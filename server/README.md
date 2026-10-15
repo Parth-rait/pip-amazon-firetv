@@ -23,6 +23,7 @@ npm start              # same, without watching (demo)
 npm run fake:tv        # acts like a TV: prints the code and pad URL, logs views and commands
 npm run smoke:join     # with the server running: a fake TV and two pads join; prints JOIN OK
 npm run smoke:ai       # one real Nova call: prints the reply and latency (needs the AWS profile)
+npm run draft:quiz -- big-buck-bunny   # Nova drafts 5 quiz questions into content/drafts/ for review
 npm run eval:ask       # runs the probes in evals/<film>.json against Nova; flags LEAK? and CHECK
 ```
 

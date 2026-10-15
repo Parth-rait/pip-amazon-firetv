@@ -38,3 +38,25 @@ export const ASK_SETTINGS: Omit<AskSettings, 'allowClarify'> = {
   temperature: 0.2,
   timeoutMs: 6000,
 };
+
+export const DRAFT_SYSTEM_PROMPT = `You write a short multiple-choice quiz about a film that a family has just watched.
+Children aged 7 and up will play, so use simple, friendly words.
+
+Use only the facts inside <premise> and <notes>.
+
+Write exactly 5 questions, in story order, spread across the whole film. For each:
+- atSec: the time of the note the question is about, copied exactly
+- question: at most 12 words
+- choices: exactly 4 short choices, at most 6 words each, exactly one of them right
+- answer: the position of the right choice, from 0 to 3
+- explanation: one sentence, at most 25 words, saying why that choice is right
+
+Rules:
+- The right answer must be clearly stated in the notes.
+- Wrong choices must sound possible, but be clearly wrong to someone who watched.
+- Ask about what happens and why, not about tiny details. No trick questions.
+- Reply with JSON only, with no markdown, in exactly this shape:
+{"quiz":[{"atSec":0,"question":"","choices":["","","",""],"answer":0,"explanation":""}]}`;
+
+/** Quiz draft call settings (section 5.2). */
+export const DRAFT_SETTINGS = { maxTokens: 1500, temperature: 0.4, timeoutMs: 30000 } as const;

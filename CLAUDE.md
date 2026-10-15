@@ -30,7 +30,8 @@ Hackathon project (Amazon Developer Hackathon, Fire TV track). Deadline: Fri Oct
 - Step 4: sessions, players, the host and QR pairing. Done (smoke:join prints JOIN OK).
 - Step 5: Pip Pad join, lobby and host controls. Done (checked with two Playwright browsers and fake:tv).
 - Step 7: Ask Pip with guidance. Server and pad done in the cloud with a fake model. Open: Parth writes the premise, notes and evals; `smoke:ai` and `eval:ask` on the Mac; the TV bubble comes with the TV app (Steps 3 and 6).
-- Next: Step 8 (quiz drafts) in the cloud; Steps 3 and 6 (TV) on the Mac via Remote Control.
+- Step 8: quiz drafts. Done in code (`npm run draft:quiz -- big-buck-bunny`). Open: Parth runs it on the Mac after writing the notes, checks the 5 questions and copies them into the film file.
+- Next: Step 9 (quiz and results) server and pad in the cloud; Steps 3 and 6 (TV) on the Mac via Remote Control.
 
 Update this list when a step is committed.
 
