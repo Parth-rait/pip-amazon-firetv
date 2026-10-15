@@ -11,9 +11,18 @@ import { createRateLimit } from './core/rate-limit.js';
 import type { Timers } from './core/timers.js';
 import type { Content } from './film/content.js';
 import { quizTimerKey } from './film/quiz.js';
-import { broadcast, goToLobby, roomOf, watchFilm, type FlowDeps, type PipServer } from './flow.js';
+import {
+  askPip,
+  broadcast,
+  goToLobby,
+  roomOf,
+  watchFilm,
+  type FlowDeps,
+  type PipServer,
+} from './flow.js';
 import { errorFields, type log as Log } from './log.js';
 import type { Session, SessionStore } from './sessions.js';
+import { answerQuestion, checkEveryoneAnswered, nextStep, startQuizFlow } from './quiz-flow.js';
 import { LIMITS, type ClientToServerEvents, type HelloResult } from './shared/protocol.js';
 import * as schema from './validate.js';
 import { buildView } from './view.js';
@@ -24,7 +33,7 @@ export interface RealtimeDeps {
   films: Content[];
   config: Config;
   timers: Timers;
-  model: TextModel; // used by Ask Pip from Step 7
+  model: TextModel;
   log: typeof Log;
   now: () => number;
 }
@@ -37,7 +46,12 @@ const JOIN_WINDOW_MS = 60 * 1000;
 
 /** Registers every handler; returns a function that stops the idle sweep. */
 export function registerRealtime(deps: RealtimeDeps): () => void {
-  const flow: FlowDeps = { ...deps, publicUrl: deps.config.PUBLIC_URL };
+  const flow: FlowDeps = {
+    ...deps,
+    publicUrl: deps.config.PUBLIC_URL,
+    aiEnabled: deps.config.AI_ENABLED,
+    logText: deps.config.LOG_TEXT,
+  };
   const joinLimit = createRateLimit(LIMITS.failedJoinsPerMinute, JOIN_WINDOW_MS);
   const core = (session: Session): CoreDeps => ({
     timers: deps.timers,
@@ -82,6 +96,7 @@ export function registerRealtime(deps: RealtimeDeps): () => void {
       }
       const wasLast = leaveSocket(session, d.playerId, socket.id, deps.now());
       if (wasLast && session.hostId === d.playerId) startHostGrace(session, core(session));
+      if (wasLast) checkEveryoneAnswered(session, flow);
       if (restingPip(session) === 'sleep' && session.pip !== 'sleep')
         setPip(session, 'sleep', core(session));
       else broadcast(session, flow);
@@ -190,9 +205,31 @@ export function registerRealtime(deps: RealtimeDeps): () => void {
         deps.io.to(session.tvSocketId).emit('tv:command', command);
       } else if (command.type === 'lobby' && stage !== 'lobby') {
         goToLobby(session, flow);
+      } else if (command.type === 'start-quiz' && stage === 'watch') {
+        if (!startQuizFlow(session, flow)) ignored('pad:host', 'no-question-unlocked');
+      } else if (command.type === 'next' && stage === 'quiz') {
+        if (!nextStep(session, command, flow)) ignored('pad:host', 'stale-next');
       } else {
         ignored('pad:host', `${command.type}-in-${stage}`);
       }
+    });
+
+    on('pad:ask', (payload, ack) => {
+      if (typeof ack !== 'function') return invalid('pad:ask');
+      const parsed = schema.askSchema.safeParse(payload);
+      const d = data();
+      const session = sessionOf();
+      const player = d?.role === 'pad' ? session?.players.get(d.playerId) : undefined;
+      if (!parsed.success || !session || !player) {
+        invalid('pad:ask');
+        return ack({ ok: false, reason: 'invalid' });
+      }
+      const { result, done } = askPip(session, player, parsed.data.text, parsed.data.via, flow);
+      ack(result);
+      if (!result.ok) ignored('pad:ask', result.reason);
+      done.catch((error: unknown) => {
+        deps.log.error('failed.pad:ask', { code: session.code, ...errorFields(error) });
+      });
     });
 
     on('tv:watch', (payload) => {
@@ -213,6 +250,18 @@ export function registerRealtime(deps: RealtimeDeps): () => void {
       session.playback = parsed.data;
       session.playbackAt = deps.now();
       broadcast(session, flow);
+    });
+
+    on('pad:answer', (payload) => {
+      const parsed = schema.answerSchema.safeParse(payload);
+      if (!parsed.success) return invalid('pad:answer');
+      const d = data();
+      const session = sessionOf();
+      if (!session || d?.role !== 'pad' || !session.players.has(d.playerId)) {
+        return ignored('pad:answer', 'not-a-player');
+      }
+      const answer = { playerId: d.playerId, ...parsed.data };
+      if (!answerQuestion(session, answer, flow)) ignored('pad:answer', 'not-current');
     });
 
     socket.on('disconnect', (reason) => {

@@ -11,7 +11,7 @@ const noteSchema = z.object({
   text: z.string().min(1).max(300),
 });
 
-const quizQuestionSchema = z.object({
+export const quizQuestionSchema = z.object({
   atSec: z.number().min(0),
   question: z.string().min(1).max(120),
   choices: z.array(z.string().min(1).max(40)).length(CHOICES_PER_QUESTION),

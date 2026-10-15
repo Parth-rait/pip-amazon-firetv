@@ -31,10 +31,12 @@ body {
   margin-bottom: var(--space-5);
 }
 
+/* Screens fade in over 180 ms when the stage changes (section 3.2, motionFast). */
 .screen {
   display: flex;
   flex-direction: column;
   gap: var(--space-5);
+  animation: fade-in var(--motion-fast);
 }
 
 .screen--join {
@@ -135,10 +137,18 @@ body {
   padding: var(--space-3) var(--space-2);
 }
 
+/* Looks small, but the invisible ::after keeps the 56 px touch target (section 3.1, rule 10). */
 .button--small {
+  position: relative;
   min-height: 40px;
   padding: var(--space-2) var(--space-4);
   font-size: var(--type-caption);
+}
+
+.button--small::after {
+  content: '';
+  position: absolute;
+  inset: -8px 0;
 }
 
 .text-input,
@@ -265,7 +275,9 @@ body {
     monospace;
 }
 
-/* Pip (section 3.4): a mint circle with two eyes; the state picks the animation. */
+/* Pip (section 3.4): a mint circle with two eyes. The server sends the state; each state
+   has one animation: sleep breathes slowly, idle breathes and blinks, thinking looks up
+   with pulsing dots, talking bounces for 1.5 s, cheer hops twice with a brighter glow. */
 .pip {
   position: relative;
   display: flex;
@@ -277,6 +289,7 @@ body {
   box-shadow: 0 0 24px rgb(124 231 196 / 0.35);
   animation: pip-breathe var(--motion-pip) infinite;
   flex-shrink: 0;
+  transition: box-shadow var(--motion-fast);
 }
 
 .pip__eye {
@@ -284,20 +297,39 @@ body {
   height: 26%;
   border-radius: 999px;
   background: var(--bg);
-  transition: height var(--motion-fast);
+  animation: pip-blink 5s infinite;
+  transition:
+    height var(--motion-fast),
+    transform var(--motion-fast);
 }
 
 .pip--sleep {
   opacity: 0.5;
   box-shadow: none;
+  animation-duration: 4800ms;
 }
 
 .pip--sleep .pip__eye {
   height: 5%;
+  animation: none;
 }
 
 .pip--thinking .pip__eye {
   transform: translate(25%, -25%);
+  animation: none;
+}
+
+.pip--talking {
+  animation:
+    pip-bounce 500ms ease-in-out 3,
+    pip-breathe var(--motion-pip) 1500ms infinite;
+}
+
+.pip--cheer {
+  box-shadow: 0 0 36px rgb(124 231 196 / 0.7);
+  animation:
+    pip-hop 750ms ease-out 2,
+    pip-breathe var(--motion-pip) 1500ms infinite;
 }
 
 .pip__dots {
@@ -323,10 +355,6 @@ body {
   animation-delay: 0.4s;
 }
 
-.pip--cheer {
-  box-shadow: 0 0 36px rgb(124 231 196 / 0.7);
-}
-
 @keyframes pip-breathe {
   0%,
   100% {
@@ -334,6 +362,39 @@ body {
   }
   50% {
     transform: scale(1.04);
+  }
+}
+
+/* A blink every 5 s (section 3.4 says every 4 to 6 s). */
+@keyframes pip-blink {
+  0%,
+  94%,
+  100% {
+    transform: scaleY(1);
+  }
+  97% {
+    transform: scaleY(0.1);
+  }
+}
+
+@keyframes pip-bounce {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-8%);
+  }
+}
+
+/* The TV hops 24 dp; the pad's small Pip hops a quarter of its size. */
+@keyframes pip-hop {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  40% {
+    transform: translateY(-25%);
   }
 }
 
@@ -354,4 +415,178 @@ body {
     animation: none !important;
     transition: none !important;
   }
+}
+
+/* Ask Pip (section 3.3): chips, "Did you mean", the answer and the Ask box. */
+.ask-pip,
+.clarify,
+.ask {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+.chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+}
+
+.chip {
+  min-height: var(--touch-min);
+  padding: var(--space-2) var(--space-4);
+  border: none;
+  border-radius: var(--radius);
+  background: var(--surface);
+  color: var(--text);
+  font: inherit;
+  cursor: pointer;
+  transition:
+    background var(--motion-fast),
+    transform var(--motion-fast);
+}
+
+.chip:active {
+  background: var(--surface2);
+  transform: scale(0.98);
+}
+
+.chip:disabled {
+  color: var(--text-muted);
+}
+
+.chip:focus-visible {
+  outline: 3px solid var(--accent);
+  outline-offset: 2px;
+}
+
+.button--quiet {
+  background: transparent;
+  color: var(--text-muted);
+}
+
+.answer {
+  padding: var(--space-4);
+  border-radius: var(--radius);
+  background: var(--surface);
+  animation: fade-in var(--motion-fast);
+}
+
+.thinking {
+  animation: pip-dot 1.2s infinite;
+}
+
+.ask__row {
+  display: flex;
+  gap: var(--space-2);
+}
+
+.mic {
+  flex-shrink: 0;
+  min-width: var(--touch-min);
+  padding: var(--space-3);
+}
+
+.mic--on {
+  background: var(--accent);
+  color: var(--bg);
+}
+
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+/* Quiz and results (section 3.3): A to D at least 96 px tall, my pick outlined in mint. */
+.quiz-header {
+  display: flex;
+  justify-content: space-between;
+}
+
+.answers {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+.answer-button {
+  display: flex;
+  align-items: center;
+  gap: var(--space-4);
+  min-height: 96px;
+  padding: var(--space-4) var(--space-5);
+  border: none;
+  border-radius: var(--radius);
+  background: var(--surface);
+  color: var(--text);
+  font: inherit;
+  font-size: var(--type-title);
+  text-align: left;
+  cursor: pointer;
+  transition:
+    background var(--motion-fast),
+    opacity var(--motion-fast);
+}
+
+.answer-button:disabled {
+  cursor: default;
+}
+
+.answer-button:focus-visible {
+  outline: 3px solid var(--accent);
+  outline-offset: 2px;
+}
+
+.answer-button--picked {
+  box-shadow: inset 0 0 0 3px var(--accent);
+  background: var(--surface2);
+}
+
+.answer-button--right {
+  background: var(--accent);
+  color: var(--bg);
+}
+
+.answer-button--dim {
+  opacity: 0.45;
+}
+
+.answer-button__letter {
+  font-weight: 600;
+  color: var(--text-muted);
+}
+
+.answer-button--right .answer-button__letter {
+  color: var(--bg);
+}
+
+.standings {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+.standings__row {
+  display: flex;
+  gap: var(--space-4);
+  padding: var(--space-3) var(--space-4);
+  border-radius: var(--radius);
+  background: var(--surface);
+  font-size: var(--type-title);
+}
+
+.standings__place {
+  color: var(--text-muted);
+  min-width: 1.5em;
+}
+
+.standings__name {
+  flex: 1;
 }

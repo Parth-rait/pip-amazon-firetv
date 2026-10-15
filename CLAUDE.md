@@ -13,11 +13,12 @@ Hackathon project (Amazon Developer Hackathon, Fire TV track). Deadline: Fri Oct
 | `scripts/sync-shared.mjs` | Copies the contract into `server/src/shared`, `pad/src/shared`, `tv/src/shared` | Done |
 | `scripts/run-all.mjs` | Runs `typecheck`, `lint` or `test` in each package that has a `package.json` | Done |
 | `scripts/tunnel.mjs` | Cloudflare quick tunnel; writes `PUBLIC_URL` and `SERVER_URL` | Done (used from Step 3) |
-| `server/` | Node 22 + Express 5 + Socket.IO 4.8 + Bedrock. `src/core/` = Pip Core, `src/film/` = film night | Steps 2 and 4 done: config, films, /health, /api/films, /qr, /media, model wrapper, sessions, players, host, realtime handlers, fake:tv, smoke:join |
+| `scripts/preflight.mjs` | `npm run preflight`: PASS or FAIL per demo check (Node 22, HTTPS URL, film, quiz, pad/dist, smoke:ai) | Done |
+| `server/` | Node 22 + Express 5 + Socket.IO 4.8 + Bedrock. `src/core/` = Pip Core, `src/film/` = film night | Steps 2, 4, 7, 8 and 9 done: config, films, /health, /api/films, /qr, /media, model wrapper, sessions, players, host, realtime handlers, Ask Pip, quiz drafts, quiz and results, fake:tv, smoke:join, smoke:quiz |
 | `server/.env` | Local config (gitignored), copied from `server/.env.example` | Done |
-| `pad/` | React + Vite web app (the Pip Pad) | Step 5 done: join, lobby, host controls, status pill, Pip, debug overlay |
+| `pad/` | React + Vite web app (the Pip Pad) | Steps 5, 7, 9 and 10 done: join, lobby, host controls, status pill, Pip and its motion, debug overlay, Ask Pip, quiz, results, fullscreen, wake lock |
 | `tv/` | Vega OS app (React Native for Vega) | Not created on purpose: Step 3 runs `vega project generate ... --outputDir tv` |
-| `docs/` | Friction log, product feedback; later measurements, demo script, devpost | Templates done |
+| `docs/` | Friction log, product feedback, measurements, demo script; later devpost | Templates, empty measurement tables and a devpost draft done; demo script needs the scene times from the notes |
 | `.claude/skills/ship-step/` | Definition-of-done and commit routine | Done; `run-pip` comes in Step 6 |
 
 `pad/` and `tv/` must not be created by hand: their generators expect an empty or missing folder, and `sync-shared` would otherwise write into them early.
@@ -29,7 +30,13 @@ Hackathon project (Amazon Developer Hackathon, Fire TV track). Deadline: Fri Oct
 - Step 2: server skeleton, film file, first Nova call. Code and tests done in the cloud. Open for Parth on the Mac: convert the film into `server/media/` (PROJECT.md 5.6), set `durationSec` from ffprobe, run `npm run smoke:ai`.
 - Step 4: sessions, players, the host and QR pairing. Done (smoke:join prints JOIN OK).
 - Step 5: Pip Pad join, lobby and host controls. Done (checked with two Playwright browsers and fake:tv).
-- Next: Steps 3 and 6 (TV, Mac-only via Remote Control). Step 7 server and pad parts can go first in the cloud.
+- Step 7: Ask Pip with guidance. Server and pad done in the cloud with a fake model. Open: Parth writes the premise, notes and evals; `smoke:ai` and `eval:ask` on the Mac; the TV bubble comes with the TV app (Steps 3 and 6).
+- Step 8: quiz drafts. Done in code (`npm run draft:quiz -- big-buck-bunny`). Open: Parth runs it on the Mac after writing the notes, checks the 5 questions and copies them into the film file.
+- Step 9: quiz and results. Server and pad done in the cloud (smoke:quiz prints QUIZ OK; three Playwright players played a whole quiz). Open: the TV's answer grid and results screen come with the TV app.
+- Step 10: polish and resilience. Pad parts done in the cloud: Pip motion, 180 ms fades, 56 px targets, fullscreen, wake lock; every row of PROJECT.md 4.10 walked through in browsers (known issues in README.md). Open: the TV's Pip motion, safe margin and type scale.
+- Step 11: demo hardening. Cloud parts done: `npm run preflight`, `docs/demo-script.md`, empty measurement tables. Open (Mac): preflight passing, scene times in the demo script, measurements, usability test, rehearsals, tag v0.1.0.
+- Step 12: drafts only: README.md (what, why, architecture, Amazon tech, how to run, tests, known issues, credits) and docs/devpost.md, with "After" marks for what needs the TV app, measurements or the usability test. `npm audit`: 0 vulnerabilities in server/ and pad/.
+- Next: Steps 3 and 6 (TV) on the Mac via Remote Control, then the TV parts of Steps 7, 9 and 10; then Step 11 on the Mac; then finish Step 12 with screenshots and real numbers.
 
 Update this list when a step is committed.
 
@@ -42,6 +49,7 @@ npm run typecheck      # in server/ and pad/
 npm run lint
 npm test
 npm run tunnel         # Step 3 onward
+npm run preflight      # before a rehearsal or recording; needs the tunnel and the server
 ```
 
 ## Rules that bite

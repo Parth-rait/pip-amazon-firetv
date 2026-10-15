@@ -1,6 +1,8 @@
 // The one typed socket, and joining: a saved code rejoins after every reconnect (PROJECT.md 4.5).
 import { io, type Socket } from 'socket.io-client';
 import {
+  type AskResult,
+  type AskVia,
   type ClientToServerEvents,
   type JoinResult,
   type ServerToClientEvents,
@@ -100,3 +102,16 @@ export function connectPad(socket: PadSocket, playerId: string, dispatch: (a: Pa
 }
 
 export type PadConnection = ReturnType<typeof connectPad>;
+
+/** Sends a question to Pip. Null when the server did not answer in time. */
+export async function sendAsk(
+  socket: PadSocket,
+  text: string,
+  via: AskVia,
+): Promise<AskResult | null> {
+  try {
+    return await socket.timeout(ACK_TIMEOUT_MS).emitWithAck('pad:ask', { text, via });
+  } catch {
+    return null;
+  }
+}

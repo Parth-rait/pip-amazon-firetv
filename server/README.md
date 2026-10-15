@@ -5,7 +5,8 @@
 One Node.js 22 process that connects the Pip Pads, the TV app and Amazon Bedrock. It holds the sessions (a TV, its code, the players and the host) in memory, relays the host's commands to the TV, draws the join QR codes, and serves the film list and the film files from `media/`. Socket.IO events are typed with `src/shared/protocol.ts`. TypeScript runs directly with `tsx`; there is no build step.
 
 - `src/core/`: Pip Core, reusable by any Pip product. Never imports from `src/film/`.
-- `src/film/`: film night (film files, the playback estimate, and later the Ask Pip prompt and the quiz).
+- `src/film/`: film night (film files, the playback estimate, the Ask Pip prompt, and later the quiz).
+- `src/core/ai/`: the model wrapper and the guidance loop (`runAsk`, `parseReply`, `cleanText`), reusable by any Pip product.
 - `src/realtime.ts`: thin socket handlers; `src/flow.ts`: stage changes; `src/view.ts`: the snapshot; `src/validate.ts`: zod schemas for every incoming payload.
 - `content/`: one JSON file per film, checked at startup (PROJECT.md section 5.6).
 - `media/`: the film files (gitignored). Convert the film with the commands in PROJECT.md section 5.6.
@@ -21,7 +22,10 @@ npm run dev            # http://localhost:8787, restarts on change
 npm start              # same, without watching (demo)
 npm run fake:tv        # acts like a TV: prints the code and pad URL, logs views and commands
 npm run smoke:join     # with the server running: a fake TV and two pads join; prints JOIN OK
+npm run smoke:quiz     # with the server running and a film with quiz questions: plays a whole quiz; prints QUIZ OK
 npm run smoke:ai       # one real Nova call: prints the reply and latency (needs the AWS profile)
+npm run draft:quiz -- big-buck-bunny   # Nova drafts 5 quiz questions into content/drafts/ for review
+npm run eval:ask       # runs the probes in evals/<film>.json against Nova; flags LEAK? and CHECK
 ```
 
 Quick checks while it runs:

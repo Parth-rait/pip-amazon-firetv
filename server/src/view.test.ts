@@ -1,6 +1,7 @@
 import { describe, expect, it } from 'vitest';
 import { joinPlayer, leaveSocket } from './core/players.js';
 import type { Content } from './film/content.js';
+import { recordAnswer, revealQuestion, startQuiz, type QuizRun } from './film/quiz.js';
 import { createSession } from './sessions.js';
 import { buildView } from './view.js';
 
@@ -65,5 +66,56 @@ describe('buildView', () => {
     expect(json).not.toContain('Because.');
     expect(view.quiz).toBeNull();
     expect(view.results).toBeNull();
+  });
+});
+
+describe('buildView in the quiz', () => {
+  function inQuiz() {
+    const session = watching();
+    joinPlayer(session, { playerId: '1'.repeat(32), name: 'A', socketId: 's1' }, 0);
+    session.stage = 'quiz';
+    session.quiz = startQuiz(session, film.quiz, 1000);
+    recordAnswer(session.quiz, session, { playerId: '1'.repeat(32), index: 0, choice: 1 });
+    return session;
+  }
+
+  it('hides the answer, the explanation and the picks before the reveal', () => {
+    const view = buildView(inQuiz(), [film], 'http://x', 1000);
+    expect(view.quiz).toMatchObject({
+      phase: 'question',
+      correct: null,
+      explanation: null,
+      picks: null,
+      answeredIds: ['1'.repeat(32)],
+    });
+    expect(JSON.stringify(view)).not.toContain('Because.');
+  });
+
+  it('shows all three in the reveal', () => {
+    const session = inQuiz();
+    revealQuestion(session.quiz as QuizRun, session, 2000);
+    const view = buildView(session, [film], 'http://x', 2000);
+    expect(view.quiz).toMatchObject({
+      phase: 'reveal',
+      correct: 2,
+      explanation: 'Because.',
+      picks: { ['1'.repeat(32)]: 1 },
+      secondsLeft: 0,
+    });
+  });
+
+  it('counts secondsLeft down', () => {
+    const session = inQuiz();
+    expect(buildView(session, [film], 'http://x', 1000).quiz?.secondsLeft).toBe(20);
+    expect(buildView(session, [film], 'http://x', 6500).quiz?.secondsLeft).toBe(15);
+    expect(buildView(session, [film], 'http://x', 99_000).quiz?.secondsLeft).toBe(0);
+  });
+
+  it('shows the results only in the results stage', () => {
+    const session = inQuiz();
+    session.stage = 'results';
+    const view = buildView(session, [film], 'http://x', 0);
+    expect(view.quiz).toBeNull();
+    expect(view.results?.questions).toBe(2);
   });
 });
