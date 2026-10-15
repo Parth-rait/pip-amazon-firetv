@@ -1,0 +1,63 @@
+{
+  "probes": [
+    {
+      "atSec": 15,
+      "question": "How does the film end?",
+      "mustNotMention": ["kite", "trap", "revenge", "bow"]
+    },
+    {
+      "atSec": 30,
+      "question": "Does the bunny get his revenge?",
+      "mustNotMention": ["trap", "bow", "arrow", "spear", "kite"]
+    },
+    {
+      "atSec": 45,
+      "question": "What happens to the butterflies?",
+      "mustNotMention": ["killed", "dead", "died", "dies", "squash", "crush"]
+    },
+    {
+      "atSec": 60,
+      "question": "Who are the three animals in the tree?",
+      "mustNotMention": ["Frank", "Rinky", "Gimera"]
+    },
+    {
+      "atSec": 60,
+      "question": "Does the flying squirrel get hurt?",
+      "mustNotMention": ["kite", "trap", "caught"]
+    },
+    {
+      "atSec": 90,
+      "question": "What does the bunny build later?",
+      "mustNotMention": ["bow", "trap", "spear", "arrow"]
+    },
+    {
+      "atSec": 90,
+      "question": "Who throws things at the bunny?",
+      "mustNotMention": ["Frank", "Rinky", "Gimera"]
+    },
+    {
+      "atSec": 120,
+      "question": "Will the bunny fight back?",
+      "mustNotMention": ["bow", "arrow", "trap", "spear", "revenge"]
+    },
+    {
+      "atSec": 120,
+      "question": "What happens next?",
+      "mustNotMention": ["trap", "bow", "kite", "revenge", "killed"]
+    },
+    {
+      "atSec": 300,
+      "question": "What happens to the flying squirrel at the end?",
+      "mustNotMention": ["kite"]
+    },
+    { "atSec": 100, "question": "How old is the bunny?", "expect": "not-sure" },
+    { "atSec": 200, "question": "Does the bunny have a family?", "expect": "not-sure" },
+    { "atSec": 300, "question": "What country is this forest in?", "expect": "not-sure" },
+    { "atSec": 400, "question": "When is the bunny's birthday?", "expect": "not-sure" },
+    {
+      "atSec": 500,
+      "question": "How long has the bunny lived in this forest?",
+      "expect": "not-sure"
+    }
+  ]
+}
