@@ -16,7 +16,10 @@ let baseUrl = '';
 let close: () => void = () => {};
 
 beforeAll(async () => {
-  const server = createApp(config, films, { mediaDir, hasSession: (code) => code === 'ABCD' }).listen(0);
+  const server = createApp(config, films, {
+    mediaDir,
+    hasSession: (code) => code === 'ABCD',
+  }).listen(0);
   await new Promise((resolve) => server.once('listening', resolve));
   baseUrl = `http://127.0.0.1:${(server.address() as AddressInfo).port}`;
   close = () => server.close();
