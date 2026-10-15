@@ -16,7 +16,7 @@ let baseUrl = '';
 let close: () => void = () => {};
 
 beforeAll(async () => {
-  const server = createApp(config, films, { mediaDir }).listen(0);
+  const server = createApp(config, films, { mediaDir, hasSession: (code) => code === 'ABCD' }).listen(0);
   await new Promise((resolve) => server.once('listening', resolve));
   baseUrl = `http://127.0.0.1:${(server.address() as AddressInfo).port}`;
   close = () => server.close();
@@ -48,6 +48,14 @@ describe('createApp', () => {
     expect(res.status).toBe(206);
     expect(res.headers.get('content-type')).toBe('video/mp4');
     expect((await res.arrayBuffer()).byteLength).toBe(100);
+  });
+
+  it('draws a PNG QR code for a live session and 404s an unknown code', async () => {
+    const res = await fetch(`${baseUrl}/qr/ABCD`);
+    expect(res.status).toBe(200);
+    expect(res.headers.get('content-type')).toBe('image/png');
+    expect((await fetch(`${baseUrl}/qr/WXYZ`)).status).toBe(404);
+    expect((await fetch(`${baseUrl}/qr/nope`)).status).toBe(404);
   });
 
   it('answers 404 for a missing film file', async () => {

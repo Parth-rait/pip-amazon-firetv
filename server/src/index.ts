@@ -5,35 +5,34 @@ import { fileURLToPath } from 'node:url';
 import { Server } from 'socket.io';
 import { createApp } from './app.js';
 import { loadConfig } from './config.js';
+import { createBedrockModel, createFakeModel } from './core/ai/model.js';
+import { createTimers } from './core/timers.js';
 import { loadFilms } from './film/content.js';
-import { errorFields, log } from './log.js';
+import { log } from './log.js';
+import { registerRealtime } from './realtime.js';
+import { InMemorySessionStore } from './sessions.js';
 import type { ClientToServerEvents, ServerToClientEvents } from './shared/protocol.js';
 
 const CONTENT_DIR = fileURLToPath(new URL('../content', import.meta.url));
 
 const config = loadConfig();
 const films = loadFilms(CONTENT_DIR);
-const httpServer = createServer(createApp(config, films));
+const store = new InMemorySessionStore();
+const model = config.AI_ENABLED
+  ? createBedrockModel({
+      region: config.AWS_REGION,
+      profile: config.AWS_PROFILE,
+      modelId: config.BEDROCK_MODEL_ID,
+    })
+  : createFakeModel(() => {
+      throw new Error('AI is switched off (AI_ENABLED=false)');
+    });
+
+const app = createApp(config, films, { hasSession: (code) => store.get(code) !== undefined });
+const httpServer = createServer(app);
 const io = new Server<ClientToServerEvents, ServerToClientEvents>(httpServer);
 
-io.on('connection', (socket) => {
-  log.info('socket.connect', { socketId: socket.id });
-
-  socket.on('sys:ping', (payload, ack) => {
-    // Check the ack first: calling a missing ack throws, and one throw stops the server.
-    if (typeof ack !== 'function') return;
-    try {
-      const sentAt = typeof payload?.sentAt === 'number' ? payload.sentAt : 0;
-      ack({ sentAt, serverAt: Date.now() });
-    } catch (error) {
-      log.error('sys:ping.failed', { socketId: socket.id, ...errorFields(error) });
-    }
-  });
-
-  socket.on('disconnect', (reason) => {
-    log.info('socket.disconnect', { socketId: socket.id, reason });
-  });
-});
+registerRealtime({ io, store, films, config, timers: createTimers(), model, log, now: Date.now });
 
 httpServer.listen(config.PORT, () => {
   log.info('server.start', {
