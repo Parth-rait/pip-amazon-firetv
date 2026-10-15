@@ -15,7 +15,7 @@ Hackathon project (Amazon Developer Hackathon, Fire TV track). Deadline: Fri Oct
 | `scripts/tunnel.mjs` | Cloudflare quick tunnel; writes `PUBLIC_URL` and `SERVER_URL` | Done (used from Step 3) |
 | `server/` | Node 22 + Express 5 + Socket.IO 4.8 + Bedrock. `src/core/` = Pip Core, `src/film/` = film night | Steps 2, 4, 7, 8 and 9 done: config, films, /health, /api/films, /qr, /media, model wrapper, sessions, players, host, realtime handlers, Ask Pip, quiz drafts, quiz and results, fake:tv, smoke:join, smoke:quiz |
 | `server/.env` | Local config (gitignored), copied from `server/.env.example` | Done |
-| `pad/` | React + Vite web app (the Pip Pad) | Steps 5, 7 and 9 done: join, lobby, host controls, status pill, Pip, debug overlay, Ask Pip, quiz, results |
+| `pad/` | React + Vite web app (the Pip Pad) | Steps 5, 7, 9 and 10 done: join, lobby, host controls, status pill, Pip and its motion, debug overlay, Ask Pip, quiz, results, fullscreen, wake lock |
 | `tv/` | Vega OS app (React Native for Vega) | Not created on purpose: Step 3 runs `vega project generate ... --outputDir tv` |
 | `docs/` | Friction log, product feedback; later measurements, demo script, devpost | Templates done |
 | `.claude/skills/ship-step/` | Definition-of-done and commit routine | Done; `run-pip` comes in Step 6 |
@@ -32,7 +32,8 @@ Hackathon project (Amazon Developer Hackathon, Fire TV track). Deadline: Fri Oct
 - Step 7: Ask Pip with guidance. Server and pad done in the cloud with a fake model. Open: Parth writes the premise, notes and evals; `smoke:ai` and `eval:ask` on the Mac; the TV bubble comes with the TV app (Steps 3 and 6).
 - Step 8: quiz drafts. Done in code (`npm run draft:quiz -- big-buck-bunny`). Open: Parth runs it on the Mac after writing the notes, checks the 5 questions and copies them into the film file.
 - Step 9: quiz and results. Server and pad done in the cloud (smoke:quiz prints QUIZ OK; three Playwright players played a whole quiz). Open: the TV's answer grid and results screen come with the TV app.
-- Next: Steps 3 and 6 (TV) on the Mac via Remote Control, then the TV parts of Steps 7 and 9.
+- Step 10: polish and resilience. Pad parts done in the cloud: Pip motion, 180 ms fades, 56 px targets, fullscreen, wake lock; every row of PROJECT.md 4.10 walked through in browsers (known issues in README.md). Open: the TV's Pip motion, safe margin and type scale.
+- Next: Step 11 cloud parts (preflight, demo script, measurement tables); Steps 3 and 6 (TV) on the Mac via Remote Control, then the TV parts of Steps 7, 9 and 10.
 
 Update this list when a step is committed.
 

@@ -31,10 +31,12 @@ body {
   margin-bottom: var(--space-5);
 }
 
+/* Screens fade in over 180 ms when the stage changes (section 3.2, motionFast). */
 .screen {
   display: flex;
   flex-direction: column;
   gap: var(--space-5);
+  animation: fade-in var(--motion-fast);
 }
 
 .screen--join {
@@ -135,10 +137,18 @@ body {
   padding: var(--space-3) var(--space-2);
 }
 
+/* Looks small, but the invisible ::after keeps the 56 px touch target (section 3.1, rule 10). */
 .button--small {
+  position: relative;
   min-height: 40px;
   padding: var(--space-2) var(--space-4);
   font-size: var(--type-caption);
+}
+
+.button--small::after {
+  content: '';
+  position: absolute;
+  inset: -8px 0;
 }
 
 .text-input,
@@ -265,7 +275,9 @@ body {
     monospace;
 }
 
-/* Pip (section 3.4): a mint circle with two eyes; the state picks the animation. */
+/* Pip (section 3.4): a mint circle with two eyes. The server sends the state; each state
+   has one animation: sleep breathes slowly, idle breathes and blinks, thinking looks up
+   with pulsing dots, talking bounces for 1.5 s, cheer hops twice with a brighter glow. */
 .pip {
   position: relative;
   display: flex;
@@ -277,6 +289,7 @@ body {
   box-shadow: 0 0 24px rgb(124 231 196 / 0.35);
   animation: pip-breathe var(--motion-pip) infinite;
   flex-shrink: 0;
+  transition: box-shadow var(--motion-fast);
 }
 
 .pip__eye {
@@ -284,20 +297,39 @@ body {
   height: 26%;
   border-radius: 999px;
   background: var(--bg);
-  transition: height var(--motion-fast);
+  animation: pip-blink 5s infinite;
+  transition:
+    height var(--motion-fast),
+    transform var(--motion-fast);
 }
 
 .pip--sleep {
   opacity: 0.5;
   box-shadow: none;
+  animation-duration: 4800ms;
 }
 
 .pip--sleep .pip__eye {
   height: 5%;
+  animation: none;
 }
 
 .pip--thinking .pip__eye {
   transform: translate(25%, -25%);
+  animation: none;
+}
+
+.pip--talking {
+  animation:
+    pip-bounce 500ms ease-in-out 3,
+    pip-breathe var(--motion-pip) 1500ms infinite;
+}
+
+.pip--cheer {
+  box-shadow: 0 0 36px rgb(124 231 196 / 0.7);
+  animation:
+    pip-hop 750ms ease-out 2,
+    pip-breathe var(--motion-pip) 1500ms infinite;
 }
 
 .pip__dots {
@@ -323,10 +355,6 @@ body {
   animation-delay: 0.4s;
 }
 
-.pip--cheer {
-  box-shadow: 0 0 36px rgb(124 231 196 / 0.7);
-}
-
 @keyframes pip-breathe {
   0%,
   100% {
@@ -334,6 +362,39 @@ body {
   }
   50% {
     transform: scale(1.04);
+  }
+}
+
+/* A blink every 5 s (section 3.4 says every 4 to 6 s). */
+@keyframes pip-blink {
+  0%,
+  94%,
+  100% {
+    transform: scaleY(1);
+  }
+  97% {
+    transform: scaleY(0.1);
+  }
+}
+
+@keyframes pip-bounce {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-8%);
+  }
+}
+
+/* The TV hops 24 dp; the pad's small Pip hops a quarter of its size. */
+@keyframes pip-hop {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  40% {
+    transform: translateY(-25%);
   }
 }
 

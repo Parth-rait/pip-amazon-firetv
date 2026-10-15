@@ -25,7 +25,7 @@ For local work, also run `npm run dev` and `npm run fake:tv` in `server/`, then 
 ## How to test
 
 ```bash
-npm test           # vitest: the reducer and the quiz lines
+npm test           # vitest: the reducer, the quiz lines, fullscreen and the wake lock
 npm run typecheck
 npm run lint       # oxlint (from the Vite template)
 ```
