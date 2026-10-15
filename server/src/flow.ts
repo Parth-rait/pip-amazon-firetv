@@ -82,7 +82,8 @@ export function goToLobby(session: Session, deps: FlowDeps): void {
   broadcast(session, deps);
 }
 
-function coreDeps(session: Session, deps: FlowDeps): CoreDeps {
+/** Pip Core's dependencies for one session: its broadcast, the shared timers and the clock. */
+export function coreDeps(session: Session, deps: FlowDeps): CoreDeps {
   return { timers: deps.timers, broadcast: () => broadcast(session, deps), now: deps.now };
 }
 

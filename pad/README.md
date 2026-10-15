@@ -6,7 +6,7 @@ The touch pad that replaces the remote, as a web app (React + Vite, plain CSS). 
 
 - `src/net/socket.ts`: the one typed socket; rejoins with the saved code after every reconnect.
 - `src/state/store.ts`: the reducer (logic, tested).
-- `src/screens/`, `src/components/`: the screens and parts from PROJECT.md section 3.3, including Ask Pip (chips, Ask box, mic).
+- `src/screens/`, `src/components/`: the screens and parts from PROJECT.md section 3.3, including Ask Pip (chips, Ask box, mic), the quiz (four answer buttons, countdown, reveal) and the results.
 - `src/lib/speech.ts`: the browser's speech recognition (Web Speech API) for the mic. Where the browser has none, the mic button does not show; the microphone needs HTTPS or localhost.
 - `src/shared/protocol.ts`: generated from `shared/protocol.ts` by `npm run sync:shared` at the root. Do not edit it.
 
@@ -25,7 +25,7 @@ For local work, also run `npm run dev` and `npm run fake:tv` in `server/`, then 
 ## How to test
 
 ```bash
-npm test           # vitest: the reducer
+npm test           # vitest: the reducer and the quiz lines
 npm run typecheck
 npm run lint       # oxlint (from the Vite template)
 ```

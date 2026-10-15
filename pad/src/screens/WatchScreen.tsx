@@ -37,6 +37,7 @@ export function WatchScreen(props: Props) {
       />
       {isHost ? (
         <HostControls
+          quizUnlocked={view.quizUnlocked}
           playback={view.playback}
           playbackAt={props.playbackAt}
           durationSec={durationSec}

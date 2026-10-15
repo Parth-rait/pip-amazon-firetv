@@ -439,3 +439,93 @@ body {
     opacity: 1;
   }
 }
+
+/* Quiz and results (section 3.3): A to D at least 96 px tall, my pick outlined in mint. */
+.quiz-header {
+  display: flex;
+  justify-content: space-between;
+}
+
+.answers {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+.answer-button {
+  display: flex;
+  align-items: center;
+  gap: var(--space-4);
+  min-height: 96px;
+  padding: var(--space-4) var(--space-5);
+  border: none;
+  border-radius: var(--radius);
+  background: var(--surface);
+  color: var(--text);
+  font: inherit;
+  font-size: var(--type-title);
+  text-align: left;
+  cursor: pointer;
+  transition:
+    background var(--motion-fast),
+    opacity var(--motion-fast);
+}
+
+.answer-button:disabled {
+  cursor: default;
+}
+
+.answer-button:focus-visible {
+  outline: 3px solid var(--accent);
+  outline-offset: 2px;
+}
+
+.answer-button--picked {
+  box-shadow: inset 0 0 0 3px var(--accent);
+  background: var(--surface2);
+}
+
+.answer-button--right {
+  background: var(--accent);
+  color: var(--bg);
+}
+
+.answer-button--dim {
+  opacity: 0.45;
+}
+
+.answer-button__letter {
+  font-weight: 600;
+  color: var(--text-muted);
+}
+
+.answer-button--right .answer-button__letter {
+  color: var(--bg);
+}
+
+.standings {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+.standings__row {
+  display: flex;
+  gap: var(--space-4);
+  padding: var(--space-3) var(--space-4);
+  border-radius: var(--radius);
+  background: var(--surface);
+  font-size: var(--type-title);
+}
+
+.standings__place {
+  color: var(--text-muted);
+  min-width: 1.5em;
+}
+
+.standings__name {
+  flex: 1;
+}

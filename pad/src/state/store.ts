@@ -11,6 +11,7 @@ export interface PadState {
   connection: Connection;
   myId: string;
   view: SessionView | null; // null until joined; the join screen shows
+  viewAt: number; // when the latest view arrived (ms), for the quiz countdown
   playbackAt: number; // when the TV's latest playback report arrived (ms), for the progress line
   say: PipSay | null; // Pip's latest answer to me
   chips: { kind: ChipKind; items: string[] };
@@ -34,6 +35,7 @@ export function initialState(myId: string): PadState {
     connection: 'connecting',
     myId,
     view: null,
+    viewAt: 0,
     playbackAt: 0,
     say: null,
     chips: { kind: 'starter', items: STARTER_CHIPS },
@@ -54,6 +56,7 @@ export function reducer(state: PadState, action: PadAction): PadState {
       return {
         ...state,
         view: action.view,
+        viewAt: action.at,
         playbackAt: action.at,
         joinError: null,
         lookingForTv: false,
@@ -64,6 +67,7 @@ export function reducer(state: PadState, action: PadAction): PadState {
       return {
         ...state,
         view: action.view,
+        viewAt: action.at,
         // Other changes (a player joining) resend the same report; keep its original arrival time.
         playbackAt: isSamePlayback(state.view.playback, action.view.playback)
           ? state.playbackAt

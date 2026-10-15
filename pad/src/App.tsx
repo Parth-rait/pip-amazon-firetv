@@ -76,8 +76,19 @@ export function App() {
           onSomethingElse={() => dispatch({ type: 'chips-expired' })}
         />
       )}
-      {view?.stage === 'quiz' && <QuizScreen />}
-      {view?.stage === 'results' && <ResultsScreen />}
+      {view?.stage === 'quiz' && view.quiz && (
+        <QuizScreen
+          quiz={view.quiz}
+          viewAt={state.viewAt}
+          myId={state.myId}
+          isHost={isHost(state)}
+          onAnswer={(index, choice) => socket.emit('pad:answer', { index, choice })}
+          onCommand={sendHost}
+        />
+      )}
+      {view?.stage === 'results' && (
+        <ResultsScreen view={view} myId={state.myId} isHost={isHost(state)} onCommand={sendHost} />
+      )}
       {isDebug && <DebugOverlay socket={socket} />}
     </div>
   );

@@ -17,7 +17,8 @@
     "fake:tv": "tsx scripts/fake-tv.ts",
     "smoke:join": "tsx scripts/smoke-join.ts",
     "eval:ask": "tsx scripts/eval-ask.ts",
-    "draft:quiz": "tsx scripts/draft-quiz.ts"
+    "draft:quiz": "tsx scripts/draft-quiz.ts",
+    "smoke:quiz": "tsx scripts/smoke-quiz.ts"
   },
   "dependencies": {
     "@aws-sdk/client-bedrock-runtime": "^3.1152.0",
