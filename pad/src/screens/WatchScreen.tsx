@@ -1,16 +1,22 @@
-// WATCH: the host's controls, or who has them. Ask Pip joins this screen in Step 7.
+// WATCH: Ask Pip for everyone, and the host's controls or who has them (section 3.3).
+import { AskPip } from '../components/AskPip';
 import { HostControls } from '../components/HostControls';
-import type { HostCommand, SessionView } from '../shared/protocol';
-import { hostName } from '../state/store';
+import type { AskResult, AskVia, HostCommand, PipSay, SessionView } from '../shared/protocol';
+import { hostName, type ChipKind } from '../state/store';
 
 interface Props {
   view: SessionView;
   playbackAt: number;
   isHost: boolean;
+  chips: { kind: ChipKind; items: string[] };
+  say: PipSay | null;
   onCommand: (command: HostCommand) => void;
+  onAsk: (text: string, via: AskVia) => Promise<AskResult | null>;
+  onSomethingElse: () => void;
 }
 
-export function WatchScreen({ view, playbackAt, isHost, onCommand }: Props) {
+export function WatchScreen(props: Props) {
+  const { view, isHost, onCommand } = props;
   const durationSec = view.content?.durationSec ?? 0;
   return (
     <main className="screen">
@@ -22,10 +28,17 @@ export function WatchScreen({ view, playbackAt, isHost, onCommand }: Props) {
         )}
         <h1 className="title">{view.content?.title ?? 'Film'}</h1>
       </header>
+      <AskPip
+        chips={props.chips}
+        say={props.say}
+        isThinking={view.pip === 'thinking'}
+        onAsk={props.onAsk}
+        onSomethingElse={props.onSomethingElse}
+      />
       {isHost ? (
         <HostControls
           playback={view.playback}
-          playbackAt={playbackAt}
+          playbackAt={props.playbackAt}
           durationSec={durationSec}
           onCommand={onCommand}
         />

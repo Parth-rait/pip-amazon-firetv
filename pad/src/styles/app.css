@@ -355,3 +355,87 @@ body {
     transition: none !important;
   }
 }
+
+/* Ask Pip (section 3.3): chips, "Did you mean", the answer and the Ask box. */
+.ask-pip,
+.clarify,
+.ask {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+.chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+}
+
+.chip {
+  min-height: var(--touch-min);
+  padding: var(--space-2) var(--space-4);
+  border: none;
+  border-radius: var(--radius);
+  background: var(--surface);
+  color: var(--text);
+  font: inherit;
+  cursor: pointer;
+  transition:
+    background var(--motion-fast),
+    transform var(--motion-fast);
+}
+
+.chip:active {
+  background: var(--surface2);
+  transform: scale(0.98);
+}
+
+.chip:disabled {
+  color: var(--text-muted);
+}
+
+.chip:focus-visible {
+  outline: 3px solid var(--accent);
+  outline-offset: 2px;
+}
+
+.button--quiet {
+  background: transparent;
+  color: var(--text-muted);
+}
+
+.answer {
+  padding: var(--space-4);
+  border-radius: var(--radius);
+  background: var(--surface);
+  animation: fade-in var(--motion-fast);
+}
+
+.thinking {
+  animation: pip-dot 1.2s infinite;
+}
+
+.ask__row {
+  display: flex;
+  gap: var(--space-2);
+}
+
+.mic {
+  flex-shrink: 0;
+  min-width: var(--touch-min);
+  padding: var(--space-3);
+}
+
+.mic--on {
+  background: var(--accent);
+  color: var(--bg);
+}
+
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}

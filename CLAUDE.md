@@ -29,7 +29,8 @@ Hackathon project (Amazon Developer Hackathon, Fire TV track). Deadline: Fri Oct
 - Step 2: server skeleton, film file, first Nova call. Code and tests done in the cloud. Open for Parth on the Mac: convert the film into `server/media/` (PROJECT.md 5.6), set `durationSec` from ffprobe, run `npm run smoke:ai`.
 - Step 4: sessions, players, the host and QR pairing. Done (smoke:join prints JOIN OK).
 - Step 5: Pip Pad join, lobby and host controls. Done (checked with two Playwright browsers and fake:tv).
-- Next: Steps 3 and 6 (TV, Mac-only via Remote Control). Step 7 server and pad parts can go first in the cloud.
+- Step 7: Ask Pip with guidance. Server and pad done in the cloud with a fake model. Open: Parth writes the premise, notes and evals; `smoke:ai` and `eval:ask` on the Mac; the TV bubble comes with the TV app (Steps 3 and 6).
+- Next: Step 8 (quiz drafts) in the cloud; Steps 3 and 6 (TV) on the Mac via Remote Control.
 
 Update this list when a step is committed.
 

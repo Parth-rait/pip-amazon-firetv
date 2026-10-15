@@ -4,13 +4,13 @@ import { DebugOverlay } from './components/DebugOverlay';
 import { Pip } from './components/Pip';
 import { StatusPill } from './components/StatusPill';
 import { getPlayerId, getSavedCode, getSavedName } from './lib/player-id';
-import { connectPad, createSocket, type PadConnection } from './net/socket';
+import { connectPad, createSocket, sendAsk, type PadConnection } from './net/socket';
 import { JoinScreen } from './screens/JoinScreen';
 import { LobbyScreen } from './screens/LobbyScreen';
 import { QuizScreen } from './screens/QuizScreen';
 import { ResultsScreen } from './screens/ResultsScreen';
 import { WatchScreen } from './screens/WatchScreen';
-import type { HostCommand } from './shared/protocol';
+import type { AskVia, HostCommand } from './shared/protocol';
 import { initialState, isHost, reducer } from './state/store';
 
 const NEXT_CHIPS_MS = 60_000;
@@ -36,6 +36,7 @@ export function App() {
   }, [state.chips]);
 
   const sendHost = (command: HostCommand) => socket.emit('pad:host', command);
+  const ask = (text: string, via: AskVia) => sendAsk(socket, text, via);
   const { view } = state;
 
   return (
@@ -68,7 +69,11 @@ export function App() {
           view={view}
           playbackAt={state.playbackAt}
           isHost={isHost(state)}
+          chips={state.chips}
+          say={state.say}
           onCommand={sendHost}
+          onAsk={ask}
+          onSomethingElse={() => dispatch({ type: 'chips-expired' })}
         />
       )}
       {view?.stage === 'quiz' && <QuizScreen />}

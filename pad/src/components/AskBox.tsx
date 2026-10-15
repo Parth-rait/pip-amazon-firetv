@@ -1,0 +1,56 @@
+// The Ask box: type a question (or say it with the mic) and send it to Pip.
+import { useState, type FormEvent, type Ref } from 'react';
+import { LIMITS, type AskVia } from '../shared/protocol';
+import { MicButton } from './MicButton';
+
+interface Props {
+  isDisabled: boolean; // while Pip is thinking
+  onAsk: (text: string, via: AskVia) => void;
+  message: string | null; // a refused ask, or a mic line
+  onMessage: (message: string | null) => void;
+  inputRef?: Ref<HTMLInputElement>; // "Something else" focuses the box
+}
+
+export function AskBox({ isDisabled, onAsk, message, onMessage, inputRef }: Props) {
+  const [text, setText] = useState('');
+
+  const submit = (event: FormEvent) => {
+    event.preventDefault();
+    const question = text.trim();
+    if (question.length < 2) {
+      onMessage('Type a question first.');
+      return;
+    }
+    onAsk(question, 'typed');
+    setText('');
+  };
+
+  return (
+    <form className="ask" onSubmit={submit}>
+      <div className="ask__row">
+        <input
+          ref={inputRef}
+          className="text-input"
+          value={text}
+          maxLength={LIMITS.askMaxChars}
+          placeholder="Ask Pip about the film"
+          onChange={(e) => setText(e.target.value)}
+          aria-label="Your question"
+        />
+        <MicButton
+          isDisabled={isDisabled}
+          onPartial={setText}
+          onFinal={(heard) => {
+            setText('');
+            if (heard.trim().length >= 2) onAsk(heard.trim(), 'voice');
+          }}
+          onMessage={onMessage}
+        />
+      </div>
+      <button className="button button--wide button--accent" type="submit" disabled={isDisabled}>
+        Ask
+      </button>
+      {message && <p className="caption">{message}</p>}
+    </form>
+  );
+}

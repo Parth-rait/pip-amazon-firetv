@@ -11,7 +11,15 @@ import { createRateLimit } from './core/rate-limit.js';
 import type { Timers } from './core/timers.js';
 import type { Content } from './film/content.js';
 import { quizTimerKey } from './film/quiz.js';
-import { broadcast, goToLobby, roomOf, watchFilm, type FlowDeps, type PipServer } from './flow.js';
+import {
+  askPip,
+  broadcast,
+  goToLobby,
+  roomOf,
+  watchFilm,
+  type FlowDeps,
+  type PipServer,
+} from './flow.js';
 import { errorFields, type log as Log } from './log.js';
 import type { Session, SessionStore } from './sessions.js';
 import { LIMITS, type ClientToServerEvents, type HelloResult } from './shared/protocol.js';
@@ -24,7 +32,7 @@ export interface RealtimeDeps {
   films: Content[];
   config: Config;
   timers: Timers;
-  model: TextModel; // used by Ask Pip from Step 7
+  model: TextModel;
   log: typeof Log;
   now: () => number;
 }
@@ -37,7 +45,12 @@ const JOIN_WINDOW_MS = 60 * 1000;
 
 /** Registers every handler; returns a function that stops the idle sweep. */
 export function registerRealtime(deps: RealtimeDeps): () => void {
-  const flow: FlowDeps = { ...deps, publicUrl: deps.config.PUBLIC_URL };
+  const flow: FlowDeps = {
+    ...deps,
+    publicUrl: deps.config.PUBLIC_URL,
+    aiEnabled: deps.config.AI_ENABLED,
+    logText: deps.config.LOG_TEXT,
+  };
   const joinLimit = createRateLimit(LIMITS.failedJoinsPerMinute, JOIN_WINDOW_MS);
   const core = (session: Session): CoreDeps => ({
     timers: deps.timers,
@@ -193,6 +206,24 @@ export function registerRealtime(deps: RealtimeDeps): () => void {
       } else {
         ignored('pad:host', `${command.type}-in-${stage}`);
       }
+    });
+
+    on('pad:ask', (payload, ack) => {
+      if (typeof ack !== 'function') return invalid('pad:ask');
+      const parsed = schema.askSchema.safeParse(payload);
+      const d = data();
+      const session = sessionOf();
+      const player = d?.role === 'pad' ? session?.players.get(d.playerId) : undefined;
+      if (!parsed.success || !session || !player) {
+        invalid('pad:ask');
+        return ack({ ok: false, reason: 'invalid' });
+      }
+      const { result, done } = askPip(session, player, parsed.data.text, parsed.data.via, flow);
+      ack(result);
+      if (!result.ok) ignored('pad:ask', result.reason);
+      done.catch((error: unknown) => {
+        deps.log.error('failed.pad:ask', { code: session.code, ...errorFields(error) });
+      });
     });
 
     on('tv:watch', (payload) => {
