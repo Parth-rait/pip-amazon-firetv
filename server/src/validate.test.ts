@@ -1,0 +1,67 @@
+import { describe, expect, it } from 'vitest';
+import { LIMITS } from './shared/protocol.js';
+import {
+  askSchema,
+  helloSchema,
+  hostCommandSchema,
+  joinSchema,
+  playbackSchema,
+} from './validate.js';
+
+const ID = '0123456789abcdef0123456789abcdef';
+
+describe('validate', () => {
+  it('accepts a good join and rejects bad codes and ids', () => {
+    expect(joinSchema.safeParse({ code: 'ABCD', playerId: ID, name: 'Sam' }).success).toBe(true);
+    for (const code of ['AB0D', 'abcd', 'ABC', 'ABCDE']) {
+      expect(joinSchema.safeParse({ code, playerId: ID, name: 'Sam' }).success).toBe(false);
+    }
+    for (const playerId of [ID.toUpperCase(), ID.slice(1), `${ID}0`, 'x'.repeat(32)]) {
+      expect(joinSchema.safeParse({ code: 'ABCD', playerId, name: 'Sam' }).success).toBe(false);
+    }
+  });
+
+  it('accepts a first hello and rejects a bad tv key', () => {
+    expect(helloSchema.safeParse({ previousCode: null, tvKey: null, playback: null }).success).toBe(
+      true,
+    );
+    expect(
+      helloSchema.safeParse({ previousCode: 'ABCD', tvKey: 'nope', playback: null }).success,
+    ).toBe(false);
+  });
+
+  it('clamps seeks to the limit', () => {
+    expect(hostCommandSchema.parse({ type: 'seek', deltaSec: 500 })).toEqual({
+      type: 'seek',
+      deltaSec: LIMITS.seekMaxAbsSec,
+    });
+    expect(hostCommandSchema.parse({ type: 'seek', deltaSec: -500 })).toEqual({
+      type: 'seek',
+      deltaSec: -LIMITS.seekMaxAbsSec,
+    });
+  });
+
+  it('rejects unknown host commands', () => {
+    expect(hostCommandSchema.safeParse({ type: 'explode' }).success).toBe(false);
+    expect(hostCommandSchema.safeParse({ type: 'seek', deltaSec: 'far' }).success).toBe(false);
+  });
+
+  it('trims the ask text and rejects text that is too short or too long', () => {
+    expect(askSchema.parse({ text: '  why?  ', via: 'typed' }).text).toBe('why?');
+    expect(askSchema.safeParse({ text: ' a ', via: 'typed' }).success).toBe(false);
+    const long = 'a'.repeat(LIMITS.askMaxChars + 1);
+    expect(askSchema.safeParse({ text: long, via: 'typed' }).success).toBe(false);
+    expect(askSchema.safeParse({ text: 'why?', via: 'shout' }).success).toBe(false);
+  });
+
+  it('rejects playback that is not a number', () => {
+    const playback = {
+      contentId: 'f',
+      positionSec: 'x',
+      durationSec: 1,
+      paused: false,
+      ended: false,
+    };
+    expect(playbackSchema.safeParse(playback).success).toBe(false);
+  });
+});

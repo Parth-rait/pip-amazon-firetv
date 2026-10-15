@@ -1,0 +1,26 @@
+/* Design tokens from PROJECT.md section 3.2. Use these names; no other colors or spacing. */
+:root {
+  --bg: #0b0b0f;
+  --surface: #15151c;
+  --surface2: #1e1e27;
+  --text: #f4f4f6;
+  --text-muted: #9b9ba8;
+  --accent: #7ce7c4;
+  --danger: #ff6b6b;
+  --radius: 20px;
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 24px;
+  --space-6: 32px;
+  --space-7: 48px;
+  --font: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+  --motion-fast: 180ms ease-out;
+  --motion-pip: 2400ms ease-in-out;
+  --type-caption: 15px;
+  --type-body: 17px;
+  --type-title: 22px;
+  --type-display: 34px;
+  --touch-min: 56px;
+}

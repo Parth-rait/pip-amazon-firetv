@@ -1,0 +1,357 @@
+/* Pip Pad styles: big and calm, one accent color, no borders (PROJECT.md section 3.1). */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  min-height: 100%;
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font);
+  font-size: var(--type-body);
+  line-height: 1.4;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.app {
+  max-width: 560px;
+  margin: 0 auto;
+  padding: var(--space-4) var(--space-4) var(--space-7);
+  padding-top: max(var(--space-4), env(safe-area-inset-top));
+}
+
+.top-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: var(--space-5);
+}
+
+.screen {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-5);
+}
+
+.screen--join {
+  align-items: center;
+  padding-top: var(--space-6);
+}
+
+.stack {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  width: 100%;
+}
+
+.title {
+  font-size: var(--type-title);
+  font-weight: 600;
+  margin: 0;
+}
+
+.body {
+  margin: 0;
+}
+
+.caption,
+.label {
+  font-size: var(--type-caption);
+  color: var(--text-muted);
+  margin: 0;
+}
+
+.muted {
+  color: var(--text-muted);
+}
+
+.error {
+  color: var(--danger);
+  margin: 0;
+}
+
+/* Buttons and inputs: surface steps instead of borders; 56 px touch targets. */
+.button,
+.film-card {
+  min-height: var(--touch-min);
+  padding: var(--space-3) var(--space-5);
+  border: none;
+  border-radius: var(--radius);
+  background: var(--surface);
+  color: var(--text);
+  font: inherit;
+  cursor: pointer;
+  transition:
+    background var(--motion-fast),
+    transform var(--motion-fast);
+}
+
+.button:active,
+.film-card:active {
+  background: var(--surface2);
+  transform: scale(0.98);
+}
+
+.button:disabled {
+  color: var(--text-muted);
+  cursor: default;
+  transform: none;
+}
+
+.button:focus-visible,
+.film-card:focus-visible,
+.text-input:focus-visible,
+.code-box:focus-visible {
+  outline: 3px solid var(--accent);
+  outline-offset: 2px;
+}
+
+.button--accent {
+  background: var(--accent);
+  color: var(--bg);
+  font-weight: 600;
+}
+
+.button--accent:active {
+  background: var(--accent);
+}
+
+.button--accent:disabled {
+  background: var(--surface);
+}
+
+.button--wide {
+  width: 100%;
+}
+
+.button--big {
+  flex: 1;
+  min-height: 72px;
+  padding: var(--space-3) var(--space-2);
+}
+
+.button--small {
+  min-height: 40px;
+  padding: var(--space-2) var(--space-4);
+  font-size: var(--type-caption);
+}
+
+.text-input,
+.code-box {
+  width: 100%;
+  min-height: var(--touch-min);
+  padding: var(--space-3) var(--space-4);
+  border: none;
+  border-radius: var(--radius);
+  background: var(--surface);
+  color: var(--text);
+  font: inherit;
+}
+
+.code-boxes {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: var(--space-3);
+}
+
+.code-box {
+  height: 72px;
+  text-align: center;
+  font-size: var(--type-display);
+  font-weight: 600;
+  text-transform: uppercase;
+}
+
+.film-card {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  min-height: 96px;
+  text-align: left;
+}
+
+.film-card__title {
+  font-size: var(--type-title);
+  font-weight: 600;
+}
+
+.players {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+}
+
+.player {
+  padding: var(--space-2) var(--space-4);
+  border-radius: var(--radius);
+  background: var(--surface);
+}
+
+.player--away {
+  color: var(--text-muted);
+}
+
+.player__marks {
+  color: var(--text-muted);
+  font-size: var(--type-caption);
+}
+
+.pill-row {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+}
+
+.pill {
+  padding: var(--space-1) var(--space-3);
+  border-radius: var(--radius);
+  background: var(--surface);
+  color: var(--accent);
+  font-size: var(--type-caption);
+}
+
+.pill--muted {
+  color: var(--text-muted);
+}
+
+.watch-header {
+  display: flex;
+  align-items: center;
+  gap: var(--space-4);
+}
+
+.host-controls {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+}
+
+.control-row {
+  display: flex;
+  gap: var(--space-3);
+}
+
+.progress {
+  height: 4px;
+  border-radius: 2px;
+  background: var(--surface2);
+  overflow: hidden;
+}
+
+.progress__fill {
+  height: 100%;
+  background: var(--accent);
+  transition: width 1s linear;
+}
+
+.debug {
+  position: fixed;
+  right: var(--space-2);
+  bottom: var(--space-2);
+  padding: var(--space-1) var(--space-2);
+  border-radius: 8px;
+  background: var(--surface2);
+  color: var(--text-muted);
+  font:
+    12px ui-monospace,
+    monospace;
+}
+
+/* Pip (section 3.4): a mint circle with two eyes; the state picks the animation. */
+.pip {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 18%;
+  border-radius: 50%;
+  background: var(--accent);
+  box-shadow: 0 0 24px rgb(124 231 196 / 0.35);
+  animation: pip-breathe var(--motion-pip) infinite;
+  flex-shrink: 0;
+}
+
+.pip__eye {
+  width: 11%;
+  height: 26%;
+  border-radius: 999px;
+  background: var(--bg);
+  transition: height var(--motion-fast);
+}
+
+.pip--sleep {
+  opacity: 0.5;
+  box-shadow: none;
+}
+
+.pip--sleep .pip__eye {
+  height: 5%;
+}
+
+.pip--thinking .pip__eye {
+  transform: translate(25%, -25%);
+}
+
+.pip__dots {
+  position: absolute;
+  bottom: -30%;
+  display: flex;
+  gap: 4px;
+}
+
+.pip__dots span {
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: var(--accent);
+  animation: pip-dot 1.2s infinite;
+}
+
+.pip__dots span:nth-child(2) {
+  animation-delay: 0.2s;
+}
+
+.pip__dots span:nth-child(3) {
+  animation-delay: 0.4s;
+}
+
+.pip--cheer {
+  box-shadow: 0 0 36px rgb(124 231 196 / 0.7);
+}
+
+@keyframes pip-breathe {
+  0%,
+  100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.04);
+  }
+}
+
+@keyframes pip-dot {
+  0%,
+  100% {
+    opacity: 0.3;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation: none !important;
+    transition: none !important;
+  }
+}
