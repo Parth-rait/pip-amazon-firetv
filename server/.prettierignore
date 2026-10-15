@@ -1,0 +1,5 @@
+node_modules
+media
+coverage
+src/shared
+package-lock.json
