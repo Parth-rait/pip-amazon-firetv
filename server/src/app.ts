@@ -1,5 +1,7 @@
-// Express routes: health, the film list, QR codes and the film files (PROJECT.md section 7.3).
+// Express routes: health, the film list, QR codes, the film files and the built pad (section 7.3).
 import express, { type Express } from 'express';
+import { existsSync } from 'node:fs';
+import { join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import QRCode from 'qrcode';
 import type { Config } from './config.js';
@@ -10,10 +12,13 @@ import { errorFields, log } from './log.js';
 const SERVER_VERSION = '0.1.0';
 const QR_OPTIONS = { type: 'png', width: 512, margin: 2 } as const;
 export const MEDIA_DIR = fileURLToPath(new URL('../media', import.meta.url));
+export const PAD_DIR = fileURLToPath(new URL('../../pad/dist', import.meta.url));
+const NOT_PAD_PATHS = /^\/(api|qr|media|socket\.io)(\/|$)/;
 
 export interface AppOptions {
   hasSession?: (code: string) => boolean; // a QR code is drawn only for a live session
   mediaDir?: string; // swapped in tests
+  padDir?: string; // the built pad; served only when the folder exists
 }
 
 /** Builds the HTTP app. */
@@ -57,5 +62,17 @@ export function createApp(config: Config, films: Content[], options: AppOptions 
     res.status(404).json({ ok: false, error: 'not-found' });
   });
 
+  servePad(app, options.padDir ?? PAD_DIR);
   return app;
+}
+
+/** The built pad, with index.html for any other GET, so links like /?code=K7QD open the app. */
+function servePad(app: Express, padDir: string): void {
+  if (!existsSync(join(padDir, 'index.html'))) return;
+  app.use(express.static(padDir));
+  // Express 5 no longer accepts '*' as a path, so the fallback is the last middleware.
+  app.use((req, res, next) => {
+    if (req.method !== 'GET' || NOT_PAD_PATHS.test(req.path)) return next();
+    res.sendFile(join(padDir, 'index.html'));
+  });
 }

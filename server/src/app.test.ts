@@ -11,6 +11,8 @@ const config = parseConfig({ PUBLIC_URL: 'https://pip.example.com' });
 const films = loadFilms(new URL('../content/', import.meta.url).pathname);
 const mediaDir = mkdtempSync(join(tmpdir(), 'pip-media-'));
 writeFileSync(join(mediaDir, 'big-buck-bunny.mp4'), Buffer.alloc(1000, 1));
+const padDir = mkdtempSync(join(tmpdir(), 'pip-pad-'));
+writeFileSync(join(padDir, 'index.html'), '<!doctype html><title>Pip Pad</title>');
 
 let baseUrl = '';
 let close: () => void = () => {};
@@ -59,6 +61,16 @@ describe('createApp', () => {
     expect(res.headers.get('content-type')).toBe('image/png');
     expect((await fetch(`${baseUrl}/qr/WXYZ`)).status).toBe(404);
     expect((await fetch(`${baseUrl}/qr/nope`)).status).toBe(404);
+  });
+
+  it('serves the pad for any other GET, but never for /api, /qr or /media', async () => {
+    const page = await fetch(`${baseUrl}/watch?code=ABCD`);
+    expect(page.status).toBe(200);
+    expect(await page.text()).toContain('Pip Pad');
+    expect((await fetch(`${baseUrl}/api/missing`)).status).toBe(404);
+    expect((await fetch(`${baseUrl}/media/missing.mp4`)).headers.get('content-type')).toContain(
+      'json',
+    );
   });
 
   it('answers 404 for a missing film file', async () => {

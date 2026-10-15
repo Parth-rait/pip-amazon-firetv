@@ -15,7 +15,7 @@ Hackathon project (Amazon Developer Hackathon, Fire TV track). Deadline: Fri Oct
 | `scripts/tunnel.mjs` | Cloudflare quick tunnel; writes `PUBLIC_URL` and `SERVER_URL` | Done (used from Step 3) |
 | `server/` | Node 22 + Express 5 + Socket.IO 4.8 + Bedrock. `src/core/` = Pip Core, `src/film/` = film night | Steps 2 and 4 done: config, films, /health, /api/films, /qr, /media, model wrapper, sessions, players, host, realtime handlers, fake:tv, smoke:join |
 | `server/.env` | Local config (gitignored), copied from `server/.env.example` | Done |
-| `pad/` | React + Vite web app (the Pip Pad) | Not created on purpose: Step 5 runs `npm create vite@latest pad` |
+| `pad/` | React + Vite web app (the Pip Pad) | Step 5 done: join, lobby, host controls, status pill, Pip, debug overlay |
 | `tv/` | Vega OS app (React Native for Vega) | Not created on purpose: Step 3 runs `vega project generate ... --outputDir tv` |
 | `docs/` | Friction log, product feedback; later measurements, demo script, devpost | Templates done |
 | `.claude/skills/ship-step/` | Definition-of-done and commit routine | Done; `run-pip` comes in Step 6 |
@@ -28,7 +28,8 @@ Hackathon project (Amazon Developer Hackathon, Fire TV track). Deadline: Fri Oct
 - Step 1: root skeleton, contract, docs templates, ship-step skill. Done, except the ADBT `init-context` run (Parth runs it; re-check this file afterwards, since it may rewrite CLAUDE.md) and the first commit.
 - Step 2: server skeleton, film file, first Nova call. Code and tests done in the cloud. Open for Parth on the Mac: convert the film into `server/media/` (PROJECT.md 5.6), set `durationSec` from ffprobe, run `npm run smoke:ai`.
 - Step 4: sessions, players, the host and QR pairing. Done (smoke:join prints JOIN OK).
-- Next: Step 5 (Pip Pad). Step 3 (TV spike) is Mac-only.
+- Step 5: Pip Pad join, lobby and host controls. Done (checked with two Playwright browsers and fake:tv).
+- Next: Steps 3 and 6 (TV, Mac-only via Remote Control). Step 7 server and pad parts can go first in the cloud.
 
 Update this list when a step is committed.
 
