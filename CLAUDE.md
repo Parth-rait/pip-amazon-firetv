@@ -18,7 +18,7 @@ Hackathon project (Amazon Developer Hackathon, Fire TV track). Deadline: Fri Oct
 | `server/.env` | Local config (gitignored), copied from `server/.env.example` | Done |
 | `pad/` | React + Vite web app (the Pip Pad) | Steps 5, 7, 9 and 10 done: join, lobby, host controls, status pill, Pip and its motion, debug overlay, Ask Pip, quiz, results, fullscreen, wake lock |
 | `tv/` | Vega OS app (React Native for Vega) | Not created on purpose: Step 3 runs `vega project generate ... --outputDir tv` |
-| `docs/` | Friction log, product feedback, measurements, demo script; later devpost | Templates and empty measurement tables done; demo script needs the scene times from the notes |
+| `docs/` | Friction log, product feedback, measurements, demo script; later devpost | Templates, empty measurement tables and a devpost draft done; demo script needs the scene times from the notes |
 | `.claude/skills/ship-step/` | Definition-of-done and commit routine | Done; `run-pip` comes in Step 6 |
 
 `pad/` and `tv/` must not be created by hand: their generators expect an empty or missing folder, and `sync-shared` would otherwise write into them early.
@@ -35,7 +35,8 @@ Hackathon project (Amazon Developer Hackathon, Fire TV track). Deadline: Fri Oct
 - Step 9: quiz and results. Server and pad done in the cloud (smoke:quiz prints QUIZ OK; three Playwright players played a whole quiz). Open: the TV's answer grid and results screen come with the TV app.
 - Step 10: polish and resilience. Pad parts done in the cloud: Pip motion, 180 ms fades, 56 px targets, fullscreen, wake lock; every row of PROJECT.md 4.10 walked through in browsers (known issues in README.md). Open: the TV's Pip motion, safe margin and type scale.
 - Step 11: demo hardening. Cloud parts done: `npm run preflight`, `docs/demo-script.md`, empty measurement tables. Open (Mac): preflight passing, scene times in the demo script, measurements, usability test, rehearsals, tag v0.1.0.
-- Next: Steps 3 and 6 (TV) on the Mac via Remote Control, then the TV parts of Steps 7, 9 and 10; then Step 11 on the Mac.
+- Step 12: drafts only: README.md (what, why, architecture, Amazon tech, how to run, tests, known issues, credits) and docs/devpost.md, with "After" marks for what needs the TV app, measurements or the usability test. `npm audit`: 0 vulnerabilities in server/ and pad/.
+- Next: Steps 3 and 6 (TV) on the Mac via Remote Control, then the TV parts of Steps 7, 9 and 10; then Step 11 on the Mac; then finish Step 12 with screenshots and real numbers.
 
 Update this list when a step is committed.
 
