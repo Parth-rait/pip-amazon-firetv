@@ -50,11 +50,47 @@ describe('buildView', () => {
     ]);
   });
 
-  it('counts unlocked questions only in watch', () => {
+  it('counts unlocked questions only in watch, and only when the quiz mode is on', () => {
     const session = watching();
-    expect(buildView(session, [film], 'http://x', 0).quizUnlocked).toBe(1);
-    session.stage = 'lobby';
+    const quizOn = { quiz: true };
+    expect(buildView(session, [film], 'http://x', 0, quizOn).quizUnlocked).toBe(1);
     expect(buildView(session, [film], 'http://x', 0).quizUnlocked).toBe(0);
+    expect(buildView(session, [film], 'http://x', 0).features.quiz).toBe(false);
+    session.stage = 'lobby';
+    expect(buildView(session, [film], 'http://x', 0, quizOn).quizUnlocked).toBe(0);
+  });
+
+  it('shows Pip and the last command only in watch', () => {
+    const session = watching();
+    session.assist = {
+      phase: 'reply',
+      askedBy: '1'.repeat(32),
+      askedByName: 'A',
+      question: 'Who is that?',
+      text: 'A fox.',
+      kind: 'answer',
+    };
+    session.lastAction = {
+      commandId: 'c1',
+      type: 'pause',
+      deltaSec: null,
+      by: '1'.repeat(32),
+      sentAt: 0,
+      expected: { paused: true },
+      status: 'sent',
+    };
+    const view = buildView(session, [film], 'http://x', 0);
+    expect(view.assist?.text).toBe('A fox.');
+    expect(view.lastAction).toEqual({
+      commandId: 'c1',
+      type: 'pause',
+      deltaSec: null,
+      by: '1'.repeat(32),
+      status: 'sent',
+    });
+    session.stage = 'lobby';
+    expect(buildView(session, [film], 'http://x', 0).assist).toBeNull();
+    expect(buildView(session, [film], 'http://x', 0).lastAction).toBeNull();
   });
 
   it('includes the film with a full URL and never the notes, the quiz or the answers', () => {

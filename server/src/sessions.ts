@@ -1,7 +1,20 @@
-// The Session type and the in-memory store (PROJECT.md section 4.6).
+// The Session type and the in-memory store (PROJECT.md section 4.6, vNext fields below history).
+import type { TrackedAction } from './core/actions/tracker.js';
+import { createJournal, type Journal } from './core/events/journal.js';
+import { createSeenIds, type SeenIds } from './core/input/dedupe.js';
 import { isOnline, type Roster } from './core/players.js';
+import type { HistoryItem } from './film/ask-prompt.js';
 import type { QuizRun } from './film/quiz.js';
-import { LIMITS, type PipState, type Playback, type Stage } from './shared/protocol.js';
+import {
+  LIMITS,
+  type AssistView,
+  type PipState,
+  type Playback,
+  type Stage,
+} from './shared/protocol.js';
+
+const SEEN_IDS_MAX = 500;
+const JOURNAL_MAX = 1000;
 
 export interface Session extends Roster {
   code: string;
@@ -14,9 +27,13 @@ export interface Session extends Roster {
   playbackAt: number; // when the last tv:playback arrived (ms)
   asking: boolean; // the ask lock: one model call at a time
   // Newest last, at most 3; atSec is where the film was. Cleared for a new film.
-  history: { atSec: number; question: string; answer: string }[];
+  history: HistoryItem[];
   quiz: QuizRun | null; // kept through the results stage
   updatedAt: number;
+  assist: AssistView | null; // Pip on the TV; null keeps the film full screen
+  lastAction: TrackedAction | null; // the latest playback command and its observed outcome
+  seenIds: SeenIds; // event and command ids already applied (idempotency)
+  journal: Journal; // what happened, without names or question text
 }
 
 export interface SessionStore {
@@ -54,6 +71,10 @@ export function createSession(
     history: [],
     quiz: null,
     updatedAt: now,
+    assist: null,
+    lastAction: null,
+    seenIds: createSeenIds(SEEN_IDS_MAX),
+    journal: createJournal(JOURNAL_MAX),
   };
 }
 

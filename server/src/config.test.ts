@@ -11,6 +11,9 @@ describe('parseConfig', () => {
       BEDROCK_MODEL_ID: 'us.amazon.nova-2-lite-v1:0',
       AI_ENABLED: true,
       LOG_TEXT: false,
+      TIMELINE_REVIEW: 'accepted',
+      QUIZ_ENABLED: false,
+      INTENT_JUDGE: 'rules',
     });
   });
 

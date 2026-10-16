@@ -19,6 +19,9 @@ function view(overrides: Partial<SessionView> = {}): SessionView {
     playback: null,
     quizUnlocked: 0,
     pip: 'idle',
+    assist: null,
+    lastAction: null,
+    features: { quiz: false },
     quiz: null,
     results: null,
     ...overrides,
@@ -34,6 +37,7 @@ function say(askedBy: string, overrides: Partial<PipSay> = {}): PipSay {
     next: ['Why is he sad?', 'Where is he?'],
     clarify: [],
     source: 'ai',
+    kind: 'answer',
     ...overrides,
   };
 }
