@@ -14,6 +14,7 @@ Not the demo setup: Pip ran on the local brain (`AI_PROVIDER=ollama`, `qwen2.5:3
 | Question to answer, local model | `ask.done` `ms` in the server log, 11 real answers | median 2.3 s, worst 4.8 s |
 | A repeated question at the same scene | Answer memory (PROJECT.md 5.9) | 18 ms |
 | Grounding probes, local model | `eval:ask`, 15 per film | 0 leaks on both films; the 3B model still made up small facts, for example "Her sword was given to her by the shaman" |
+| Moods on the local model | The same 3 questions in Chill and Sassy; then with a per-mood example reply, then with a concrete "end with a cheeky remark" rule | No audible difference; the concrete rule broke the reply format, so both changes were dropped. Moods are judged on Nova |
 | Quiz run, three scripted players on the VVD | `quiz-sim` script, Big Buck Bunny | 0 wrong scores, no answer visible before a reveal, no stuck screen; results Mom 4, Gran 2, Leo 0, family 6 of 12 |
 | Keep watching after the results | Same session | resumed at 6:29, where the quiz started |
 
