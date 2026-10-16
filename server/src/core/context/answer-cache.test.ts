@@ -17,7 +17,12 @@ describe('answer cache', () => {
   });
 
   it('never shares a key across evidence sets, prompts or models', () => {
-    for (const change of [{ evidenceKey: 'e2' }, { promptVersion: 'p2' }, { modelId: 'm2' }, { isClarifyPick: true }]) {
+    for (const change of [
+      { evidenceKey: 'e2' },
+      { promptVersion: 'p2' },
+      { modelId: 'm2' },
+      { isClarifyPick: true },
+    ]) {
       expect(cacheKey({ ...parts, ...change })).not.toBe(cacheKey(parts));
     }
   });

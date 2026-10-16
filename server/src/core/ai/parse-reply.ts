@@ -33,7 +33,11 @@ function fields(raw: string): { labelled: Partial<Record<Label, string>>; unlabe
 }
 
 function comparable(text: string): string {
-  return text.toLowerCase().replace(/[^\p{L}\p{N} ]/gu, '').replace(/\s+/g, ' ').trim();
+  return text
+    .toLowerCase()
+    .replace(/[^\p{L}\p{N} ]/gu, '')
+    .replace(/\s+/g, ' ')
+    .trim();
 }
 
 /** Chips: split on |, cleaned, at most 60 characters, ending in "?", no repeats of the question. */

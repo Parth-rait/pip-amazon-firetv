@@ -10,8 +10,7 @@ export interface AskSettings {
 }
 
 export type AskOutcome =
-  | { reply: ParsedReply; raw: string; ms: number }
-  | { reply: null; error: string; ms: number }; // 'unparsed', or the error's name for the log
+  { reply: ParsedReply; raw: string; ms: number } | { reply: null; error: string; ms: number }; // 'unparsed', or the error's name for the log
 
 /** Calls the model with a time limit and parses the reply. Errors become `{ reply: null, error }`. */
 export async function runAsk(

@@ -14,7 +14,11 @@ const RECENCY_HALF_LIFE_SEC = 60;
 const RECENCY_WEIGHT = 1.5;
 
 /** The facts most relevant to `query`, in story order. Never returns anything outside `evidence`. */
-export function retrieve(evidence: EvidenceSet, query: string, options: RetrieveOptions): TimedFact[] {
+export function retrieve(
+  evidence: EvidenceSet,
+  query: string,
+  options: RetrieveOptions,
+): TimedFact[] {
   const facts = evidence.facts;
   if (facts.length === 0 || options.limit <= 0) return [];
   const queryWords = new Set(contentWords(query));
@@ -64,7 +68,9 @@ export function mentionedEntities(entities: Entity[], text: string): Set<string>
   const found = new Set<string>();
   for (const entity of entities) {
     const names = [entity.name, ...entity.aliases];
-    if (names.some((n) => contentWords(n).every((w) => words.has(w)) && contentWords(n).length > 0)) {
+    if (
+      names.some((n) => contentWords(n).every((w) => words.has(w)) && contentWords(n).length > 0)
+    ) {
       found.add(entity.id);
     }
   }

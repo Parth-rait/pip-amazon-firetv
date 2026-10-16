@@ -2,7 +2,13 @@
 // This is a hard filter in code, applied before any model call and again to every answer.
 import { createHash } from 'node:crypto';
 import { containsTerm } from './text.js';
-import { isUsable, type Entity, type ReviewPolicy, type TimedFact, type Timeline } from './timeline.js';
+import {
+  isUsable,
+  type Entity,
+  type ReviewPolicy,
+  type TimedFact,
+  type Timeline,
+} from './timeline.js';
 
 /** Everything Pip may use at one moment, plus the terms it must not say. */
 export interface EvidenceSet {

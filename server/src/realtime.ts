@@ -204,7 +204,10 @@ export function registerRealtime(deps: RealtimeDeps): () => void {
       pickHost(session, now);
       socket.data = { role: 'pad', code, playerId } satisfies SocketData;
       void socket.join(roomOf(code));
-      ack({ ok: true, view: buildView(session, deps.films, deps.config.PUBLIC_URL, now, features) });
+      ack({
+        ok: true,
+        view: buildView(session, deps.films, deps.config.PUBLIC_URL, now, features),
+      });
       deps.log.info('pad.join', { socketId: socket.id, code, playerId, isNew: outcome.isNew });
       if (session.pip === 'sleep') setPip(session, 'idle', core(session));
       else broadcast(session, flow);
@@ -227,7 +230,9 @@ export function registerRealtime(deps: RealtimeDeps): () => void {
         stage === 'watch'
       ) {
         const intent =
-          command.type === 'seek' ? { type: 'seek' as const, deltaSec: command.deltaSec } : { type: command.type };
+          command.type === 'seek'
+            ? { type: 'seek' as const, deltaSec: command.deltaSec }
+            : { type: command.type };
         const sent = sendPlayback(session, intent, d.playerId, command.commandId ?? null, flow);
         if (!sent.ok) ignored('pad:host', sent.reason);
       } else if (command.type === 'lobby' && stage !== 'lobby') {
@@ -285,10 +290,12 @@ export function registerRealtime(deps: RealtimeDeps): () => void {
         via: parsed.data.via,
         ...(deps.config.LOG_TEXT ? { text: parsed.data.text } : {}),
       });
-      askPip(session, d.playerId, parsed.data.text, parsed.data.via, flow).catch((error: unknown) => {
-        session.asking = false;
-        deps.log.error('failed.ask', { code: session.code, ...errorFields(error) });
-      });
+      askPip(session, d.playerId, parsed.data.text, parsed.data.via, flow).catch(
+        (error: unknown) => {
+          session.asking = false;
+          deps.log.error('failed.ask', { code: session.code, ...errorFields(error) });
+        },
+      );
     });
 
     on('pad:assist', (payload) => {
@@ -299,7 +306,13 @@ export function registerRealtime(deps: RealtimeDeps): () => void {
       if (!session || d?.role !== 'pad' || !session.players.has(d.playerId)) {
         return ignored('pad:assist', 'not-in-session');
       }
-      session.journal.append({ at: deps.now(), type: 'assist.dismiss', source: 'pad', actor: d.playerId, data: {} });
+      session.journal.append({
+        at: deps.now(),
+        type: 'assist.dismiss',
+        source: 'pad',
+        actor: d.playerId,
+        data: {},
+      });
       dismissAssist(session, flow);
     });
 
@@ -337,7 +350,8 @@ export function registerRealtime(deps: RealtimeDeps): () => void {
   const sweep = setInterval(() => {
     for (const code of deps.store.sweep(deps.now())) {
       const keys = [pipTimerKey(code), hostTimerKey(code), quizTimerKey(code)];
-      for (const key of [...keys, assistTimerKey(code), actionTimerKey(code)]) deps.timers.clear(key);
+      for (const key of [...keys, assistTimerKey(code), actionTimerKey(code)])
+        deps.timers.clear(key);
       deps.log.info('session.expired', { code });
     }
   }, SWEEP_EVERY_MS);

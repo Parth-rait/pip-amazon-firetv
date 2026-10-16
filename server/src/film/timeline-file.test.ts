@@ -11,7 +11,12 @@ function fixtureFile(): TimelineFile {
     schemaVersion: 1,
     contentId: t.contentId,
     durationSec: t.durationSec,
-    source: { assetId: 'lantern-fox', sha256: null, license: 'MIT', rights: 'Original test story.' },
+    source: {
+      assetId: 'lantern-fox',
+      sha256: null,
+      license: 'MIT',
+      rights: 'Original test story.',
+    },
     frames: t.facts.flatMap((f) => f.evidence.map((e) => ({ id: e.ref, atSec: e.atSec }))),
     scenes: [
       { id: 's1', startSec: 0, endSec: 48 },
@@ -45,28 +50,41 @@ describe('checkTimelineFile', () => {
   it('accepts the fixture and converts it to the runtime timeline', () => {
     const result = checkTimelineFile(fixtureFile());
     expect(result.ok).toBe(true);
-    if (result.ok) expect(toTimeline(result.file, 'v1').facts).toHaveLength(lanternFoxTimeline().facts.length);
+    if (result.ok)
+      expect(toTimeline(result.file, 'v1').facts).toHaveLength(lanternFoxTimeline().facts.length);
   });
 
   it('rejects a reveal outside the film or before its start', () => {
-    expect(problems((f) => void (f.facts[0]!.revealSec = 500))).toContain('fact f1: revealSec is after the end');
-    expect(problems((f) => void (f.facts[1]!.revealSec = 1))).toContain('fact f2: revealSec is before startSec');
+    expect(problems((f) => void (f.facts[0]!.revealSec = 500))).toContain(
+      'fact f1: revealSec is after the end',
+    );
+    expect(problems((f) => void (f.facts[1]!.revealSec = 1))).toContain(
+      'fact f2: revealSec is before startSec',
+    );
   });
 
   it('rejects unresolved evidence and evidence from after the reveal', () => {
-    expect(problems((f) => void (f.facts[0]!.evidence = ['nope']))).toContain('fact f1: unresolved evidence nope');
+    expect(problems((f) => void (f.facts[0]!.evidence = ['nope']))).toContain(
+      'fact f1: unresolved evidence nope',
+    );
     expect(problems((f) => void (f.frames[0]!.atSec = 50))).toEqual(
       expect.arrayContaining([expect.stringContaining('is after its reveal')]),
     );
   });
 
   it('rejects a fact naming an entity before that entity is first seen', () => {
-    expect(problems((f) => void f.facts[0]!.entities.push('moss'))).toContain('fact f1: names moss before it is first seen');
+    expect(problems((f) => void f.facts[0]!.entities.push('moss'))).toContain(
+      'fact f1: names moss before it is first seen',
+    );
   });
 
   it('rejects an accepted fact without evidence or without a reviewer', () => {
-    expect(problems((f) => void (f.facts[0]!.evidence = []))).toContain('fact f1: accepted without evidence');
-    expect(problems((f) => void (f.facts[0]!.review.by = null))).toContain('fact f1: accepted without a reviewer');
+    expect(problems((f) => void (f.facts[0]!.evidence = []))).toContain(
+      'fact f1: accepted without evidence',
+    );
+    expect(problems((f) => void (f.facts[0]!.review.by = null))).toContain(
+      'fact f1: accepted without a reviewer',
+    );
   });
 
   it('rejects duplicate ids, overlapping scenes and unordered facts', () => {

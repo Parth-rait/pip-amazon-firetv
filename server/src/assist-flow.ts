@@ -13,7 +13,13 @@ import { LIMITS, type AskVia, type PipSay, type ReplyKind } from './shared/proto
 const MAX_HISTORY = 3;
 
 /** Sends a reply to the asker's own pads; the TV shows replies from view.assist instead. */
-function sayTo(session: Session, playerId: string, question: string, say: Partial<PipSay> & { text: string; kind: ReplyKind }, deps: FlowDeps): void {
+function sayTo(
+  session: Session,
+  playerId: string,
+  question: string,
+  say: Partial<PipSay> & { text: string; kind: ReplyKind },
+  deps: FlowDeps,
+): void {
   const player = session.players.get(playerId);
   if (!player) return;
   const full: PipSay = {
@@ -40,27 +46,53 @@ export function dismissAssist(session: Session, deps: FlowDeps): void {
 function actionLine(intent: PlaybackIntent): string {
   if (intent.type === 'play') return LINES.play;
   if (intent.type === 'pause') return LINES.pause;
-  return intent.deltaSec < 0 ? LINES.seekBack(-intent.deltaSec) : LINES.seekForward(intent.deltaSec);
+  return intent.deltaSec < 0
+    ? LINES.seekBack(-intent.deltaSec)
+    : LINES.seekForward(intent.deltaSec);
 }
 
 /**
  * Handles one accepted ask (realtime.ts has already checked stage, lock and rate). Commands never
  * reach a model; questions go through answerQuestion and the answer gate.
  */
-export async function askPip(session: Session, playerId: string, text: string, via: AskVia, deps: FlowDeps): Promise<void> {
+export async function askPip(
+  session: Session,
+  playerId: string,
+  text: string,
+  via: AskVia,
+  deps: FlowDeps,
+): Promise<void> {
   const player = session.players.get(playerId);
   if (!player) return;
   player.lastAskAt = deps.now();
   const route = routeText(text);
-  session.journal.append({ at: deps.now(), type: 'ask.route', source: 'pad', actor: playerId, data: { via, route: route.kind } });
+  session.journal.append({
+    at: deps.now(),
+    type: 'ask.route',
+    source: 'pad',
+    actor: playerId,
+    data: { via, route: route.kind },
+  });
   if (route.kind === 'action') {
     if (session.hostId !== playerId) {
       const host = session.hostId ? session.players.get(session.hostId)?.name : undefined;
-      sayTo(session, playerId, text, { text: LINES.onlyHost(host ?? 'The host'), kind: 'refused' }, deps);
+      sayTo(
+        session,
+        playerId,
+        text,
+        { text: LINES.onlyHost(host ?? 'The host'), kind: 'refused' },
+        deps,
+      );
       return;
     }
     const sent = sendPlayback(session, route.intent, playerId, null, deps);
-    sayTo(session, playerId, text, { text: sent.ok ? actionLine(route.intent) : LINES.modelFailed, kind: 'action' }, deps);
+    sayTo(
+      session,
+      playerId,
+      text,
+      { text: sent.ok ? actionLine(route.intent) : LINES.modelFailed, kind: 'action' },
+      deps,
+    );
     return;
   }
   if (route.kind === 'dismiss') {
@@ -69,7 +101,13 @@ export async function askPip(session: Session, playerId: string, text: string, v
     return;
   }
   if (route.kind === 'ambiguous-command') {
-    sayTo(session, playerId, text, { text: LINES.whatToStop, kind: 'clarify', clarify: route.options }, deps);
+    sayTo(
+      session,
+      playerId,
+      text,
+      { text: LINES.whatToStop, kind: 'clarify', clarify: route.options },
+      deps,
+    );
     return;
   }
   await answerAndShow(session, playerId, text, via, route.topic, deps);
@@ -90,12 +128,27 @@ async function answerAndShow(
   const contentAtStart = film.id;
   deps.timers.clear(assistTimerKey(session.code));
   session.asking = true;
-  session.assist = { phase: 'thinking', askedBy: playerId, askedByName: player.name, question, text: null, kind: null };
+  session.assist = {
+    phase: 'thinking',
+    askedBy: playerId,
+    askedByName: player.name,
+    question,
+    text: null,
+    kind: null,
+  };
   setPip(session, 'thinking', coreOf(session, deps));
   let result: AnswerResult;
   try {
     result = await answerQuestion(
-      { film, timeline, positionSec: positionOf(session, deps.now()), history: session.history, question, via, topic },
+      {
+        film,
+        timeline,
+        positionSec: positionOf(session, deps.now()),
+        history: session.history,
+        question,
+        via,
+        topic,
+      },
       deps.answer,
     );
   } finally {
@@ -111,15 +164,45 @@ async function answerAndShow(
   result = recheckAtPosition(result, timeline, positionOf(session, deps.now()), deps.answer.policy);
   logReply(session, playerId, via, result, deps);
   if (result.kind === 'answer') {
-    session.history = [...session.history, { atSec: result.boundarySec, question, answer: result.text }].slice(-MAX_HISTORY);
+    session.history = [
+      ...session.history,
+      { atSec: result.boundarySec, question, answer: result.text },
+    ].slice(-MAX_HISTORY);
   }
-  session.assist = { phase: 'reply', askedBy: playerId, askedByName: player.name, question, text: result.text, kind: result.kind };
-  sayTo(session, playerId, question, { text: result.text, kind: result.kind, next: result.next, clarify: result.clarify, source: result.source }, deps);
+  session.assist = {
+    phase: 'reply',
+    askedBy: playerId,
+    askedByName: player.name,
+    question,
+    text: result.text,
+    kind: result.kind,
+  };
+  sayTo(
+    session,
+    playerId,
+    question,
+    {
+      text: result.text,
+      kind: result.kind,
+      next: result.next,
+      clarify: result.clarify,
+      source: result.source,
+    },
+    deps,
+  );
   setPip(session, 'talking', coreOf(session, deps));
-  deps.timers.set(assistTimerKey(session.code), LIMITS.assistShowMs, () => dismissAssist(session, deps));
+  deps.timers.set(assistTimerKey(session.code), LIMITS.assistShowMs, () =>
+    dismissAssist(session, deps),
+  );
 }
 
-function logReply(session: Session, playerId: string, via: AskVia, result: AnswerResult, deps: FlowDeps): void {
+function logReply(
+  session: Session,
+  playerId: string,
+  via: AskVia,
+  result: AnswerResult,
+  deps: FlowDeps,
+): void {
   const fields = {
     code: session.code,
     playerId,
@@ -139,6 +222,11 @@ function logReply(session: Session, playerId: string, via: AskVia, result: Answe
     type: 'ask.reply',
     source: 'server',
     actor: playerId,
-    data: { kind: result.kind, path: result.path, sources: result.sources, withheld: result.withheld },
+    data: {
+      kind: result.kind,
+      path: result.path,
+      sources: result.sources,
+      withheld: result.withheld,
+    },
   });
 }

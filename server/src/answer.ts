@@ -95,15 +95,27 @@ function safeChips(chips: string[], evidence: EvidenceSet): string[] {
 export async function answerQuestion(req: AnswerRequest, deps: AnswerDeps): Promise<AnswerResult> {
   const evidence = permittedEvidence(req.timeline, req.positionSec, deps.policy);
   if (req.timeline.facts.length === 0) {
-    return reply(evidence, 'no-timeline', { kind: 'unknown', source: 'template', text: LINES.noTimeline });
+    return reply(evidence, 'no-timeline', {
+      kind: 'unknown',
+      source: 'template',
+      text: LINES.noTimeline,
+    });
   }
   // With no evidence the model is never asked: its own knowledge of a famous film could spoil it.
   if (evidence.facts.length === 0) {
-    return reply(evidence, 'no-evidence', { kind: 'unknown', source: 'template', text: LINES.noEvidenceYet });
+    return reply(evidence, 'no-evidence', {
+      kind: 'unknown',
+      source: 'template',
+      text: LINES.noEvidenceYet,
+    });
   }
   // A question naming something not seen yet gets "not sure": yes or no would both give it away.
   if (evidence.restrictedTerms.some((t) => containsTerm(req.question, t))) {
-    return reply(evidence, 'restricted-question', { kind: 'unknown', source: 'template', text: LINES.notSure });
+    return reply(evidence, 'restricted-question', {
+      kind: 'unknown',
+      source: 'template',
+      text: LINES.notSure,
+    });
   }
   const direct = retrievalAnswer(req, evidence, deps.aiEnabled);
   if (direct) return gate(direct, req.timeline, evidence);
@@ -133,7 +145,11 @@ function gate(result: AnswerResult, timeline: Timeline, evidence: EvidenceSet): 
  * Answers straight from reviewed facts: "what just happened" and "who is that" always; any other
  * question only when the model is off and one fact clearly matches.
  */
-function retrievalAnswer(req: AnswerRequest, evidence: EvidenceSet, aiEnabled: boolean): AnswerResult | null {
+function retrievalAnswer(
+  req: AnswerRequest,
+  evidence: EvidenceSet,
+  aiEnabled: boolean,
+): AnswerResult | null {
   if (req.topic === 'recap') {
     const latest = [...evidence.facts].sort((a, b) => a.revealSec - b.revealSec).slice(-2);
     return reply(evidence, 'retrieval', {
@@ -147,7 +163,8 @@ function retrievalAnswer(req: AnswerRequest, evidence: EvidenceSet, aiEnabled: b
   if (req.topic === 'identify') {
     const asked = mentionedEntities(evidence.entities, req.question);
     const near = entitiesNear(evidence, IDENTIFY_WINDOW_SEC);
-    const people = asked.size > 0 ? evidence.entities.filter((e) => asked.has(e.id)) : near.slice(0, 2);
+    const people =
+      asked.size > 0 ? evidence.entities.filter((e) => asked.has(e.id)) : near.slice(0, 2);
     if (people.length > 0) {
       const ids = new Set(people.map((p) => p.id));
       const sources = evidence.facts.filter((f) => f.entities.some((id) => ids.has(id))).slice(-2);
@@ -187,7 +204,11 @@ export function bestKeywordMatch(evidence: EvidenceSet, question: string): Timed
   return best?.fact ?? null;
 }
 
-async function modelAnswer(req: AnswerRequest, evidence: EvidenceSet, deps: AnswerDeps): Promise<AnswerResult> {
+async function modelAnswer(
+  req: AnswerRequest,
+  evidence: EvidenceSet,
+  deps: AnswerDeps,
+): Promise<AnswerResult> {
   const keyParts: CacheKeyParts = {
     evidenceKey: evidence.key,
     question: req.question,
@@ -258,7 +279,11 @@ async function modelAnswer(req: AnswerRequest, evidence: EvidenceSet, deps: Answ
     evidence,
   );
   if (checked.kind === 'answer') {
-    deps.cache.set(keyParts, { text: checked.text, next: checked.next, sources: checked.sources }, deps.now());
+    deps.cache.set(
+      keyParts,
+      { text: checked.text, next: checked.next, sources: checked.sources },
+      deps.now(),
+    );
   }
   return checked;
 }
@@ -275,5 +300,9 @@ export function recheckAtPosition(
 ): AnswerResult {
   if (result.kind !== 'answer' || positionSec >= result.boundarySec) return result;
   const evidence = permittedEvidence(timeline, positionSec, policy);
-  return gate({ ...result, evidenceKey: evidence.key, boundarySec: positionSec }, timeline, evidence);
+  return gate(
+    { ...result, evidenceKey: evidence.key, boundarySec: positionSec },
+    timeline,
+    evidence,
+  );
 }

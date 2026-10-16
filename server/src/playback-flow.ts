@@ -17,8 +17,7 @@ import { LIMITS, type InputEnvelope, type InputResult } from './shared/protocol.
 const FRESH_REPORT_MS = 10_000;
 
 export type SendResult =
-  | { ok: true; commandId: string }
-  | { ok: false; reason: 'duplicate' | 'no-tv' | 'not-watching' };
+  { ok: true; commandId: string } | { ok: false; reason: 'duplicate' | 'no-tv' | 'not-watching' };
 
 function newCommandId(): string {
   return `c${randomBytes(12).toString('hex')}`;
@@ -88,7 +87,11 @@ export function sendPlayback(
 export function observePlayback(session: Session, deps: FlowDeps): void {
   const playback = session.playback;
   if (!playback) return;
-  const report = { positionSec: playback.positionSec, durationSec: playback.durationSec, paused: playback.paused };
+  const report = {
+    positionSec: playback.positionSec,
+    durationSec: playback.durationSec,
+    paused: playback.paused,
+  };
   if (!observeReport(session.lastAction, report, session.playbackAt)) return;
   deps.timers.clear(actionTimerKey(session.code));
   const action = session.lastAction;
@@ -111,9 +114,12 @@ export function applyInput(
   actor: { kind: 'pad'; playerId: string } | { kind: 'tv' },
   deps: FlowDeps,
 ): InputResult {
-  if (!session.seenIds.firstTime(`evt:${envelope.eventId}`)) return { ok: false, reason: 'duplicate' };
+  if (!session.seenIds.firstTime(`evt:${envelope.eventId}`))
+    return { ok: false, reason: 'duplicate' };
   const watching = session.stage === 'watch' && session.playback?.contentId === session.contentId;
-  const intent = toIntent(envelope.input, { paused: watching ? (session.playback?.paused ?? null) : null });
+  const intent = toIntent(envelope.input, {
+    paused: watching ? (session.playback?.paused ?? null) : null,
+  });
   const by = actor.kind === 'pad' ? actor.playerId : 'remote';
   session.journal.append({
     at: deps.now(),
@@ -133,8 +139,16 @@ export function applyInput(
     return { ok: true, intent: 'dismiss', commandId: null };
   }
   if (session.stage !== 'watch') return { ok: false, reason: 'not-watching' };
-  if (actor.kind === 'pad' && session.hostId !== actor.playerId) return { ok: false, reason: 'not-allowed' };
-  const sent = sendPlayback(session, intent, by, `in-${envelope.eventId}`.slice(0, LIMITS.eventIdMaxChars), deps);
-  if (!sent.ok) return { ok: false, reason: sent.reason === 'duplicate' ? 'duplicate' : 'not-watching' };
+  if (actor.kind === 'pad' && session.hostId !== actor.playerId)
+    return { ok: false, reason: 'not-allowed' };
+  const sent = sendPlayback(
+    session,
+    intent,
+    by,
+    `in-${envelope.eventId}`.slice(0, LIMITS.eventIdMaxChars),
+    deps,
+  );
+  if (!sent.ok)
+    return { ok: false, reason: sent.reason === 'duplicate' ? 'duplicate' : 'not-watching' };
   return { ok: true, intent: intent.type, commandId: sent.commandId };
 }

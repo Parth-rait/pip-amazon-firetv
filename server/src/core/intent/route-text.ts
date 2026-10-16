@@ -3,9 +3,7 @@
 import { LIMITS } from '../../shared/protocol.js';
 
 export type PlaybackIntent =
-  | { type: 'play' }
-  | { type: 'pause' }
-  | { type: 'seek'; deltaSec: number };
+  { type: 'play' } | { type: 'pause' } | { type: 'seek'; deltaSec: number };
 
 export type QuestionTopic = 'recap' | 'identify' | 'why' | 'other';
 
@@ -16,12 +14,17 @@ export type TextRoute =
   | { kind: 'question'; topic: QuestionTopic };
 
 const DEFAULT_SEEK_SEC = 10;
-const POLITE = /^(?:(?:hey|ok|okay) pip[, ]*)?(?:please |can you |could you )?(.*?)(?: please| pip)?[.!?]*$/;
+const POLITE =
+  /^(?:(?:hey|ok|okay) pip[, ]*)?(?:please |can you |could you )?(.*?)(?: please| pip)?[.!?]*$/;
 const FILM = '(?: the (?:film|movie|video|show))?';
 const PAUSE = new RegExp(`^(?:pause|hold on|wait)${FILM}$`);
-const PLAY = new RegExp(`^(?:play|resume|continue|unpause|keep (?:playing|going)|start)${FILM}(?: again)?$`);
-const SEEK = /^(?:go |skip |jump |move )?(back|backwards?|rewind|forward|forwards|ahead|fast forward)(?: by)?(?: (\d{1,3}) ?(s|sec|secs|seconds?|min|mins|minutes?))?$/;
-const DISMISS = /^(?:never ?mind|close|hide(?: pip)?|dismiss|go away|done|thats all|that is all|thanks?(?: you)?|ok thanks)$/;
+const PLAY = new RegExp(
+  `^(?:play|resume|continue|unpause|keep (?:playing|going)|start)${FILM}(?: again)?$`,
+);
+const SEEK =
+  /^(?:go |skip |jump |move )?(back|backwards?|rewind|forward|forwards|ahead|fast forward)(?: by)?(?: (\d{1,3}) ?(s|sec|secs|seconds?|min|mins|minutes?))?$/;
+const DISMISS =
+  /^(?:never ?mind|close|hide(?: pip)?|dismiss|go away|done|thats all|that is all|thanks?(?: you)?|ok thanks)$/;
 const AMBIGUOUS_STOP = /^stop$/;
 
 /** Lowercase, no apostrophes, single spaces, without "please" and "hey Pip". */
@@ -50,12 +53,14 @@ export function routeText(text: string): TextRoute {
   const seek = SEEK.exec(t);
   if (seek) return { kind: 'action', intent: seekIntent(seek[1] ?? '', seek[2], seek[3]) };
   if (DISMISS.test(t)) return { kind: 'dismiss' };
-  if (AMBIGUOUS_STOP.test(t)) return { kind: 'ambiguous-command', options: ['Pause the film', 'Hide Pip'] };
+  if (AMBIGUOUS_STOP.test(t))
+    return { kind: 'ambiguous-command', options: ['Pause the film', 'Hide Pip'] };
   return { kind: 'question', topic: questionTopic(t) };
 }
 
 function questionTopic(t: string): QuestionTopic {
-  if (/\b(what (just )?happen|what did (i|we) miss|recap|so far|catch me up)/.test(t)) return 'recap';
+  if (/\b(what (just )?happen|what did (i|we) miss|recap|so far|catch me up)/.test(t))
+    return 'recap';
   if (/^(who|whos|which (one|character|animal))\b/.test(t)) return 'identify';
   if (/^why\b/.test(t)) return 'why';
   return 'other';

@@ -100,9 +100,21 @@ export const inputSchema: z.ZodType<InputEnvelope> = z.object({
   input: z.discriminatedUnion('kind', [
     z.object({
       kind: z.literal('key'),
-      key: z.enum(['play-pause', 'play', 'pause', 'rewind', 'fast-forward', 'left', 'right', 'back']),
+      key: z.enum([
+        'play-pause',
+        'play',
+        'pause',
+        'rewind',
+        'fast-forward',
+        'left',
+        'right',
+        'back',
+      ]),
     }),
-    z.object({ kind: z.literal('button'), gesture: z.enum(['press', 'double-press', 'long-press']) }),
+    z.object({
+      kind: z.literal('button'),
+      gesture: z.enum(['press', 'double-press', 'long-press']),
+    }),
     z.object({
       kind: z.literal('wheel'),
       detents: z.number().int().min(-MAX_WHEEL_DETENTS).max(MAX_WHEEL_DETENTS),

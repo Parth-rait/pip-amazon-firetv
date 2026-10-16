@@ -24,7 +24,10 @@ export const timelineFileSchema = z.object({
   durationSec: z.number().positive(),
   source: z.object({
     assetId: id,
-    sha256: z.string().regex(/^[0-9a-f]{64}$/).nullable(), // null when the media was not available
+    sha256: z
+      .string()
+      .regex(/^[0-9a-f]{64}$/)
+      .nullable(), // null when the media was not available
     license: z.string().min(1).max(120),
     rights: z.string().min(1).max(400),
   }),
@@ -85,8 +88,12 @@ export function timelineProblems(file: TimelineFile): string[] {
     const prev = file.scenes[i - 1];
     if (prev && s.startSec < prev.endSec) problems.push(`scene ${s.id} overlaps ${prev.id}`);
   });
-  file.entities.forEach((e) => e.firstSeenSec > end && problems.push(`entity ${e.id} is after the end`));
-  file.facts.forEach((fact, i) => problems.push(...factProblems(fact, i, file, frames, entities, scenes)));
+  file.entities.forEach(
+    (e) => e.firstSeenSec > end && problems.push(`entity ${e.id} is after the end`),
+  );
+  file.facts.forEach((fact, i) =>
+    problems.push(...factProblems(fact, i, file, frames, entities, scenes)),
+  );
   return problems;
 }
 
@@ -103,8 +110,10 @@ function factProblems(
   if (fact.revealSec < fact.startSec) out.push(`${where}: revealSec is before startSec`);
   if (fact.revealSec > file.durationSec) out.push(`${where}: revealSec is after the end`);
   const prev = file.facts[index - 1];
-  if (prev && fact.startSec < prev.startSec) out.push(`${where}: facts must be in order of startSec`);
-  if (fact.sceneId && !scenes.has(fact.sceneId)) out.push(`${where}: unknown scene ${fact.sceneId}`);
+  if (prev && fact.startSec < prev.startSec)
+    out.push(`${where}: facts must be in order of startSec`);
+  if (fact.sceneId && !scenes.has(fact.sceneId))
+    out.push(`${where}: unknown scene ${fact.sceneId}`);
   for (const entityId of fact.entities) {
     const entity = entities.get(entityId);
     if (!entity) out.push(`${where}: unknown entity ${entityId}`);
@@ -115,7 +124,8 @@ function factProblems(
   for (const frameId of fact.evidence) {
     const atSec = frames.get(frameId);
     if (atSec === undefined) out.push(`${where}: unresolved evidence ${frameId}`);
-    else if (atSec > fact.revealSec + 0.5) out.push(`${where}: evidence ${frameId} is after its reveal`);
+    else if (atSec > fact.revealSec + 0.5)
+      out.push(`${where}: evidence ${frameId} is after its reveal`);
   }
   if (fact.review.status === 'accepted') {
     if (fact.evidence.length === 0) out.push(`${where}: accepted without evidence`);
@@ -181,7 +191,8 @@ export function loadTimeline(timelinesDir: string, film: Content): Timeline {
   }
   const checked = checkTimelineFile(data);
   if (!checked.ok) return exitWith(file, checked.problems);
-  if (checked.file.contentId !== film.id) return exitWith(file, ['contentId does not match the film']);
+  if (checked.file.contentId !== film.id)
+    return exitWith(file, ['contentId does not match the film']);
   const version = createHash('sha256').update(text).digest('hex').slice(0, 12);
   return toTimeline(checked.file, version);
 }

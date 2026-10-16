@@ -21,6 +21,13 @@ export const noJudge: IntentJudge = {
 };
 
 /** Only a confident command-like judgement changes anything, and only into a clarify prompt. */
-export function shouldOfferCommandChoices(judgement: IntentJudgement | null, threshold: number): boolean {
-  return judgement !== null && judgement.label === 'playback-command' && judgement.confidence >= threshold;
+export function shouldOfferCommandChoices(
+  judgement: IntentJudgement | null,
+  threshold: number,
+): boolean {
+  return (
+    judgement !== null &&
+    judgement.label === 'playback-command' &&
+    judgement.confidence >= threshold
+  );
 }

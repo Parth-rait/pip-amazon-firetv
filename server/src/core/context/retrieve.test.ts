@@ -8,14 +8,20 @@ const timeline = lanternFoxTimeline();
 describe('retrieve', () => {
   it('never returns a fact outside the permitted evidence', () => {
     const evidence = permittedEvidence(timeline, 30, 'accepted');
-    const found = retrieve(evidence, 'Does the lighthouse shine again because of Moss?', { limit: 10, recentCount: 2 });
+    const found = retrieve(evidence, 'Does the lighthouse shine again because of Moss?', {
+      limit: 10,
+      recentCount: 2,
+    });
     expect(found.every((f) => f.revealSec <= 30)).toBe(true);
     expect(found.map((f) => f.id)).not.toContain('f7');
   });
 
   it('finds an older fact by its words and keeps story order', () => {
     const evidence = permittedEvidence(timeline, 96, 'accepted');
-    const found = retrieve(evidence, 'what did the owl say about the lantern?', { limit: 3, recentCount: 1 });
+    const found = retrieve(evidence, 'what did the owl say about the lantern?', {
+      limit: 3,
+      recentCount: 1,
+    });
     expect(found.map((f) => f.id)).toContain('f4');
     const starts = found.map((f) => f.startSec);
     expect(starts).toEqual([...starts].sort((a, b) => a - b));
@@ -28,7 +34,9 @@ describe('retrieve', () => {
   });
 
   it('returns nothing when no evidence is permitted', () => {
-    expect(retrieve(permittedEvidence(timeline, 1, 'accepted'), 'who?', { limit: 5, recentCount: 2 })).toEqual([]);
+    expect(
+      retrieve(permittedEvidence(timeline, 1, 'accepted'), 'who?', { limit: 5, recentCount: 2 }),
+    ).toEqual([]);
   });
 });
 

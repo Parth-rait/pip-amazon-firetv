@@ -7,7 +7,8 @@ export type AnswerVerdict =
   | { ok: true }
   | { ok: false; reason: 'restricted-term' | 'unknown-source' | 'uncited-claim'; detail: string };
 
-const ABSTAIN = /\b(not sure|don'?t know|do not know|haven'?t seen|can'?t tell|cannot tell|no idea)\b/i;
+const ABSTAIN =
+  /\b(not sure|don'?t know|do not know|haven'?t seen|can'?t tell|cannot tell|no idea)\b/i;
 
 /** True when the text admits it does not know. */
 export function isAbstention(text: string): boolean {

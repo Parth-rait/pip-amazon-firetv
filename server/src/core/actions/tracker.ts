@@ -57,7 +57,11 @@ export function trackAction(input: {
   estimate: PlayerState | null;
   now: number;
 }): TrackedAction {
-  const estimate = input.estimate ?? { positionSec: 0, durationSec: Number.MAX_SAFE_INTEGER, paused: true };
+  const estimate = input.estimate ?? {
+    positionSec: 0,
+    durationSec: Number.MAX_SAFE_INTEGER,
+    paused: true,
+  };
   return {
     commandId: input.commandId,
     type: input.command.type,
@@ -70,7 +74,11 @@ export function trackAction(input: {
 }
 
 /** Applies a playback report. Returns true when it changed the action's status to done. */
-export function observeReport(action: TrackedAction | null, report: PlayerState, reportAt: number): boolean {
+export function observeReport(
+  action: TrackedAction | null,
+  report: PlayerState,
+  reportAt: number,
+): boolean {
   if (!action || action.status !== 'sent') return false;
   if (!showsOutcome(action, report, reportAt)) return false;
   action.status = 'done';

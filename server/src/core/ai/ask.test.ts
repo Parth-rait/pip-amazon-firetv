@@ -7,7 +7,12 @@ const settings = { maxTokens: 10, temperature: 0, timeoutMs: 50, allowClarify: t
 
 describe('runAsk', () => {
   it('returns the parsed reply', async () => {
-    const outcome = await runAsk(createFakeModel('ANSWER: Hi.\nSOURCES: f1'), prompt, 'q', settings);
+    const outcome = await runAsk(
+      createFakeModel('ANSWER: Hi.\nSOURCES: f1'),
+      prompt,
+      'q',
+      settings,
+    );
     expect(outcome.reply).toMatchObject({ kind: 'answer', text: 'Hi.', sources: ['f1'] });
   });
 
@@ -17,16 +22,25 @@ describe('runAsk', () => {
       error.name = 'ThrottlingException';
       throw error;
     });
-    expect(await runAsk(throttled, prompt, 'q', settings)).toMatchObject({ reply: null, error: 'ThrottlingException' });
+    expect(await runAsk(throttled, prompt, 'q', settings)).toMatchObject({
+      reply: null,
+      error: 'ThrottlingException',
+    });
   });
 
   it('times out a model that never answers', async () => {
     const hung = createFakeModel(() => new Promise<string>(() => {}));
-    expect(await runAsk(hung, prompt, 'q', settings)).toMatchObject({ reply: null, error: 'TimeoutError' });
+    expect(await runAsk(hung, prompt, 'q', settings)).toMatchObject({
+      reply: null,
+      error: 'TimeoutError',
+    });
   });
 
   it('reports "unparsed" for a CLARIFY when clarify is not allowed', async () => {
-    const outcome = await runAsk(createFakeModel('CLARIFY: a | b'), prompt, 'q', { ...settings, allowClarify: false });
+    const outcome = await runAsk(createFakeModel('CLARIFY: a | b'), prompt, 'q', {
+      ...settings,
+      allowClarify: false,
+    });
     expect(outcome).toMatchObject({ reply: null, error: 'unparsed' });
   });
 });

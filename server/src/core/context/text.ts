@@ -44,9 +44,10 @@ export function containsTerm(text: string, term: string): boolean {
   const cleaned = term.trim();
   if (cleaned.length === 0) return false;
   const pattern = cleaned.split(/\s+/).map(escapeRegExp).join('\\s+');
-  return new RegExp(`(^|[^\\p{L}\\p{N}])${pattern}(s|es|ing|ed|d)?(?=$|[^\\p{L}\\p{N}])`, 'iu').test(
-    text,
-  );
+  return new RegExp(
+    `(^|[^\\p{L}\\p{N}])${pattern}(s|es|ing|ed|d)?(?=$|[^\\p{L}\\p{N}])`,
+    'iu',
+  ).test(text);
 }
 
 /** Collapses spaces and case so two phrasings of one question share a cache key. */

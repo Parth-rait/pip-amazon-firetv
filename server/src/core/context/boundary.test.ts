@@ -21,7 +21,9 @@ describe('permittedEvidence', () => {
 
   it('restricts names not seen yet and spoiler words of facts not revealed yet', () => {
     const early = permittedEvidence(timeline, 20, 'accepted');
-    expect(early.restrictedTerms).toEqual(expect.arrayContaining(['Moss', 'badger', 'lighthouse', 'glow', 'Hoot']));
+    expect(early.restrictedTerms).toEqual(
+      expect.arrayContaining(['Moss', 'badger', 'lighthouse', 'glow', 'Hoot']),
+    );
     expect(early.restrictedTerms).not.toContain('Ember');
   });
 
@@ -42,6 +44,8 @@ describe('permittedEvidence', () => {
     const c = permittedEvidence(timeline, 41, 'accepted');
     expect(a.key).toBe(b.key);
     expect(a.key).not.toBe(c.key);
-    expect(permittedEvidence({ ...timeline, version: 'other' }, 27, 'accepted').key).not.toBe(a.key);
+    expect(permittedEvidence({ ...timeline, version: 'other' }, 27, 'accepted').key).not.toBe(
+      a.key,
+    );
   });
 });

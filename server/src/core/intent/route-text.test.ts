@@ -24,7 +24,10 @@ describe('routeText', () => {
   });
 
   it('fails closed on an ambiguous "stop": explicit choices, no action', () => {
-    expect(routeText('stop')).toEqual({ kind: 'ambiguous-command', options: ['Pause the film', 'Hide Pip'] });
+    expect(routeText('stop')).toEqual({
+      kind: 'ambiguous-command',
+      options: ['Pause the film', 'Hide Pip'],
+    });
   });
 
   it('keeps questions that only contain command words as questions', () => {
