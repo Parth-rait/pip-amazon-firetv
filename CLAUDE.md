@@ -17,7 +17,7 @@ Hackathon project (Amazon Developer Hackathon, Fire TV track). Deadline: Fri Oct
 | `server/` | Node 22 + Express 5 + Socket.IO 4.8 + Bedrock. `src/core/` = Pip Core, `src/film/` = film night | Steps 2, 4, 7, 8 and 9 done: config, films, /health, /api/films, /qr, /media, model wrapper, sessions, players, host, realtime handlers, Ask Pip, quiz drafts, quiz and results, fake:tv, smoke:join, smoke:quiz |
 | `server/.env` | Local config (gitignored), copied from `server/.env.example` | Done |
 | `pad/` | React + Vite web app (the Pip Pad) | Steps 5, 7, 9 and 10 done: join, lobby, host controls, status pill, Pip and its motion, debug overlay, Ask Pip, quiz, results, fullscreen, wake lock |
-| `tv/` | Vega OS app (React Native for Vega) | Steps 3 and 6 done: socket with tv:hello, lobby with QR, watch with host commands, Pip, status pill; quiz and results are placeholders. Commands in `tv/README.md` |
+| `tv/` | Vega OS app (React Native for Vega) | Steps 3, 6 and the TV parts of 7, 9 and 10 done: lobby with QR and posters, watch with host commands and Pip's bubble, quiz and results, Pip's moods and colors. Commands in `tv/README.md` |
 | `docs/` | Friction log, product feedback, measurements, demo script; later devpost | Templates, empty measurement tables and a devpost draft done; demo script needs the scene times from the notes |
 | `.claude/skills/` | `ship-step` (definition of done and commit) and `run-pip` (start the whole stack) | Done |
 
@@ -39,8 +39,9 @@ Hackathon project (Amazon Developer Hackathon, Fire TV track). Deadline: Fri Oct
 - Step 3: TV spike. Done on the Mac (gate 1): every diagnostics line green on the VVD through the tunnel, round trip 28 to 104 ms, the film plays, the remote pauses it. `smoke:ai` waits for AWS.
 - Step 6: TV lobby and watch. Done on the Mac (gate 2): QR join, host commands 177 to 239 ms, remote OK starts the film, server restart keeps the film playing.
 - Oct 16 (agreed with Parth, PROJECT.md 2.4): film notes and quizzes drafted for Big Buck Bunny and Sintel (the agent read a frame every 6 s and the subtitles; Parth checks the times); local brain `AI_PROVIDER=ollama` with qwen2.5:3b; answer memory (PROJECT.md 5.9). eval:ask: 0 leaks on both films; the 3B model still makes up small facts, so the demo uses Nova.
-- Oct 16: Pip moods (Chill, Playful, Sassy) and colors, avatars, greetings, posters (contract v3); pad redesigned (chat-style watch screen, remote-style host controls, "Make Pip yours" sheet); TV follows Pip's color and shows greetings and avatars. Known issue: on the TV lobby, remote focus starts on the second film card.
-- Next: the TV's quiz and results screens (Step 9), then Steps 10 to 12. AWS: switch AI_PROVIDER to bedrock once the account is verified.
+- Oct 16: Pip moods (Chill, Playful, Sassy) and colors, avatars, greetings, posters (contract v3); pad redesigned (chat-style watch screen, remote-style host controls, "Make Pip yours" sheet); TV follows Pip's color and shows greetings and avatars.
+- Step 9 TV part: quiz screen (2 x 2 choices, countdown bar, players light up when they answer, the reveal with picks and Pip's explanation) and results screen. Checked on the VVD with three players: reveals as soon as everyone answered, results match the taps, Keep watching resumes where the quiz started. Lobby focus starts on the first film (FocusManager).
+- Next: Step 11 (preflight, scene times in the demo script, measurements, usability test, rehearsals) and Step 12. AWS: switch AI_PROVIDER to bedrock once the account is verified.
 
 Update this list when a step is committed.
 

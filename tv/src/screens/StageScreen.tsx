@@ -4,10 +4,7 @@ import type {PipState} from '../shared/protocol';
 import {Pip} from '../components/Pip';
 import {color, dp, space, type} from '../theme';
 
-/**
- * A full-screen Pip with one line: "Connecting" before the first view, and for now the
- * quiz and results stages (their real screens come with the TV part of Step 9).
- */
+/** A full-screen Pip with one line: "Connecting" before the first view. */
 export function StageScreen({
   pip,
   line,

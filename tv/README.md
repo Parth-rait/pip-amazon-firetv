@@ -50,6 +50,12 @@ Lobby (QR code, code, film cards, players), watch (film, credit line, pause bar,
 
 React Native 0.83 on Vega lays out on a 960 x 540 dp canvas (scale factor 2 on a 1080p screen). PROJECT.md gives TV sizes in pixels at 1080p, so `src/theme.ts` converts every size with `dp()`. Animations use only transform and opacity with the native driver: on RN 0.83, mixing native and JS drivers on one view aborts the app.
 
+## Step 9 result (TV part)
+
+The quiz screen (`QuizScreen`, `ChoiceGrid`, `CountdownBar`) and the results screen, checked on the VVD with three players on Oct 16 2026: names light up as players answer, the reveal comes as soon as everyone has answered, the right choice turns Pip's color with each player's avatar under their pick, Pip explains, and the results match the taps. The countdown bar empties with a native-driven `scaleX` and `transformOrigin: 'left'`, which Vega's RN 0.83 supports.
+
+Remote focus: `hasTVPreferredFocus` on the first film card landed on the last card, so the lobby calls `FocusManager.focus(findNodeHandle(ref))` from `@amazon-devices/react-native-kepler` once the films have loaded.
+
 ## Known issue
 
 Once, the TV's socket closed (`transport close`) just as the film started loading, and reconnected in about 1 s with the same code. Watch for it in rehearsals.

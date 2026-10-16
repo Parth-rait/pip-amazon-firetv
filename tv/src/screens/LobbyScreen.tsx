@@ -1,5 +1,13 @@
-import React, {useEffect, useState} from 'react';
-import {Image, Pressable, StyleSheet, Text, View} from 'react-native';
+import React, {useEffect, useRef, useState} from 'react';
+import {
+  findNodeHandle,
+  Image,
+  Pressable,
+  StyleSheet,
+  Text,
+  View,
+} from 'react-native';
+import {FocusManager} from '@amazon-devices/react-native-kepler';
 import {SERVER_URL} from '../config';
 import {getSocket} from '../net/socket';
 import {
@@ -30,6 +38,14 @@ export function LobbyScreen({
   const [films, setFilms] = useState<ContentView[] | null>(null);
   const [filmsFailed, setFilmsFailed] = useState(false);
   const accent = PIP_COLORS[view.pipStyle.color];
+  const firstCard = useRef<View>(null);
+
+  // hasTVPreferredFocus alone landed on the last card; focus the first one once the films are in.
+  useEffect(() => {
+    if (films && films.length > 0 && firstCard.current) {
+      FocusManager.focus(findNodeHandle(firstCard.current));
+    }
+  }, [films]);
 
   useEffect(() => {
     fetch(`${SERVER_URL}/api/films`)
@@ -82,6 +98,7 @@ export function LobbyScreen({
           {films?.map((film, i) => (
             <FilmCard
               key={film.id}
+              ref={i === 0 ? firstCard : undefined}
               film={film}
               preferred={i === 0}
               accent={accent}
@@ -108,10 +125,12 @@ export function LobbyScreen({
 }
 
 function FilmCard({
+  ref,
   film,
   preferred,
   accent,
 }: {
+  ref?: React.Ref<View>;
   film: ContentView;
   preferred: boolean;
   accent: string;
@@ -119,6 +138,7 @@ function FilmCard({
   const [focused, setFocused] = useState(false);
   return (
     <Pressable
+      ref={ref}
       hasTVPreferredFocus={preferred}
       onFocus={() => setFocused(true)}
       onBlur={() => setFocused(false)}

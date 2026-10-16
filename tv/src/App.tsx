@@ -6,9 +6,10 @@ import {initialTvState, tvReducer} from './state/tv-store';
 import {StatusPill} from './components/StatusPill';
 import {DiagnosticsScreen} from './screens/DiagnosticsScreen';
 import {LobbyScreen} from './screens/LobbyScreen';
+import {QuizScreen} from './screens/QuizScreen';
+import {ResultsScreen} from './screens/ResultsScreen';
 import {StageScreen} from './screens/StageScreen';
 import {WatchScreen} from './screens/WatchScreen';
-import {PIP_COLORS} from './shared/protocol';
 import {color} from './theme';
 
 export const App = () => {
@@ -69,19 +70,11 @@ function PipTv() {
             say={state.say}
             greet={state.greet}
           />
-          {view.stage === 'quiz' && (
-            <StageScreen
-              pip={view.pip}
-              color={PIP_COLORS[view.pipStyle.color]}
-              line="Quiz"
-            />
+          {view.stage === 'quiz' && view.quiz && (
+            <QuizScreen view={view} quiz={view.quiz} />
           )}
-          {view.stage === 'results' && (
-            <StageScreen
-              pip={view.pip}
-              color={PIP_COLORS[view.pipStyle.color]}
-              line="Results"
-            />
+          {view.stage === 'results' && view.results && (
+            <ResultsScreen view={view} results={view.results} />
           )}
         </>
       )}
