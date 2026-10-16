@@ -10,11 +10,7 @@ import {
 import {FocusManager} from '@amazon-devices/react-native-kepler';
 import {SERVER_URL} from '../config';
 import {getSocket} from '../net/socket';
-import {
-  PIP_COLORS,
-  type ContentView,
-  type SessionView,
-} from '../shared/protocol';
+import {type ContentView, type SessionView} from '../shared/protocol';
 import type {GreetEntry} from '../state/tv-store';
 import {Pip} from '../components/Pip';
 import {PlayerChips} from '../components/PlayerChips';
@@ -37,7 +33,7 @@ export function LobbyScreen({
 }) {
   const [films, setFilms] = useState<ContentView[] | null>(null);
   const [filmsFailed, setFilmsFailed] = useState(false);
-  const accent = PIP_COLORS[view.pipStyle.color];
+  const accent = color.accent;
   const firstCard = useRef<View>(null);
 
   // hasTVPreferredFocus alone landed on the last card; focus the first one once the films are in.
@@ -60,12 +56,7 @@ export function LobbyScreen({
   return (
     <View style={styles.root}>
       <View style={styles.header}>
-        <Pip
-          state={view.pip}
-          mood={view.pipStyle.mood}
-          size={dp(96)}
-          color={accent}
-        />
+        <Pip state={view.pip} size={dp(96)} />
         {greet ? (
           <SpeechBubble
             key={greet.id}

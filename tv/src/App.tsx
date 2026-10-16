@@ -86,7 +86,6 @@ function PipTv() {
             view={view}
             content={view.content}
             say={state.say}
-            greet={state.greet}
           />
           {view.stage === 'quiz' && view.quiz && (
             <QuizScreen view={view} quiz={view.quiz} />

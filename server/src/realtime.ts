@@ -3,10 +3,12 @@ import { randomBytes } from 'node:crypto';
 import type { Socket } from 'socket.io';
 import type { Config } from './config.js';
 import type { AnswerMemory } from './core/ai/answer-memory.js';
+import type { Journal } from './core/journal.js';
 import type { TextModel } from './core/ai/model.js';
 import { newCode } from './core/codes.js';
 import { hostTimerKey, pickTvCode, startHostGrace } from './core/pairing.js';
 import { pipTimerKey, restingPip, setPip, type CoreDeps } from './core/pip.js';
+import { handleApplied, handleInput } from './actions.js';
 import { recordReaction, recordVote } from './film/companion.js';
 import { greeting } from './lines.js';
 import { cleanName, joinPlayer, leaveSocket, pickHost } from './core/players.js';
@@ -40,6 +42,7 @@ export interface RealtimeDeps {
   timers: Timers;
   model: TextModel;
   memory?: AnswerMemory;
+  journal?: Journal;
   log: typeof Log;
   now: () => number;
 }
@@ -189,12 +192,20 @@ export function registerRealtime(deps: RealtimeDeps): () => void {
       void socket.join(roomOf(code));
       ack({ ok: true, view: buildView(session, deps.films, deps.config.PUBLIC_URL, now) });
       deps.log.info('pad.join', { socketId: socket.id, code, playerId, isNew: outcome.isNew });
-      if (outcome.isNew) {
-        // Pip says hello on the TV, in the session's mood, unless it is busy answering.
+      flow.journal?.record({
+        session_id: session.journalId,
+        playerId,
+        event_type: outcome.isNew ? 'player.joined' : 'player.rejoined',
+        content_id: session.contentId,
+        source: 'pad_touch',
+        data: {},
+      });
+      if (outcome.isNew && session.stage === 'lobby') {
+        // Pip says hello on the TV, in the lobby only: never over the film.
         deps.io.to(roomOf(code)).emit('pip:hello', {
           playerId,
           name: outcome.player.name,
-          text: greeting(session.pipStyle.mood, outcome.player.name, session.players.size - 1),
+          text: greeting(outcome.player.name, session.players.size - 1),
         });
         if (!session.asking) return setPip(session, 'talking', core(session), GREETING_MS);
       }
@@ -214,19 +225,13 @@ export function registerRealtime(deps: RealtimeDeps): () => void {
       const stage = session.stage;
       if (command.type === 'watch' && (stage === 'lobby' || stage === 'results')) {
         if (!watchFilm(session, command.contentId, flow)) ignored('pad:host', 'unknown-film');
-      } else if (
-        (command.type === 'play' || command.type === 'pause' || command.type === 'seek') &&
-        stage === 'watch' &&
-        session.tvSocketId
-      ) {
-        deps.io.to(session.tvSocketId).emit('tv:command', command);
-      } else if (command.type === 'pip-style') {
-        session.pipStyle = command.style;
-        deps.log.info('pip.style', { code: session.code, ...command.style });
+      } else if (command.type === 'kids-mode') {
+        session.kidsMode = command.on;
+        deps.log.info('kids.mode', { code: session.code, on: command.on });
         broadcast(session, flow);
       } else if (command.type === 'lobby' && stage !== 'lobby') {
         goToLobby(session, flow);
-      } else if (command.type === 'start-quiz' && stage === 'watch') {
+      } else if (command.type === 'start-quiz' && stage === 'watch' && session.kidsMode) {
         if (!startQuizFlow(session, flow)) ignored('pad:host', 'no-question-unlocked');
       } else if (command.type === 'next' && stage === 'quiz') {
         if (!nextStep(session, command, flow)) ignored('pad:host', 'stale-next');
@@ -282,6 +287,7 @@ export function registerRealtime(deps: RealtimeDeps): () => void {
       const player = d?.role === 'pad' ? session?.players.get(d.playerId) : undefined;
       if (!session || !player) return ignored('pad:react', 'not-a-player');
       const now = positionNow(session, flow);
+      if (!session.kidsMode) return ignored('pad:react', 'not-kids-mode');
       if (session.stage !== 'watch' || !now) return ignored('pad:react', 'not-watching');
       const at = deps.now();
       if (at - player.lastReactAt < LIMITS.reactMinIntervalMs) return; // a fast tapper, not an error
@@ -302,6 +308,7 @@ export function registerRealtime(deps: RealtimeDeps): () => void {
         return ignored('pad:predict', 'not-a-player');
       }
       const now = positionNow(session, flow);
+      if (!session.kidsMode) return ignored('pad:predict', 'not-kids-mode');
       if (session.stage !== 'watch' || !now) return ignored('pad:predict', 'not-watching');
       if (
         !recordVote(now.film, now.positionSec, session.predictionVotes, d.playerId, parsed.data)
@@ -309,6 +316,29 @@ export function registerRealtime(deps: RealtimeDeps): () => void {
         return ignored('pad:predict', 'not-open');
       }
       broadcast(session, flow);
+    });
+
+    on('pad:input', (payload, ack) => {
+      if (typeof ack !== 'function') return invalid('pad:input');
+      const parsed = schema.inputSchema.safeParse(payload);
+      if (!parsed.success) {
+        invalid('pad:input');
+        return ack({ ok: false, reason: 'invalid' });
+      }
+      const d = data();
+      const session = sessionOf();
+      if (!session || d?.role !== 'pad' || !session.players.has(d.playerId)) {
+        return ack({ ok: false, reason: 'not-allowed' });
+      }
+      ack(handleInput(session, d.playerId, parsed.data, flow));
+    });
+
+    on('tv:applied', (payload) => {
+      const parsed = schema.appliedSchema.safeParse(payload);
+      if (!parsed.success) return invalid('tv:applied');
+      const session = sessionOf();
+      if (!session || session.tvSocketId !== socket.id) return ignored('tv:applied', 'not-tv');
+      if (!handleApplied(session, parsed.data, flow)) ignored('tv:applied', 'unknown-command');
     });
 
     on('pad:answer', (payload) => {

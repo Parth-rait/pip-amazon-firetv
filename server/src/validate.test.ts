@@ -4,6 +4,7 @@ import {
   askSchema,
   helloSchema,
   hostCommandSchema,
+  inputSchema,
   joinSchema,
   playbackSchema,
   predictSchema,
@@ -32,15 +33,9 @@ describe('validate', () => {
     ).toBe(false);
   });
 
-  it('clamps seeks to the limit', () => {
-    expect(hostCommandSchema.parse({ type: 'seek', deltaSec: 500 })).toEqual({
-      type: 'seek',
-      deltaSec: LIMITS.seekMaxAbsSec,
-    });
-    expect(hostCommandSchema.parse({ type: 'seek', deltaSec: -500 })).toEqual({
-      type: 'seek',
-      deltaSec: -LIMITS.seekMaxAbsSec,
-    });
+  it('accepts the kids-mode host command and refuses the old media commands', () => {
+    expect(hostCommandSchema.safeParse({ type: 'kids-mode', on: true }).success).toBe(true);
+    expect(hostCommandSchema.safeParse({ type: 'pause' }).success).toBe(false);
   });
 
   it('rejects unknown host commands', () => {
@@ -68,7 +63,7 @@ describe('validate', () => {
   });
 });
 
-describe('customization (PROJECT.md 2.4)', () => {
+describe('inputs (docs/vnext/PLAN.md 4.2)', () => {
   it('accepts an optional avatar from 0 to 7 when joining', () => {
     expect(
       joinSchema.safeParse({ code: 'ABCD', playerId: ID, name: 'Sam', avatar: 7 }).success,
@@ -80,16 +75,19 @@ describe('customization (PROJECT.md 2.4)', () => {
     }
   });
 
-  it('accepts a pip-style command with a known mood and color only', () => {
-    const style = { mood: 'sassy', color: 'coral' };
-    expect(hostCommandSchema.safeParse({ type: 'pip-style', style }).success).toBe(true);
+  it('accepts semantic inputs from known adapters only', () => {
+    const input = {
+      id: 'abcdefgh1',
+      source: 'pad_touch',
+      at: 1,
+      event: { type: 'media.playPause' },
+    };
+    expect(inputSchema.safeParse(input).success).toBe(true);
+    expect(inputSchema.safeParse({ ...input, source: 'hacker' }).success).toBe(false);
     expect(
-      hostCommandSchema.safeParse({ type: 'pip-style', style: { ...style, mood: 'evil' } }).success,
+      inputSchema.safeParse({ ...input, event: { type: 'media.volumeDelta', delta: 3 } }).success,
     ).toBe(false);
-    expect(
-      hostCommandSchema.safeParse({ type: 'pip-style', style: { ...style, color: '#000' } })
-        .success,
-    ).toBe(false);
+    expect(inputSchema.safeParse({ ...input, event: { type: 'shell.run' } }).success).toBe(false);
   });
 });
 

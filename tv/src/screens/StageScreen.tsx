@@ -5,18 +5,10 @@ import {Pip} from '../components/Pip';
 import {color, dp, space, type} from '../theme';
 
 /** A full-screen Pip with one line: "Connecting" before the first view. */
-export function StageScreen({
-  pip,
-  line,
-  color: pipColor,
-}: {
-  pip: PipState;
-  line: string;
-  color?: string;
-}) {
+export function StageScreen({pip, line}: {pip: PipState; line: string}) {
   return (
     <View style={styles.root}>
-      <Pip state={pip} size={dp(200)} color={pipColor} />
+      <Pip state={pip} size={dp(200)} />
       <Text style={styles.line}>{line}</Text>
     </View>
   );

@@ -1,11 +1,12 @@
 // The Session type and the in-memory store (PROJECT.md section 4.6).
+import { randomBytes } from 'node:crypto';
 import { isOnline, type Roster } from './core/players.js';
 import type { PredictionVotes } from './film/companion.js';
 import type { QuizRun } from './film/quiz.js';
 import {
   LIMITS,
   type PipState,
-  type PipStyle,
+  type AmbientScene,
   type Playback,
   type Stage,
 } from './shared/protocol.js';
@@ -15,7 +16,17 @@ export interface Session extends Roster {
   tvKey: string; // 32 hex characters; a TV needs it to take this code back
   tvSocketId: string | null;
   pip: PipState;
-  pipStyle: PipStyle; // the host's choice of Pip's mood and color
+  journalId: string; // pseudonymous session id for the event journal, never the pairing code
+  kidsMode: boolean; // the host's opt-in for the quiz, guesses and reactions
+  assistant: { open: boolean; byId: string | null };
+  device: {
+    volume: number;
+    brightness: number;
+    ambient: AmbientScene;
+    lastAction: { id: string; action: string; ok: boolean | null } | null;
+  };
+  seenInputIds: string[]; // recent input ids, newest last, so a resent input is not applied twice
+  pendingActions: Record<string, { action: string; at: number }>; // tv commands awaiting tv:applied
   stage: Stage;
   contentId: string | null;
   playback: Playback | null;
@@ -58,7 +69,12 @@ export function createSession(
     players: new Map(),
     hostId: null,
     pip: 'sleep',
-    pipStyle: { mood: 'playful', color: 'mint' },
+    journalId: `ses_${randomBytes(8).toString('hex')}`,
+    kidsMode: false,
+    assistant: { open: false, byId: null },
+    device: { volume: 1, brightness: 1, ambient: 'off', lastAction: null },
+    seenInputIds: [],
+    pendingActions: {},
     stage: 'lobby',
     contentId: null,
     playback: null,

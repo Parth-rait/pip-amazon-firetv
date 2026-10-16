@@ -5,7 +5,7 @@ import { toContentView, unlockedQuestions, type Content } from './film/content.j
 import { estimatePosition } from './film/playback.js';
 import { buildResults, currentQuestion, type QuizRun } from './film/quiz.js';
 import type { Session } from './sessions.js';
-import { LIMITS, type QuizView, type SessionView } from './shared/protocol.js';
+import { LIMITS, type CompanionView, type QuizView, type SessionView } from './shared/protocol.js';
 
 /** The session as clients see it. Never holds the notes, nor answers or picks before a reveal. */
 export function buildView(
@@ -39,10 +39,15 @@ export function buildView(
     playback,
     quizUnlocked,
     pip: session.pip,
-    pipStyle: session.pipStyle,
+    assistant: session.assistant,
+    device: { ...session.device, lights: 'simulated' },
+    kidsMode: session.kidsMode,
     companion:
       session.stage === 'watch' && film
-        ? buildCompanion(film, positionSec, session.predictionVotes, publicUrl)
+        ? withoutKidsParts(
+            buildCompanion(film, positionSec, session.predictionVotes, publicUrl),
+            session.kidsMode,
+          )
         : null,
     quiz: session.stage === 'quiz' && run ? buildQuizView(run, nowMs) : null,
     results:
@@ -53,6 +58,11 @@ export function buildView(
           }
         : null,
   };
+}
+
+/** Guesses ("What happens next?") are a kids-mode skill; out of it they never appear. */
+function withoutKidsParts(companion: CompanionView, kidsMode: boolean): CompanionView {
+  return kidsMode ? companion : { ...companion, prediction: null };
 }
 
 /** The view for the TV: the same, without the chapters and character cards, which only the pads show. */

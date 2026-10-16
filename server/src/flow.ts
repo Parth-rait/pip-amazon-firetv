@@ -2,6 +2,7 @@
 import type { Server } from 'socket.io';
 import { runAsk, type AskOutcome } from './core/ai/ask.js';
 import type { AnswerMemory } from './core/ai/answer-memory.js';
+import type { Journal } from './core/journal.js';
 import type { TextModel } from './core/ai/model.js';
 import { restingPip, setPip, type CoreDeps } from './core/pip.js';
 import type { Player } from './core/players.js';
@@ -12,7 +13,7 @@ import type { Content } from './film/content.js';
 import { estimatePosition } from './film/playback.js';
 import { ASK_SETTINGS } from './film/prompts.js';
 import { quizTimerKey } from './film/quiz.js';
-import { LINES_BY_MOOD, type PipLines } from './lines.js';
+import { LINES, type PipLines } from './lines.js';
 import type { log as Log } from './log.js';
 import type { Session } from './sessions.js';
 import {
@@ -38,6 +39,7 @@ export interface FlowDeps {
   aiEnabled: boolean;
   simpleFormat?: boolean; // a small local model: no "Did you mean"
   memory?: AnswerMemory; // good answers by film and scene (core/ai/answer-memory.ts)
+  journal?: Journal; // the append-only event journal (core/journal.ts)
   logText: boolean; // LOG_TEXT: question text in logs, development only
   log: typeof Log;
 }
@@ -87,6 +89,7 @@ export function watchFilm(session: Session, contentId: string, deps: FlowDeps): 
   }
   session.contentId = contentId;
   session.stage = 'watch';
+  session.assistant = { open: false, byId: null }; // Pip starts hidden with every film
   broadcast(session, deps);
   return true;
 }
@@ -128,6 +131,7 @@ export function checkPredictionReveal(session: Session, deps: FlowDeps): void {
 export function goToLobby(session: Session, deps: FlowDeps): void {
   dropQuiz(session, deps);
   session.stage = 'lobby';
+  session.assistant = { open: false, byId: null };
   broadcast(session, deps);
 }
 
@@ -182,12 +186,10 @@ async function answer(
     via,
     ...(deps.logText ? { question: text } : {}),
   });
-  const mood = session.pipStyle.mood;
   const recallQuery = {
     contentId,
     sceneSec: sceneAt(film.notes, positionSec),
     question: text,
-    mood,
   };
   // The same question at the same scene was answered before: answer at once.
   const repeat = deps.memory?.recallExact(recallQuery) ?? null;
@@ -206,7 +208,6 @@ async function answer(
               question: text,
               via,
               simpleFormat: deps.simpleFormat,
-              mood,
             }),
             text,
             { ...ASK_SETTINGS, allowClarify: !deps.simpleFormat && via !== 'clarify' },
@@ -230,7 +231,7 @@ async function answer(
     setPip(session, restingPip(session), coreDeps(session, deps));
     return;
   }
-  const say = toPipSay(outcome, player, text, LINES_BY_MOOD[mood]);
+  const say = toPipSay(outcome, player, text, LINES);
   if (outcome.reply?.kind === 'answer') {
     session.history = [
       ...session.history,

@@ -82,19 +82,42 @@ export function usePlayer(
     [report, waitForSurface],
   );
 
-  const play = useCallback(() => {
-    playerRef.current?.play().catch(() => report());
+  /** Resolves true once the player is playing, false if it could not start. */
+  const play = useCallback(async (): Promise<boolean> => {
+    const p = playerRef.current;
+    if (!p) return false;
+    try {
+      await p.play();
+      return true;
+    } catch {
+      report();
+      return false;
+    }
   }, [report]);
 
-  const pause = useCallback(() => playerRef.current?.pause(), []);
+  const pause = useCallback(() => {
+    const p = playerRef.current;
+    if (!p) return false;
+    p.pause();
+    return true;
+  }, []);
+
+  /** The film's own volume, 0 to 1. Vega keeps the system volume for system apps. */
+  const setVolume = useCallback((level: number) => {
+    const p = playerRef.current;
+    if (!p) return false;
+    p.volume = Math.min(Math.max(level, 0), 1);
+    return true;
+  }, []);
 
   const seekBy = useCallback((deltaSec: number) => {
     const p = playerRef.current;
-    if (!p) return;
+    if (!p) return false;
     const end = Number.isFinite(p.duration)
       ? p.duration
       : p.currentTime + Math.max(deltaSec, 0);
     p.currentTime = Math.min(Math.max(p.currentTime + deltaSec, 0), end);
+    return true;
   }, []);
 
   const onSurfaceViewCreated = useCallback((handle: string) => {
@@ -134,6 +157,7 @@ export function usePlayer(
     play,
     pause,
     seekBy,
+    setVolume,
     onSurfaceViewCreated,
     onSurfaceViewDestroyed,
     playerRef,

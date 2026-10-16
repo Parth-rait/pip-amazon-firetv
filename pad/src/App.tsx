@@ -3,15 +3,16 @@ import { useEffect, useMemo, useReducer, useRef, useState } from 'react';
 import { DebugOverlay } from './components/DebugOverlay';
 import { StatusPill } from './components/StatusPill';
 import { fullscreenOnFirstTap } from './lib/fullscreen';
-import { getPlayerId, getSavedAvatar, getSavedCode, getSavedName } from './lib/player-id';
+import { makeInput } from './lib/input';
+import { getPlayerId, getSavedCode, getSavedName } from './lib/player-id';
 import { browserWakeLockEnv, keepAwake } from './lib/wake-lock';
-import { connectPad, createSocket, sendAsk, type PadConnection } from './net/socket';
+import { connectPad, createSocket, sendAsk, sendInput, type PadConnection } from './net/socket';
 import { JoinScreen } from './screens/JoinScreen';
 import { LobbyScreen } from './screens/LobbyScreen';
 import { QuizScreen } from './screens/QuizScreen';
 import { ResultsScreen } from './screens/ResultsScreen';
 import { WatchScreen } from './screens/WatchScreen';
-import { PIP_COLORS, type AskVia, type HostCommand } from './shared/protocol';
+import type { AskVia, HostCommand, InputSource, PipInputEvent } from './shared/protocol';
 import { initialState, isHost, reducer } from './state/store';
 
 const NEXT_CHIPS_MS = 60_000;
@@ -35,16 +36,6 @@ export function App() {
     [],
   );
 
-  // Pip's color is the accent everywhere, so the pad follows the host's choice at once.
-  const pipColor = state.view?.pipStyle.color ?? 'mint';
-  const pipMood = state.view?.pipStyle.mood ?? 'playful';
-  useEffect(() => {
-    document.documentElement.style.setProperty('--accent', PIP_COLORS[pipColor]);
-  }, [pipColor]);
-  useEffect(() => {
-    document.documentElement.dataset.pipMood = pipMood;
-  }, [pipMood]);
-
   const isJoined = state.view !== null;
   useEffect(() => (isJoined ? keepAwake(browserWakeLockEnv()) : undefined), [isJoined]);
 
@@ -59,6 +50,8 @@ export function App() {
     if (socket.connected) socket.emit('pad:host', command);
   };
   const ask = (text: string, via: AskVia) => sendAsk(socket, text, via);
+  const input = (event: PipInputEvent, source: InputSource) =>
+    sendInput(socket, makeInput(event, source));
   const { view } = state;
 
   return (
@@ -77,12 +70,9 @@ export function App() {
         <JoinScreen
           initialCode={getSavedCode() ?? ''}
           initialName={getSavedName() ?? ''}
-          initialAvatar={getSavedAvatar()}
           error={state.joinError}
           isOnline={state.connection === 'online'}
-          onJoin={(code, name, avatar) =>
-            connection.current?.join(code, name, avatar) ?? Promise.resolve(null)
-          }
+          onJoin={(code, name) => connection.current?.join(code, name) ?? Promise.resolve(null)}
         />
       )}
       {view?.stage === 'lobby' && (
@@ -97,6 +87,7 @@ export function App() {
           chips={state.chips}
           say={state.say}
           onCommand={sendHost}
+          onInput={input}
           onAsk={ask}
           onSomethingElse={() => dispatch({ type: 'chips-expired' })}
           onReact={(kind) => socket.connected && socket.emit('pad:react', { kind })}

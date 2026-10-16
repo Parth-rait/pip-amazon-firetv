@@ -232,35 +232,6 @@ body {
   opacity: 0.35;
 }
 
-.avatar-picker {
-  display: grid;
-  grid-template-columns: repeat(8, minmax(0, 1fr));
-  gap: 2px;
-}
-
-.avatar-option {
-  display: grid;
-  place-items: center;
-  min-height: var(--touch-min);
-  padding: 2px;
-  border: none;
-  border-radius: 14px;
-  background: none;
-  cursor: pointer;
-  transition:
-    transform var(--motion-fast),
-    background var(--motion-fast);
-}
-
-.avatar-option.is-on {
-  background: var(--surface2);
-  box-shadow: inset 0 0 0 2px var(--text);
-}
-
-.avatar-option:active {
-  transform: scale(0.92);
-}
-
 /* Lobby */
 .film-list {
   display: flex;
@@ -383,12 +354,6 @@ body {
   background: var(--surface2);
 }
 
-.sheet__preview {
-  display: grid;
-  place-items: center;
-  padding: var(--space-3) 0;
-}
-
 .segmented {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -415,31 +380,6 @@ body {
 .segmented__item.is-on {
   background: var(--surface2);
   color: var(--text);
-}
-
-.swatches {
-  display: flex;
-  gap: var(--space-4);
-}
-
-.swatch {
-  width: 48px;
-  height: 48px;
-  border: none;
-  border-radius: 50%;
-  cursor: pointer;
-  box-shadow: 0 0 0 3px var(--surface);
-  transition: transform var(--motion-fast);
-}
-
-.swatch.is-on {
-  box-shadow:
-    0 0 0 3px var(--surface),
-    0 0 0 5px var(--text);
-}
-
-.swatch:active {
-  transform: scale(0.92);
 }
 
 /* Watch */
@@ -541,6 +481,163 @@ body {
   background: var(--accent);
 }
 
+/* Volume and brightness: minus, a level bar, plus. */
+.stepper {
+  display: grid;
+  grid-template-columns: 96px var(--touch-min) 1fr var(--touch-min);
+  align-items: center;
+  gap: var(--space-2);
+}
+
+.stepper__label {
+  color: var(--text-muted);
+  font-size: var(--type-caption);
+}
+
+.stepper__button {
+  width: var(--touch-min);
+  height: var(--touch-min);
+  border: none;
+  border-radius: 50%;
+  background: var(--surface2);
+  color: var(--text);
+  font: inherit;
+  font-size: var(--type-title);
+  cursor: pointer;
+  transition: transform var(--motion-fast);
+}
+
+.stepper__button:active {
+  transform: scale(0.92);
+}
+
+.stepper__track {
+  height: 8px;
+  overflow: hidden;
+  border-radius: 999px;
+  background: var(--surface2);
+}
+
+.stepper__fill {
+  height: 100%;
+  border-radius: 999px;
+  background: var(--accent);
+  transition: width var(--motion-fast);
+}
+
+.remote__lights {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+.remote__lights .label,
+.remote__lights .caption,
+.remote__status {
+  margin: 0;
+}
+
+/* One button for spoken commands and questions. */
+.voice {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+.voice .caption {
+  margin: 0;
+  text-align: center;
+}
+
+.voice__button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-3);
+  min-height: var(--touch-min);
+  padding: var(--space-2) var(--space-4);
+  border: none;
+  border-radius: 999px;
+  background: var(--surface);
+  color: var(--text);
+  font: inherit;
+  font-size: var(--type-caption);
+  cursor: pointer;
+  transition: background var(--motion-fast);
+}
+
+.voice__button.is-on {
+  background: var(--danger);
+}
+
+/* Pip's button: always in the same corner, the one way to call Pip. */
+.pip-fab {
+  position: fixed;
+  right: max(var(--space-5), calc((100vw - 560px) / 2 + var(--space-5)));
+  bottom: max(var(--space-5), env(safe-area-inset-bottom));
+  z-index: 7;
+  display: grid;
+  place-items: center;
+  width: 72px;
+  height: 72px;
+  border: none;
+  border-radius: 50%;
+  background: var(--surface2);
+  box-shadow: 0 8px 24px rgb(0 0 0 / 0.45);
+  cursor: pointer;
+  animation: pop-in var(--motion-fast);
+  transition: transform var(--motion-fast);
+}
+
+.pip-fab:active {
+  transform: scale(0.94);
+}
+
+.sheet--pip {
+  max-height: 88vh;
+  overflow-y: auto;
+}
+
+/* In Pip's sheet the Ask bar sits under the chips instead of at the bottom of the page. */
+.sheet--pip .ask-bar {
+  position: static;
+  padding: 0;
+  background: none;
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+}
+
+/* The kids games switch in the lobby. */
+.switch {
+  position: relative;
+  flex-shrink: 0;
+  width: 52px;
+  height: 32px;
+  border-radius: 999px;
+  background: var(--surface2);
+  transition: background var(--motion-fast);
+}
+
+.switch::after {
+  content: '';
+  position: absolute;
+  top: 3px;
+  left: 3px;
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  background: var(--text);
+  transition: transform var(--motion-fast);
+}
+
+.switch.is-on {
+  background: var(--accent);
+}
+
+.switch.is-on::after {
+  transform: translateX(20px);
+}
+
 /* Ask Pip as a chat */
 .ask-pip,
 .clarify {
@@ -600,11 +697,6 @@ body {
 
 .typing span:nth-child(3) {
   animation-delay: 0.4s;
-}
-
-/* In the chat the bubble shows Pip's thinking dots, so Pip's own dots would repeat them. */
-.pip-line .pip__dots {
-  display: none;
 }
 
 .chips {
@@ -862,94 +954,6 @@ body {
   cursor: default;
 }
 
-/* "Catch me up": the story so far */
-.story {
-  list-style: none;
-  margin: 0;
-  padding: 0;
-  display: flex;
-  flex-direction: column;
-  gap: var(--space-4);
-}
-
-.chapter {
-  overflow: hidden;
-  border-radius: 20px;
-  background: var(--surface);
-  animation: fade-in var(--motion-fast);
-}
-
-.chapter__image {
-  display: block;
-  width: 100%;
-  aspect-ratio: 16 / 9;
-  object-fit: cover;
-}
-
-.chapter__text {
-  display: flex;
-  flex-direction: column;
-  gap: var(--space-1);
-  padding: var(--space-3) var(--space-4) var(--space-4);
-}
-
-.chapter__text .label {
-  margin: 0;
-}
-
-/* "Who's who" */
-.cast {
-  list-style: none;
-  margin: 0;
-  padding: 0;
-  display: flex;
-  flex-direction: column;
-  gap: var(--space-3);
-}
-
-.cast__card {
-  display: flex;
-  gap: var(--space-4);
-  padding: var(--space-3);
-  border-radius: 20px;
-  background: var(--surface);
-}
-
-.cast__image {
-  flex-shrink: 0;
-  width: 88px;
-  height: 88px;
-  border-radius: 16px;
-  object-fit: cover;
-  background: var(--surface2);
-}
-
-.cast__image--empty {
-  display: grid;
-  place-items: center;
-  color: var(--text-muted);
-  font-size: var(--type-display);
-  font-weight: 700;
-}
-
-.cast__text {
-  display: flex;
-  flex-direction: column;
-  gap: var(--space-1);
-  min-width: 0;
-}
-
-.cast__facts {
-  margin: 0;
-  padding: 0 0 0 var(--space-4);
-  color: var(--text-muted);
-  font-size: var(--type-caption);
-}
-
-.cast__facts .is-latest {
-  color: var(--text);
-}
-
 /* Problems only: the pill in the top bar. */
 .pill-row {
   display: flex;
@@ -1011,200 +1015,163 @@ body {
   }
 }
 
-/* Pip (section 3.4): a mint circle with two eyes. The server sends the state; each state
-   has one animation: sleep breathes slowly, idle breathes and blinks, thinking looks up
-   with pulsing dots, talking bounces for 1.5 s, cheer hops twice with a brighter glow. */
+/* Pip, the screen buddy (docs/vnext/PLAN.md 3.1): it bobs and blinks, nothing more. The state
+   picks the face: asleep, idle (smile), thinking (eyes up, thought dots), talking (open mouth),
+   cheer (happy eyes). */
 .pip {
-  position: relative;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 18%;
-  border-radius: 50%;
-  background: var(--accent);
-  box-shadow: 0 0 24px color-mix(in srgb, var(--accent) 35%, transparent);
-  animation: pip-breathe var(--motion-pip) infinite;
+  display: block;
   flex-shrink: 0;
-  transition: box-shadow var(--motion-fast);
+  overflow: visible;
 }
 
-.pip__eye {
-  width: 11%;
-  height: 26%;
-  border-radius: 999px;
-  background: var(--bg);
-  animation: pip-blink 5s infinite;
-  transition:
-    height var(--motion-fast),
-    transform var(--motion-fast);
+.pip-shadow {
+  fill: #000;
+  opacity: 0.25;
+  transform-origin: 60px 113px;
+  animation: pip-shadow 3.2s ease-in-out infinite;
 }
 
-.pip--sleep {
-  opacity: 0.5;
-  box-shadow: none;
-  animation-duration: 4800ms;
+.pip-body {
+  transform-origin: 60px 104px;
+  animation: pip-bob 3.2s ease-in-out infinite;
 }
 
-.pip--sleep .pip__eye {
-  height: 5%;
+.pip-shell,
+.pip-antenna circle {
+  fill: var(--accent);
+}
+
+.pip-band {
+  fill: color-mix(in srgb, var(--accent) 78%, #000);
+}
+
+.pip-antenna path {
+  stroke: color-mix(in srgb, var(--accent) 70%, #000);
+  stroke-width: 4;
+  stroke-linecap: round;
+  fill: none;
+}
+
+.pip-face {
+  fill: #f2fffa;
+}
+
+.pip-eyes ellipse {
+  fill: #101418;
+}
+
+.pip-shine {
+  fill: #fff;
+}
+
+.pip-eyes {
+  transform-origin: 60px 48px;
+  animation: pip-blink 4.6s infinite;
+}
+
+.pip-happy path,
+.pip-closed path,
+.pip-smile {
+  fill: none;
+  stroke: #101418;
+  stroke-width: 3.2;
+  stroke-linecap: round;
+}
+
+.pip-cheek {
+  fill: #fb7185;
+  opacity: 0.45;
+}
+
+.pip-o {
+  fill: #101418;
+}
+
+.pip-foot {
+  fill: #1f2937;
+}
+
+.pip-think circle {
+  fill: var(--text-muted);
+}
+
+.pip-happy,
+.pip-closed,
+.pip-o,
+.pip-think {
+  display: none;
+}
+
+.pip--sleep .pip-eyes,
+.pip--sleep .pip-smile {
+  display: none;
+}
+
+.pip--sleep .pip-closed {
+  display: inline;
+}
+
+.pip--sleep .pip-body {
+  animation-duration: 5s;
+  opacity: 0.7;
+}
+
+.pip--thinking .pip-eyes {
   animation: none;
+  transform: translate(3px, -3px);
 }
 
-.pip--thinking .pip__eye {
-  transform: translate(25%, -25%);
-  animation: none;
-}
-
-.pip--talking {
-  animation:
-    pip-bounce 500ms ease-in-out 3,
-    pip-breathe var(--motion-pip) 1500ms infinite;
-}
-
-.pip--cheer {
-  box-shadow: 0 0 36px color-mix(in srgb, var(--accent) 70%, transparent);
-  animation:
-    pip-hop 750ms ease-out 2,
-    pip-breathe var(--motion-pip) 1500ms infinite;
-}
-
-.pip__dots {
-  position: absolute;
-  bottom: -30%;
-  display: flex;
-  gap: 4px;
-}
-
-.pip__dots span {
-  width: 5px;
-  height: 5px;
-  border-radius: 50%;
-  background: var(--accent);
+.pip--thinking .pip-think {
+  display: inline;
   animation: pip-dot 1.2s infinite;
 }
 
-.pip__dots span:nth-child(2) {
-  animation-delay: 0.2s;
-}
-
-.pip__dots span:nth-child(3) {
-  animation-delay: 0.4s;
-}
-
-/* Pip's face per mood (section 2.4): chill eyes are sleepy, playful ones sparkle with rosy
-   cheeks, sassy Pip raises one brow and half-closes the other eye. Sleep always wins. */
-.pip__brow,
-.pip__cheek {
-  display: none;
-  position: absolute;
-  pointer-events: none;
-}
-
-[data-pip-mood='chill'] .pip__eye {
-  height: 14%;
-  margin-top: 8%;
-}
-
-[data-pip-mood='playful'] .pip__eye {
-  position: relative;
-}
-
-[data-pip-mood='playful'] .pip__eye::after {
-  content: '';
-  position: absolute;
-  top: 14%;
-  left: 20%;
-  width: 40%;
-  height: 26%;
-  border-radius: 50%;
-  background: #fff;
-  opacity: 0.9;
-}
-
-[data-pip-mood='playful'] .pip__cheek {
-  display: block;
-  top: 60%;
-  width: 16%;
-  height: 9%;
-  border-radius: 50%;
-  background: rgb(255 110 140 / 0.45);
-}
-
-.pip__cheek--left {
-  left: 15%;
-}
-
-.pip__cheek--right {
-  right: 15%;
-}
-
-[data-pip-mood='sassy'] .pip__eye:nth-of-type(2) {
-  height: 13%;
-  margin-top: 9%;
-}
-
-[data-pip-mood='sassy'] .pip__brow {
-  display: block;
-  top: 24%;
-  left: 25%;
-  width: 22%;
-  height: 6%;
-  border-radius: 999px;
-  background: var(--bg);
-  transform: rotate(-16deg);
-}
-
-.pip.pip--sleep .pip__eye {
-  height: 5%;
-  margin-top: 0;
-}
-
-.pip--sleep .pip__eye::after,
-.pip--sleep .pip__brow,
-.pip--sleep .pip__cheek {
+.pip--talking .pip-smile {
   display: none;
 }
 
-@keyframes pip-breathe {
+.pip--talking .pip-o {
+  display: inline;
+}
+
+.pip--cheer .pip-eyes {
+  display: none;
+}
+
+.pip--cheer .pip-happy {
+  display: inline;
+}
+
+@keyframes pip-bob {
   0%,
   100% {
-    transform: scale(1);
+    transform: translateY(0);
   }
   50% {
-    transform: scale(1.04);
+    transform: translateY(-4px) rotate(-1.5deg);
   }
 }
 
-/* A blink every 5 s (section 3.4 says every 4 to 6 s). */
 @keyframes pip-blink {
   0%,
-  94%,
+  92%,
   100% {
     transform: scaleY(1);
   }
-  97% {
+  95% {
     transform: scaleY(0.1);
   }
 }
 
-@keyframes pip-bounce {
+@keyframes pip-shadow {
   0%,
   100% {
-    transform: translateY(0);
+    transform: scaleX(1);
+    opacity: 0.25;
   }
   50% {
-    transform: translateY(-8%);
-  }
-}
-
-/* The TV hops 24 dp; the pad's small Pip hops a quarter of its size. */
-@keyframes pip-hop {
-  0%,
-  100% {
-    transform: translateY(0);
-  }
-  40% {
-    transform: translateY(-25%);
+    transform: scaleX(0.85);
+    opacity: 0.15;
   }
 }
 

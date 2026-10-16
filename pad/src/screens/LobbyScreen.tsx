@@ -1,14 +1,11 @@
-// LOBBY: the host picks a film and can make Pip theirs; everyone else waits (sections 3.3 and 2.4).
+// LOBBY: the host picks a film and can turn on kids games; everyone else waits. Quizzes, guesses
+// and reactions are an opt-in skill, never the default (docs/vnext/PLAN.md 3.1).
 import { useEffect, useState } from 'react';
 import { PlayerList } from '../components/PlayerList';
 import { Pip } from '../components/Pip';
-import { PipStyleSheet } from '../components/PipStyleSheet';
-import { SparkleIcon } from '../components/Icons';
 import { formatMinutes } from '../lib/format';
 import type { ContentView, HostCommand, SessionView } from '../shared/protocol';
 import { hostName } from '../state/store';
-
-const MOOD_LABEL = { chill: 'Chill', playful: 'Playful', sassy: 'Sassy' } as const;
 
 interface Props {
   view: SessionView;
@@ -20,7 +17,6 @@ interface Props {
 export function LobbyScreen({ view, myId, isHost, onCommand }: Props) {
   const [films, setFilms] = useState<ContentView[] | null>(null);
   const [isLoadFailed, setIsLoadFailed] = useState(false);
-  const [isStyling, setIsStyling] = useState(false);
 
   useEffect(() => {
     if (!isHost) return;
@@ -61,35 +57,33 @@ export function LobbyScreen({ view, myId, isHost, onCommand }: Props) {
               </button>
             ))}
           </div>
-          <button className="row-button" onClick={() => setIsStyling(true)}>
-            <Pip state="idle" size={32} />
+          <button
+            className="row-button"
+            role="switch"
+            aria-checked={view.kidsMode}
+            onClick={() => onCommand({ type: 'kids-mode', on: !view.kidsMode })}
+          >
             <span className="row-button__text">
-              <span>Make Pip yours</span>
-              <span className="caption">{MOOD_LABEL[view.pipStyle.mood]} mood. Tap to change.</span>
+              <span>Kids games</span>
+              <span className="caption">
+                {view.kidsMode
+                  ? 'On: a quiz after the film, guesses and reactions.'
+                  : 'Off: just the film, with Pip when you ask.'}
+              </span>
             </span>
-            <SparkleIcon />
+            <span className={view.kidsMode ? 'switch is-on' : 'switch'} aria-hidden="true" />
           </button>
         </>
       ) : (
         <section className="waiting">
           <Pip state={view.pip} size={96} />
           <h1 className="title">Waiting for {hostName(view) ?? 'the host'} to pick a film</h1>
-          <p className="caption">
-            Pip is in a {MOOD_LABEL[view.pipStyle.mood].toLowerCase()} mood.
-          </p>
         </section>
       )}
       <section className="stack">
         <p className="label">Here now</p>
         <PlayerList view={view} myId={myId} />
       </section>
-      {isStyling && (
-        <PipStyleSheet
-          style={view.pipStyle}
-          onCommand={onCommand}
-          onClose={() => setIsStyling(false)}
-        />
-      )}
     </main>
   );
 }

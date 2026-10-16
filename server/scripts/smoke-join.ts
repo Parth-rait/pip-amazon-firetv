@@ -61,14 +61,20 @@ const sam = await join(first, code, 'Sam');
 const sam2 = await join(second, code, 'sam');
 if (!sam.ok || !sam2.ok) fail('a pad could not join');
 
-const filmId = sam2.view.content?.id ?? 'big-buck-bunny';
+const filmId = sam2.view.content?.id ?? 'sintel';
 second.emit('pad:host', { type: 'watch', contentId: filmId });
 await wait(SETTLE_MS);
 if (latest()?.stage !== 'lobby') fail('a host command from the second pad was not ignored');
 
 first.emit('pad:host', { type: 'watch', contentId: filmId });
 await wait(SETTLE_MS);
-first.emit('pad:host', { type: 'pause' });
+const paused = await first.emitWithAck('pad:input', {
+  id: `smoke-${Date.now()}`,
+  source: 'simulator',
+  at: Date.now(),
+  event: { type: 'media.pause' },
+});
+if (!paused.ok) fail(`the host's pause input was refused: ${paused.reason}`);
 await wait(SETTLE_MS);
 if (latest()?.stage !== 'watch') fail('the host could not start the film');
 if (!commands.some((c) => c.type === 'pause')) fail('the pause command did not reach the TV');

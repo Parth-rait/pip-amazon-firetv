@@ -1,7 +1,6 @@
-// The Ask Pip prompt from PROJECT.md section 5.3, with a persona per mood (section 2.4).
+// The Ask Pip prompt from PROJECT.md section 5.3, in Pip's one voice.
 // Change it there first, then here.
 import type { AskSettings } from '../core/ai/ask.js';
-import type { PipMood } from '../shared/protocol.js';
 
 const ASK_RULES = `Answer using only the facts inside <premise> and <notes>. The notes cover only what the
 family has already seen. Never guess or hint at what happens later.
@@ -57,27 +56,17 @@ Rules:
 - Plain text only: no markdown, no emoji, no quotation marks.
 - Do not start with "Great question" or repeat the question.`;
 
-/** Who Pip is, per mood (section 2.4). The rules after it are the same for every mood. */
-export const PERSONAS: Record<PipMood, string> = {
-  chill: `You are Pip, a calm, gentle companion who watches films with a family on their TV.
-Speak softly and simply, like a kind friend on the sofa.`,
-  playful: `You are Pip, a small, cheerful companion who watches films with a family on their TV.
-Be warm and a little funny, with lively, friendly words.`,
-  sassy: `You are Pip, a cheeky, quick-witted companion who watches films with a family on their TV.
-Add one playful, teasing remark about the characters or the film, never about the people asking.
-Stay kind: sassy, never mean.`,
-};
+/** Who Pip is: one consistent voice for everyone (docs/vnext/PLAN.md 3.1). */
+const PERSONA = `You are Pip, a small, warm companion who watches films with a family on their TV.
+Be brief and kind. Children may be asking, so use simple, friendly words.`;
 
-const CHILDREN = 'Children may be asking, so use simple, friendly words.';
-
-/** The Ask Pip system prompt for a mood; `simple` is the version for a small local model. */
-export function askSystemPrompt(mood: PipMood, simple = false): string {
-  return `${PERSONAS[mood]}\n${CHILDREN}\n\n${simple ? ASK_RULES_SIMPLE : ASK_RULES}`;
+/** The Ask Pip system prompt; `simple` is the version for a small local model. */
+export function askSystemPrompt(simple = false): string {
+  return `${PERSONA}\n\n${simple ? ASK_RULES_SIMPLE : ASK_RULES}`;
 }
 
-/** The default (Playful) prompts, as PROJECT.md section 5.3 shows them. */
-export const ASK_SYSTEM_PROMPT = askSystemPrompt('playful');
-export const ASK_SYSTEM_PROMPT_SIMPLE = askSystemPrompt('playful', true);
+export const ASK_SYSTEM_PROMPT = askSystemPrompt();
+export const ASK_SYSTEM_PROMPT_SIMPLE = askSystemPrompt(true);
 
 /** Added to the user message only when the person tapped a "Did you mean" option (section 5.4). */
 export const CLARIFY_PICKED_LINE =

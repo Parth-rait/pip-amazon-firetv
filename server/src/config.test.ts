@@ -14,6 +14,7 @@ describe('parseConfig', () => {
       OLLAMA_URL: 'http://localhost:11434',
       OLLAMA_MODEL: 'qwen2.5:3b',
       ANSWER_MEMORY: true,
+      JOURNAL: true,
       LOG_TEXT: false,
     });
   });

@@ -1,10 +1,8 @@
 // What this device remembers: its player id, the last code and the first name (localStorage).
-import { AVATAR_COLORS } from '../shared/protocol';
 const KEYS = {
   playerId: 'pip.playerId',
   code: 'pip.code',
   name: 'pip.name',
-  avatar: 'pip.avatar',
 } as const;
 const ID_BYTES = 16;
 
@@ -39,10 +37,3 @@ export const getSavedCode = () => read(KEYS.code);
 export const saveCode = (code: string | null) => write(KEYS.code, code);
 export const getSavedName = () => read(KEYS.name);
 export const saveName = (name: string) => write(KEYS.name, name);
-/** The avatar color this device picked (an index into AVATAR_COLORS), if any. */
-export function getSavedAvatar(): number | null {
-  const raw = read(KEYS.avatar);
-  const avatar = raw === null ? Number.NaN : Number(raw);
-  return Number.isInteger(avatar) && avatar >= 0 && avatar < AVATAR_COLORS.length ? avatar : null;
-}
-export const saveAvatar = (avatar: number) => write(KEYS.avatar, String(avatar));

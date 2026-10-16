@@ -1,10 +1,6 @@
 import React from 'react';
 import {StyleSheet, Text, View} from 'react-native';
-import {
-  PIP_COLORS,
-  type ResultsView,
-  type SessionView,
-} from '../shared/protocol';
+import {type ResultsView, type SessionView} from '../shared/protocol';
 import {Avatar} from '../components/Avatar';
 import {Pip} from '../components/Pip';
 import {familyLine} from '../quiz-lines';
@@ -19,7 +15,7 @@ export function ResultsScreen({
   view: SessionView;
   results: ResultsView;
 }) {
-  const accent = PIP_COLORS[view.pipStyle.color];
+  const accent = color.accent;
   return (
     <View style={styles.root}>
       <View style={styles.left}>
@@ -57,12 +53,7 @@ export function ResultsScreen({
         </View>
       </View>
       <View style={styles.right}>
-        <Pip
-          state={view.pip}
-          mood={view.pipStyle.mood}
-          size={dp(220)}
-          color={accent}
-        />
+        <Pip state={view.pip} size={dp(220)} />
         <Text style={styles.family}>
           {familyLine(results.correct, results.answers)}
         </Text>

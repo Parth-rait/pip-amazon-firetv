@@ -35,8 +35,12 @@ function report(): void {
   if (playback) socket.emit('tv:playback', { ...playback });
 }
 
+/** Applies one command and confirms it, like the real TV's player (tv:applied). */
 function apply(command: TvCommand): void {
-  if (!playback) return;
+  if (!playback) {
+    socket.emit('tv:applied', { id: command.id, ok: false, detail: 'no film' });
+    return;
+  }
   advance();
   if (command.type === 'play') playback.paused = false;
   if (command.type === 'pause') playback.paused = true;
@@ -45,7 +49,9 @@ function apply(command: TvCommand): void {
     playback.positionSec = Math.min(Math.max(target, 0), playback.durationSec);
     playback.ended = false;
   }
+  // Volume and brightness have nothing to show here; they are confirmed like the rest.
   report();
+  socket.emit('tv:applied', { id: command.id, ok: true });
 }
 
 socket.on('connect', () => {
@@ -77,7 +83,13 @@ socket.on('session:view', (view) => {
 });
 
 socket.on('tv:command', (command) => {
-  console.log(`tv:command ${command.type}${command.type === 'seek' ? ` ${command.deltaSec}` : ''}`);
+  const detail =
+    command.type === 'seek'
+      ? ` ${command.deltaSec}`
+      : command.type === 'volume' || command.type === 'brightness'
+        ? ` ${command.level}`
+        : '';
+  console.log(`tv:command ${command.type}${detail}`);
   apply(command);
 });
 

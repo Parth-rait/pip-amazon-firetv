@@ -6,6 +6,7 @@ import { Server } from 'socket.io';
 import { createApp } from './app.js';
 import { loadConfig } from './config.js';
 import { createAnswerMemory } from './core/ai/answer-memory.js';
+import { createFileJournal } from './core/journal.js';
 import { createBedrockModel, createFakeModel, createOllamaModel } from './core/ai/model.js';
 import { createTimers } from './core/timers.js';
 import { loadFilms } from './film/content.js';
@@ -16,6 +17,7 @@ import type { ClientToServerEvents, ServerToClientEvents } from './shared/protoc
 
 const CONTENT_DIR = fileURLToPath(new URL('../content', import.meta.url));
 const MEMORY_FILE = fileURLToPath(new URL('../data/answer-memory.json', import.meta.url));
+const JOURNAL_DIR = fileURLToPath(new URL('../data/events', import.meta.url));
 const WARM_UP_MS = 120_000;
 
 const config = loadConfig();
@@ -38,6 +40,15 @@ const memory = config.ANSWER_MEMORY
       now: Date.now,
       onError: (error) =>
         log.warn('memory.error', { error: error instanceof Error ? error.name : 'Error' }),
+    })
+  : undefined;
+
+const journal = config.JOURNAL
+  ? createFileJournal({
+      dir: JOURNAL_DIR,
+      now: Date.now,
+      onError: (error) =>
+        log.warn('journal.error', { error: error instanceof Error ? error.name : 'Error' }),
     })
   : undefined;
 
@@ -70,6 +81,7 @@ registerRealtime({
   timers: createTimers(),
   model,
   memory,
+  journal,
   log,
   now: Date.now,
 });

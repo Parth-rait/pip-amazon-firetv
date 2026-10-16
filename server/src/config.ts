@@ -17,6 +17,7 @@ export const configSchema = z.object({
   OLLAMA_URL: z.url({ protocol: /^https?$/ }).default('http://localhost:11434'),
   OLLAMA_MODEL: z.string().min(1).default('qwen2.5:3b'),
   ANSWER_MEMORY: booleanFlag.default(true),
+  JOURNAL: booleanFlag.default(true),
   LOG_TEXT: booleanFlag.default(false),
 });
 

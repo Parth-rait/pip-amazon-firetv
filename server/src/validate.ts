@@ -8,6 +8,7 @@ import {
   type ClientToServerEvents,
   type HostCommand,
   type Playback,
+  type PipInput,
 } from './shared/protocol.js';
 
 type PayloadOf<E extends keyof ClientToServerEvents> = Parameters<ClientToServerEvents[E]>[0];
@@ -58,15 +59,6 @@ export const joinSchema: z.ZodType<PayloadOf<'pad:join'>> = z.object({
 
 export const hostCommandSchema: z.ZodType<HostCommand> = z.discriminatedUnion('type', [
   z.object({ type: z.literal('watch'), contentId }),
-  z.object({ type: z.literal('play') }),
-  z.object({ type: z.literal('pause') }),
-  z.object({
-    type: z.literal('seek'),
-    deltaSec: z
-      .number()
-      .finite()
-      .transform((n) => Math.min(Math.max(n, -LIMITS.seekMaxAbsSec), LIMITS.seekMaxAbsSec)),
-  }),
   z.object({ type: z.literal('start-quiz') }),
   z.object({
     type: z.literal('next'),
@@ -74,14 +66,46 @@ export const hostCommandSchema: z.ZodType<HostCommand> = z.discriminatedUnion('t
     phase: z.enum(['question', 'reveal']),
   }),
   z.object({ type: z.literal('lobby') }),
-  z.object({
-    type: z.literal('pip-style'),
-    style: z.object({
-      mood: z.enum(['chill', 'playful', 'sassy']),
-      color: z.enum(['mint', 'coral', 'lilac', 'sun']),
-    }),
-  }),
+  z.object({ type: z.literal('kids-mode'), on: z.boolean() }),
 ]);
+
+const delta = z.number().finite().min(-1).max(1);
+
+export const inputSchema: z.ZodType<PipInput> = z.object({
+  id: z.string().min(8).max(64),
+  source: z.enum([
+    'pad_touch',
+    'pad_voice',
+    'tv_remote',
+    'touchwheel_proto',
+    'capacitive_button_proto',
+    'simulator',
+  ]),
+  at: z.number().finite(),
+  event: z.discriminatedUnion('type', [
+    z.object({ type: z.literal('pip.invoke') }),
+    z.object({ type: z.literal('pip.dismiss') }),
+    z.object({ type: z.literal('media.playPause') }),
+    z.object({ type: z.literal('media.play') }),
+    z.object({ type: z.literal('media.pause') }),
+    z.object({
+      type: z.literal('media.seekRelative'),
+      seconds: z.number().finite().min(-600).max(600),
+    }),
+    z.object({ type: z.literal('media.volumeDelta'), delta }),
+    z.object({ type: z.literal('media.brightnessDelta'), delta }),
+    z.object({ type: z.literal('ambient.set'), scene: z.enum(['off', 'movie', 'bright']) }),
+    z.object({ type: z.literal('navigation.move'), direction: z.enum(['next', 'previous']) }),
+    z.object({ type: z.literal('navigation.confirm') }),
+    z.object({ type: z.literal('navigation.back') }),
+  ]),
+});
+
+export const appliedSchema: z.ZodType<PayloadOf<'tv:applied'>> = z.object({
+  id: z.string().min(8).max(64),
+  ok: z.boolean(),
+  detail: z.string().max(120).optional(),
+});
 
 export const reactSchema: z.ZodType<PayloadOf<'pad:react'>> = z.object({
   kind: z.enum(['laugh', 'wow', 'love', 'scared']),

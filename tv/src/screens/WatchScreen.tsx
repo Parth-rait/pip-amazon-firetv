@@ -3,14 +3,13 @@ import {StyleSheet, Text, View} from 'react-native';
 import {KeplerVideoSurfaceView} from '@amazon-devices/react-native-w3cmedia';
 import {getSocket, setHelloPlayback} from '../net/socket';
 import {usePlayer, type PlayerReport} from '../player/use-player';
-import {
-  PIP_COLORS,
-  type ContentView,
-  type Playback,
-  type SessionView,
-  type TvCommand,
+import type {
+  ContentView,
+  Playback,
+  SessionView,
+  TvCommand,
 } from '../shared/protocol';
-import type {GreetEntry, SayEntry} from '../state/tv-store';
+import type {SayEntry} from '../state/tv-store';
 import {Fade} from '../components/Fade';
 import {Pip} from '../components/Pip';
 import {PredictionPanel} from '../components/PredictionPanel';
@@ -21,25 +20,26 @@ import {color, dp, radius, safe, space, type} from '../theme';
 const CREDIT_MS = 4000;
 const PAUSE_BAR_MS = 3000;
 const ANSWER_MS = 8000;
-const GREETING_MS = 4000;
+const PAUSE_HINT_MS = 6000;
+const MIN_BRIGHTNESS = 0.3;
 
 /**
  * WATCH (PROJECT.md 3.3 and 4.5, Watch). Stays mounted through the quiz and the results so
- * "Keep watching" resumes at once; the quiz and results screens cover it.
+ * "Keep watching" resumes at once; the quiz and results screens cover it. Pip stays hidden while
+ * the film plays; it shows when someone opens it on a pad, while paused, and with an answer
+ * (docs/vnext/PLAN.md 3.1).
  */
 export function WatchScreen({
   view,
   content,
   say,
-  greet,
 }: {
   view: SessionView;
   content: ContentView;
-  greet: GreetEntry | null;
   say: SayEntry | null;
 }) {
   const active = view.stage === 'watch';
-  const accent = PIP_COLORS[view.pipStyle.color];
+  const accent = color.accent;
   const activeRef = useRef(active);
   activeRef.current = active;
   const viewRef = useRef(view);
@@ -63,8 +63,11 @@ export function WatchScreen({
     console.warn(`[pip] ${message}`);
     setFailed(true);
   });
-  const {load, play, pause, seekBy, playerRef} = player;
+  const {load, play, pause, seekBy, setVolume, playerRef} = player;
   const loadedRef = useRef(false);
+  // The picture's brightness is a dim layer over the video; it starts where the server has it.
+  const [brightness, setBrightness] = useState(view.device.brightness);
+  const volumeRef = useRef(view.device.volume);
 
   // Load the film at the resume point: the server's playback for this film, unless it ended.
   useEffect(() => {
@@ -80,8 +83,9 @@ export function WatchScreen({
       .then(() => {
         if (cancelled) return;
         loadedRef.current = true;
+        setVolume(volumeRef.current);
         if (activeRef.current) {
-          play();
+          play().catch(() => undefined);
           setShowCredit(true);
         }
       })
@@ -92,7 +96,7 @@ export function WatchScreen({
     return () => {
       cancelled = true;
     };
-  }, [content.id, content.url, load, play]);
+  }, [content.id, content.url, load, play, setVolume]);
 
   // Pause when the stage leaves watch; play again when it comes back (from the start if it ended).
   useEffect(() => {
@@ -100,7 +104,7 @@ export function WatchScreen({
     if (active) {
       const p = playerRef.current;
       if (p?.ended) p.currentTime = 0;
-      play();
+      play().catch(() => undefined);
     } else {
       setHelloPlayback(null);
       pause();
@@ -109,20 +113,44 @@ export function WatchScreen({
 
   useEffect(() => () => setHelloPlayback(null), []);
 
-  // The host's commands, sent by the server to the TV only.
+  // The host's commands, sent by the server to the TV only. Each one is confirmed with
+  // tv:applied, so the pad says "done" only when the TV really did it (docs/vnext/PLAN.md 8).
   useEffect(() => {
     const s = getSocket();
+    const apply = async (command: TvCommand): Promise<boolean> => {
+      switch (command.type) {
+        case 'play':
+          return play();
+        case 'pause':
+          return pause();
+        case 'seek':
+          return seekBy(command.deltaSec);
+        case 'volume':
+          volumeRef.current = command.level;
+          return setVolume(command.level);
+        case 'brightness':
+          setBrightness(Math.min(Math.max(command.level, MIN_BRIGHTNESS), 1));
+          return true;
+      }
+    };
     const onCommand = (command: TvCommand) => {
-      if (!activeRef.current) return;
-      if (command.type === 'play') play();
-      if (command.type === 'pause') pause();
-      if (command.type === 'seek') seekBy(command.deltaSec);
+      if (!activeRef.current) {
+        s.emit('tv:applied', {
+          id: command.id,
+          ok: false,
+          detail: 'not watching',
+        });
+        return;
+      }
+      apply(command)
+        .then((ok) => s.emit('tv:applied', {id: command.id, ok}))
+        .catch(() => s.emit('tv:applied', {id: command.id, ok: false}));
     };
     s.on('tv:command', onCommand);
     return () => {
       s.off('tv:command', onCommand);
     };
-  }, [play, pause, seekBy]);
+  }, [play, pause, seekBy, setVolume]);
 
   useEffect(() => {
     if (!showCredit) return;
@@ -142,6 +170,24 @@ export function WatchScreen({
     return () => clearTimeout(t);
   }, [paused, ended]);
 
+  // An answer shows for 8 s; Pip shows with it.
+  const [answerId, setAnswerId] = useState<number | null>(null);
+  useEffect(() => {
+    if (!say) return;
+    setAnswerId(say.id);
+    const t = setTimeout(() => setAnswerId(null), ANSWER_MS);
+    return () => clearTimeout(t);
+  }, [say]);
+  const answer = say && say.id === answerId ? say : null;
+  const isAsked = view.assistant.open;
+  const isPipShown =
+    isAsked || (paused && !ended) || view.pip === 'thinking' || answer !== null;
+  const hint = isAsked
+    ? 'Ask me on your Pip Pad.'
+    : paused && !ended
+    ? 'Paused. Tap Pip on your pad to ask about the film.'
+    : null;
+
   return (
     <View style={styles.root}>
       <KeplerVideoSurfaceView
@@ -150,6 +196,12 @@ export function WatchScreen({
         onSurfaceViewCreated={player.onSurfaceViewCreated}
         onSurfaceViewDestroyed={player.onSurfaceViewDestroyed}
       />
+      {brightness < 1 && (
+        <View
+          style={[styles.dim, {opacity: 1 - brightness}]}
+          pointerEvents="none"
+        />
+      )}
       {active && (
         <View style={styles.overlay} pointerEvents="none">
           <Fade visible={showCredit} style={styles.credit}>
@@ -169,12 +221,14 @@ export function WatchScreen({
               <Text style={styles.title}>
                 {failed
                   ? "The film didn't load."
-                  : 'The end. Ready for the quiz?'}
+                  : view.kidsMode
+                  ? 'The end. Ready for the quiz?'
+                  : 'The end.'}
               </Text>
             </View>
           )}
 
-          {view.companion?.prediction ? (
+          {view.kidsMode && view.companion?.prediction ? (
             <PredictionPanel
               prediction={view.companion.prediction}
               players={view.players}
@@ -182,32 +236,32 @@ export function WatchScreen({
             />
           ) : null}
 
-          <ReactionLayer />
+          {view.kidsMode && <ReactionLayer />}
 
-          <View style={styles.corner}>
-            {say ? (
-              <SpeechBubble
-                key={`say-${say.id}`}
-                above={`${say.say.askedByName} asked: ${say.say.question}`}
-                text={say.say.text}
-                showMs={ANSWER_MS}
-                tint={accent}
+          {isPipShown && (
+            <View style={styles.corner}>
+              {answer ? (
+                <SpeechBubble
+                  key={`say-${answer.id}`}
+                  above={`${answer.say.askedByName} asked: ${answer.say.question}`}
+                  text={answer.say.text}
+                  showMs={ANSWER_MS}
+                  tint={accent}
+                />
+              ) : hint && view.pip !== 'thinking' ? (
+                <SpeechBubble
+                  key={hint}
+                  text={hint}
+                  showMs={PAUSE_HINT_MS}
+                  tint={color.surface2}
+                />
+              ) : null}
+              <Pip
+                state={view.pip === 'sleep' ? 'idle' : view.pip}
+                size={dp(96)}
               />
-            ) : greet ? (
-              <SpeechBubble
-                key={`greet-${greet.id}`}
-                text={greet.hello.text}
-                showMs={GREETING_MS}
-                tint={accent}
-              />
-            ) : null}
-            <Pip
-              state={view.pip}
-              mood={view.pipStyle.mood}
-              size={dp(96)}
-              color={accent}
-            />
-          </View>
+            </View>
+          )}
         </View>
       )}
     </View>
@@ -222,6 +276,7 @@ function clock(sec: number): string {
 const styles = StyleSheet.create({
   root: {flex: 1, backgroundColor: '#000000'},
   video: {position: 'absolute', top: 0, left: 0, right: 0, bottom: 0},
+  dim: {...StyleSheet.absoluteFillObject, backgroundColor: '#000000'},
   overlay: {
     ...StyleSheet.absoluteFillObject,
     paddingHorizontal: safe.horizontal,

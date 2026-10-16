@@ -1,4 +1,5 @@
 // npm run smoke:quiz: a fake TV and two fake pads play a whole quiz over real sockets; exits 0 on success.
+// The quiz is a kids-games skill, so the host turns kids games on first (docs/vnext/PLAN.md 3.1).
 import 'dotenv/config';
 import { randomBytes } from 'node:crypto';
 import { fileURLToPath } from 'node:url';
@@ -101,4 +102,5 @@ sam.on('session:view', (view: SessionView) => {
   }
 });
 
+sam.emit('pad:host', { type: 'kids-mode', on: true });
 sam.emit('pad:host', { type: 'watch', contentId: film.id });

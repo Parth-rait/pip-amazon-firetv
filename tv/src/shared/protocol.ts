@@ -4,30 +4,13 @@
 // Edit only this file, then run `npm run sync:shared` to copy it into each package.
 // Types and constants only: no imports, so it compiles in Node, browsers and React Native for Vega.
 
-export const PROTOCOL_VERSION = 4;
+export const PROTOCOL_VERSION = 5;
 
 /** Where the session is in the journey. The server owns it; the TV and pads follow it. */
 export type Stage = 'lobby' | 'watch' | 'quiz' | 'results';
 export type PipState = 'sleep' | 'idle' | 'thinking' | 'talking' | 'cheer';
 export type Source = 'ai' | 'template';
-/** How Pip talks. The host picks it; Playful is the default. */
-export type PipMood = 'chill' | 'playful' | 'sassy';
-/** Pip's body, and the accent color on the TV and every pad. The host picks it; mint is the default. */
-export type PipColor = 'mint' | 'coral' | 'lilac' | 'sun';
-
-export interface PipStyle {
-  mood: PipMood;
-  color: PipColor;
-}
-
-export const PIP_COLORS: Record<PipColor, string> = {
-  mint: '#7CE7C4',
-  coral: '#FF8E7F',
-  lilac: '#B8A6FF',
-  sun: '#FFD166',
-};
-
-/** A player's avatar is their initial on one of these colors, picked when joining. */
+/** A player's color, given when joining, so names are easy to tell apart. */
 export const AVATAR_COLORS = [
   '#7CE7C4',
   '#FF8E7F',
@@ -139,25 +122,87 @@ export interface SessionView {
   playback: Playback | null; // the TV's latest report for that film
   quizUnlocked: number; // quiz questions about scenes already watched
   pip: PipState;
-  pipStyle: PipStyle;
+  assistant: AssistantView; // Pip shows on the TV only when invoked, paused or answering
+  device: DeviceView; // what the TV was last asked to do, and whether it confirmed
+  kidsMode: boolean; // the host's opt-in: quiz, guesses and reactions (docs/vnext/PLAN.md 3.1)
   companion: CompanionView | null; // only in the watch stage
   quiz: QuizView | null; // only in the quiz stage
   results: ResultsView | null; // only in the results stage
 }
 
+export interface AssistantView {
+  open: boolean;
+  byId: string | null; // who opened Pip
+}
+
+/** Ambient light scenes. Real lights need a connected bridge; without one this is simulated. */
+export type AmbientScene = 'off' | 'movie' | 'bright';
+
+export interface DeviceView {
+  volume: number; // the film's volume on the TV, 0 to 1 (Vega keeps system volume for system apps)
+  brightness: number; // the picture's brightness in the TV app, 0.3 to 1
+  ambient: AmbientScene;
+  lights: 'simulated' | 'connected';
+  lastAction: { id: string; action: string; ok: boolean | null } | null; // null: not confirmed yet
+}
+
 /** Commands only the host's pad may send. The server ignores them from anyone else. */
 export type HostCommand =
   | { type: 'watch'; contentId: string } // from the lobby or results; the same film resumes
+  | { type: 'start-quiz' } // kids mode only
+  | { type: 'next'; index: number; phase: 'question' | 'reveal' } // what the host saw, so a double tap cannot skip ahead
+  | { type: 'lobby' }
+  | { type: 'kids-mode'; on: boolean };
+
+/**
+ * Where an input came from: the adapter, never the user (docs/vnext/PLAN.md 4.2). Every adapter
+ * sends the same semantic events, so the brain does not care which surface was touched.
+ */
+export type InputSource =
+  | 'pad_touch'
+  | 'pad_voice'
+  | 'tv_remote'
+  | 'touchwheel_proto'
+  | 'capacitive_button_proto'
+  | 'simulator';
+
+/** One semantic input. Media and device inputs never call a model. */
+export type PipInputEvent =
+  | { type: 'pip.invoke' }
+  | { type: 'pip.dismiss' }
+  | { type: 'media.playPause' }
+  | { type: 'media.play' }
+  | { type: 'media.pause' }
+  | { type: 'media.seekRelative'; seconds: number }
+  | { type: 'media.volumeDelta'; delta: number } // -1 to 1, in steps of 0.1 on the pad
+  | { type: 'media.brightnessDelta'; delta: number }
+  | { type: 'ambient.set'; scene: AmbientScene }
+  | { type: 'navigation.move'; direction: 'next' | 'previous' }
+  | { type: 'navigation.confirm' }
+  | { type: 'navigation.back' };
+
+export interface PipInput {
+  id: string; // made by the adapter, so a resent input is not applied twice
+  source: InputSource;
+  at: number; // when the adapter saw it (ms since epoch); stale inputs are refused
+  event: PipInputEvent;
+}
+
+export type InputResult =
+  | { ok: true; action: string }
+  | {
+      ok: false;
+      reason: 'invalid' | 'not-allowed' | 'not-watching' | 'duplicate' | 'stale' | 'unsupported' | 'no-tv';
+    };
+
+/** What the server asks the TV's player to do. The TV confirms each one with tv:applied. */
+export type TvCommand = { id: string } & (
   | { type: 'play' }
   | { type: 'pause' }
   | { type: 'seek'; deltaSec: number }
-  | { type: 'start-quiz' }
-  | { type: 'next'; index: number; phase: 'question' | 'reveal' } // what the host saw, so a double tap cannot skip ahead
-  | { type: 'lobby' }
-  | { type: 'pip-style'; style: PipStyle }; // any stage
-
-/** What the server asks the TV's player to do. */
-export type TvCommand = { type: 'play' } | { type: 'pause' } | { type: 'seek'; deltaSec: number };
+  | { type: 'volume'; level: number }
+  | { type: 'brightness'; level: number }
+);
 
 export interface PipSay {
   askedBy: string; // playerId
@@ -169,7 +214,7 @@ export interface PipSay {
   source: Source;
 }
 
-/** Pip says hello on the TV when a new player joins, in the session's mood. */
+/** Pip says hello on the TV (lobby only) when a new player joins. */
 export interface PipHello {
   playerId: string;
   name: string;
@@ -204,10 +249,12 @@ export interface ClientToServerEvents {
     ack: Ack<JoinResult>,
   ) => void;
   'pad:host': (command: HostCommand) => void;
+  'pad:input': (input: PipInput, ack: Ack<InputResult>) => void;
+  'tv:applied': (result: { id: string; ok: boolean; detail?: string }) => void; // outcome of a tv:command
   'pad:ask': (payload: { text: string; via: AskVia }, ack: Ack<AskResult>) => void;
   'pad:answer': (payload: { index: number; choice: number }) => void;
-  'pad:react': (payload: { kind: ReactionKind }) => void; // watch stage only
-  'pad:predict': (payload: { id: string; choice: number }) => void; // while that prediction is open
+  'pad:react': (payload: { kind: ReactionKind }) => void; // kids mode, watch stage only
+  'pad:predict': (payload: { id: string; choice: number }) => void; // kids mode, while that prediction is open
 }
 
 /** Events the server sends to the TV and pads of one session. */
@@ -226,6 +273,8 @@ export const LIMITS = {
   askMaxChars: 200,
   askMinIntervalMs: 2000, // per player
   reactMinIntervalMs: 400, // per player
+  inputMaxAgeMs: 10_000, // an input older than this is stale and refused
+  seekStepMaxSec: 60,
   seekMaxAbsSec: 60,
   failedJoinsPerMinute: 60, // per IP address; only joins with an unknown code count
   questionSeconds: 20,

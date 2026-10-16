@@ -1,6 +1,6 @@
 import React from 'react';
 import {StyleSheet, Text, View} from 'react-native';
-import {PIP_COLORS, type QuizView, type SessionView} from '../shared/protocol';
+import type {QuizView, SessionView} from '../shared/protocol';
 import {ChoiceGrid} from '../components/ChoiceGrid';
 import {CountdownBar} from '../components/CountdownBar';
 import {Pip} from '../components/Pip';
@@ -16,7 +16,7 @@ const REVEAL_MS = 60_000; // the explanation stays for the whole reveal
  * picked). In the reveal: the right choice, everyone's picks and the explanation next to Pip.
  */
 export function QuizScreen({view, quiz}: {view: SessionView; quiz: QuizView}) {
-  const accent = PIP_COLORS[view.pipStyle.color];
+  const accent = color.accent;
   const isReveal = quiz.phase === 'reveal';
   return (
     <View style={styles.root}>
@@ -61,12 +61,7 @@ export function QuizScreen({view, quiz}: {view: SessionView; quiz: QuizView}) {
               tint={accent}
             />
           ) : null}
-          <Pip
-            state={view.pip}
-            mood={view.pipStyle.mood}
-            size={dp(96)}
-            color={accent}
-          />
+          <Pip state={view.pip} size={dp(96)} />
         </View>
       </View>
     </View>
