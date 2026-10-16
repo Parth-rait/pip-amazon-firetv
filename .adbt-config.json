@@ -1,0 +1,8 @@
+{
+  "project": {
+    "identifier": "pip-firetv"
+  },
+  "platform": {
+    "default": "vega_os"
+  }
+}

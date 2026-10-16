@@ -7,7 +7,7 @@ import { fileURLToPath } from 'node:url';
 
 const root = join(dirname(fileURLToPath(import.meta.url)), '..');
 const script = process.argv[2];
-const packages = ['server', 'pad'];
+const packages = ['server', 'pad', 'tv'];
 let failed = 0;
 
 if (!script) {
