@@ -6,63 +6,72 @@ Pip is one context-and-action loop: inputs become semantic events; the server ke
 
 ## Runtime loop
 
+As merged on 17 Oct 2026 (the cloud branch's vNext work onto `mac/film-and-tv`; protocol v5).
+
 ```mermaid
 flowchart TB
-  subgraph Inputs["Input adapters"]
-    pad["Pip Pad (web): taps, chips, typing, mic"]
-    hw["Pad button and touchwheel (simulated: ?lab=1)"]
-    remote["Fire TV remote keys (tv:input)"]
+  subgraph Inputs["Input adapters (each makes a PipInput with its own source)"]
+    pad["Pip Pad: remote buttons, Pip button, voice and short typed commands (pad/src/lib/commands.ts)"]
+    hw["Button and touchwheel (server/src/core/touch.ts; npm run sim:touch)"]
+    asked["Questions typed, spoken or tapped as chips (pad:ask)"]
   end
-  contract["Versioned contract: shared/protocol.ts v3<br/>InputEnvelope (eventId, source, input), HostCommand (commandId), pad:ask"]
+  contract["Versioned contract: shared/protocol.ts v5<br/>PipInput (id, source, at, event), TvCommand (id), tv:applied"]
   pad --> contract
   hw --> contract
-  remote --> contract
+  asked --> contract
   contract --> validate["zod validation at the boundary (validate.ts)"]
-  validate --> state["Session state + event journal (sessions.ts, core/events)"]
-  state --> router["Decision router (core/intent/route-text.ts)"]
-  router -- "play / pause / seek" --> exec["Action executor (playback-flow.ts)<br/>host check, dedupe, commandId"]
-  router -- "never mind" --> dismiss["Dismiss Pip"]
+  validate -- "pad:input" --> exec["Action executor (actions.ts)<br/>stale and repeated ids refused, media for the host only"]
+  validate -- "pad:ask" --> router["Text router (ask-commands.ts, core/intent/route-text.ts)"]
+  router -- "play / pause / seek, never mind" --> exec
   router -- "ambiguous: stop" --> choices["Explicit choices (fail closed)"]
-  router -- "question" --> boundary["Spoiler boundary (core/context/boundary.ts)<br/>only facts revealed by now, reviewed"]
-  router -. "rules unsure: optional typed judge (TypeSafe)" .-> choices
-  boundary --> retrieval["Retrieval (core/context/retrieve.ts)<br/>keywords, entities, recency"]
+  router -- "question" --> judge{"Optional typed judge (TypeSafe), only for text the rules call other"}
+  judge -. "confident command" .-> choices
+  judge -- "question" --> path{"Does the film have a timeline?"}
+  path -- "yes" --> boundary["Spoiler boundary (core/context/boundary.ts)<br/>only reviewed facts revealed by now"]
+  path -- "no (notes path)" --> notes["Notes up to now, answer memory, no-spoiler line (flow.ts)"]
+  boundary --> retrieval["Retrieval (core/context/retrieve.ts)"]
   retrieval -- "recap / who is that" --> timelineAnswer["Answer from facts"]
-  retrieval -- "other questions" --> cache["Answer cache keyed by evidence set"]
-  cache --> gateway["Model gateway (core/ai): Bedrock Nova 2 Lite, fakes"]
-  gateway --> gate["Answer gate (core/context/check-answer.ts)<br/>no later terms, permitted citations, no uncited claims"]
+  retrieval -- "other questions" --> cache["Answer cache keyed by the evidence set"]
+  cache --> gateway["Model gateway (core/ai): Bedrock Nova 2 Lite, Ollama, fakes"]
+  gateway --> gate["Answer gate (core/context/check-answer.ts)<br/>no later terms, permitted citations; re-checked after a rewind"]
   timelineAnswer --> gate
-  gate --> show["TV bubble (view.assist) + asker's pad (pip:say)"]
-  exec --> tv["TV player (tv:command)"]
-  tv -- "tv:playback report" --> outcome["Outcome check (core/actions/tracker.ts)<br/>sent, done, unconfirmed"]
-  outcome --> state
-  show --> state
+  notes --> notesModel["Model with the notes (no answer gate: notes are not evidence-linked)"]
+  gate --> show["pip:say: the asker's pad shows it; the TV shows Pip with it"]
+  notesModel --> show
+  exec --> tv["TV player (tv:command with an id)"]
+  tv -- "tv:applied, or failed after 3 s" --> outcome["Outcome (actions.ts): device.lastAction ok or failed"]
+  exec --> journal["Event journal (core/journal.ts, JSON Lines in server/data/events)"]
+  outcome --> journal
 ```
 
 ## Modules and status
 
 | Responsibility | Where | Status |
 |---|---|---|
-| Input adapters (remote keys, button gestures, wheel detents to intents) | `server/src/core/input/adapters.ts`; pad lab panel; TV simulator keys | **Built** (hardware is simulated) |
-| Event contract, versioned | `shared/protocol.ts` (`PROTOCOL_VERSION = 3`), zod in `server/src/validate.ts` | **Built** |
-| Event journal and session state | `server/src/core/events/journal.ts`, `server/src/sessions.ts` | **Built**, in memory, bounded; JSON Lines export function, no disk sink |
-| Idempotency | `server/src/core/input/dedupe.ts`; `commandId` and `eventId` | **Built** |
-| Content timeline (facts, entities, evidence, review) | `server/src/core/context/timeline.ts`, `server/src/film/timeline-file.ts` | **Built** |
-| Memory: events, content, preferences, datasets kept apart | Journal (events), timelines (content), `evals/datasets` (datasets) | **Partial**: no preference memory, on purpose (needs consent first) |
+| Input adapters | `pad/src/lib/commands.ts` (voice and typed), `server/src/core/touch.ts` (button and touchwheel readings), `npm run sim:touch` | **Built**; hardware simulated; the TV remote is not an input adapter yet |
+| Event contract, versioned | `shared/protocol.ts` (`PROTOCOL_VERSION = 5`), zod in `server/src/validate.ts` | **Built** |
+| Event journal and session state | `server/src/core/journal.ts` (JSON Lines on disk, pseudonymous ids, consent scope), `server/src/sessions.ts` | **Built** |
+| Idempotency | input `id` (`seenInputIds` in `actions.ts`), `TvCommand.id` | **Built** |
+| Content timeline (facts, entities, evidence, review) | `server/src/core/context/timeline.ts`, `server/src/film/timeline-file.ts` | **Built**; only the lab film has a timeline so far |
+| Memory: events, content, answers, datasets kept apart | Journal (events), timelines (content), answer memory (notes path) and the evidence-keyed answer cache (timeline path), `evals/datasets` | **Partial**: no preference memory, on purpose (needs consent first) |
 | Retrieval, time-bounded | `server/src/core/context/retrieve.ts` | **Built**, keyword and entity; no embeddings (not needed by the benchmark yet) |
-| Decision router | `server/src/core/intent/route-text.ts`, `server/src/assist-flow.ts` | **Built** |
-| Typed semantic judgement | `server/src/core/intent/judge.ts`, `server/src/typesafe-judge.ts` | **Partial**: adapter and policy built; not run against the live API |
-| Model gateway | `server/src/core/ai/` (`TextModel`, Bedrock, fake, timeouts, never throws) | **Built**; local model adapter (Ollama) **planned** only if needed |
-| Action executor with outcome check | `server/src/playback-flow.ts`, `server/src/core/actions/tracker.ts` | **Built** |
-| Answer and action validation | `server/src/core/context/check-answer.ts`, `server/src/answer.ts` | **Built** |
-| Outcome and feedback records | Journal events (`action.done`, `action.unconfirmed`, `ask.reply`) | **Partial**: no explicit "that was wrong" feedback from people yet |
-| Video data pipeline | `server/scripts/pipeline.ts`, `server/src/pipeline/` | **Built**; Big Buck Bunny run **blocked here** (media host blocked) |
-| Evaluation | `server/scripts/eval.ts`, `server/src/eval/`, `server/evals/` | **Built** |
-| Virtual Pip Lab | `server/src/lab/` (real-socket scenarios), `pad/tv.html` (TV simulator), `scripts/e2e-browser.mjs` | **Built** |
+| Decision router | `server/src/core/intent/route-text.ts`, `server/src/ask-commands.ts`, `server/src/flow.ts` | **Built** |
+| Typed semantic judgement | `server/src/core/intent/judge.ts`, `server/src/typesafe-judge.ts` | **Partial**: adapter and policy built; not run against the live API (paid) |
+| Model gateway | `server/src/core/ai/` (`TextModel`: Bedrock, Ollama, fake; timeouts; never throws) | **Built**; Nova not run yet (AWS pending) |
+| Action executor with outcome check | `server/src/actions.ts` (the TV confirms each command with `tv:applied`) | **Built**; 73 to 120 ms on the VVD |
+| Answer validation | `server/src/core/context/check-answer.ts`, `server/src/answer.ts` | **Built** for films with a timeline; the notes path has the no-spoiler line only |
+| Outcome and feedback records | Journal events (`action.requested`, `action.confirmed`, `action.failed`, `input.refused`) | **Partial**: no explicit "that was wrong" feedback from people yet |
+| Video data pipeline | `server/scripts/pipeline.ts`, `server/src/pipeline/`; `server/scripts/annotate.ts` (local VLM candidates through Ollama) | **Built**; lab film run; Big Buck Bunny and Sintel not run yet (Mac) |
+| Evaluation | `server/scripts/eval.ts`, `server/src/eval/`, `server/evals/` | **Built**; measured with the local model (`--ollama`); `--nova` pending |
+| Virtual Pip Lab | `server/src/lab/` (20 real-socket scenarios with faults), `scripts/fake-tv.ts`, `smoke:join`, `sim:touch` | **Built**; the cloud's browser TV simulator was not merged (the Vega app is the TV) |
+| TV app | `tv/` (React Native for Vega) | **Built**; checked on the Vega Virtual Device |
 | Recommendations | none | **Planned** (section below) |
 
 Process shape stays one Node process with in-memory sessions, as PROJECT.md decided for v1. Nothing here needs a second service.
 
 ## The spoiler boundary, exactly
+
+This applies to films with a timeline (today the lab film). Films without one (Big Buck Bunny and Sintel) use the notes path: notes up to the position, the prompt's rules and the fixed no-spoiler line for questions about the future, but no answer gate, because their notes are not evidence-linked. Building their timelines with the pipeline is the next step.
 
 1. `boundarySec` is the playback position estimated from the TV's latest report (`film/playback.ts`). It moves back on a rewind.
 2. A fact is permitted when `revealSec <= boundarySec` and its review state is usable (`accepted` by default; `TIMELINE_REVIEW=candidate` for development only).

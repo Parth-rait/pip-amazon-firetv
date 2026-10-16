@@ -70,6 +70,9 @@ components:
 
 # Design System: Pip
 
+> **Merge note (17 Oct 2026).** This file was written by the cloud session from its own pad and browser TV simulator, which were not merged. The principles, colours, type scale, spacing and motion still apply. The component descriptions (reply card with Done, lab panel, TV simulator bubble) describe that UI, not the merged pad (Pip button and sheet, remote, voice button) or the Vega TV app. Reconciling them with Impeccable on the merged UI is open (docs/vnext/REPORT-cloud-merge.md).
+
+
 Documented from the existing code (`pad/src/styles/tokens.css`, `app.css`, `pip.css`, `pad/src/tv/tv.css`) in Impeccable's DESIGN.md format, then refined by the vNext review. The tokens match PROJECT.md section 3.2; the TV uses the same tokens at the TV type scale. The creative north star below is the agent's proposal for Parth to confirm.
 
 ## Overview

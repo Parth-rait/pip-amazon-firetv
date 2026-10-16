@@ -1,5 +1,7 @@
 # Current state (verified)
 
+> **Read section 7 first.** Sections 1 to 6 are the cloud session's record of branch `claude/pip-vnext-core`, which started from `8e7b472` (Step 6 code, no TV app) and was merged onto `mac/film-and-tv` on 17 Oct 2026. They stay as history; section 7 is the merged state.
+
 This file records what the repository actually contains and does, checked by running it. Plans live in [PROJECT.md](../../PROJECT.md) and [target-architecture.md](target-architecture.md); this file only records facts. Update it when the facts change.
 
 ## 1. Baseline audit (October 16, 2026, before the vNext work)
@@ -108,3 +110,35 @@ Verified in this cloud session (Node 22.22.0, Ubuntu, Chromium from Playwright 1
 **Gap matrix status** (section 5): every row has a change and a test, except the parts that need the Mac or credentials: the Vega TV screens, a reviewed Big Buck Bunny timeline, real-model numbers and a live TypeSafe comparison. Those are listed in PROJECT.md section 0.4 as next steps.
 
 **Defects found and fixed during the work:** the baseline test bug (section 1); the pad's first rejoin retry waited 10 s, so after a server restart a pad that returned before the TV stalled (now 1, 2 and 5 s first); "what happens next" was routed as a recap; "who owns X" was treated as identify; the AI-off keyword match accepted a name alone; on the TV the credit line ran under Pip's bubble; the disabled Ask button had no visible shape; the Ask field truncated on narrow phones.
+
+## 7. After the merge onto the Mac branch (October 17, 2026, branch `merge/cloud-vnext`)
+
+The cloud branch and `mac/film-and-tv` grew the same vNext ideas separately for a day. The merge keeps the Mac branch as the base and brings the cloud's work on top; the full record is [docs/vnext/REPORT-cloud-merge.md](../vnext/REPORT-cloud-merge.md).
+
+| Item | Value |
+|---|---|
+| Packages | `server/`, `pad/` and `tv/` (the Vega app, checked on the Vega Virtual Device) |
+| Contract | `shared/protocol.ts` v5: `PipInput` over `pad:input`, `TvCommand` with `id` confirmed by `tv:applied`, `pad:ask`, `SessionView.assistant` and `device`; `Source` gained `'timeline'` (additive) |
+| Kept from the Mac branch | protocol v5, `actions.ts`, `core/journal.ts`, `core/touch.ts` and `sim:touch`, the TV app, the pad's watch screen and Pip sheet, kids mode, answer memory, the local model |
+| Ported from the cloud branch | grounded Ask Pip (`answer.ts`, `core/context/`), the text router (`core/intent/route-text.ts`, `ask-commands.ts`), the optional TypeSafe judge, the timeline loader, the video data pipeline and lab film, the dataset and golden probes, the benchmark, the Virtual Pip Lab (rewritten for v5), and these docs |
+| Not merged | the cloud's command tracker, input envelope adapters and in-memory journal (the Mac versions cover them); the browser TV simulator, its Ask and lab panels and the browser end-to-end script (the Vega app is the TV) |
+
+Checks on the merged branch (Mac, Node 22):
+
+| Command | Result |
+|---|---|
+| `npm run check:shared` | pass |
+| `npm run typecheck` | pass (server, pad, tv) |
+| `npm run lint` | pass: 0 errors; 4 warnings, all Vega "system distributed library" notices |
+| `npm test` | server 296 tests (41 files) including 20 Virtual Pip Lab scenarios, pad 29, tv 10 |
+| `npm run lab` | 20 of 20, five runs in a row |
+| `npm run eval -- --ollama` | 0 spoiler leaks in 68 probe runs for every strategy, including the local model (`docs/evaluation/README.md`) |
+| Live server with `LAB_CONTENT=true`, AI off, real sockets | "What just happened?" at 50 s answered from 2 facts in 37 ms; "What happens at the end?" got the no-spoiler line; typed "pause" paused the TV, with the reply on the asker's pad only |
+
+**Behaviour now:**
+
+- A film with a timeline answers through the spoiler boundary, retrieval, the model only when needed and the answer gate. Only the lab film has one (`LAB_CONTENT=true`); Big Buck Bunny and Sintel still answer from their notes, now with the fixed no-spoiler line for questions about the future.
+- Text sent to Ask Pip that is a command ("pause", "back 30 seconds", "never mind", "stop") runs through the action executor without a model; the pad also sends short typed commands as inputs directly.
+- Everything else is as in docs/vnext/REPORT-phase-1-2.md: quiet viewing, Pip on demand, TV-confirmed commands, the journal, the touch adapter.
+
+**Not verified on this branch:** Nova (AWS not set up); the TypeSafe API (paid, no key); a timeline for Big Buck Bunny or Sintel; the merged server against the TV app on the Vega Virtual Device (the TV-facing protocol did not change, but it has not been re-run).

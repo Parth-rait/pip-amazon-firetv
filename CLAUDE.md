@@ -1,4 +1,4 @@
-Read docs/vnext/PLAN.md before any task: since 16 Oct 2026 it is the source of truth for direction (Pip as a quiet, context-and-action assistant; the build order in its section 13). PROJECT.md stays the reference for the infrastructure that is kept (pairing, playback, the socket protocol, coding standards). Where they differ, docs/vnext/PLAN.md wins. docs/vnext/AUDIT.md is the Phase 0 baseline; rollback tag `pre-vnext`.
+Read docs/vnext/PLAN.md before any task: since 16 Oct 2026 it is the source of truth for direction (Pip as a quiet, context-and-action assistant; the build order in its section 13). PROJECT.md stays the reference for the infrastructure that is kept (pairing, playback, the socket protocol, coding standards). Where they differ, docs/vnext/PLAN.md wins. docs/vnext/AUDIT.md is the Phase 0 baseline; rollback tag `pre-vnext`. PROJECT_enh.md (16 Oct evening) is Parth's master build brief on top of the plan; where the two differ, PROJECT_enh.md wins. What exists now: docs/architecture/current-state.md section 7 and docs/vnext/REPORT-cloud-merge.md; decisions in docs/decisions/; product and design in PRODUCT.md and DESIGN.md.
 
 # Pip for Fire TV: agent notes
 
@@ -18,6 +18,7 @@ Hackathon project (Amazon Developer Hackathon, Fire TV track). Deadline: Fri Oct
 | `server/.env` | Local config (gitignored), copied from `server/.env.example` | Done |
 | `pad/` | React + Vite web app (the Pip Pad) | Steps 5, 7, 9 and 10 done: join, lobby, host controls, status pill, Pip and its motion, debug overlay, Ask Pip, quiz, results, fullscreen, wake lock |
 | `tv/` | Vega OS app (React Native for Vega) | Steps 3, 6 and the TV parts of 7, 9 and 10 done: lobby with QR and posters, watch with host commands and Pip's bubble, quiz and results, Pip's moods and colors. Commands in `tv/README.md` |
+| `PRODUCT.md`, `DESIGN.md`, `docs/architecture/`, `docs/decisions/`, `docs/evaluation/`, `docs/engineering/` | Product, design, architecture (current state and target), decisions, benchmark, open-source review; from the cloud session, reconciled at the merge | Done |
 | `docs/` | Friction log, product feedback, measurements, demo script; later devpost | Templates, empty measurement tables and a devpost draft done; demo script needs the scene times from the notes |
 | `.claude/skills/` | `ship-step` (definition of done and commit) and `run-pip` (start the whole stack) | Done |
 
@@ -47,7 +48,8 @@ Hackathon project (Amazon Developer Hackathon, Fire TV track). Deadline: Fri Oct
 - Companion built (contract v4): server (chapters, character facts and "What happens next?" votes cut at the family's position, reactions per scene, favourite moment, Pip reacting to reveals), content for both films (`npm run companion:images` makes the pictures), pad (tabs Pip, Story, Who's who; reaction bar with drawn faces; prediction card), TV (reactions float up, prediction panel with voters then picks, favourite moment in the results). Fixed: notes and quiz times were about 6 s early; the TV's WebSocket on Vega dropped every ~5 s once views carried the companion (~5 KB), so the TV now gets a slim view (`tvView`); the TV releases its player and socket in the background (AppState).
 - Polish built: little-Pip avatars (8 shapes, one per color) on the pad (SVG) and TV (views); Pip's face per mood (chill sleepy eyes, playful sparkles and cheeks, sassy brow) on both, through `data-pip-mood` on the pad; confetti and a star for a right answer, star rows in the results on both.
 - Oct 16, vNext (docs/vnext/PLAN.md): Phase 0 audit committed (docs/vnext/AUDIT.md, tag `pre-vnext`). Phases 1 and 2 built (contract v5): quiet viewing (Pip hidden on the TV during play, shown on invoke, pause or answer), a pad remote with volume, brightness and simulated lights, voice commands without a model, the Pip button and sheet, kids games as an opt-in, semantic inputs through `server/src/actions.ts` with TV confirmation (`tv:applied`), the event journal, and the touch adapter with `npm run sim:touch`. Evidence and open questions: docs/vnext/REPORT-phase-1-2.md.
-- Next: Phase 3 (scene records with evidence and review status, time-filtered retrieval, a spoiler test set; replace Big Buck Bunny with a short licensed film), then Phase 4 (router for questions, p50/p95 latency), Phase 6 (catalogue and explicit-mood recommendations), Phase 7 (offline annotation and evaluation). With Parth: Nova once AWS is verified, a 10-minute viewing test, README and devpost for vNext.
+- Oct 17: the cloud session's vNext work (PR 3 on main, built from Step 6 code without the Mac commits) merged onto this branch on `merge/cloud-vnext`, Mac as the base (docs/vnext/REPORT-cloud-merge.md): grounded Ask Pip for films with a timeline (spoiler boundary, retrieval, answer gate, evidence-keyed cache, re-check after a rewind), typed commands without a model, optional TypeSafe judge, the video data pipeline and lab film (`LAB_CONTENT=true`), `npm run eval` (with `--ollama`: 0 leaks), the Virtual Pip Lab (`npm run lab`, 20 scenarios on v5). Server 296 tests, pad 29, tv 10.
+- Next: run `run-pip` once on the VVD with the merged server; build reviewed timelines for Big Buck Bunny and Sintel with the pipeline (they use the notes path until then); fold `npm run annotate` into the pipeline; then Phase 4 onward. Previously listed: Phase 3 (scene records with evidence and review status, time-filtered retrieval, a spoiler test set; replace Big Buck Bunny with a short licensed film), then Phase 4 (router for questions, p50/p95 latency), Phase 6 (catalogue and explicit-mood recommendations), Phase 7 (offline annotation and evaluation). With Parth: Nova once AWS is verified, a 10-minute viewing test, README and devpost for vNext.
 
 Update this list when a step is committed.
 
@@ -61,6 +63,9 @@ npm run lint
 npm test
 npm run tunnel         # Step 3 onward
 npm run preflight      # before a rehearsal or recording; needs the tunnel and the server
+cd server && npm run lab        # Virtual Pip Lab: real-socket scenarios with faults
+cd server && npm run eval       # benchmark on the lab film; --ollama adds the local model (free)
+cd server && npm run pipeline   # video data pipeline (docs/architecture/video-data-pipeline.md)
 ```
 
 ## Rules that bite
