@@ -68,6 +68,18 @@ export function parseCommand(raw: string): PipInputEvent | null {
   return null;
 }
 
+const MAX_TYPED_COMMAND_WORDS = 4;
+
+/**
+ * A command typed into the Ask box: the same rules, but only for short text ("pause", "back 30
+ * seconds", "turn it up"). A longer typed sentence that happens to say "again" or "back" is more
+ * likely a question; the server's stricter rules still catch longer commands.
+ */
+export function parseTypedCommand(raw: string): PipInputEvent | null {
+  const words = raw.trim().split(/\s+/).filter(Boolean);
+  return words.length <= MAX_TYPED_COMMAND_WORDS ? parseCommand(raw) : null;
+}
+
 /** A short line for what a command did, for the pad's status line. */
 export function describeCommand(event: PipInputEvent): string {
   switch (event.type) {

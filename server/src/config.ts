@@ -24,6 +24,9 @@ export const configSchema = z.object({
   TIMELINE_REVIEW: z.enum(['accepted', 'candidate']).default('accepted'),
   // Adds the lab film from lab/content (The Lantern Fox, made by npm run lab:film) to the films.
   LAB_CONTENT: booleanFlag.default(false),
+  // 'typesafe' adds a typed judgement for text the rules cannot route; needs TYPESAFE_API_KEY and
+  // @typesafe-ai/sdk (paid API, not installed). It can only offer choices, never act.
+  INTENT_JUDGE: z.enum(['rules', 'typesafe']).default('rules'),
 });
 
 export type Config = Readonly<z.infer<typeof configSchema>>;

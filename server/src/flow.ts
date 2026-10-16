@@ -5,6 +5,7 @@ import { runAsk, type AskOutcome } from './core/ai/ask.js';
 import type { AnswerMemory } from './core/ai/answer-memory.js';
 import type { AnswerCache } from './core/context/answer-cache.js';
 import type { ReviewPolicy, Timeline } from './core/context/timeline.js';
+import { shouldOfferCommandChoices, type IntentJudge } from './core/intent/judge.js';
 import { routeText, type QuestionTopic } from './core/intent/route-text.js';
 import type { Journal } from './core/journal.js';
 import type { TextModel } from './core/ai/model.js';
@@ -49,6 +50,7 @@ export interface FlowDeps {
   answerCache?: AnswerCache; // grounded answers, keyed by the exact permitted evidence
   timelinePolicy?: ReviewPolicy; // TIMELINE_REVIEW: accepted facts only, or drafts too
   modelId?: string; // part of the answer-cache key
+  judge?: IntentJudge; // INTENT_JUDGE=typesafe; it can only offer command choices
   logText: boolean; // LOG_TEXT: question text in logs, development only
   log: typeof Log;
 }
@@ -57,6 +59,9 @@ const TALKING_MS = 8000;
 const CHEER_MS = 1500;
 const REVEAL_TALK_MS = 4000;
 const MAX_HISTORY = 3;
+const JUDGE_THRESHOLD = 0.8;
+// Each choice is routed by the rules when tapped (ask-commands.ts), so the judge never acts itself.
+const COMMAND_CHOICES = ['Pause the film', 'Play the film', 'Go back 10 seconds'];
 const NO_CACHE: AnswerCache = { get: () => undefined, set: () => undefined, size: () => 0 };
 
 export function roomOf(code: string): string {
@@ -202,10 +207,13 @@ async function answer(
   const timeline = deps.timelines?.get(contentId);
   let reply: Reply;
   try {
+    // Only text the rules could not place waits for the judge; everything else goes straight on.
+    const judge = deps.judge && topic === 'other' && via !== 'clarify' ? deps.judge : null;
     reply =
-      timeline && timeline.facts.length > 0
+      (judge ? await commandChoices(text, judge) : null) ??
+      (timeline && timeline.facts.length > 0
         ? await groundedReply(session, film, timeline, positionSec, text, via, topic, deps)
-        : await notesReply(session, film, positionSec, text, via, topic, deps);
+        : await notesReply(session, film, positionSec, text, via, topic, deps));
   } finally {
     session.asking = false;
   }
@@ -248,6 +256,24 @@ interface Reply {
   source: Source;
   isAnswer: boolean; // goes into the history the next prompt sees
   log: Record<string, string | number | null>;
+}
+
+/**
+ * Text the rules could not place may still be a command ("hold it a sec"). With a typed judge
+ * configured, a confident command-like judgement only offers explicit choices; a pick from
+ * "Did you mean" never asks the judge again.
+ */
+async function commandChoices(text: string, judge: IntentJudge): Promise<Reply | null> {
+  const judgement = await judge.judge(text);
+  if (!shouldOfferCommandChoices(judgement, JUDGE_THRESHOLD)) return null;
+  return {
+    text: LINES.wantACommand,
+    next: [],
+    clarify: COMMAND_CHOICES,
+    source: 'template',
+    isAnswer: false,
+    log: { kind: 'clarify', path: 'judge', judge: judge.name },
+  };
 }
 
 /**

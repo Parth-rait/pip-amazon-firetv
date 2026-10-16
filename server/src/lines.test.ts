@@ -1,6 +1,7 @@
 import { describe, expect, it } from 'vitest';
 import { greeting, LINES } from './lines.js';
 import { askSystemPrompt } from './film/prompts.js';
+import { LIMITS } from './shared/protocol.js';
 
 describe("Pip's one voice (docs/vnext/PLAN.md 3.1)", () => {
   it('greets by name, with lines that vary', () => {
@@ -9,7 +10,13 @@ describe("Pip's one voice (docs/vnext/PLAN.md 3.1)", () => {
   });
 
   it('keeps every fixed line short and without emoji', () => {
-    for (const line of Object.values(LINES)) {
+    const texts = [
+      ...Object.values(LINES).flatMap((line) => (typeof line === 'string' ? [line] : [])),
+      LINES.seekBack(LIMITS.seekStepMaxSec),
+      LINES.seekForward(LIMITS.seekStepMaxSec),
+      LINES.onlyHost('W'.repeat(LIMITS.nameMaxChars)),
+    ];
+    for (const line of texts) {
       expect(line.length).toBeGreaterThan(0);
       expect(line.length).toBeLessThanOrEqual(80);
       expect(line).not.toMatch(/\p{Extended_Pictographic}/u);

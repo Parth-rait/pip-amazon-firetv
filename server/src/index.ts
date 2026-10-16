@@ -12,6 +12,7 @@ import { createBedrockModel, createFakeModel, createOllamaModel } from './core/a
 import { createTimers } from './core/timers.js';
 import { loadFilms } from './film/content.js';
 import { loadTimeline } from './film/timeline-file.js';
+import { loadTypeSafeJudge } from './typesafe-judge.js';
 import { log } from './log.js';
 import { registerRealtime } from './realtime.js';
 import { InMemorySessionStore } from './sessions.js';
@@ -22,6 +23,7 @@ const LAB_CONTENT_DIR = fileURLToPath(new URL('../lab/content', import.meta.url)
 const MEMORY_FILE = fileURLToPath(new URL('../data/answer-memory.json', import.meta.url));
 const JOURNAL_DIR = fileURLToPath(new URL('../data/events', import.meta.url));
 const WARM_UP_MS = 120_000;
+const JUDGE_TIMEOUT_MS = 1500;
 
 const config = loadConfig();
 // Each film may have content/timelines/<id>.json: reviewed facts with evidence (vNext). Films
@@ -79,6 +81,13 @@ if (config.AI_ENABLED && config.AI_PROVIDER === 'ollama') {
     );
 }
 
+const judge = config.INTENT_JUDGE === 'typesafe' ? await loadTypeSafeJudge(JUDGE_TIMEOUT_MS) : null;
+if (config.INTENT_JUDGE === 'typesafe' && !judge) {
+  log.warn('judge.unavailable', {
+    note: 'INTENT_JUDGE=typesafe needs TYPESAFE_API_KEY and @typesafe-ai/sdk; using rules only',
+  });
+}
+
 const app = createApp(config, films, { hasSession: (code) => store.get(code) !== undefined });
 const httpServer = createServer(app);
 const io = new Server<ClientToServerEvents, ServerToClientEvents>(httpServer);
@@ -93,6 +102,7 @@ registerRealtime({
   memory,
   journal,
   timelines,
+  judge: judge ?? undefined,
   log,
   now: Date.now,
 });

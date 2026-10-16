@@ -18,6 +18,7 @@ describe('parseConfig', () => {
       LOG_TEXT: false,
       TIMELINE_REVIEW: 'accepted',
       LAB_CONTENT: false,
+      INTENT_JUDGE: 'rules',
     });
   });
 

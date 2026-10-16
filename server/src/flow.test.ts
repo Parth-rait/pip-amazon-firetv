@@ -287,3 +287,38 @@ describe('askPip on the timeline path', () => {
     );
   });
 });
+
+describe('askPip with a typed judge (INTENT_JUDGE=typesafe)', () => {
+  const commandLike = {
+    name: 'test-judge',
+    judge: vi.fn(async () => ({ label: 'playback-command' as const, confidence: 0.9 })),
+  };
+
+  it('offers command choices for text the rules could not place, without the model', async () => {
+    const complete = vi.fn(() => 'ANSWER: Sure.');
+    const t = setup(createFakeModel(complete));
+    t.deps.judge = commandLike;
+    await askPip(t.session, t.sam, 'hold it a sec', 'typed', t.deps).done;
+    expect(t.said[0]).toMatchObject({
+      text: LINES.wantACommand,
+      clarify: ['Pause the film', 'Play the film', 'Go back 10 seconds'],
+    });
+    expect(complete).not.toHaveBeenCalled();
+  });
+
+  it('never asks the judge about a question the rules placed or a "Did you mean" pick', async () => {
+    const t = setup(createFakeModel('ANSWER: A bunny.'));
+    t.deps.judge = { name: 'test-judge', judge: vi.fn(async () => null) };
+    await askPip(t.session, t.sam, 'What just happened?', 'typed', t.deps).done;
+    t.advance(LIMITS.askMinIntervalMs);
+    await askPip(t.session, t.sam, 'hold it a sec', 'clarify', t.deps).done;
+    expect(t.deps.judge.judge).not.toHaveBeenCalled();
+  });
+
+  it('lets the answer stand when the judge is unsure or unavailable', async () => {
+    const t = setup(createFakeModel('ANSWER: A bunny.'));
+    t.deps.judge = { name: 'test-judge', judge: vi.fn(async () => null) };
+    await askPip(t.session, t.sam, 'hold it a sec', 'typed', t.deps).done;
+    expect(t.said[0]).toMatchObject({ text: 'A bunny.', source: 'ai' });
+  });
+});

@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { actionLabel, parseCommand } from './commands';
+import { actionLabel, parseCommand, parseTypedCommand } from './commands';
 
 describe('parseCommand', () => {
   it('understands play and pause in everyday words', () => {
@@ -50,5 +50,21 @@ describe('actionLabel', () => {
     expect(actionLabel('seek +30')).toBe('Forward 30 s');
     expect(actionLabel('volume 90%')).toBe('Volume 90%');
     expect(actionLabel('ambient.movie')).toBe('Movie lights');
+  });
+});
+
+describe('parseTypedCommand', () => {
+  it('treats short typed text like voice', () => {
+    expect(parseTypedCommand('pause')).toEqual({ type: 'media.pause' });
+    expect(parseTypedCommand('back 30 seconds')).toEqual({
+      type: 'media.seekRelative',
+      seconds: -30,
+    });
+    expect(parseTypedCommand('turn it up')).toEqual({ type: 'media.volumeDelta', delta: 0.1 });
+  });
+
+  it('leaves longer sentences and questions to Pip', () => {
+    expect(parseTypedCommand('tell me again what the fox found')).toBeNull();
+    expect(parseTypedCommand('why did he stop?')).toBeNull();
   });
 });

@@ -20,11 +20,13 @@ interface Props {
   chips: { kind: ChipKind; items: string[] };
   say: PipSay | null;
   onAsk: (text: string, via: AskVia) => Promise<AskResult | null>;
+  onCommandText?: (text: string) => Promise<string | null>;
   onSomethingElse: () => void;
   onClose: () => void;
 }
 
-export function PipSheet({ pip, chips, say, onAsk, onSomethingElse, onClose }: Props) {
+export function PipSheet(props: Props) {
+  const { pip, chips, say, onAsk, onCommandText, onSomethingElse, onClose } = props;
   return (
     <div className="sheet-backdrop" onClick={onClose}>
       <section
@@ -45,6 +47,7 @@ export function PipSheet({ pip, chips, say, onAsk, onSomethingElse, onClose }: P
           say={say}
           isThinking={pip === 'thinking'}
           onAsk={onAsk}
+          onCommandText={onCommandText}
           onSomethingElse={onSomethingElse}
         />
       </section>

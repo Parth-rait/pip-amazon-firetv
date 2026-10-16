@@ -19,6 +19,7 @@ import type {
   ReactionKind,
   SessionView,
 } from '../shared/protocol';
+import { describeCommand, parseTypedCommand } from '../lib/commands';
 import { hostName, type ChipKind } from '../state/store';
 
 type Refusal = Extract<InputResult, { ok: false }>['reason'];
@@ -66,6 +67,15 @@ export function WatchScreen(props: Props) {
     const result = await onInput(event, source);
     if (!result) setNotice(NO_ANSWER);
     else if (!result.ok) setNotice(REFUSALS[result.reason] ?? null);
+  };
+  // "pause" or "turn it up" typed into the Ask box is a command, not a question for Pip.
+  const runTypedCommand = async (text: string): Promise<string | null> => {
+    const command = parseTypedCommand(text);
+    if (!command) return null;
+    if (command.type === 'pip.invoke') return describeCommand(command);
+    const result = await onInput(command, 'pad_touch');
+    if (!result) return NO_ANSWER;
+    return result.ok ? describeCommand(command) : (REFUSALS[result.reason] ?? NO_ANSWER);
   };
   const openPip = (source: InputSource) => {
     setIsPipOpen(true);
@@ -154,6 +164,7 @@ export function WatchScreen(props: Props) {
           chips={props.chips}
           say={props.say}
           onAsk={props.onAsk}
+          onCommandText={runTypedCommand}
           onSomethingElse={props.onSomethingElse}
           onClose={closePip}
         />

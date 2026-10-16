@@ -5,6 +5,8 @@ import type { Config } from './config.js';
 import type { AnswerMemory } from './core/ai/answer-memory.js';
 import { createAnswerCache, type AnswerCache } from './core/context/answer-cache.js';
 import type { Timeline } from './core/context/timeline.js';
+import type { IntentJudge } from './core/intent/judge.js';
+import { askCommand } from './ask-commands.js';
 import type { Journal } from './core/journal.js';
 import type { TextModel } from './core/ai/model.js';
 import { newCode } from './core/codes.js';
@@ -47,6 +49,7 @@ export interface RealtimeDeps {
   journal?: Journal;
   timelines?: Map<string, Timeline>; // films with an evidence timeline (film/timeline-file.ts)
   answerCache?: AnswerCache;
+  judge?: IntentJudge; // INTENT_JUDGE=typesafe: a typed judgement for text the rules cannot place
   log: typeof Log;
   now: () => number;
 }
@@ -262,7 +265,10 @@ export function registerRealtime(deps: RealtimeDeps): () => void {
         invalid('pad:ask');
         return ack({ ok: false, reason: 'invalid' });
       }
-      const { result, done } = askPip(session, player, parsed.data.text, parsed.data.via, flow);
+      // A command ("pause", "never mind") runs without a model; anything else is a question.
+      const { result, done } =
+        askCommand(session, player, parsed.data.text, flow) ??
+        askPip(session, player, parsed.data.text, parsed.data.via, flow);
       ack(result);
       if (!result.ok) ignored('pad:ask', result.reason);
       done.catch((error: unknown) => {

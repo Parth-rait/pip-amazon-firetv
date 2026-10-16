@@ -24,10 +24,13 @@ interface Props {
   say: PipSay | null;
   isThinking: boolean;
   onAsk: (text: string, via: AskVia) => Promise<AskResult | null>;
+  // Runs typed text as a command when it is one and says what happened; null for a question.
+  onCommandText?: (text: string) => Promise<string | null>;
   onSomethingElse: () => void;
 }
 
-export function AskPip({ pip, chips, say, isThinking, onAsk, onSomethingElse }: Props) {
+export function AskPip(props: Props) {
+  const { pip, chips, say, isThinking, onAsk, onCommandText, onSomethingElse } = props;
   const [message, setMessage] = useState<string | null>(null);
   const [isSending, setIsSending] = useState(false);
   // The question I sent, and the answer showing then: it is pending until a new answer comes.
@@ -39,6 +42,12 @@ export function AskPip({ pip, chips, say, isThinking, onAsk, onSomethingElse }: 
   const ask = async (text: string, via: AskVia) => {
     setMessage(null);
     setIsSending(true);
+    const done = via === 'typed' && onCommandText ? await onCommandText(text) : null;
+    if (done !== null) {
+      setIsSending(false);
+      setMessage(done);
+      return;
+    }
     const result = await onAsk(text, via);
     setIsSending(false);
     if (!result) setMessage(NO_ANSWER);
