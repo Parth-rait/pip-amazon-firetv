@@ -9,13 +9,15 @@ Hackathon project (Amazon Developer Hackathon, Fire TV track). Deadline: Fri Oct
 | Path | What | Status |
 |---|---|---|
 | `PROJECT.md` | Plan, architecture, contracts, standards, step-by-step build prompts (section 13) | Done |
-| `shared/protocol.ts` | The only definition of socket events and payloads | Done (verbatim from PROJECT.md 7.1) |
+| `shared/protocol.ts` | The only definition of socket events and payloads | Done; v3 since vNext (PROJECT.md 7.1 keeps the v2 listing as history) |
 | `scripts/sync-shared.mjs` | Copies the contract into `server/src/shared`, `pad/src/shared`, `tv/src/shared` | Done |
 | `scripts/run-all.mjs` | Runs `typecheck`, `lint` or `test` in each package that has a `package.json` | Done |
 | `scripts/tunnel.mjs` | Cloudflare quick tunnel; writes `PUBLIC_URL` and `SERVER_URL` | Done (used from Step 3) |
-| `server/` | Node 22 + Express 5 + Socket.IO 4.8 + Bedrock. `src/core/` = Pip Core, `src/film/` = film night | Steps 2 and 4 done: config, films, /health, /api/films, /qr, /media, model wrapper, sessions, players, host, realtime handlers, fake:tv, smoke:join |
+| `server/` | Node 22 + Express 5 + Socket.IO 4.8 + Bedrock. `src/core/` = Pip Core, `src/film/` = film night | Steps 2 and 4 done, plus vNext: grounded Ask Pip with the spoiler gate, tracked commands, input envelope, lab, pipeline, benchmark |
 | `server/.env` | Local config (gitignored), copied from `server/.env.example` | Done |
-| `pad/` | React + Vite web app (the Pip Pad) | Step 5 done: join, lobby, host controls, status pill, Pip, debug overlay |
+| `pad/` | React + Vite web app (the Pip Pad) and `tv.html` (TV simulator) | Step 5 done, plus vNext: Ask panel, confirmed controls, lab panel, TV simulator |
+| `PRODUCT.md`, `DESIGN.md` | Product truth and design system (Impeccable formats) | Done (vNext) |
+| `docs/architecture/`, `docs/decisions/`, `docs/evaluation/`, `docs/engineering/` | Current state, target architecture, pipeline, ADRs, benchmark, tool adoption | Done (vNext) |
 | `tv/` | Vega OS app (React Native for Vega) | Not created on purpose: Step 3 runs `vega project generate ... --outputDir tv` |
 | `docs/` | Friction log, product feedback; later measurements, demo script, devpost | Templates done |
 | `.claude/skills/ship-step/` | Definition-of-done and commit routine | Done; `run-pip` comes in Step 6 |
@@ -29,7 +31,8 @@ Hackathon project (Amazon Developer Hackathon, Fire TV track). Deadline: Fri Oct
 - Step 2: server skeleton, film file, first Nova call. Code and tests done in the cloud. Open for Parth on the Mac: convert the film into `server/media/` (PROJECT.md 5.6), set `durationSec` from ffprobe, run `npm run smoke:ai`.
 - Step 4: sessions, players, the host and QR pairing. Done (smoke:join prints JOIN OK).
 - Step 5: Pip Pad join, lobby and host controls. Done (checked with two Playwright browsers and fake:tv).
-- Next: Steps 3 and 6 (TV, Mac-only via Remote Control). Step 7 server and pad parts can go first in the cloud.
+- vNext (PROJECT.md 0.4), October 16: protocol v3, grounded Ask Pip with the spoiler gate, tracked commands, input envelope, Pad Ask panel, TV simulator, Virtual Pip Lab, video pipeline, benchmark. On branch `claude/pip-vnext-core`.
+- Next: on the Mac, the Big Buck Bunny timeline (pipeline + review), then Steps 3 and 6 (Vega TV app on protocol v3, using `pad/src/tv/` as the reference), then real Nova measurements.
 
 Update this list when a step is committed.
 
@@ -50,6 +53,8 @@ npm run tunnel         # Step 3 onward
 - Edit `shared/protocol.ts`, never the generated copies; then `npm run sync:shared` and update `server/src/validate.ts` in the same commit.
 - `server/src/core/` never imports from `server/src/film/`; a test enforces it.
 - Every socket handler validates with zod and checks the ack is a function; one throw stops the server.
+- Commands (play, pause, seek) never reach a model; Pip never answers without permitted timeline evidence; the answer gate runs on every reply.
+- Run `npm run lab` and `npm run eval` in `server/` after changing Ask Pip, the router or the timeline code.
 - Logs never contain player names or question text (unless `LOG_TEXT=true`).
 - Verify Vega, AWS and package APIs with the ADBT MCP, the AWS MCP or installed types before using them; say "unverified" otherwise.
 - One step at a time, Conventional Commits, never commit `.env`, keys, the film or build output.

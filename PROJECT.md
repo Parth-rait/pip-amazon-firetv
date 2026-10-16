@@ -2,21 +2,24 @@
 
 | | |
 |---|---|
-| Version | 2.0 (October 15, 2026) |
+| Version | 3.0 (October 16, 2026): vNext direction on top of the 2.0 plan |
 | Owner | Parth (GitHub `Parth-rait`) |
 | Event | Build, Ship, Shape: Amazon Developer Hackathon, Fire TV track |
 | Deadline | Friday October 23, 2026, 12:00 PDT. Our target is to submit on Thursday October 22. |
-| Status | Ready to build. No code yet. |
+| Status | In development. Built and tested: server core (sessions, host, grounded Ask Pip, spoiler gate, tracked commands, input envelope), Pip Pad, Virtual Pip Lab with a browser TV simulator, video data pipeline and benchmark. Not started: the Vega TV app (Mac only). Blocked here: the Big Buck Bunny timeline (media host blocked) and real-model measurements (no AWS credentials). Details in section 0.4. |
 | New in 2.0 | v1 is one family journey (join, watch, ask Pip, quiz, results) instead of two separate demos. The workout plan became stretch goal S3; version 1.0 of this file is kept in the project files as `pip-pad/archive/PROJECT-workout-version.md`. Google's public sample film links stopped working, so we serve our own copy of the film. The build now proves the riskiest parts first, in five gates. |
-| Supersedes | The "Pip for Fire TV: System Design" doc, for v1. That doc keeps the long-term (v2) architecture. |
+| New in 3.0 | Pip is a context-and-action system. The default watch path is quiet (Pip hidden on the TV until asked); the quiz is an opt-in mode. Answers come from a reviewed, evidence-linked timeline with a spoiler boundary enforced in code. Commands carry ids and count as done only when the TV confirms them. All devices send one input envelope. Read section 0.4 first. |
+| Supersedes | The "Pip for Fire TV: System Design" doc, for v1. That doc keeps the long-term (v2) architecture. Sections of this file marked **vNext** override the 2.0 text beneath them; the 2.0 text stays as history. |
 
-This file is the single source of truth for building v1. It tells a person or an AI coding agent what we are building, how it is put together, the rules for writing the code, and the exact order of work, with a ready-to-paste prompt for every step.
+This file is the single source of truth for building v1, updated for vNext in version 3.0. It tells a person or an AI coding agent what we are building, how it is put together, the rules for writing the code, and the exact order of work, with a ready-to-paste prompt for every step.
 
 ---
 
 ## 0. How to use this file
 
 ### 0.1 Order of truth
+
+> **vNext:** for product direction, the vNext brief summarised in section 0.4 comes first, then this file. For what exists, the code and its tests are the truth ([docs/architecture/current-state.md](docs/architecture/current-state.md) records it). `shared/protocol.ts` (v3) is the contract; the v2 listing in section 7.1 is history.
 
 1. This file.
 2. `shared/protocol.ts` (the contract between the three apps; section 7 explains it).
@@ -63,6 +66,38 @@ Rules for this session:
 | Server | One Node.js process that connects the pads, the TV and Amazon Bedrock (`server/`). |
 | VVD | Vega Virtual Device, the Fire TV simulator that ships with the Vega SDK. |
 | ADBT | Amazon Devices Builder Tools: Amazon's MCP server, Agent Skills and steering docs for AI coding agents. |
+
+### 0.4 vNext: read this first (October 16, 2026)
+
+**What changed.** Pip is a context-and-action system for everyday environments: it understands the current moment, answers from what has already been established, acts only through permitted devices, verifies the result and improves offline from reviewed evidence. Fire TV with the Pip Pad is the first environment. The rules:
+
+- The film comes first. During playback the TV shows only the film. Pip appears when someone asks, shows a short reply for 8 s (or until Done, Hide or the remote's Back) and goes away. No unrequested quizzes, prompts, cards or reactions in the default path. The quiz is an opt-in mode (`QUIZ_ENABLED`, default off).
+- Grounded or silent. Answers come from a timeline of reviewed facts with evidence frames and reveal times. The spoiler boundary is enforced in code before and after the model; questions about the future get a fixed no-spoiler line.
+- Done means observed. Playback commands carry ids, repeats are ignored, and a command is done only when the TV's report shows it.
+- One input path. Pad buttons, a touchwheel and remote keys send the same envelope; deterministic controls never reach a model.
+- No accounts, no persistent personal memory, nothing inferred about people.
+
+**Where things are now.**
+
+| Area | Status | Where |
+|---|---|---|
+| Sessions, pairing, players, host hand-over, QR, media | Built (2.0 Steps 2 and 4) | `server/src/core/`, `server/src/realtime.ts` |
+| Protocol v3 (assist, lastAction, input envelope, commandId) | Built | `shared/protocol.ts` |
+| Ask Pip: router, timeline retrieval, spoiler gate, answer cache, Nova call, fallbacks | Built and tested; real Nova not measured (no credentials here) | `server/src/answer.ts`, `server/src/core/context/`, `server/src/core/intent/` |
+| Tracked commands and outcome confirmation | Built | `server/src/playback-flow.ts`, `server/src/core/actions/` |
+| Pip Pad: join, lobby, host controls with confirmation, Ask panel, mic, Done, lab hardware panel | Built | `pad/` |
+| TV simulator in the browser (stand-in for the Vega app) | Built | `pad/tv.html`, `pad/src/tv/` |
+| Vega TV app | Not started; must be generated on the Mac (Step 3, Step 6) | `tv/` (missing on purpose) |
+| Virtual Pip Lab: 19 real-socket scenarios, browser end-to-end run | Built | `server/src/lab/`, `scripts/e2e-browser.mjs` |
+| Video data pipeline, lab film, dataset factory, benchmark | Built; lab film fully run | `server/scripts/pipeline.ts`, `server/src/pipeline/`, `server/scripts/eval.ts` |
+| Big Buck Bunny timeline | Blocked here (media host blocked); run the pipeline on the Mac | [docs/architecture/video-data-pipeline.md](docs/architecture/video-data-pipeline.md) |
+| Typed intent judge (TypeSafe) | Adapter and safe policy built; not run against the live API | `server/src/typesafe-judge.ts` |
+| Quiz and results | Opt-in mode; not implemented (Steps 8 and 9 optional) | `server/src/film/quiz.ts` (type only) |
+| Recommendations | Planned, not built | [docs/architecture/target-architecture.md](docs/architecture/target-architecture.md) |
+
+**Read next:** [PRODUCT.md](PRODUCT.md), [DESIGN.md](DESIGN.md), [docs/architecture/target-architecture.md](docs/architecture/target-architecture.md), [docs/decisions/](docs/decisions/), [docs/evaluation/README.md](docs/evaluation/README.md), [docs/engineering/open-source-adoption.md](docs/engineering/open-source-adoption.md).
+
+**Next steps, in order:** (1) on the Mac, put the film in `server/media/`, run the pipeline and review the Big Buck Bunny timeline; (2) generate the Vega app (Step 3) and build its lobby and watch screens on protocol v3 (Step 6, with the TV simulator as the reference); (3) run `npm run eval -- big-buck-bunny --nova` and `npm run smoke:ai` with the AWS profile; (4) the usability test (section 14.4).
 
 ---
 
@@ -111,6 +146,8 @@ These seven rules define the product line. Section 3 turns them into design rule
 
 ### 1.6 The journey (one demo)
 
+> **vNext:** steps 1 to 3 are the default journey, with Pip hidden on the TV until asked and every reply dismissible. Steps 4 and 5 (quiz and results) are an opt-in mode, not part of the default path.
+
 1. **Scan and join.** The TV shows Pip, a QR code and a 4-character code. Each person scans it and types a first name. The names appear on the TV and Pip wakes up. The first person to join is the host; in the demo that is the Pip Pad.
 2. **Watch.** The host picks the film. It plays on the TV, and the host's pad shows big Play, Pause and skip buttons.
 3. **Ask Pip.** Anyone can type, tap a suggested question or speak. Pip answers on the TV within seconds (the target is under three), with the asker's name. It only gets notes about the film up to the current moment, so it does not spoil what comes next. Each answer brings two or three next questions to tap, and a vague question gets "Did you mean" options instead of a guess (section 5.4).
@@ -155,6 +192,8 @@ The four criteria are weighted equally.
 ## 2. Scope for v1
 
 ### 2.1 In
+
+> **vNext:** the quiz is opt-in (`QUIZ_ENABLED`). Added to scope: timeline facts with evidence and review, tracked commands, the input envelope with simulated button and touchwheel, the Virtual Pip Lab, the video pipeline and the benchmark.
 
 - Joining: the TV shows a QR code and a 4-character code. Each person joins with a first name on their own phone or tablet; up to 8 players.
 - The host: the first player controls the film and the quiz. If the host leaves, the role passes on after 10 seconds.
@@ -231,6 +270,8 @@ Type scale:
 
 ### 3.3 Screens
 
+> **vNext:** TV WATCH shows only the film: no Pip, no chrome, until someone asks; then the bubble ("<name> asked: ...") with Pip for 8 s or until dismissed; the credit line never sits under it. Pad WATCH: title, host row with a status line ("Pausing…", then "Paused" only when the TV confirms), "Pip is answering <name> on the TV · Hide" when relevant, the Ask Pip panel, and "Back to films" at the bottom. No quiz button. The current design is in [DESIGN.md](DESIGN.md).
+
 TV app, four screens:
 
 ```text
@@ -303,6 +344,8 @@ QUIZ                 REVEAL (host)        RESULTS (host)
 
 ### 3.4 Pip states
 
+> **vNext:** the server still owns Pip's state, but the TV draws Pip during watch only while `view.assist` is set. Breathing and blinking are the only idle motion; no other characters or costumes.
+
 | State | When | TV visual | Pad visual |
 |---|---|---|---|
 | `sleep` | No player online | Eyes are flat lines, body at 50% opacity, slow breathing | Small sleeping Pip on the JOIN screen |
@@ -352,6 +395,8 @@ Fixed lines:
 ## 4. Architecture
 
 ### 4.1 Diagram
+
+> **vNext:** the target loop (input adapters, contract, state and journal, router, boundary, retrieval, model gateway, answer gate, executor, outcome check, offline data factory) is drawn in [docs/architecture/target-architecture.md](docs/architecture/target-architecture.md). The process shape below is unchanged: one server, Socket.IO, Bedrock.
 
 ```text
    Pip Pads (one web app on every device)          Fire TV (Vega OS app)
@@ -438,6 +483,8 @@ We choose technology that has been around for years, has huge communities and fa
 | Tests | Vitest for logic; smoke scripts over real sockets | Fast and simple | End-to-end suites |
 
 ### 4.5 Runtime flows
+
+> **vNext:** Ask Pip now runs: route the text (commands and "never mind" never reach a model; "stop" offers choices), then the spoiler boundary, retrieval and (only if needed) the model, then the answer gate; the reply goes to `view.assist` for the TV and `pip:say` for the asker's pads only. Host commands carry a `commandId` and are confirmed by the TV's report (`view.lastAction`). `pad:input`, `tv:input` and `pad:assist` are new. See [docs/decisions/](docs/decisions/).
 
 **Join**
 
@@ -670,6 +717,8 @@ The prompts below have not been run against Nova yet. Step 7 measures them (sect
 
 ### 5.3 Ask Pip
 
+> **vNext:** the prompt (`ask-v3`, `server/src/film/prompts.ts`) lists permitted facts as `[id m:ss] text` and asks for a `SOURCES:` line; replies citing anything else are withheld. Recap and "who is that" questions are answered straight from the timeline. The model is never called without evidence. The 2.0 text below remains the reference for the reply format and guidance rules.
+
 **Context** (`buildAskPrompt({ title, positionSec, premise, notes, history, question, via })` in `server/src/film/ask-prompt.ts`, a logic module with tests; it returns `{ system, user }`):
 
 1. Estimate where the film is now with `estimatePosition`: `positionSec` from the last `tv:playback`, plus the seconds since it arrived unless the film is paused, capped at `durationSec`. An ended film counts as its full length.
@@ -840,6 +889,8 @@ Copy the questions that pass, fixed where needed, into the `quiz` list of the fi
 
 ### 5.6 The film, its notes and its quiz
 
+> **vNext:** facts about the film live in `server/content/timelines/<id>.json`, built by the video pipeline ([docs/architecture/video-data-pipeline.md](docs/architecture/video-data-pipeline.md)) and reviewed by a person; `notes` and `quiz` in the film file are now optional. The placeholder Big Buck Bunny notes and quiz were removed until a reviewed timeline exists. The film conversion steps below still apply.
+
 **The film:** Big Buck Bunny (2008, about 10 minutes), an open movie by the Blender Foundation, licensed CC BY 3.0. It has no dialogue, a clear story and a gentle, funny tone, so it works for every age and makes good questions. Credit line, shown on the TV and in the README: "Big Buck Bunny, (c) copyright 2008 Blender Foundation, www.bigbuckbunny.org, CC BY 3.0".
 
 **Why we serve our own copy:** the public sample links that many tutorials use (`commondatastorage.googleapis.com/gtv-videos-bucket/...`) now answer `403 AccessDenied`. We serve the film from `server/media/` (gitignored) at `/media/big-buck-bunny.mp4`, through the same tunnel as everything else.
@@ -934,6 +985,8 @@ No agent loops, no tool calling, no web search, no vector database, no memory be
 ## 7. Contracts
 
 ### 7.1 `shared/protocol.ts`
+
+> **vNext:** the listing below is the v2 contract, kept as history. The current contract is `shared/protocol.ts` itself (`PROTOCOL_VERSION = 3`): it adds `ReplyKind`, `AssistView`, `ActionView`, `FeaturesView`, `InputEnvelope`, `RawInput`, `InputResult`, the `pad:assist`, `pad:input` and `tv:input` events, `commandId` on playback commands, `kind` on `pip:say`, and new limits.
 
 This is the only place events and payloads are defined. Change it first, run `npm run sync:shared`, then update the server, pad and TV in the same commit. The copies in `server/src/shared/`, `pad/src/shared/` and `tv/src/shared/` are generated; never edit them.
 
@@ -1235,6 +1288,8 @@ The TV app keeps the scripts its Vega template generates; check it with its own 
 ---
 
 ## 8. Repository layout
+
+> **vNext additions:** `PRODUCT.md`, `DESIGN.md`, `docs/architecture/`, `docs/decisions/`, `docs/evaluation/`, `docs/engineering/`, `docs/screenshots/`, `scripts/e2e-browser.mjs`; in `server/`: `src/answer.ts`, `src/assist-flow.ts`, `src/playback-flow.ts`, `src/server.ts`, `src/typesafe-judge.ts`, `src/core/{context,intent,actions,input,events}/`, `src/film/timeline-file.ts`, `src/lab/`, `src/pipeline/`, `src/eval/`, `scripts/{pipeline,eval,make-lab-film}.ts`, `pipeline/{annotations,reviews,truth}/`, `lab/content/`, `evals/`; in `pad/`: `tv.html`, `src/tv/`, `src/components/{AskPanel,LabPanel}.tsx`.
 
 ```text
 pip-firetv/
@@ -1963,6 +2018,8 @@ Commit: `feat(tv): add lobby with qr pairing and pip, and host-controlled playba
 
 #### Step 7: Ask Pip with guidance
 
+> **vNext status:** server and pad parts done, in the vNext form (timeline facts instead of notes, the answer gate, `SOURCES`, retrieval answers, the cache). Still open for Parth on the Mac: the Big Buck Bunny timeline, `npm run smoke:ai`, `npm run eval -- big-buck-bunny --nova`, and the TV bubble in the Vega app.
+
 Goal: anyone asks about the film and Pip answers on the TV within 3 seconds, without spoilers, with next questions to tap, or "Did you mean" options for a vague question.
 
 You first: watch Big Buck Bunny once and write the premise and 15 to 25 real notes into `server/content/big-buck-bunny.json` (section 5.6). Then write `server/evals/big-buck-bunny.json` with 10 spoiler probes and 5 unknown-fact probes (section 14.3).
@@ -2041,6 +2098,8 @@ Commit: `feat: add ask pip with guidance chips and spoiler-safe notes`
 
 #### Step 8: Quiz drafts
 
+> **vNext:** optional; only if the opt-in quiz mode is built.
+
 Goal: Nova drafts a five-question quiz from the notes, and Parth checks every question before it reaches the film file.
 
 Prompt:
@@ -2070,6 +2129,8 @@ Done when: the script writes a draft and prints the review list; the film file h
 Commit: `feat(server): add nova quiz drafts for review`
 
 #### Step 9: Quiz and results
+
+> **vNext:** optional and behind `QUIZ_ENABLED`; the default watch path must not change.
 
 Goal: the family plays the quiz on their own screens and sees the results together.
 
@@ -2227,6 +2288,8 @@ Each has a short prompt. Run it after the session start prompt, and keep the def
 ## 14. Testing and measurement
 
 ### 14.1 Automated
+
+> **vNext:** also `npm run lab` (19 real-socket scenarios with fault injection), `npm run eval` (spoiler, abstention, grounding and routing benchmark) and `node scripts/e2e-browser.mjs` (browser run of TV simulator and pads). Results: [docs/evaluation/README.md](docs/evaluation/README.md).
 
 | Package | Tested modules |
 |---|---|

@@ -76,4 +76,35 @@ The failure was a test bug, not an environment problem: the test created a tempo
 | Evaluation | `evals/` empty | No measurements | Golden set and runner with real local measurements | `npm run eval` output in docs/evaluation |
 | Source of truth | PROJECT.md says "no code yet" | Agents misled | Reconcile PROJECT.md; mark quiz-first parts as history | Doc review |
 
-Sections 6 and later of this file are updated as the vNext work lands.
+## 6. After the vNext work (October 16, 2026, branch `claude/pip-vnext-core`)
+
+Verified in this cloud session (Node 22.22.0, Ubuntu, Chromium from Playwright 1.56.1):
+
+| Check | Result |
+|---|---|
+| `npm run check:shared` | Pass |
+| `npm run typecheck` (server, pad) | Pass |
+| `npm run lint` (eslint, oxlint) | Pass |
+| `npm test` | Server 198 tests in 30 files pass (19 of them are Virtual Pip Lab scenarios over real sockets); pad 13 tests pass |
+| Lab stability | `npm run lab` passed 6 times in a row after the rejoin retry fix |
+| `npm run smoke:join` against a running server | `JOIN OK` |
+| `npm run eval` (lab film) | 0 spoiler leaks in 68 probe runs for every strategy; AI off: 99% correct abstentions, 87% correct answers, 100% routing |
+| `node scripts/e2e-browser.mjs` (TV simulator at 1920x1080, phones at 390 and 360 px, tablet at 820 px) | 14 of 14 checks, no console errors |
+| `npx impeccable detect` (pad and TV pages, `pad/src`) | 0 findings (page scans see the first screen only) |
+| `npm audit` (server, pad) | 0 known vulnerabilities |
+| Pipeline on the lab film | Scene detection F1 1.00 at threshold 3 (default 10: 0.25; fixed 6 s: 0.27); 51 frames with exact decoded times; 18 facts accepted after the script check; timeline valid |
+
+**Not verified here:** anything on Fire TV or the Vega Virtual Device (no Vega app yet; Mac only); real Nova calls (no AWS credentials in this environment: `smoke:ai`, `eval --nova`, the Nova annotator); the TypeSafe API (host unreachable, no key); the Big Buck Bunny pipeline run (`download.blender.org` refused by the network policy); the browser speech input (no microphone in headless Chromium); any physical button or touchwheel.
+
+**Behaviour now:**
+
+- Join, lobby and host flows as before; `pad:join`, `tv:hello` and the host hand-over are unchanged.
+- Watch is quiet: the TV shows only the film; `view.assist` is null until someone asks.
+- `pad:ask` routes text: play, pause and seek phrases run as host-only commands without a model; "never mind" dismisses; "stop" offers "Pause the film" and "Hide Pip"; questions about the future get "No spoilers from me. Keep watching and see!"; recap and "who is that" are answered from the timeline; other questions go to the model with only permitted facts and must cite them.
+- Replies show on the TV for 8 s (or until Done, Hide or the remote's Back) and only on the asker's pads.
+- Host commands, remote keys and the pad's button and wheel go through one executor; repeats of a `commandId` or `eventId` are ignored; `view.lastAction` says sent, done (the TV's report showed it) or unconfirmed (4 s without it).
+- Big Buck Bunny has no timeline, so Pip says it has no notes for that film. The lab film (`LAB_CONTENT=true`) has 18 accepted facts.
+
+**Gap matrix status** (section 5): every row has a change and a test, except the parts that need the Mac or credentials: the Vega TV screens, a reviewed Big Buck Bunny timeline, real-model numbers and a live TypeSafe comparison. Those are listed in PROJECT.md section 0.4 as next steps.
+
+**Defects found and fixed during the work:** the baseline test bug (section 1); the pad's first rejoin retry waited 10 s, so after a server restart a pad that returned before the TV stalled (now 1, 2 and 5 s first); "what happens next" was routed as a recap; "who owns X" was treated as identify; the AI-off keyword match accepted a name alone; on the TV the credit line ran under Pip's bubble; the disabled Ask button had no visible shape; the Ask field truncated on narrow phones.
