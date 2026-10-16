@@ -75,8 +75,9 @@ export const contentSchema = z
     durationSec: z.number().positive(),
     poster: mediaUrl.optional(),
     premise: z.string().min(1).max(400),
-    notes: z.array(noteSchema).min(1).max(40),
-    quiz: z.array(quizQuestionSchema).min(1).max(8),
+    // A film may have no notes or quiz when Pip answers from its timeline (the lab film).
+    notes: z.array(noteSchema).max(40),
+    quiz: z.array(quizQuestionSchema).max(8),
     chapters: z.array(chapterSchema).max(20).default([]),
     characters: z.array(characterSchema).max(12).default([]),
     predictions: z.array(predictionSchema).max(6).default([]),

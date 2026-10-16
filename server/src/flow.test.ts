@@ -1,6 +1,8 @@
 import { describe, expect, it, vi } from 'vitest';
 import { createAnswerMemory } from './core/ai/answer-memory.js';
 import { createFakeModel, type TextModel } from './core/ai/model.js';
+import { createAnswerCache } from './core/context/answer-cache.js';
+import { lanternFoxTimeline } from './core/context/fixture.js';
 import { createFakeTimers } from './core/fake-timers.js';
 import { pipTimerKey } from './core/pip.js';
 import { joinPlayer, type Player } from './core/players.js';
@@ -28,7 +30,13 @@ const film: Content = {
 
 function setup(
   model: TextModel,
-  options: { aiEnabled?: boolean; memory?: boolean; simpleFormat?: boolean } = {},
+  options: {
+    aiEnabled?: boolean;
+    memory?: boolean;
+    simpleFormat?: boolean;
+    timeline?: boolean;
+    films?: Content[];
+  } = {},
 ) {
   const said: PipSay[] = [];
   const emit = (event: string, payload: unknown) => {
@@ -40,7 +48,7 @@ function setup(
   const log = { info: vi.fn(), warn: vi.fn(), error: vi.fn() };
   const deps: FlowDeps = {
     io,
-    films: [film],
+    films: options.films ?? [film],
     publicUrl: 'http://x',
     timers,
     now: () => now,
@@ -48,6 +56,9 @@ function setup(
     aiEnabled: options.aiEnabled ?? true,
     simpleFormat: options.simpleFormat,
     memory: options.memory ? createAnswerMemory({ now: () => now }) : undefined,
+    timelines: options.timeline ? new Map([[film.id, lanternFoxTimeline()]]) : undefined,
+    answerCache: options.timeline ? createAnswerCache(50, 60_000) : undefined,
+    modelId: 'fake',
     logText: false,
     log,
   };
@@ -209,5 +220,70 @@ describe('askPip', () => {
       system: expect.stringContaining('Always reply in exactly this format') as unknown,
     });
     expect(t.said[0]).toMatchObject({ text: LINES.unparsed, clarify: [] });
+  });
+});
+
+describe('askPip on the notes path (a film without a timeline)', () => {
+  it('answers a question about what happens later with the fixed line, without the model', async () => {
+    const complete = vi.fn(() => 'ANSWER: The bunny wins in the end.');
+    const t = setup(createFakeModel(complete));
+    await askPip(t.session, t.sam, 'What happens at the end?', 'typed', t.deps).done;
+    expect(t.said[0]).toMatchObject({ text: LINES.noFuture, source: 'template' });
+    expect(complete).not.toHaveBeenCalled();
+    expect(t.session.history).toEqual([]);
+  });
+
+  it('says it has no notes, without the model, for a film with neither notes nor a timeline', async () => {
+    const complete = vi.fn(() => 'ANSWER: Something.');
+    const bare: Content = { ...film, notes: [] };
+    const t = setup(createFakeModel(complete), { films: [bare] });
+    await askPip(t.session, t.sam, 'Who is that?', 'typed', t.deps).done;
+    expect(t.said[0]).toMatchObject({ text: LINES.noTimeline, source: 'template' });
+    expect(complete).not.toHaveBeenCalled();
+  });
+});
+
+describe('askPip on the timeline path', () => {
+  function atPosition(t: ReturnType<typeof setup>, positionSec: number) {
+    t.session.playback = { ...t.session.playback!, positionSec, paused: true };
+    t.session.playbackAt = 0;
+  }
+
+  it('answers "What just happened?" from reviewed facts, without the model', async () => {
+    const complete = vi.fn(() => 'ANSWER: Moss keeps the lighthouse.\nSOURCES: f9');
+    const t = setup(createFakeModel(complete), { timeline: true });
+    atPosition(t, 50);
+    await askPip(t.session, t.sam, 'What just happened?', 'starter', t.deps).done;
+    expect(t.said[0]).toMatchObject({ source: 'timeline', askedByName: 'Sam' });
+    expect(t.said[0]?.text).not.toMatch(/Moss|lighthouse/i);
+    expect(complete).not.toHaveBeenCalled();
+    expect(t.session.history).toHaveLength(1);
+  });
+
+  it('never asks the model before any fact is revealed', async () => {
+    const complete = vi.fn(() => 'ANSWER: Ember finds a lantern.\nSOURCES: f3');
+    const t = setup(createFakeModel(complete), { timeline: true });
+    atPosition(t, 1);
+    await askPip(t.session, t.sam, 'Why is it dark?', 'typed', t.deps).done;
+    expect(t.said[0]).toMatchObject({ text: LINES.noEvidenceYet, source: 'template' });
+    expect(complete).not.toHaveBeenCalled();
+  });
+
+  it('withholds an answer when the film was rewound while the model was thinking', async () => {
+    let finish: (raw: string) => void = () => undefined;
+    const model = createFakeModel(() => new Promise<string>((resolve) => (finish = resolve)));
+    const t = setup(model, { timeline: true });
+    atPosition(t, 60);
+    const { done } = askPip(t.session, t.sam, 'What is the lantern doing?', 'typed', t.deps);
+    await Promise.resolve();
+    atPosition(t, 30); // the host rewound while Pip was thinking
+    finish('ANSWER: The lantern glows blue now.\nSOURCES: f5');
+    await done;
+    expect(t.said[0]).toMatchObject({ text: LINES.unparsed, source: 'template' });
+    expect(t.session.history).toEqual([]);
+    expect(t.log.info).toHaveBeenCalledWith(
+      'ask.done',
+      expect.objectContaining({ path: 'model', withheld: expect.any(String) }),
+    );
   });
 });

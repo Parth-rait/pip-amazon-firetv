@@ -8,6 +8,9 @@ export const LINES = {
   didYouMean: 'Did you mean one of these?',
   notYet: "The film hasn't shown that yet.",
   cantTell: "I can't tell from what we've seen so far.",
+  noTimeline: "I don't have notes for this film yet, so I can't answer that.",
+  noEvidenceYet: "I haven't seen enough of this film yet to answer that.",
+  noFuture: 'No spoilers from me. Keep watching and see!',
 } as const;
 
 export type PipLines = typeof LINES;

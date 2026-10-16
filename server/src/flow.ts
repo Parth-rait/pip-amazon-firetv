@@ -1,7 +1,11 @@
 // Stage changes and Ask Pip for film night (PROJECT.md section 4.5).
 import type { Server } from 'socket.io';
+import { answerQuestion, recheckAtPosition } from './answer.js';
 import { runAsk, type AskOutcome } from './core/ai/ask.js';
 import type { AnswerMemory } from './core/ai/answer-memory.js';
+import type { AnswerCache } from './core/context/answer-cache.js';
+import type { ReviewPolicy, Timeline } from './core/context/timeline.js';
+import { routeText, type QuestionTopic } from './core/intent/route-text.js';
 import type { Journal } from './core/journal.js';
 import type { TextModel } from './core/ai/model.js';
 import { restingPip, setPip, type CoreDeps } from './core/pip.js';
@@ -23,6 +27,7 @@ import {
   type ClientToServerEvents,
   type PipSay,
   type ServerToClientEvents,
+  type Source,
 } from './shared/protocol.js';
 import { buildView, tvView } from './view.js';
 
@@ -40,6 +45,10 @@ export interface FlowDeps {
   simpleFormat?: boolean; // a small local model: no "Did you mean"
   memory?: AnswerMemory; // good answers by film and scene (core/ai/answer-memory.ts)
   journal?: Journal; // the append-only event journal (core/journal.ts)
+  timelines?: Map<string, Timeline>; // films with an evidence timeline answer from it (answer.ts)
+  answerCache?: AnswerCache; // grounded answers, keyed by the exact permitted evidence
+  timelinePolicy?: ReviewPolicy; // TIMELINE_REVIEW: accepted facts only, or drafts too
+  modelId?: string; // part of the answer-cache key
   logText: boolean; // LOG_TEXT: question text in logs, development only
   log: typeof Log;
 }
@@ -48,6 +57,7 @@ const TALKING_MS = 8000;
 const CHEER_MS = 1500;
 const REVEAL_TALK_MS = 4000;
 const MAX_HISTORY = 3;
+const NO_CACHE: AnswerCache = { get: () => undefined, set: () => undefined, size: () => 0 };
 
 export function roomOf(code: string): string {
   return `s:${code}`;
@@ -180,14 +190,141 @@ async function answer(
     ? estimatePosition(session.playback, session.playbackAt, startedAt)
     : 0;
   const contentId = film.id;
+  const route = routeText(text);
+  const topic = route.kind === 'question' ? route.topic : 'other';
   deps.log.info('ask.start', {
     code: session.code,
     playerId: player.id,
     via,
+    topic,
     ...(deps.logText ? { question: text } : {}),
   });
+  const timeline = deps.timelines?.get(contentId);
+  let reply: Reply;
+  try {
+    reply =
+      timeline && timeline.facts.length > 0
+        ? await groundedReply(session, film, timeline, positionSec, text, via, topic, deps)
+        : await notesReply(session, film, positionSec, text, via, topic, deps);
+  } finally {
+    session.asking = false;
+  }
+  if (session.stage !== 'watch' || session.contentId !== contentId) {
+    deps.log.info('ask.dropped', { code: session.code, playerId: player.id });
+    setPip(session, restingPip(session), coreDeps(session, deps));
+    return;
+  }
+  const say: PipSay = {
+    askedBy: player.id,
+    askedByName: player.name,
+    question: text,
+    text: reply.text,
+    next: reply.next,
+    clarify: reply.clarify,
+    source: reply.source,
+  };
+  if (reply.isAnswer) {
+    session.history = [
+      ...session.history,
+      { atSec: positionSec, question: text, answer: reply.text },
+    ].slice(-MAX_HISTORY);
+  }
+  deps.log.info('ask.done', {
+    code: session.code,
+    playerId: player.id,
+    ms: deps.now() - startedAt,
+    source: say.source,
+    ...reply.log,
+  });
+  deps.io.to(roomOf(session.code)).emit('pip:say', say);
+  setPip(session, 'talking', coreDeps(session, deps), TALKING_MS);
+}
+
+/** What Pip says, plus what the log may record about how it was found (never the text). */
+interface Reply {
+  text: string;
+  next: string[];
+  clarify: string[];
+  source: Source;
+  isAnswer: boolean; // goes into the history the next prompt sees
+  log: Record<string, string | number | null>;
+}
+
+/**
+ * A film with a timeline (vNext): the spoiler boundary, retrieval, the model only when needed and
+ * the answer gate (answer.ts). If the film was rewound while Pip was thinking, the answer is
+ * checked again against the new position before anyone sees it.
+ */
+async function groundedReply(
+  session: Session,
+  film: Content,
+  timeline: Timeline,
+  positionSec: number,
+  question: string,
+  via: AskVia,
+  topic: QuestionTopic,
+  deps: FlowDeps,
+): Promise<Reply> {
+  const policy = deps.timelinePolicy ?? 'accepted';
+  const found = await answerQuestion(
+    { film, timeline, positionSec, history: session.history, question, via, topic },
+    {
+      model: deps.model,
+      modelId: deps.modelId ?? 'unknown',
+      aiEnabled: deps.aiEnabled,
+      simpleFormat: deps.simpleFormat,
+      cache: deps.answerCache ?? NO_CACHE,
+      policy,
+      now: deps.now,
+    },
+  );
+  const nowAt = positionNow(session, deps);
+  const result =
+    nowAt && nowAt.film.id === film.id
+      ? recheckAtPosition(found, timeline, nowAt.positionSec, policy)
+      : found;
+  return {
+    text: result.text,
+    next: result.next,
+    clarify: result.clarify,
+    source: result.source,
+    isAnswer: result.kind === 'answer',
+    log: {
+      kind: result.kind,
+      path: result.path,
+      sources: result.sources.length,
+      withheld: result.withheld,
+      modelMs: result.modelMs,
+      ...(result.error ? { error: result.error } : {}),
+    },
+  };
+}
+
+/**
+ * A film without a timeline: the notes up to now, answer memory and the model (Step 7). Questions
+ * about what happens later get the fixed no-spoiler line without a model call.
+ */
+async function notesReply(
+  session: Session,
+  film: Content,
+  positionSec: number,
+  text: string,
+  via: AskVia,
+  topic: QuestionTopic,
+  deps: FlowDeps,
+): Promise<Reply> {
+  const fixed = (line: string, kind: string): Reply => ({
+    text: line,
+    next: [],
+    clarify: [],
+    source: 'template',
+    isAnswer: false,
+    log: { kind, path: 'notes' },
+  });
+  if (topic === 'future') return fixed(LINES.noFuture, 'future-question');
+  if (film.notes.length === 0) return fixed(LINES.noTimeline, 'no-notes');
   const recallQuery = {
-    contentId,
+    contentId: film.id,
     sceneSec: sceneAt(film.notes, positionSec),
     question: text,
   };
@@ -195,71 +332,61 @@ async function answer(
   const repeat = deps.memory?.recallExact(recallQuery) ?? null;
   let outcome: AskOutcome;
   let fromMemory = repeat !== null;
-  try {
-    outcome = repeat
-      ? { reply: { kind: 'answer', text: repeat.answer, next: repeat.next } }
-      : deps.aiEnabled
-        ? await runAsk(
-            deps.model,
-            buildAskPrompt({
-              ...film,
-              positionSec,
-              history: session.history,
-              question: text,
-              via,
-              simpleFormat: deps.simpleFormat,
-            }),
-            text,
-            { ...ASK_SETTINGS, allowClarify: !deps.simpleFormat && via !== 'clarify' },
-          )
-        : { reply: null, error: 'offline' };
-  } finally {
-    session.asking = false;
-  }
+  outcome = repeat
+    ? { reply: { kind: 'answer', text: repeat.answer, next: repeat.next, sources: [] } }
+    : deps.aiEnabled
+      ? await runAsk(
+          deps.model,
+          buildAskPrompt({
+            ...film,
+            positionSec,
+            history: session.history,
+            question: text,
+            via,
+            simpleFormat: deps.simpleFormat,
+          }),
+          text,
+          { ...ASK_SETTINGS, allowClarify: !deps.simpleFormat && via !== 'clarify' },
+          deps.now,
+        )
+      : { reply: null, error: 'offline' };
   if (outcome.reply === null) {
     // The model failed or is off: the closest answer from a scene already watched, if any.
     const similar = deps.memory?.recallSimilar(recallQuery);
     if (similar) {
-      outcome = { reply: { kind: 'answer', text: similar.answer, next: similar.next } };
+      outcome = {
+        reply: { kind: 'answer', text: similar.answer, next: similar.next, sources: [] },
+      };
       fromMemory = true;
     }
   } else if (outcome.reply.kind === 'answer' && !fromMemory) {
     deps.memory?.remember({ ...recallQuery, answer: outcome.reply.text, next: outcome.reply.next });
   }
-  if (session.stage !== 'watch' || session.contentId !== contentId) {
-    deps.log.info('ask.dropped', { code: session.code, playerId: player.id });
-    setPip(session, restingPip(session), coreDeps(session, deps));
-    return;
-  }
-  const say = toPipSay(outcome, player, text, LINES);
-  if (outcome.reply?.kind === 'answer') {
-    session.history = [
-      ...session.history,
-      { atSec: positionSec, question: text, answer: outcome.reply.text },
-    ].slice(-MAX_HISTORY);
-  }
-  deps.log.info('ask.done', {
-    code: session.code,
-    playerId: player.id,
-    ms: deps.now() - startedAt,
-    kind: fromMemory ? 'memory' : (outcome.reply?.kind ?? 'fallback'),
-    source: say.source,
-    ...(outcome.reply ? {} : { error: outcome.error }),
-  });
-  deps.io.to(roomOf(session.code)).emit('pip:say', say);
-  setPip(session, 'talking', coreDeps(session, deps), TALKING_MS);
+  const said = toPipSay(outcome, LINES);
+  return {
+    ...said,
+    isAnswer: outcome.reply?.kind === 'answer',
+    log: {
+      kind: fromMemory ? 'memory' : (outcome.reply?.kind ?? 'fallback'),
+      path: 'notes',
+      modelMs: outcome.ms ?? null,
+      ...(outcome.reply ? {} : { error: outcome.error }),
+    },
+  };
 }
 
-function toPipSay(outcome: AskOutcome, player: Player, question: string, lines: PipLines): PipSay {
-  const base = { askedBy: player.id, askedByName: player.name, question, next: [], clarify: [] };
+function toPipSay(
+  outcome: AskOutcome,
+  lines: PipLines,
+): Pick<PipSay, 'text' | 'next' | 'clarify' | 'source'> {
   const reply = outcome.reply;
   if (reply?.kind === 'answer')
-    return { ...base, text: reply.text, next: reply.next, source: 'ai' };
+    return { text: reply.text, next: reply.next, clarify: [], source: 'ai' };
   if (reply?.kind === 'clarify') {
-    return { ...base, text: lines.didYouMean, clarify: reply.options, source: 'ai' };
+    return { text: lines.didYouMean, next: [], clarify: reply.options, source: 'ai' };
   }
   const error = outcome.reply === null ? outcome.error : '';
   const text =
     error === 'offline' ? lines.offline : error === 'unparsed' ? lines.unparsed : lines.modelFailed;
-  return { ...base, text, source: 'template' };
+  return { text, next: [], clarify: [], source: 'template' };
 }

@@ -3,6 +3,8 @@ import { randomBytes } from 'node:crypto';
 import type { Socket } from 'socket.io';
 import type { Config } from './config.js';
 import type { AnswerMemory } from './core/ai/answer-memory.js';
+import { createAnswerCache, type AnswerCache } from './core/context/answer-cache.js';
+import type { Timeline } from './core/context/timeline.js';
 import type { Journal } from './core/journal.js';
 import type { TextModel } from './core/ai/model.js';
 import { newCode } from './core/codes.js';
@@ -43,6 +45,8 @@ export interface RealtimeDeps {
   model: TextModel;
   memory?: AnswerMemory;
   journal?: Journal;
+  timelines?: Map<string, Timeline>; // films with an evidence timeline (film/timeline-file.ts)
+  answerCache?: AnswerCache;
   log: typeof Log;
   now: () => number;
 }
@@ -51,6 +55,8 @@ type PipSocket = Socket<ClientToServerEvents>;
 type SocketData = { role: 'tv'; code: string } | { role: 'pad'; code: string; playerId: string };
 
 const SWEEP_EVERY_MS = 10 * 60 * 1000;
+const CACHE_MAX_ANSWERS = 200;
+const CACHE_TTL_MS = 30 * 60 * 1000;
 const GREETING_MS = 4000;
 const JOIN_WINDOW_MS = 60 * 1000;
 
@@ -62,6 +68,12 @@ export function registerRealtime(deps: RealtimeDeps): () => void {
     aiEnabled: deps.config.AI_ENABLED,
     simpleFormat: deps.config.AI_PROVIDER === 'ollama',
     logText: deps.config.LOG_TEXT,
+    answerCache: deps.answerCache ?? createAnswerCache(CACHE_MAX_ANSWERS, CACHE_TTL_MS),
+    timelinePolicy: deps.config.TIMELINE_REVIEW,
+    modelId:
+      deps.config.AI_PROVIDER === 'ollama'
+        ? deps.config.OLLAMA_MODEL
+        : deps.config.BEDROCK_MODEL_ID,
   };
   const joinLimit = createRateLimit(LIMITS.failedJoinsPerMinute, JOIN_WINDOW_MS);
   const core = (session: Session): CoreDeps => ({

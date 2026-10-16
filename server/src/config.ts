@@ -19,6 +19,11 @@ export const configSchema = z.object({
   ANSWER_MEMORY: booleanFlag.default(true),
   JOURNAL: booleanFlag.default(true),
   LOG_TEXT: booleanFlag.default(false),
+  // Which timeline facts Pip may answer from: 'accepted' (reviewed, the default) or 'candidate'
+  // (also unreviewed drafts; development only).
+  TIMELINE_REVIEW: z.enum(['accepted', 'candidate']).default('accepted'),
+  // Adds the lab film from lab/content (The Lantern Fox, made by npm run lab:film) to the films.
+  LAB_CONTENT: booleanFlag.default(false),
 });
 
 export type Config = Readonly<z.infer<typeof configSchema>>;

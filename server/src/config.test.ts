@@ -16,6 +16,8 @@ describe('parseConfig', () => {
       ANSWER_MEMORY: true,
       JOURNAL: true,
       LOG_TEXT: false,
+      TIMELINE_REVIEW: 'accepted',
+      LAB_CONTENT: false,
     });
   });
 

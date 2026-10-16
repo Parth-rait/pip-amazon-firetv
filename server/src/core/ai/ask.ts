@@ -9,7 +9,9 @@ export interface AskSettings {
   allowClarify: boolean;
 }
 
-export type AskOutcome = { reply: ParsedReply } | { reply: null; error: string };
+// ms is how long the model took; replies that did not come from the model leave it out.
+export type AskOutcome =
+  { reply: ParsedReply; ms?: number } | { reply: null; error: string; ms?: number };
 
 /** Calls the model and parses the reply. error is 'unparsed' or the thrown error's name. */
 export async function runAsk(
@@ -17,7 +19,9 @@ export async function runAsk(
   prompt: { system: string; user: string },
   question: string,
   settings: AskSettings,
+  now: () => number = Date.now,
 ): Promise<AskOutcome> {
+  const startedAt = now();
   try {
     const raw = await withTimeout(
       model.complete({
@@ -30,8 +34,10 @@ export async function runAsk(
       settings.timeoutMs,
     );
     const reply = parseReply(raw, question, { allowClarify: settings.allowClarify });
-    return reply ? { reply } : { reply: null, error: 'unparsed' };
+    const ms = now() - startedAt;
+    return reply ? { reply, ms } : { reply: null, error: 'unparsed', ms };
   } catch (error) {
-    return { reply: null, error: error instanceof Error ? error.name : 'Error' };
+    const name = error instanceof Error ? error.name : 'Error';
+    return { reply: null, error: name, ms: now() - startedAt };
   }
 }

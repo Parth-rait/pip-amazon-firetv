@@ -9,7 +9,8 @@ export const PROTOCOL_VERSION = 5;
 /** Where the session is in the journey. The server owns it; the TV and pads follow it. */
 export type Stage = 'lobby' | 'watch' | 'quiz' | 'results';
 export type PipState = 'sleep' | 'idle' | 'thinking' | 'talking' | 'cheer';
-export type Source = 'ai' | 'template';
+// Where a reply's text came from: the model, a fixed line, or straight from reviewed timeline facts.
+export type Source = 'ai' | 'template' | 'timeline';
 /** A player's color, given when joining, so names are easy to tell apart. */
 export const AVATAR_COLORS = [
   '#7CE7C4',

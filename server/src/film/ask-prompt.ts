@@ -1,7 +1,9 @@
-// buildAskPrompt(): the Ask Pip prompt from what the family has already seen (section 5.3).
+// buildAskPrompt(): the Ask Pip prompt from what the family has already seen (section 5.3), and
+// buildGroundedPrompt(): the same from timeline facts that passed the spoiler boundary (vNext).
+import type { TimedFact } from '../core/context/timeline.js';
 import type { AskVia } from '../shared/protocol.js';
 import type { Note } from './content.js';
-import { askSystemPrompt, CLARIFY_PICKED_LINE } from './prompts.js';
+import { askSystemPrompt, CLARIFY_PICKED_LINE, groundedSystemPrompt } from './prompts.js';
 
 const MAX_HISTORY = 3;
 
@@ -35,15 +37,25 @@ export function formatTime(sec: number): string {
   return `${Math.floor(whole / 60)}:${String(whole % 60).padStart(2, '0')}`;
 }
 
+/** Strips tag-like text so a question or a note cannot close our tags or pose as instructions. */
+export function inert(text: string): string {
+  return text.replace(/[<>]/g, ' ').replace(/\s+/g, ' ').trim();
+}
+
+/** The questions asked at or before positionSec (a rewind leaves later ones out), newest last. */
+function recentHistory(history: HistoryItem[], positionSec: number): string[] {
+  return history
+    .filter((item) => item.atSec <= positionSec)
+    .slice(-MAX_HISTORY)
+    .map((item) => `Q: ${inert(item.question)}\nA: ${inert(item.answer)}`);
+}
+
 /** The system prompt and the user message. Nothing after positionSec is ever included. */
 export function buildAskPrompt(input: AskPromptInput): { system: string; user: string } {
   const notes = input.notes
     .filter((note) => note.atSec <= input.positionSec)
     .map((note) => `[${formatTime(note.atSec)}] ${note.text}`);
-  const recent = input.history
-    .filter((item) => item.atSec <= input.positionSec)
-    .slice(-MAX_HISTORY)
-    .map((item) => `Q: ${item.question}\nA: ${item.answer}`);
+  const recent = recentHistory(input.history, input.positionSec);
   const lines = [
     `<title>${input.title}</title>`,
     `<now>${formatTime(input.positionSec)}</now>`,
@@ -55,10 +67,40 @@ export function buildAskPrompt(input: AskPromptInput): { system: string; user: s
     ...recent,
     '</recent>',
     ...(input.via === 'clarify' ? [CLARIFY_PICKED_LINE] : []),
-    `Question: ${input.question}`,
+    `Question: ${inert(input.question)}`,
   ];
   return {
     system: askSystemPrompt(input.simpleFormat),
     user: lines.join('\n'),
   };
+}
+
+export interface GroundedPromptInput {
+  title: string;
+  positionSec: number;
+  premise: string;
+  facts: TimedFact[]; // already filtered by the spoiler boundary and retrieval
+  history: HistoryItem[];
+  question: string;
+  via: AskVia;
+  simpleFormat?: boolean;
+}
+
+/** The grounded prompt: each fact with its id, so the reply can cite it in SOURCES. */
+export function buildGroundedPrompt(input: GroundedPromptInput): { system: string; user: string } {
+  const facts = input.facts.map((f) => `[${f.id} ${formatTime(f.startSec)}] ${inert(f.text)}`);
+  const lines = [
+    `<title>${inert(input.title)}</title>`,
+    `<now>${formatTime(input.positionSec)}</now>`,
+    `<premise>${inert(input.premise)}</premise>`,
+    '<facts>',
+    ...facts,
+    '</facts>',
+    '<recent>',
+    ...recentHistory(input.history, input.positionSec),
+    '</recent>',
+    ...(input.via === 'clarify' ? [CLARIFY_PICKED_LINE] : []),
+    `Question: ${inert(input.question)}`,
+  ];
+  return { system: groundedSystemPrompt(input.simpleFormat), user: lines.join('\n') };
 }
