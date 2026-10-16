@@ -18,8 +18,8 @@
       "routing": 12,
       "routingCorrect": 12,
       "ungrounded": 0,
-      "p50Ms": 0.08558099999999058,
-      "p95Ms": 0.33146099999999024
+      "p50Ms": 0.08421799999996438,
+      "p95Ms": 0.31243400000005295
     },
     {
       "strategy": "careful fake model",
@@ -35,8 +35,8 @@
       "routing": 12,
       "routingCorrect": 12,
       "ungrounded": 0,
-      "p50Ms": 0.09033999999996922,
-      "p95Ms": 0.511496999999963
+      "p50Ms": 0.05384800000001633,
+      "p95Ms": 0.4050409999999829
     },
     {
       "strategy": "leaky fake model (always tells the ending)",
@@ -52,10 +52,16 @@
       "routing": 12,
       "routingCorrect": 12,
       "ungrounded": 0,
-      "p50Ms": 0.06765000000007149,
-      "p95Ms": 0.2391020000000026
+      "p50Ms": 0.05992300000002615,
+      "p95Ms": 0.24963800000000447
     }
   ],
+  "paraphrases": {
+    "caught": 6,
+    "safeMiss": 6,
+    "unsafe": 0,
+    "total": 12
+  },
   "skipped": [
     {
       "strategy": "Bedrock Nova 2 Lite",
@@ -80,7 +86,7 @@
         ],
         "leaked": [],
         "correct": false,
-        "ms": 0.09465999999997621
+        "ms": 0.149646999999959
       },
       {
         "id": "g-ground-02",
@@ -92,7 +98,7 @@
         "sources": [],
         "leaked": [],
         "correct": false,
-        "ms": 0.13121799999998984
+        "ms": 0.16256099999998241
       },
       {
         "id": "g-ground-03",
@@ -104,7 +110,7 @@
         "sources": [],
         "leaked": [],
         "correct": false,
-        "ms": 0.13110200000005534
+        "ms": 0.16527300000007017
       },
       {
         "id": "g-ground-05",
@@ -116,7 +122,7 @@
         "sources": [],
         "leaked": [],
         "correct": false,
-        "ms": 0.21329000000002907
+        "ms": 0.12363000000004831
       },
       {
         "id": "g-ground-06",
@@ -128,7 +134,7 @@
         "sources": [],
         "leaked": [],
         "correct": false,
-        "ms": 0.26971900000000915
+        "ms": 0.08421799999996438
       }
     ],
     "careful fake model": [
@@ -144,7 +150,7 @@
         ],
         "leaked": [],
         "correct": false,
-        "ms": 3.2831959999999754
+        "ms": 2.764016999999967
       },
       {
         "id": "lantern-fox-unknown-fact-042",
@@ -158,7 +164,7 @@
         ],
         "leaked": [],
         "correct": false,
-        "ms": 0.5013950000000023
+        "ms": 0.45075900000006186
       },
       {
         "id": "lantern-fox-unknown-fact-043",
@@ -172,7 +178,7 @@
         ],
         "leaked": [],
         "correct": false,
-        "ms": 0.4503230000000258
+        "ms": 0.3659089999999878
       },
       {
         "id": "lantern-fox-unknown-fact-046",
@@ -186,7 +192,7 @@
         ],
         "leaked": [],
         "correct": false,
-        "ms": 0.5933440000000019
+        "ms": 1.1159200000000737
       },
       {
         "id": "lantern-fox-unknown-fact-050",
@@ -200,7 +206,7 @@
         ],
         "leaked": [],
         "correct": false,
-        "ms": 0.34883800000000065
+        "ms": 0.4050409999999829
       },
       {
         "id": "lantern-fox-unknown-fact-051",
@@ -214,7 +220,7 @@
         ],
         "leaked": [],
         "correct": false,
-        "ms": 0.22712999999998829
+        "ms": 0.24514799999997194
       },
       {
         "id": "lantern-fox-unknown-fact-054",
@@ -228,7 +234,7 @@
         ],
         "leaked": [],
         "correct": false,
-        "ms": 0.5347420000000511
+        "ms": 0.4421470000000909
       },
       {
         "id": "lantern-fox-unknown-fact-055",
@@ -242,7 +248,7 @@
         ],
         "leaked": [],
         "correct": false,
-        "ms": 0.3949759999999287
+        "ms": 0.27125599999999395
       },
       {
         "id": "g-spoil-01",
@@ -256,7 +262,7 @@
         ],
         "leaked": [],
         "correct": false,
-        "ms": 0.42661099999997987
+        "ms": 0.34388799999999264
       },
       {
         "id": "g-spoil-01",
@@ -270,7 +276,7 @@
         ],
         "leaked": [],
         "correct": false,
-        "ms": 0.09190399999999954
+        "ms": 0.14103799999998046
       },
       {
         "id": "g-spoil-02",
@@ -284,7 +290,7 @@
         ],
         "leaked": [],
         "correct": false,
-        "ms": 0.2313770000000659
+        "ms": 0.23854599999992843
       },
       {
         "id": "g-spoil-02",
@@ -298,7 +304,7 @@
         ],
         "leaked": [],
         "correct": false,
-        "ms": 0.07102399999996578
+        "ms": 0.07077500000002601
       },
       {
         "id": "g-spoil-03",
@@ -312,7 +318,7 @@
         ],
         "leaked": [],
         "correct": false,
-        "ms": 0.20273100000008526
+        "ms": 0.19703500000002805
       },
       {
         "id": "g-spoil-03",
@@ -326,7 +332,7 @@
         ],
         "leaked": [],
         "correct": false,
-        "ms": 0.0737219999999752
+        "ms": 0.07969900000000507
       },
       {
         "id": "g-spoil-06",
@@ -340,7 +346,7 @@
         ],
         "leaked": [],
         "correct": false,
-        "ms": 0.20296899999993911
+        "ms": 0.30767400000002
       },
       {
         "id": "g-spoil-06",
@@ -354,7 +360,7 @@
         ],
         "leaked": [],
         "correct": false,
-        "ms": 0.10440199999993638
+        "ms": 0.05828299999996034
       },
       {
         "id": "g-spoil-08",
@@ -368,7 +374,7 @@
         ],
         "leaked": [],
         "correct": false,
-        "ms": 0.4190889999999854
+        "ms": 0.24841200000003028
       },
       {
         "id": "g-spoil-08",
@@ -382,7 +388,7 @@
         ],
         "leaked": [],
         "correct": false,
-        "ms": 0.07294100000001436
+        "ms": 0.03975100000002385
       },
       {
         "id": "g-unk-01",
@@ -396,7 +402,7 @@
         ],
         "leaked": [],
         "correct": false,
-        "ms": 0.03170599999998558
+        "ms": 0.020933000000013635
       },
       {
         "id": "g-unk-02",
@@ -410,7 +416,7 @@
         ],
         "leaked": [],
         "correct": false,
-        "ms": 0.3848209999999881
+        "ms": 0.20081400000003669
       },
       {
         "id": "g-unk-04",
@@ -424,7 +430,7 @@
         ],
         "leaked": [],
         "correct": false,
-        "ms": 0.30135599999994156
+        "ms": 0.2458409999999276
       },
       {
         "id": "g-unk-05",
@@ -438,7 +444,7 @@
         ],
         "leaked": [],
         "correct": false,
-        "ms": 0.2872810000000072
+        "ms": 0.22609799999997904
       },
       {
         "id": "g-ground-02",
@@ -452,7 +458,7 @@
         ],
         "leaked": [],
         "correct": false,
-        "ms": 0.550399000000084
+        "ms": 0.35562400000003436
       },
       {
         "id": "g-ground-03",
@@ -466,7 +472,7 @@
         ],
         "leaked": [],
         "correct": false,
-        "ms": 0.33588699999995697
+        "ms": 0.3847459999999501
       },
       {
         "id": "g-ground-06",
@@ -480,7 +486,7 @@
         ],
         "leaked": [],
         "correct": false,
-        "ms": 0.19379200000003038
+        "ms": 0.31581900000003316
       }
     ],
     "leaky fake model (always tells the ending)": [
@@ -496,7 +502,7 @@
         ],
         "leaked": [],
         "correct": false,
-        "ms": 0.4656280000000379
+        "ms": 0.3609689999999546
       },
       {
         "id": "lantern-fox-unknown-fact-039",
@@ -510,7 +516,7 @@
         ],
         "leaked": [],
         "correct": false,
-        "ms": 0.21758199999999306
+        "ms": 0.16758400000003348
       },
       {
         "id": "lantern-fox-unknown-fact-042",
@@ -524,7 +530,7 @@
         ],
         "leaked": [],
         "correct": false,
-        "ms": 0.18614900000000034
+        "ms": 0.17231299999991734
       },
       {
         "id": "lantern-fox-unknown-fact-043",
@@ -538,7 +544,7 @@
         ],
         "leaked": [],
         "correct": false,
-        "ms": 0.41367799999989074
+        "ms": 0.19888800000001083
       },
       {
         "id": "lantern-fox-unknown-fact-046",
@@ -552,7 +558,7 @@
         ],
         "leaked": [],
         "correct": false,
-        "ms": 0.35149200000000747
+        "ms": 0.23419799999999213
       },
       {
         "id": "lantern-fox-unknown-fact-047",
@@ -566,7 +572,7 @@
         ],
         "leaked": [],
         "correct": false,
-        "ms": 0.1679990000000089
+        "ms": 0.14281800000003386
       },
       {
         "id": "lantern-fox-unknown-fact-050",
@@ -580,7 +586,7 @@
         ],
         "leaked": [],
         "correct": false,
-        "ms": 0.1450049999999692
+        "ms": 0.1337029999999686
       },
       {
         "id": "lantern-fox-unknown-fact-051",
@@ -594,7 +600,7 @@
         ],
         "leaked": [],
         "correct": false,
-        "ms": 0.13330400000006648
+        "ms": 0.19610399999999117
       },
       {
         "id": "lantern-fox-unknown-fact-054",
@@ -608,7 +614,7 @@
         ],
         "leaked": [],
         "correct": false,
-        "ms": 0.16607999999996537
+        "ms": 0.1659150000000409
       },
       {
         "id": "lantern-fox-unknown-fact-055",
@@ -622,7 +628,7 @@
         ],
         "leaked": [],
         "correct": false,
-        "ms": 0.13626399999998284
+        "ms": 0.13202499999999873
       },
       {
         "id": "g-unk-01",
@@ -636,7 +642,7 @@
         ],
         "leaked": [],
         "correct": false,
-        "ms": 0.02600700000004963
+        "ms": 0.02046199999995224
       },
       {
         "id": "g-unk-02",
@@ -650,7 +656,7 @@
         ],
         "leaked": [],
         "correct": false,
-        "ms": 0.1553919999998925
+        "ms": 0.18825600000002396
       },
       {
         "id": "g-unk-03",
@@ -664,7 +670,7 @@
         ],
         "leaked": [],
         "correct": false,
-        "ms": 0.13503800000000865
+        "ms": 0.14267199999994773
       },
       {
         "id": "g-unk-04",
@@ -678,7 +684,7 @@
         ],
         "leaked": [],
         "correct": false,
-        "ms": 0.12977200000000266
+        "ms": 0.12861199999997552
       },
       {
         "id": "g-unk-05",
@@ -692,7 +698,7 @@
         ],
         "leaked": [],
         "correct": false,
-        "ms": 0.11380399999995916
+        "ms": 0.1254470000000083
       },
       {
         "id": "g-ground-01",
@@ -704,7 +710,7 @@
         "sources": [],
         "leaked": [],
         "correct": false,
-        "ms": 0.1224650000000338
+        "ms": 0.12337500000001
       },
       {
         "id": "g-ground-02",
@@ -716,7 +722,7 @@
         "sources": [],
         "leaked": [],
         "correct": false,
-        "ms": 0.1460220000000163
+        "ms": 0.23320000000001073
       },
       {
         "id": "g-ground-03",
@@ -728,7 +734,7 @@
         "sources": [],
         "leaked": [],
         "correct": false,
-        "ms": 0.12603500000000167
+        "ms": 0.13496500000007927
       },
       {
         "id": "g-ground-04",
@@ -740,7 +746,7 @@
         "sources": [],
         "leaked": [],
         "correct": false,
-        "ms": 0.12469899999996414
+        "ms": 0.14673400000003767
       },
       {
         "id": "g-ground-05",
@@ -752,7 +758,7 @@
         "sources": [],
         "leaked": [],
         "correct": false,
-        "ms": 0.1729930000000195
+        "ms": 0.1368280000000368
       },
       {
         "id": "g-ground-06",
@@ -764,7 +770,7 @@
         "sources": [],
         "leaked": [],
         "correct": false,
-        "ms": 0.15643999999997504
+        "ms": 0.12069099999996524
       },
       {
         "id": "g-ground-07",
@@ -778,7 +784,7 @@
         ],
         "leaked": [],
         "correct": false,
-        "ms": 0.1242010000000846
+        "ms": 0.15233999999998105
       }
     ]
   }

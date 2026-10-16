@@ -9,6 +9,9 @@ import { loadFilms } from './film/content.js';
 import { loadTimeline } from './film/timeline-file.js';
 import { log } from './log.js';
 import { createPipServer } from './server.js';
+import { loadTypeSafeJudge } from './typesafe-judge.js';
+
+const JUDGE_TIMEOUT_MS = 1500;
 
 const CONTENT_DIR = fileURLToPath(new URL('../content', import.meta.url));
 const LAB_CONTENT_DIR = fileURLToPath(new URL('../lab/content', import.meta.url));
@@ -30,7 +33,15 @@ const model = config.AI_ENABLED
       throw new Error('AI is switched off (AI_ENABLED=false)');
     });
 
+const judge = config.INTENT_JUDGE === 'typesafe' ? await loadTypeSafeJudge(JUDGE_TIMEOUT_MS) : null;
+if (config.INTENT_JUDGE === 'typesafe' && !judge) {
+  log.warn('judge.unavailable', {
+    note: 'INTENT_JUDGE=typesafe needs TYPESAFE_API_KEY and @typesafe-ai/sdk; using rules only',
+  });
+}
+
 const server = createPipServer({
+  judge: judge ?? undefined,
   config,
   films,
   timelines,

@@ -7,6 +7,7 @@ import type { Config } from './config.js';
 import type { TextModel } from './core/ai/model.js';
 import { createAnswerCache, type AnswerCache } from './core/context/answer-cache.js';
 import type { Timeline } from './core/context/timeline.js';
+import type { IntentJudge } from './core/intent/judge.js';
 import type { Timers } from './core/timers.js';
 import type { Content } from './film/content.js';
 import type { log as Log } from './log.js';
@@ -27,6 +28,7 @@ export interface PipServerParts {
   now: () => number;
   store?: SessionStore;
   cache?: AnswerCache;
+  judge?: IntentJudge;
   padDir?: string;
   mediaDir?: string;
 }
@@ -56,6 +58,7 @@ export function createPipServer(parts: PipServerParts): PipServer {
     model: parts.model,
     timelines: parts.timelines,
     cache: parts.cache ?? createAnswerCache(CACHE_MAX_ANSWERS, CACHE_TTL_MS),
+    judge: parts.judge,
     log: parts.log,
     now: parts.now,
   });

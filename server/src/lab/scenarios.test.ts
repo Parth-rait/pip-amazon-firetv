@@ -319,6 +319,30 @@ describe('Virtual Pip Lab', () => {
     raw.close();
   });
 
+  it('lets a confident typed judgement offer command choices, but never run one', async () => {
+    const judge = {
+      name: 'fake',
+      judge: async (text: string) =>
+        text.includes('hold it')
+          ? { label: 'playback-command' as const, confidence: 0.95 }
+          : { label: 'question' as const, confidence: 0.9 },
+    };
+    lab = await startLab({ judge });
+    const { tv, host } = await watching(lab);
+    await seekTv(lab, tv, 45);
+    await host.ask('could you hold it a sec');
+    const say = await waitFor(() => host.says[0], 'the choices');
+    expect(say).toMatchObject({
+      kind: 'clarify',
+      clarify: ['Pause the film', 'Play the film', 'Go back 10 seconds'],
+    });
+    expect(tv.commands).toEqual([]);
+    lab.clock.advance(LIMITS.askMinIntervalMs);
+    await host.ask('Pause the film', 'clarify');
+    await waitFor(() => tv.commands.length === 1, 'the pause after the tap');
+    expect(tv.commands[0]?.type).toBe('pause');
+  });
+
   it('keeps names and question text out of the logs', async () => {
     lab = await startLab();
     const { tv, guest } = await watching(lab);

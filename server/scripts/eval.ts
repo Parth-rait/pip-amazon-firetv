@@ -16,6 +16,46 @@ import { checkContent } from '../src/film/content.js';
 import { checkTimelineFile, toTimeline } from '../src/film/timeline-file.js';
 import { groundedModel, leakyModel } from '../src/lab/models.js';
 import type { EvalExample } from '../src/pipeline/dataset.js';
+import { routeText } from '../src/core/intent/route-text.js';
+
+// Paraphrased commands for the one semantic task where a typed judge (TypeSafe) might help.
+// "unsafe" counts the dangerous case: the rules running a different action than meant.
+const PARAPHRASES: { text: string; means: 'play' | 'pause' | 'seek-back' | 'seek-forward' }[] = [
+  { text: 'hold it a sec', means: 'pause' },
+  { text: 'freeze', means: 'pause' },
+  { text: 'wait', means: 'pause' },
+  { text: 'can you stop the movie for a moment', means: 'pause' },
+  { text: 'ok carry on', means: 'play' },
+  { text: 'resume please', means: 'play' },
+  { text: 'unpause', means: 'play' },
+  { text: 'go back a bit', means: 'seek-back' },
+  { text: 'rewind 20 seconds', means: 'seek-back' },
+  { text: 'I missed that, back up', means: 'seek-back' },
+  { text: 'skip forward', means: 'seek-forward' },
+  { text: 'jump ahead 30 seconds', means: 'seek-forward' },
+];
+
+function routingParaphrases(): { caught: number; safeMiss: number; unsafe: number; total: number } {
+  let caught = 0;
+  let safeMiss = 0;
+  let unsafe = 0;
+  for (const p of PARAPHRASES) {
+    const route = routeText(p.text);
+    if (route.kind !== 'action') {
+      safeMiss += 1;
+      continue;
+    }
+    const got =
+      route.intent.type === 'seek'
+        ? route.intent.deltaSec < 0
+          ? 'seek-back'
+          : 'seek-forward'
+        : route.intent.type;
+    if (got === p.means) caught += 1;
+    else unsafe += 1;
+  }
+  return { caught, safeMiss, unsafe, total: PARAPHRASES.length };
+}
 
 const SERVER = join(dirname(fileURLToPath(import.meta.url)), '..');
 const REPO = join(SERVER, '..');
@@ -127,6 +167,7 @@ for (const strategy of strategies) {
   details[strategy.name] = results.filter((r) => !r.correct || r.leaked.length > 0);
 }
 
+const paraphrases = routingParaphrases();
 const pct = (a: number, b: number) => (b === 0 ? '-' : `${a}/${b} (${Math.round((a / b) * 100)}%)`);
 const rows = summaries.map(
   (s) =>
@@ -142,7 +183,9 @@ const markdown = [
   '|---|---|---|---|---|---|---|---|',
   ...rows,
   '',
-  "Latency is in-process on this machine with fake models (no network); it measures Pip's own pipeline, not a real model.",
+  "Latency is in-process on this machine with fake models (no network); it measures Pip's own pipeline, not a real model. The fake models measure the plumbing (prompt, citations, gate, cache), not answer quality: the careful one answers with any fact sharing a word.",
+  '',
+  `Paraphrased commands (rules only): ${paraphrases.caught}/${paraphrases.total} run the right action, ${paraphrases.safeMiss} go on as questions (safe), ${paraphrases.unsafe} run a wrong action (unsafe). This is the task a typed judge would be measured on.`,
   '',
   ...(skipped.length
     ? ['Skipped:', ...skipped.map((s) => `- ${s.strategy}: ${s.reason}`), '']
@@ -154,7 +197,7 @@ mkdirSync(outDir, { recursive: true });
 writeFileSync(join(outDir, `${date}-${contentId}.md`), `${markdown}\n`);
 writeFileSync(
   join(outDir, `${date}-${contentId}.json`),
-  `${JSON.stringify({ date, contentId, timelineVersion: timeline.version, examples: examples.length, summaries, skipped, misses: details }, null, 2)}\n`,
+  `${JSON.stringify({ date, contentId, timelineVersion: timeline.version, examples: examples.length, summaries, paraphrases, skipped, misses: details }, null, 2)}\n`,
 );
 console.log(markdown);
 console.log(`wrote docs/evaluation/results/${date}-${contentId}.{md,json}`);

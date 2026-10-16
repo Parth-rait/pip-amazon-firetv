@@ -5,6 +5,7 @@ import { parseConfig } from '../config.js';
 import { lanternFoxTimeline } from '../core/context/fixture.js';
 import type { Timeline } from '../core/context/timeline.js';
 import type { TextModel } from '../core/ai/model.js';
+import type { IntentJudge } from '../core/intent/judge.js';
 import { createFakeTimers, type FakeTimers } from '../core/fake-timers.js';
 import type { Content } from '../film/content.js';
 import type { log as Log } from '../log.js';
@@ -30,6 +31,7 @@ export interface LabOptions {
   model?: TextModel;
   env?: Record<string, string>; // server config overrides, as in server/.env
   timeline?: Timeline;
+  judge?: IntentJudge;
 }
 
 export interface Lab {
@@ -82,6 +84,7 @@ export async function startLab(options: LabOptions = {}): Promise<Lab> {
       films: [LAB_FILM],
       timelines,
       model: options.model ?? groundedModel(),
+      judge: options.judge,
       timers,
       log: captureLog(logs),
       now: clock.now,

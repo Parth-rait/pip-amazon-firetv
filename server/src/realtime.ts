@@ -5,6 +5,7 @@ import type { Config } from './config.js';
 import type { TextModel } from './core/ai/model.js';
 import type { AnswerCache } from './core/context/answer-cache.js';
 import type { Timeline } from './core/context/timeline.js';
+import { noJudge, type IntentJudge } from './core/intent/judge.js';
 import { routeText } from './core/intent/route-text.js';
 import { newCode } from './core/codes.js';
 import { hostTimerKey, pickTvCode, startHostGrace } from './core/pairing.js';
@@ -47,6 +48,7 @@ export interface RealtimeDeps {
   model: TextModel;
   timelines: Map<string, Timeline>; // one per film; empty when a film has no timeline yet
   cache: AnswerCache;
+  judge?: IntentJudge;
   log: typeof Log;
   now: () => number;
 }
@@ -68,6 +70,7 @@ export function registerRealtime(deps: RealtimeDeps): () => void {
     now: deps.now,
     timelines: deps.timelines,
     features,
+    judge: deps.judge ?? noJudge,
     log: deps.log,
     answer: {
       model: deps.model,

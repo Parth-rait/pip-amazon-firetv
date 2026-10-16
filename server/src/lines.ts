@@ -16,4 +16,5 @@ export const LINES = {
   onlyHost: (host: string) => `${host} has the controls, so ask them.`,
   dismissed: 'Okay.',
   whatToStop: 'What should I stop?',
+  wantACommand: 'Do you want me to do one of these?',
 } as const;

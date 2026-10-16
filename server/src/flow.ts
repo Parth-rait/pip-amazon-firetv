@@ -2,6 +2,7 @@
 // dependencies of the vNext flows (assist-flow.ts, playback-flow.ts).
 import type { Server } from 'socket.io';
 import type { Timeline } from './core/context/timeline.js';
+import type { IntentJudge } from './core/intent/judge.js';
 import type { CoreDeps } from './core/pip.js';
 import type { Timers } from './core/timers.js';
 import type { AnswerDeps } from './answer.js';
@@ -29,6 +30,7 @@ export interface FlowDeps {
   timelines: Map<string, Timeline>;
   answer: AnswerDeps;
   features: FeaturesView;
+  judge: IntentJudge; // noJudge unless INTENT_JUDGE=typesafe works
   log: typeof Log;
 }
 
