@@ -41,7 +41,8 @@ Hackathon project (Amazon Developer Hackathon, Fire TV track). Deadline: Fri Oct
 - Oct 16 (agreed with Parth, PROJECT.md 2.4): film notes and quizzes drafted for Big Buck Bunny and Sintel (the agent read a frame every 6 s and the subtitles; Parth checks the times); local brain `AI_PROVIDER=ollama` with qwen2.5:3b; answer memory (PROJECT.md 5.9). eval:ask: 0 leaks on both films; the 3B model still makes up small facts, so the demo uses Nova.
 - Oct 16: Pip moods (Chill, Playful, Sassy) and colors, avatars, greetings, posters (contract v3); pad redesigned (chat-style watch screen, remote-style host controls, "Make Pip yours" sheet); TV follows Pip's color and shows greetings and avatars.
 - Step 9 TV part: quiz screen (2 x 2 choices, countdown bar, players light up when they answer, the reveal with picks and Pip's explanation) and results screen. Checked on the VVD with three players: reveals as soon as everyone answered, results match the taps, Keep watching resumes where the quiz started. Lobby focus starts on the first film (FocusManager).
-- Next: Step 11 (preflight, scene times in the demo script, measurements, usability test, rehearsals) and Step 12. AWS: switch AI_PROVIDER to bedrock once the account is verified.
+- Step 11, parts without people: preflight checks every film (Range request, poster, 5 questions), that the TV app uses this tunnel URL, and notes the local model; `smoke:ai` uses the configured brain; the demo script has real scene times, the mood moment and a Sintel no-spoiler cutaway; `docs/measurements.md` has a labeled local-model baseline. Fixed: `npm run tunnel` could not rewrite a wrapped `SERVER_URL`. Preflight passes (local model). Not tagged yet: v0.1.0 waits for preflight on Nova.
+- Next (with Parth): the evaluation together (usability test, answer quality, quiz runs on real phones, rehearsals), Nova once AWS is verified, then Step 12.
 
 Update this list when a step is committed.
 

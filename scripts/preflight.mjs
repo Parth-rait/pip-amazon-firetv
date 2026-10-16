@@ -2,12 +2,15 @@
 // Checks the demo setup before a rehearsal or a recording (PROJECT.md Step 11) and prints one
 // PASS or FAIL line per check. Start the tunnel and the server first. Exits 1 if anything fails.
 import { spawn } from 'node:child_process';
-import { existsSync, readFileSync } from 'node:fs';
+import { existsSync, readdirSync, readFileSync } from 'node:fs';
 import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
 const root = join(dirname(fileURLToPath(import.meta.url)), '..');
-const FILM_ID = 'big-buck-bunny';
+const CONTENT_DIR = join(root, 'server', 'content');
+const FILM_IDS = readdirSync(CONTENT_DIR)
+  .filter((name) => name.endsWith('.json'))
+  .map((name) => name.replace(/\.json$/, ''));
 const QUIZ_QUESTIONS = 5;
 const FETCH_TIMEOUT_MS = 8000;
 // smoke:ai fails by itself when Nova takes over 6 s; this only covers npm and tsx starting up.
@@ -74,54 +77,87 @@ if (!publicUrl.startsWith('https://')) {
   }
 }
 
-// 3. The film is listed with a full URL, and its first 100 bytes come back as a 206.
+// 3. Each film is listed with a full URL, its first 100 bytes come back as a 206, and its
+//    poster loads.
 if (isServerUp) {
   try {
     const films = await (await get(`${publicUrl}/api/films`)).json();
-    const film = Array.isArray(films) ? films.find((f) => f.id === FILM_ID) : undefined;
-    const hasFullUrl = typeof film?.url === 'string' && film.url.startsWith(`${publicUrl}/`);
-    report(hasFullUrl, '/api/films lists the film with a full URL', film?.url ?? `no "${FILM_ID}"`);
-    if (hasFullUrl) {
+    for (const id of FILM_IDS) {
+      const film = Array.isArray(films) ? films.find((f) => f.id === id) : undefined;
+      const hasFullUrl = typeof film?.url === 'string' && film.url.startsWith(`${publicUrl}/`);
+      report(hasFullUrl, `/api/films lists ${id} with a full URL`, film?.url ?? 'missing');
+      if (!hasFullUrl) continue;
       const res = await get(film.url, { Range: 'bytes=0-99' });
       const type = res.headers.get('content-type') ?? '';
       await res.arrayBuffer();
       report(
         res.status === 206 && type.startsWith('video/mp4'),
-        'The film answers a Range request',
+        `${id} answers a Range request`,
         `${res.status} ${type}`,
       );
+      if (film.poster) {
+        const poster = await get(film.poster);
+        const posterType = poster.headers.get('content-type') ?? '';
+        await poster.arrayBuffer();
+        report(
+          poster.ok && posterType.startsWith('image/'),
+          `${id} has its poster`,
+          `${poster.status} ${posterType}`,
+        );
+      } else {
+        report(false, `${id} has its poster`, 'no poster in the film file (PROJECT.md 5.6)');
+      }
     }
   } catch (error) {
-    report(false, '/api/films lists the film with a full URL', why(error));
+    report(false, '/api/films lists the films', why(error));
   }
 } else {
-  report(false, '/api/films and the film', 'skipped: the server did not answer');
+  report(false, '/api/films and the films', 'skipped: the server did not answer');
 }
 
-// 4. The film file has the checked quiz.
+// 4. Each film file has the checked quiz.
+for (const id of FILM_IDS) {
+  try {
+    const content = JSON.parse(readFileSync(join(CONTENT_DIR, `${id}.json`), 'utf8'));
+    const count = Array.isArray(content.quiz) ? content.quiz.length : 0;
+    report(
+      count === QUIZ_QUESTIONS,
+      `${id} has ${QUIZ_QUESTIONS} quiz questions`,
+      `found ${count}`,
+    );
+  } catch (error) {
+    report(false, `${id} has ${QUIZ_QUESTIONS} quiz questions`, why(error));
+  }
+}
+
+// 4b. The TV app talks to this tunnel. A new tunnel URL needs a TV rebuild (tv/README.md).
 try {
-  const content = JSON.parse(
-    readFileSync(join(root, 'server', 'content', `${FILM_ID}.json`), 'utf8'),
-  );
-  const count = Array.isArray(content.quiz) ? content.quiz.length : 0;
+  const tvConfig = readFileSync(join(root, 'tv', 'src', 'config.ts'), 'utf8');
+  const tvUrl = /SERVER_URL =\s*['"]([^'"]*)['"]/.exec(tvConfig)?.[1] ?? '';
   report(
-    count === QUIZ_QUESTIONS,
-    `The film file has ${QUIZ_QUESTIONS} quiz questions`,
-    `found ${count}`,
+    tvUrl.replace(/\/+$/, '') === publicUrl,
+    'The TV app uses this tunnel URL',
+    tvUrl === publicUrl ? '' : `tv/src/config.ts has "${tvUrl}"; rebuild and reinstall the TV app`,
   );
 } catch (error) {
-  report(false, `The film file has ${QUIZ_QUESTIONS} quiz questions`, why(error));
+  report(false, 'The TV app uses this tunnel URL', why(error));
 }
 
 // 5. The built pad, which the server serves at its own URL.
 const hasPad = existsSync(join(root, 'pad', 'dist', 'index.html'));
 report(hasPad, 'pad/dist exists', hasPad ? '' : 'run npm run build in pad/');
 
-// 6. One real Nova call.
+// 6. One real model call. The demo uses Nova; the local model is for rehearsals (PROJECT.md 2.4).
+if (env.AI_PROVIDER === 'ollama') {
+  console.log('NOTE  AI_PROVIDER=ollama: Pip uses the local model, not Nova');
+}
 const smoke = await runSmokeAi();
 const latency = /latency: (\d+) ms/.exec(smoke.output)?.[1];
 const lastLine = smoke.output.trim().split('\n').at(-1) ?? '';
 report(smoke.ok, 'smoke:ai answers within 6 s', smoke.ok ? `${latency} ms` : lastLine);
+if (env.AI_ENABLED === 'false') {
+  report(false, 'AI_ENABLED is true', 'Pip would only say its fixed lines');
+}
 
 console.log(
   failed === 0 ? '\nAll checks passed.' : `\n${failed} check${failed === 1 ? '' : 's'} failed.`,

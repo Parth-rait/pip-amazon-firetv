@@ -9,7 +9,8 @@ import { fileURLToPath } from 'node:url';
 const root = join(dirname(fileURLToPath(import.meta.url)), '..');
 const port = process.env.PORT ?? '8787';
 const urlPattern = /https:\/\/(?!api\.)[a-z0-9-]+\.trycloudflare\.com/;
-const tvPattern = /export const SERVER_URL = ['"][^'"]*['"];/;
+// Whitespace-tolerant, so a formatter that wraps the line cannot break the rewrite.
+const tvPattern = /export const SERVER_URL =\s*['"][^'"]*['"];/;
 let found = false;
 let buffer = '';
 

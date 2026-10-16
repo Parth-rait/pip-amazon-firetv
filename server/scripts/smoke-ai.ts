@@ -1,14 +1,21 @@
-// npm run smoke:ai: one real Nova call through the server's model wrapper; prints the reply and latency.
+// npm run smoke:ai: one real model call through the server's model wrapper (Nova, or the local
+// model when AI_PROVIDER=ollama); prints the reply and latency.
 import 'dotenv/config';
 import { loadConfig } from '../src/config.js';
-import { createBedrockModel } from '../src/core/ai/model.js';
+import { createBedrockModel, createOllamaModel } from '../src/core/ai/model.js';
 
 const config = loadConfig();
-const model = createBedrockModel({
-  region: config.AWS_REGION,
-  profile: config.AWS_PROFILE,
-  modelId: config.BEDROCK_MODEL_ID,
-});
+const local = config.AI_PROVIDER === 'ollama';
+const model = local
+  ? createOllamaModel({ url: config.OLLAMA_URL, model: config.OLLAMA_MODEL })
+  : createBedrockModel({
+      region: config.AWS_REGION,
+      profile: config.AWS_PROFILE,
+      modelId: config.BEDROCK_MODEL_ID,
+    });
+const where = local
+  ? `local model ${config.OLLAMA_MODEL}`
+  : `model ${config.BEDROCK_MODEL_ID}, region ${config.AWS_REGION}`;
 
 const startedAt = performance.now();
 try {
@@ -21,7 +28,7 @@ try {
   });
   const ms = Math.round(performance.now() - startedAt);
   console.log(`reply: ${reply}`);
-  console.log(`latency: ${ms} ms (model ${config.BEDROCK_MODEL_ID}, region ${config.AWS_REGION})`);
+  console.log(`latency: ${ms} ms (${where})`);
 } catch (error) {
   const name = error instanceof Error ? error.name : 'Error';
   const message = error instanceof Error ? error.message : String(error);

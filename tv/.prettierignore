@@ -1,2 +1,4 @@
 # Generated from shared/protocol.ts; keep it byte-identical.
 src/shared/
+# Rewritten by npm run tunnel; keep SERVER_URL on one line.
+src/config.ts
