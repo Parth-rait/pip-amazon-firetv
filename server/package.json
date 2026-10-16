@@ -23,6 +23,7 @@
     "annotate": "tsx scripts/annotate.ts",
     "pipeline": "tsx scripts/pipeline.ts",
     "lab:film": "tsx scripts/make-lab-film.ts",
+    "eval": "tsx scripts/eval.ts",
     "companion:images": "sh scripts/companion-images.sh"
   },
   "dependencies": {

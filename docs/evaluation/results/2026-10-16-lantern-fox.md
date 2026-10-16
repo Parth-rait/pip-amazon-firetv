@@ -4,15 +4,16 @@ Timeline sha:ecbe9a535cb5: 18 facts. Examples: 91 (derived dataset v1 plus hand-
 
 | Strategy | Spoiler leaks | Abstains when it should | Answers when it should | Cites the expected fact | Routing | Ungrounded sources | Latency p50 / p95 (ms) |
 |---|---|---|---|---|---|---|---|
-| timeline only (AI off) | 0 of 68 | 82/83 (99%) | 26/30 (87%) | 21/25 (84%) | 12/12 (100%) | 0 | 0.08 / 0.31 |
-| careful fake model | 0 of 68 | 61/83 (73%) | 27/30 (90%) | 22/25 (88%) | 12/12 (100%) | 0 | 0.05 / 0.41 |
-| leaky fake model (always tells the ending) | 0 of 68 | 68/83 (82%) | 23/30 (77%) | 18/25 (72%) | 12/12 (100%) | 0 | 0.06 / 0.25 |
+| timeline only (AI off) | 0 of 68 | 82/83 (99%) | 26/30 (87%) | 21/25 (84%) | 12/12 (100%) | 0 | 0.04 / 0.13 |
+| careful fake model | 0 of 68 | 61/83 (73%) | 27/30 (90%) | 22/25 (88%) | 12/12 (100%) | 0 | 0.03 / 0.19 |
+| leaky fake model (always tells the ending) | 0 of 68 | 68/83 (82%) | 23/30 (77%) | 18/25 (72%) | 12/12 (100%) | 0 | 0.03 / 0.10 |
+| Ollama qwen2.5:3b (local) | 0 of 68 | 65/83 (78%) | 30/30 (100%) | 25/25 (100%) | 12/12 (100%) | 0 | 0.08 / 1972.05 |
 
-Latency is in-process on this machine with fake models (no network); it measures Pip's own pipeline, not a real model. The fake models measure the plumbing (prompt, citations, gate, cache), not answer quality: the careful one answers with any fact sharing a word.
+Latency is measured in-process on this machine. For the fake models (no network) it is Pip's own pipeline only; a real model's row (Ollama, Nova) includes the model, and questions answered from the timeline or a fixed line never reach it, so p50 can stay near 0. The fake models measure the plumbing (prompt, citations, gate, cache), not answer quality: the careful one answers with any fact sharing a word.
 
 Paraphrased commands (rules only): 6/12 run the right action, 6 go on as questions (safe), 0 run a wrong action (unsafe). This is the task a typed judge would be measured on.
 
 Skipped:
 - Bedrock Nova 2 Lite: not requested (pass --nova; needs the AWS profile from PROJECT.md 9.3)
-- TypeSafe routing judge: no TYPESAFE_API_KEY and api.typesafe.ai is not reachable from this environment
+- TypeSafe routing judge: no TYPESAFE_API_KEY (the paid TypeSafe API is not used without one)
 
