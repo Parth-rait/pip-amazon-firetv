@@ -1,0 +1,34 @@
+{
+  "schemaVersion": 1,
+  "assetId": "lantern-fox",
+  "generator": "claude-code-session visual review 2026-10-16",
+  "createdAt": "2026-10-16T18:55:00Z",
+  "method": "Looked at data/lantern-fox/sheets/sheet-01..05.png (51 frames from npm run pipeline -- all). Each fact cites the first sampled frame where it is visible; revealSec is that frame's time.",
+  "entities": [
+    { "id": "ember", "name": "Ember", "aliases": ["the fox", "fox", "orange fox"], "firstSeenSec": 12.5, "intro": "That is Ember, a small orange fox." },
+    { "id": "lantern", "name": "lantern", "aliases": ["old lantern", "brass lantern"], "firstSeenSec": 24.5, "intro": "That is an old brass lantern Ember found in the snow." },
+    { "id": "hoot", "name": "Hoot", "aliases": ["the owl", "owl"], "firstSeenSec": 36.5, "intro": "That is Hoot, an owl who watches from a pine tree." },
+    { "id": "lighthouse", "name": "lighthouse", "aliases": [], "firstSeenSec": 61.5, "intro": "That is a dark lighthouse across the frozen lake." },
+    { "id": "moss", "name": "Moss", "aliases": ["the badger", "badger", "keeper", "lighthouse keeper"], "firstSeenSec": 86.5, "intro": "That is Moss, an old badger who thanks Ember." }
+  ],
+  "facts": [
+    { "id": "c01", "startSec": 0, "revealSec": 2.5, "kind": "setting", "text": "It is night in a snowy forest under a full moon.", "entities": [], "spoilerTerms": [], "evidence": ["fr-00025"], "confidence": 0.95 },
+    { "id": "c02", "startSec": 10, "revealSec": 12.5, "kind": "appearance", "text": "A small orange fox called Ember appears in the forest.", "entities": ["ember"], "spoilerTerms": [], "evidence": ["fr-00105", "fr-00125"], "confidence": 0.95 },
+    { "id": "c03", "startSec": 12, "revealSec": 14.5, "kind": "event", "text": "Ember walks through the snowy forest.", "entities": ["ember"], "spoilerTerms": [], "evidence": ["fr-00145"], "confidence": 0.95 },
+    { "id": "c04", "startSec": 22, "revealSec": 24.5, "kind": "event", "text": "Ember finds an old brass lantern.", "entities": ["ember", "lantern"], "spoilerTerms": ["brass"], "evidence": ["fr-00225", "fr-00245"], "confidence": 0.95 },
+    { "id": "c05", "startSec": 24, "revealSec": 26.5, "kind": "setting", "text": "The lantern is half buried in the snow.", "entities": ["lantern"], "spoilerTerms": ["half buried"], "evidence": ["fr-00265"], "confidence": 0.9 },
+    { "id": "c06", "startSec": 34, "revealSec": 36.5, "kind": "appearance", "text": "Hoot the owl watches from a pine tree.", "entities": ["hoot"], "spoilerTerms": ["pine tree"], "evidence": ["fr-00345", "fr-00365"], "confidence": 0.95 },
+    { "id": "c07", "startSec": 38, "revealSec": 40.5, "kind": "dialogue", "text": "Hoot says the lantern belongs to someone.", "entities": ["hoot", "lantern"], "spoilerTerms": ["belongs to someone"], "evidence": ["fr-00405"], "confidence": 0.95 },
+    { "id": "c08", "startSec": 46, "revealSec": 47.5, "kind": "event", "text": "Ember carries the lantern to a frozen lake.", "entities": ["ember", "lantern"], "spoilerTerms": ["frozen lake"], "evidence": ["fr-00475"], "confidence": 0.95 },
+    { "id": "c09", "startSec": 52, "revealSec": 52.5, "kind": "event", "text": "The lantern starts to glow blue by itself.", "entities": ["lantern"], "spoilerTerms": ["glow", "blue"], "evidence": ["fr-00525"], "confidence": 0.95 },
+    { "id": "c10", "startSec": 60, "revealSec": 61.5, "kind": "appearance", "text": "A dark lighthouse stands across the lake.", "entities": ["lighthouse"], "spoilerTerms": [], "evidence": ["fr-00605", "fr-00615"], "confidence": 0.95 },
+    { "id": "c11", "startSec": 63, "revealSec": 64.5, "kind": "setting", "text": "The light of the lighthouse is out.", "entities": ["lighthouse"], "spoilerTerms": ["light is out"], "evidence": ["fr-00645"], "confidence": 0.9 },
+    { "id": "c12", "startSec": 72, "revealSec": 74.5, "kind": "event", "text": "Ember climbs the lighthouse.", "entities": ["ember", "lighthouse"], "spoilerTerms": ["climbs"], "evidence": ["fr-00745"], "confidence": 0.95 },
+    { "id": "c13", "startSec": 76, "revealSec": 76.5, "kind": "event", "text": "Ember sets the lantern at the top of the lighthouse.", "entities": ["ember", "lantern", "lighthouse"], "spoilerTerms": ["at the top"], "evidence": ["fr-00765"], "confidence": 0.95 },
+    { "id": "c14", "startSec": 79, "revealSec": 79.5, "kind": "event", "text": "The lighthouse shines again.", "entities": ["lighthouse"], "spoilerTerms": ["shines again"], "evidence": ["fr-00795"], "confidence": 0.95 },
+    { "id": "c15", "startSec": 84, "revealSec": 86.5, "kind": "appearance", "text": "An old badger called Moss thanks Ember.", "entities": ["moss", "ember"], "spoilerTerms": ["thanks"], "evidence": ["fr-00865"], "confidence": 0.95 },
+    { "id": "c16", "startSec": 88, "revealSec": 88.5, "kind": "relation", "text": "The lantern was Moss's, and he is the lighthouse keeper.", "entities": ["moss", "lantern", "lighthouse"], "spoilerTerms": ["was his", "keeper"], "evidence": ["fr-00885"], "confidence": 0.95 },
+    { "id": "c17", "startSec": 92, "revealSec": 92.5, "kind": "event", "text": "Ember becomes the helper of Moss.", "entities": ["ember", "moss"], "spoilerTerms": ["helper"], "evidence": ["fr-00925"], "confidence": 0.95 },
+    { "id": "c18", "startSec": 94, "revealSec": 94.5, "kind": "event", "text": "Ember and Moss light the lamp together every night.", "entities": ["ember", "moss"], "spoilerTerms": ["together", "every night"], "evidence": ["fr-00945"], "confidence": 0.95 }
+  ]
+}

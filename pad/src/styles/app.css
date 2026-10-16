@@ -122,7 +122,9 @@ body {
 }
 
 .button--accent:disabled {
-  background: var(--surface);
+  /* Still a visible button on the surface panels it sits on, just not lit. */
+  background: var(--surface2);
+  color: var(--text-muted);
 }
 
 .button--wide {
@@ -265,86 +267,193 @@ body {
     monospace;
 }
 
-/* Pip (section 3.4): a mint circle with two eyes; the state picks the animation. */
-.pip {
-  position: relative;
+/* Ask Pip: chips, the Ask field, my reply. Surface steps, no borders; the accent marks actions. */
+.ask {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  padding: var(--space-4);
+  border-radius: var(--radius);
+  background: var(--surface);
+}
+
+.ask__head {
   display: flex;
   align-items: center;
-  justify-content: center;
-  gap: 18%;
-  border-radius: 50%;
-  background: var(--accent);
-  box-shadow: 0 0 24px rgb(124 231 196 / 0.35);
-  animation: pip-breathe var(--motion-pip) infinite;
-  flex-shrink: 0;
+  gap: var(--space-3);
 }
 
-.pip__eye {
-  width: 11%;
-  height: 26%;
-  border-radius: 999px;
-  background: var(--bg);
-  transition: height var(--motion-fast);
-}
-
-.pip--sleep {
-  opacity: 0.5;
-  box-shadow: none;
-}
-
-.pip--sleep .pip__eye {
-  height: 5%;
-}
-
-.pip--thinking .pip__eye {
-  transform: translate(25%, -25%);
-}
-
-.pip__dots {
-  position: absolute;
-  bottom: -30%;
+.ask__form {
   display: flex;
-  gap: 4px;
+  gap: var(--space-2);
 }
 
-.pip__dots span {
-  width: 5px;
-  height: 5px;
+.ask__form .text-input {
+  flex: 1;
+  min-width: 0;
+  background: var(--bg);
+}
+
+/* Narrow phones: the question gets the whole row, the buttons share the next one. */
+@media (max-width: 400px) {
+  .ask__form {
+    flex-wrap: wrap;
+  }
+
+  .ask__form .text-input {
+    flex-basis: 100%;
+  }
+
+  .ask__form .button--accent {
+    flex: 1;
+  }
+}
+
+.chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+}
+
+.chip {
+  min-height: var(--touch-min);
+  padding: var(--space-2) var(--space-4);
+  border: none;
+  border-radius: var(--radius);
+  background: var(--surface2);
+  color: var(--text);
+  font: inherit;
+  text-align: left;
+  cursor: pointer;
+  transition:
+    background var(--motion-fast),
+    transform var(--motion-fast);
+}
+
+.chip:active {
+  transform: scale(0.98);
+}
+
+.chip:disabled {
+  color: var(--text-muted);
+  cursor: default;
+}
+
+.chip:focus-visible,
+.mic:focus-visible,
+.lab__button:focus-visible,
+.lab__wheel:focus-visible {
+  outline: 3px solid var(--accent);
+  outline-offset: 2px;
+}
+
+/* "Did you mean": the options become full-width buttons, easy to hit for every age. */
+.chips--clarify {
+  flex-direction: column;
+}
+
+.chips--clarify .chip {
+  width: 100%;
+}
+
+.chip--quiet {
+  background: transparent;
+  color: var(--text-muted);
+}
+
+.reply {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-3);
+  padding: var(--space-3) var(--space-4);
+  border-radius: var(--radius);
+  background: var(--bg);
+}
+
+.reply__text {
+  flex: 1;
+  margin: 0;
+  font-size: var(--type-title);
+  line-height: 1.35;
+}
+
+.reply--quiet .reply__text {
+  font-size: var(--type-body);
+  color: var(--text-muted);
+}
+
+.mic {
+  min-width: var(--touch-min);
+  padding: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--bg);
+}
+
+.mic--on {
+  background: var(--accent);
+  color: var(--bg);
+}
+
+.action-line {
+  min-height: 1.4em;
+}
+
+.action-line--warn {
+  color: var(--danger);
+}
+
+.tv-note {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-3);
+}
+
+.button--quiet {
+  align-self: flex-start;
+  background: transparent;
+  color: var(--text-muted);
+}
+
+/* ?lab=1: the simulated Pip button and touchwheel. */
+.lab {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  margin-top: var(--space-6);
+  padding: var(--space-4);
+  border-radius: var(--radius);
+  background: var(--surface);
+}
+
+.lab__row {
+  display: flex;
+  align-items: center;
+  gap: var(--space-6);
+}
+
+.lab__button {
+  width: 88px;
+  height: 88px;
+  border: none;
   border-radius: 50%;
   background: var(--accent);
-  animation: pip-dot 1.2s infinite;
+  color: var(--bg);
+  font: inherit;
+  font-weight: 600;
+  touch-action: none;
+  cursor: pointer;
 }
 
-.pip__dots span:nth-child(2) {
-  animation-delay: 0.2s;
-}
-
-.pip__dots span:nth-child(3) {
-  animation-delay: 0.4s;
-}
-
-.pip--cheer {
-  box-shadow: 0 0 36px rgb(124 231 196 / 0.7);
-}
-
-@keyframes pip-breathe {
-  0%,
-  100% {
-    transform: scale(1);
-  }
-  50% {
-    transform: scale(1.04);
-  }
-}
-
-@keyframes pip-dot {
-  0%,
-  100% {
-    opacity: 0.3;
-  }
-  50% {
-    opacity: 1;
-  }
+.lab__wheel {
+  width: 160px;
+  height: 160px;
+  border-radius: 50%;
+  background: radial-gradient(circle, var(--surface) 0 34%, var(--surface2) 35% 100%);
+  touch-action: none;
+  cursor: grab;
 }
 
 @media (prefers-reduced-motion: reduce) {

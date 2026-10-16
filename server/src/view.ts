@@ -3,19 +3,34 @@ import { isOnline } from './core/players.js';
 import { toContentView, unlockedQuestions, type Content } from './film/content.js';
 import { estimatePosition } from './film/playback.js';
 import type { Session } from './sessions.js';
-import type { SessionView } from './shared/protocol.js';
+import type { ActionView, FeaturesView, SessionView } from './shared/protocol.js';
 
-/** The session as clients see it. Never holds notes, answers or picks (quiz comes in Step 9). */
+const NO_FEATURES: FeaturesView = { quiz: false };
+
+/** The session as clients see it. Never holds notes, facts, answers or picks. */
 export function buildView(
   session: Session,
   films: Content[],
   publicUrl: string,
   nowMs: number,
+  features: FeaturesView = NO_FEATURES,
 ): SessionView {
+  const isWatching = session.stage === 'watch';
+  const action = session.lastAction;
+  const lastAction: ActionView | null =
+    isWatching && action
+      ? {
+          commandId: action.commandId,
+          type: action.type,
+          deltaSec: action.deltaSec,
+          by: action.by,
+          status: action.status,
+        }
+      : null;
   const film = films.find((f) => f.id === session.contentId) ?? null;
   const playback = session.playback;
   const quizUnlocked =
-    session.stage === 'watch' && film && playback && playback.contentId === film.id
+    features.quiz && isWatching && film && playback && playback.contentId === film.id
       ? unlockedQuestions(film, estimatePosition(playback, session.playbackAt, nowMs)).length
       : 0;
   return {
@@ -33,6 +48,9 @@ export function buildView(
     playback,
     quizUnlocked,
     pip: session.pip,
+    assist: isWatching ? session.assist : null,
+    lastAction,
+    features,
     quiz: null,
     results: null,
   };

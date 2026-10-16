@@ -14,6 +14,14 @@ export const configSchema = z.object({
   BEDROCK_MODEL_ID: z.string().min(1).default('us.amazon.nova-2-lite-v1:0'),
   AI_ENABLED: booleanFlag.default(true),
   LOG_TEXT: booleanFlag.default(false),
+  // vNext. Which timeline facts Pip may use: 'accepted' (reviewed, the default) or 'candidate'
+  // (also unreviewed drafts; development only).
+  TIMELINE_REVIEW: z.enum(['accepted', 'candidate']).default('accepted'),
+  QUIZ_ENABLED: booleanFlag.default(false), // the quiz is an opt-in mode, never the default path
+  // 'typesafe' adds a typed judgement for text the rules cannot route; needs TYPESAFE_API_KEY.
+  INTENT_JUDGE: z.enum(['rules', 'typesafe']).default('rules'),
+  // Adds the lab film from lab/content (The Lantern Fox, made by npm run lab:film) to the films.
+  LAB_CONTENT: booleanFlag.default(false),
 });
 
 export type Config = Readonly<z.infer<typeof configSchema>>;

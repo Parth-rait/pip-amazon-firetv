@@ -1,0 +1,89 @@
+/* Pip, shared by the pad and the TV simulator. One character; motion only shows state. */
+/* Pip (section 3.4): a mint circle with two eyes; the state picks the animation. */
+.pip {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 18%;
+  border-radius: 50%;
+  background: var(--accent);
+  box-shadow: 0 0 24px rgb(124 231 196 / 0.35);
+  animation: pip-breathe var(--motion-pip) infinite;
+  flex-shrink: 0;
+}
+
+.pip__eye {
+  width: 11%;
+  height: 26%;
+  border-radius: 999px;
+  background: var(--bg);
+  transition: height var(--motion-fast);
+}
+
+.pip--sleep {
+  opacity: 0.5;
+  box-shadow: none;
+}
+
+.pip--sleep .pip__eye {
+  height: 5%;
+}
+
+.pip--thinking .pip__eye {
+  transform: translate(25%, -25%);
+}
+
+.pip__dots {
+  position: absolute;
+  bottom: -30%;
+  display: flex;
+  gap: 4px;
+}
+
+.pip__dots span {
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: var(--accent);
+  animation: pip-dot 1.2s infinite;
+}
+
+.pip__dots span:nth-child(2) {
+  animation-delay: 0.2s;
+}
+
+.pip__dots span:nth-child(3) {
+  animation-delay: 0.4s;
+}
+
+.pip--cheer {
+  box-shadow: 0 0 36px rgb(124 231 196 / 0.7);
+}
+
+@keyframes pip-breathe {
+  0%,
+  100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.04);
+  }
+}
+
+@keyframes pip-dot {
+  0%,
+  100% {
+    opacity: 0.3;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .pip,
+  .pip__dots span {
+    animation: none !important;
+  }
+}

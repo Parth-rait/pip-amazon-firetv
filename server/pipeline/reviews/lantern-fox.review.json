@@ -1,0 +1,78 @@
+{
+  "schemaVersion": 1,
+  "assetId": "lantern-fox",
+  "reviewer": "lab script check (synthetic fixture; not a person)",
+  "reviewedAt": "2026-10-16",
+  "decisions": {
+    "entity:ember": {
+      "status": "accepted"
+    },
+    "entity:lantern": {
+      "status": "accepted"
+    },
+    "entity:hoot": {
+      "status": "accepted"
+    },
+    "entity:lighthouse": {
+      "status": "accepted"
+    },
+    "entity:moss": {
+      "status": "accepted"
+    },
+    "c01": {
+      "status": "accepted"
+    },
+    "c02": {
+      "status": "accepted"
+    },
+    "c03": {
+      "status": "accepted"
+    },
+    "c04": {
+      "status": "accepted"
+    },
+    "c05": {
+      "status": "accepted"
+    },
+    "c06": {
+      "status": "accepted"
+    },
+    "c07": {
+      "status": "accepted"
+    },
+    "c08": {
+      "status": "accepted"
+    },
+    "c09": {
+      "status": "accepted"
+    },
+    "c10": {
+      "status": "accepted"
+    },
+    "c11": {
+      "status": "accepted"
+    },
+    "c12": {
+      "status": "accepted"
+    },
+    "c13": {
+      "status": "accepted"
+    },
+    "c14": {
+      "status": "accepted"
+    },
+    "c15": {
+      "status": "accepted"
+    },
+    "c16": {
+      "status": "accepted"
+    },
+    "c17": {
+      "status": "accepted"
+    },
+    "c18": {
+      "status": "accepted"
+    }
+  },
+  "edits": {}
+}

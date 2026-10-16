@@ -3,6 +3,10 @@ import { randomBytes } from 'node:crypto';
 import type { Socket } from 'socket.io';
 import type { Config } from './config.js';
 import type { TextModel } from './core/ai/model.js';
+import type { AnswerCache } from './core/context/answer-cache.js';
+import type { Timeline } from './core/context/timeline.js';
+import { noJudge, type IntentJudge } from './core/intent/judge.js';
+import { routeText } from './core/intent/route-text.js';
 import { newCode } from './core/codes.js';
 import { hostTimerKey, pickTvCode, startHostGrace } from './core/pairing.js';
 import { pipTimerKey, restingPip, setPip, type CoreDeps } from './core/pip.js';
@@ -11,10 +15,27 @@ import { createRateLimit } from './core/rate-limit.js';
 import type { Timers } from './core/timers.js';
 import type { Content } from './film/content.js';
 import { quizTimerKey } from './film/quiz.js';
-import { broadcast, goToLobby, roomOf, watchFilm, type FlowDeps, type PipServer } from './flow.js';
+import { askPip, dismissAssist } from './assist-flow.js';
+import {
+  actionTimerKey,
+  assistTimerKey,
+  broadcast,
+  goToLobby,
+  roomOf,
+  watchFilm,
+  type FlowDeps,
+  type PipServer,
+} from './flow.js';
+import { applyInput, observePlayback, sendPlayback } from './playback-flow.js';
 import { errorFields, type log as Log } from './log.js';
 import type { Session, SessionStore } from './sessions.js';
-import { LIMITS, type ClientToServerEvents, type HelloResult } from './shared/protocol.js';
+import {
+  LIMITS,
+  type AskResult,
+  type ClientToServerEvents,
+  type HelloResult,
+  type InputResult,
+} from './shared/protocol.js';
 import * as schema from './validate.js';
 import { buildView } from './view.js';
 
@@ -24,7 +45,10 @@ export interface RealtimeDeps {
   films: Content[];
   config: Config;
   timers: Timers;
-  model: TextModel; // used by Ask Pip from Step 7
+  model: TextModel;
+  timelines: Map<string, Timeline>; // one per film; empty when a film has no timeline yet
+  cache: AnswerCache;
+  judge?: IntentJudge;
   log: typeof Log;
   now: () => number;
 }
@@ -37,7 +61,26 @@ const JOIN_WINDOW_MS = 60 * 1000;
 
 /** Registers every handler; returns a function that stops the idle sweep. */
 export function registerRealtime(deps: RealtimeDeps): () => void {
-  const flow: FlowDeps = { ...deps, publicUrl: deps.config.PUBLIC_URL };
+  const features = { quiz: deps.config.QUIZ_ENABLED };
+  const flow: FlowDeps = {
+    io: deps.io,
+    films: deps.films,
+    publicUrl: deps.config.PUBLIC_URL,
+    timers: deps.timers,
+    now: deps.now,
+    timelines: deps.timelines,
+    features,
+    judge: deps.judge ?? noJudge,
+    log: deps.log,
+    answer: {
+      model: deps.model,
+      modelId: deps.config.BEDROCK_MODEL_ID,
+      aiEnabled: deps.config.AI_ENABLED,
+      cache: deps.cache,
+      policy: deps.config.TIMELINE_REVIEW,
+      now: deps.now,
+    },
+  };
   const joinLimit = createRateLimit(LIMITS.failedJoinsPerMinute, JOIN_WINDOW_MS);
   const core = (session: Session): CoreDeps => ({
     timers: deps.timers,
@@ -164,7 +207,10 @@ export function registerRealtime(deps: RealtimeDeps): () => void {
       pickHost(session, now);
       socket.data = { role: 'pad', code, playerId } satisfies SocketData;
       void socket.join(roomOf(code));
-      ack({ ok: true, view: buildView(session, deps.films, deps.config.PUBLIC_URL, now) });
+      ack({
+        ok: true,
+        view: buildView(session, deps.films, deps.config.PUBLIC_URL, now, features),
+      });
       deps.log.info('pad.join', { socketId: socket.id, code, playerId, isNew: outcome.isNew });
       if (session.pip === 'sleep') setPip(session, 'idle', core(session));
       else broadcast(session, flow);
@@ -184,10 +230,14 @@ export function registerRealtime(deps: RealtimeDeps): () => void {
         if (!watchFilm(session, command.contentId, flow)) ignored('pad:host', 'unknown-film');
       } else if (
         (command.type === 'play' || command.type === 'pause' || command.type === 'seek') &&
-        stage === 'watch' &&
-        session.tvSocketId
+        stage === 'watch'
       ) {
-        deps.io.to(session.tvSocketId).emit('tv:command', command);
+        const intent =
+          command.type === 'seek'
+            ? { type: 'seek' as const, deltaSec: command.deltaSec }
+            : { type: command.type };
+        const sent = sendPlayback(session, intent, d.playerId, command.commandId ?? null, flow);
+        if (!sent.ok) ignored('pad:host', sent.reason);
       } else if (command.type === 'lobby' && stage !== 'lobby') {
         goToLobby(session, flow);
       } else {
@@ -212,7 +262,82 @@ export function registerRealtime(deps: RealtimeDeps): () => void {
       if (parsed.data.contentId !== session.contentId) return ignored('tv:playback', 'other-film');
       session.playback = parsed.data;
       session.playbackAt = deps.now();
+      observePlayback(session, flow);
       broadcast(session, flow);
+    });
+
+    on('pad:ask', (payload, ack) => {
+      if (typeof ack !== 'function') return invalid('pad:ask');
+      const reply = (result: AskResult) => ack(result);
+      const parsed = schema.askSchema.safeParse(payload);
+      const d = data();
+      const session = sessionOf();
+      if (!parsed.success || !session || d?.role !== 'pad' || !session.players.has(d.playerId)) {
+        invalid('pad:ask');
+        return reply({ ok: false, reason: 'invalid' });
+      }
+      const player = session.players.get(d.playerId);
+      const now = deps.now();
+      if (session.stage !== 'watch') return reply({ ok: false, reason: 'not-watching' });
+      // Commands never wait for a model, so only a question is "busy" while another is answered.
+      if (session.asking && routeText(parsed.data.text).kind === 'question') {
+        return reply({ ok: false, reason: 'busy' });
+      }
+      if (player && now - player.lastAskAt < LIMITS.askMinIntervalMs) {
+        return reply({ ok: false, reason: 'too-soon' });
+      }
+      reply({ ok: true });
+      deps.log.info('ask.start', {
+        code: session.code,
+        playerId: d.playerId,
+        via: parsed.data.via,
+        ...(deps.config.LOG_TEXT ? { text: parsed.data.text } : {}),
+      });
+      askPip(session, d.playerId, parsed.data.text, parsed.data.via, flow).catch(
+        (error: unknown) => {
+          session.asking = false;
+          deps.log.error('failed.ask', { code: session.code, ...errorFields(error) });
+        },
+      );
+    });
+
+    on('pad:assist', (payload) => {
+      const parsed = schema.assistSchema.safeParse(payload);
+      if (!parsed.success) return invalid('pad:assist');
+      const d = data();
+      const session = sessionOf();
+      if (!session || d?.role !== 'pad' || !session.players.has(d.playerId)) {
+        return ignored('pad:assist', 'not-in-session');
+      }
+      session.journal.append({
+        at: deps.now(),
+        type: 'assist.dismiss',
+        source: 'pad',
+        actor: d.playerId,
+        data: {},
+      });
+      dismissAssist(session, flow);
+    });
+
+    on('pad:input', (payload, ack) => {
+      if (typeof ack !== 'function') return invalid('pad:input');
+      const parsed = schema.inputSchema.safeParse(payload);
+      const d = data();
+      const session = sessionOf();
+      if (!parsed.success || !session || d?.role !== 'pad' || !session.players.has(d.playerId)) {
+        invalid('pad:input');
+        return ack({ ok: false, reason: 'invalid' } satisfies InputResult);
+      }
+      ack(applyInput(session, parsed.data, { kind: 'pad', playerId: d.playerId }, flow));
+    });
+
+    on('tv:input', (payload) => {
+      const parsed = schema.inputSchema.safeParse(payload);
+      if (!parsed.success) return invalid('tv:input');
+      const session = sessionOf();
+      if (!session || session.tvSocketId !== socket.id) return ignored('tv:input', 'not-tv');
+      const result = applyInput(session, parsed.data, { kind: 'tv' }, flow);
+      if (!result.ok) ignored('tv:input', result.reason);
     });
 
     socket.on('disconnect', (reason) => {
@@ -227,7 +352,8 @@ export function registerRealtime(deps: RealtimeDeps): () => void {
 
   const sweep = setInterval(() => {
     for (const code of deps.store.sweep(deps.now())) {
-      for (const key of [pipTimerKey(code), hostTimerKey(code), quizTimerKey(code)])
+      const keys = [pipTimerKey(code), hostTimerKey(code), quizTimerKey(code)];
+      for (const key of [...keys, assistTimerKey(code), actionTimerKey(code)])
         deps.timers.clear(key);
       deps.log.info('session.expired', { code });
     }

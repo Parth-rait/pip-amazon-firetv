@@ -1,4 +1,6 @@
 // Film files: the schema and checks from PROJECT.md section 5.6, loading, and what clients may see.
+// vNext: facts about the film live in content/timelines/ (film/timeline-file.ts). `notes` stays as
+// legacy hand-written context and `quiz` serves the opt-in quiz mode; both may be empty.
 import { readdirSync, readFileSync } from 'node:fs';
 import { basename, join } from 'node:path';
 import { z } from 'zod';
@@ -37,8 +39,8 @@ export const contentSchema = z
     credit: z.string().min(1).max(200),
     durationSec: z.number().positive(),
     premise: z.string().min(1).max(400),
-    notes: z.array(noteSchema).min(1).max(40),
-    quiz: z.array(quizQuestionSchema).min(1).max(8),
+    notes: z.array(noteSchema).max(40).default([]),
+    quiz: z.array(quizQuestionSchema).max(8).default([]),
   })
   .superRefine((content, ctx) => {
     for (const key of ['notes', 'quiz'] as const) {

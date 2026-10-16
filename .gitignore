@@ -9,3 +9,4 @@ coverage
 server/media/
 server/content/drafts/
 .DS_Store
+server/data/

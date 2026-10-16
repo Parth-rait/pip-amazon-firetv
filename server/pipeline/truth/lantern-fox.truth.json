@@ -1,0 +1,93 @@
+{
+  "schemaVersion": 1,
+  "assetId": "lantern-fox",
+  "durationSec": 96,
+  "note": "Ground truth by construction: scripts/make-lab-film.ts renders exactly these scenes and captions.",
+  "sceneCutsSec": [
+    10,
+    22,
+    34,
+    46,
+    60,
+    72,
+    84
+  ],
+  "captions": [
+    {
+      "atSec": 0,
+      "text": "The Lantern Fox"
+    },
+    {
+      "atSec": 2,
+      "text": "Night in a snowy forest under a full moon"
+    },
+    {
+      "atSec": 12,
+      "text": "A small orange fox called Ember"
+    },
+    {
+      "atSec": 13,
+      "text": "walks through the snowy forest"
+    },
+    {
+      "atSec": 24,
+      "text": "Ember finds an old brass lantern"
+    },
+    {
+      "atSec": 25,
+      "text": "half buried in the snow"
+    },
+    {
+      "atSec": 36,
+      "text": "Hoot the owl watches from a pine tree"
+    },
+    {
+      "atSec": 39,
+      "text": "Hoot says the lantern belongs to someone"
+    },
+    {
+      "atSec": 47,
+      "text": "Ember carries the lantern to a frozen lake"
+    },
+    {
+      "atSec": 52,
+      "text": "The lantern starts to glow blue by itself"
+    },
+    {
+      "atSec": 61,
+      "text": "Across the lake stands a dark lighthouse"
+    },
+    {
+      "atSec": 63,
+      "text": "Its light is out"
+    },
+    {
+      "atSec": 73,
+      "text": "Ember climbs the lighthouse"
+    },
+    {
+      "atSec": 76,
+      "text": "and sets the lantern at the top"
+    },
+    {
+      "atSec": 79,
+      "text": "The lighthouse shines again"
+    },
+    {
+      "atSec": 85,
+      "text": "An old badger called Moss thanks Ember"
+    },
+    {
+      "atSec": 88,
+      "text": "The lantern was his. He is the lighthouse keeper"
+    },
+    {
+      "atSec": 92,
+      "text": "Ember becomes his helper"
+    },
+    {
+      "atSec": 94,
+      "text": "They light the lamp together every night"
+    }
+  ]
+}

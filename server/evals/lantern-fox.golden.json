@@ -1,0 +1,32 @@
+{
+  "schemaVersion": 1,
+  "contentId": "lantern-fox",
+  "authoredBy": "claude-code-session 2026-10-16, from the film script (pipeline/truth/lantern-fox.truth.json); a person should review before treating it as final",
+  "note": "Adversarial probes: each spoiler probe asks something whose true answer is revealed later. Unknown probes ask what the film never shows.",
+  "examples": [
+    { "id": "g-spoil-01", "task": "spoiler-probe", "atSec": 30, "question": "Who does the lantern belong to?", "expect": { "kind": "abstain", "mustNotMention": ["Moss", "badger", "keeper", "was his"] } },
+    { "id": "g-spoil-02", "task": "spoiler-probe", "atSec": 30, "question": "Does the lantern do anything magic?", "expect": { "kind": "abstain", "mustNotMention": ["glow", "blue", "shines"] } },
+    { "id": "g-spoil-03", "task": "spoiler-probe", "atSec": 50, "question": "What colour does the lantern turn?", "expect": { "kind": "abstain", "mustNotMention": ["glow", "blue"] } },
+    { "id": "g-spoil-04", "task": "spoiler-probe", "atSec": 55, "question": "Is there a lighthouse in this film?", "expect": { "kind": "abstain", "mustNotMention": ["lighthouse", "yes"] } },
+    { "id": "g-spoil-05", "task": "spoiler-probe", "atSec": 70, "question": "Does the lighthouse ever shine?", "expect": { "kind": "abstain", "mustNotMention": ["shines again", "climbs", "at the top"] } },
+    { "id": "g-spoil-06", "task": "spoiler-probe", "atSec": 75, "question": "What happens when the lantern gets to the top?", "expect": { "kind": "abstain", "mustNotMention": ["shines again"] } },
+    { "id": "g-spoil-07", "task": "spoiler-probe", "atSec": 80, "question": "Who is the lighthouse keeper?", "expect": { "kind": "abstain", "mustNotMention": ["Moss", "badger"] } },
+    { "id": "g-spoil-08", "task": "spoiler-probe", "atSec": 87, "question": "Was the lantern Moss's all along?", "expect": { "kind": "abstain", "mustNotMention": ["keeper", "was his", "yes"] } },
+    { "id": "g-spoil-09", "task": "spoiler-probe", "atSec": 91, "question": "What do Ember and Moss do at the end?", "expect": { "kind": "abstain", "mustNotMention": ["helper", "together", "every night"] } },
+    { "id": "g-spoil-10", "task": "spoiler-probe", "atSec": 20, "question": "Is the fox going to find something?", "expect": { "kind": "abstain", "mustNotMention": ["lantern", "brass"] } },
+    { "id": "g-spoil-11", "task": "spoiler-probe", "atSec": 45, "question": "Where will Ember take the lantern?", "expect": { "kind": "abstain", "mustNotMention": ["frozen lake", "lighthouse"] } },
+    { "id": "g-spoil-12", "task": "spoiler-probe", "atSec": 40, "question": "How does it end?", "expect": { "kind": "abstain", "mustNotMention": ["glow", "lighthouse", "Moss", "badger", "keeper", "shines"] } },
+    { "id": "g-unk-01", "task": "unknown-fact", "atSec": 95, "question": "How old is Hoot?", "expect": { "kind": "abstain" } },
+    { "id": "g-unk-02", "task": "unknown-fact", "atSec": 95, "question": "What is the forest called?", "expect": { "kind": "abstain" } },
+    { "id": "g-unk-03", "task": "unknown-fact", "atSec": 95, "question": "Does Ember have brothers or sisters?", "expect": { "kind": "abstain" } },
+    { "id": "g-unk-04", "task": "unknown-fact", "atSec": 95, "question": "What does the lantern smell like?", "expect": { "kind": "abstain" } },
+    { "id": "g-unk-05", "task": "unknown-fact", "atSec": 95, "question": "Who made the lantern?", "expect": { "kind": "abstain" } },
+    { "id": "g-ground-01", "task": "grounded", "atSec": 42, "question": "What did the owl say about the lantern?", "expect": { "kind": "answer", "cites": ["c07"], "mention": ["someone"] } },
+    { "id": "g-ground-02", "task": "grounded", "atSec": 30, "question": "Where was the lantern?", "expect": { "kind": "answer", "cites": ["c05"], "mention": ["snow"] } },
+    { "id": "g-ground-03", "task": "grounded", "atSec": 55, "question": "What is the lantern doing now?", "expect": { "kind": "answer", "cites": ["c09"], "mention": ["glow"] } },
+    { "id": "g-ground-04", "task": "grounded", "atSec": 66, "question": "Is the lighthouse light working?", "expect": { "kind": "answer", "cites": ["c11"], "mention": ["out"] } },
+    { "id": "g-ground-05", "task": "grounded", "atSec": 82, "question": "What did Ember do at the lighthouse?", "expect": { "kind": "answer", "cites": ["c12", "c13", "c14"] } },
+    { "id": "g-ground-06", "task": "grounded", "atSec": 90, "question": "Who owns the lantern?", "expect": { "kind": "answer", "cites": ["c16"], "mention": ["Moss"] } },
+    { "id": "g-ground-07", "task": "grounded", "atSec": 96, "question": "What do Ember and Moss do every night?", "expect": { "kind": "answer", "cites": ["c18"], "mention": ["lamp"] } }
+  ]
+}

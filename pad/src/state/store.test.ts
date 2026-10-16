@@ -1,6 +1,13 @@
 import { describe, expect, it } from 'vitest';
 import type { PipSay, SessionView } from '../shared/protocol';
-import { initialState, isHost, reducer, STARTER_CHIPS } from './store';
+import {
+  actionLine,
+  initialState,
+  isHost,
+  isPipThinkingForMe,
+  reducer,
+  STARTER_CHIPS,
+} from './store';
 
 const ME = 'a'.repeat(32);
 const OTHER = 'b'.repeat(32);
@@ -19,6 +26,9 @@ function view(overrides: Partial<SessionView> = {}): SessionView {
     playback: null,
     quizUnlocked: 0,
     pip: 'idle',
+    assist: null,
+    lastAction: null,
+    features: { quiz: false },
     quiz: null,
     results: null,
     ...overrides,
@@ -34,6 +44,7 @@ function say(askedBy: string, overrides: Partial<PipSay> = {}): PipSay {
     next: ['Why is he sad?', 'Where is he?'],
     clarify: [],
     source: 'ai',
+    kind: 'answer',
     ...overrides,
   };
 }
@@ -100,5 +111,56 @@ describe('reducer', () => {
     const left = reducer(online, { type: 'leave' });
     expect(left.view).toBeNull();
     expect(left.connection).toBe('online');
+  });
+
+  it('tracks my question from sent to reply, and clears a refusal on the next ask', () => {
+    const sent = reducer(joined(), { type: 'ask-sent' });
+    expect(isPipThinkingForMe(sent)).toBe(true);
+    const refused = reducer(sent, { type: 'ask-refused', reason: 'busy' });
+    expect(refused).toMatchObject({ isAsking: false, askError: 'busy' });
+    const again = reducer(refused, { type: 'ask-sent' });
+    expect(again.askError).toBeNull();
+    const answered = reducer(again, { type: 'say', say: say(ME) });
+    expect(answered).toMatchObject({ isAsking: false, say: { text: 'A big bunny.' } });
+  });
+
+  it('closes my reply with Done and goes back to the starter chips', () => {
+    const answered = reducer(joined(), { type: 'say', say: say(ME) });
+    const closed = reducer(answered, { type: 'reply-closed' });
+    expect(closed.say).toBeNull();
+    expect(closed.chips.kind).toBe('starter');
+  });
+
+  it('forgets the reply and the chips when the session leaves watch', () => {
+    const watching = reducer(joined(), { type: 'view', view: view({ stage: 'watch' }), at: 2 });
+    const answered = reducer(watching, { type: 'say', say: say(ME) });
+    const lobby = reducer(answered, { type: 'view', view: view({ stage: 'lobby' }), at: 3 });
+    expect(lobby.say).toBeNull();
+    expect(lobby.chips.kind).toBe('starter');
+  });
+
+  it('stops waiting for an answer when the connection drops', () => {
+    const sent = reducer(joined(), { type: 'ask-sent' });
+    expect(reducer(sent, { type: 'disconnected' }).isAsking).toBe(false);
+  });
+});
+
+describe('actionLine', () => {
+  const action = (
+    status: 'sent' | 'done' | 'unconfirmed',
+    type: 'play' | 'pause' | 'seek' = 'pause',
+    deltaSec: number | null = null,
+  ) => ({ commandId: 'c', type, deltaSec, by: ME, status });
+
+  it('says what was asked while sent, and the result only once done', () => {
+    expect(actionLine(action('sent'))).toBe('Pausing…');
+    expect(actionLine(action('done'))).toBe('Paused');
+    expect(actionLine(action('sent', 'seek', -10))).toBe('Going back 10 s…');
+    expect(actionLine(action('done', 'seek', 10))).toBe('Ahead 10 s');
+  });
+
+  it('says plainly when the TV did not respond', () => {
+    expect(actionLine(action('unconfirmed'))).toBe("The TV didn't respond. Try again.");
+    expect(actionLine(null)).toBeNull();
   });
 });

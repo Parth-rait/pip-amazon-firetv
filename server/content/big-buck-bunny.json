@@ -4,15 +4,7 @@
   "url": "/media/big-buck-bunny.mp4",
   "credit": "Big Buck Bunny, (c) copyright 2008 Blender Foundation, www.bigbuckbunny.org, CC BY 3.0",
   "durationSec": 596,
-  "premise": "Placeholder premise. Parth writes the real one in Step 7.",
-  "notes": [{ "atSec": 0, "text": "Placeholder note. Parth writes the real notes in Step 7." }],
-  "quiz": [
-    {
-      "atSec": 0,
-      "question": "Placeholder question. Parth checks the real quiz in Step 8?",
-      "choices": ["Right choice", "Wrong choice", "Wrong choice", "Wrong choice"],
-      "answer": 0,
-      "explanation": "Placeholder explanation."
-    }
-  ]
+  "premise": "Placeholder premise. Parth writes the real, spoiler-free one when the timeline is reviewed.",
+  "notes": [],
+  "quiz": []
 }
