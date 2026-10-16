@@ -38,7 +38,8 @@ Hackathon project (Amazon Developer Hackathon, Fire TV track). Deadline: Fri Oct
 - Step 12: drafts only: README.md (what, why, architecture, Amazon tech, how to run, tests, known issues, credits) and docs/devpost.md, with "After" marks for what needs the TV app, measurements or the usability test. `npm audit`: 0 vulnerabilities in server/ and pad/.
 - Step 3: TV spike. Done on the Mac (gate 1): every diagnostics line green on the VVD through the tunnel, round trip 28 to 104 ms, the film plays, the remote pauses it. `smoke:ai` waits for AWS.
 - Step 6: TV lobby and watch. Done on the Mac (gate 2): QR join, host commands 177 to 239 ms, remote OK starts the film, server restart keeps the film playing.
-- Next (agreed Oct 16): film notes and quiz drafts; a local brain (Ollama) with an answer memory until AWS is verified; Pip moods and customization; pad and TV redesign (minimal by default); Sintel as a second film; then the TV parts of Steps 9 and 10, Step 11 and Step 12.
+- Oct 16 (agreed with Parth, PROJECT.md 2.4): film notes and quizzes drafted for Big Buck Bunny and Sintel (the agent read a frame every 6 s and the subtitles; Parth checks the times); local brain `AI_PROVIDER=ollama` with qwen2.5:3b; answer memory (PROJECT.md 5.9). eval:ask: 0 leaks on both films; the 3B model still makes up small facts, so the demo uses Nova.
+- Next (agreed Oct 16): Pip moods and customization; pad and TV redesign (minimal by default); then the TV parts of Steps 9 and 10, Step 11 and Step 12.
 
 Update this list when a step is committed.
 

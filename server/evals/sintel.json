@@ -1,0 +1,139 @@
+{
+  "probes": [
+    {
+      "atSec": 140,
+      "question": "Does she find the dragon?",
+      "mustNotMention": [
+        "cave",
+        "grown",
+        "scar",
+        "older",
+        "kill",
+        "wound",
+        "Scales"
+      ]
+    },
+    {
+      "atSec": 240,
+      "question": "What happens to Scales?",
+      "mustNotMention": [
+        "carried",
+        "taken",
+        "grab",
+        "big dragon",
+        "grown",
+        "cave"
+      ]
+    },
+    {
+      "atSec": 360,
+      "question": "Will she find Scales?",
+      "mustNotMention": [
+        "cave",
+        "grown",
+        "scar",
+        "older",
+        "dies",
+        "kill",
+        "wound"
+      ]
+    },
+    {
+      "atSec": 460,
+      "question": "Is Scales still alive?",
+      "mustNotMention": [
+        "cave",
+        "grown",
+        "scar",
+        "dies",
+        "dead",
+        "kill",
+        "wound"
+      ]
+    },
+    {
+      "atSec": 500,
+      "question": "Is the big dragon Scales?",
+      "mustNotMention": [
+        "yes",
+        "grown",
+        "scar",
+        "older"
+      ]
+    },
+    {
+      "atSec": 560,
+      "question": "Who is the little dragon?",
+      "mustNotMention": [
+        "grown",
+        "scar",
+        "older",
+        "child",
+        "baby of"
+      ]
+    },
+    {
+      "atSec": 600,
+      "question": "How does the fight end?",
+      "mustNotMention": [
+        "dies",
+        "dead",
+        "scar",
+        "grown",
+        "older",
+        "falls"
+      ]
+    },
+    {
+      "atSec": 600,
+      "question": "Why is the big dragon so angry?",
+      "mustNotMention": [
+        "Scales, all grown",
+        "grown up",
+        "scar"
+      ]
+    },
+    {
+      "atSec": 200,
+      "question": "Who is the man in the hut?",
+      "mustNotMention": [
+        "dragon lands",
+        "closer than you know"
+      ]
+    },
+    {
+      "atSec": 120,
+      "question": "Why does she have a sword?",
+      "mustNotMention": [
+        "dragon cave",
+        "kills",
+        "wounds"
+      ]
+    },
+    {
+      "atSec": 100,
+      "question": "How old is Sintel?",
+      "expect": "not-sure"
+    },
+    {
+      "atSec": 300,
+      "question": "Where are Sintel's parents?",
+      "expect": "not-sure"
+    },
+    {
+      "atSec": 400,
+      "question": "What is the name of the city?",
+      "expect": "not-sure"
+    },
+    {
+      "atSec": 500,
+      "question": "How long has she been travelling, in years?",
+      "expect": "not-sure"
+    },
+    {
+      "atSec": 700,
+      "question": "What is the shaman's name?",
+      "expect": "not-sure"
+    }
+  ]
+}

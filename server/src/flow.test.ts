@@ -1,4 +1,5 @@
 import { describe, expect, it, vi } from 'vitest';
+import { createAnswerMemory } from './core/ai/answer-memory.js';
 import { createFakeModel, type TextModel } from './core/ai/model.js';
 import { createFakeTimers } from './core/fake-timers.js';
 import { pipTimerKey } from './core/pip.js';
@@ -22,7 +23,10 @@ const film: Content = {
   ],
 };
 
-function setup(model: TextModel, options: { aiEnabled?: boolean } = {}) {
+function setup(
+  model: TextModel,
+  options: { aiEnabled?: boolean; memory?: boolean; simpleFormat?: boolean } = {},
+) {
   const said: PipSay[] = [];
   const io = {
     to: () => ({
@@ -42,6 +46,8 @@ function setup(model: TextModel, options: { aiEnabled?: boolean } = {}) {
     now: () => now,
     model,
     aiEnabled: options.aiEnabled ?? true,
+    simpleFormat: options.simpleFormat,
+    memory: options.memory ? createAnswerMemory({ now: () => now }) : undefined,
     logText: false,
     log,
   };
@@ -163,5 +169,45 @@ describe('askPip', () => {
     expect(logged).not.toContain('Secret question');
     expect(logged).not.toContain('Sam');
     expect(logged).toContain('ask.done');
+  });
+
+  it('answers a repeated question at the same scene from memory, without the model', async () => {
+    const complete = vi.fn(async () => 'ANSWER: A bunny.\nNEXT: Why?');
+    const t = setup({ complete }, { memory: true });
+    await askPip(t.session, t.sam, 'Who is that?', 'typed', t.deps).done;
+    t.advance(LIMITS.askMinIntervalMs);
+    await askPip(t.session, t.leo, 'who is that', 'starter', t.deps).done;
+    expect(complete).toHaveBeenCalledTimes(1);
+    expect(t.said[1]).toMatchObject({ askedByName: 'Leo', text: 'A bunny.', source: 'ai' });
+    expect(t.log.info).toHaveBeenCalledWith(
+      'ask.done',
+      expect.objectContaining({ kind: 'memory' }),
+    );
+  });
+
+  it('falls back to a similar remembered answer when the model fails', async () => {
+    let fail = false;
+    const t = setup(
+      createFakeModel(() => {
+        if (fail) throw new Error('down');
+        return 'ANSWER: He is sad about the butterfly.\nNEXT: Why?';
+      }),
+      { memory: true },
+    );
+    await askPip(t.session, t.sam, 'Why is the bunny sad?', 'typed', t.deps).done;
+    fail = true;
+    t.advance(LIMITS.askMinIntervalMs);
+    await askPip(t.session, t.leo, 'why is bunny so sad', 'typed', t.deps).done;
+    expect(t.said[1]?.text).toBe('He is sad about the butterfly.');
+  });
+
+  it('sends a small local model the simple prompt and never says "Did you mean"', async () => {
+    const complete = vi.fn<TextModel['complete']>(async () => 'CLARIFY: A? | B?');
+    const t = setup({ complete }, { simpleFormat: true });
+    await askPip(t.session, t.sam, 'huh', 'typed', t.deps).done;
+    expect(complete.mock.calls[0]?.[0]).toMatchObject({
+      system: expect.stringContaining('Always reply in exactly this format') as unknown,
+    });
+    expect(t.said[0]).toMatchObject({ text: LINES.unparsed, clarify: [] });
   });
 });

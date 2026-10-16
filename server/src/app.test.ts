@@ -38,13 +38,19 @@ describe('createApp', () => {
 
   it('lists the films with full URLs and no notes or quiz', async () => {
     const body = (await (await fetch(`${baseUrl}/api/films`)).json()) as unknown[];
-    expect(body).toEqual([
-      expect.objectContaining({
-        id: 'big-buck-bunny',
-        url: 'https://pip.example.com/media/big-buck-bunny.mp4',
-      }),
-    ]);
-    expect(body[0]).not.toHaveProperty('notes');
+    expect(body).toEqual(
+      expect.arrayContaining([
+        expect.objectContaining({
+          id: 'big-buck-bunny',
+          url: 'https://pip.example.com/media/big-buck-bunny.mp4',
+        }),
+        expect.objectContaining({ id: 'sintel', url: 'https://pip.example.com/media/sintel.mp4' }),
+      ]),
+    );
+    for (const film of body) {
+      expect(film).not.toHaveProperty('notes');
+      expect(film).not.toHaveProperty('quiz');
+    }
   });
 
   it('answers a Range request with 206 and video/mp4', async () => {

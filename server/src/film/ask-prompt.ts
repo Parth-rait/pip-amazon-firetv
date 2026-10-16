@@ -1,7 +1,7 @@
 // buildAskPrompt(): the Ask Pip prompt from what the family has already seen (section 5.3).
 import type { AskVia } from '../shared/protocol.js';
 import type { Note } from './content.js';
-import { ASK_SYSTEM_PROMPT, CLARIFY_PICKED_LINE } from './prompts.js';
+import { ASK_SYSTEM_PROMPT, ASK_SYSTEM_PROMPT_SIMPLE, CLARIFY_PICKED_LINE } from './prompts.js';
 
 const MAX_HISTORY = 3;
 
@@ -19,6 +19,14 @@ export interface AskPromptInput {
   history: HistoryItem[]; // oldest first
   question: string;
   via: AskVia;
+  simpleFormat?: boolean; // a small local model: no CLARIFY, one example reply
+}
+
+/** The atSec of the last note at or before positionSec: the scene the family is in (0 before any). */
+export function sceneAt(notes: Note[], positionSec: number): number {
+  let scene = 0;
+  for (const note of notes) if (note.atSec <= positionSec) scene = note.atSec;
+  return scene;
 }
 
 /** m:ss, as the notes and <now> use. */
@@ -49,5 +57,8 @@ export function buildAskPrompt(input: AskPromptInput): { system: string; user: s
     ...(input.via === 'clarify' ? [CLARIFY_PICKED_LINE] : []),
     `Question: ${input.question}`,
   ];
-  return { system: ASK_SYSTEM_PROMPT, user: lines.join('\n') };
+  return {
+    system: input.simpleFormat ? ASK_SYSTEM_PROMPT_SIMPLE : ASK_SYSTEM_PROMPT,
+    user: lines.join('\n'),
+  };
 }

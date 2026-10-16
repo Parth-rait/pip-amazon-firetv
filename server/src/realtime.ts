@@ -2,6 +2,7 @@
 import { randomBytes } from 'node:crypto';
 import type { Socket } from 'socket.io';
 import type { Config } from './config.js';
+import type { AnswerMemory } from './core/ai/answer-memory.js';
 import type { TextModel } from './core/ai/model.js';
 import { newCode } from './core/codes.js';
 import { hostTimerKey, pickTvCode, startHostGrace } from './core/pairing.js';
@@ -34,6 +35,7 @@ export interface RealtimeDeps {
   config: Config;
   timers: Timers;
   model: TextModel;
+  memory?: AnswerMemory;
   log: typeof Log;
   now: () => number;
 }
@@ -50,6 +52,7 @@ export function registerRealtime(deps: RealtimeDeps): () => void {
     ...deps,
     publicUrl: deps.config.PUBLIC_URL,
     aiEnabled: deps.config.AI_ENABLED,
+    simpleFormat: deps.config.AI_PROVIDER === 'ollama',
     logText: deps.config.LOG_TEXT,
   };
   const joinLimit = createRateLimit(LIMITS.failedJoinsPerMinute, JOIN_WINDOW_MS);

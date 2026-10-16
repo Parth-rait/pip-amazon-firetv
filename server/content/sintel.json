@@ -1,0 +1,228 @@
+{
+  "id": "sintel",
+  "title": "Sintel",
+  "url": "/media/sintel.mp4",
+  "credit": "Sintel, (c) copyright 2010 Blender Foundation, durian.blender.org, CC BY 3.0",
+  "durationSec": 888,
+  "premise": "Sintel, a brave young woman, crosses wild, snowy mountains alone, searching for someone very dear to her. It is a fantasy adventure with a few scary, sad moments.",
+  "notes": [
+    {
+      "atSec": 0,
+      "text": "Wild, snowy mountains in a storm. A small, lonely figure walks through the deep snow with a walking stick."
+    },
+    {
+      "atSec": 30,
+      "text": "It is a young woman with red hair under her hood, struggling against the freezing wind."
+    },
+    {
+      "atSec": 36,
+      "text": "A man with a spear leaps out of the snow and attacks her."
+    },
+    {
+      "atSec": 48,
+      "text": "She fights back with her sword, but she is knocked down and lies still in the snow, hurt and exhausted."
+    },
+    {
+      "atSec": 90,
+      "text": "The title Sintel appears over the white mountains. Sintel is the young woman's name."
+    },
+    {
+      "atSec": 102,
+      "text": "She wakes up in a warm, dark hut by a fire. An old bearded man, a shaman, is looking closely at her sword."
+    },
+    {
+      "atSec": 107,
+      "text": "The shaman says her blade has a dark past and has shed much innocent blood."
+    },
+    {
+      "atSec": 118,
+      "text": "He tells her she is a fool to travel alone so unprepared, and lucky to be alive. She thanks him."
+    },
+    {
+      "atSec": 135,
+      "text": "He asks what brings her to the land of the gatekeepers. She says she is searching for someone: a dragon."
+    },
+    {
+      "atSec": 152,
+      "text": "She says she has been alone for as long as she can remember. Her memory takes us back to her past."
+    },
+    {
+      "atSec": 162,
+      "text": "In the memory Sintel is younger, with short red hair, getting by on her own in a busy old city."
+    },
+    {
+      "atSec": 186,
+      "text": "On a rooftop she finds a baby dragon with a hurt, bleeding wing."
+    },
+    {
+      "atSec": 198,
+      "text": "She gently picks up the little dragon and smiles at it."
+    },
+    {
+      "atSec": 207,
+      "text": "She takes the baby dragon home, bandages its wing and tells it to sit still."
+    },
+    {
+      "atSec": 228,
+      "text": "At night she says: Good night, Scales. Scales is the baby dragon's name, and they become best friends."
+    },
+    {
+      "atSec": 246,
+      "text": "Scales rides on her shoulder as they run and play through the town."
+    },
+    {
+      "atSec": 294,
+      "text": "At sunset on the rooftops she cheers as Scales learns to fly."
+    },
+    {
+      "atSec": 312,
+      "text": "A huge grown-up dragon swoops down out of the sky."
+    },
+    {
+      "atSec": 324,
+      "text": "The big dragon grabs Scales and carries him away into the sunset."
+    },
+    {
+      "atSec": 338,
+      "text": "Sintel shouts Scales! She is shocked and angry, and she sets off to find him."
+    },
+    {
+      "atSec": 348,
+      "text": "Her long journey begins. She travels alone through dead forests, under the moon, across hot deserts and through bamboo forests."
+    },
+    {
+      "atSec": 384,
+      "text": "She faces danger on the way, like a fierce creature among desert rocks."
+    },
+    {
+      "atSec": 396,
+      "text": "Tired, with a hood and a walking stick, she climbs into the snowy mountains. This is where the film first showed her."
+    },
+    {
+      "atSec": 444,
+      "text": "Back in the shaman's hut, Sintel says sadly: I have failed."
+    },
+    {
+      "atSec": 452,
+      "text": "The shaman says she has only failed to see. These are dragon lands, Sintel. You are closer than you know."
+    },
+    {
+      "atSec": 468,
+      "text": "At night she reaches a strange, huge tree on a cliff in the dragon lands."
+    },
+    {
+      "atSec": 480,
+      "text": "She enters a dark cave lit by glowing crystals. The moon shines through the entrance."
+    },
+    {
+      "atSec": 498,
+      "text": "Deep in the cave a huge grown-up dragon is resting."
+    },
+    {
+      "atSec": 520,
+      "text": "Sintel hides behind the rocks, scared, with her sword ready."
+    },
+    {
+      "atSec": 552,
+      "text": "She sees a small young dragon in the cave and cries out: Scales! The big dragon roars and breathes fire at her."
+    },
+    {
+      "atSec": 588,
+      "text": "The big dragon spreads its wings and knocks Sintel to the ground."
+    },
+    {
+      "atSec": 606,
+      "text": "Sintel fights back with her sword and badly wounds the big dragon."
+    },
+    {
+      "atSec": 618,
+      "text": "The big dragon falls and lies still, hurt very badly."
+    },
+    {
+      "atSec": 621,
+      "text": "Sintel looks at the dragon's wing and whispers: Scales? She sees the old scar where she once bandaged him. The big dragon is Scales, all grown up."
+    },
+    {
+      "atSec": 630,
+      "text": "In a pool on the ground she sees her own face. She is much older now. Her search took many years."
+    },
+    {
+      "atSec": 684,
+      "text": "Outside, Sintel sits alone on the edge of a cliff, heartbroken."
+    },
+    {
+      "atSec": 710,
+      "text": "She walks slowly away into the mist, past white snowdrop flowers."
+    },
+    {
+      "atSec": 730,
+      "text": "As she walks away, the young dragon from the cave creeps out onto the rocks behind her."
+    },
+    {
+      "atSec": 744,
+      "text": "The story is over and the credits begin."
+    }
+  ],
+  "quiz": [
+    {
+      "atSec": 140,
+      "question": "What is Sintel searching for?",
+      "choices": [
+        "A lost brother",
+        "A dragon",
+        "A magic sword",
+        "Her way home"
+      ],
+      "answer": 1,
+      "explanation": "She tells the shaman she is searching for someone very dear: a dragon."
+    },
+    {
+      "atSec": 230,
+      "question": "What name does Sintel give the baby dragon?",
+      "choices": [
+        "Scales",
+        "Spike",
+        "Ember",
+        "Wings"
+      ],
+      "answer": 0,
+      "explanation": "She bandages his wing and says: Good night, Scales."
+    },
+    {
+      "atSec": 330,
+      "question": "What happens to Scales on the rooftops?",
+      "choices": [
+        "He flies off to play",
+        "He falls asleep",
+        "A big dragon carries him off",
+        "He hides in the market"
+      ],
+      "answer": 2,
+      "explanation": "A huge grown-up dragon swoops down, grabs Scales and flies away with him."
+    },
+    {
+      "atSec": 460,
+      "question": "What does the shaman tell Sintel?",
+      "choices": [
+        "Go back home",
+        "She is closer than she knows",
+        "Dragons are not real",
+        "Wait until spring"
+      ],
+      "answer": 1,
+      "explanation": "He says these are dragon lands, and that she is closer than she knows."
+    },
+    {
+      "atSec": 640,
+      "question": "Who is the big dragon in the cave?",
+      "choices": [
+        "The dragon that took Scales",
+        "Scales, all grown up",
+        "A dragon from the city",
+        "The shaman in disguise"
+      ],
+      "answer": 1,
+      "explanation": "Sintel sees the old scar on its wing: the big dragon is Scales, grown up after many years."
+    }
+  ]
+}

@@ -13,6 +13,10 @@ export const configSchema = z.object({
   AWS_REGION: z.string().min(1).default('us-east-1'),
   BEDROCK_MODEL_ID: z.string().min(1).default('us.amazon.nova-2-lite-v1:0'),
   AI_ENABLED: booleanFlag.default(true),
+  AI_PROVIDER: z.enum(['bedrock', 'ollama']).default('bedrock'),
+  OLLAMA_URL: z.url({ protocol: /^https?$/ }).default('http://localhost:11434'),
+  OLLAMA_MODEL: z.string().min(1).default('qwen2.5:3b'),
+  ANSWER_MEMORY: booleanFlag.default(true),
   LOG_TEXT: booleanFlag.default(false),
 });
 

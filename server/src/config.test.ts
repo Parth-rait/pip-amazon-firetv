@@ -10,6 +10,10 @@ describe('parseConfig', () => {
       AWS_REGION: 'us-east-1',
       BEDROCK_MODEL_ID: 'us.amazon.nova-2-lite-v1:0',
       AI_ENABLED: true,
+      AI_PROVIDER: 'bedrock',
+      OLLAMA_URL: 'http://localhost:11434',
+      OLLAMA_MODEL: 'qwen2.5:3b',
+      ANSWER_MEMORY: true,
       LOG_TEXT: false,
     });
   });

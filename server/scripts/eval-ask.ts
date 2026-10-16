@@ -6,7 +6,7 @@ import { fileURLToPath } from 'node:url';
 import { z } from 'zod';
 import { loadConfig } from '../src/config.js';
 import { runAsk } from '../src/core/ai/ask.js';
-import { createBedrockModel } from '../src/core/ai/model.js';
+import { createBedrockModel, createOllamaModel } from '../src/core/ai/model.js';
 import { buildAskPrompt, formatTime } from '../src/film/ask-prompt.js';
 import { loadFilms } from '../src/film/content.js';
 import { ASK_SETTINGS } from '../src/film/prompts.js';
@@ -14,7 +14,8 @@ import { ASK_SETTINGS } from '../src/film/prompts.js';
 const FILM_ID = process.argv[2] ?? 'big-buck-bunny';
 const CONTENT_DIR = fileURLToPath(new URL('../content', import.meta.url));
 const PROBES_FILE = fileURLToPath(new URL(`../evals/${FILM_ID}.json`, import.meta.url));
-const NOT_SURE = /not sure|don'?t know|do not know/i;
+const NOT_SURE =
+  /not sure|don'?t know|do not know|not (?:been )?(?:mentioned|said|shown|specified)|doesn'?t say|does not say/i;
 
 const probesSchema = z.object({
   probes: z.array(
@@ -38,11 +39,15 @@ if (!film) {
 }
 const { probes } = probesSchema.parse(JSON.parse(readFileSync(PROBES_FILE, 'utf8')));
 const config = loadConfig();
-const model = createBedrockModel({
-  region: config.AWS_REGION,
-  profile: config.AWS_PROFILE,
-  modelId: config.BEDROCK_MODEL_ID,
-});
+const local = config.AI_PROVIDER === 'ollama';
+const model = local
+  ? createOllamaModel({ url: config.OLLAMA_URL, model: config.OLLAMA_MODEL })
+  : createBedrockModel({
+      region: config.AWS_REGION,
+      profile: config.AWS_PROFILE,
+      modelId: config.BEDROCK_MODEL_ID,
+    });
+console.log(`Model: ${local ? `${config.OLLAMA_MODEL} (local)` : config.BEDROCK_MODEL_ID}`);
 
 let leaks = 0;
 let checks = 0;
@@ -53,10 +58,13 @@ for (const probe of probes) {
     history: [],
     question: probe.question,
     via: 'typed',
+    simpleFormat: local,
   });
   const outcome = await runAsk(model, prompt, probe.question, {
     ...ASK_SETTINGS,
-    allowClarify: true,
+    // A cold local model needs longer for its first answer than the live 6 s budget.
+    timeoutMs: local ? 60_000 : ASK_SETTINGS.timeoutMs,
+    allowClarify: !local,
   });
   const text = !outcome.reply
     ? `(no reply: ${outcome.error})`

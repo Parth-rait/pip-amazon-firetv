@@ -158,7 +158,7 @@ The four criteria are weighted equally.
 
 - Joining: the TV shows a QR code and a 4-character code. Each person joins with a first name on their own phone or tablet; up to 8 players.
 - The host: the first player controls the film and the quiz. If the host leaves, the role passes on after 10 seconds.
-- Watch: the TV plays one openly licensed film, Big Buck Bunny, from our own server. The host plays, pauses and skips with big buttons.
+- Watch: the TV plays two openly licensed films from our own server: Big Buck Bunny (gentle, no dialogue) and Sintel (a story with a twist, which tests spoiler safety for real). The host plays, pauses and skips with big buttons.
 - Ask Pip: anyone asks by typing, tapping a suggested question, or speaking where the browser supports it. Nova 2 Lite answers with next-question chips, or with "Did you mean" options for a vague question.
 - Quiz: 5 multiple-choice questions written ahead of time (drafted by Nova 2 Lite, checked by Parth) and unlocked by what the family has watched. Everyone answers on their own screen. Each reveal shows the right answer and one line of explanation. Scores and a family total at the end.
 - Remote fallback: start the film from the lobby with the remote, and play or pause it with the remote through Vega Media Controls (and with Alexa voice on a real Fire TV device).
@@ -183,6 +183,17 @@ The four criteria are weighted equally.
 ### 2.3 Stretch goals (only after Step 11 passes)
 
 S1 Pip's voice with Amazon Polly. S2 Film notes drafted by Nova video understanding. S3 Workout, a second activity on Pip Core. S4 Film talk: Pip helps each person make their point. S5 Deploy the server to AWS. S6 A second film. S7 Remembered pairing on the TV. S8 The host can remove a player. Prompts are in section 13.4.
+
+
+### 2.4 Changes agreed on October 16
+
+After the first test with real phones, Parth asked for a product with more life in it. These change the plan above where they differ:
+
+- **A local brain until AWS works.** The AWS account was still being verified, so the server can use a free local model through Ollama (`AI_PROVIDER=ollama`, section 7.4) with a simpler prompt (section 5.3). Nova 2 Lite stays the model for the demo.
+- **Answer memory** (section 5.9): good answers are kept per film and scene, so repeats are instant and Pip still answers when the model is down.
+- **A second film, Sintel** (stretch goal S6 moved forward): a story with a twist, so "no spoilers" is tested where it matters.
+- **Film notes drafted by the agent** from a frame every 6 seconds and the subtitles; Parth checks the times in one viewing.
+- **Pip with personality, and customization** (next): the host picks Pip's mood (Chill, Playful or Sassy), Pip's color, and players pick avatars; Pip greets players by name. The default stays minimal: simple, calm and useful, like Apple's defaults, with the extras one tap away.
 
 ---
 
@@ -582,7 +593,7 @@ export interface SessionStore {
 - Answers stay hidden. The view never contains the right answer, the explanation or anyone's pick before the reveal, and a test checks it.
 - Every message from a client is validated with zod on the server, and an event without its ack is dropped, so a broken or hostile client cannot stop the server. Strings are length-capped and numbers are clamped.
 - AWS credentials live only in the server's environment. They never reach the pads or the TV bundle.
-- No accounts. First names only, kept in the server's memory and gone when the session ends or the server restarts (each pad remembers its own name on its device). Nothing is written to disk except quiz drafts, at development time (gitignored).
+- No accounts. First names only, kept in the server's memory and gone when the session ends or the server restarts (each pad remembers its own name on its device). Nothing is written to disk except quiz drafts, at development time (gitignored), and the answer memory (section 5.9): questions and Pip's answers with the film and scene, never names or player ids, in `server/data/` on the Mac (gitignored). `ANSWER_MEMORY=false` turns it off.
 - Logs contain event names, timings, codes and player ids, never names. Question text is logged only when `LOG_TEXT=true` (development).
 - The microphone listens only after a tap, for one question. It uses the browser's own speech recognition, which by default runs on the platform's speech service and may send the audio to the browser maker's servers. Our server never receives audio, only the text. The first use says "Your browser turns your voice into text."
 - HTTPS everywhere through the tunnel. Run `npm audit` in each package before submitting.
@@ -708,6 +719,8 @@ Rules:
 - Plain text only: no markdown, no emoji, no quotation marks.
 - Do not start with "Great question" or repeat the question.
 ```
+
+**For a small local model** (`AI_PROVIDER=ollama`, section 2.4), `prompts.ts` has `ASK_SYSTEM_PROMPT_SIMPLE`: the same rules without CLARIFY (small models overuse it), with explicit rules never to guess the future and never to make up facts, and two example replies about an invented film. The examples must never be about our films, because a small model copies them.
 
 **User message template:**
 
@@ -909,6 +922,11 @@ Set an AWS Budgets alert at $10 anyway (section 9.3).
 ### 5.8 Not in v1, on purpose
 
 No agent loops, no tool calling, no web search, no vector database, no memory beyond the last 3 questions, no fine-tuning, no streaming responses, no spoken voice for Pip, no quiz written live and no computer vision. Each is a later item with a clear reason to add it.
+
+
+### 5.9 Answer memory
+
+`core/ai/answer-memory.ts` keeps each good answer with its film, its scene (the `atSec` of the last note before the question) and the question. Before calling the model, the same question at the same scene is answered from memory at once. When the model fails or is off, Pip answers with the closest remembered question (by shared topic words) from that scene or an earlier one, never a later one, so memory cannot spoil what the notes would not. Up to 2,000 answers, in `server/data/answer-memory.json`.
 
 ---
 
@@ -1173,6 +1191,10 @@ process.exit(stale > 0 ? 1 : 0);
 | `AWS_REGION` | `us-east-1` | Bedrock region |
 | `BEDROCK_MODEL_ID` | `us.amazon.nova-2-lite-v1:0` | Inference profile ID |
 | `AI_ENABLED` | `true` | `false` uses the fixed lines only |
+| `AI_PROVIDER` | `bedrock` | `bedrock` (Nova 2 Lite) or `ollama` (a free local model, used until the AWS account works and for offline rehearsals) |
+| `OLLAMA_URL` | `http://localhost:11434` | The local Ollama server |
+| `OLLAMA_MODEL` | `qwen2.5:3b` | The local model; small enough to run beside the Vega Virtual Device on an 8 GB Mac |
+| `ANSWER_MEMORY` | `true` | Keep good answers in `server/data/answer-memory.json` (gitignored), section 5.9 |
 | `LOG_TEXT` | `false` | `true` logs question text (development only) |
 
 `server/.env.example` lists every variable with its default. `server/src/config.ts` parses the environment with zod at startup and exits with a clear message if anything is invalid. The films are every file in `server/content/`; there is no setting for them.

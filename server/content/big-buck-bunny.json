@@ -4,15 +4,205 @@
   "url": "/media/big-buck-bunny.mp4",
   "credit": "Big Buck Bunny, (c) copyright 2008 Blender Foundation, www.bigbuckbunny.org, CC BY 3.0",
   "durationSec": 596,
-  "premise": "Placeholder premise. Parth writes the real one in Step 7.",
-  "notes": [{ "atSec": 0, "text": "Placeholder note. Parth writes the real notes in Step 7." }],
-  "quiz": [
+  "premise": "A big, gentle rabbit lives in a burrow under a tree in a sunny meadow. He loves quiet mornings, flowers and butterflies, but three mischievous little animals in the trees are watching him.",
+  "notes": [
     {
       "atSec": 0,
-      "question": "Placeholder question. Parth checks the real quiz in Step 8?",
-      "choices": ["Right choice", "Wrong choice", "Wrong choice", "Wrong choice"],
+      "text": "Morning in a green meadow with a stream, flowers and soft pink clouds."
+    },
+    {
+      "atSec": 12,
+      "text": "A small purple bird wakes up on a branch and stretches its wings."
+    },
+    {
+      "atSec": 24,
+      "text": "The title Big Buck Bunny appears over a big tree. Under the tree there is a burrow, a rabbit hole."
+    },
+    {
+      "atSec": 30,
+      "text": "Inside the burrow a huge grey rabbit is fast asleep. This is Big Buck Bunny."
+    },
+    {
+      "atSec": 42,
+      "text": "The big bunny wakes up, yawns and squeezes out of his burrow."
+    },
+    {
+      "atSec": 54,
+      "text": "He stretches in the sunshine and smiles up at the sky. He is gentle and happy."
+    },
+    {
+      "atSec": 60,
+      "text": "He walks between giant daisies and sniffs the flowers."
+    },
+    {
+      "atSec": 66,
+      "text": "From high in a tree, a brown flying squirrel secretly watches him."
+    },
+    {
+      "atSec": 72,
+      "text": "A pink butterfly flutters around the bunny, and he plays with it very gently."
+    },
+    {
+      "atSec": 90,
+      "text": "He finds a red apple in the grass and picks it up, pleased."
+    },
+    {
+      "atSec": 102,
+      "text": "A purple butterfly flies past his face. He waves at it happily."
+    },
+    {
+      "atSec": 114,
+      "text": "Three troublemakers watch him: a brown flying squirrel, a skinny red squirrel with big front teeth, and a round grey chinchilla holding a nut."
+    },
+    {
+      "atSec": 126,
+      "text": "The flying squirrel sneaks around the tree right behind the bunny's back."
+    },
+    {
+      "atSec": 150,
+      "text": "Behind the tree the three troublemakers laugh at the bunny."
+    },
+    {
+      "atSec": 168,
+      "text": "Fruit and nuts hit the bunny on the head. The troublemakers are throwing things at him, and he looks confused."
+    },
+    {
+      "atSec": 186,
+      "text": "The bunny stands in the grass with fallen fruit all around him."
+    },
+    {
+      "atSec": 192,
+      "text": "The bunny reaches out in shock: the troublemakers have caught the purple butterfly."
+    },
+    {
+      "atSec": 204,
+      "text": "The red squirrel waves a torn purple wing. The butterfly is hurt, and the flying squirrel grins."
+    },
+    {
+      "atSec": 222,
+      "text": "The bunny leans against a tree, very sad. Then his sad face slowly turns angry."
+    },
+    {
+      "atSec": 246,
+      "text": "Deep in the forest the bunny gets busy. He carves a stick into a sharp point with a stone."
+    },
+    {
+      "atSec": 264,
+      "text": "He twists a long vine into a rope and pushes a pointed wooden stake into the ground."
+    },
+    {
+      "atSec": 276,
+      "text": "A close-up of his eyes: he looks determined. He has a plan."
+    },
+    {
+      "atSec": 288,
+      "text": "He holds a bow made from a branch and pulls back a wooden arrow."
+    },
+    {
+      "atSec": 300,
+      "text": "The three troublemakers stroll along a forest path, not knowing the bunny is hiding in the leaves and watching them."
+    },
+    {
+      "atSec": 336,
+      "text": "Along the path the bunny has set traps: a big rock tied up with vines, a log and a bent young tree."
+    },
+    {
+      "atSec": 372,
+      "text": "The bunny stands behind the chinchilla and gives a thumbs up. The chinchilla does not notice."
+    },
+    {
+      "atSec": 390,
+      "text": "High in a tree the flying squirrel spreads his arms, ready to glide."
+    },
+    {
+      "atSec": 420,
+      "text": "The flying squirrel glides through the air above the forest."
+    },
+    {
+      "atSec": 438,
+      "text": "Something goes wrong: he panics and tumbles through the air."
+    },
+    {
+      "atSec": 444,
+      "text": "He falls toward a row of sharp wooden spikes, but the bunny catches him on a stick just in time."
+    },
+    {
+      "atSec": 462,
+      "text": "Night passes and a new day starts at the bunny's big tree."
+    },
+    {
+      "atSec": 468,
+      "text": "The bunny smiles again, with the pink butterfly flying beside him."
+    },
+    {
+      "atSec": 480,
+      "text": "The bunny flies the flying squirrel on a string, like a kite, over the meadow."
+    },
+    {
+      "atSec": 486,
+      "text": "The story is over and the credits roll, with little drawings of the animals."
+    }
+  ],
+  "quiz": [
+    {
+      "atSec": 54,
+      "question": "Where does the big bunny sleep?",
+      "choices": [
+        "In a burrow under a tree",
+        "In a bird nest",
+        "In a cave by the river",
+        "On a big rock"
+      ],
       "answer": 0,
-      "explanation": "Placeholder explanation."
+      "explanation": "He wakes up in a burrow under the big tree and squeezes out to stretch."
+    },
+    {
+      "atSec": 120,
+      "question": "Who is secretly watching the bunny?",
+      "choices": [
+        "A fox and an owl",
+        "A family of ducks",
+        "Three little troublemakers",
+        "The purple bird"
+      ],
+      "answer": 2,
+      "explanation": "A flying squirrel, a red squirrel and a chinchilla watch him from the trees."
+    },
+    {
+      "atSec": 210,
+      "question": "What do the troublemakers do to the purple butterfly?",
+      "choices": [
+        "They feed it",
+        "They catch it and hurt it",
+        "They paint its wings",
+        "They let it go"
+      ],
+      "answer": 1,
+      "explanation": "They grab the purple butterfly, and the red squirrel waves its torn wing."
+    },
+    {
+      "atSec": 290,
+      "question": "What does the bunny make in the forest?",
+      "choices": [
+        "A boat",
+        "A treehouse",
+        "A big sandwich",
+        "Spears, a rope and a bow"
+      ],
+      "answer": 3,
+      "explanation": "He carves sharp sticks, twists a vine into rope and makes a bow and arrow."
+    },
+    {
+      "atSec": 484,
+      "question": "What does the bunny do with the flying squirrel at the end?",
+      "choices": [
+        "Flies him like a kite",
+        "Throws him in a river",
+        "Gives him an apple",
+        "Builds him a house"
+      ],
+      "answer": 0,
+      "explanation": "He ties a string to the flying squirrel and flies him over the meadow like a kite."
     }
   ]
 }

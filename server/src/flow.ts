@@ -1,11 +1,12 @@
 // Stage changes and Ask Pip for film night (PROJECT.md section 4.5).
 import type { Server } from 'socket.io';
 import { runAsk, type AskOutcome } from './core/ai/ask.js';
+import type { AnswerMemory } from './core/ai/answer-memory.js';
 import type { TextModel } from './core/ai/model.js';
 import { restingPip, setPip, type CoreDeps } from './core/pip.js';
 import type { Player } from './core/players.js';
 import type { Timers } from './core/timers.js';
-import { buildAskPrompt } from './film/ask-prompt.js';
+import { buildAskPrompt, sceneAt } from './film/ask-prompt.js';
 import type { Content } from './film/content.js';
 import { estimatePosition } from './film/playback.js';
 import { ASK_SETTINGS } from './film/prompts.js';
@@ -34,6 +35,8 @@ export interface FlowDeps {
   now: () => number;
   model: TextModel;
   aiEnabled: boolean;
+  simpleFormat?: boolean; // a small local model: no "Did you mean"
+  memory?: AnswerMemory; // good answers by film and scene (core/ai/answer-memory.ts)
   logText: boolean; // LOG_TEXT: question text in logs, development only
   log: typeof Log;
 }
@@ -133,18 +136,41 @@ async function answer(
     via,
     ...(deps.logText ? { question: text } : {}),
   });
+  const recallQuery = { contentId, sceneSec: sceneAt(film.notes, positionSec), question: text };
+  // The same question at the same scene was answered before: answer at once.
+  const repeat = deps.memory?.recallExact(recallQuery) ?? null;
   let outcome: AskOutcome;
+  let fromMemory = repeat !== null;
   try {
-    outcome = deps.aiEnabled
-      ? await runAsk(
-          deps.model,
-          buildAskPrompt({ ...film, positionSec, history: session.history, question: text, via }),
-          text,
-          { ...ASK_SETTINGS, allowClarify: via !== 'clarify' },
-        )
-      : { reply: null, error: 'offline' };
+    outcome = repeat
+      ? { reply: { kind: 'answer', text: repeat.answer, next: repeat.next } }
+      : deps.aiEnabled
+        ? await runAsk(
+            deps.model,
+            buildAskPrompt({
+              ...film,
+              positionSec,
+              history: session.history,
+              question: text,
+              via,
+              simpleFormat: deps.simpleFormat,
+            }),
+            text,
+            { ...ASK_SETTINGS, allowClarify: !deps.simpleFormat && via !== 'clarify' },
+          )
+        : { reply: null, error: 'offline' };
   } finally {
     session.asking = false;
+  }
+  if (outcome.reply === null) {
+    // The model failed or is off: the closest answer from a scene already watched, if any.
+    const similar = deps.memory?.recallSimilar(recallQuery);
+    if (similar) {
+      outcome = { reply: { kind: 'answer', text: similar.answer, next: similar.next } };
+      fromMemory = true;
+    }
+  } else if (outcome.reply.kind === 'answer' && !fromMemory) {
+    deps.memory?.remember({ ...recallQuery, answer: outcome.reply.text, next: outcome.reply.next });
   }
   if (session.stage !== 'watch' || session.contentId !== contentId) {
     deps.log.info('ask.dropped', { code: session.code, playerId: player.id });
@@ -162,7 +188,7 @@ async function answer(
     code: session.code,
     playerId: player.id,
     ms: deps.now() - startedAt,
-    kind: outcome.reply?.kind ?? 'fallback',
+    kind: fromMemory ? 'memory' : (outcome.reply?.kind ?? 'fallback'),
     source: say.source,
     ...(outcome.reply ? {} : { error: outcome.error }),
   });
