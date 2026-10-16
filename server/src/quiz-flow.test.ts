@@ -24,6 +24,9 @@ const film: Content = {
   credit: 'Credit',
   durationSec: 100,
   premise: 'Premise.',
+  chapters: [],
+  characters: [],
+  predictions: [],
   notes: [{ atSec: 0, text: 'Start.' }],
   quiz: [10, 20, 90].map((atSec) => ({
     atSec,

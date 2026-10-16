@@ -7,6 +7,7 @@ import { restingPip, setPip, type CoreDeps } from './core/pip.js';
 import type { Player } from './core/players.js';
 import type { Timers } from './core/timers.js';
 import { buildAskPrompt, sceneAt } from './film/ask-prompt.js';
+import { currentPrediction } from './film/companion.js';
 import type { Content } from './film/content.js';
 import { estimatePosition } from './film/playback.js';
 import { ASK_SETTINGS } from './film/prompts.js';
@@ -42,6 +43,8 @@ export interface FlowDeps {
 }
 
 const TALKING_MS = 8000;
+const CHEER_MS = 1500;
+const REVEAL_TALK_MS = 4000;
 const MAX_HISTORY = 3;
 
 export function roomOf(code: string): string {
@@ -69,6 +72,9 @@ export function watchFilm(session: Session, contentId: string, deps: FlowDeps): 
   if (session.contentId !== contentId) {
     session.playback = null;
     session.history = [];
+    session.predictionVotes = {};
+    session.revealedPredictions = [];
+    session.reactions = {};
   } else if (session.playback?.ended) {
     session.playback = null;
   }
@@ -76,6 +82,39 @@ export function watchFilm(session: Session, contentId: string, deps: FlowDeps): 
   session.stage = 'watch';
   broadcast(session, deps);
   return true;
+}
+
+/** Where the film is now, or null when nothing of this session's film is playing. */
+export function positionNow(
+  session: Session,
+  deps: FlowDeps,
+): { film: Content; positionSec: number } | null {
+  const film = deps.films.find((f) => f.id === session.contentId);
+  if (!film || !session.playback || session.playback.contentId !== film.id) return null;
+  return { film, positionSec: estimatePosition(session.playback, session.playbackAt, deps.now()) };
+}
+
+/**
+ * When a "What happens next?" vote has just been revealed, Pip reacts once: a cheer when at
+ * least half of the votes were right, talking otherwise (the quiz's rule).
+ */
+export function checkPredictionReveal(session: Session, deps: FlowDeps): void {
+  const now = positionNow(session, deps);
+  if (!now || session.stage !== 'watch' || session.asking) return;
+  const current = currentPrediction(now.film, now.positionSec);
+  if (current?.status !== 'revealed') return;
+  const { id, answer } = current.prediction;
+  if (session.revealedPredictions.includes(id)) return;
+  session.revealedPredictions = [...session.revealedPredictions, id];
+  const picks = Object.values(session.predictionVotes[id] ?? {});
+  if (picks.length === 0) return;
+  const isMostlyRight = picks.filter((p) => p === answer).length * 2 >= picks.length;
+  setPip(
+    session,
+    isMostlyRight ? 'cheer' : 'talking',
+    coreDeps(session, deps),
+    isMostlyRight ? CHEER_MS : REVEAL_TALK_MS,
+  );
 }
 
 /** Back to the lobby; a quiz in progress and its timer are dropped. */

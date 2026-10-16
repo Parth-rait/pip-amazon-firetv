@@ -6,6 +6,8 @@ import {
   hostCommandSchema,
   joinSchema,
   playbackSchema,
+  predictSchema,
+  reactSchema,
 } from './validate.js';
 
 const ID = '0123456789abcdef0123456789abcdef';
@@ -88,5 +90,18 @@ describe('customization (PROJECT.md 2.4)', () => {
       hostCommandSchema.safeParse({ type: 'pip-style', style: { ...style, color: '#000' } })
         .success,
     ).toBe(false);
+  });
+});
+
+describe('companion events (PROJECT.md 2.4)', () => {
+  it('accepts the four reactions only', () => {
+    expect(reactSchema.safeParse({ kind: 'laugh' }).success).toBe(true);
+    expect(reactSchema.safeParse({ kind: 'angry' }).success).toBe(false);
+  });
+
+  it('accepts a vote for choice 0 to 2 only', () => {
+    expect(predictSchema.safeParse({ id: 'revenge', choice: 2 }).success).toBe(true);
+    expect(predictSchema.safeParse({ id: 'revenge', choice: 3 }).success).toBe(false);
+    expect(predictSchema.safeParse({ id: '', choice: 0 }).success).toBe(false);
   });
 });

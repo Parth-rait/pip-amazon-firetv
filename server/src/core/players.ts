@@ -10,6 +10,7 @@ export interface Player {
   joinedAt: number;
   lastSeenAt: number; // when the last socket left (ms)
   lastAskAt: number; // when this player last asked Pip (ms)
+  lastReactAt: number; // when this player last sent a reaction (ms)
 }
 
 /** The part of a session the player functions use, so any Pip product can reuse them. */
@@ -73,6 +74,7 @@ export function joinPlayer(
     joinedAt: nowMs,
     lastSeenAt: nowMs,
     lastAskAt: 0,
+    lastReactAt: 0,
   };
   roster.players.set(player.id, player);
   return { ok: true, player, isNew: true };

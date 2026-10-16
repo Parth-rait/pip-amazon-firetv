@@ -7,6 +7,7 @@ import type { TextModel } from './core/ai/model.js';
 import { newCode } from './core/codes.js';
 import { hostTimerKey, pickTvCode, startHostGrace } from './core/pairing.js';
 import { pipTimerKey, restingPip, setPip, type CoreDeps } from './core/pip.js';
+import { recordReaction, recordVote } from './film/companion.js';
 import { greeting } from './lines.js';
 import { cleanName, joinPlayer, leaveSocket, pickHost } from './core/players.js';
 import { createRateLimit } from './core/rate-limit.js';
@@ -17,6 +18,8 @@ import {
   askPip,
   broadcast,
   goToLobby,
+  checkPredictionReveal,
+  positionNow,
   roomOf,
   watchFilm,
   type FlowDeps,
@@ -267,6 +270,44 @@ export function registerRealtime(deps: RealtimeDeps): () => void {
       if (parsed.data.contentId !== session.contentId) return ignored('tv:playback', 'other-film');
       session.playback = parsed.data;
       session.playbackAt = deps.now();
+      checkPredictionReveal(session, flow);
+      broadcast(session, flow);
+    });
+
+    on('pad:react', (payload) => {
+      const parsed = schema.reactSchema.safeParse(payload);
+      if (!parsed.success) return invalid('pad:react');
+      const d = data();
+      const session = sessionOf();
+      const player = d?.role === 'pad' ? session?.players.get(d.playerId) : undefined;
+      if (!session || !player) return ignored('pad:react', 'not-a-player');
+      const now = positionNow(session, flow);
+      if (session.stage !== 'watch' || !now) return ignored('pad:react', 'not-watching');
+      const at = deps.now();
+      if (at - player.lastReactAt < LIMITS.reactMinIntervalMs) return; // a fast tapper, not an error
+      player.lastReactAt = at;
+      recordReaction(now.film, now.positionSec, session.reactions);
+      deps.io.to(roomOf(session.code)).emit('pip:react', {
+        playerId: player.id,
+        kind: parsed.data.kind,
+      });
+    });
+
+    on('pad:predict', (payload) => {
+      const parsed = schema.predictSchema.safeParse(payload);
+      if (!parsed.success) return invalid('pad:predict');
+      const d = data();
+      const session = sessionOf();
+      if (!session || d?.role !== 'pad' || !session.players.has(d.playerId)) {
+        return ignored('pad:predict', 'not-a-player');
+      }
+      const now = positionNow(session, flow);
+      if (session.stage !== 'watch' || !now) return ignored('pad:predict', 'not-watching');
+      if (
+        !recordVote(now.film, now.positionSec, session.predictionVotes, d.playerId, parsed.data)
+      ) {
+        return ignored('pad:predict', 'not-open');
+      }
       broadcast(session, flow);
     });
 

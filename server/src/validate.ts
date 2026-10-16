@@ -83,6 +83,15 @@ export const hostCommandSchema: z.ZodType<HostCommand> = z.discriminatedUnion('t
   }),
 ]);
 
+export const reactSchema: z.ZodType<PayloadOf<'pad:react'>> = z.object({
+  kind: z.enum(['laugh', 'wow', 'love', 'scared']),
+});
+
+export const predictSchema: z.ZodType<PayloadOf<'pad:predict'>> = z.object({
+  id: z.string().min(1).max(CONTENT_ID_MAX_CHARS),
+  choice: z.number().int().min(0).max(2),
+});
+
 const askVia: z.ZodType<AskVia> = z.enum(['typed', 'voice', 'starter', 'next', 'clarify']);
 
 export const askSchema: z.ZodType<PayloadOf<'pad:ask'>> = z.object({

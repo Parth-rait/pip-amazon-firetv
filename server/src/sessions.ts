@@ -1,5 +1,6 @@
 // The Session type and the in-memory store (PROJECT.md section 4.6).
 import { isOnline, type Roster } from './core/players.js';
+import type { PredictionVotes } from './film/companion.js';
 import type { QuizRun } from './film/quiz.js';
 import {
   LIMITS,
@@ -23,6 +24,10 @@ export interface Session extends Roster {
   // Newest last, at most 3; atSec is where the film was. Cleared for a new film.
   history: { atSec: number; question: string; answer: string }[];
   quiz: QuizRun | null; // kept through the results stage
+  // The companion (PROJECT.md 2.4), for the current film; cleared for a new film.
+  predictionVotes: PredictionVotes;
+  revealedPredictions: string[]; // reveals Pip has already reacted to
+  reactions: Record<string, number>; // scene atSec -> reactions there
   updatedAt: number;
 }
 
@@ -61,6 +66,9 @@ export function createSession(
     asking: false,
     history: [],
     quiz: null,
+    predictionVotes: {},
+    revealedPredictions: [],
+    reactions: {},
     updatedAt: now,
   };
 }

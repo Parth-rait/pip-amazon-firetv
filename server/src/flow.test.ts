@@ -17,6 +17,9 @@ const film: Content = {
   credit: 'Credit',
   durationSec: 100,
   premise: 'Premise.',
+  chapters: [],
+  characters: [],
+  predictions: [],
   notes: [{ atSec: 0, text: 'Start.' }],
   quiz: [
     { atSec: 10, question: 'Q?', choices: ['A', 'B', 'C', 'D'], answer: 0, explanation: 'E.' },

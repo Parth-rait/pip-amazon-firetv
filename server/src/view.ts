@@ -1,5 +1,6 @@
 // buildView(): the one snapshot every screen draws from (PROJECT.md section 7.1).
 import { isOnline } from './core/players.js';
+import { buildCompanion, favouriteMoment } from './film/companion.js';
 import { toContentView, unlockedQuestions, type Content } from './film/content.js';
 import { estimatePosition } from './film/playback.js';
 import { buildResults, currentQuestion, type QuizRun } from './film/quiz.js';
@@ -15,10 +16,12 @@ export function buildView(
 ): SessionView {
   const film = films.find((f) => f.id === session.contentId) ?? null;
   const playback = session.playback;
-  const quizUnlocked =
-    session.stage === 'watch' && film && playback && playback.contentId === film.id
-      ? unlockedQuestions(film, estimatePosition(playback, session.playbackAt, nowMs)).length
+  const positionSec =
+    film && playback && playback.contentId === film.id
+      ? estimatePosition(playback, session.playbackAt, nowMs)
       : 0;
+  const quizUnlocked =
+    session.stage === 'watch' && film ? unlockedQuestions(film, positionSec).length : 0;
   const run = session.quiz;
   return {
     code: session.code,
@@ -37,9 +40,18 @@ export function buildView(
     quizUnlocked,
     pip: session.pip,
     pipStyle: session.pipStyle,
-    companion: null, // filled in by the companion step (chapters, characters, predictions)
+    companion:
+      session.stage === 'watch' && film
+        ? buildCompanion(film, positionSec, session.predictionVotes, publicUrl)
+        : null,
     quiz: session.stage === 'quiz' && run ? buildQuizView(run, nowMs) : null,
-    results: session.stage === 'results' && run ? buildResults(run, session) : null,
+    results:
+      session.stage === 'results' && run
+        ? {
+            ...buildResults(run, session),
+            moment: film ? favouriteMoment(film, session.reactions) : null,
+          }
+        : null,
   };
 }
 

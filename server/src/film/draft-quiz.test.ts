@@ -11,6 +11,9 @@ const film: Content = {
   credit: 'Credit',
   durationSec: 200,
   premise: 'A bunny wakes up.',
+  chapters: [],
+  characters: [],
+  predictions: [],
   notes: NOTE_TIMES.map((atSec) => ({ atSec, text: `Note at ${atSec}.` })),
   quiz: [{ atSec: 0, question: 'Q?', choices: ['A', 'B', 'C', 'D'], answer: 0, explanation: 'E.' }],
 };

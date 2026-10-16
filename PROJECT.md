@@ -873,6 +873,7 @@ ffprobe -v error -show_entries format=duration -of csv=p=0 server/media/big-buck
 3. Put the `ffprobe` duration, rounded down, into `durationSec`.
 4. Make the poster for the film cards, a spoiler-free still (section 2.4): `ffmpeg -ss <sec> -i server/media/<id>.mp4 -frames:v 1 -vf "crop=ih*16/9:ih,scale=640:-2" -q:v 3 server/media/<id>.jpg`, and set `"poster": "/media/<id>.jpg"`. Big Buck Bunny uses 54 s; Sintel uses 294 s (the city at sunset).
 5. Sintel (2010, CC BY 3.0, "Sintel, (c) copyright 2010 Blender Foundation, durian.blender.org, CC BY 3.0"): download `Sintel.2010.720p.mkv.zip` from `download.blender.org/durian/movies/`, check it against the `.md5` there, and convert it with the command above, adding `-map 0:v:0 -map 0:a:0 -ac 2` (the file has 5.1 sound and subtitle tracks).
+6. The companion pictures (section 2.4): `npm run companion:images` in `server/` writes a portrait per character and a still per chapter into `server/media/companion/` (gitignored).
 
 **The film file** (`server/content/big-buck-bunny.json`):
 
