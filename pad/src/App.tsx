@@ -37,9 +37,13 @@ export function App() {
 
   // Pip's color is the accent everywhere, so the pad follows the host's choice at once.
   const pipColor = state.view?.pipStyle.color ?? 'mint';
+  const pipMood = state.view?.pipStyle.mood ?? 'playful';
   useEffect(() => {
     document.documentElement.style.setProperty('--accent', PIP_COLORS[pipColor]);
   }, [pipColor]);
+  useEffect(() => {
+    document.documentElement.dataset.pipMood = pipMood;
+  }, [pipMood]);
 
   const isJoined = state.view !== null;
   useEffect(() => (isJoined ? keepAwake(browserWakeLockEnv()) : undefined), [isJoined]);

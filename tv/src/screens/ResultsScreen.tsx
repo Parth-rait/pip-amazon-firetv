@@ -41,14 +41,28 @@ export function ResultsScreen({
                 <Text style={styles.name} numberOfLines={1}>
                   {row.name}
                 </Text>
-                <Text style={styles.score}>{row.score}</Text>
+                <Text
+                  style={styles.score}
+                  accessibilityLabel={`${row.score} points`}>
+                  {'\u2605'.repeat(row.score)}
+                  <Text style={styles.emptyStars}>
+                    {'\u2606'.repeat(
+                      Math.max(0, results.questions - row.score),
+                    )}
+                  </Text>
+                </Text>
               </View>
             );
           })}
         </View>
       </View>
       <View style={styles.right}>
-        <Pip state={view.pip} size={dp(220)} color={accent} />
+        <Pip
+          state={view.pip}
+          mood={view.pipStyle.mood}
+          size={dp(220)}
+          color={accent}
+        />
         <Text style={styles.family}>
           {familyLine(results.correct, results.answers)}
         </Text>
@@ -95,7 +109,8 @@ const styles = StyleSheet.create({
     minWidth: dp(40),
   },
   name: {flex: 1, color: color.text, fontSize: type.title},
-  score: {color: color.text, fontSize: type.title, fontWeight: '700'},
+  score: {color: '#FFD166', fontSize: type.title, letterSpacing: dp(4)},
+  emptyStars: {color: color.textMuted},
   right: {
     flex: 2,
     alignItems: 'center',

@@ -31,8 +31,8 @@ describe('ChoiceGrid', () => {
     const screen = render(
       <ChoiceGrid quiz={quiz({})} players={players} accent="#7CE7C4" />,
     );
-    expect(screen.queryByText('M')).toBeNull();
-    expect(screen.queryByText('L')).toBeNull();
+    expect(screen.queryByLabelText('Mom')).toBeNull();
+    expect(screen.queryByLabelText('Leo')).toBeNull();
   });
 
   it('shows each player under the choice they picked in the reveal', () => {
@@ -48,8 +48,8 @@ describe('ChoiceGrid', () => {
         accent="#7CE7C4"
       />,
     );
-    expect(screen.getByText('M')).toBeTruthy();
-    expect(screen.getByText('L')).toBeTruthy();
+    expect(screen.getByLabelText('Mom')).toBeTruthy();
+    expect(screen.getByLabelText('Leo')).toBeTruthy();
   });
 });
 

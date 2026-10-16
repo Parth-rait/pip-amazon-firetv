@@ -3,6 +3,8 @@ import { useEffect, useState } from 'react';
 import { AnswerButtons } from '../components/AnswerButtons';
 import { vibrateRight } from '../lib/haptics';
 import { revealLine } from '../lib/quiz-lines';
+import { Confetti } from '../components/Confetti';
+import { Stars } from '../components/Stars';
 import type { HostCommand, QuizView } from '../shared/protocol';
 
 const TICK_MS = 250;
@@ -69,9 +71,13 @@ export function QuizScreen({ quiz, viewAt, myId, isHost, onAnswer, onCommand }: 
           onAnswer(quiz.index, choice);
         }}
       />
+      {isRight && <Confetti key={quiz.index} />}
       {isReveal ? (
         <section className="stack">
-          <p className="body">{revealLine(quiz, myId)}</p>
+          <p className={isRight ? 'reveal-line reveal-line--right' : 'reveal-line'}>
+            {isRight && <Stars filled={1} total={1} size={28} />}
+            {revealLine(quiz, myId)}
+          </p>
           {quiz.explanation && <p className="body muted">{quiz.explanation}</p>}
         </section>
       ) : (

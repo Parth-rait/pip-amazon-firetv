@@ -1,6 +1,7 @@
 // RESULTS: my score, the standings and the family total; the host goes on (section 3.3).
 import { Avatar } from '../components/Avatar';
 import { Pip } from '../components/Pip';
+import { Stars } from '../components/Stars';
 import { familyLine } from '../lib/quiz-lines';
 import type { HostCommand, SessionView } from '../shared/protocol';
 
@@ -22,9 +23,12 @@ export function ResultsScreen({ view, myId, isHost, onCommand }: Props) {
       <div className="results-hero">
         <Pip state={view.pip} size={88} />
         {me && (
-          <h1 className="large-title">
-            You got {me.score} of {results.questions}.
-          </h1>
+          <>
+            <Stars filled={me.score} total={results.questions} size={34} />
+            <h1 className="large-title">
+              You got {me.score} of {results.questions}.
+            </h1>
+          </>
         )}
       </div>
       <ol className="standings">
@@ -37,7 +41,7 @@ export function ResultsScreen({ view, myId, isHost, onCommand }: Props) {
               size={36}
             />
             <span className="standings__name">{row.name}</span>
-            <span>{row.score}</span>
+            <Stars filled={row.score} total={results.questions} size={16} />
           </li>
         ))}
       </ol>

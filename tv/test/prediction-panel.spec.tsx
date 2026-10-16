@@ -28,7 +28,7 @@ describe('PredictionPanel', () => {
     expect(
       screen.getByText('1 of 2 have guessed. Guess on your phone.'),
     ).toBeTruthy();
-    expect(screen.getAllByText('L')).toHaveLength(1); // Leo's avatar once, in the guessed row
+    expect(screen.getAllByLabelText('Leo')).toHaveLength(1); // Leo's avatar once, in the guessed row
   });
 
   it('shows each guess under its choice and the reveal line after the reveal', () => {
@@ -46,7 +46,7 @@ describe('PredictionPanel', () => {
       />,
     );
     expect(screen.getByText('It is Scales, all grown up.')).toBeTruthy();
-    expect(screen.getByText('M')).toBeTruthy();
-    expect(screen.getByText('L')).toBeTruthy();
+    expect(screen.getByLabelText('Mom')).toBeTruthy();
+    expect(screen.getByLabelText('Leo')).toBeTruthy();
   });
 });

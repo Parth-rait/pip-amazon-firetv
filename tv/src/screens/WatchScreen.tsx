@@ -201,7 +201,12 @@ export function WatchScreen({
                 tint={accent}
               />
             ) : null}
-            <Pip state={view.pip} size={dp(96)} color={accent} />
+            <Pip
+              state={view.pip}
+              mood={view.pipStyle.mood}
+              size={dp(96)}
+              color={accent}
+            />
           </View>
         </View>
       )}

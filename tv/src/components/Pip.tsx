@@ -1,6 +1,6 @@
 import React, {useEffect, useRef} from 'react';
 import {Animated, Easing, StyleSheet, View} from 'react-native';
-import type {PipState} from '../shared/protocol';
+import type {PipMood, PipState} from '../shared/protocol';
 import {color, dp, motionPipMs} from '../theme';
 
 // Pip, a mint circle with two eyes, in the five states of PROJECT.md section 3.4.
@@ -13,10 +13,12 @@ export function Pip({
   state,
   size = dp(120),
   color: body = color.accent,
+  mood = 'playful',
 }: {
   state: PipState;
   size?: number;
   color?: string;
+  mood?: PipMood;
 }) {
   const breathe = useRef(new Animated.Value(1)).current;
   const blink = useRef(new Animated.Value(1)).current;
@@ -142,9 +144,26 @@ export function Pip({
   }, [state, dots]);
 
   const asleep = state === 'sleep';
-  const eye = {
+  // The face per mood (PROJECT.md 2.4), like the pad's: chill eyes are sleepy, playful ones
+  // sparkle with rosy cheeks, sassy Pip raises a brow and half-closes one eye. Sleep wins.
+  const eyeHeight = (which: 'left' | 'right') => {
+    if (asleep) return 0.05;
+    if (mood === 'chill') return 0.14;
+    if (mood === 'sassy' && which === 'right') return 0.13;
+    return 0.26;
+  };
+  const eyeStyle = (which: 'left' | 'right') => ({
     width: size * 0.11,
-    height: size * (asleep ? 0.05 : 0.26),
+    height: size * eyeHeight(which),
+    marginTop: eyeHeight(which) < 0.2 && !asleep ? size * 0.08 : 0,
+    borderRadius: size,
+  });
+  const isPlayful = mood === 'playful' && !asleep;
+  const sparkle = {
+    left: size * 0.022,
+    top: size * 0.035,
+    width: size * 0.045,
+    height: size * 0.065,
     borderRadius: size,
   };
   const look =
@@ -185,13 +204,48 @@ export function Pip({
             },
           ]}>
           <View style={[styles.eyes, {gap: size * 0.18, transform: look}]}>
-            <Animated.View
-              style={[styles.eye, eye, {transform: [{scaleY: blink}]}]}
-            />
-            <Animated.View
-              style={[styles.eye, eye, {transform: [{scaleY: blink}]}]}
-            />
+            {(['left', 'right'] as const).map((which) => (
+              <Animated.View
+                key={which}
+                style={[
+                  styles.eye,
+                  eyeStyle(which),
+                  {transform: [{scaleY: blink}]},
+                ]}>
+                {isPlayful && <View style={[styles.sparkle, sparkle]} />}
+              </Animated.View>
+            ))}
           </View>
+          {isPlayful &&
+            (['left', 'right'] as const).map((side) => (
+              <View
+                key={side}
+                style={[
+                  styles.cheek,
+                  {
+                    top: size * 0.6,
+                    [side]: size * 0.15,
+                    width: size * 0.16,
+                    height: size * 0.09,
+                    borderRadius: size,
+                  },
+                ]}
+              />
+            ))}
+          {mood === 'sassy' && !asleep && (
+            <View
+              style={[
+                styles.brow,
+                {
+                  top: size * 0.24,
+                  left: size * 0.25,
+                  width: size * 0.22,
+                  height: size * 0.06,
+                  borderRadius: size,
+                },
+              ]}
+            />
+          )}
         </Animated.View>
       </Animated.View>
       {state === 'thinking' && (
@@ -229,6 +283,13 @@ const styles = StyleSheet.create({
   },
   eyes: {flexDirection: 'row', alignItems: 'center'},
   eye: {backgroundColor: color.bg},
+  sparkle: {position: 'absolute', backgroundColor: '#FFFFFF', opacity: 0.9},
+  cheek: {position: 'absolute', backgroundColor: 'rgba(255, 110, 140, 0.45)'},
+  brow: {
+    position: 'absolute',
+    backgroundColor: color.bg,
+    transform: [{rotate: '-16deg'}],
+  },
   dots: {
     position: 'absolute',
     left: 0,

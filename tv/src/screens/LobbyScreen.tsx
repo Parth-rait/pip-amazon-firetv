@@ -60,7 +60,12 @@ export function LobbyScreen({
   return (
     <View style={styles.root}>
       <View style={styles.header}>
-        <Pip state={view.pip} size={dp(96)} color={accent} />
+        <Pip
+          state={view.pip}
+          mood={view.pipStyle.mood}
+          size={dp(96)}
+          color={accent}
+        />
         {greet ? (
           <SpeechBubble
             key={greet.id}

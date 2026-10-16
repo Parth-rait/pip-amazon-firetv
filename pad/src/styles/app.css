@@ -222,13 +222,9 @@ body {
 }
 
 .avatar {
-  display: inline-grid;
-  place-items: center;
+  display: block;
   flex-shrink: 0;
-  border-radius: 50%;
-  color: #0b0b0f;
-  font-weight: 700;
-  line-height: 1;
+  overflow: visible;
   transition: opacity var(--motion-fast);
 }
 
@@ -246,22 +242,19 @@ body {
   display: grid;
   place-items: center;
   min-height: var(--touch-min);
-  padding: 0;
+  padding: 2px;
   border: none;
-  border-radius: 50%;
+  border-radius: 14px;
   background: none;
   cursor: pointer;
-  transition: transform var(--motion-fast);
+  transition:
+    transform var(--motion-fast),
+    background var(--motion-fast);
 }
 
-.avatar-option .avatar {
-  box-shadow: 0 0 0 3px var(--bg);
-}
-
-.avatar-option.is-on .avatar {
-  box-shadow:
-    0 0 0 3px var(--bg),
-    0 0 0 5px var(--text);
+.avatar-option.is-on {
+  background: var(--surface2);
+  box-shadow: inset 0 0 0 2px var(--text);
 }
 
 .avatar-option:active {
@@ -1098,6 +1091,80 @@ body {
   animation-delay: 0.4s;
 }
 
+/* Pip's face per mood (section 2.4): chill eyes are sleepy, playful ones sparkle with rosy
+   cheeks, sassy Pip raises one brow and half-closes the other eye. Sleep always wins. */
+.pip__brow,
+.pip__cheek {
+  display: none;
+  position: absolute;
+  pointer-events: none;
+}
+
+[data-pip-mood='chill'] .pip__eye {
+  height: 14%;
+  margin-top: 8%;
+}
+
+[data-pip-mood='playful'] .pip__eye {
+  position: relative;
+}
+
+[data-pip-mood='playful'] .pip__eye::after {
+  content: '';
+  position: absolute;
+  top: 14%;
+  left: 20%;
+  width: 40%;
+  height: 26%;
+  border-radius: 50%;
+  background: #fff;
+  opacity: 0.9;
+}
+
+[data-pip-mood='playful'] .pip__cheek {
+  display: block;
+  top: 60%;
+  width: 16%;
+  height: 9%;
+  border-radius: 50%;
+  background: rgb(255 110 140 / 0.45);
+}
+
+.pip__cheek--left {
+  left: 15%;
+}
+
+.pip__cheek--right {
+  right: 15%;
+}
+
+[data-pip-mood='sassy'] .pip__eye:nth-of-type(2) {
+  height: 13%;
+  margin-top: 9%;
+}
+
+[data-pip-mood='sassy'] .pip__brow {
+  display: block;
+  top: 24%;
+  left: 25%;
+  width: 22%;
+  height: 6%;
+  border-radius: 999px;
+  background: var(--bg);
+  transform: rotate(-16deg);
+}
+
+.pip.pip--sleep .pip__eye {
+  height: 5%;
+  margin-top: 0;
+}
+
+.pip--sleep .pip__eye::after,
+.pip--sleep .pip__brow,
+.pip--sleep .pip__cheek {
+  display: none;
+}
+
 @keyframes pip-breathe {
   0%,
   100% {
@@ -1158,6 +1225,56 @@ body {
     animation: none !important;
     transition: none !important;
   }
+}
+
+/* A child-like quiz (section 2.4): confetti and a star for a right answer, stars in the results. */
+.confetti {
+  position: fixed;
+  inset: 0;
+  z-index: 20;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.confetti__piece {
+  position: absolute;
+  top: -12px;
+  left: 50%;
+  width: 9px;
+  height: 14px;
+  border-radius: 2px;
+  animation: confetti-fall 1400ms cubic-bezier(0.2, 0.7, 0.4, 1) var(--delay) forwards;
+}
+
+@keyframes confetti-fall {
+  0% {
+    transform: translate(0, 0) rotate(0);
+    opacity: 1;
+  }
+  100% {
+    transform: translate(var(--x), 85vh) rotate(var(--spin));
+    opacity: 0;
+  }
+}
+
+.reveal-line {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  margin: 0;
+  font-size: var(--type-title);
+  font-weight: 600;
+}
+
+.reveal-line--right {
+  color: var(--accent);
+  animation: pop-in 320ms cubic-bezier(0.2, 0.9, 0.3, 1.4);
+}
+
+.stars {
+  display: inline-flex;
+  gap: 2px;
+  color: var(--text-muted);
 }
 
 /* Quiz and results (section 3.3): A to D at least 96 px tall, my pick outlined in mint. */
