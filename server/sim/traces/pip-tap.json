@@ -1,0 +1,11 @@
+{
+  "name": "pip-tap",
+  "description": "Tap the Pip button to open Pip, then the back button to close it.",
+  "samples": [
+    { "t": 0, "button": "pip", "touched": true },
+    { "t": 120, "button": "pip", "touched": false },
+    { "t": 2000, "button": "back", "touched": true },
+    { "t": 2120, "button": "back", "touched": false }
+  ],
+  "expected": [{ "type": "pip.invoke" }, { "type": "pip.dismiss" }]
+}

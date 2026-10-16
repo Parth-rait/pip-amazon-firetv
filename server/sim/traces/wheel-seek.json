@@ -1,0 +1,32 @@
+{
+  "name": "wheel-seek",
+  "description": "Turn the wheel 90 degrees clockwise across 0 (three steps forward), let go, then 60 degrees back (two steps back).",
+  "samples": [
+    { "t": 0, "wheel": 350 },
+    { "t": 40, "wheel": 0 },
+    { "t": 80, "wheel": 10 },
+    { "t": 120, "wheel": 20 },
+    { "t": 160, "wheel": 30 },
+    { "t": 200, "wheel": 40 },
+    { "t": 240, "wheel": 50 },
+    { "t": 280, "wheel": 60 },
+    { "t": 320, "wheel": 70 },
+    { "t": 360, "wheel": 80 },
+    { "t": 400, "wheel": null },
+    { "t": 2000, "wheel": 200 },
+    { "t": 2040, "wheel": 190 },
+    { "t": 2080, "wheel": 180 },
+    { "t": 2120, "wheel": 170 },
+    { "t": 2160, "wheel": 160 },
+    { "t": 2200, "wheel": 150 },
+    { "t": 2240, "wheel": 140 },
+    { "t": 2280, "wheel": null }
+  ],
+  "expected": [
+    { "type": "media.seekRelative", "seconds": 10 },
+    { "type": "media.seekRelative", "seconds": 10 },
+    { "type": "media.seekRelative", "seconds": 10 },
+    { "type": "media.seekRelative", "seconds": -10 },
+    { "type": "media.seekRelative", "seconds": -10 }
+  ]
+}

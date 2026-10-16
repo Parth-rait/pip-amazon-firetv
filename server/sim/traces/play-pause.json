@@ -1,0 +1,13 @@
+{
+  "name": "play-pause",
+  "description": "Tap play twice; a 10 ms bounce in between does nothing.",
+  "samples": [
+    { "t": 0, "button": "play", "touched": true },
+    { "t": 120, "button": "play", "touched": false },
+    { "t": 1500, "button": "play", "touched": true },
+    { "t": 1510, "button": "play", "touched": false },
+    { "t": 3000, "button": "play", "touched": true },
+    { "t": 3120, "button": "play", "touched": false }
+  ],
+  "expected": [{ "type": "media.playPause" }, { "type": "media.playPause" }]
+}

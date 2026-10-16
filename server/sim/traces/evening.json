@@ -1,0 +1,34 @@
+{
+  "name": "evening",
+  "description": "A short evening: open Pip, close it, pause, skip back 30 s, play.",
+  "samples": [
+    { "t": 0, "button": "pip", "touched": true },
+    { "t": 120, "button": "pip", "touched": false },
+    { "t": 4000, "button": "back", "touched": true },
+    { "t": 4120, "button": "back", "touched": false },
+    { "t": 6000, "button": "play", "touched": true },
+    { "t": 6120, "button": "play", "touched": false },
+    { "t": 8000, "wheel": 120 },
+    { "t": 8040, "wheel": 110 },
+    { "t": 8080, "wheel": 100 },
+    { "t": 8120, "wheel": 90 },
+    { "t": 8160, "wheel": 80 },
+    { "t": 8200, "wheel": 70 },
+    { "t": 8240, "wheel": 60 },
+    { "t": 8280, "wheel": 50 },
+    { "t": 8320, "wheel": 40 },
+    { "t": 8360, "wheel": 30 },
+    { "t": 8400, "wheel": null },
+    { "t": 10000, "button": "play", "touched": true },
+    { "t": 10120, "button": "play", "touched": false }
+  ],
+  "expected": [
+    { "type": "pip.invoke" },
+    { "type": "pip.dismiss" },
+    { "type": "media.playPause" },
+    { "type": "media.seekRelative", "seconds": -10 },
+    { "type": "media.seekRelative", "seconds": -10 },
+    { "type": "media.seekRelative", "seconds": -10 },
+    { "type": "media.playPause" }
+  ]
+}
