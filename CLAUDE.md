@@ -17,9 +17,9 @@ Hackathon project (Amazon Developer Hackathon, Fire TV track). Deadline: Fri Oct
 | `server/` | Node 22 + Express 5 + Socket.IO 4.8 + Bedrock. `src/core/` = Pip Core, `src/film/` = film night | Steps 2, 4, 7, 8 and 9 done: config, films, /health, /api/films, /qr, /media, model wrapper, sessions, players, host, realtime handlers, Ask Pip, quiz drafts, quiz and results, fake:tv, smoke:join, smoke:quiz |
 | `server/.env` | Local config (gitignored), copied from `server/.env.example` | Done |
 | `pad/` | React + Vite web app (the Pip Pad) | Steps 5, 7, 9 and 10 done: join, lobby, host controls, status pill, Pip and its motion, debug overlay, Ask Pip, quiz, results, fullscreen, wake lock |
-| `tv/` | Vega OS app (React Native for Vega) | Step 3 done: diagnostics screen, socket, W3C Media player; commands in `tv/README.md` |
+| `tv/` | Vega OS app (React Native for Vega) | Steps 3 and 6 done: socket with tv:hello, lobby with QR, watch with host commands, Pip, status pill; quiz and results are placeholders. Commands in `tv/README.md` |
 | `docs/` | Friction log, product feedback, measurements, demo script; later devpost | Templates, empty measurement tables and a devpost draft done; demo script needs the scene times from the notes |
-| `.claude/skills/ship-step/` | Definition-of-done and commit routine | Done; `run-pip` comes in Step 6 |
+| `.claude/skills/` | `ship-step` (definition of done and commit) and `run-pip` (start the whole stack) | Done |
 
 `pad/` and `tv/` must not be created by hand: their generators expect an empty or missing folder, and `sync-shared` would otherwise write into them early.
 
@@ -37,7 +37,8 @@ Hackathon project (Amazon Developer Hackathon, Fire TV track). Deadline: Fri Oct
 - Step 11: demo hardening. Cloud parts done: `npm run preflight`, `docs/demo-script.md`, empty measurement tables. Open (Mac): preflight passing, scene times in the demo script, measurements, usability test, rehearsals, tag v0.1.0.
 - Step 12: drafts only: README.md (what, why, architecture, Amazon tech, how to run, tests, known issues, credits) and docs/devpost.md, with "After" marks for what needs the TV app, measurements or the usability test. `npm audit`: 0 vulnerabilities in server/ and pad/.
 - Step 3: TV spike. Done on the Mac (gate 1): every diagnostics line green on the VVD through the tunnel, round trip 28 to 104 ms, the film plays, the remote pauses it. `smoke:ai` waits for AWS.
-- Next: Step 6 (TV) on the Mac, then the TV parts of Steps 7, 9 and 10; then Step 11 on the Mac; then finish Step 12 with screenshots and real numbers.
+- Step 6: TV lobby and watch. Done on the Mac (gate 2): QR join, host commands 177 to 239 ms, remote OK starts the film, server restart keeps the film playing.
+- Next (agreed Oct 16): film notes and quiz drafts; a local brain (Ollama) with an answer memory until AWS is verified; Pip moods and customization; pad and TV redesign (minimal by default); Sintel as a second film; then the TV parts of Steps 9 and 10, Step 11 and Step 12.
 
 Update this list when a step is committed.
 

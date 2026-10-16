@@ -41,3 +41,15 @@ vega exec vda -s emulator-5554 shell "inputd-cli button_press KEY_PLAYPAUSE"  # 
 ```
 
 Alexa voice can only be checked on a real Fire TV device (PROJECT.md section 14.2, check 10).
+
+## Step 6 result (gate 2)
+
+Lobby (QR code, code, film cards, players), watch (film, credit line, pause bar, answer bubble, Pip) and placeholders for the quiz and results. Checked on the VVD through the tunnel on Oct 16 2026: phones join by QR and appear on the TV; the host's Pause and Play reach the TV and come back as playback in 177 to 239 ms; skips land in 1.1 to 1.6 s (the player re-buffers); the remote's OK starts the film from the lobby; a server restart mid-film shows "Reconnecting", the film keeps playing from its buffer, and the TV takes its code back in watch.
+
+## Sizes on Vega
+
+React Native 0.83 on Vega lays out on a 960 x 540 dp canvas (scale factor 2 on a 1080p screen). PROJECT.md gives TV sizes in pixels at 1080p, so `src/theme.ts` converts every size with `dp()`. Animations use only transform and opacity with the native driver: on RN 0.83, mixing native and JS drivers on one view aborts the app.
+
+## Known issue
+
+Once, the TV's socket closed (`transport close`) just as the film started loading, and reconnected in about 1 s with the same code. Watch for it in rehearsals.

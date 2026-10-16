@@ -1,4 +1,3 @@
-/* global globalThis */
 import 'react-native';
 import {render} from '@testing-library/react-native';
 import * as React from 'react';
@@ -10,27 +9,17 @@ jest.mock('@amazon-devices/react-native-w3cmedia', () => ({
 }));
 jest.mock('../src/net/socket', () => ({
   getSocket: () => ({connected: false, on: jest.fn(), off: jest.fn()}),
+  sendHello: jest.fn(),
+  setHelloPlayback: jest.fn(),
   pingOnce: jest.fn(),
 }));
 
 import {App} from '../src/App';
 
 describe('App', () => {
-  beforeEach(() => {
-    globalThis.fetch = jest.fn(() => new Promise<never>(() => {}));
-  });
-
-  it('shows every diagnostics check while SHOW_DIAGNOSTICS is on', () => {
+  it('shows a sleeping Pip and "Connecting" before the first view', () => {
     const screen = render(<App />);
-    expect(screen.getByText('Pip diagnostics')).toBeTruthy();
-    for (const label of [
-      'SERVER_URL',
-      'GET /health',
-      'Socket.IO',
-      'GET /api/films',
-      'Film',
-    ]) {
-      expect(screen.getByText(label)).toBeTruthy();
-    }
+    expect(screen.getByText('Connecting')).toBeTruthy();
+    expect(screen.getByLabelText('Pip is sleep')).toBeTruthy();
   });
 });
