@@ -135,14 +135,7 @@ export type InputSource = 'pad-touch' | 'pad-button' | 'pad-wheel' | 'remote' | 
 
 /** Keys a TV remote (or a keyboard standing in for one) can send. */
 export type RemoteKey =
-  | 'play-pause'
-  | 'play'
-  | 'pause'
-  | 'rewind'
-  | 'fast-forward'
-  | 'left'
-  | 'right'
-  | 'back';
+  'play-pause' | 'play' | 'pause' | 'rewind' | 'fast-forward' | 'left' | 'right' | 'back';
 
 /** A raw device input. The server's adapters turn it into an intent; devices never decide. */
 export type RawInput =
@@ -161,7 +154,11 @@ export interface InputEnvelope {
 
 /** What an input became: the intent the server applied (or that the pad should apply, for invoke). */
 export type InputResult =
-  | { ok: true; intent: 'play' | 'pause' | 'seek' | 'invoke' | 'dismiss' | 'none'; commandId: string | null }
+  | {
+      ok: true;
+      intent: 'play' | 'pause' | 'seek' | 'invoke' | 'dismiss' | 'none';
+      commandId: string | null;
+    }
   | { ok: false; reason: 'invalid' | 'duplicate' | 'not-allowed' | 'not-watching' };
 
 export interface PipSay {
@@ -184,8 +181,7 @@ export type JoinResult =
   | { ok: false; reason: 'invalid' | 'unknown-code' | 'rate-limited' | 'full' };
 
 export type AskResult =
-  | { ok: true }
-  | { ok: false; reason: 'invalid' | 'not-watching' | 'busy' | 'too-soon' };
+  { ok: true } | { ok: false; reason: 'invalid' | 'not-watching' | 'busy' | 'too-soon' };
 
 export type Ack<T> = (result: T) => void;
 
@@ -198,7 +194,10 @@ export interface ClientToServerEvents {
   ) => void;
   'tv:playback': (playback: Playback) => void;
   'tv:watch': (payload: { contentId: string }) => void; // the remote picked a film in the lobby
-  'pad:join': (payload: { code: string; playerId: string; name: string }, ack: Ack<JoinResult>) => void;
+  'pad:join': (
+    payload: { code: string; playerId: string; name: string },
+    ack: Ack<JoinResult>,
+  ) => void;
   'pad:host': (command: HostCommand) => void;
   'pad:ask': (payload: { text: string; via: AskVia }, ack: Ack<AskResult>) => void;
   'pad:answer': (payload: { index: number; choice: number }) => void;

@@ -11,6 +11,9 @@ import type { PadAction } from '../state/store';
 export type PadSocket = Socket<ServerToClientEvents, ClientToServerEvents>;
 
 const ACK_TIMEOUT_MS = 5000;
+// After a server restart a pad can be back before the TV has re-created the session, so the first
+// retries are quick; then every 10 s, for two minutes in all.
+const RETRY_DELAYS_MS = [1000, 2000, 5000];
 const RETRY_EVERY_MS = 10_000;
 const RETRY_FOR_MS = 2 * 60 * 1000;
 
@@ -34,6 +37,7 @@ async function sendJoin(socket: PadSocket, code: string, playerId: string, name:
 export function connectPad(socket: PadSocket, playerId: string, dispatch: (a: PadAction) => void) {
   let retryTimer: ReturnType<typeof setTimeout> | undefined;
   let retryUntil = 0;
+  let retries = 0;
 
   const handle = (result: JoinResult | null, code: string, name: string): JoinResult | null => {
     if (result?.ok) {
@@ -58,9 +62,11 @@ export function connectPad(socket: PadSocket, playerId: string, dispatch: (a: Pa
       (result.reason === 'unknown-code' || result.reason === 'rate-limited');
     if (canRetry && Date.now() < retryUntil) {
       dispatch({ type: 'looking-for-tv', isLooking: true });
-      retryTimer = setTimeout(() => void rejoin(), RETRY_EVERY_MS);
+      retryTimer = setTimeout(() => void rejoin(), RETRY_DELAYS_MS[retries] ?? RETRY_EVERY_MS);
+      retries += 1;
       return;
     }
+    retries = 0;
     dispatch({ type: 'looking-for-tv', isLooking: false });
     if (result && !result.ok) {
       // Gave up: back to the join screen, with the saved code filled in and the reason shown.
@@ -72,6 +78,7 @@ export function connectPad(socket: PadSocket, playerId: string, dispatch: (a: Pa
   socket.on('connect', () => {
     dispatch({ type: 'connected' });
     retryUntil = Date.now() + RETRY_FOR_MS;
+    retries = 0;
     void rejoin();
   });
   socket.on('disconnect', () => dispatch({ type: 'disconnected' }));
