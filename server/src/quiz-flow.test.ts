@@ -40,7 +40,9 @@ const film: Content = {
 function setup(positionSec = 30) {
   const timers = createFakeTimers();
   const deps: FlowDeps = {
-    io: { to: () => ({ emit: () => {} }) } as unknown as PipServer,
+    io: {
+      to: () => ({ emit: () => {}, except: () => ({ emit: () => {} }) }),
+    } as unknown as PipServer,
     films: [film],
     publicUrl: 'http://x',
     timers,

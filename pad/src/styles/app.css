@@ -724,6 +724,239 @@ body {
   cursor: default;
 }
 
+/* The watch screen's tabs reuse the segmented control, on a surface instead of the page. */
+.screen--watch {
+  padding-bottom: 150px;
+}
+
+.screen--watch .segmented {
+  background: var(--surface);
+}
+
+.screen--watch .segmented__item.is-on {
+  background: var(--surface2);
+}
+
+.empty {
+  margin: 0;
+  padding: var(--space-6) var(--space-4);
+  text-align: center;
+  color: var(--text-muted);
+}
+
+/* Reactions float above the Ask bar on the Pip tab, at the bottom on the others. */
+.reactions {
+  position: fixed;
+  left: 50%;
+  bottom: max(var(--space-3), env(safe-area-inset-bottom));
+  z-index: 6;
+  display: flex;
+  gap: var(--space-2);
+  padding: var(--space-1) var(--space-2);
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--surface) 92%, transparent);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  transform: translateX(-50%);
+  transition: bottom var(--motion-fast);
+}
+
+.reactions--raised {
+  bottom: calc(max(var(--space-3), env(safe-area-inset-bottom)) + 76px);
+}
+
+.reaction {
+  position: relative;
+  display: grid;
+  place-items: center;
+  width: var(--touch-min);
+  height: var(--touch-min);
+  border: none;
+  border-radius: 50%;
+  background: transparent;
+  cursor: pointer;
+  transition: transform 120ms ease-out;
+}
+
+.reaction:active {
+  transform: scale(0.86);
+}
+
+.reaction__pop {
+  position: absolute;
+  left: 50%;
+  bottom: 50%;
+  pointer-events: none;
+  animation: float-up 900ms ease-out forwards;
+}
+
+@keyframes float-up {
+  from {
+    opacity: 1;
+    transform: translate(-50%, 0) scale(0.8);
+  }
+  to {
+    opacity: 0;
+    transform: translate(-50%, -90px) scale(1.2);
+  }
+}
+
+/* "What happens next?" */
+.predict {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  padding: var(--space-4);
+  border-radius: 24px;
+  background: color-mix(in srgb, var(--accent) 14%, var(--surface));
+  animation: pop-in 260ms cubic-bezier(0.2, 0.9, 0.3, 1.2);
+}
+
+.predict__head {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+}
+
+.predict__head .label {
+  margin: 0;
+  color: var(--text);
+}
+
+.predict__question {
+  margin: 0;
+  font-size: var(--type-title);
+  font-weight: 600;
+}
+
+.predict__choices {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+.predict__choice {
+  min-height: var(--touch-min);
+  padding: var(--space-3) var(--space-4);
+  border: none;
+  border-radius: 16px;
+  background: var(--surface);
+  color: var(--text);
+  font: inherit;
+  text-align: left;
+  cursor: pointer;
+  transition:
+    background var(--motion-fast),
+    opacity var(--motion-fast),
+    box-shadow var(--motion-fast);
+}
+
+.predict__choice.is-mine {
+  box-shadow: inset 0 0 0 3px var(--accent);
+}
+
+.predict__choice.is-right {
+  background: var(--accent);
+  color: var(--bg);
+  font-weight: 600;
+}
+
+.predict__choice.is-dim {
+  opacity: 0.45;
+}
+
+.predict__choice:disabled {
+  cursor: default;
+}
+
+/* "Catch me up": the story so far */
+.story {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+}
+
+.chapter {
+  overflow: hidden;
+  border-radius: 20px;
+  background: var(--surface);
+  animation: fade-in var(--motion-fast);
+}
+
+.chapter__image {
+  display: block;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+}
+
+.chapter__text {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+  padding: var(--space-3) var(--space-4) var(--space-4);
+}
+
+.chapter__text .label {
+  margin: 0;
+}
+
+/* "Who's who" */
+.cast {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+.cast__card {
+  display: flex;
+  gap: var(--space-4);
+  padding: var(--space-3);
+  border-radius: 20px;
+  background: var(--surface);
+}
+
+.cast__image {
+  flex-shrink: 0;
+  width: 88px;
+  height: 88px;
+  border-radius: 16px;
+  object-fit: cover;
+  background: var(--surface2);
+}
+
+.cast__image--empty {
+  display: grid;
+  place-items: center;
+  color: var(--text-muted);
+  font-size: var(--type-display);
+  font-weight: 700;
+}
+
+.cast__text {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+  min-width: 0;
+}
+
+.cast__facts {
+  margin: 0;
+  padding: 0 0 0 var(--space-4);
+  color: var(--text-muted);
+  font-size: var(--type-caption);
+}
+
+.cast__facts .is-latest {
+  color: var(--text);
+}
+
 /* Problems only: the pill in the top bar. */
 .pill-row {
   display: flex;

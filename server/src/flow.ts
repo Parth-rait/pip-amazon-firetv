@@ -23,7 +23,7 @@ import {
   type PipSay,
   type ServerToClientEvents,
 } from './shared/protocol.js';
-import { buildView } from './view.js';
+import { buildView, tvView } from './view.js';
 
 export type PipServer = Server<ClientToServerEvents, ServerToClientEvents>;
 
@@ -55,9 +55,16 @@ export function roomOf(code: string): string {
 export function broadcast(session: Session, deps: FlowDeps): void {
   const now = deps.now();
   session.updatedAt = now;
-  deps.io
-    .to(roomOf(session.code))
-    .emit('session:view', buildView(session, deps.films, deps.publicUrl, now));
+  const view = buildView(session, deps.films, deps.publicUrl, now);
+  const room = deps.io.to(roomOf(session.code));
+  if (!session.tvSocketId) {
+    room.emit('session:view', view);
+    return;
+  }
+  // The TV gets a slim view: on Vega its WebSocket dropped every few seconds once the view
+  // carried the chapters and character cards (about 5 KB), which only the pads show.
+  room.except(session.tvSocketId).emit('session:view', view);
+  deps.io.to(session.tvSocketId).emit('session:view', tvView(view));
 }
 
 function dropQuiz(session: Session, deps: FlowDeps): void {

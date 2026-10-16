@@ -87,6 +87,7 @@ export function App() {
       {view?.stage === 'watch' && (
         <WatchScreen
           view={view}
+          myId={state.myId}
           playbackAt={state.playbackAt}
           isHost={isHost(state)}
           chips={state.chips}
@@ -94,6 +95,8 @@ export function App() {
           onCommand={sendHost}
           onAsk={ask}
           onSomethingElse={() => dispatch({ type: 'chips-expired' })}
+          onReact={(kind) => socket.connected && socket.emit('pad:react', { kind })}
+          onVote={(id, choice) => socket.connected && socket.emit('pad:predict', { id, choice })}
         />
       )}
       {view?.stage === 'quiz' && view.quiz && (

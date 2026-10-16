@@ -55,6 +55,12 @@ export function buildView(
   };
 }
 
+/** The view for the TV: the same, without the chapters and character cards, which only the pads show. */
+export function tvView(view: SessionView): SessionView {
+  if (!view.companion) return view;
+  return { ...view, companion: { ...view.companion, chapters: [], characters: [] } };
+}
+
 /** The current question. The answer, the explanation and the picks appear only in the reveal. */
 export function buildQuizView(run: QuizRun, nowMs: number): QuizView | null {
   const question = currentQuestion(run);

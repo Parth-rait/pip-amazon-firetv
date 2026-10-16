@@ -1,5 +1,5 @@
-import React, {useEffect, useReducer} from 'react';
-import {StyleSheet, View} from 'react-native';
+import React, {useEffect, useReducer, useState} from 'react';
+import {AppState, StyleSheet, View} from 'react-native';
 import {SHOW_DIAGNOSTICS} from './config';
 import {getSocket, sendHello} from './net/socket';
 import {initialTvState, tvReducer} from './state/tv-store';
@@ -19,6 +19,23 @@ export const App = () => {
 
 function PipTv() {
   const [state, dispatch] = useReducer(tvReducer, initialTvState);
+  const [isActive, setIsActive] = useState(
+    AppState.currentState !== 'background',
+  );
+
+  // In the background a Vega app must release its player; its network is cut too. So the TV
+  // closes its socket and unmounts the watch screen, and on its way back reconnects with its
+  // code: the server still has the film's position, so the film resumes (a warm start).
+  useEffect(() => {
+    const sub = AppState.addEventListener('change', (next) => {
+      const active = next === 'active';
+      setIsActive(active);
+      const s = getSocket();
+      if (active && !s.connected) s.connect();
+      if (!active) s.disconnect();
+    });
+    return () => sub.remove();
+  }, []);
 
   useEffect(() => {
     const s = getSocket();
@@ -50,6 +67,7 @@ function PipTv() {
   }, []);
 
   const {view} = state;
+  if (!isActive) return <View style={styles.root} />;
   // The server owns the stage; the TV draws whatever session:view says (PROJECT.md 3.3).
   return (
     <View style={styles.root}>

@@ -52,6 +52,16 @@ export function ResultsScreen({
         <Text style={styles.family}>
           {familyLine(results.correct, results.answers)}
         </Text>
+        {results.moment ? (
+          <View style={styles.moment}>
+            <Text style={styles.momentLabel}>
+              Favourite moment ({results.moment.reactions} reactions)
+            </Text>
+            <Text style={styles.momentText} numberOfLines={3}>
+              {results.moment.text}
+            </Text>
+          </View>
+        ) : null}
       </View>
     </View>
   );
@@ -97,4 +107,12 @@ const styles = StyleSheet.create({
     fontSize: type.title,
     textAlign: 'center',
   },
+  moment: {
+    gap: space.xs,
+    padding: space.xl,
+    borderRadius: radius,
+    backgroundColor: color.surface,
+  },
+  momentLabel: {color: color.textMuted, fontSize: type.caption},
+  momentText: {color: color.text, fontSize: type.caption},
 });

@@ -31,13 +31,10 @@ function setup(
   options: { aiEnabled?: boolean; memory?: boolean; simpleFormat?: boolean } = {},
 ) {
   const said: PipSay[] = [];
-  const io = {
-    to: () => ({
-      emit: (event: string, payload: unknown) => {
-        if (event === 'pip:say') said.push(payload as PipSay);
-      },
-    }),
-  } as unknown as PipServer;
+  const emit = (event: string, payload: unknown) => {
+    if (event === 'pip:say') said.push(payload as PipSay);
+  };
+  const io = { to: () => ({ emit, except: () => ({ emit }) }) } as unknown as PipServer;
   let now = 10_000;
   const timers = createFakeTimers();
   const log = { info: vi.fn(), warn: vi.fn(), error: vi.fn() };

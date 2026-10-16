@@ -13,6 +13,8 @@ import {
 import type {GreetEntry, SayEntry} from '../state/tv-store';
 import {Fade} from '../components/Fade';
 import {Pip} from '../components/Pip';
+import {PredictionPanel} from '../components/PredictionPanel';
+import {ReactionLayer} from '../components/ReactionLayer';
 import {SpeechBubble} from '../components/SpeechBubble';
 import {color, dp, radius, safe, space, type} from '../theme';
 
@@ -171,6 +173,16 @@ export function WatchScreen({
               </Text>
             </View>
           )}
+
+          {view.companion?.prediction ? (
+            <PredictionPanel
+              prediction={view.companion.prediction}
+              players={view.players}
+              accent={accent}
+            />
+          ) : null}
+
+          <ReactionLayer />
 
           <View style={styles.corner}>
             {say ? (

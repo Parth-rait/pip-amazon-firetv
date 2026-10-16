@@ -122,3 +122,27 @@ describe('buildView in the quiz', () => {
     expect(view.results?.questions).toBe(2);
   });
 });
+
+describe('tvView', () => {
+  it('leaves out the chapters and character cards but keeps the prediction', async () => {
+    const { tvView } = await import('./view.js');
+    const prediction = {
+      id: 'p',
+      question: 'Q?',
+      choices: ['A', 'B'],
+      status: 'open' as const,
+      votedIds: [],
+      answer: null,
+      reveal: null,
+      picks: null,
+    };
+    const full = {
+      companion: {
+        chapters: [{ atSec: 1, title: 'T', summary: 'S', image: null }],
+        characters: [{ id: 'c', name: 'C', image: null, facts: ['F'] }],
+        prediction,
+      },
+    } as unknown as Parameters<typeof tvView>[0];
+    expect(tvView(full).companion).toEqual({ chapters: [], characters: [], prediction });
+  });
+});
