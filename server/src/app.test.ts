@@ -20,6 +20,7 @@ let close: () => void = () => {};
 beforeAll(async () => {
   const server = createApp(config, films, {
     mediaDir,
+    padDir, // without it the test depends on a locally built pad/dist
     hasSession: (code) => code === 'ABCD',
   }).listen(0);
   await new Promise((resolve) => server.once('listening', resolve));
