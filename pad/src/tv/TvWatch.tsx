@@ -36,6 +36,16 @@ interface Props {
   setCommandHandler: (handler: ((command: TvCommand) => void) | null) => void;
 }
 
+/**
+ * The simulator runs in browsers that may lack H.264 (open-source Chromium), so it falls back to a
+ * .webm file next to the .mp4. The Vega app on Fire TV plays the MP4 itself.
+ */
+function playableUrl(url: string): string {
+  const canMp4 =
+    document.createElement('video').canPlayType('video/mp4; codecs="avc1.640028"') !== '';
+  return canMp4 ? url : url.replace(/\.mp4(\?|$)/, '.webm$1');
+}
+
 function clock(seconds: number): string {
   const s = Math.max(0, Math.floor(seconds));
   return `${Math.floor(s / 60)}:${String(s % 60).padStart(2, '0')}`;
@@ -130,7 +140,7 @@ export function TvWatch({ socket, view, content, onReport, setCommandHandler }: 
       <video
         ref={video}
         className="tv-video"
-        src={content.url}
+        src={playableUrl(content.url)}
         autoPlay
         muted={muted}
         playsInline
@@ -146,7 +156,7 @@ export function TvWatch({ socket, view, content, onReport, setCommandHandler }: 
         onError={() => setIsBroken(true)}
       />
       {isBroken && <p className="tv-message">The film didn't load.</p>}
-      {showCredit && <p className="tv-credit">{content.credit}</p>}
+      {showCredit && !assist && <p className="tv-credit">{content.credit}</p>}
       {pausedAtSec !== null && (
         <div className="tv-pausebar">
           <span>{content.title}</span>

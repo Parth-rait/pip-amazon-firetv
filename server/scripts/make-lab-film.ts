@@ -9,6 +9,9 @@ import { fileURLToPath } from 'node:url';
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), '..');
 const OUT = join(ROOT, 'media', 'lantern-fox.mp4');
+// Open-source Chromium (as in Playwright) has no H.264 decoder, so the browser TV simulator
+// falls back to this VP9 copy. Fire TV itself plays the MP4.
+const OUT_WEBM = join(ROOT, 'media', 'lantern-fox.webm');
 const TRUTH = join(ROOT, 'pipeline', 'truth', 'lantern-fox.truth.json');
 const SIZE = '1280x720';
 const FPS = 24;
@@ -201,6 +204,12 @@ function render(): void {
   if (result.status !== 0) throw new Error(`ffmpeg failed with status ${result.status}`);
 }
 
+function renderWebm(): void {
+  const args = ['-hide_banner', '-loglevel', 'error', '-y', '-i', OUT, '-c:v', 'libvpx-vp9', '-b:v', '0', '-crf', '40', '-deadline', 'realtime', '-cpu-used', '8', '-c:a', 'libopus', '-b:a', '48k', OUT_WEBM];
+  const result = spawnSync('ffmpeg', args, { stdio: 'inherit' });
+  if (result.status !== 0) throw new Error(`ffmpeg (webm) failed with status ${result.status}`);
+}
+
 function writeTruth(): void {
   mkdirSync(dirname(TRUTH), { recursive: true });
   const truth = {
@@ -215,5 +224,6 @@ function writeTruth(): void {
 }
 
 render();
+renderWebm();
 writeTruth();
-console.log(`wrote ${OUT}\nwrote ${TRUTH}`);
+console.log(`wrote ${OUT}\nwrote ${OUT_WEBM}\nwrote ${TRUTH}`);

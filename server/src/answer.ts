@@ -172,8 +172,9 @@ function retrievalAnswer(
   if (req.topic === 'identify') {
     const asked = mentionedEntities(evidence.entities, req.question);
     const near = entitiesNear(evidence, IDENTIFY_WINDOW_SEC);
+    // Pip speaks briefly: who was named, or else the one figure seen most recently.
     const people =
-      asked.size > 0 ? evidence.entities.filter((e) => asked.has(e.id)) : near.slice(0, 2);
+      asked.size > 0 ? evidence.entities.filter((e) => asked.has(e.id)) : near.slice(0, 1);
     if (people.length > 0) {
       const ids = new Set(people.map((p) => p.id));
       const sources = evidence.facts.filter((f) => f.entities.some((id) => ids.has(id))).slice(-2);

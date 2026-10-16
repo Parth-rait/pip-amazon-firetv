@@ -122,7 +122,9 @@ body {
 }
 
 .button--accent:disabled {
-  background: var(--surface);
+  /* Still a visible button on the surface panels it sits on, just not lit. */
+  background: var(--surface2);
+  color: var(--text-muted);
 }
 
 .button--wide {
@@ -290,6 +292,21 @@ body {
   flex: 1;
   min-width: 0;
   background: var(--bg);
+}
+
+/* Narrow phones: the question gets the whole row, the buttons share the next one. */
+@media (max-width: 400px) {
+  .ask__form {
+    flex-wrap: wrap;
+  }
+
+  .ask__form .text-input {
+    flex-basis: 100%;
+  }
+
+  .ask__form .button--accent {
+    flex: 1;
+  }
 }
 
 .chips {
