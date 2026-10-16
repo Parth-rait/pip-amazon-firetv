@@ -1,10 +1,7 @@
 // Starts the Pip server: HTTP (Express) and Socket.IO on one port.
 import 'dotenv/config';
-import { createServer } from 'node:http';
 import { join } from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { Server } from 'socket.io';
-import { createApp } from './app.js';
 import { loadConfig } from './config.js';
 import { createAnswerMemory } from './core/ai/answer-memory.js';
 import { createFileJournal } from './core/journal.js';
@@ -14,9 +11,7 @@ import { loadFilms } from './film/content.js';
 import { loadTimeline } from './film/timeline-file.js';
 import { loadTypeSafeJudge } from './typesafe-judge.js';
 import { log } from './log.js';
-import { registerRealtime } from './realtime.js';
-import { InMemorySessionStore } from './sessions.js';
-import type { ClientToServerEvents, ServerToClientEvents } from './shared/protocol.js';
+import { createPipServer } from './server.js';
 
 const CONTENT_DIR = fileURLToPath(new URL('../content', import.meta.url));
 const LAB_CONTENT_DIR = fileURLToPath(new URL('../lab/content', import.meta.url));
@@ -34,7 +29,6 @@ const films = loaded.map(({ film }) => film);
 const timelines = new Map(
   loaded.map(({ film, dir }) => [film.id, loadTimeline(join(dir, 'timelines'), film)]),
 );
-const store = new InMemorySessionStore();
 const model = !config.AI_ENABLED
   ? createFakeModel(() => {
       throw new Error('AI is switched off (AI_ENABLED=false)');
@@ -88,20 +82,14 @@ if (config.INTENT_JUDGE === 'typesafe' && !judge) {
   });
 }
 
-const app = createApp(config, films, { hasSession: (code) => store.get(code) !== undefined });
-const httpServer = createServer(app);
-const io = new Server<ClientToServerEvents, ServerToClientEvents>(httpServer);
-
-registerRealtime({
-  io,
-  store,
-  films,
+const { httpServer } = createPipServer({
   config,
-  timers: createTimers(),
+  films,
+  timelines,
   model,
+  timers: createTimers(),
   memory,
   journal,
-  timelines,
   judge: judge ?? undefined,
   log,
   now: Date.now,
