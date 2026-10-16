@@ -354,6 +354,15 @@ body {
   background: var(--surface2);
 }
 
+/* The sheet is --surface too, so its chips need the raised surface to show as buttons. */
+.sheet .chip {
+  background: var(--surface2);
+}
+
+.sheet .chip:active {
+  background: var(--surface);
+}
+
 .segmented {
   display: grid;
   grid-template-columns: repeat(3, 1fr);

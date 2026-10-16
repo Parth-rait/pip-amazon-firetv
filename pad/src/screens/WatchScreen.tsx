@@ -115,6 +115,7 @@ export function WatchScreen(props: Props) {
       )}
 
       <VoiceButton
+        isHost={isHost}
         onCommand={(event) =>
           event.type === 'pip.invoke' ? openPip('pad_voice') : void send(event, 'pad_voice')
         }

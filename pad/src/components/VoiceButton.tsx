@@ -6,12 +6,16 @@ import { isSpeechAvailable, listenOnce } from '../lib/speech';
 import type { PipInputEvent } from '../shared/protocol';
 import { MicIcon } from './Icons';
 
+const HOST_HINT = 'Tap and say "pause", "back 10" or "louder"';
+const GUEST_HINT = 'Tap and ask Pip about the film';
+
 interface Props {
   onCommand: (event: PipInputEvent) => void;
   onQuestion: (text: string) => void;
+  isHost: boolean; // only the host's commands control the film, so guests get a question hint
 }
 
-export function VoiceButton({ onCommand, onQuestion }: Props) {
+export function VoiceButton({ onCommand, onQuestion, isHost }: Props) {
   const [heard, setHeard] = useState<string | null>(null);
   const [isListening, setIsListening] = useState(false);
   const stop = useRef<(() => void) | null>(null);
@@ -55,7 +59,7 @@ export function VoiceButton({ onCommand, onQuestion }: Props) {
         aria-pressed={isListening}
       >
         <MicIcon />
-        <span>{isListening ? 'Listening...' : 'Tap and say "pause", "back 10" or "louder"'}</span>
+        <span>{isListening ? 'Listening...' : isHost ? HOST_HINT : GUEST_HINT}</span>
       </button>
       {heard && <p className="caption">{heard}</p>}
     </div>
