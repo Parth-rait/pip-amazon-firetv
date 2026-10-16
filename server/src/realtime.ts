@@ -7,6 +7,7 @@ import type { TextModel } from './core/ai/model.js';
 import { newCode } from './core/codes.js';
 import { hostTimerKey, pickTvCode, startHostGrace } from './core/pairing.js';
 import { pipTimerKey, restingPip, setPip, type CoreDeps } from './core/pip.js';
+import { greeting } from './lines.js';
 import { cleanName, joinPlayer, leaveSocket, pickHost } from './core/players.js';
 import { createRateLimit } from './core/rate-limit.js';
 import type { Timers } from './core/timers.js';
@@ -44,6 +45,7 @@ type PipSocket = Socket<ClientToServerEvents>;
 type SocketData = { role: 'tv'; code: string } | { role: 'pad'; code: string; playerId: string };
 
 const SWEEP_EVERY_MS = 10 * 60 * 1000;
+const GREETING_MS = 4000;
 const JOIN_WINDOW_MS = 60 * 1000;
 
 /** Registers every handler; returns a function that stops the idle sweep. */
@@ -157,7 +159,7 @@ export function registerRealtime(deps: RealtimeDeps): () => void {
         invalid('pad:join');
         return ack({ ok: false, reason: 'invalid' });
       }
-      const { code, playerId } = parsed.data;
+      const { code, playerId, avatar } = parsed.data;
       const now = deps.now();
       let session = deps.store.get(code);
       if (!session?.players.has(playerId)) {
@@ -177,13 +179,22 @@ export function registerRealtime(deps: RealtimeDeps): () => void {
         session = deps.store.get(code);
         if (!session) return ack({ ok: false, reason: 'unknown-code' });
       }
-      const outcome = joinPlayer(session, { playerId, name, socketId: socket.id }, now);
+      const outcome = joinPlayer(session, { playerId, name, socketId: socket.id, avatar }, now);
       if (!outcome.ok) return ack({ ok: false, reason: outcome.reason });
       pickHost(session, now);
       socket.data = { role: 'pad', code, playerId } satisfies SocketData;
       void socket.join(roomOf(code));
       ack({ ok: true, view: buildView(session, deps.films, deps.config.PUBLIC_URL, now) });
       deps.log.info('pad.join', { socketId: socket.id, code, playerId, isNew: outcome.isNew });
+      if (outcome.isNew) {
+        // Pip says hello on the TV, in the session's mood, unless it is busy answering.
+        deps.io.to(roomOf(code)).emit('pip:hello', {
+          playerId,
+          name: outcome.player.name,
+          text: greeting(session.pipStyle.mood, outcome.player.name, session.players.size - 1),
+        });
+        if (!session.asking) return setPip(session, 'talking', core(session), GREETING_MS);
+      }
       if (session.pip === 'sleep') setPip(session, 'idle', core(session));
       else broadcast(session, flow);
     });
@@ -206,6 +217,10 @@ export function registerRealtime(deps: RealtimeDeps): () => void {
         session.tvSocketId
       ) {
         deps.io.to(session.tvSocketId).emit('tv:command', command);
+      } else if (command.type === 'pip-style') {
+        session.pipStyle = command.style;
+        deps.log.info('pip.style', { code: session.code, ...command.style });
+        broadcast(session, flow);
       } else if (command.type === 'lobby' && stage !== 'lobby') {
         goToLobby(session, flow);
       } else if (command.type === 'start-quiz' && stage === 'watch') {

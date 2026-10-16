@@ -9,7 +9,7 @@ Hackathon project (Amazon Developer Hackathon, Fire TV track). Deadline: Fri Oct
 | Path | What | Status |
 |---|---|---|
 | `PROJECT.md` | Plan, architecture, contracts, standards, step-by-step build prompts (section 13) | Done |
-| `shared/protocol.ts` | The only definition of socket events and payloads | Done (verbatim from PROJECT.md 7.1) |
+| `shared/protocol.ts` | The only definition of socket events and payloads | Version 3 (PROJECT.md 2.4); 7.1 shows version 2 |
 | `scripts/sync-shared.mjs` | Copies the contract into `server/src/shared`, `pad/src/shared`, `tv/src/shared` | Done |
 | `scripts/run-all.mjs` | Runs `typecheck`, `lint` or `test` in each package that has a `package.json` | Done |
 | `scripts/tunnel.mjs` | Cloudflare quick tunnel; writes `PUBLIC_URL` and `SERVER_URL` | Done (used from Step 3) |
@@ -39,7 +39,8 @@ Hackathon project (Amazon Developer Hackathon, Fire TV track). Deadline: Fri Oct
 - Step 3: TV spike. Done on the Mac (gate 1): every diagnostics line green on the VVD through the tunnel, round trip 28 to 104 ms, the film plays, the remote pauses it. `smoke:ai` waits for AWS.
 - Step 6: TV lobby and watch. Done on the Mac (gate 2): QR join, host commands 177 to 239 ms, remote OK starts the film, server restart keeps the film playing.
 - Oct 16 (agreed with Parth, PROJECT.md 2.4): film notes and quizzes drafted for Big Buck Bunny and Sintel (the agent read a frame every 6 s and the subtitles; Parth checks the times); local brain `AI_PROVIDER=ollama` with qwen2.5:3b; answer memory (PROJECT.md 5.9). eval:ask: 0 leaks on both films; the 3B model still makes up small facts, so the demo uses Nova.
-- Next (agreed Oct 16): Pip moods and customization; pad and TV redesign (minimal by default); then the TV parts of Steps 9 and 10, Step 11 and Step 12.
+- Oct 16: Pip moods (Chill, Playful, Sassy) and colors, avatars, greetings, posters (contract v3); pad redesigned (chat-style watch screen, remote-style host controls, "Make Pip yours" sheet); TV follows Pip's color and shows greetings and avatars. Known issue: on the TV lobby, remote focus starts on the second film card.
+- Next: the TV's quiz and results screens (Step 9), then Steps 10 to 12. AWS: switch AI_PROVIDER to bedrock once the account is verified.
 
 Update this list when a step is committed.
 

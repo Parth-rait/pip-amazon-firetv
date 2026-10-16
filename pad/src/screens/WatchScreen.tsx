@@ -1,5 +1,6 @@
-// WATCH: Ask Pip for everyone, and the host's controls or who has them (section 3.3).
+// WATCH: the film's progress for everyone, the host's remote, and Ask Pip as a chat (section 3.3).
 import { AskPip } from '../components/AskPip';
+import { FilmProgress } from '../components/FilmProgress';
 import { HostControls } from '../components/HostControls';
 import type { AskResult, AskVia, HostCommand, PipSay, SessionView } from '../shared/protocol';
 import { hostName, type ChipKind } from '../state/store';
@@ -17,35 +18,40 @@ interface Props {
 
 export function WatchScreen(props: Props) {
   const { view, isHost, onCommand } = props;
-  const durationSec = view.content?.durationSec ?? 0;
   return (
-    <main className="screen">
+    <main className="screen screen--watch">
       <header className="watch-header">
+        <div className="watch-header__text">
+          <h1 className="large-title">{view.content?.title ?? 'Film'}</h1>
+          <FilmProgress
+            playback={view.playback}
+            playbackAt={props.playbackAt}
+            durationSec={view.content?.durationSec ?? 0}
+          />
+        </div>
         {isHost && (
           <button className="button button--small" onClick={() => onCommand({ type: 'lobby' })}>
-            Lobby
+            Films
           </button>
         )}
-        <h1 className="title">{view.content?.title ?? 'Film'}</h1>
       </header>
+      {isHost ? (
+        <HostControls
+          quizUnlocked={view.quizUnlocked}
+          playback={view.playback}
+          onCommand={onCommand}
+        />
+      ) : (
+        <p className="caption">{hostName(view) ?? 'The host'} has the remote</p>
+      )}
       <AskPip
+        pip={view.pip}
         chips={props.chips}
         say={props.say}
         isThinking={view.pip === 'thinking'}
         onAsk={props.onAsk}
         onSomethingElse={props.onSomethingElse}
       />
-      {isHost ? (
-        <HostControls
-          quizUnlocked={view.quizUnlocked}
-          playback={view.playback}
-          playbackAt={props.playbackAt}
-          durationSec={durationSec}
-          onCommand={onCommand}
-        />
-      ) : (
-        <p className="body muted">{hostName(view) ?? 'The host'} has the controls</p>
-      )}
     </main>
   );
 }

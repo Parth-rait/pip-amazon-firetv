@@ -29,3 +29,9 @@ export function estimatePosition(playback: Playback, receivedAt: number, nowMs: 
   const elapsed = playback.paused ? 0 : Math.max(0, nowMs - receivedAt) / 1000;
   return Math.min(playback.positionSec + elapsed, playback.durationSec);
 }
+
+/** The first letter of a name, as a capital, for avatars ("?" when there is none). */
+export function initialOf(name: string): string {
+  const first = [...name.trim()][0];
+  return first ? first.toLocaleUpperCase() : '?';
+}

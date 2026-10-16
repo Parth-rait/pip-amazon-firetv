@@ -104,9 +104,18 @@ describe('toContentView', () => {
       url: 'https://pip.trycloudflare.com/media/test-film.mp4',
       credit: 'Credit',
       durationSec: 100,
+      poster: null,
     });
     expect(view).not.toHaveProperty('notes');
     expect(view).not.toHaveProperty('quiz');
+  });
+
+  it('makes the poster a full URL too', () => {
+    const view = toContentView(
+      { ...(film() as Content), poster: '/media/test-film.jpg' },
+      'https://pip.trycloudflare.com',
+    );
+    expect(view.poster).toBe('https://pip.trycloudflare.com/media/test-film.jpg');
   });
 
   it('keeps an https url as it is', () => {

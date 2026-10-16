@@ -7,6 +7,7 @@ const film = {
   url: 'https://example.test/media/big-buck-bunny.mp4',
   credit: 'Blender Foundation',
   durationSec: 596,
+  poster: null,
 };
 
 function view(over: Partial<SessionView>): SessionView {
@@ -20,6 +21,7 @@ function view(over: Partial<SessionView>): SessionView {
     playback: null,
     quizUnlocked: 0,
     pip: 'sleep',
+    pipStyle: {mood: 'playful', color: 'mint'},
     quiz: null,
     results: null,
     ...over,
@@ -68,5 +70,12 @@ describe('tvReducer', () => {
       view: view({stage: 'quiz', content: film}),
     });
     expect(state.say).toBeNull();
+  });
+
+  it('numbers greetings so each one shows', () => {
+    const hello = {playerId: 'p2', name: 'Gran', text: 'Hi Gran.'};
+    const once = tvReducer(initialTvState, {type: 'greet', hello});
+    const twice = tvReducer(once, {type: 'greet', hello});
+    expect(twice.greet?.id).toBe(2);
   });
 });

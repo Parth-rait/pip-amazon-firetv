@@ -1,13 +1,20 @@
 // The Session type and the in-memory store (PROJECT.md section 4.6).
 import { isOnline, type Roster } from './core/players.js';
 import type { QuizRun } from './film/quiz.js';
-import { LIMITS, type PipState, type Playback, type Stage } from './shared/protocol.js';
+import {
+  LIMITS,
+  type PipState,
+  type PipStyle,
+  type Playback,
+  type Stage,
+} from './shared/protocol.js';
 
 export interface Session extends Roster {
   code: string;
   tvKey: string; // 32 hex characters; a TV needs it to take this code back
   tvSocketId: string | null;
   pip: PipState;
+  pipStyle: PipStyle; // the host's choice of Pip's mood and color
   stage: Stage;
   contentId: string | null;
   playback: Playback | null;
@@ -46,6 +53,7 @@ export function createSession(
     players: new Map(),
     hostId: null,
     pip: 'sleep',
+    pipStyle: { mood: 'playful', color: 'mint' },
     stage: 'lobby',
     contentId: null,
     playback: null,

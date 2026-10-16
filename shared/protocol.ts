@@ -3,12 +3,41 @@
 // Edit only this file, then run `npm run sync:shared` to copy it into each package.
 // Types and constants only: no imports, so it compiles in Node, browsers and React Native for Vega.
 
-export const PROTOCOL_VERSION = 2;
+export const PROTOCOL_VERSION = 3;
 
 /** Where the session is in the journey. The server owns it; the TV and pads follow it. */
 export type Stage = 'lobby' | 'watch' | 'quiz' | 'results';
 export type PipState = 'sleep' | 'idle' | 'thinking' | 'talking' | 'cheer';
 export type Source = 'ai' | 'template';
+/** How Pip talks. The host picks it; Playful is the default. */
+export type PipMood = 'chill' | 'playful' | 'sassy';
+/** Pip's body, and the accent color on the TV and every pad. The host picks it; mint is the default. */
+export type PipColor = 'mint' | 'coral' | 'lilac' | 'sun';
+
+export interface PipStyle {
+  mood: PipMood;
+  color: PipColor;
+}
+
+export const PIP_COLORS: Record<PipColor, string> = {
+  mint: '#7CE7C4',
+  coral: '#FF8E7F',
+  lilac: '#B8A6FF',
+  sun: '#FFD166',
+};
+
+/** A player's avatar is their initial on one of these colors, picked when joining. */
+export const AVATAR_COLORS = [
+  '#7CE7C4',
+  '#FF8E7F',
+  '#B8A6FF',
+  '#FFD166',
+  '#6EC1FF',
+  '#FF9BD2',
+  '#A8E06C',
+  '#F4A65D',
+] as const;
+
 /** How a question was asked: typed, spoken, or tapped from the starter, next or "Did you mean" chips. */
 export type AskVia = 'typed' | 'voice' | 'starter' | 'next' | 'clarify';
 
@@ -19,6 +48,7 @@ export interface ContentView {
   url: string; // full URL of the MP4
   credit: string;
   durationSec: number;
+  poster: string | null; // full URL of a still from the film, for the film cards
 }
 
 /** What the TV's video player is doing. The TV app is the only writer. */
@@ -33,6 +63,7 @@ export interface Playback {
 export interface PlayerView {
   id: string;
   name: string;
+  avatar: number; // index into AVATAR_COLORS
   score: number;
   online: boolean;
 }
@@ -68,6 +99,7 @@ export interface SessionView {
   playback: Playback | null; // the TV's latest report for that film
   quizUnlocked: number; // quiz questions about scenes already watched
   pip: PipState;
+  pipStyle: PipStyle;
   quiz: QuizView | null; // only in the quiz stage
   results: ResultsView | null; // only in the results stage
 }
@@ -80,7 +112,8 @@ export type HostCommand =
   | { type: 'seek'; deltaSec: number }
   | { type: 'start-quiz' }
   | { type: 'next'; index: number; phase: 'question' | 'reveal' } // what the host saw, so a double tap cannot skip ahead
-  | { type: 'lobby' };
+  | { type: 'lobby' }
+  | { type: 'pip-style'; style: PipStyle }; // any stage
 
 /** What the server asks the TV's player to do. */
 export type TvCommand = { type: 'play' } | { type: 'pause' } | { type: 'seek'; deltaSec: number };
@@ -93,6 +126,13 @@ export interface PipSay {
   next: string[]; // up to 3 follow-up questions, for the asker's pad
   clarify: string[]; // up to 3 clearer versions of a vague question, for the asker's pad
   source: Source;
+}
+
+/** Pip says hello on the TV when a new player joins, in the session's mood. */
+export interface PipHello {
+  playerId: string;
+  name: string;
+  text: string;
 }
 
 export type HelloResult =
@@ -118,7 +158,10 @@ export interface ClientToServerEvents {
   ) => void;
   'tv:playback': (playback: Playback) => void;
   'tv:watch': (payload: { contentId: string }) => void; // the remote picked a film in the lobby
-  'pad:join': (payload: { code: string; playerId: string; name: string }, ack: Ack<JoinResult>) => void;
+  'pad:join': (
+    payload: { code: string; playerId: string; name: string; avatar?: number },
+    ack: Ack<JoinResult>,
+  ) => void;
   'pad:host': (command: HostCommand) => void;
   'pad:ask': (payload: { text: string; via: AskVia }, ack: Ack<AskResult>) => void;
   'pad:answer': (payload: { index: number; choice: number }) => void;
@@ -129,6 +172,7 @@ export interface ServerToClientEvents {
   'session:view': (view: SessionView) => void; // to the TV and every pad, after each change
   'tv:command': (command: TvCommand) => void; // to the TV only
   'pip:say': (say: PipSay) => void; // to the TV and every pad; a pad shows it only to the asker
+  'pip:hello': (hello: PipHello) => void; // to the TV and every pad, when a new player joins
 }
 
 export const LIMITS = {

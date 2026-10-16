@@ -1,8 +1,9 @@
 // JOIN: the code from the TV and a first name (PROJECT.md section 3.3).
 import { useRef, useState, type FormEvent } from 'react';
+import { Avatar } from '../components/Avatar';
 import { Pip } from '../components/Pip';
 import { cleanCodeInput, isFullCode } from '../lib/format';
-import { LIMITS } from '../shared/protocol';
+import { AVATAR_COLORS, LIMITS } from '../shared/protocol';
 import type { JoinFailure } from '../state/store';
 
 const JOIN_ERRORS: Record<JoinFailure, string> = {
@@ -15,14 +16,25 @@ const JOIN_ERRORS: Record<JoinFailure, string> = {
 interface Props {
   initialCode: string;
   initialName: string;
+  initialAvatar: number | null;
   error: JoinFailure | null;
   isOnline: boolean;
-  onJoin: (code: string, name: string) => Promise<unknown>;
+  onJoin: (code: string, name: string, avatar: number) => Promise<unknown>;
 }
 
-export function JoinScreen({ initialCode, initialName, error, isOnline, onJoin }: Props) {
+export function JoinScreen({
+  initialCode,
+  initialName,
+  initialAvatar,
+  error,
+  isOnline,
+  onJoin,
+}: Props) {
   const [code, setCode] = useState(cleanCodeInput(initialCode));
   const [name, setName] = useState(initialName);
+  const [avatar, setAvatar] = useState(
+    () => initialAvatar ?? Math.floor(Math.random() * AVATAR_COLORS.length),
+  );
   const [isJoining, setIsJoining] = useState(false);
   const [localError, setLocalError] = useState<string | null>(null);
   const boxes = useRef<(HTMLInputElement | null)[]>([]);
@@ -50,7 +62,7 @@ export function JoinScreen({ initialCode, initialName, error, isOnline, onJoin }
     }
     setLocalError(null);
     setIsJoining(true);
-    await onJoin(code, trimmed);
+    await onJoin(code, trimmed, avatar);
     setIsJoining(false);
   };
 
@@ -58,7 +70,10 @@ export function JoinScreen({ initialCode, initialName, error, isOnline, onJoin }
 
   return (
     <main className="screen screen--join">
-      <Pip state="sleep" size={64} />
+      <div className="join-hero">
+        <Pip state="sleep" size={88} />
+        <h1 className="large-title">Join the TV</h1>
+      </div>
       <form className="stack" onSubmit={submit}>
         <label className="label" htmlFor="code-0">
           Code on the TV
@@ -98,6 +113,22 @@ export function JoinScreen({ initialCode, initialName, error, isOnline, onJoin }
         <p className="caption">
           First name or nickname. Pip forgets it after the session; this device remembers it.
         </p>
+        <p className="label">Your color</p>
+        <div className="avatar-picker" role="radiogroup" aria-label="Your color">
+          {AVATAR_COLORS.map((_, i) => (
+            <button
+              key={i}
+              type="button"
+              role="radio"
+              aria-checked={avatar === i}
+              aria-label={`Color ${i + 1}`}
+              className={avatar === i ? 'avatar-option is-on' : 'avatar-option'}
+              onClick={() => setAvatar(i)}
+            >
+              <Avatar name={name || '?'} avatar={i} size={38} />
+            </button>
+          ))}
+        </div>
         {message && <p className="error">{message}</p>}
         <button
           className="button button--wide button--accent"

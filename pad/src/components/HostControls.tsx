@@ -1,69 +1,44 @@
-// The host's row for the film: back 10 s, play or pause, forward 10 s, progress, lobby and the quiz.
-import { useEffect, useState } from 'react';
-import { estimatePosition, formatTimeLeft } from '../lib/format';
+// The host's remote: back 10 s, play or pause, forward 10 s, and the quiz (section 3.3).
 import type { HostCommand, Playback } from '../shared/protocol';
+import { BackIcon, ForwardIcon, PauseIcon, PlayIcon } from './Icons';
 
 const SKIP_SEC = 10;
-const TICK_MS = 1000;
 
 interface Props {
   quizUnlocked: number;
   playback: Playback | null;
-  playbackAt: number;
-  durationSec: number;
   onCommand: (command: HostCommand) => void;
 }
 
-export function HostControls({
-  quizUnlocked,
-  playback,
-  playbackAt,
-  durationSec,
-  onCommand,
-}: Props) {
-  const [now, setNow] = useState(() => Date.now());
-  useEffect(() => {
-    const timer = setInterval(() => setNow(Date.now()), TICK_MS);
-    return () => clearInterval(timer);
-  }, []);
-
-  const position = playback ? estimatePosition(playback, playbackAt, now) : 0;
+export function HostControls({ quizUnlocked, playback, onCommand }: Props) {
   const isPaused = playback?.paused ?? false;
   const isEnded = playback?.ended ?? false;
-  const percent = durationSec > 0 ? Math.min(100, (position / durationSec) * 100) : 0;
 
   return (
-    <section className="host-controls" aria-label="Host controls">
-      <div
-        className="progress"
-        role="progressbar"
-        aria-valuenow={Math.round(percent)}
-        aria-valuemin={0}
-        aria-valuemax={100}
-      >
-        <div className="progress__fill" style={{ width: `${percent}%` }} />
-      </div>
-      <p className="caption">{formatTimeLeft(position, durationSec)}</p>
-      <div className="control-row">
+    <section className="remote" aria-label="Host controls">
+      <div className="remote__row">
         <button
-          className="button button--big"
+          className="remote__button"
           onClick={() => onCommand({ type: 'seek', deltaSec: -SKIP_SEC })}
           aria-label="Back 10 seconds"
         >
-          −10 s
+          <BackIcon />
+          <span className="remote__hint">10</span>
         </button>
         <button
-          className={isEnded ? 'button button--big' : 'button button--big button--accent'}
+          className="remote__button remote__button--main"
           onClick={() => onCommand({ type: isPaused ? 'play' : 'pause' })}
+          aria-label={isPaused ? 'Play' : 'Pause'}
         >
-          {isPaused ? 'Play' : 'Pause'}
+          {isPaused ? <PlayIcon /> : <PauseIcon />}
         </button>
         <button
-          className="button button--big"
+          className="remote__button"
           onClick={() => onCommand({ type: 'seek', deltaSec: SKIP_SEC })}
           aria-label="Forward 10 seconds"
         >
-          +10 s
+          <ForwardIcon />
+          <span className="remote__hint">10</span>
         </button>
       </div>
       <button

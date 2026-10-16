@@ -1,9 +1,10 @@
 // Players and the host: names, joining, leaving and the hand-over (PROJECT.md 4.5 Join and Host).
-import { LIMITS } from '../shared/protocol.js';
+import { AVATAR_COLORS, LIMITS } from '../shared/protocol.js';
 
 export interface Player {
   id: string; // 32 lowercase hex characters, made by the pad
   name: string;
+  avatar: number; // index into AVATAR_COLORS
   socketIds: Set<string>; // online while not empty
   score: number;
   joinedAt: number;
@@ -52,12 +53,13 @@ export function isOnline(player: Player): boolean {
 /** Adds a socket to a known player, or adds a new player. The caller cleans the name first. */
 export function joinPlayer(
   roster: Roster,
-  input: { playerId: string; name: string; socketId: string },
+  input: { playerId: string; name: string; socketId: string; avatar?: number },
   nowMs: number,
 ): JoinOutcome {
   const known = roster.players.get(input.playerId);
   if (known) {
     known.socketIds.add(input.socketId);
+    if (input.avatar !== undefined) known.avatar = input.avatar;
     return { ok: true, player: known, isNew: false };
   }
   if (roster.players.size >= LIMITS.maxPlayers) return { ok: false, reason: 'full' };
@@ -65,6 +67,7 @@ export function joinPlayer(
   const player: Player = {
     id: input.playerId,
     name: uniqueName(input.name, taken),
+    avatar: input.avatar ?? freeAvatar(roster),
     socketIds: new Set([input.socketId]),
     score: 0,
     joinedAt: nowMs,
@@ -73,6 +76,13 @@ export function joinPlayer(
   };
   roster.players.set(player.id, player);
   return { ok: true, player, isNew: true };
+}
+
+/** The first avatar color nobody in the roster has, or the next one round the list. */
+export function freeAvatar(roster: Roster): number {
+  const used = new Set([...roster.players.values()].map((p) => p.avatar));
+  for (let i = 0; i < AVATAR_COLORS.length; i += 1) if (!used.has(i)) return i;
+  return roster.players.size % AVATAR_COLORS.length;
 }
 
 /** Removes one socket from a player. Returns true when that was the player's last socket. */

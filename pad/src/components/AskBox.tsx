@@ -1,6 +1,7 @@
-// The Ask box: type a question (or say it with the mic) and send it to Pip.
+// The Ask bar at the bottom of the screen: type a question (or say it with the mic) and send it.
 import { useState, type FormEvent, type Ref } from 'react';
 import { LIMITS, type AskVia } from '../shared/protocol';
+import { SendIcon } from './Icons';
 import { MicButton } from './MicButton';
 
 interface Props {
@@ -26,11 +27,12 @@ export function AskBox({ isDisabled, onAsk, message, onMessage, inputRef }: Prop
   };
 
   return (
-    <form className="ask" onSubmit={submit}>
-      <div className="ask__row">
+    <form className="ask-bar" onSubmit={submit}>
+      {message && <p className="caption ask-bar__message">{message}</p>}
+      <div className="ask-bar__row">
         <input
           ref={inputRef}
-          className="text-input"
+          className="ask-bar__input"
           value={text}
           maxLength={LIMITS.askMaxChars}
           placeholder="Ask Pip about the film"
@@ -46,11 +48,15 @@ export function AskBox({ isDisabled, onAsk, message, onMessage, inputRef }: Prop
           }}
           onMessage={onMessage}
         />
+        <button
+          className="send"
+          type="submit"
+          disabled={isDisabled || text.trim().length < 2}
+          aria-label="Ask Pip"
+        >
+          <SendIcon />
+        </button>
       </div>
-      <button className="button button--wide button--accent" type="submit" disabled={isDisabled}>
-        Ask
-      </button>
-      {message && <p className="caption">{message}</p>}
     </form>
   );
 }

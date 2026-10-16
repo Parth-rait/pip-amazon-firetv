@@ -1,21 +1,25 @@
 import React, {useCallback, useEffect, useRef, useState} from 'react';
-import {Animated, StyleSheet, Text, View} from 'react-native';
+import {StyleSheet, Text, View} from 'react-native';
 import {KeplerVideoSurfaceView} from '@amazon-devices/react-native-w3cmedia';
 import {getSocket, setHelloPlayback} from '../net/socket';
 import {usePlayer, type PlayerReport} from '../player/use-player';
-import type {
-  ContentView,
-  Playback,
-  SessionView,
-  TvCommand,
+import {
+  PIP_COLORS,
+  type ContentView,
+  type Playback,
+  type SessionView,
+  type TvCommand,
 } from '../shared/protocol';
-import type {SayEntry} from '../state/tv-store';
+import type {GreetEntry, SayEntry} from '../state/tv-store';
+import {Fade} from '../components/Fade';
 import {Pip} from '../components/Pip';
-import {color, dp, motionFastMs, radius, safe, space, type} from '../theme';
+import {SpeechBubble} from '../components/SpeechBubble';
+import {color, dp, radius, safe, space, type} from '../theme';
 
 const CREDIT_MS = 4000;
 const PAUSE_BAR_MS = 3000;
 const ANSWER_MS = 8000;
+const GREETING_MS = 4000;
 
 /**
  * WATCH (PROJECT.md 3.3 and 4.5, Watch). Stays mounted through the quiz and the results so
@@ -25,12 +29,15 @@ export function WatchScreen({
   view,
   content,
   say,
+  greet,
 }: {
   view: SessionView;
   content: ContentView;
+  greet: GreetEntry | null;
   say: SayEntry | null;
 }) {
   const active = view.stage === 'watch';
+  const accent = PIP_COLORS[view.pipStyle.color];
   const activeRef = useRef(active);
   activeRef.current = active;
   const viewRef = useRef(view);
@@ -166,55 +173,28 @@ export function WatchScreen({
           )}
 
           <View style={styles.corner}>
-            {say && <Answer key={say.id} entry={say} />}
-            <Pip state={view.pip} size={dp(96)} />
+            {say ? (
+              <SpeechBubble
+                key={`say-${say.id}`}
+                above={`${say.say.askedByName} asked: ${say.say.question}`}
+                text={say.say.text}
+                showMs={ANSWER_MS}
+                tint={accent}
+              />
+            ) : greet ? (
+              <SpeechBubble
+                key={`greet-${greet.id}`}
+                text={greet.hello.text}
+                showMs={GREETING_MS}
+                tint={accent}
+              />
+            ) : null}
+            <Pip state={view.pip} size={dp(96)} color={accent} />
           </View>
         </View>
       )}
     </View>
   );
-}
-
-/** "<name> asked: <question>" and Pip's answer, next to Pip, for 8 s. */
-function Answer({entry}: {entry: SayEntry}) {
-  const [visible, setVisible] = useState(true);
-  useEffect(() => {
-    const t = setTimeout(() => setVisible(false), ANSWER_MS);
-    return () => clearTimeout(t);
-  }, []);
-  return (
-    <Fade visible={visible} style={styles.answer}>
-      <Text style={styles.asked} numberOfLines={1}>
-        {entry.say.askedByName} asked: {entry.say.question}
-      </Text>
-      <View style={styles.bubble}>
-        <Text style={styles.body} numberOfLines={4}>
-          {entry.say.text}
-        </Text>
-      </View>
-    </Fade>
-  );
-}
-
-/** Fades its children in and out in 180 ms (native-driven opacity only). */
-function Fade({
-  visible,
-  style,
-  children,
-}: {
-  visible: boolean;
-  style?: object;
-  children: React.ReactNode;
-}) {
-  const opacity = useRef(new Animated.Value(visible ? 1 : 0)).current;
-  useEffect(() => {
-    Animated.timing(opacity, {
-      toValue: visible ? 1 : 0,
-      duration: motionFastMs,
-      useNativeDriver: true,
-    }).start();
-  }, [visible, opacity]);
-  return <Animated.View style={[style, {opacity}]}>{children}</Animated.View>;
 }
 
 function clock(sec: number): string {
@@ -260,13 +240,6 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'flex-end',
     gap: space.xl,
-  },
-  answer: {maxWidth: dp(900), gap: space.s},
-  asked: {color: color.text, fontSize: type.caption},
-  bubble: {
-    padding: space.xl,
-    borderRadius: radius,
-    backgroundColor: color.surface,
   },
   title: {
     color: color.text,

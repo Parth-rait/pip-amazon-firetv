@@ -11,7 +11,7 @@ import type { Content } from './film/content.js';
 import { estimatePosition } from './film/playback.js';
 import { ASK_SETTINGS } from './film/prompts.js';
 import { quizTimerKey } from './film/quiz.js';
-import { LINES } from './lines.js';
+import { LINES_BY_MOOD, type PipLines } from './lines.js';
 import type { log as Log } from './log.js';
 import type { Session } from './sessions.js';
 import {
@@ -136,7 +136,13 @@ async function answer(
     via,
     ...(deps.logText ? { question: text } : {}),
   });
-  const recallQuery = { contentId, sceneSec: sceneAt(film.notes, positionSec), question: text };
+  const mood = session.pipStyle.mood;
+  const recallQuery = {
+    contentId,
+    sceneSec: sceneAt(film.notes, positionSec),
+    question: text,
+    mood,
+  };
   // The same question at the same scene was answered before: answer at once.
   const repeat = deps.memory?.recallExact(recallQuery) ?? null;
   let outcome: AskOutcome;
@@ -154,6 +160,7 @@ async function answer(
               question: text,
               via,
               simpleFormat: deps.simpleFormat,
+              mood,
             }),
             text,
             { ...ASK_SETTINGS, allowClarify: !deps.simpleFormat && via !== 'clarify' },
@@ -177,7 +184,7 @@ async function answer(
     setPip(session, restingPip(session), coreDeps(session, deps));
     return;
   }
-  const say = toPipSay(outcome, player, text);
+  const say = toPipSay(outcome, player, text, LINES_BY_MOOD[mood]);
   if (outcome.reply?.kind === 'answer') {
     session.history = [
       ...session.history,
@@ -196,16 +203,16 @@ async function answer(
   setPip(session, 'talking', coreDeps(session, deps), TALKING_MS);
 }
 
-function toPipSay(outcome: AskOutcome, player: Player, question: string): PipSay {
+function toPipSay(outcome: AskOutcome, player: Player, question: string, lines: PipLines): PipSay {
   const base = { askedBy: player.id, askedByName: player.name, question, next: [], clarify: [] };
   const reply = outcome.reply;
   if (reply?.kind === 'answer')
     return { ...base, text: reply.text, next: reply.next, source: 'ai' };
   if (reply?.kind === 'clarify') {
-    return { ...base, text: LINES.didYouMean, clarify: reply.options, source: 'ai' };
+    return { ...base, text: lines.didYouMean, clarify: reply.options, source: 'ai' };
   }
   const error = outcome.reply === null ? outcome.error : '';
   const text =
-    error === 'offline' ? LINES.offline : error === 'unparsed' ? LINES.unparsed : LINES.modelFailed;
+    error === 'offline' ? lines.offline : error === 'unparsed' ? lines.unparsed : lines.modelFailed;
   return { ...base, text, source: 'template' };
 }

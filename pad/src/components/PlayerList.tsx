@@ -1,5 +1,7 @@
-// Everyone in the session, in join order, with "you" and "host" marked and offline players dimmed.
+// Everyone in the session, in join order: avatar and name, with "you" and "host" marked and
+// offline players dimmed.
 import type { SessionView } from '../shared/protocol';
+import { Avatar } from './Avatar';
 
 export function PlayerList({ view, myId }: { view: SessionView; myId: string }) {
   return (
@@ -10,8 +12,9 @@ export function PlayerList({ view, myId }: { view: SessionView; myId: string }) 
         );
         return (
           <li key={player.id} className={player.online ? 'player' : 'player player--away'}>
-            {player.name}
-            {marks.length > 0 && <span className="player__marks"> ({marks.join(', ')})</span>}
+            <Avatar name={player.name} avatar={player.avatar} size={44} isAway={!player.online} />
+            <span className="player__name">{player.name}</span>
+            {marks.length > 0 && <span className="player__marks">{marks.join(', ')}</span>}
           </li>
         );
       })}

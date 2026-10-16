@@ -9,7 +9,15 @@ import {color, dp, motionPipMs} from '../theme';
 
 const HOP_DP = dp(24);
 
-export function Pip({state, size = dp(120)}: {state: PipState; size?: number}) {
+export function Pip({
+  state,
+  size = dp(120),
+  color: body = color.accent,
+}: {
+  state: PipState;
+  size?: number;
+  color?: string;
+}) {
   const breathe = useRef(new Animated.Value(1)).current;
   const blink = useRef(new Animated.Value(1)).current;
   const lift = useRef(new Animated.Value(0)).current;
@@ -156,6 +164,7 @@ export function Pip({state, size = dp(120)}: {state: PipState; size?: number}) {
             style={[
               styles.glow,
               {
+                backgroundColor: body,
                 width: size * 1.3,
                 height: size * 1.3,
                 borderRadius: size,
@@ -169,7 +178,11 @@ export function Pip({state, size = dp(120)}: {state: PipState; size?: number}) {
         <Animated.View
           style={[
             styles.body,
-            {borderRadius: size, transform: [{scale: breathe}]},
+            {
+              backgroundColor: body,
+              borderRadius: size,
+              transform: [{scale: breathe}],
+            },
           ]}>
           <View style={[styles.eyes, {gap: size * 0.18, transform: look}]}>
             <Animated.View
@@ -188,7 +201,13 @@ export function Pip({state, size = dp(120)}: {state: PipState; size?: number}) {
               key={i}
               style={[
                 styles.dot,
-                {width: dot, height: dot, borderRadius: dot, opacity: value},
+                {
+                  backgroundColor: body,
+                  width: dot,
+                  height: dot,
+                  borderRadius: dot,
+                  opacity: value,
+                },
               ]}
             />
           ))}

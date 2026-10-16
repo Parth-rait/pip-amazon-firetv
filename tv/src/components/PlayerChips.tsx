@@ -1,35 +1,40 @@
 import React from 'react';
 import {StyleSheet, Text, View} from 'react-native';
 import type {PlayerView} from '../shared/protocol';
-import {color, radius, space, type} from '../theme';
+import {color, dp, space, type} from '../theme';
+import {Avatar} from './Avatar';
 
-/** The players in join order: the host marked, offline players dimmed, answered ones in mint. */
+/** The players in join order: avatar and name, the host marked, offline players dimmed, and a
+ *  ring in Pip's color around those who have answered (quiz). */
 export function PlayerChips({
   players,
   hostId,
   highlightIds,
+  accent = color.accent,
 }: {
   players: PlayerView[];
   hostId: string | null;
   highlightIds?: string[];
+  accent?: string;
 }) {
   return (
     <View style={styles.row}>
       {players.map((p) => {
         const lit = highlightIds?.includes(p.id) ?? false;
         return (
-          <View key={p.id} style={[styles.chip, lit && styles.chipLit]}>
-            <Text
-              style={[
-                styles.name,
-                !p.online && styles.offline,
-                lit && styles.nameLit,
-              ]}>
+          <View key={p.id} style={styles.player}>
+            <View style={[styles.ring, lit && {borderColor: accent}]}>
+              <Avatar
+                name={p.name}
+                avatar={p.avatar}
+                size={dp(64)}
+                isAway={!p.online}
+              />
+            </View>
+            <Text style={[styles.name, !p.online && styles.offline]}>
               {p.name}
-              {p.id === hostId ? (
-                <Text style={styles.host}> (host)</Text>
-              ) : null}
             </Text>
+            {p.id === hostId ? <Text style={styles.host}>host</Text> : null}
           </View>
         );
       })}
@@ -38,16 +43,15 @@ export function PlayerChips({
 }
 
 const styles = StyleSheet.create({
-  row: {flexDirection: 'row', flexWrap: 'wrap', gap: space.l},
-  chip: {
-    paddingHorizontal: space.xl,
-    paddingVertical: space.m,
-    borderRadius: radius,
-    backgroundColor: color.surface,
+  row: {flexDirection: 'row', flexWrap: 'wrap', gap: space.xxl},
+  player: {alignItems: 'center', gap: space.xs, minWidth: dp(96)},
+  ring: {
+    padding: dp(4),
+    borderRadius: dp(64),
+    borderWidth: dp(4),
+    borderColor: 'transparent',
   },
-  chipLit: {backgroundColor: color.accent},
-  name: {color: color.text, fontSize: type.body},
-  nameLit: {color: color.bg},
+  name: {color: color.text, fontSize: type.caption},
   offline: {color: color.textMuted},
-  host: {fontSize: type.caption, color: color.textMuted},
+  host: {color: color.textMuted, fontSize: dp(20)},
 });

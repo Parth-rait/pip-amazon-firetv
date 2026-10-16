@@ -1,10 +1,9 @@
 // The Pip Pad: one socket, one reducer, and the screen for the session's stage.
 import { useEffect, useMemo, useReducer, useRef, useState } from 'react';
 import { DebugOverlay } from './components/DebugOverlay';
-import { Pip } from './components/Pip';
 import { StatusPill } from './components/StatusPill';
 import { fullscreenOnFirstTap } from './lib/fullscreen';
-import { getPlayerId, getSavedCode, getSavedName } from './lib/player-id';
+import { getPlayerId, getSavedAvatar, getSavedCode, getSavedName } from './lib/player-id';
 import { browserWakeLockEnv, keepAwake } from './lib/wake-lock';
 import { connectPad, createSocket, sendAsk, type PadConnection } from './net/socket';
 import { JoinScreen } from './screens/JoinScreen';
@@ -12,7 +11,7 @@ import { LobbyScreen } from './screens/LobbyScreen';
 import { QuizScreen } from './screens/QuizScreen';
 import { ResultsScreen } from './screens/ResultsScreen';
 import { WatchScreen } from './screens/WatchScreen';
-import type { AskVia, HostCommand } from './shared/protocol';
+import { PIP_COLORS, type AskVia, type HostCommand } from './shared/protocol';
 import { initialState, isHost, reducer } from './state/store';
 
 const NEXT_CHIPS_MS = 60_000;
@@ -36,6 +35,12 @@ export function App() {
     [],
   );
 
+  // Pip's color is the accent everywhere, so the pad follows the host's choice at once.
+  const pipColor = state.view?.pipStyle.color ?? 'mint';
+  useEffect(() => {
+    document.documentElement.style.setProperty('--accent', PIP_COLORS[pipColor]);
+  }, [pipColor]);
+
   const isJoined = state.view !== null;
   useEffect(() => (isJoined ? keepAwake(browserWakeLockEnv()) : undefined), [isJoined]);
 
@@ -56,7 +61,6 @@ export function App() {
     <div className="app">
       {view && (
         <header className="top-bar">
-          <Pip state={view.pip} size={40} />
           <StatusPill
             connection={state.connection}
             tvOnline={view.tvOnline}
@@ -69,9 +73,12 @@ export function App() {
         <JoinScreen
           initialCode={getSavedCode() ?? ''}
           initialName={getSavedName() ?? ''}
+          initialAvatar={getSavedAvatar()}
           error={state.joinError}
           isOnline={state.connection === 'online'}
-          onJoin={(code, name) => connection.current?.join(code, name) ?? Promise.resolve(null)}
+          onJoin={(code, name, avatar) =>
+            connection.current?.join(code, name, avatar) ?? Promise.resolve(null)
+          }
         />
       )}
       {view?.stage === 'lobby' && (

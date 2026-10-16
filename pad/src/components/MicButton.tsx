@@ -1,6 +1,7 @@
 // The mic: one question per tap, with the browser's speech recognition. Hidden where it does not exist.
 import { useEffect, useRef, useState } from 'react';
 import { isSpeechAvailable, listenOnce } from '../lib/speech';
+import { MicIcon } from './Icons';
 
 const HINT_KEY = 'pip.micHint';
 
@@ -62,13 +63,14 @@ export function MicButton({ isDisabled, onPartial, onFinal, onMessage }: Props) 
 
   return (
     <button
-      className={isListening ? 'button mic mic--on' : 'button mic'}
+      type="button"
+      className={isListening ? 'mic mic--on' : 'mic'}
       onClick={start}
       disabled={isDisabled && !isListening}
       aria-label={isListening ? 'Stop listening' : 'Ask by voice'}
       aria-pressed={isListening}
     >
-      Mic
+      <MicIcon />
     </button>
   );
 }

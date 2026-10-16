@@ -2,23 +2,34 @@ import React, {useEffect, useState} from 'react';
 import {Image, Pressable, StyleSheet, Text, View} from 'react-native';
 import {SERVER_URL} from '../config';
 import {getSocket} from '../net/socket';
-import type {ContentView, SessionView} from '../shared/protocol';
+import {
+  PIP_COLORS,
+  type ContentView,
+  type SessionView,
+} from '../shared/protocol';
+import type {GreetEntry} from '../state/tv-store';
 import {Pip} from '../components/Pip';
 import {PlayerChips} from '../components/PlayerChips';
+import {SpeechBubble} from '../components/SpeechBubble';
 import {color, dp, radius, safe, space, type} from '../theme';
 
 const QR_SIZE = dp(320);
+const POSTER_WIDTH = dp(520);
+const GREETING_MS = 4000;
 
-/** LOBBY (PROJECT.md 3.3): Pip, the QR code, the code, the films and the players. */
+/** LOBBY (PROJECT.md 3.3 and 2.4): Pip, the QR code, the code, the films and the players. */
 export function LobbyScreen({
   view,
   qrUrl,
+  greet,
 }: {
   view: SessionView;
   qrUrl: string | null;
+  greet: GreetEntry | null;
 }) {
   const [films, setFilms] = useState<ContentView[] | null>(null);
   const [filmsFailed, setFilmsFailed] = useState(false);
+  const accent = PIP_COLORS[view.pipStyle.color];
 
   useEffect(() => {
     fetch(`${SERVER_URL}/api/films`)
@@ -33,8 +44,17 @@ export function LobbyScreen({
   return (
     <View style={styles.root}>
       <View style={styles.header}>
-        <Pip state={view.pip} size={dp(96)} />
-        <Text style={styles.brand}>Pip</Text>
+        <Pip state={view.pip} size={dp(96)} color={accent} />
+        {greet ? (
+          <SpeechBubble
+            key={greet.id}
+            text={greet.hello.text}
+            showMs={GREETING_MS}
+            tint={accent}
+          />
+        ) : (
+          <Text style={styles.brand}>Pip</Text>
+        )}
       </View>
 
       <View style={styles.main}>
@@ -60,14 +80,23 @@ export function LobbyScreen({
             </Text>
           )}
           {films?.map((film, i) => (
-            <FilmCard key={film.id} film={film} preferred={i === 0} />
+            <FilmCard
+              key={film.id}
+              film={film}
+              preferred={i === 0}
+              accent={accent}
+            />
           ))}
         </View>
       </View>
 
       <View style={styles.players}>
         {view.players.length > 0 ? (
-          <PlayerChips players={view.players} hostId={view.hostId} />
+          <PlayerChips
+            players={view.players}
+            hostId={view.hostId}
+            accent={accent}
+          />
         ) : (
           <Text style={styles.muted}>
             Point a phone camera at the code to join.
@@ -78,7 +107,15 @@ export function LobbyScreen({
   );
 }
 
-function FilmCard({film, preferred}: {film: ContentView; preferred: boolean}) {
+function FilmCard({
+  film,
+  preferred,
+  accent,
+}: {
+  film: ContentView;
+  preferred: boolean;
+  accent: string;
+}) {
   const [focused, setFocused] = useState(false);
   return (
     <Pressable
@@ -86,9 +123,21 @@ function FilmCard({film, preferred}: {film: ContentView; preferred: boolean}) {
       onFocus={() => setFocused(true)}
       onBlur={() => setFocused(false)}
       onPress={() => getSocket().emit('tv:watch', {contentId: film.id})}
-      style={[styles.card, focused && styles.cardFocused]}>
-      <Text style={styles.cardTitle}>{film.title}</Text>
-      <Text style={styles.muted}>{Math.round(film.durationSec / 60)} min</Text>
+      style={[
+        styles.card,
+        focused && [styles.cardFocused, {borderColor: accent}],
+      ]}>
+      {film.poster ? (
+        <Image source={{uri: film.poster}} style={styles.poster} />
+      ) : (
+        <View style={styles.poster} />
+      )}
+      <View style={styles.cardText}>
+        <Text style={styles.cardTitle}>{film.title}</Text>
+        <Text style={styles.cardMinutes}>
+          {Math.round(film.durationSec / 60)} min
+        </Text>
+      </View>
     </Pressable>
   );
 }
@@ -99,14 +148,21 @@ const styles = StyleSheet.create({
     backgroundColor: color.bg,
     paddingHorizontal: safe.horizontal,
     paddingVertical: safe.vertical,
+    gap: space.xl,
   },
-  header: {flexDirection: 'row', alignItems: 'center', gap: space.xl},
+  header: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: space.xl,
+    minHeight: dp(96),
+  },
   brand: {color: color.text, fontSize: type.title, fontWeight: '600'},
   main: {
     flex: 1,
     flexDirection: 'row',
     alignItems: 'center',
-    gap: space.xxxl * 2,
+    justifyContent: 'space-between',
+    gap: space.xxxl,
   },
   join: {flexDirection: 'row', alignItems: 'center', gap: space.xxxl},
   qrCard: {
@@ -124,22 +180,36 @@ const styles = StyleSheet.create({
     fontWeight: '700',
     letterSpacing: space.l,
   },
-  films: {flex: 1, gap: space.xl},
+  films: {gap: space.xl},
   card: {
-    padding: space.xxl,
-    gap: space.s,
+    width: POSTER_WIDTH,
     borderRadius: radius,
     borderWidth: dp(4),
     borderColor: 'transparent',
+    overflow: 'hidden',
     backgroundColor: color.surface,
   },
   // Focus needs a physical change, not only a color (Vega focus guide).
-  cardFocused: {
-    borderColor: color.accent,
+  cardFocused: {transform: [{scale: 1.05}]},
+  poster: {
+    width: '100%',
+    aspectRatio: 16 / 9,
     backgroundColor: color.surface2,
-    transform: [{scale: 1.05}],
   },
-  cardTitle: {color: color.text, fontSize: type.title, fontWeight: '600'},
+  cardText: {
+    position: 'absolute',
+    left: 0,
+    right: 0,
+    bottom: 0,
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'flex-end',
+    paddingHorizontal: space.xl,
+    paddingVertical: space.l,
+    backgroundColor: 'rgba(0, 0, 0, 0.55)',
+  },
+  cardTitle: {color: color.text, fontSize: type.title, fontWeight: '700'},
+  cardMinutes: {color: 'rgba(255, 255, 255, 0.8)', fontSize: type.caption},
   muted: {color: color.textMuted, fontSize: type.caption},
-  players: {minHeight: dp(72), justifyContent: 'center'},
+  players: {minHeight: dp(120), justifyContent: 'center'},
 });

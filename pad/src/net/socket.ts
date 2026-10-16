@@ -7,7 +7,14 @@ import {
   type JoinResult,
   type ServerToClientEvents,
 } from '../shared/protocol';
-import { getSavedCode, getSavedName, saveCode, saveName } from '../lib/player-id';
+import {
+  getSavedAvatar,
+  getSavedCode,
+  getSavedName,
+  saveAvatar,
+  saveCode,
+  saveName,
+} from '../lib/player-id';
 import type { PadAction } from '../state/store';
 
 export type PadSocket = Socket<ServerToClientEvents, ClientToServerEvents>;
@@ -22,8 +29,11 @@ export function createSocket(): PadSocket {
 }
 
 async function sendJoin(socket: PadSocket, code: string, playerId: string, name: string) {
+  const avatar = getSavedAvatar() ?? undefined;
   try {
-    return await socket.timeout(ACK_TIMEOUT_MS).emitWithAck('pad:join', { code, playerId, name });
+    return await socket
+      .timeout(ACK_TIMEOUT_MS)
+      .emitWithAck('pad:join', { code, playerId, name, avatar });
   } catch {
     return null; // no answer in time; the next reconnect tries again
   }
@@ -82,8 +92,9 @@ export function connectPad(socket: PadSocket, playerId: string, dispatch: (a: Pa
   socket.connect();
 
   return {
-    async join(code: string, name: string): Promise<JoinResult | null> {
+    async join(code: string, name: string, avatar?: number): Promise<JoinResult | null> {
       clearTimeout(retryTimer);
+      if (avatar !== undefined) saveAvatar(avatar);
       dispatch({ type: 'looking-for-tv', isLooking: false });
       return handle(await sendJoin(socket, code, playerId, name), code, name);
     },

@@ -1,4 +1,5 @@
-// The connection pill: Online, Reconnecting, Looking for your TV, or TV offline with a way out.
+// The connection pill. It shows only when something is wrong: Reconnecting, Looking for your TV,
+// or TV offline with a way out. When all is well the top bar stays quiet.
 import type { Connection } from '../state/store';
 
 interface Props {
@@ -21,5 +22,5 @@ export function StatusPill({ connection, tvOnline, isLookingForTv, onJoinAnother
       </span>
     );
   }
-  return <span className="pill">Online</span>;
+  return null;
 }

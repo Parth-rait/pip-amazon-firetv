@@ -28,6 +28,7 @@ export function buildView(
     players: [...session.players.values()].map((p) => ({
       id: p.id,
       name: p.name,
+      avatar: p.avatar,
       score: p.score,
       online: isOnline(p),
     })),
@@ -35,6 +36,7 @@ export function buildView(
     playback,
     quizUnlocked,
     pip: session.pip,
+    pipStyle: session.pipStyle,
     quiz: session.stage === 'quiz' && run ? buildQuizView(run, nowMs) : null,
     results: session.stage === 'results' && run ? buildResults(run, session) : null,
   };

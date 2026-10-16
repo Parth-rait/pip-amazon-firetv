@@ -1,9 +1,14 @@
-// LOBBY: the host picks a film; everyone else waits (PROJECT.md section 3.3).
+// LOBBY: the host picks a film and can make Pip theirs; everyone else waits (sections 3.3 and 2.4).
 import { useEffect, useState } from 'react';
 import { PlayerList } from '../components/PlayerList';
+import { Pip } from '../components/Pip';
+import { PipStyleSheet } from '../components/PipStyleSheet';
+import { SparkleIcon } from '../components/Icons';
 import { formatMinutes } from '../lib/format';
 import type { ContentView, HostCommand, SessionView } from '../shared/protocol';
 import { hostName } from '../state/store';
+
+const MOOD_LABEL = { chill: 'Chill', playful: 'Playful', sassy: 'Sassy' } as const;
 
 interface Props {
   view: SessionView;
@@ -15,6 +20,7 @@ interface Props {
 export function LobbyScreen({ view, myId, isHost, onCommand }: Props) {
   const [films, setFilms] = useState<ContentView[] | null>(null);
   const [isLoadFailed, setIsLoadFailed] = useState(false);
+  const [isStyling, setIsStyling] = useState(false);
 
   useEffect(() => {
     if (!isHost) return;
@@ -31,26 +37,59 @@ export function LobbyScreen({ view, myId, isHost, onCommand }: Props) {
   return (
     <main className="screen">
       {isHost ? (
-        <section className="stack">
-          <h1 className="title">Pick a film</h1>
+        <>
+          <h1 className="large-title">Pick a film</h1>
           {isLoadFailed && (
             <p className="error">The films didn't load. Reload the page to try again.</p>
           )}
-          {films?.map((film) => (
-            <button
-              key={film.id}
-              className="film-card"
-              onClick={() => onCommand({ type: 'watch', contentId: film.id })}
-            >
-              <span className="film-card__title">{film.title}</span>
-              <span className="caption">{formatMinutes(film.durationSec)}</span>
-            </button>
-          ))}
-        </section>
+          <div className="film-list">
+            {films?.map((film) => (
+              <button
+                key={film.id}
+                className="poster-card"
+                onClick={() => onCommand({ type: 'watch', contentId: film.id })}
+              >
+                {film.poster ? (
+                  <img className="poster-card__image" src={film.poster} alt="" />
+                ) : (
+                  <span className="poster-card__image" />
+                )}
+                <span className="poster-card__text">
+                  <span className="poster-card__title">{film.title}</span>
+                  <span className="caption">{formatMinutes(film.durationSec)}</span>
+                </span>
+              </button>
+            ))}
+          </div>
+          <button className="row-button" onClick={() => setIsStyling(true)}>
+            <Pip state="idle" size={32} />
+            <span className="row-button__text">
+              <span>Make Pip yours</span>
+              <span className="caption">{MOOD_LABEL[view.pipStyle.mood]} mood. Tap to change.</span>
+            </span>
+            <SparkleIcon />
+          </button>
+        </>
       ) : (
-        <h1 className="title">Waiting for {hostName(view) ?? 'the host'} to pick a film</h1>
+        <section className="waiting">
+          <Pip state={view.pip} size={96} />
+          <h1 className="title">Waiting for {hostName(view) ?? 'the host'} to pick a film</h1>
+          <p className="caption">
+            Pip is in a {MOOD_LABEL[view.pipStyle.mood].toLowerCase()} mood.
+          </p>
+        </section>
       )}
-      <PlayerList view={view} myId={myId} />
+      <section className="stack">
+        <p className="label">Here now</p>
+        <PlayerList view={view} myId={myId} />
+      </section>
+      {isStyling && (
+        <PipStyleSheet
+          style={view.pipStyle}
+          onCommand={onCommand}
+          onClose={() => setIsStyling(false)}
+        />
+      )}
     </main>
   );
 }

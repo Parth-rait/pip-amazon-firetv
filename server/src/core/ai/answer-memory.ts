@@ -8,6 +8,7 @@ export interface Remembered {
   contentId: string;
   sceneSec: number; // atSec of the last note the family had seen when it was asked
   question: string;
+  mood?: string; // Pip's mood when it answered; an exact repeat needs the same mood
   answer: string;
   next: string[];
   savedAt: number;
@@ -22,6 +23,7 @@ export interface RecallQuery {
   contentId: string;
   sceneSec: number;
   question: string;
+  mood?: string;
 }
 
 export interface AnswerMemory {
@@ -102,6 +104,7 @@ export function createAnswerMemory(options: {
   const sameKey = (entry: Remembered, query: RecallQuery) =>
     entry.contentId === query.contentId &&
     entry.sceneSec === query.sceneSec &&
+    (entry.mood ?? '') === (query.mood ?? '') &&
     normalizeQuestion(entry.question) === normalizeQuestion(query.question);
 
   return {
@@ -145,6 +148,7 @@ function isRemembered(value: unknown): value is Remembered {
     typeof v.sceneSec === 'number' &&
     typeof v.question === 'string' &&
     typeof v.answer === 'string' &&
+    (v.mood === undefined || typeof v.mood === 'string') &&
     Array.isArray(v.next) &&
     v.next.every((n) => typeof n === 'string') &&
     typeof v.savedAt === 'number'

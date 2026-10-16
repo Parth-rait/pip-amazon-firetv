@@ -8,6 +8,7 @@ import {DiagnosticsScreen} from './screens/DiagnosticsScreen';
 import {LobbyScreen} from './screens/LobbyScreen';
 import {StageScreen} from './screens/StageScreen';
 import {WatchScreen} from './screens/WatchScreen';
+import {PIP_COLORS} from './shared/protocol';
 import {color} from './theme';
 
 export const App = () => {
@@ -36,12 +37,14 @@ function PipTv() {
     s.on('disconnect', onDisconnect);
     s.on('session:view', (view) => dispatch({type: 'view', view}));
     s.on('pip:say', (say) => dispatch({type: 'say', say}));
+    s.on('pip:hello', (hello) => dispatch({type: 'greet', hello}));
     if (s.connected) onConnect();
     return () => {
       s.off('connect', onConnect);
       s.off('disconnect', onDisconnect);
       s.off('session:view');
       s.off('pip:say');
+      s.off('pip:hello');
     };
   }, []);
 
@@ -52,7 +55,11 @@ function PipTv() {
       {!view ? (
         <StageScreen pip="sleep" line="Connecting" />
       ) : view.stage === 'lobby' || !view.content ? (
-        <LobbyScreen view={view} qrUrl={state.hello?.qrUrl ?? null} />
+        <LobbyScreen
+          view={view}
+          qrUrl={state.hello?.qrUrl ?? null}
+          greet={state.greet}
+        />
       ) : (
         <>
           <WatchScreen
@@ -60,10 +67,21 @@ function PipTv() {
             view={view}
             content={view.content}
             say={state.say}
+            greet={state.greet}
           />
-          {view.stage === 'quiz' && <StageScreen pip={view.pip} line="Quiz" />}
+          {view.stage === 'quiz' && (
+            <StageScreen
+              pip={view.pip}
+              color={PIP_COLORS[view.pipStyle.color]}
+              line="Quiz"
+            />
+          )}
           {view.stage === 'results' && (
-            <StageScreen pip={view.pip} line="Results" />
+            <StageScreen
+              pip={view.pip}
+              color={PIP_COLORS[view.pipStyle.color]}
+              line="Results"
+            />
           )}
         </>
       )}

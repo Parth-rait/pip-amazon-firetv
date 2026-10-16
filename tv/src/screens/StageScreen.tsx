@@ -8,10 +8,18 @@ import {color, dp, space, type} from '../theme';
  * A full-screen Pip with one line: "Connecting" before the first view, and for now the
  * quiz and results stages (their real screens come with the TV part of Step 9).
  */
-export function StageScreen({pip, line}: {pip: PipState; line: string}) {
+export function StageScreen({
+  pip,
+  line,
+  color: pipColor,
+}: {
+  pip: PipState;
+  line: string;
+  color?: string;
+}) {
   return (
     <View style={styles.root}>
-      <Pip state={pip} size={dp(200)} />
+      <Pip state={pip} size={dp(200)} color={pipColor} />
       <Text style={styles.line}>{line}</Text>
     </View>
   );

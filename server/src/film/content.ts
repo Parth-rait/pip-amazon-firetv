@@ -36,6 +36,12 @@ export const contentSchema = z
     }),
     credit: z.string().min(1).max(200),
     durationSec: z.number().positive(),
+    poster: z
+      .string()
+      .refine((url) => url.startsWith('https://') || url.startsWith('/media/'), {
+        message: 'must start with https:// or /media/',
+      })
+      .optional(),
     premise: z.string().min(1).max(400),
     notes: z.array(noteSchema).min(1).max(40),
     quiz: z.array(quizQuestionSchema).min(1).max(8),
@@ -110,6 +116,7 @@ export function toContentView(content: Content, publicUrl: string): ContentView 
     url: new URL(content.url, publicUrl).toString(),
     credit: content.credit,
     durationSec: content.durationSec,
+    poster: content.poster ? new URL(content.poster, publicUrl).toString() : null,
   };
 }
 

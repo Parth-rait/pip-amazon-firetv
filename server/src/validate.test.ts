@@ -65,3 +65,28 @@ describe('validate', () => {
     expect(playbackSchema.safeParse(playback).success).toBe(false);
   });
 });
+
+describe('customization (PROJECT.md 2.4)', () => {
+  it('accepts an optional avatar from 0 to 7 when joining', () => {
+    expect(
+      joinSchema.safeParse({ code: 'ABCD', playerId: ID, name: 'Sam', avatar: 7 }).success,
+    ).toBe(true);
+    for (const avatar of [-1, 8, 1.5, '2']) {
+      expect(
+        joinSchema.safeParse({ code: 'ABCD', playerId: ID, name: 'Sam', avatar }).success,
+      ).toBe(false);
+    }
+  });
+
+  it('accepts a pip-style command with a known mood and color only', () => {
+    const style = { mood: 'sassy', color: 'coral' };
+    expect(hostCommandSchema.safeParse({ type: 'pip-style', style }).success).toBe(true);
+    expect(
+      hostCommandSchema.safeParse({ type: 'pip-style', style: { ...style, mood: 'evil' } }).success,
+    ).toBe(false);
+    expect(
+      hostCommandSchema.safeParse({ type: 'pip-style', style: { ...style, color: '#000' } })
+        .success,
+    ).toBe(false);
+  });
+});

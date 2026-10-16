@@ -16,7 +16,6 @@ export function Chips({ kind, items, isDisabled, onAsk, onSomethingElse }: Props
   if (kind === 'clarify') {
     return (
       <section className="clarify" aria-label="Did you mean">
-        <p className="caption">Did you mean one of these?</p>
         {items.map((item) => (
           <button
             key={item}

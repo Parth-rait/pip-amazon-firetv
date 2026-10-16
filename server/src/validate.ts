@@ -1,6 +1,7 @@
 // zod schemas for every payload a client sends (PROJECT.md section 10.4). Update with protocol.ts.
 import { z } from 'zod';
 import {
+  AVATAR_COLORS,
   CODE_ALPHABET,
   LIMITS,
   type AskVia,
@@ -47,6 +48,12 @@ export const joinSchema: z.ZodType<PayloadOf<'pad:join'>> = z.object({
   code,
   playerId: hexId,
   name: z.string().max(NAME_RAW_MAX_CHARS),
+  avatar: z
+    .number()
+    .int()
+    .min(0)
+    .max(AVATAR_COLORS.length - 1)
+    .optional(),
 });
 
 export const hostCommandSchema: z.ZodType<HostCommand> = z.discriminatedUnion('type', [
@@ -67,6 +74,13 @@ export const hostCommandSchema: z.ZodType<HostCommand> = z.discriminatedUnion('t
     phase: z.enum(['question', 'reveal']),
   }),
   z.object({ type: z.literal('lobby') }),
+  z.object({
+    type: z.literal('pip-style'),
+    style: z.object({
+      mood: z.enum(['chill', 'playful', 'sassy']),
+      color: z.enum(['mint', 'coral', 'lilac', 'sun']),
+    }),
+  }),
 ]);
 
 const askVia: z.ZodType<AskVia> = z.enum(['typed', 'voice', 'starter', 'next', 'clarify']);

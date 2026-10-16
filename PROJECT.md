@@ -193,7 +193,8 @@ After the first test with real phones, Parth asked for a product with more life 
 - **Answer memory** (section 5.9): good answers are kept per film and scene, so repeats are instant and Pip still answers when the model is down.
 - **A second film, Sintel** (stretch goal S6 moved forward): a story with a twist, so "no spoilers" is tested where it matters.
 - **Film notes drafted by the agent** from a frame every 6 seconds and the subtitles; Parth checks the times in one viewing.
-- **Pip with personality, and customization** (next): the host picks Pip's mood (Chill, Playful or Sassy), Pip's color, and players pick avatars; Pip greets players by name. The default stays minimal: simple, calm and useful, like Apple's defaults, with the extras one tap away.
+- **Pip with personality, and customization:** the host picks Pip's mood (Chill, Playful or Sassy) and color (mint, coral, lilac, sun) under "Make Pip yours" in the lobby; the mood changes the prompt's persona (`PERSONAS` in `prompts.ts`, the rules stay the same), the fixed lines (`LINES_BY_MOOD` in `lines.ts`) and Pip's greetings; the color is Pip's body and the accent color on the TV and every pad. Players pick an avatar color when joining; the avatar is their initial on it. Pip greets each new player by name on the TV (`pip:hello`). The default stays minimal: simple, calm and useful, like Apple's defaults, with the extras one tap away. The pad's watch screen is a chat (Pip's answer in its bubble, the Ask bar at the bottom), and the top bar shows only problems.
+- **Contract version 3:** `shared/protocol.ts` adds `pipStyle`, player avatars, film posters, the `pip-style` host command and `pip:hello`. It is now the reference; section 7.1 shows version 2.
 
 ---
 
@@ -870,6 +871,8 @@ ffprobe -v error -show_entries format=duration -of csv=p=0 server/media/big-buck
 ```
 
 3. Put the `ffprobe` duration, rounded down, into `durationSec`.
+4. Make the poster for the film cards, a spoiler-free still (section 2.4): `ffmpeg -ss <sec> -i server/media/<id>.mp4 -frames:v 1 -vf "crop=ih*16/9:ih,scale=640:-2" -q:v 3 server/media/<id>.jpg`, and set `"poster": "/media/<id>.jpg"`. Big Buck Bunny uses 54 s; Sintel uses 294 s (the city at sunset).
+5. Sintel (2010, CC BY 3.0, "Sintel, (c) copyright 2010 Blender Foundation, durian.blender.org, CC BY 3.0"): download `Sintel.2010.720p.mkv.zip` from `download.blender.org/durian/movies/`, check it against the `.md5` there, and convert it with the command above, adding `-map 0:v:0 -map 0:a:0 -ac 2` (the file has 5.1 sound and subtitle tracks).
 
 **The film file** (`server/content/big-buck-bunny.json`):
 

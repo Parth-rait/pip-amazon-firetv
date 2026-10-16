@@ -101,3 +101,26 @@ describe('joinPlayer and pickHost', () => {
     expect(leaveSocket(r, id(1), 'second', 4)).toBe(true);
   });
 });
+
+describe('avatars', () => {
+  it('gives each new player the first free avatar color, unless they picked one', () => {
+    const r = roster();
+    join(r, 1);
+    expect(r.players.get(id(1))?.avatar).toBe(0);
+    expect(
+      joinPlayer(r, { playerId: id(2), name: 'Leo', socketId: 's2', avatar: 3 }, 2),
+    ).toMatchObject({
+      ok: true,
+      player: { avatar: 3 },
+    });
+    join(r, 3);
+    expect(r.players.get(id(3))?.avatar).toBe(1);
+  });
+
+  it('lets a returning player change their avatar', () => {
+    const r = roster();
+    join(r, 1);
+    joinPlayer(r, { playerId: id(1), name: 'P1', socketId: 's9', avatar: 5 }, 9);
+    expect(r.players.get(id(1))?.avatar).toBe(5);
+  });
+});
