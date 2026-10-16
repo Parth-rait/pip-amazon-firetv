@@ -21,6 +21,8 @@
     "smoke:quiz": "tsx scripts/smoke-quiz.ts",
     "sim:touch": "tsx scripts/sim-touch.ts",
     "annotate": "tsx scripts/annotate.ts",
+    "pipeline": "tsx scripts/pipeline.ts",
+    "lab:film": "tsx scripts/make-lab-film.ts",
     "companion:images": "sh scripts/companion-images.sh"
   },
   "dependencies": {

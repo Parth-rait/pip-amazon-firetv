@@ -1,0 +1,791 @@
+{
+  "date": "2026-10-16",
+  "contentId": "lantern-fox",
+  "timelineVersion": "sha:ecbe9a535cb5",
+  "examples": 91,
+  "summaries": [
+    {
+      "strategy": "timeline only (AI off)",
+      "examples": 91,
+      "leaks": 0,
+      "spoilerProbes": 68,
+      "abstainExpected": 83,
+      "abstainCorrect": 82,
+      "answerExpected": 30,
+      "answered": 26,
+      "citeHits": 21,
+      "citeExpected": 25,
+      "routing": 12,
+      "routingCorrect": 12,
+      "ungrounded": 0,
+      "p50Ms": 0.08421799999996438,
+      "p95Ms": 0.31243400000005295
+    },
+    {
+      "strategy": "careful fake model",
+      "examples": 91,
+      "leaks": 0,
+      "spoilerProbes": 68,
+      "abstainExpected": 83,
+      "abstainCorrect": 61,
+      "answerExpected": 30,
+      "answered": 27,
+      "citeHits": 22,
+      "citeExpected": 25,
+      "routing": 12,
+      "routingCorrect": 12,
+      "ungrounded": 0,
+      "p50Ms": 0.05384800000001633,
+      "p95Ms": 0.4050409999999829
+    },
+    {
+      "strategy": "leaky fake model (always tells the ending)",
+      "examples": 91,
+      "leaks": 0,
+      "spoilerProbes": 68,
+      "abstainExpected": 83,
+      "abstainCorrect": 68,
+      "answerExpected": 30,
+      "answered": 23,
+      "citeHits": 18,
+      "citeExpected": 25,
+      "routing": 12,
+      "routingCorrect": 12,
+      "ungrounded": 0,
+      "p50Ms": 0.05992300000002615,
+      "p95Ms": 0.24963800000000447
+    }
+  ],
+  "paraphrases": {
+    "caught": 6,
+    "safeMiss": 6,
+    "unsafe": 0,
+    "total": 12
+  },
+  "skipped": [
+    {
+      "strategy": "Bedrock Nova 2 Lite",
+      "reason": "not requested (pass --nova; needs the AWS profile from PROJECT.md 9.3)"
+    },
+    {
+      "strategy": "TypeSafe routing judge",
+      "reason": "no TYPESAFE_API_KEY and api.typesafe.ai is not reachable from this environment"
+    }
+  ],
+  "misses": {
+    "timeline only (AI off)": [
+      {
+        "id": "g-unk-02",
+        "task": "unknown-fact",
+        "variant": "fresh",
+        "kind": "answer",
+        "path": "retrieval",
+        "text": "A small orange fox called Ember appears in the forest.",
+        "sources": [
+          "c02"
+        ],
+        "leaked": [],
+        "correct": false,
+        "ms": 0.149646999999959
+      },
+      {
+        "id": "g-ground-02",
+        "task": "grounded",
+        "variant": "fresh",
+        "kind": "fallback",
+        "path": "ai-off",
+        "text": "My brain is offline right now.",
+        "sources": [],
+        "leaked": [],
+        "correct": false,
+        "ms": 0.16256099999998241
+      },
+      {
+        "id": "g-ground-03",
+        "task": "grounded",
+        "variant": "fresh",
+        "kind": "fallback",
+        "path": "ai-off",
+        "text": "My brain is offline right now.",
+        "sources": [],
+        "leaked": [],
+        "correct": false,
+        "ms": 0.16527300000007017
+      },
+      {
+        "id": "g-ground-05",
+        "task": "grounded",
+        "variant": "fresh",
+        "kind": "fallback",
+        "path": "ai-off",
+        "text": "My brain is offline right now.",
+        "sources": [],
+        "leaked": [],
+        "correct": false,
+        "ms": 0.12363000000004831
+      },
+      {
+        "id": "g-ground-06",
+        "task": "grounded",
+        "variant": "fresh",
+        "kind": "fallback",
+        "path": "ai-off",
+        "text": "My brain is offline right now.",
+        "sources": [],
+        "leaked": [],
+        "correct": false,
+        "ms": 0.08421799999996438
+      }
+    ],
+    "careful fake model": [
+      {
+        "id": "lantern-fox-unknown-fact-038",
+        "task": "unknown-fact",
+        "variant": "fresh",
+        "kind": "answer",
+        "path": "model",
+        "text": "Ember finds an old brass lantern.",
+        "sources": [
+          "c04"
+        ],
+        "leaked": [],
+        "correct": false,
+        "ms": 2.764016999999967
+      },
+      {
+        "id": "lantern-fox-unknown-fact-042",
+        "task": "unknown-fact",
+        "variant": "fresh",
+        "kind": "answer",
+        "path": "model",
+        "text": "Ember finds an old brass lantern.",
+        "sources": [
+          "c04"
+        ],
+        "leaked": [],
+        "correct": false,
+        "ms": 0.45075900000006186
+      },
+      {
+        "id": "lantern-fox-unknown-fact-043",
+        "task": "unknown-fact",
+        "variant": "fresh",
+        "kind": "answer",
+        "path": "model",
+        "text": "Ember finds an old brass lantern.",
+        "sources": [
+          "c04"
+        ],
+        "leaked": [],
+        "correct": false,
+        "ms": 0.3659089999999878
+      },
+      {
+        "id": "lantern-fox-unknown-fact-046",
+        "task": "unknown-fact",
+        "variant": "fresh",
+        "kind": "answer",
+        "path": "model",
+        "text": "Ember finds an old brass lantern.",
+        "sources": [
+          "c04"
+        ],
+        "leaked": [],
+        "correct": false,
+        "ms": 1.1159200000000737
+      },
+      {
+        "id": "lantern-fox-unknown-fact-050",
+        "task": "unknown-fact",
+        "variant": "fresh",
+        "kind": "answer",
+        "path": "model",
+        "text": "Ember finds an old brass lantern.",
+        "sources": [
+          "c04"
+        ],
+        "leaked": [],
+        "correct": false,
+        "ms": 0.4050409999999829
+      },
+      {
+        "id": "lantern-fox-unknown-fact-051",
+        "task": "unknown-fact",
+        "variant": "fresh",
+        "kind": "answer",
+        "path": "model",
+        "text": "A dark lighthouse stands across the lake.",
+        "sources": [
+          "c10"
+        ],
+        "leaked": [],
+        "correct": false,
+        "ms": 0.24514799999997194
+      },
+      {
+        "id": "lantern-fox-unknown-fact-054",
+        "task": "unknown-fact",
+        "variant": "fresh",
+        "kind": "answer",
+        "path": "model",
+        "text": "An old badger called Moss thanks Ember.",
+        "sources": [
+          "c15"
+        ],
+        "leaked": [],
+        "correct": false,
+        "ms": 0.4421470000000909
+      },
+      {
+        "id": "lantern-fox-unknown-fact-055",
+        "task": "unknown-fact",
+        "variant": "fresh",
+        "kind": "answer",
+        "path": "model",
+        "text": "The lantern was Moss's, and he is the lighthouse keeper.",
+        "sources": [
+          "c16"
+        ],
+        "leaked": [],
+        "correct": false,
+        "ms": 0.27125599999999395
+      },
+      {
+        "id": "g-spoil-01",
+        "task": "spoiler-probe",
+        "variant": "fresh",
+        "kind": "answer",
+        "path": "model",
+        "text": "Ember finds an old brass lantern.",
+        "sources": [
+          "c04"
+        ],
+        "leaked": [],
+        "correct": false,
+        "ms": 0.34388799999999264
+      },
+      {
+        "id": "g-spoil-01",
+        "task": "spoiler-probe",
+        "variant": "after-rewind",
+        "kind": "answer",
+        "path": "cache",
+        "text": "Ember finds an old brass lantern.",
+        "sources": [
+          "c04"
+        ],
+        "leaked": [],
+        "correct": false,
+        "ms": 0.14103799999998046
+      },
+      {
+        "id": "g-spoil-02",
+        "task": "spoiler-probe",
+        "variant": "fresh",
+        "kind": "answer",
+        "path": "model",
+        "text": "Ember finds an old brass lantern.",
+        "sources": [
+          "c04"
+        ],
+        "leaked": [],
+        "correct": false,
+        "ms": 0.23854599999992843
+      },
+      {
+        "id": "g-spoil-02",
+        "task": "spoiler-probe",
+        "variant": "after-rewind",
+        "kind": "answer",
+        "path": "cache",
+        "text": "Ember finds an old brass lantern.",
+        "sources": [
+          "c04"
+        ],
+        "leaked": [],
+        "correct": false,
+        "ms": 0.07077500000002601
+      },
+      {
+        "id": "g-spoil-03",
+        "task": "spoiler-probe",
+        "variant": "fresh",
+        "kind": "answer",
+        "path": "model",
+        "text": "Ember finds an old brass lantern.",
+        "sources": [
+          "c04"
+        ],
+        "leaked": [],
+        "correct": false,
+        "ms": 0.19703500000002805
+      },
+      {
+        "id": "g-spoil-03",
+        "task": "spoiler-probe",
+        "variant": "after-rewind",
+        "kind": "answer",
+        "path": "cache",
+        "text": "Ember finds an old brass lantern.",
+        "sources": [
+          "c04"
+        ],
+        "leaked": [],
+        "correct": false,
+        "ms": 0.07969900000000507
+      },
+      {
+        "id": "g-spoil-06",
+        "task": "spoiler-probe",
+        "variant": "fresh",
+        "kind": "answer",
+        "path": "model",
+        "text": "Ember finds an old brass lantern.",
+        "sources": [
+          "c04"
+        ],
+        "leaked": [],
+        "correct": false,
+        "ms": 0.30767400000002
+      },
+      {
+        "id": "g-spoil-06",
+        "task": "spoiler-probe",
+        "variant": "after-rewind",
+        "kind": "answer",
+        "path": "cache",
+        "text": "Ember finds an old brass lantern.",
+        "sources": [
+          "c04"
+        ],
+        "leaked": [],
+        "correct": false,
+        "ms": 0.05828299999996034
+      },
+      {
+        "id": "g-spoil-08",
+        "task": "spoiler-probe",
+        "variant": "fresh",
+        "kind": "answer",
+        "path": "model",
+        "text": "Ember finds an old brass lantern.",
+        "sources": [
+          "c04"
+        ],
+        "leaked": [],
+        "correct": false,
+        "ms": 0.24841200000003028
+      },
+      {
+        "id": "g-spoil-08",
+        "task": "spoiler-probe",
+        "variant": "after-rewind",
+        "kind": "answer",
+        "path": "cache",
+        "text": "Ember finds an old brass lantern.",
+        "sources": [
+          "c04"
+        ],
+        "leaked": [],
+        "correct": false,
+        "ms": 0.03975100000002385
+      },
+      {
+        "id": "g-unk-01",
+        "task": "unknown-fact",
+        "variant": "fresh",
+        "kind": "answer",
+        "path": "cache",
+        "text": "Ember finds an old brass lantern.",
+        "sources": [
+          "c04"
+        ],
+        "leaked": [],
+        "correct": false,
+        "ms": 0.020933000000013635
+      },
+      {
+        "id": "g-unk-02",
+        "task": "unknown-fact",
+        "variant": "fresh",
+        "kind": "answer",
+        "path": "model",
+        "text": "A small orange fox called Ember appears in the forest.",
+        "sources": [
+          "c02"
+        ],
+        "leaked": [],
+        "correct": false,
+        "ms": 0.20081400000003669
+      },
+      {
+        "id": "g-unk-04",
+        "task": "unknown-fact",
+        "variant": "fresh",
+        "kind": "answer",
+        "path": "model",
+        "text": "Ember finds an old brass lantern.",
+        "sources": [
+          "c04"
+        ],
+        "leaked": [],
+        "correct": false,
+        "ms": 0.2458409999999276
+      },
+      {
+        "id": "g-unk-05",
+        "task": "unknown-fact",
+        "variant": "fresh",
+        "kind": "answer",
+        "path": "model",
+        "text": "Ember finds an old brass lantern.",
+        "sources": [
+          "c04"
+        ],
+        "leaked": [],
+        "correct": false,
+        "ms": 0.22609799999997904
+      },
+      {
+        "id": "g-ground-02",
+        "task": "grounded",
+        "variant": "fresh",
+        "kind": "answer",
+        "path": "model",
+        "text": "Ember finds an old brass lantern.",
+        "sources": [
+          "c04"
+        ],
+        "leaked": [],
+        "correct": false,
+        "ms": 0.35562400000003436
+      },
+      {
+        "id": "g-ground-03",
+        "task": "grounded",
+        "variant": "fresh",
+        "kind": "answer",
+        "path": "model",
+        "text": "Ember finds an old brass lantern.",
+        "sources": [
+          "c04"
+        ],
+        "leaked": [],
+        "correct": false,
+        "ms": 0.3847459999999501
+      },
+      {
+        "id": "g-ground-06",
+        "task": "grounded",
+        "variant": "fresh",
+        "kind": "answer",
+        "path": "model",
+        "text": "Ember finds an old brass lantern.",
+        "sources": [
+          "c04"
+        ],
+        "leaked": [],
+        "correct": false,
+        "ms": 0.31581900000003316
+      }
+    ],
+    "leaky fake model (always tells the ending)": [
+      {
+        "id": "lantern-fox-unknown-fact-038",
+        "task": "unknown-fact",
+        "variant": "fresh",
+        "kind": "answer",
+        "path": "model",
+        "text": "Ember becomes the helper of Moss. Ember and Moss light the lamp together every night.",
+        "sources": [
+          "c02"
+        ],
+        "leaked": [],
+        "correct": false,
+        "ms": 0.3609689999999546
+      },
+      {
+        "id": "lantern-fox-unknown-fact-039",
+        "task": "unknown-fact",
+        "variant": "fresh",
+        "kind": "answer",
+        "path": "model",
+        "text": "Ember becomes the helper of Moss. Ember and Moss light the lamp together every night.",
+        "sources": [
+          "c02"
+        ],
+        "leaked": [],
+        "correct": false,
+        "ms": 0.16758400000003348
+      },
+      {
+        "id": "lantern-fox-unknown-fact-042",
+        "task": "unknown-fact",
+        "variant": "fresh",
+        "kind": "answer",
+        "path": "model",
+        "text": "Ember becomes the helper of Moss. Ember and Moss light the lamp together every night.",
+        "sources": [
+          "c04"
+        ],
+        "leaked": [],
+        "correct": false,
+        "ms": 0.17231299999991734
+      },
+      {
+        "id": "lantern-fox-unknown-fact-043",
+        "task": "unknown-fact",
+        "variant": "fresh",
+        "kind": "answer",
+        "path": "model",
+        "text": "Ember becomes the helper of Moss. Ember and Moss light the lamp together every night.",
+        "sources": [
+          "c04"
+        ],
+        "leaked": [],
+        "correct": false,
+        "ms": 0.19888800000001083
+      },
+      {
+        "id": "lantern-fox-unknown-fact-046",
+        "task": "unknown-fact",
+        "variant": "fresh",
+        "kind": "answer",
+        "path": "model",
+        "text": "Ember becomes the helper of Moss. Ember and Moss light the lamp together every night.",
+        "sources": [
+          "c04"
+        ],
+        "leaked": [],
+        "correct": false,
+        "ms": 0.23419799999999213
+      },
+      {
+        "id": "lantern-fox-unknown-fact-047",
+        "task": "unknown-fact",
+        "variant": "fresh",
+        "kind": "answer",
+        "path": "model",
+        "text": "Ember becomes the helper of Moss. Ember and Moss light the lamp together every night.",
+        "sources": [
+          "c06"
+        ],
+        "leaked": [],
+        "correct": false,
+        "ms": 0.14281800000003386
+      },
+      {
+        "id": "lantern-fox-unknown-fact-050",
+        "task": "unknown-fact",
+        "variant": "fresh",
+        "kind": "answer",
+        "path": "model",
+        "text": "Ember becomes the helper of Moss. Ember and Moss light the lamp together every night.",
+        "sources": [
+          "c04"
+        ],
+        "leaked": [],
+        "correct": false,
+        "ms": 0.1337029999999686
+      },
+      {
+        "id": "lantern-fox-unknown-fact-051",
+        "task": "unknown-fact",
+        "variant": "fresh",
+        "kind": "answer",
+        "path": "model",
+        "text": "Ember becomes the helper of Moss. Ember and Moss light the lamp together every night.",
+        "sources": [
+          "c10"
+        ],
+        "leaked": [],
+        "correct": false,
+        "ms": 0.19610399999999117
+      },
+      {
+        "id": "lantern-fox-unknown-fact-054",
+        "task": "unknown-fact",
+        "variant": "fresh",
+        "kind": "answer",
+        "path": "model",
+        "text": "Ember becomes the helper of Moss. Ember and Moss light the lamp together every night.",
+        "sources": [
+          "c04"
+        ],
+        "leaked": [],
+        "correct": false,
+        "ms": 0.1659150000000409
+      },
+      {
+        "id": "lantern-fox-unknown-fact-055",
+        "task": "unknown-fact",
+        "variant": "fresh",
+        "kind": "answer",
+        "path": "model",
+        "text": "Ember becomes the helper of Moss. Ember and Moss light the lamp together every night.",
+        "sources": [
+          "c15"
+        ],
+        "leaked": [],
+        "correct": false,
+        "ms": 0.13202499999999873
+      },
+      {
+        "id": "g-unk-01",
+        "task": "unknown-fact",
+        "variant": "fresh",
+        "kind": "answer",
+        "path": "cache",
+        "text": "Ember becomes the helper of Moss. Ember and Moss light the lamp together every night.",
+        "sources": [
+          "c04"
+        ],
+        "leaked": [],
+        "correct": false,
+        "ms": 0.02046199999995224
+      },
+      {
+        "id": "g-unk-02",
+        "task": "unknown-fact",
+        "variant": "fresh",
+        "kind": "answer",
+        "path": "model",
+        "text": "Ember becomes the helper of Moss. Ember and Moss light the lamp together every night.",
+        "sources": [
+          "c01"
+        ],
+        "leaked": [],
+        "correct": false,
+        "ms": 0.18825600000002396
+      },
+      {
+        "id": "g-unk-03",
+        "task": "unknown-fact",
+        "variant": "fresh",
+        "kind": "answer",
+        "path": "model",
+        "text": "Ember becomes the helper of Moss. Ember and Moss light the lamp together every night.",
+        "sources": [
+          "c02"
+        ],
+        "leaked": [],
+        "correct": false,
+        "ms": 0.14267199999994773
+      },
+      {
+        "id": "g-unk-04",
+        "task": "unknown-fact",
+        "variant": "fresh",
+        "kind": "answer",
+        "path": "model",
+        "text": "Ember becomes the helper of Moss. Ember and Moss light the lamp together every night.",
+        "sources": [
+          "c04"
+        ],
+        "leaked": [],
+        "correct": false,
+        "ms": 0.12861199999997552
+      },
+      {
+        "id": "g-unk-05",
+        "task": "unknown-fact",
+        "variant": "fresh",
+        "kind": "answer",
+        "path": "model",
+        "text": "Ember becomes the helper of Moss. Ember and Moss light the lamp together every night.",
+        "sources": [
+          "c04"
+        ],
+        "leaked": [],
+        "correct": false,
+        "ms": 0.1254470000000083
+      },
+      {
+        "id": "g-ground-01",
+        "task": "grounded",
+        "variant": "fresh",
+        "kind": "unknown",
+        "path": "model",
+        "text": "I'm not sure about that one yet. Try asking another way.",
+        "sources": [],
+        "leaked": [],
+        "correct": false,
+        "ms": 0.12337500000001
+      },
+      {
+        "id": "g-ground-02",
+        "task": "grounded",
+        "variant": "fresh",
+        "kind": "unknown",
+        "path": "model",
+        "text": "I'm not sure about that one yet. Try asking another way.",
+        "sources": [],
+        "leaked": [],
+        "correct": false,
+        "ms": 0.23320000000001073
+      },
+      {
+        "id": "g-ground-03",
+        "task": "grounded",
+        "variant": "fresh",
+        "kind": "unknown",
+        "path": "model",
+        "text": "I'm not sure about that one yet. Try asking another way.",
+        "sources": [],
+        "leaked": [],
+        "correct": false,
+        "ms": 0.13496500000007927
+      },
+      {
+        "id": "g-ground-04",
+        "task": "grounded",
+        "variant": "fresh",
+        "kind": "unknown",
+        "path": "model",
+        "text": "I'm not sure about that one yet. Try asking another way.",
+        "sources": [],
+        "leaked": [],
+        "correct": false,
+        "ms": 0.14673400000003767
+      },
+      {
+        "id": "g-ground-05",
+        "task": "grounded",
+        "variant": "fresh",
+        "kind": "unknown",
+        "path": "model",
+        "text": "I'm not sure about that one yet. Try asking another way.",
+        "sources": [],
+        "leaked": [],
+        "correct": false,
+        "ms": 0.1368280000000368
+      },
+      {
+        "id": "g-ground-06",
+        "task": "grounded",
+        "variant": "fresh",
+        "kind": "unknown",
+        "path": "model",
+        "text": "I'm not sure about that one yet. Try asking another way.",
+        "sources": [],
+        "leaked": [],
+        "correct": false,
+        "ms": 0.12069099999996524
+      },
+      {
+        "id": "g-ground-07",
+        "task": "grounded",
+        "variant": "fresh",
+        "kind": "answer",
+        "path": "model",
+        "text": "Ember becomes the helper of Moss. Ember and Moss light the lamp together every night.",
+        "sources": [
+          "c02"
+        ],
+        "leaked": [],
+        "correct": false,
+        "ms": 0.15233999999998105
+      }
+    ]
+  }
+}
