@@ -1,4 +1,4 @@
-Read PROJECT.md before any task. It is the source of truth for scope, architecture, contracts, standards and build order, and it overrides general guidance where they differ.
+Read docs/vnext/PLAN.md before any task: since 16 Oct 2026 it is the source of truth for direction (Pip as a quiet, context-and-action assistant; the build order in its section 13). PROJECT.md stays the reference for the infrastructure that is kept (pairing, playback, the socket protocol, coding standards). Where they differ, docs/vnext/PLAN.md wins. docs/vnext/AUDIT.md is the Phase 0 baseline; rollback tag `pre-vnext`.
 
 # Pip for Fire TV: agent notes
 
