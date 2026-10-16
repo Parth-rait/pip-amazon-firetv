@@ -22,6 +22,7 @@ function view(over: Partial<SessionView>): SessionView {
     quizUnlocked: 0,
     pip: 'sleep',
     pipStyle: {mood: 'playful', color: 'mint'},
+    companion: null,
     quiz: null,
     results: null,
     ...over,

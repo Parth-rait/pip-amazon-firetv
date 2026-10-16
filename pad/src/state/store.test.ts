@@ -20,6 +20,7 @@ function view(overrides: Partial<SessionView> = {}): SessionView {
     quizUnlocked: 0,
     pip: 'idle',
     pipStyle: { mood: 'playful', color: 'mint' },
+    companion: null,
     quiz: null,
     results: null,
     ...overrides,

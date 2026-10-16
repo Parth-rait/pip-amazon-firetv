@@ -3,7 +3,7 @@
 // Edit only this file, then run `npm run sync:shared` to copy it into each package.
 // Types and constants only: no imports, so it compiles in Node, browsers and React Native for Vega.
 
-export const PROTOCOL_VERSION = 3;
+export const PROTOCOL_VERSION = 4;
 
 /** Where the session is in the journey. The server owns it; the TV and pads follow it. */
 export type Stage = 'lobby' | 'watch' | 'quiz' | 'results';
@@ -37,6 +37,44 @@ export const AVATAR_COLORS = [
   '#A8E06C',
   '#F4A65D',
 ] as const;
+
+/** A tap on the reaction bar; it floats up on the TV. */
+export type ReactionKind = 'laugh' | 'wow' | 'love' | 'scared';
+
+/** One chapter of the story so far, for "Catch me up". Only chapters already watched are sent. */
+export interface ChapterView {
+  atSec: number; // everything in the summary has happened by this time
+  title: string;
+  summary: string;
+  image: string | null; // full URL of a still
+}
+
+/** A character card for "Who's who": only characters already seen, with only the facts seen so far. */
+export interface CharacterView {
+  id: string;
+  name: string;
+  image: string | null;
+  facts: string[]; // oldest first
+}
+
+/** Pip's "What happens next?" vote. The answer and everyone's votes come only with the reveal. */
+export interface PredictionView {
+  id: string;
+  question: string;
+  choices: string[]; // 2 or 3
+  status: 'open' | 'revealed';
+  votedIds: string[]; // who has voted, never what, until the reveal
+  answer: number | null; // null until the reveal
+  reveal: string | null; // one line, null until the reveal
+  picks: Record<string, number> | null; // playerId -> choice; null until the reveal
+}
+
+/** What the pads show beside the film: only what the family has already seen. */
+export interface CompanionView {
+  chapters: ChapterView[];
+  characters: CharacterView[];
+  prediction: PredictionView | null; // open, or revealed in the last 20 s
+}
 
 /** How a question was asked: typed, spoken, or tapped from the starter, next or "Did you mean" chips. */
 export type AskVia = 'typed' | 'voice' | 'starter' | 'next' | 'clarify';
@@ -86,6 +124,7 @@ export interface ResultsView {
   questions: number; // questions in this quiz
   correct: number; // right answers from everyone together
   answers: number; // answers given by everyone together
+  moment: { atSec: number; text: string; reactions: number } | null; // the most reacted-to scene
 }
 
 /** The whole session in one snapshot. The server sends it to the TV and every pad after each change. */
@@ -100,6 +139,7 @@ export interface SessionView {
   quizUnlocked: number; // quiz questions about scenes already watched
   pip: PipState;
   pipStyle: PipStyle;
+  companion: CompanionView | null; // only in the watch stage
   quiz: QuizView | null; // only in the quiz stage
   results: ResultsView | null; // only in the results stage
 }
@@ -165,6 +205,8 @@ export interface ClientToServerEvents {
   'pad:host': (command: HostCommand) => void;
   'pad:ask': (payload: { text: string; via: AskVia }, ack: Ack<AskResult>) => void;
   'pad:answer': (payload: { index: number; choice: number }) => void;
+  'pad:react': (payload: { kind: ReactionKind }) => void; // watch stage only
+  'pad:predict': (payload: { id: string; choice: number }) => void; // while that prediction is open
 }
 
 /** Events the server sends to the TV and pads of one session. */
@@ -173,6 +215,7 @@ export interface ServerToClientEvents {
   'tv:command': (command: TvCommand) => void; // to the TV only
   'pip:say': (say: PipSay) => void; // to the TV and every pad; a pad shows it only to the asker
   'pip:hello': (hello: PipHello) => void; // to the TV and every pad, when a new player joins
+  'pip:react': (reaction: { playerId: string; kind: ReactionKind }) => void; // to the room
 }
 
 export const LIMITS = {
@@ -181,6 +224,7 @@ export const LIMITS = {
   maxPlayers: 8,
   askMaxChars: 200,
   askMinIntervalMs: 2000, // per player
+  reactMinIntervalMs: 400, // per player
   seekMaxAbsSec: 60,
   failedJoinsPerMinute: 60, // per IP address; only joins with an unknown code count
   questionSeconds: 20,

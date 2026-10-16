@@ -107,5 +107,6 @@ export function buildResults(run: QuizRun, roster: Roster): ResultsView {
     questions: run.questions.length,
     correct: run.correct,
     answers: run.answered,
+    moment: null, // the most reacted-to scene, filled in with reactions
   };
 }

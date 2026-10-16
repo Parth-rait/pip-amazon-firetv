@@ -37,6 +37,7 @@ export function buildView(
     quizUnlocked,
     pip: session.pip,
     pipStyle: session.pipStyle,
+    companion: null, // filled in by the companion step (chapters, characters, predictions)
     quiz: session.stage === 'quiz' && run ? buildQuizView(run, nowMs) : null,
     results: session.stage === 'results' && run ? buildResults(run, session) : null,
   };
