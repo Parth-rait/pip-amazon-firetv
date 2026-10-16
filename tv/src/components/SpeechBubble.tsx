@@ -41,7 +41,17 @@ export function SpeechBubble({
 
 const styles = StyleSheet.create({
   wrap: {maxWidth: dp(900), gap: space.s},
-  above: {color: color.text, fontSize: type.caption},
+  // Sits over the film, so it gets its own dark backing to stay readable on bright scenes.
+  above: {
+    alignSelf: 'flex-start',
+    paddingHorizontal: space.l,
+    paddingVertical: space.xs,
+    borderRadius: radius,
+    overflow: 'hidden',
+    color: color.text,
+    fontSize: type.caption,
+    backgroundColor: 'rgba(11, 11, 15, 0.75)',
+  },
   bubble: {
     paddingHorizontal: space.xl,
     paddingVertical: space.l,

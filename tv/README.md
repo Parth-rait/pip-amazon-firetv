@@ -59,3 +59,7 @@ Remote focus: `hasTVPreferredFocus` on the first film card landed on the last ca
 ## Known issue
 
 Once, the TV's socket closed (`transport close`) just as the film started loading, and reconnected in about 1 s with the same code. Watch for it in rehearsals.
+
+## npm audit
+
+`npm audit` in `tv/` (Oct 16 2026) lists high and moderate findings in build tooling that comes with the Vega template (`braces`, `minimatch`, `lodash`, `ajv`, `fast-xml-parser`, `sprintf-js`, via the CLI and Metro), not in code that runs on the TV. We do not run `npm audit fix --force`, because it replaces versions the Vega toolchain pins. `server/` and `pad/` have no findings.
