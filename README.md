@@ -15,21 +15,22 @@ Watching together on a TV is still passive. The remote is small, easy to lose, h
 1. **Scan and join.** The TV shows Pip, a QR code and a 4-character code. Each person scans it and types a first name. The first one in is the host.
 2. **Make Pip yours.** In the lobby the host picks Pip's mood (Chill, Playful or Sassy) and color. The mood changes how Pip talks; the color follows on the TV and every pad. Pip greets each new player by name, in that mood. Players pick a color for their avatar (their initial, like a contact photo). The default stays simple; the extras are one tap away.
 3. **Watch.** The host picks a film from the posters on the Pip Pad (a tablet) and gets a remote-style Play, Pause and skip control. There are two films: Big Buck Bunny (gentle, no dialogue) and Sintel (a fantasy with a twist ending).
-4. **Ask Pip.** Anyone can tap a suggested question, type or speak. Pip answers on the TV with the asker's name, using only notes about the film up to the current moment, so it does not spoil what comes next. Each answer brings two or three next questions to tap, and a vague question gets "Did you mean" options instead of a guess.
-5. **Quiz.** The host starts a five-question quiz about the scenes already watched. Everyone answers on their own screen, with the same big buttons, no buzzers and no speed points.
-6. **Results.** Each question ends with the right answer and a one-line explanation, then the scores and a family total: "Together you got 9 of 10 right."
+4. **A companion beside the film.** Each pad has three tabs: Pip (ask), Story ("Catch me up": the chapters watched so far, with pictures) and Who's who (character cards whose facts unlock as the film plays). At key moments Pip asks "What happens next?"; everyone guesses on their own pad and Pip reveals it when the film gets there, so a twist becomes a game. Anyone can tap laugh, wow, aww or scary, and the face floats up on the TV; the results name the family's favourite moment.
+5. **Ask Pip.** Anyone can tap a suggested question, type or speak. Pip answers on the TV with the asker's name, using only notes about the film up to the current moment, so it does not spoil what comes next. Each answer brings two or three next questions to tap, and a vague question gets "Did you mean" options instead of a guess.
+6. **Quiz.** The host starts a five-question quiz about the scenes already watched. Everyone answers on their own screen, with the same big buttons, no buzzers and no speed points.
+7. **Results.** Each question ends with the right answer and a one-line explanation, then the scores and a family total: "Together you got 9 of 10 right."
 
 ## Screenshots
 
-The TV app on the Vega Virtual Device: the lobby (Pip greeting Gran), Pip answering during the film, a quiz question, its reveal, and the results.
+The TV app on the Vega Virtual Device: the lobby with eight players (each a little Pip with its own ears), Pip answering during the film, a "What happens next?" vote revealed in Sintel, a quiz reveal with everyone's picks, and the results with stars.
 
 ![TV lobby](docs/screenshots/tv-1-lobby.jpg)
 ![Pip answering during the film](docs/screenshots/tv-2-watch.jpg)
-![A quiz question](docs/screenshots/tv-3-quiz.jpg)
-![The reveal, with everyone's picks](docs/screenshots/tv-4-reveal.jpg)
+![A vote revealed](docs/screenshots/tv-3-prediction.jpg)
+![The quiz reveal, with everyone's picks](docs/screenshots/tv-4-reveal.jpg)
 ![Results](docs/screenshots/tv-5-results.jpg)
 
-The Pip Pad on a phone: joining, the host's lobby, "Make Pip yours" (here Sassy and coral), and Ask Pip as a chat.
+The Pip Pad on a phone: joining with a little-Pip avatar, a "What happens next?" vote, "Catch me up" (Story) and "Who's who".
 
 ![The Pip Pad](docs/screenshots/pad-strip.jpg)
 
