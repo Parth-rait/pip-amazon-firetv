@@ -20,6 +20,7 @@
     "draft:quiz": "tsx scripts/draft-quiz.ts",
     "smoke:quiz": "tsx scripts/smoke-quiz.ts",
     "sim:touch": "tsx scripts/sim-touch.ts",
+    "annotate": "tsx scripts/annotate.ts",
     "companion:images": "sh scripts/companion-images.sh"
   },
   "dependencies": {
