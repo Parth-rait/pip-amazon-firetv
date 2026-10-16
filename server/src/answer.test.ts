@@ -189,6 +189,26 @@ describe('answerQuestion', () => {
   });
 });
 
+describe('questions about later and names without a predicate', () => {
+  it('answers a question about the future with the no-spoiler line, without any model', async () => {
+    const { deps: d, complete } = deps(LEAKY);
+    const result = await answerQuestion(request('What happens next?', 60), d);
+    expect(result).toMatchObject({
+      kind: 'unknown',
+      path: 'future-question',
+      text: LINES.noFuture,
+    });
+    expect(complete).not.toHaveBeenCalled();
+  });
+
+  it('does not answer "How old is Hoot?" with an unrelated Hoot fact when AI is off', async () => {
+    const { deps: d } = deps(LEAKY, { aiEnabled: false });
+    expect(await answerQuestion(request('How old is Hoot?', 95), d)).toMatchObject({
+      kind: 'fallback',
+    });
+  });
+});
+
 describe('recheckAtPosition', () => {
   it('withholds an answer that relied on facts after a rewind', async () => {
     const { deps: d } = deps('ANSWER: The lantern glows blue now.\nSOURCES: f5');

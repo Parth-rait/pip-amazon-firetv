@@ -18,12 +18,18 @@ export function readPrompt(user: string): { facts: PromptFact[]; question: strin
   return { facts, question };
 }
 
+/** Capitalised words in the facts stand for names; a careful model needs more than a name. */
 function bestFact(facts: PromptFact[], question: string): PromptFact | null {
+  const names = new Set(
+    facts.flatMap((f) => (f.text.match(/\b[A-Z][a-z]+\b/g) ?? []).map((w) => w.toLowerCase())),
+  );
   const asked = new Set(contentWords(question));
   let best: { fact: PromptFact; score: number } | null = null;
   for (const fact of facts) {
-    const score = contentWords(fact.text).filter((w) => asked.has(w)).length;
-    if (score > 0 && (!best || score > best.score)) best = { fact, score };
+    const shared = contentWords(fact.text).filter((w) => asked.has(w));
+    const predicate = shared.filter((w) => !names.has(w)).length;
+    if (predicate > 0 && (!best || shared.length > best.score))
+      best = { fact, score: shared.length };
   }
   return best?.fact ?? null;
 }

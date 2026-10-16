@@ -8,6 +8,7 @@ export const LINES = {
   didYouMean: 'Did you mean one of these?',
   noEvidenceYet: "I haven't seen enough of this film yet to answer that.",
   noTimeline: "I don't have notes for this film yet, so I can't answer that.",
+  noFuture: 'No spoilers from me. Keep watching and see!',
   play: 'Playing the film.',
   pause: 'Pausing the film.',
   seekBack: (sec: number) => `Going back ${sec} seconds.`,

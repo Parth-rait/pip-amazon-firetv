@@ -43,6 +43,7 @@ export type AnswerPath =
   | 'no-timeline'
   | 'no-evidence'
   | 'restricted-question'
+  | 'future-question'
   | 'retrieval'
   | 'cache'
   | 'model'
@@ -107,6 +108,14 @@ export async function answerQuestion(req: AnswerRequest, deps: AnswerDeps): Prom
       kind: 'unknown',
       source: 'template',
       text: LINES.noEvidenceYet,
+    });
+  }
+  // Pip never predicts: what happens later is the one thing it must not say.
+  if (req.topic === 'future') {
+    return reply(evidence, 'future-question', {
+      kind: 'unknown',
+      source: 'template',
+      text: LINES.noFuture,
     });
   }
   // A question naming something not seen yet gets "not sure": yes or no would both give it away.
@@ -191,15 +200,24 @@ function retrievalAnswer(
   return null;
 }
 
-/** The permitted fact sharing the most meaningful words with the question, if clearly relevant. */
+/**
+ * The permitted fact sharing the most meaningful words with the question, if clearly relevant.
+ * Names alone are not enough ("How old is Hoot?" must not return any Hoot fact): at least one
+ * other word of the question has to match too.
+ */
 export function bestKeywordMatch(evidence: EvidenceSet, question: string): TimedFact | null {
+  const nameWords = new Set(
+    evidence.entities.flatMap((e) => [e.name, ...e.aliases].flatMap(contentWords)),
+  );
   const queryWords = new Set(contentWords(question));
   const asked = mentionedEntities(evidence.entities, question);
   let best: { fact: TimedFact; score: number } | null = null;
   for (const fact of evidence.facts) {
-    const overlap = new Set(contentWords(fact.text).filter((w) => queryWords.has(w))).size;
-    const score = overlap + fact.entities.filter((id) => asked.has(id)).length;
-    if (score >= MIN_KEYWORD_SCORE && (!best || score >= best.score)) best = { fact, score };
+    const shared = new Set(contentWords(fact.text).filter((w) => queryWords.has(w)));
+    const predicate = [...shared].filter((w) => !nameWords.has(w)).length;
+    const score = predicate + fact.entities.filter((id) => asked.has(id)).length;
+    if (predicate >= 1 && score >= MIN_KEYWORD_SCORE && (!best || score >= best.score))
+      best = { fact, score };
   }
   return best?.fact ?? null;
 }

@@ -20,6 +20,8 @@ export const configSchema = z.object({
   QUIZ_ENABLED: booleanFlag.default(false), // the quiz is an opt-in mode, never the default path
   // 'typesafe' adds a typed judgement for text the rules cannot route; needs TYPESAFE_API_KEY.
   INTENT_JUDGE: z.enum(['rules', 'typesafe']).default('rules'),
+  // Adds the lab film from lab/content (The Lantern Fox, made by npm run lab:film) to the films.
+  LAB_CONTENT: booleanFlag.default(false),
 });
 
 export type Config = Readonly<z.infer<typeof configSchema>>;

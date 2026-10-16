@@ -1,0 +1,829 @@
+{
+  "schemaVersion": 1,
+  "contentId": "lantern-fox",
+  "durationSec": 96,
+  "source": {
+    "assetId": "lantern-fox",
+    "sha256": "ecbe9a535cb59f7be1597bfa601f634007d9f2ab063984a2ce4432827c6ae81e",
+    "license": "MIT",
+    "rights": "The Lantern Fox is an original test film made by the Pip project with scripts/make-lab-film.ts; MIT like the repo."
+  },
+  "frames": [
+    {
+      "id": "fr-00005",
+      "atSec": 0.5,
+      "path": "frames/fr-00005.jpg"
+    },
+    {
+      "id": "fr-00025",
+      "atSec": 2.5,
+      "path": "frames/fr-00025.jpg"
+    },
+    {
+      "id": "fr-00045",
+      "atSec": 4.5,
+      "path": "frames/fr-00045.jpg"
+    },
+    {
+      "id": "fr-00065",
+      "atSec": 6.5,
+      "path": "frames/fr-00065.jpg"
+    },
+    {
+      "id": "fr-00085",
+      "atSec": 8.5,
+      "path": "frames/fr-00085.jpg"
+    },
+    {
+      "id": "fr-00105",
+      "atSec": 10.5,
+      "path": "frames/fr-00105.jpg"
+    },
+    {
+      "id": "fr-00125",
+      "atSec": 12.5,
+      "path": "frames/fr-00125.jpg"
+    },
+    {
+      "id": "fr-00145",
+      "atSec": 14.5,
+      "path": "frames/fr-00145.jpg"
+    },
+    {
+      "id": "fr-00165",
+      "atSec": 16.5,
+      "path": "frames/fr-00165.jpg"
+    },
+    {
+      "id": "fr-00185",
+      "atSec": 18.5,
+      "path": "frames/fr-00185.jpg"
+    },
+    {
+      "id": "fr-00205",
+      "atSec": 20.5,
+      "path": "frames/fr-00205.jpg"
+    },
+    {
+      "id": "fr-00225",
+      "atSec": 22.5,
+      "path": "frames/fr-00225.jpg"
+    },
+    {
+      "id": "fr-00245",
+      "atSec": 24.5,
+      "path": "frames/fr-00245.jpg"
+    },
+    {
+      "id": "fr-00265",
+      "atSec": 26.5,
+      "path": "frames/fr-00265.jpg"
+    },
+    {
+      "id": "fr-00285",
+      "atSec": 28.5,
+      "path": "frames/fr-00285.jpg"
+    },
+    {
+      "id": "fr-00305",
+      "atSec": 30.5,
+      "path": "frames/fr-00305.jpg"
+    },
+    {
+      "id": "fr-00325",
+      "atSec": 32.5,
+      "path": "frames/fr-00325.jpg"
+    },
+    {
+      "id": "fr-00345",
+      "atSec": 34.5,
+      "path": "frames/fr-00345.jpg"
+    },
+    {
+      "id": "fr-00365",
+      "atSec": 36.5,
+      "path": "frames/fr-00365.jpg"
+    },
+    {
+      "id": "fr-00385",
+      "atSec": 38.5,
+      "path": "frames/fr-00385.jpg"
+    },
+    {
+      "id": "fr-00405",
+      "atSec": 40.5,
+      "path": "frames/fr-00405.jpg"
+    },
+    {
+      "id": "fr-00425",
+      "atSec": 42.5,
+      "path": "frames/fr-00425.jpg"
+    },
+    {
+      "id": "fr-00445",
+      "atSec": 44.5,
+      "path": "frames/fr-00445.jpg"
+    },
+    {
+      "id": "fr-00465",
+      "atSec": 46.5,
+      "path": "frames/fr-00465.jpg"
+    },
+    {
+      "id": "fr-00475",
+      "atSec": 47.5,
+      "path": "frames/fr-00475.jpg"
+    },
+    {
+      "id": "fr-00485",
+      "atSec": 48.5,
+      "path": "frames/fr-00485.jpg"
+    },
+    {
+      "id": "fr-00505",
+      "atSec": 50.5,
+      "path": "frames/fr-00505.jpg"
+    },
+    {
+      "id": "fr-00525",
+      "atSec": 52.5,
+      "path": "frames/fr-00525.jpg"
+    },
+    {
+      "id": "fr-00545",
+      "atSec": 54.5,
+      "path": "frames/fr-00545.jpg"
+    },
+    {
+      "id": "fr-00565",
+      "atSec": 56.5,
+      "path": "frames/fr-00565.jpg"
+    },
+    {
+      "id": "fr-00585",
+      "atSec": 58.5,
+      "path": "frames/fr-00585.jpg"
+    },
+    {
+      "id": "fr-00605",
+      "atSec": 60.5,
+      "path": "frames/fr-00605.jpg"
+    },
+    {
+      "id": "fr-00615",
+      "atSec": 61.5,
+      "path": "frames/fr-00615.jpg"
+    },
+    {
+      "id": "fr-00625",
+      "atSec": 62.5,
+      "path": "frames/fr-00625.jpg"
+    },
+    {
+      "id": "fr-00645",
+      "atSec": 64.5,
+      "path": "frames/fr-00645.jpg"
+    },
+    {
+      "id": "fr-00665",
+      "atSec": 66.5,
+      "path": "frames/fr-00665.jpg"
+    },
+    {
+      "id": "fr-00685",
+      "atSec": 68.5,
+      "path": "frames/fr-00685.jpg"
+    },
+    {
+      "id": "fr-00705",
+      "atSec": 70.5,
+      "path": "frames/fr-00705.jpg"
+    },
+    {
+      "id": "fr-00725",
+      "atSec": 72.5,
+      "path": "frames/fr-00725.jpg"
+    },
+    {
+      "id": "fr-00745",
+      "atSec": 74.5,
+      "path": "frames/fr-00745.jpg"
+    },
+    {
+      "id": "fr-00765",
+      "atSec": 76.5,
+      "path": "frames/fr-00765.jpg"
+    },
+    {
+      "id": "fr-00785",
+      "atSec": 78.5,
+      "path": "frames/fr-00785.jpg"
+    },
+    {
+      "id": "fr-00795",
+      "atSec": 79.5,
+      "path": "frames/fr-00795.jpg"
+    },
+    {
+      "id": "fr-00805",
+      "atSec": 80.5,
+      "path": "frames/fr-00805.jpg"
+    },
+    {
+      "id": "fr-00825",
+      "atSec": 82.5,
+      "path": "frames/fr-00825.jpg"
+    },
+    {
+      "id": "fr-00845",
+      "atSec": 84.5,
+      "path": "frames/fr-00845.jpg"
+    },
+    {
+      "id": "fr-00865",
+      "atSec": 86.5,
+      "path": "frames/fr-00865.jpg"
+    },
+    {
+      "id": "fr-00885",
+      "atSec": 88.5,
+      "path": "frames/fr-00885.jpg"
+    },
+    {
+      "id": "fr-00905",
+      "atSec": 90.5,
+      "path": "frames/fr-00905.jpg"
+    },
+    {
+      "id": "fr-00925",
+      "atSec": 92.5,
+      "path": "frames/fr-00925.jpg"
+    },
+    {
+      "id": "fr-00945",
+      "atSec": 94.5,
+      "path": "frames/fr-00945.jpg"
+    }
+  ],
+  "scenes": [
+    {
+      "id": "sc-001",
+      "startSec": 0,
+      "endSec": 10
+    },
+    {
+      "id": "sc-002",
+      "startSec": 10,
+      "endSec": 22
+    },
+    {
+      "id": "sc-003",
+      "startSec": 22,
+      "endSec": 34
+    },
+    {
+      "id": "sc-004",
+      "startSec": 34,
+      "endSec": 46
+    },
+    {
+      "id": "sc-005",
+      "startSec": 46,
+      "endSec": 60
+    },
+    {
+      "id": "sc-006",
+      "startSec": 60,
+      "endSec": 72
+    },
+    {
+      "id": "sc-007",
+      "startSec": 72,
+      "endSec": 84
+    },
+    {
+      "id": "sc-008",
+      "startSec": 84,
+      "endSec": 96
+    }
+  ],
+  "entities": [
+    {
+      "id": "ember",
+      "name": "Ember",
+      "aliases": [
+        "the fox",
+        "fox",
+        "orange fox"
+      ],
+      "firstSeenSec": 12.5,
+      "intro": "That is Ember, a small orange fox.",
+      "review": {
+        "status": "accepted",
+        "by": "lab script check (synthetic fixture; not a person)",
+        "at": "2026-10-16"
+      }
+    },
+    {
+      "id": "lantern",
+      "name": "lantern",
+      "aliases": [
+        "old lantern",
+        "brass lantern"
+      ],
+      "firstSeenSec": 24.5,
+      "intro": "That is an old brass lantern Ember found in the snow.",
+      "review": {
+        "status": "accepted",
+        "by": "lab script check (synthetic fixture; not a person)",
+        "at": "2026-10-16"
+      }
+    },
+    {
+      "id": "hoot",
+      "name": "Hoot",
+      "aliases": [
+        "the owl",
+        "owl"
+      ],
+      "firstSeenSec": 36.5,
+      "intro": "That is Hoot, an owl who watches from a pine tree.",
+      "review": {
+        "status": "accepted",
+        "by": "lab script check (synthetic fixture; not a person)",
+        "at": "2026-10-16"
+      }
+    },
+    {
+      "id": "lighthouse",
+      "name": "lighthouse",
+      "aliases": [],
+      "firstSeenSec": 61.5,
+      "intro": "That is a dark lighthouse across the frozen lake.",
+      "review": {
+        "status": "accepted",
+        "by": "lab script check (synthetic fixture; not a person)",
+        "at": "2026-10-16"
+      }
+    },
+    {
+      "id": "moss",
+      "name": "Moss",
+      "aliases": [
+        "the badger",
+        "badger",
+        "keeper",
+        "lighthouse keeper"
+      ],
+      "firstSeenSec": 86.5,
+      "intro": "That is Moss, an old badger who thanks Ember.",
+      "review": {
+        "status": "accepted",
+        "by": "lab script check (synthetic fixture; not a person)",
+        "at": "2026-10-16"
+      }
+    }
+  ],
+  "facts": [
+    {
+      "id": "c01",
+      "startSec": 0,
+      "revealSec": 2.5,
+      "kind": "setting",
+      "text": "It is night in a snowy forest under a full moon.",
+      "entities": [],
+      "spoilerTerms": [],
+      "evidence": [
+        "fr-00025"
+      ],
+      "confidence": 0.95,
+      "sceneId": "sc-001",
+      "generator": "claude-code-session visual review 2026-10-16",
+      "review": {
+        "status": "accepted",
+        "by": "lab script check (synthetic fixture; not a person)",
+        "at": "2026-10-16"
+      }
+    },
+    {
+      "id": "c02",
+      "startSec": 10,
+      "revealSec": 12.5,
+      "kind": "appearance",
+      "text": "A small orange fox called Ember appears in the forest.",
+      "entities": [
+        "ember"
+      ],
+      "spoilerTerms": [],
+      "evidence": [
+        "fr-00105",
+        "fr-00125"
+      ],
+      "confidence": 0.95,
+      "sceneId": "sc-002",
+      "generator": "claude-code-session visual review 2026-10-16",
+      "review": {
+        "status": "accepted",
+        "by": "lab script check (synthetic fixture; not a person)",
+        "at": "2026-10-16"
+      }
+    },
+    {
+      "id": "c03",
+      "startSec": 12,
+      "revealSec": 14.5,
+      "kind": "event",
+      "text": "Ember walks through the snowy forest.",
+      "entities": [
+        "ember"
+      ],
+      "spoilerTerms": [],
+      "evidence": [
+        "fr-00145"
+      ],
+      "confidence": 0.95,
+      "sceneId": "sc-002",
+      "generator": "claude-code-session visual review 2026-10-16",
+      "review": {
+        "status": "accepted",
+        "by": "lab script check (synthetic fixture; not a person)",
+        "at": "2026-10-16"
+      }
+    },
+    {
+      "id": "c04",
+      "startSec": 22,
+      "revealSec": 24.5,
+      "kind": "event",
+      "text": "Ember finds an old brass lantern.",
+      "entities": [
+        "ember",
+        "lantern"
+      ],
+      "spoilerTerms": [
+        "brass"
+      ],
+      "evidence": [
+        "fr-00225",
+        "fr-00245"
+      ],
+      "confidence": 0.95,
+      "sceneId": "sc-003",
+      "generator": "claude-code-session visual review 2026-10-16",
+      "review": {
+        "status": "accepted",
+        "by": "lab script check (synthetic fixture; not a person)",
+        "at": "2026-10-16"
+      }
+    },
+    {
+      "id": "c05",
+      "startSec": 24,
+      "revealSec": 26.5,
+      "kind": "setting",
+      "text": "The lantern is half buried in the snow.",
+      "entities": [
+        "lantern"
+      ],
+      "spoilerTerms": [
+        "half buried"
+      ],
+      "evidence": [
+        "fr-00265"
+      ],
+      "confidence": 0.9,
+      "sceneId": "sc-003",
+      "generator": "claude-code-session visual review 2026-10-16",
+      "review": {
+        "status": "accepted",
+        "by": "lab script check (synthetic fixture; not a person)",
+        "at": "2026-10-16"
+      }
+    },
+    {
+      "id": "c06",
+      "startSec": 34,
+      "revealSec": 36.5,
+      "kind": "appearance",
+      "text": "Hoot the owl watches from a pine tree.",
+      "entities": [
+        "hoot"
+      ],
+      "spoilerTerms": [
+        "pine tree"
+      ],
+      "evidence": [
+        "fr-00345",
+        "fr-00365"
+      ],
+      "confidence": 0.95,
+      "sceneId": "sc-004",
+      "generator": "claude-code-session visual review 2026-10-16",
+      "review": {
+        "status": "accepted",
+        "by": "lab script check (synthetic fixture; not a person)",
+        "at": "2026-10-16"
+      }
+    },
+    {
+      "id": "c07",
+      "startSec": 38,
+      "revealSec": 40.5,
+      "kind": "dialogue",
+      "text": "Hoot says the lantern belongs to someone.",
+      "entities": [
+        "hoot",
+        "lantern"
+      ],
+      "spoilerTerms": [
+        "belongs to someone"
+      ],
+      "evidence": [
+        "fr-00405"
+      ],
+      "confidence": 0.95,
+      "sceneId": "sc-004",
+      "generator": "claude-code-session visual review 2026-10-16",
+      "review": {
+        "status": "accepted",
+        "by": "lab script check (synthetic fixture; not a person)",
+        "at": "2026-10-16"
+      }
+    },
+    {
+      "id": "c08",
+      "startSec": 46,
+      "revealSec": 47.5,
+      "kind": "event",
+      "text": "Ember carries the lantern to a frozen lake.",
+      "entities": [
+        "ember",
+        "lantern"
+      ],
+      "spoilerTerms": [
+        "frozen lake"
+      ],
+      "evidence": [
+        "fr-00475"
+      ],
+      "confidence": 0.95,
+      "sceneId": "sc-005",
+      "generator": "claude-code-session visual review 2026-10-16",
+      "review": {
+        "status": "accepted",
+        "by": "lab script check (synthetic fixture; not a person)",
+        "at": "2026-10-16"
+      }
+    },
+    {
+      "id": "c09",
+      "startSec": 52,
+      "revealSec": 52.5,
+      "kind": "event",
+      "text": "The lantern starts to glow blue by itself.",
+      "entities": [
+        "lantern"
+      ],
+      "spoilerTerms": [
+        "glow",
+        "blue"
+      ],
+      "evidence": [
+        "fr-00525"
+      ],
+      "confidence": 0.95,
+      "sceneId": "sc-005",
+      "generator": "claude-code-session visual review 2026-10-16",
+      "review": {
+        "status": "accepted",
+        "by": "lab script check (synthetic fixture; not a person)",
+        "at": "2026-10-16"
+      }
+    },
+    {
+      "id": "c10",
+      "startSec": 60,
+      "revealSec": 61.5,
+      "kind": "appearance",
+      "text": "A dark lighthouse stands across the lake.",
+      "entities": [
+        "lighthouse"
+      ],
+      "spoilerTerms": [],
+      "evidence": [
+        "fr-00605",
+        "fr-00615"
+      ],
+      "confidence": 0.95,
+      "sceneId": "sc-006",
+      "generator": "claude-code-session visual review 2026-10-16",
+      "review": {
+        "status": "accepted",
+        "by": "lab script check (synthetic fixture; not a person)",
+        "at": "2026-10-16"
+      }
+    },
+    {
+      "id": "c11",
+      "startSec": 63,
+      "revealSec": 64.5,
+      "kind": "setting",
+      "text": "The light of the lighthouse is out.",
+      "entities": [
+        "lighthouse"
+      ],
+      "spoilerTerms": [
+        "light is out"
+      ],
+      "evidence": [
+        "fr-00645"
+      ],
+      "confidence": 0.9,
+      "sceneId": "sc-006",
+      "generator": "claude-code-session visual review 2026-10-16",
+      "review": {
+        "status": "accepted",
+        "by": "lab script check (synthetic fixture; not a person)",
+        "at": "2026-10-16"
+      }
+    },
+    {
+      "id": "c12",
+      "startSec": 72,
+      "revealSec": 74.5,
+      "kind": "event",
+      "text": "Ember climbs the lighthouse.",
+      "entities": [
+        "ember",
+        "lighthouse"
+      ],
+      "spoilerTerms": [
+        "climbs"
+      ],
+      "evidence": [
+        "fr-00745"
+      ],
+      "confidence": 0.95,
+      "sceneId": "sc-007",
+      "generator": "claude-code-session visual review 2026-10-16",
+      "review": {
+        "status": "accepted",
+        "by": "lab script check (synthetic fixture; not a person)",
+        "at": "2026-10-16"
+      }
+    },
+    {
+      "id": "c13",
+      "startSec": 76,
+      "revealSec": 76.5,
+      "kind": "event",
+      "text": "Ember sets the lantern at the top of the lighthouse.",
+      "entities": [
+        "ember",
+        "lantern",
+        "lighthouse"
+      ],
+      "spoilerTerms": [
+        "at the top"
+      ],
+      "evidence": [
+        "fr-00765"
+      ],
+      "confidence": 0.95,
+      "sceneId": "sc-007",
+      "generator": "claude-code-session visual review 2026-10-16",
+      "review": {
+        "status": "accepted",
+        "by": "lab script check (synthetic fixture; not a person)",
+        "at": "2026-10-16"
+      }
+    },
+    {
+      "id": "c14",
+      "startSec": 79,
+      "revealSec": 79.5,
+      "kind": "event",
+      "text": "The lighthouse shines again.",
+      "entities": [
+        "lighthouse"
+      ],
+      "spoilerTerms": [
+        "shines again"
+      ],
+      "evidence": [
+        "fr-00795"
+      ],
+      "confidence": 0.95,
+      "sceneId": "sc-007",
+      "generator": "claude-code-session visual review 2026-10-16",
+      "review": {
+        "status": "accepted",
+        "by": "lab script check (synthetic fixture; not a person)",
+        "at": "2026-10-16"
+      }
+    },
+    {
+      "id": "c15",
+      "startSec": 84,
+      "revealSec": 86.5,
+      "kind": "appearance",
+      "text": "An old badger called Moss thanks Ember.",
+      "entities": [
+        "moss",
+        "ember"
+      ],
+      "spoilerTerms": [
+        "thanks"
+      ],
+      "evidence": [
+        "fr-00865"
+      ],
+      "confidence": 0.95,
+      "sceneId": "sc-008",
+      "generator": "claude-code-session visual review 2026-10-16",
+      "review": {
+        "status": "accepted",
+        "by": "lab script check (synthetic fixture; not a person)",
+        "at": "2026-10-16"
+      }
+    },
+    {
+      "id": "c16",
+      "startSec": 88,
+      "revealSec": 88.5,
+      "kind": "relation",
+      "text": "The lantern was Moss's, and he is the lighthouse keeper.",
+      "entities": [
+        "moss",
+        "lantern",
+        "lighthouse"
+      ],
+      "spoilerTerms": [
+        "was his",
+        "keeper"
+      ],
+      "evidence": [
+        "fr-00885"
+      ],
+      "confidence": 0.95,
+      "sceneId": "sc-008",
+      "generator": "claude-code-session visual review 2026-10-16",
+      "review": {
+        "status": "accepted",
+        "by": "lab script check (synthetic fixture; not a person)",
+        "at": "2026-10-16"
+      }
+    },
+    {
+      "id": "c17",
+      "startSec": 92,
+      "revealSec": 92.5,
+      "kind": "event",
+      "text": "Ember becomes the helper of Moss.",
+      "entities": [
+        "ember",
+        "moss"
+      ],
+      "spoilerTerms": [
+        "helper"
+      ],
+      "evidence": [
+        "fr-00925"
+      ],
+      "confidence": 0.95,
+      "sceneId": "sc-008",
+      "generator": "claude-code-session visual review 2026-10-16",
+      "review": {
+        "status": "accepted",
+        "by": "lab script check (synthetic fixture; not a person)",
+        "at": "2026-10-16"
+      }
+    },
+    {
+      "id": "c18",
+      "startSec": 94,
+      "revealSec": 94.5,
+      "kind": "event",
+      "text": "Ember and Moss light the lamp together every night.",
+      "entities": [
+        "ember",
+        "moss"
+      ],
+      "spoilerTerms": [
+        "together",
+        "every night"
+      ],
+      "evidence": [
+        "fr-00945"
+      ],
+      "confidence": 0.95,
+      "sceneId": "sc-008",
+      "generator": "claude-code-session visual review 2026-10-16",
+      "review": {
+        "status": "accepted",
+        "by": "lab script check (synthetic fixture; not a person)",
+        "at": "2026-10-16"
+      }
+    }
+  ]
+}

@@ -5,7 +5,8 @@ import { LIMITS } from '../../shared/protocol.js';
 export type PlaybackIntent =
   { type: 'play' } | { type: 'pause' } | { type: 'seek'; deltaSec: number };
 
-export type QuestionTopic = 'recap' | 'identify' | 'why' | 'other';
+// 'future' asks what happens later: Pip never predicts, so it answers with a fixed line.
+export type QuestionTopic = 'recap' | 'identify' | 'why' | 'future' | 'other';
 
 export type TextRoute =
   | { kind: 'action'; intent: PlaybackIntent }
@@ -58,10 +59,15 @@ export function routeText(text: string): TextRoute {
   return { kind: 'question', topic: questionTopic(t) };
 }
 
+const FUTURE =
+  /\b(next|later|going to|gonna|ending|in the end|at the end|end up)\b|\bhow does (it|this|the \w+) end\b|\bwill\b|\bever\b/;
+
 function questionTopic(t: string): QuestionTopic {
-  if (/\b(what (just )?happen|what did (i|we) miss|recap|so far|catch me up)/.test(t))
+  if (FUTURE.test(t) && !/\b(what (just )?happened|before)\b/.test(t)) return 'future';
+  if (/\b(what (just )?happened|what did (i|we) miss|recap|so far|catch me up)\b/.test(t))
     return 'recap';
-  if (/^(who|whos|which (one|character|animal))\b/.test(t)) return 'identify';
+  // "Who is that?" or "Who is Hoot?" identify someone; "Who owns the lantern?" asks a relation.
+  if (/^(who is|who are|whos|which (one|character|animal))\b/.test(t)) return 'identify';
   if (/^why\b/.test(t)) return 'why';
   return 'other';
 }

@@ -1,5 +1,6 @@
 // Starts the Pip server: HTTP (Express) and Socket.IO on one port.
 import 'dotenv/config';
+import { join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { loadConfig } from './config.js';
 import { createBedrockModel, createFakeModel } from './core/ai/model.js';
@@ -10,11 +11,15 @@ import { log } from './log.js';
 import { createPipServer } from './server.js';
 
 const CONTENT_DIR = fileURLToPath(new URL('../content', import.meta.url));
-const TIMELINES_DIR = fileURLToPath(new URL('../content/timelines', import.meta.url));
+const LAB_CONTENT_DIR = fileURLToPath(new URL('../lab/content', import.meta.url));
 
 const config = loadConfig();
-const films = loadFilms(CONTENT_DIR);
-const timelines = new Map(films.map((film) => [film.id, loadTimeline(TIMELINES_DIR, film)]));
+const dirs = config.LAB_CONTENT ? [CONTENT_DIR, LAB_CONTENT_DIR] : [CONTENT_DIR];
+const loaded = dirs.flatMap((dir) => loadFilms(dir).map((film) => ({ film, dir })));
+const films = loaded.map(({ film }) => film);
+const timelines = new Map(
+  loaded.map(({ film, dir }) => [film.id, loadTimeline(join(dir, 'timelines'), film)]),
+);
 const model = config.AI_ENABLED
   ? createBedrockModel({
       region: config.AWS_REGION,

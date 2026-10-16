@@ -14,6 +14,7 @@ describe('parseConfig', () => {
       TIMELINE_REVIEW: 'accepted',
       QUIZ_ENABLED: false,
       INTENT_JUDGE: 'rules',
+      LAB_CONTENT: false,
     });
   });
 

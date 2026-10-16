@@ -39,6 +39,28 @@ describe('routeText', () => {
     expect(routeText('What just happened?')).toEqual({ kind: 'question', topic: 'recap' });
     expect(routeText("Who's that?")).toEqual({ kind: 'question', topic: 'identify' });
     expect(routeText('Why did she do that?')).toEqual({ kind: 'question', topic: 'why' });
+    expect(routeText('Who owns the lantern?')).toEqual({ kind: 'question', topic: 'other' });
+    expect(routeText('Who does the lantern belong to?')).toEqual({
+      kind: 'question',
+      topic: 'other',
+    });
     expect(routeText('Is the lake cold?')).toEqual({ kind: 'question', topic: 'other' });
+  });
+
+  it('tags questions about later as future, never as a recap', () => {
+    for (const q of [
+      'What happens next?',
+      'How does it end?',
+      'Where will Ember take the lantern?',
+      'Does the lighthouse ever shine?',
+      'What do they do at the end?',
+      'Is the fox going to find something?',
+    ]) {
+      expect(routeText(q)).toEqual({ kind: 'question', topic: 'future' });
+    }
+    expect(routeText('What happened before the lake?')).not.toEqual({
+      kind: 'question',
+      topic: 'future',
+    });
   });
 });
