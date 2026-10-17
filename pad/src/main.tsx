@@ -5,6 +5,7 @@ import { App } from './App';
 import { takeCodeFromAddress } from './lib/address';
 import './styles/tokens.css';
 import './styles/app.css';
+import './styles/pip.css';
 
 // Before the first render, so the join screen and the rejoin both see the link's code.
 takeCodeFromAddress();

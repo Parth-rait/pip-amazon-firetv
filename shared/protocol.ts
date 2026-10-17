@@ -3,7 +3,7 @@
 // Edit only this file, then run `npm run sync:shared` to copy it into each package.
 // Types and constants only: no imports, so it compiles in Node, browsers and React Native for Vega.
 
-export const PROTOCOL_VERSION = 5;
+export const PROTOCOL_VERSION = 6;
 
 /** Where the session is in the journey. The server owns it; the TV and pads follow it. */
 export type Stage = 'lobby' | 'watch' | 'quiz' | 'results';
@@ -71,6 +71,7 @@ export interface ContentView {
   credit: string;
   durationSec: number;
   poster: string | null; // full URL of a still from the film, for the film cards
+  synopsis: string; // the film's premise: what it is about, spoiler-free (the TV's home screen)
 }
 
 /** What the TV's video player is doing. The TV app is the only writer. */
@@ -245,6 +246,7 @@ export interface ClientToServerEvents {
   ) => void;
   'tv:playback': (playback: Playback) => void;
   'tv:watch': (payload: { contentId: string }) => void; // the remote picked a film in the lobby
+  'tv:home': () => void; // the remote's Back during the film: back to the films (watch stage only)
   'pad:join': (
     payload: { code: string; playerId: string; name: string; avatar?: number },
     ack: Ack<JoinResult>,

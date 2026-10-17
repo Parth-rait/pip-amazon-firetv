@@ -96,7 +96,7 @@ describe('unlockedQuestions', () => {
 });
 
 describe('toContentView', () => {
-  it('makes a full URL and leaves out the notes and the quiz', () => {
+  it('makes a full URL, adds the premise as the synopsis, and leaves out the notes and the quiz', () => {
     const view = toContentView(film() as Content, 'https://pip.trycloudflare.com');
     expect(view).toEqual({
       id: 'test-film',
@@ -105,6 +105,7 @@ describe('toContentView', () => {
       credit: 'Credit',
       durationSec: 100,
       poster: null,
+      synopsis: 'A premise.', // the premise is spoiler-free by design; the notes never go out
     });
     expect(view).not.toHaveProperty('notes');
     expect(view).not.toHaveProperty('quiz');

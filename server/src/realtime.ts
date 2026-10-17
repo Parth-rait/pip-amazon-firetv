@@ -304,6 +304,14 @@ export function registerRealtime(deps: RealtimeDeps): () => void {
       if (!watchFilm(session, parsed.data.contentId, flow)) ignored('tv:watch', 'unknown-film');
     });
 
+    // No payload to validate: the TV's Back while the film shows. Same as the host's "lobby".
+    on('tv:home', () => {
+      const session = sessionOf();
+      if (!session || session.tvSocketId !== socket.id) return ignored('tv:home', 'not-tv');
+      if (session.stage !== 'watch') return ignored('tv:home', `in-${session.stage}`);
+      goToLobby(session, flow);
+    });
+
     on('tv:playback', (payload) => {
       const parsed = schema.playbackSchema.safeParse(payload);
       if (!parsed.success) return invalid('tv:playback');

@@ -189,6 +189,7 @@ export function toContentView(content: Content, publicUrl: string): ContentView 
     credit: content.credit,
     durationSec: content.durationSec,
     poster: content.poster ? new URL(content.poster, publicUrl).toString() : null,
+    synopsis: content.premise,
   };
 }
 

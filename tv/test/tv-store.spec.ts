@@ -8,6 +8,7 @@ const film = {
   credit: 'Blender Foundation',
   durationSec: 596,
   poster: null,
+  synopsis: 'A test film.',
 };
 
 function view(over: Partial<SessionView>): SessionView {

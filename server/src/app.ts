@@ -66,9 +66,15 @@ export function createApp(config: Config, films: Content[], options: AppOptions 
   return app;
 }
 
-/** The built pad, with index.html for any other GET, so links like /?code=K7QD open the app. */
+/**
+ * The built pad, with index.html for any other GET, so links like /?code=K7QD open the app; and
+ * the browser TV (tv.html, a second TV client on the same protocol) at /tv.
+ */
 function servePad(app: Express, padDir: string): void {
   if (!existsSync(join(padDir, 'index.html'))) return;
+  if (existsSync(join(padDir, 'tv.html'))) {
+    app.get('/tv', (_req, res) => res.sendFile(join(padDir, 'tv.html')));
+  }
   app.use(express.static(padDir));
   // Express 5 no longer accepts '*' as a path, so the fallback is the last middleware.
   app.use((req, res, next) => {

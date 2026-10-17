@@ -13,6 +13,7 @@ const mediaDir = mkdtempSync(join(tmpdir(), 'pip-media-'));
 writeFileSync(join(mediaDir, 'big-buck-bunny.mp4'), Buffer.alloc(1000, 1));
 const padDir = mkdtempSync(join(tmpdir(), 'pip-pad-'));
 writeFileSync(join(padDir, 'index.html'), '<!doctype html><title>Pip Pad</title>');
+writeFileSync(join(padDir, 'tv.html'), '<!doctype html><title>Pip TV</title>');
 
 let baseUrl = '';
 let close: () => void = () => {};
@@ -78,6 +79,12 @@ describe('createApp', () => {
     expect((await fetch(`${baseUrl}/media/missing.mp4`)).headers.get('content-type')).toContain(
       'json',
     );
+  });
+
+  it('serves the browser TV at /tv', async () => {
+    const page = await fetch(`${baseUrl}/tv`);
+    expect(page.status).toBe(200);
+    expect(await page.text()).toContain('Pip TV');
   });
 
   it('answers 404 for a missing film file', async () => {
