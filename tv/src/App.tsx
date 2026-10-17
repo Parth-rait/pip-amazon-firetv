@@ -26,15 +26,26 @@ function PipTv() {
   // In the background a Vega app must release its player; its network is cut too. So the TV
   // closes its socket and unmounts the watch screen, and on its way back reconnects with its
   // code: the server still has the film's position, so the film resumes (a warm start).
+  // Only 'background' lets go: 'inactive' is a passing state, and on the VVD (SDK 0.24, RN 0.83)
+  // 'change' can stop arriving after the first background and foreground, while 'focus' still
+  // comes (community.amazondeveloper.com/t/29128). Anything but 'background', or a focus, comes
+  // back, so one missed event cannot leave the TV off the server with every command refused.
   useEffect(() => {
-    const sub = AppState.addEventListener('change', (next) => {
-      const active = next === 'active';
-      setIsActive(active);
+    const comeBack = () => {
+      setIsActive(true);
       const s = getSocket();
-      if (active && !s.connected) s.connect();
-      if (!active) s.disconnect();
+      if (!s.connected) s.connect();
+    };
+    const change = AppState.addEventListener('change', (next) => {
+      if (next !== 'background') return comeBack();
+      setIsActive(false);
+      getSocket().disconnect();
     });
-    return () => sub.remove();
+    const focus = AppState.addEventListener('focus', comeBack); // unverified on Vega: harmless if never sent
+    return () => {
+      change.remove();
+      focus.remove();
+    };
   }, []);
 
   useEffect(() => {

@@ -97,6 +97,23 @@ describe('Virtual Pip Lab', () => {
     expect(lab.journal.some((e) => e.event_type === 'action.confirmed')).toBe(true);
   });
 
+  it('refuses a command while the TV is away, and journals why it left and when it came back', async () => {
+    lab = await startLab();
+    const { tv, host } = await watching(lab);
+    tv.close(); // as the TV app does when it goes to the background
+    await waitFor(
+      () => lab!.journal.find((e) => e.event_type === 'tv.disconnected'),
+      'the disconnect in the journal',
+    );
+    expect(lab.journal.find((e) => e.event_type === 'tv.disconnected')?.data).toEqual({
+      reason: 'client namespace disconnect',
+    });
+    expect(lab.journal.filter((e) => e.event_type === 'tv.connected')).toHaveLength(1);
+    expect(
+      await host.input({ type: 'media.seekRelative', seconds: 10 }, 'hand_gesture_cam'),
+    ).toEqual({ ok: false, reason: 'no-tv' });
+  });
+
   it('reports a failure when the TV never answers, and when it says it could not', async () => {
     lab = await startLab();
     const { tv, host, code } = await watching(lab);

@@ -109,14 +109,25 @@ export function registerRealtime(deps: RealtimeDeps): () => void {
       deps.log.info(`ignored.${event}`, { socketId: socket.id, code: data()?.code, why });
 
     /** Leaves the current session as on disconnect: TV seat, or the player's socket. */
-    const leaveCurrent = () => {
+    const leaveCurrent = (reason = 'left') => {
       const d = data();
       const session = sessionOf();
       socket.data = undefined;
       if (!d || !session) return;
       void socket.leave(roomOf(session.code));
       if (d.role === 'tv') {
-        if (session.tvSocketId === socket.id) session.tvSocketId = null;
+        if (session.tvSocketId !== socket.id) return broadcast(session, flow);
+        session.tvSocketId = null;
+        // Socket.IO's reason tells a TV that let go ('client namespace disconnect', as on
+        // backgrounding) from a lost network ('transport close', 'ping timeout').
+        flow.journal?.record({
+          session_id: session.journalId,
+          event_type: 'tv.disconnected',
+          content_id: session.contentId,
+          source: 'tv',
+          data: { reason },
+          provenance: 'system',
+        });
         broadcast(session, flow);
         return;
       }
@@ -169,6 +180,14 @@ export function registerRealtime(deps: RealtimeDeps): () => void {
         qrUrl: `${base}/qr/${session.code}`,
       });
       deps.log.info('tv.hello', { socketId: socket.id, code: session.code, kind: choice.kind });
+      flow.journal?.record({
+        session_id: session.journalId,
+        event_type: 'tv.connected',
+        content_id: session.contentId,
+        source: 'tv',
+        data: { kind: choice.kind },
+        provenance: 'system',
+      });
       broadcast(session, flow);
     });
 
@@ -374,7 +393,7 @@ export function registerRealtime(deps: RealtimeDeps): () => void {
     socket.on('disconnect', (reason) => {
       try {
         deps.log.info('socket.disconnect', { socketId: socket.id, code: data()?.code, reason });
-        leaveCurrent();
+        leaveCurrent(reason);
       } catch (error) {
         deps.log.error('failed.disconnect', { socketId: socket.id, ...errorFields(error) });
       }
