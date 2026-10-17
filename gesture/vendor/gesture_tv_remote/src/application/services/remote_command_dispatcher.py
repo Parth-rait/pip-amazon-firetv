@@ -1,0 +1,142 @@
+import asyncio
+import contextlib
+import time
+from collections import deque
+from dataclasses import dataclass
+
+from src.application.ports.logger import LoggerPort
+from src.application.ports.tv_remote import TVRemotePort
+from src.domain.constants import DISPLAY_COMMAND_SELECT, TV_COMMAND_DPAD_CENTER
+
+MAX_PENDING_COMMANDS = 8
+
+
+@dataclass(frozen=True)
+class RemoteCommandRequest:
+    source: str
+    command: str
+    enqueued_at: float
+
+
+class RemoteCommandDispatcher:
+    def __init__(self, remote: TVRemotePort, logger: LoggerPort) -> None:
+        self._remote = remote
+        self._logger = logger
+        self._commands: deque[RemoteCommandRequest] = deque()
+        self._has_work: asyncio.Event | None = None
+        self._worker_task: asyncio.Task | None = None
+        self._closed = False
+        self._last_send_latency_seconds: float | None = None
+        self._dropped_commands = 0
+
+    def start(self) -> None:
+        if self._worker_task is not None and not self._worker_task.done():
+            return
+        self._has_work = asyncio.Event()
+        self._worker_task = asyncio.create_task(self._run())
+
+    def enqueue(
+        self,
+        source: str,
+        command: str,
+        *,
+        coalesce_repeats: bool = True,
+        max_pending: int | None = MAX_PENDING_COMMANDS,
+    ) -> None:
+        if self._closed:
+            return
+        if not self._supports_command(command):
+            self._dropped_commands += 1
+            self._logger.info(
+                "Adapter does not support command. "
+                f"Skipping source={source} command={command}"
+            )
+            return
+        if self._has_work is None:
+            self.start()
+        has_work = self._has_work
+        if has_work is None:
+            return
+
+        request = RemoteCommandRequest(
+            source=source,
+            command=command,
+            enqueued_at=time.monotonic(),
+        )
+        # TV adapters can be slow or reconnecting; keep gesture detection independent
+        # by allowing callers to bound pending work and coalesce noisy repeats.
+        if (
+            coalesce_repeats
+            and self._commands
+            and self._commands[-1].command == command
+        ):
+            self._commands[-1] = request
+            has_work.set()
+            return
+        if max_pending is not None and len(self._commands) >= max_pending:
+            self._commands.popleft()
+            self._dropped_commands += 1
+            self._commands.append(request)
+            has_work.set()
+            return
+        self._commands.append(request)
+        has_work.set()
+
+    @property
+    def queue_depth(self) -> int:
+        return len(self._commands)
+
+    @property
+    def dropped_commands(self) -> int:
+        return self._dropped_commands
+
+    @property
+    def last_send_latency_seconds(self) -> float | None:
+        return self._last_send_latency_seconds
+
+    async def close(self) -> None:
+        self._closed = True
+        self._commands.clear()
+        if self._worker_task is None:
+            return
+
+        self._worker_task.cancel()
+        with contextlib.suppress(asyncio.CancelledError):
+            await self._worker_task
+        self._worker_task = None
+
+    async def _run(self) -> None:
+        if self._has_work is None:
+            return
+
+        while True:
+            await self._has_work.wait()
+            while True:
+                request = self._next_request()
+                if request is None:
+                    self._has_work.clear()
+                    break
+
+                await self._send(request)
+
+    async def _send(self, request: RemoteCommandRequest) -> None:
+        display_command = (
+            DISPLAY_COMMAND_SELECT
+            if request.command == TV_COMMAND_DPAD_CENTER
+            else request.command
+        )
+        self._logger.info(
+            f"Remote command attempt: {request.source} -> {display_command}"
+        )
+        started_at = time.monotonic()
+        await self._remote.send_command(request.command)
+        self._last_send_latency_seconds = time.monotonic() - started_at
+
+    def _next_request(self) -> RemoteCommandRequest | None:
+        if self._commands:
+            return self._commands.popleft()
+
+        return None
+
+    def _supports_command(self, command: str) -> bool:
+        return command in self._remote.capabilities().supported_commands

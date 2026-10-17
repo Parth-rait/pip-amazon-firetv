@@ -1,0 +1,44 @@
+{
+  "name": "evening",
+  "description": "Activate with two palms, then select, point right, point left, pinch up, hold a fist, two fingers then palm, point up",
+  "steps": [
+    { "ms": 500, "note": "two upright palms: activate", "hands": [
+      { "pose": "open_palm", "at": [0.3, 0.55] }, { "pose": "open_palm", "at": [0.7, 0.55] } ] },
+    { "ms": 400, "note": "the left hand drops; the right one keeps control", "hands": [
+      { "pose": "open_palm", "at": [0.7, 0.55] } ] },
+    { "ms": 250, "note": "close to a fist", "hands": [ { "pose": "fist", "at": [0.7, 0.55] } ] },
+    { "ms": 500, "note": "open again: select", "hands": [ { "pose": "open_palm", "at": [0.7, 0.55] } ] },
+
+    { "ms": 300, "note": "point: sets the joystick centre", "hands": [ { "pose": "point", "at": [0.7, 0.5] } ] },
+    { "ms": 150, "note": "move right, 0.25 past the centre (activation is 0.161)", "hands": [
+      { "pose": "point", "from": [0.7, 0.5], "to": [0.95, 0.5] } ] },
+    { "ms": 100, "note": "hold there, under the 0.3 s repeat", "hands": [ { "pose": "point", "at": [0.95, 0.5] } ] },
+    { "ms": 150, "note": "back to the centre", "hands": [
+      { "pose": "point", "from": [0.95, 0.5], "to": [0.7, 0.5] } ] },
+    { "ms": 150, "note": "move left", "hands": [ { "pose": "point", "from": [0.7, 0.5], "to": [0.45, 0.5] } ] },
+    { "ms": 100, "note": "hold there", "hands": [ { "pose": "point", "at": [0.45, 0.5] } ] },
+    { "ms": 150, "note": "back to the centre", "hands": [
+      { "pose": "point", "from": [0.45, 0.5], "to": [0.7, 0.5] } ] },
+    { "ms": 500, "note": "open palm ends pointing", "hands": [ { "pose": "open_palm", "at": [0.7, 0.55] } ] },
+
+    { "ms": 300, "note": "pinch: sets the volume centre", "hands": [ { "pose": "pinch", "at": [0.7, 0.5] } ] },
+    { "ms": 150, "note": "pinch moves up 0.25 (activation is 0.184)", "hands": [
+      { "pose": "pinch", "from": [0.7, 0.5], "to": [0.7, 0.25] } ] },
+    { "ms": 100, "note": "hold there", "hands": [ { "pose": "pinch", "at": [0.7, 0.25] } ] },
+    { "ms": 150, "note": "back to the centre", "hands": [
+      { "pose": "pinch", "from": [0.7, 0.25], "to": [0.7, 0.5] } ] },
+    { "ms": 500, "note": "open palm ends the pinch", "hands": [ { "pose": "open_palm", "at": [0.7, 0.55] } ] },
+
+    { "ms": 1500, "note": "hold a fist past the 1.2 s hold threshold", "hands": [ { "pose": "fist", "at": [0.7, 0.55] } ] },
+    { "ms": 500, "note": "open again", "hands": [ { "pose": "open_palm", "at": [0.7, 0.55] } ] },
+    { "ms": 400, "note": "two fingers, briefly", "hands": [ { "pose": "two_fingers", "at": [0.7, 0.55] } ] },
+    { "ms": 500, "note": "back to an open palm: back", "hands": [ { "pose": "open_palm", "at": [0.7, 0.55] } ] },
+
+    { "ms": 300, "note": "point: sets the joystick centre", "hands": [ { "pose": "point", "at": [0.7, 0.5] } ] },
+    { "ms": 150, "note": "move up", "hands": [ { "pose": "point", "from": [0.7, 0.5], "to": [0.7, 0.25] } ] },
+    { "ms": 100, "note": "hold there", "hands": [ { "pose": "point", "at": [0.7, 0.25] } ] },
+    { "ms": 150, "note": "back to the centre", "hands": [
+      { "pose": "point", "from": [0.7, 0.25], "to": [0.7, 0.5] } ] },
+    { "ms": 600, "note": "open palm, then the trace ends", "hands": [ { "pose": "open_palm", "at": [0.7, 0.55] } ] }
+  ]
+}

@@ -10,3 +10,9 @@ server/media/
 server/content/drafts/
 .DS_Store
 server/data/
+
+# gesture/: the bridge's Python, the downloaded hand model and its logs
+gesture/.venv/
+gesture/models/
+gesture/logs/
+__pycache__/

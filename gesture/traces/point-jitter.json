@@ -1,0 +1,14 @@
+{
+  "name": "point-jitter",
+  "description": "Activated, then a pointing hand that wobbles inside the neutral circle: no seek may be sent",
+  "steps": [
+    { "ms": 500, "hands": [ { "pose": "open_palm", "at": [0.3, 0.55] }, { "pose": "open_palm", "at": [0.7, 0.55] } ] },
+    { "ms": 300, "hands": [ { "pose": "open_palm", "at": [0.7, 0.55] } ] },
+    { "ms": 300, "note": "point: sets the joystick centre", "hands": [ { "pose": "point", "at": [0.7, 0.5] } ] },
+    { "ms": 150, "hands": [ { "pose": "point", "from": [0.7, 0.5], "to": [0.76, 0.52] } ] },
+    { "ms": 150, "hands": [ { "pose": "point", "from": [0.76, 0.52], "to": [0.65, 0.47] } ] },
+    { "ms": 150, "hands": [ { "pose": "point", "from": [0.65, 0.47], "to": [0.74, 0.54] } ] },
+    { "ms": 150, "hands": [ { "pose": "point", "from": [0.74, 0.54], "to": [0.66, 0.5] } ] },
+    { "ms": 400, "hands": [ { "pose": "open_palm", "at": [0.7, 0.55] } ] }
+  ]
+}

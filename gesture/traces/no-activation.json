@@ -1,0 +1,20 @@
+{
+  "name": "no-activation",
+  "description": "One palm only (no two-palm activation), then every command gesture at full strength: nothing may be sent",
+  "steps": [
+    { "ms": 400, "note": "a single palm does not activate", "hands": [ { "pose": "open_palm", "at": [0.7, 0.55] } ] },
+    { "ms": 250, "hands": [ { "pose": "fist", "at": [0.7, 0.55] } ] },
+    { "ms": 400, "hands": [ { "pose": "open_palm", "at": [0.7, 0.55] } ] },
+    { "ms": 300, "hands": [ { "pose": "point", "at": [0.7, 0.5] } ] },
+    { "ms": 150, "hands": [ { "pose": "point", "from": [0.7, 0.5], "to": [0.95, 0.5] } ] },
+    { "ms": 100, "hands": [ { "pose": "point", "at": [0.95, 0.5] } ] },
+    { "ms": 150, "hands": [ { "pose": "point", "from": [0.95, 0.5], "to": [0.7, 0.5] } ] },
+    { "ms": 300, "hands": [ { "pose": "pinch", "at": [0.7, 0.5] } ] },
+    { "ms": 150, "hands": [ { "pose": "pinch", "from": [0.7, 0.5], "to": [0.7, 0.25] } ] },
+    { "ms": 100, "hands": [ { "pose": "pinch", "at": [0.7, 0.25] } ] },
+    { "ms": 150, "hands": [ { "pose": "pinch", "from": [0.7, 0.25], "to": [0.7, 0.5] } ] },
+    { "ms": 1000, "hands": [ { "pose": "fist", "at": [0.7, 0.55] } ] },
+    { "ms": 400, "hands": [ { "pose": "two_fingers", "at": [0.7, 0.55] } ] },
+    { "ms": 400, "hands": [ { "pose": "open_palm", "at": [0.7, 0.55] } ] }
+  ]
+}

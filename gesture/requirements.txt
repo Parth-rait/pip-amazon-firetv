@@ -1,0 +1,5 @@
+# Runtime for the vendored gesture-tv-remote pipeline (gesture/vendor/gesture_tv_remote).
+# Versions match upstream's uv.lock at commit 8accb57; mediapipe pulls in opencv-contrib-python.
+mediapipe==0.10.35
+opencv-contrib-python==4.13.0.92
+numpy==2.4.6

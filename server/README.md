@@ -25,6 +25,10 @@ npm run smoke:join     # with the server running: a fake TV and two pads join; p
 npm run smoke:quiz     # with the server running and a film with quiz questions: plays a whole quiz; prints QUIZ OK
 npm run sim:touch -- evening ABCD   # replays sim/traces/evening.json as touch-button and touchwheel inputs into session ABCD
 npm run sim:touch -- wheel-seek --dry   # prints the inputs a trace makes, without a server
+npm run gesture -- ABCD --preview   # webcam hand gestures into session ABCD (setup: gesture/README.md; join "Gestures" first so it is the host)
+npm run gesture -- --replay evening --dry   # a recorded trace of hand poses through the gesture pipeline; prints the inputs
+npm run lab            # Virtual Pip Lab: real-socket scenarios with injected faults (the gesture scenario needs gesture/.venv)
+npm run eval -- --ollama   # benchmark on the lab film, plus the local model (free)
 npm run smoke:ai       # one real Nova call: prints the reply and latency (needs the AWS profile)
 npm run draft:quiz -- big-buck-bunny   # Nova drafts 5 quiz questions into content/drafts/ for review
 npm run eval:ask       # runs the probes in evals/<film>.json against Nova; flags LEAK? and CHECK

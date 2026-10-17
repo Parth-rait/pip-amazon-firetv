@@ -79,6 +79,7 @@ export const inputSchema: z.ZodType<PipInput> = z.object({
     'tv_remote',
     'touchwheel_proto',
     'capacitive_button_proto',
+    'hand_gesture_cam',
     'simulator',
   ]),
   at: z.number().finite(),

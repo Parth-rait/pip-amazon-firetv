@@ -20,6 +20,7 @@
     "draft:quiz": "tsx scripts/draft-quiz.ts",
     "smoke:quiz": "tsx scripts/smoke-quiz.ts",
     "sim:touch": "tsx scripts/sim-touch.ts",
+    "gesture": "tsx scripts/gesture.ts",
     "annotate": "tsx scripts/annotate.ts",
     "pipeline": "tsx scripts/pipeline.ts",
     "lab:film": "tsx scripts/make-lab-film.ts",

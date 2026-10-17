@@ -1,4 +1,5 @@
 import { describe, expect, it } from 'vitest';
+import { GESTURE_COMMANDS, gestureEvent } from './core/gesture.js';
 import { LIMITS } from './shared/protocol.js';
 import {
   askSchema,
@@ -88,6 +89,13 @@ describe('inputs (docs/vnext/PLAN.md 4.2)', () => {
       inputSchema.safeParse({ ...input, event: { type: 'media.volumeDelta', delta: 3 } }).success,
     ).toBe(false);
     expect(inputSchema.safeParse({ ...input, event: { type: 'shell.run' } }).success).toBe(false);
+  });
+
+  it('accepts the input of every hand gesture', () => {
+    for (const command of GESTURE_COMMANDS) {
+      const input = { id: `gesture-${command}`, source: 'hand_gesture_cam', at: 0 };
+      expect(inputSchema.safeParse({ ...input, event: gestureEvent(command) }).success).toBe(true);
+    }
   });
 });
 

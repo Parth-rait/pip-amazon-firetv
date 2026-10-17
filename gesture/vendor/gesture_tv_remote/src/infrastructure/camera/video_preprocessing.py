@@ -1,0 +1,55 @@
+from collections.abc import Callable
+from typing import Any
+
+from src.domain.geometry.camera_geometry import CroppedFrame, CropRect
+
+
+def apply_center_crop_zoom(
+    frame: Any,
+    zoom: float,
+    resize: Callable[[Any, tuple[int, int]], Any] | None = None,
+) -> Any:
+    if zoom <= 1.0:
+        return frame
+
+    return apply_crop(frame, center_crop_for_zoom(zoom), resize).frame
+
+
+def apply_crop(
+    frame: Any,
+    crop: CropRect,
+    resize: Callable[[Any, tuple[int, int]], Any] | None = None,
+) -> CroppedFrame:
+    if crop == CropRect(0.0, 0.0, 1.0, 1.0):
+        return CroppedFrame(frame=frame, crop=crop)
+
+    resize_frame = resize or _resize_frame
+    height, width = frame.shape[:2]
+    x1 = int(crop.x * width)
+    y1 = int(crop.y * height)
+    crop_width = max(1, int(crop.width * width))
+    crop_height = max(1, int(crop.height * height))
+    x1 = min(max(0, x1), width - crop_width)
+    y1 = min(max(0, y1), height - crop_height)
+    cropped = frame[y1 : y1 + crop_height, x1 : x1 + crop_width]
+    return CroppedFrame(
+        frame=resize_frame(cropped, (width, height)),
+        crop=CropRect(
+            x=x1 / width,
+            y=y1 / height,
+            width=crop_width / width,
+            height=crop_height / height,
+        ),
+    )
+
+
+def center_crop_for_zoom(zoom: float) -> CropRect:
+    from src.infrastructure.camera.crop_geometry import crop_from_center_zoom
+
+    return crop_from_center_zoom(0.5, 0.5, zoom)
+
+
+def _resize_frame(frame: Any, size: tuple[int, int]) -> Any:
+    import cv2
+
+    return cv2.resize(frame, size, interpolation=cv2.INTER_LINEAR)

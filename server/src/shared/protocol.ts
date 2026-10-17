@@ -165,6 +165,7 @@ export type InputSource =
   | 'tv_remote'
   | 'touchwheel_proto'
   | 'capacitive_button_proto'
+  | 'hand_gesture_cam' // webcam hand tracking (gesture/, vendored gesture-tv-remote)
   | 'simulator';
 
 /** One semantic input. Media and device inputs never call a model. */
