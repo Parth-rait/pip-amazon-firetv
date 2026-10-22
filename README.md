@@ -7,18 +7,22 @@ Built for the Amazon Developer Hackathon, Fire TV track. Direction: [docs/vnext/
 ## What it does
 
 1. **Join.** The TV shows a QR code and a 4-character code. Each person scans it with a phone or tablet (the Pip Pad) and types a first name. The first one in is the host.
-2. **Watch.** The host picks Big Buck Bunny or Sintel. During the film Pip is invisible on the TV.
+2. **Watch.** The TV opens on a Fire TV style launcher: Home, Discover (pick by kind and length), My Space (continue watching, who's in the room, what Pip keeps), Scenes (only the chapters you've already watched, to jump back to) and Search. Two films: **Tears of Steel**, a live-action sci-fi short with real actors, and **Sintel**, an animated fantasy with a twist. During the film Pip is invisible on the TV.
 3. **Control it any way you like.** Play, pause, ±10 s, volume, brightness and simulated lights come from the host's pad, voice ("pause", "back 10", "louder"), webcam hand gestures (`npm run gesture`) or the TV remote. They all go through one action router, and the TV confirms each command. None of them calls a model.
 4. **Ask Pip.** Tap, type or speak. Pip answers briefly on the TV and the asker's pad, using only facts the film has already shown. Questions about later get "No spoilers from me".
 5. **While you were away.** A pad that sleeps or drops off during the film, or someone who joins late, gets a private recap of what they missed, up to now and never further. The film keeps playing for everyone else.
 6. **What if...?** "What if Sintel had kept Scales inside that night?" or, after the film, "Give it a happier ending." Pip makes up a short version of the story from what has been shown so far, labelled "made up by Pip" on every screen. Mid-film it doesn't know the real story ahead, and the spoiler gate keeps later words and unseen characters out, so a made-up ending can't give the real one away by accident. Both films are CC BY 3.0, which allows adaptations.
-7. **Kids games (opt-in).** A switch in the lobby turns on guesses, reactions and a quiz after the film. They're off by default.
+7. **The Command Center** at `http://localhost:8787/hub`, on the Mac only: the brain and whether it's answering, what's playing, each film's reviewed facts and benchmark, today's journal, the devices, automations marked Active, Opt-in or Planned, and the settings. Through the tunnel it refuses to answer.
+8. **Kids games (opt-in).** A switch in the lobby turns on guesses, reactions and a quiz after the film. They're off by default.
 
 ![The TV home](docs/screenshots/local-tv-home.jpg)
-![Ask Pip on a tablet, beside the remote](docs/screenshots/local-pad-tablet-ask.jpg)
-![Pip's answer on the TV, during the film](docs/screenshots/local-tv-answer.jpg)
-
-!["While you were away" on a phone](docs/screenshots/local-pad-missed.jpg)
+![Discover](docs/screenshots/local-tv-discover.jpg)
+![Scenes: only what you've watched](docs/screenshots/local-tv-scenes.jpg)
+![A "what if" ending on the TV](docs/screenshots/local-tv-whatif.jpg)
+![The Pip Pad on a tablet: the directional control and Ask Pip](docs/screenshots/local-pad-tablet-ask.jpg)
+!["While you were away" and the quick actions on a phone](docs/screenshots/local-pad-missed.jpg)
+![The Command Center](docs/screenshots/local-hub-overview.jpg)
+![The Command Center's Library](docs/screenshots/local-hub-library.jpg)
 
 The TV screenshots are from the browser TV at `/tv`. The Vega app's earlier screens (16 Oct, on the Vega Virtual Device) are in `docs/screenshots/tv-*.jpg`.
 
@@ -26,9 +30,9 @@ The TV screenshots are from the browser TV at `/tv`. The Vega app's earlier scre
 
 | Claim | Evidence |
 |---|---|
-| Pip does not spoil the film | 0 leaks in 104 probes on Big Buck Bunny and 110 on Sintel with the local model (`npm run eval -- <film> --ollama`; [docs/evaluation/results/](docs/evaluation/results/)) |
-| Pip answers when the film has shown the answer | 98% (Big Buck Bunny) and 95% (Sintel) of grounded questions answered; every expected fact cited |
-| Pip says when it doesn't know | Abstains correctly on 93 to 95% of unknown-fact and future questions |
+| Pip does not spoil the film | 0 leaks in 108 probes on Tears of Steel and 110 on Sintel with the local model (`npm run eval -- <film> --ollama`; [docs/evaluation/results/](docs/evaluation/results/)) |
+| Pip answers when the film has shown the answer | 95% (Tears of Steel) and 95% (Sintel) of grounded questions answered; every expected fact cited |
+| Pip says when it doesn't know | Abstains correctly on 95 to 98% of unknown-fact and future questions |
 | Controls never wait for a model | 0 model calls for playback; TV confirmation in 6 to 12 ms (browser TV), 177 to 239 ms (VVD over the tunnel) |
 | The catch-up is private and safe | Lab scenarios over real sockets (`server/src/lab/away.test.ts`) |
 
@@ -109,6 +113,6 @@ The Vega app: [tv/README.md](tv/README.md). Rebuild it after a new tunnel URL. T
 ## Credits and licenses
 
 - Code: MIT, see [LICENSE](LICENSE). Vendored: gesture-tv-remote (MIT) in `gesture/vendor`.
-- Big Buck Bunny, (c) copyright 2008 Blender Foundation, www.bigbuckbunny.org, CC BY 3.0.
+- Tears of Steel, (c) copyright 2012 Blender Foundation, mango.blender.org, CC BY 3.0. (Its soundtrack is CC BY-ND; Pip doesn't adapt the music.)
 - Sintel, (c) copyright 2010 Blender Foundation, durian.blender.org, CC BY 3.0.
 - The films are served from our own server and are not in this repository. The posters and screenshots are stills from them.

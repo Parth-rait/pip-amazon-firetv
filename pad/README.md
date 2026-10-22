@@ -10,6 +10,10 @@ The touch pad that replaces the remote, as a web app (React + Vite, plain CSS). 
 - `src/lib/speech.ts`: the browser's speech recognition (Web Speech API) for the mic. Where the browser has none, the mic button does not show; the microphone needs HTTPS or localhost.
 - `src/shared/protocol.ts`: generated from `shared/protocol.ts` by `npm run sync:shared` at the root. Do not edit it.
 
+## The Command Center (`/hub`)
+
+A read-only dashboard for the household's own screen (`hub.html`, `src/hub/`): Overview, Library, Memory, Devices, Automations and Settings, refreshed every 3 s from `GET /api/hub`. The server answers that only on the machine it runs on, so open `http://localhost:8787/hub` there; through the tunnel the page says so instead.
+
 ## The browser TV (`/tv`)
 
 A second TV client beside the Vega app, in this same Vite project (`tv.html`, `src/tv/`), so the whole room can be built and shown on a laptop: open `/tv` in a browser and it pairs, plays and takes commands exactly like the Fire TV app (the same TV half of the protocol: `tv:hello`, `tv:watch`, `tv:playback`, `tv:command` with `tv:applied`, and `tv:home`). The pads and `npm run gesture` cannot tell the two apart.
@@ -26,7 +30,7 @@ Dependencies and why: `react`, `react-dom` (UI), `socket.io-client` (the realtim
 ```bash
 npm install
 npm run dev        # http://localhost:5173; proxies /socket.io, /api, /qr and /media to the server on :8787
-npm run build      # pad/dist, which the server serves at its own URL: the pad at /, the browser TV at /tv
+npm run build      # pad/dist, which the server serves at its own URL: the pad at /, the browser TV at /tv, the Command Center at /hub
 ```
 
 For local work, also run `npm run dev` and `npm run fake:tv` in `server/`, then open `http://localhost:5173/?code=<code from fake:tv>` in two windows, one of them private, to be two players. Add `?debug=1` to see the ping round trip. With the server running and the pad built, `http://localhost:8787/tv` is a TV without the Vega Virtual Device (in development, `http://localhost:5173/tv`).

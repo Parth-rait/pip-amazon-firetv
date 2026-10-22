@@ -54,6 +54,14 @@ Tried with qwen2.5:3b (2 to 6 s each): "What if Sintel had kept Scales inside th
 - Pad: a now-playing card with the film's still, elapsed and total time. On a tablet (900 px and wider), Pip sits beside the remote instead of behind a button; on a phone it's unchanged. The recap card goes at the top. Checked at 1180 x 820 and 390 x 844.
 - Browser TV: kids mode walked through for the first time (two pads, a whole quiz, reveal with picks, results), with no page errors. Fixed: the film's credits showed through the quiz overlay.
 
+## 3b. The catalogue and the UI (later on 22 Oct)
+
+- **Tears of Steel replaces Big Buck Bunny.** It's a live-action short with real actors (Blender Foundation, 2012, CC BY 3.0), downloaded with Parth's OK from download.blender.org (372 MB). The notes were written from a frame every 10 s and the English subtitles, and the names come only when the film says them: the old man is Thom at 3:46, and the giant robot speaks with Celia's memories at 6:23. Benchmark with qwen2.5:3b: 0 leaks in 108 probes, 95% of grounded questions answered, 98% of abstentions right. Big Buck Bunny's files were removed once Tears of Steel played on the browser TV.
+- **TV:** a top bar with Home, Discover (kind and length from the film's tags, no profiling), My Space, Scenes (`GET /api/films/:id/scenes?until=`, chapters fully watched only) and Search. Walked through in Chrome with the keyboard as the remote, with no page errors. Fixed: the key that enters a page from the bar also moved the page's focus.
+- **Pip Pad:** a directional control (OK plays or pauses, left and right skip 10 s, up and down change the volume), quick actions (Explain this scene, Who is that?, What did I miss?, What if…?) and push to talk.
+- **Command Center** at `/hub`: Overview, Library, Memory, Devices, Automations, Settings. It's read-only; `GET /api/hub` answers only on this machine (403 with `cf-connecting-ip` or `x-forwarded-for`), and anything unbuilt is labelled Planned.
+- **Palette:** Void #050914, Surface #0B1424, Electric #168BFF, Ice #8ED8FF, shared by all three.
+
 ## 4. Configuration
 
 `AI_PROVIDER` now defaults to `ollama`. Preflight checks that each film has a reviewed timeline, and says which brain is in use.
