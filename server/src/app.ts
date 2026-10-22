@@ -6,7 +6,7 @@ import { fileURLToPath } from 'node:url';
 import QRCode from 'qrcode';
 import type { Config } from './config.js';
 import { isValidCode } from './core/codes.js';
-import { toContentView, type Content } from './film/content.js';
+import { toContentView, watchedScenes, type Content } from './film/content.js';
 import { errorFields, log } from './log.js';
 
 const SERVER_VERSION = '0.1.0';
@@ -38,6 +38,17 @@ export function createApp(config: Config, films: Content[], options: AppOptions 
 
   app.get('/api/films', (_req, res) => {
     res.json(films.map((film) => toContentView(film, config.PUBLIC_URL)));
+  });
+
+  // Scenes the family has watched: the TV asks with its resume position, never for more.
+  app.get('/api/films/:id/scenes', (req, res) => {
+    const film = films.find((f) => f.id === req.params.id);
+    const until = Number(req.query.until);
+    if (!film || !Number.isFinite(until) || until < 0) {
+      res.status(404).json({ ok: false, error: 'not-found' });
+      return;
+    }
+    res.json(watchedScenes(film, until, config.PUBLIC_URL));
   });
 
   app.get('/qr/:code', async (req, res) => {

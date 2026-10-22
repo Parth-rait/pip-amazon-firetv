@@ -26,6 +26,7 @@ export const LAB_FILM: Content = {
   credit: 'The Lantern Fox, an original test film by the Pip project (MIT)',
   durationSec: 96,
   premise: 'A small fox explores a snowy forest at night.',
+  tags: [],
   notes: [],
   quiz: [],
   chapters: [],

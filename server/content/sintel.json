@@ -6,6 +6,11 @@
   "durationSec": 888,
   "poster": "/media/sintel.jpg",
   "premise": "Sintel, a brave young woman, crosses wild, snowy mountains alone, searching for someone very dear to her. It is a fantasy adventure with a few scary, sad moments.",
+  "tags": [
+    "Animated",
+    "Fantasy",
+    "Adventure"
+  ],
   "notes": [
     {
       "atSec": 0,

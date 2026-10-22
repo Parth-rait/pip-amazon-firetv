@@ -79,7 +79,7 @@ function questionTopic(t: string): QuestionTopic {
     return 'recap';
   // "Who is that?" or "Who is Hoot?" identify someone; "Who owns the lantern?" asks a relation.
   // "Who is she looking for?" asks about what someone does, not who they are.
-  if (/^(who is|who are|whos) \w+ \w+ing\b/.test(t)) return 'other';
+  if (/^(who is|who are|whos) (\w+ )?\w+ing\b/.test(t)) return 'other';
   if (/^(who is|who are|whos|which (one|character|animal))\b/.test(t)) return 'identify';
   if (/^why\b/.test(t)) return 'why';
   return 'other';

@@ -10,7 +10,7 @@ import { loadFilms } from './film/content.js';
 const config = parseConfig({ PUBLIC_URL: 'https://pip.example.com' });
 const films = loadFilms(new URL('../content/', import.meta.url).pathname);
 const mediaDir = mkdtempSync(join(tmpdir(), 'pip-media-'));
-writeFileSync(join(mediaDir, 'big-buck-bunny.mp4'), Buffer.alloc(1000, 1));
+writeFileSync(join(mediaDir, 'tears-of-steel.mp4'), Buffer.alloc(1000, 1));
 const padDir = mkdtempSync(join(tmpdir(), 'pip-pad-'));
 writeFileSync(join(padDir, 'index.html'), '<!doctype html><title>Pip Pad</title>');
 writeFileSync(join(padDir, 'tv.html'), '<!doctype html><title>Pip TV</title>');
@@ -42,8 +42,8 @@ describe('createApp', () => {
     expect(body).toEqual(
       expect.arrayContaining([
         expect.objectContaining({
-          id: 'big-buck-bunny',
-          url: 'https://pip.example.com/media/big-buck-bunny.mp4',
+          id: 'tears-of-steel',
+          url: 'https://pip.example.com/media/tears-of-steel.mp4',
         }),
         expect.objectContaining({ id: 'sintel', url: 'https://pip.example.com/media/sintel.mp4' }),
       ]),
@@ -54,8 +54,16 @@ describe('createApp', () => {
     }
   });
 
+  it('lists only the scenes watched so far, and 404 for an unknown film', async () => {
+    const scenes = (await (
+      await fetch(`${baseUrl}/api/films/tears-of-steel/scenes?until=140`)
+    ).json()) as { title: string }[];
+    expect(scenes.map((s) => s.title)).toEqual(['The breakup', 'Forty years later']);
+    expect((await fetch(`${baseUrl}/api/films/nope/scenes?until=10`)).status).toBe(404);
+  });
+
   it('answers a Range request with 206 and video/mp4', async () => {
-    const res = await fetch(`${baseUrl}/media/big-buck-bunny.mp4`, {
+    const res = await fetch(`${baseUrl}/media/tears-of-steel.mp4`, {
       headers: { Range: 'bytes=0-99' },
     });
     expect(res.status).toBe(206);

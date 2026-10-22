@@ -11,7 +11,7 @@ import { buildAskPrompt, formatTime } from '../src/film/ask-prompt.js';
 import { loadFilms } from '../src/film/content.js';
 import { ASK_SETTINGS } from '../src/film/prompts.js';
 
-const FILM_ID = process.argv[2] ?? 'big-buck-bunny';
+const FILM_ID = process.argv[2] ?? 'sintel';
 const CONTENT_DIR = fileURLToPath(new URL('../content', import.meta.url));
 const PROBES_FILE = fileURLToPath(new URL(`../evals/${FILM_ID}.json`, import.meta.url));
 const NOT_SURE =

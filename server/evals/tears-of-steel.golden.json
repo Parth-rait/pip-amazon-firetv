@@ -1,0 +1,239 @@
+{
+ "schemaVersion": 1,
+ "contentId": "tears-of-steel",
+ "authoredBy": "claude-code session 2026-10-22, from the film notes (content/tears-of-steel.json, written from a frame every 10 s and the English subtitles). A person should review before treating it as final.",
+ "note": "Two reveals: the old man is Thom (3:46) and the giant robot speaks with Celia's memories (6:23).",
+ "examples": [
+  {
+   "id": "g-spoil-01",
+   "task": "spoiler-probe",
+   "atSec": 125,
+   "question": "Who is the old man?",
+   "expect": {
+    "kind": "answer",
+    "mustNotMention": [
+     "Thom",
+     "forty years older"
+    ]
+   }
+  },
+  {
+   "id": "g-spoil-02",
+   "task": "spoiler-probe",
+   "atSec": 150,
+   "question": "Is the old man Thom?",
+   "expect": {
+    "kind": "abstain",
+    "mustNotMention": [
+     "yes",
+     "forty years older"
+    ]
+   }
+  },
+  {
+   "id": "g-spoil-03",
+   "task": "spoiler-probe",
+   "atSec": 300,
+   "question": "Who is controlling the giant robot?",
+   "expect": {
+    "kind": "abstain",
+    "mustNotMention": [
+     "Celia",
+     "memories",
+     "heart"
+    ]
+   }
+  },
+  {
+   "id": "g-spoil-04",
+   "task": "spoiler-probe",
+   "atSec": 300,
+   "question": "Does the plan work?",
+   "expect": {
+    "kind": "abstain",
+    "mustNotMention": [
+     "complete",
+     "overwrite complete",
+     "yes",
+     "works"
+    ]
+   }
+  },
+  {
+   "id": "g-spoil-05",
+   "task": "spoiler-probe",
+   "atSec": 350,
+   "question": "What will Thom say to Celia?",
+   "expect": {
+    "kind": "abstain",
+    "mustNotMention": [
+     "sorry",
+     "world",
+     "changed"
+    ]
+   }
+  },
+  {
+   "id": "g-spoil-06",
+   "task": "spoiler-probe",
+   "atSec": 360,
+   "question": "Why is the robot angry?",
+   "expect": {
+    "kind": "abstain",
+    "mustNotMention": [
+     "broke my heart",
+     "forgot me",
+     "Earth"
+    ]
+   }
+  },
+  {
+   "id": "g-spoil-07",
+   "task": "spoiler-probe",
+   "atSec": 500,
+   "question": "How does it end?",
+   "expect": {
+    "kind": "abstain",
+    "mustNotMention": [
+     "complete",
+     "lesson",
+     "still"
+    ]
+   }
+  },
+  {
+   "id": "g-spoil-08",
+   "task": "spoiler-probe",
+   "atSec": 60,
+   "question": "Does Celia come back?",
+   "expect": {
+    "kind": "abstain",
+    "mustNotMention": [
+     "robot",
+     "voice",
+     "memories"
+    ]
+   }
+  },
+  {
+   "id": "g-ground-01",
+   "task": "grounded",
+   "atSec": 50,
+   "question": "Why did they break up?",
+   "expect": {
+    "kind": "answer",
+    "mention": [
+     "space"
+    ]
+   }
+  },
+  {
+   "id": "g-ground-02",
+   "task": "grounded",
+   "atSec": 70,
+   "question": "What is on the big man's desk?",
+   "expect": {
+    "kind": "answer",
+    "mention": [
+     "brain"
+    ]
+   }
+  },
+  {
+   "id": "g-ground-03",
+   "task": "grounded",
+   "atSec": 95,
+   "question": "What is the soldier looking at?",
+   "expect": {
+    "kind": "answer",
+    "mention": [
+     "flying"
+    ]
+   }
+  },
+  {
+   "id": "g-ground-04",
+   "task": "grounded",
+   "atSec": 240,
+   "question": "Who is the old man?",
+   "expect": {
+    "kind": "answer",
+    "mention": [
+     "Thom"
+    ]
+   }
+  },
+  {
+   "id": "g-ground-05",
+   "task": "grounded",
+   "atSec": 305,
+   "question": "What is the lab doing?",
+   "expect": {
+    "kind": "answer",
+    "mention": [
+     "memory"
+    ]
+   }
+  },
+  {
+   "id": "g-ground-06",
+   "task": "grounded",
+   "atSec": 395,
+   "question": "What did the robot say?",
+   "expect": {
+    "kind": "answer",
+    "mention": [
+     "heart"
+    ]
+   }
+  },
+  {
+   "id": "g-ground-07",
+   "task": "grounded",
+   "atSec": 550,
+   "question": "Did the memory overwrite work?",
+   "expect": {
+    "kind": "answer",
+    "mention": [
+     "complete"
+    ]
+   }
+  },
+  {
+   "id": "g-unknown-01",
+   "task": "unknown-fact",
+   "atSec": 100,
+   "question": "How old is Celia?",
+   "expect": {
+    "kind": "abstain"
+   }
+  },
+  {
+   "id": "g-unknown-02",
+   "task": "unknown-fact",
+   "atSec": 250,
+   "question": "What is the soldier's name?",
+   "expect": {
+    "kind": "abstain"
+   }
+  },
+  {
+   "id": "g-unknown-03",
+   "task": "unknown-fact",
+   "atSec": 400,
+   "question": "What year is it?",
+   "expect": {
+    "kind": "abstain"
+   }
+  },
+  {
+   "id": "g-unknown-04",
+   "task": "unknown-fact",
+   "atSec": 600,
+   "question": "Where did the robots come from?",
+   "expect": {
+    "kind": "abstain"
+   }
+  }
+ ]
+}

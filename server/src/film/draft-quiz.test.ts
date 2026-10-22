@@ -11,6 +11,7 @@ const film: Content = {
   credit: 'Credit',
   durationSec: 200,
   premise: 'A bunny wakes up.',
+  tags: [],
   chapters: [],
   characters: [],
   predictions: [],

@@ -24,6 +24,7 @@ const film: Content = {
   credit: 'Credit',
   durationSec: 100,
   premise: 'Premise.',
+  tags: [],
   chapters: [],
   characters: [],
   predictions: [],

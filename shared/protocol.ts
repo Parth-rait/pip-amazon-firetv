@@ -3,7 +3,7 @@
 // Edit only this file, then run `npm run sync:shared` to copy it into each package.
 // Types and constants only: no imports, so it compiles in Node, browsers and React Native for Vega.
 
-export const PROTOCOL_VERSION = 8;
+export const PROTOCOL_VERSION = 9;
 
 /** Where the session is in the journey. The server owns it; the TV and pads follow it. */
 export type Stage = 'lobby' | 'watch' | 'quiz' | 'results';
@@ -73,6 +73,16 @@ export interface ContentView {
   durationSec: number;
   poster: string | null; // full URL of a still from the film, for the film cards
   synopsis: string; // the film's premise: what it is about, spoiler-free (the TV's home screen)
+  tags: string[]; // kind and mood ("Live action", "Sci-fi"), for Discover
+}
+
+/** One chapter the family has already watched (GET /api/films/:id/scenes?until=sec). */
+export interface SceneView {
+  startSec: number; // where the chapter begins
+  atSec: number; // by then all of it has happened
+  title: string;
+  summary: string;
+  image: string | null; // full URL
 }
 
 /** What the TV's video player is doing. The TV app is the only writer. */

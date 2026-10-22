@@ -14,15 +14,9 @@ still() { # film name time
     -vf "crop=ih*16/9:ih,scale=640:360" -q:v 4 "$M/companion/$1/$2.jpg"
 }
 
-out big-buck-bunny
-portrait big-buck-bunny 18 440 440 80 bird
-portrait big-buck-bunny 96 460 140 100 bunny
-portrait big-buck-bunny 120 440 110 140 flying-squirrel
-portrait big-buck-bunny 120 400 390 0 red-squirrel
-portrait big-buck-bunny 120 440 630 200 chinchilla
-portrait big-buck-bunny 78 420 330 0 pink-butterfly
-portrait big-buck-bunny 108 360 340 0 purple-butterfly
-i=1; for t in 60 78 120 230 270 348 430 474; do still big-buck-bunny "chapter-$i" "$t"; i=$((i + 1)); done
+# Tears of Steel is 1280 x 534 (2.39:1) after the conversion; the stills are 16:9 crops.
+out tears-of-steel
+i=1; for t in 28 83 226 300 383 518; do still tears-of-steel "chapter-$i" "$t"; i=$((i + 1)); done
 
 # Sintel is 1694 x 720 after the conversion in PROJECT.md 5.6.
 out sintel

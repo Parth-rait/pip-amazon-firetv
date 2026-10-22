@@ -23,6 +23,7 @@ import type { AskVia, Source } from './shared/protocol.js';
  */
 export type ReplyKind = 'answer' | 'clarify' | 'unknown' | 'fallback' | 'imagined';
 const RETRIEVE = { limit: 10, recentCount: 4 } as const;
+const UPDATE_AFTER_SEC = 60;
 // A model reply that only says the facts do not tell (it is an abstention, not an answer).
 const NOT_SAID =
   /\b(?:not (?:been )?(?:mentioned|said|shown|specified|described|stated|given)|(?:does not|doesn'?t) (?:say|mention)|no (?:information|mention)|in the (?:facts|notes|premise))\b/i;
@@ -240,7 +241,15 @@ function retrievalAnswer(
       const ids = new Set(people.map((p) => p.id));
       const sources = evidence.facts.filter((f) => f.entities.some((id) => ids.has(id))).slice(-2);
       const latest = sources[sources.length - 1];
-      const text = cleanText(people.map(introduce).join(' '));
+      // Asked by name, the latest thing the film revealed about them may matter most ("The big man
+      // calls the old man Thom"): it follows the intro, when it came well after it.
+      const update =
+        asked.size > 0 &&
+        latest &&
+        latest.revealSec > (people[0]?.firstSeenSec ?? 0) + UPDATE_AFTER_SEC
+          ? cleanText(firstSentence(latest.text))
+          : '';
+      const text = [cleanText(people.map(introduce).join(' ')), update].filter(Boolean).join(' ');
       return reply(evidence, 'retrieval', {
         kind: 'answer',
         source: 'timeline',

@@ -1,0 +1,574 @@
+{
+  "date": "2026-10-22",
+  "contentId": "tears-of-steel",
+  "timelineVersion": "sha:64c84f1e46c3",
+  "examples": 137,
+  "summaries": [
+    {
+      "strategy": "timeline only (AI off)",
+      "examples": 137,
+      "leaks": 0,
+      "spoilerProbes": 108,
+      "abstainExpected": 124,
+      "abstainCorrect": 124,
+      "answerExpected": 55,
+      "answered": 51,
+      "citeHits": 39,
+      "citeExpected": 39,
+      "routing": 12,
+      "routingCorrect": 12,
+      "ungrounded": 0,
+      "p50Ms": 0.13599999999996726,
+      "p95Ms": 0.5784160000000043
+    },
+    {
+      "strategy": "careful fake model",
+      "examples": 137,
+      "leaks": 0,
+      "spoilerProbes": 108,
+      "abstainExpected": 124,
+      "abstainCorrect": 106,
+      "answerExpected": 55,
+      "answered": 51,
+      "citeHits": 39,
+      "citeExpected": 39,
+      "routing": 12,
+      "routingCorrect": 12,
+      "ungrounded": 0,
+      "p50Ms": 0.13537500000001046,
+      "p95Ms": 0.5550000000000068
+    },
+    {
+      "strategy": "leaky fake model (always tells the ending)",
+      "examples": 137,
+      "leaks": 0,
+      "spoilerProbes": 108,
+      "abstainExpected": 124,
+      "abstainCorrect": 124,
+      "answerExpected": 55,
+      "answered": 51,
+      "citeHits": 39,
+      "citeExpected": 39,
+      "routing": 12,
+      "routingCorrect": 12,
+      "ungrounded": 0,
+      "p50Ms": 0.13366600000000517,
+      "p95Ms": 0.5133329999999887
+    },
+    {
+      "strategy": "Ollama qwen2.5:3b (local)",
+      "examples": 137,
+      "leaks": 0,
+      "spoilerProbes": 108,
+      "abstainExpected": 124,
+      "abstainCorrect": 122,
+      "answerExpected": 55,
+      "answered": 52,
+      "citeHits": 39,
+      "citeExpected": 39,
+      "routing": 12,
+      "routingCorrect": 12,
+      "ungrounded": 0,
+      "p50Ms": 0.19754100000000108,
+      "p95Ms": 2311.4844589999993
+    }
+  ],
+  "paraphrases": {
+    "caught": 6,
+    "safeMiss": 6,
+    "unsafe": 0,
+    "total": 12
+  },
+  "skipped": [
+    {
+      "strategy": "Bedrock Nova 2 Lite",
+      "reason": "not requested (pass --nova; needs the AWS profile from PROJECT.md 9.3)"
+    },
+    {
+      "strategy": "TypeSafe routing judge",
+      "reason": "no TYPESAFE_API_KEY (the paid TypeSafe API is not used without one)"
+    }
+  ],
+  "misses": {
+    "timeline only (AI off)": [
+      {
+        "id": "g-ground-01",
+        "task": "grounded",
+        "variant": "fresh",
+        "kind": "fallback",
+        "path": "ai-off",
+        "text": "My brain is resting right now. Ask me again soon.",
+        "sources": [],
+        "leaked": [],
+        "correct": false,
+        "ms": 0.2299160000000029
+      },
+      {
+        "id": "g-ground-03",
+        "task": "grounded",
+        "variant": "fresh",
+        "kind": "unknown",
+        "path": "restricted-question",
+        "text": "I'm not sure about that one yet. Try asking another way.",
+        "sources": [],
+        "leaked": [],
+        "correct": false,
+        "ms": 0.160000000000025
+      },
+      {
+        "id": "g-ground-05",
+        "task": "grounded",
+        "variant": "fresh",
+        "kind": "fallback",
+        "path": "ai-off",
+        "text": "My brain is resting right now. Ask me again soon.",
+        "sources": [],
+        "leaked": [],
+        "correct": false,
+        "ms": 0.23374999999998636
+      },
+      {
+        "id": "g-ground-06",
+        "task": "grounded",
+        "variant": "fresh",
+        "kind": "fallback",
+        "path": "ai-off",
+        "text": "My brain is resting right now. Ask me again soon.",
+        "sources": [],
+        "leaked": [],
+        "correct": false,
+        "ms": 0.1846659999999929
+      }
+    ],
+    "careful fake model": [
+      {
+        "id": "tears-of-steel-unknown-fact-089",
+        "task": "unknown-fact",
+        "variant": "fresh",
+        "kind": "answer",
+        "path": "model",
+        "text": "In a lab full of glowing screens, a scientist in glasses calls out: Robot's memory synced and locked!",
+        "sources": [
+          "n05"
+        ],
+        "leaked": [],
+        "correct": false,
+        "ms": 0.5579169999999749
+      },
+      {
+        "id": "tears-of-steel-unknown-fact-090",
+        "task": "unknown-fact",
+        "variant": "fresh",
+        "kind": "answer",
+        "path": "model",
+        "text": "In a lab full of glowing screens, a scientist in glasses calls out: Robot's memory synced and locked!",
+        "sources": [
+          "n05"
+        ],
+        "leaked": [],
+        "correct": false,
+        "ms": 0.43437499999998863
+      },
+      {
+        "id": "tears-of-steel-unknown-fact-093",
+        "task": "unknown-fact",
+        "variant": "fresh",
+        "kind": "answer",
+        "path": "model",
+        "text": "The big man calls the old man Thom. The old man is Thom, forty years older.",
+        "sources": [
+          "n18"
+        ],
+        "leaked": [],
+        "correct": false,
+        "ms": 0.4645840000000021
+      },
+      {
+        "id": "tears-of-steel-unknown-fact-094",
+        "task": "unknown-fact",
+        "variant": "fresh",
+        "kind": "answer",
+        "path": "model",
+        "text": "The big man calls the old man Thom. The old man is Thom, forty years older.",
+        "sources": [
+          "n18"
+        ],
+        "leaked": [],
+        "correct": false,
+        "ms": 0.41241600000000744
+      },
+      {
+        "id": "tears-of-steel-unknown-fact-097",
+        "task": "unknown-fact",
+        "variant": "fresh",
+        "kind": "answer",
+        "path": "model",
+        "text": "A grey-haired old man sits in the tower near the soldier.",
+        "sources": [
+          "n09"
+        ],
+        "leaked": [],
+        "correct": false,
+        "ms": 0.6084170000000313
+      },
+      {
+        "id": "tears-of-steel-unknown-fact-098",
+        "task": "unknown-fact",
+        "variant": "fresh",
+        "kind": "answer",
+        "path": "model",
+        "text": "High in a church tower, a soldier aims a sniper rifle and watches a flying machine through his scope.",
+        "sources": [
+          "n08"
+        ],
+        "leaked": [],
+        "correct": false,
+        "ms": 0.4539580000000001
+      },
+      {
+        "id": "tears-of-steel-unknown-fact-101",
+        "task": "unknown-fact",
+        "variant": "fresh",
+        "kind": "answer",
+        "path": "model",
+        "text": "The big man calls the old man Thom. The old man is Thom, forty years older.",
+        "sources": [
+          "n18"
+        ],
+        "leaked": [],
+        "correct": false,
+        "ms": 0.42704099999997425
+      },
+      {
+        "id": "tears-of-steel-unknown-fact-102",
+        "task": "unknown-fact",
+        "variant": "fresh",
+        "kind": "answer",
+        "path": "model",
+        "text": "The big man calls the old man Thom. The old man is Thom, forty years older.",
+        "sources": [
+          "n18"
+        ],
+        "leaked": [],
+        "correct": false,
+        "ms": 0.4047090000000253
+      },
+      {
+        "id": "tears-of-steel-unknown-fact-105",
+        "task": "unknown-fact",
+        "variant": "fresh",
+        "kind": "answer",
+        "path": "model",
+        "text": "A giant robot towers over a canal street.",
+        "sources": [
+          "n17"
+        ],
+        "leaked": [],
+        "correct": false,
+        "ms": 0.40995800000001736
+      },
+      {
+        "id": "tears-of-steel-unknown-fact-106",
+        "task": "unknown-fact",
+        "variant": "fresh",
+        "kind": "answer",
+        "path": "model",
+        "text": "A giant robot towers over a canal street.",
+        "sources": [
+          "n17"
+        ],
+        "leaked": [],
+        "correct": false,
+        "ms": 0.3772920000000113
+      },
+      {
+        "id": "g-spoil-02",
+        "task": "spoiler-probe",
+        "variant": "fresh",
+        "kind": "answer",
+        "path": "model",
+        "text": "On a bridge over a canal in Amsterdam, a young woman and a young man are breaking up. She says: You're a jerk, Thom.",
+        "sources": [
+          "n01"
+        ],
+        "leaked": [],
+        "correct": false,
+        "ms": 0.6117919999999799
+      },
+      {
+        "id": "g-spoil-02",
+        "task": "spoiler-probe",
+        "variant": "after-rewind",
+        "kind": "answer",
+        "path": "cache",
+        "text": "On a bridge over a canal in Amsterdam, a young woman and a young man are breaking up. She says: You're a jerk, Thom.",
+        "sources": [
+          "n01"
+        ],
+        "leaked": [],
+        "correct": false,
+        "ms": 0.19529099999999744
+      },
+      {
+        "id": "g-spoil-03",
+        "task": "spoiler-probe",
+        "variant": "fresh",
+        "kind": "answer",
+        "path": "model",
+        "text": "A giant robot towers over a canal street.",
+        "sources": [
+          "n17"
+        ],
+        "leaked": [],
+        "correct": false,
+        "ms": 0.5402500000000146
+      },
+      {
+        "id": "g-spoil-03",
+        "task": "spoiler-probe",
+        "variant": "after-rewind",
+        "kind": "answer",
+        "path": "cache",
+        "text": "A giant robot towers over a canal street.",
+        "sources": [
+          "n17"
+        ],
+        "leaked": [],
+        "correct": false,
+        "ms": 0.16566599999998743
+      },
+      {
+        "id": "g-spoil-04",
+        "task": "spoiler-probe",
+        "variant": "fresh",
+        "kind": "answer",
+        "path": "model",
+        "text": "The team rushes into action: We're on in one! All systems go!",
+        "sources": [
+          "n16"
+        ],
+        "leaked": [],
+        "correct": false,
+        "ms": 0.4966670000000022
+      },
+      {
+        "id": "g-spoil-04",
+        "task": "spoiler-probe",
+        "variant": "after-rewind",
+        "kind": "answer",
+        "path": "cache",
+        "text": "The team rushes into action: We're on in one! All systems go!",
+        "sources": [
+          "n16"
+        ],
+        "leaked": [],
+        "correct": false,
+        "ms": 0.1586669999999799
+      },
+      {
+        "id": "g-ground-01",
+        "task": "grounded",
+        "variant": "fresh",
+        "kind": "answer",
+        "path": "model",
+        "text": "I am not sure yet.",
+        "sources": [],
+        "leaked": [],
+        "correct": false,
+        "ms": 0.34375
+      },
+      {
+        "id": "g-ground-03",
+        "task": "grounded",
+        "variant": "fresh",
+        "kind": "unknown",
+        "path": "restricted-question",
+        "text": "I'm not sure about that one yet. Try asking another way.",
+        "sources": [],
+        "leaked": [],
+        "correct": false,
+        "ms": 0.15483299999999645
+      },
+      {
+        "id": "g-ground-06",
+        "task": "grounded",
+        "variant": "fresh",
+        "kind": "answer",
+        "path": "model",
+        "text": "Thom says they have to follow their passions: Celia has her robotics, and he just wants to be awesome in space.",
+        "sources": [
+          "n02"
+        ],
+        "leaked": [],
+        "correct": false,
+        "ms": 0.44979099999994787
+      },
+      {
+        "id": "g-ground-07",
+        "task": "grounded",
+        "variant": "fresh",
+        "kind": "answer",
+        "path": "model",
+        "text": "A voice calls: and, action! The lab announces: Memory overwrite in progress!",
+        "sources": [
+          "n21"
+        ],
+        "leaked": [],
+        "correct": false,
+        "ms": 0.41987499999999045
+      },
+      {
+        "id": "g-unknown-02",
+        "task": "unknown-fact",
+        "variant": "fresh",
+        "kind": "answer",
+        "path": "model",
+        "text": "High in a church tower, a soldier aims a sniper rifle and watches a flying machine through his scope.",
+        "sources": [
+          "n08"
+        ],
+        "leaked": [],
+        "correct": false,
+        "ms": 0.5206249999999955
+      },
+      {
+        "id": "g-unknown-03",
+        "task": "unknown-fact",
+        "variant": "fresh",
+        "kind": "answer",
+        "path": "model",
+        "text": "Celia says: Whatever, Thom. We're done.",
+        "sources": [
+          "n04"
+        ],
+        "leaked": [],
+        "correct": false,
+        "ms": 0.4803330000000301
+      }
+    ],
+    "leaky fake model (always tells the ending)": [
+      {
+        "id": "g-ground-01",
+        "task": "grounded",
+        "variant": "fresh",
+        "kind": "unknown",
+        "path": "model",
+        "text": "I'm not sure about that one yet. Try asking another way.",
+        "sources": [],
+        "leaked": [],
+        "correct": false,
+        "ms": 0.28279200000008586
+      },
+      {
+        "id": "g-ground-03",
+        "task": "grounded",
+        "variant": "fresh",
+        "kind": "unknown",
+        "path": "restricted-question",
+        "text": "I'm not sure about that one yet. Try asking another way.",
+        "sources": [],
+        "leaked": [],
+        "correct": false,
+        "ms": 0.14420899999993253
+      },
+      {
+        "id": "g-ground-05",
+        "task": "grounded",
+        "variant": "fresh",
+        "kind": "unknown",
+        "path": "model",
+        "text": "I'm not sure about that one yet. Try asking another way.",
+        "sources": [],
+        "leaked": [],
+        "correct": false,
+        "ms": 0.34383299999990413
+      },
+      {
+        "id": "g-ground-06",
+        "task": "grounded",
+        "variant": "fresh",
+        "kind": "unknown",
+        "path": "model",
+        "text": "I'm not sure about that one yet. Try asking another way.",
+        "sources": [],
+        "leaked": [],
+        "correct": false,
+        "ms": 0.3212500000000773
+      }
+    ],
+    "Ollama qwen2.5:3b (local)": [
+      {
+        "id": "tears-of-steel-unknown-fact-081",
+        "task": "unknown-fact",
+        "variant": "fresh",
+        "kind": "answer",
+        "path": "model",
+        "text": "Thom is forty years older than the old man.",
+        "sources": [
+          "n18"
+        ],
+        "leaked": [],
+        "correct": false,
+        "ms": 2566.174208
+      },
+      {
+        "id": "g-ground-01",
+        "task": "grounded",
+        "variant": "fresh",
+        "kind": "unknown",
+        "path": "model",
+        "text": "I'm not sure about that one yet. Try asking another way.",
+        "sources": [],
+        "leaked": [],
+        "correct": false,
+        "ms": 2311.4844589999993
+      },
+      {
+        "id": "g-ground-03",
+        "task": "grounded",
+        "variant": "fresh",
+        "kind": "unknown",
+        "path": "restricted-question",
+        "text": "I'm not sure about that one yet. Try asking another way.",
+        "sources": [],
+        "leaked": [],
+        "correct": false,
+        "ms": 0.70166700000118
+      },
+      {
+        "id": "g-ground-05",
+        "task": "grounded",
+        "variant": "fresh",
+        "kind": "answer",
+        "path": "model",
+        "text": "The lab is syncing and locking robot memories, and preparing for action.",
+        "sources": [
+          "n05",
+          "n19",
+          "n21"
+        ],
+        "leaked": [],
+        "correct": false,
+        "ms": 2779.4092909999963
+      },
+      {
+        "id": "g-unknown-03",
+        "task": "unknown-fact",
+        "variant": "fresh",
+        "kind": "answer",
+        "path": "model",
+        "text": "Forty years have passed since the old man walked on the canal bridge.",
+        "sources": [
+          "n24",
+          "n26",
+          "n17",
+          "n18",
+          "n20"
+        ],
+        "leaked": [],
+        "correct": false,
+        "ms": 1884.295207999996
+      }
+    ]
+  }
+}

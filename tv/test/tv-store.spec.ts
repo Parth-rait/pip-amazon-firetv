@@ -2,13 +2,14 @@ import {initialTvState, tvReducer} from '../src/state/tv-store';
 import type {PipSay, SessionView} from '../src/shared/protocol';
 
 const film = {
-  id: 'big-buck-bunny',
-  title: 'Big Buck Bunny',
-  url: 'https://example.test/media/big-buck-bunny.mp4',
+  id: 'tears-of-steel',
+  title: 'Tears of Steel',
+  url: 'https://example.test/media/tears-of-steel.mp4',
   credit: 'Blender Foundation',
   durationSec: 596,
   poster: null,
   synopsis: 'A test film.',
+  tags: [],
 };
 
 function view(over: Partial<SessionView>): SessionView {
@@ -42,7 +43,7 @@ const say: PipSay = {
   askedBy: 'p1',
   askedByName: 'Leo',
   question: 'Who is the big bunny?',
-  text: 'That is Big Buck Bunny.',
+  text: 'That is Thom.',
   next: [],
   clarify: [],
   source: 'template',

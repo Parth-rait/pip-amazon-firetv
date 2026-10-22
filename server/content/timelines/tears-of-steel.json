@@ -1,41 +1,41 @@
 {
   "schemaVersion": 1,
-  "contentId": "big-buck-bunny",
-  "durationSec": 596,
+  "contentId": "tears-of-steel",
+  "durationSec": 734,
   "source": {
-    "assetId": "big-buck-bunny",
-    "sha256": "ec65cb00cea1b8871b5e4db99784504dbfaef824062a6e87176aad3923752a9b",
+    "assetId": "tears-of-steel",
+    "sha256": "64c84f1e46c35bd4c3dd4fcc041751221be70d808562c40017f0d6a8a2cd12ce",
     "license": "CC BY 3.0",
-    "rights": "Big Buck Bunny, (c) copyright 2008 Blender Foundation, www.bigbuckbunny.org, CC BY 3.0"
+    "rights": "Tears of Steel, (c) copyright 2012 Blender Foundation, mango.blender.org, CC BY 3.0"
   },
   "frames": [
     {
       "id": "fr-n00",
-      "atSec": 2
+      "atSec": 12
     },
     {
       "id": "fr-n01",
-      "atSec": 20
+      "atSec": 25
     },
     {
       "id": "fr-n02",
-      "atSec": 32
+      "atSec": 27
     },
     {
       "id": "fr-n03",
-      "atSec": 38
+      "atSec": 32
     },
     {
       "id": "fr-n04",
-      "atSec": 50
+      "atSec": 45
     },
     {
       "id": "fr-n05",
-      "atSec": 62
+      "atSec": 52
     },
     {
       "id": "fr-n06",
-      "atSec": 68
+      "atSec": 62
     },
     {
       "id": "fr-n07",
@@ -43,107 +43,127 @@
     },
     {
       "id": "fr-n08",
-      "atSec": 80
+      "atSec": 84
     },
     {
       "id": "fr-n09",
-      "atSec": 98
+      "atSec": 105
     },
     {
       "id": "fr-n10",
-      "atSec": 110
+      "atSec": 119
     },
     {
       "id": "fr-n11",
-      "atSec": 122
+      "atSec": 133
     },
     {
       "id": "fr-n12",
-      "atSec": 134
+      "atSec": 165
     },
     {
       "id": "fr-n13",
-      "atSec": 158
+      "atSec": 175
     },
     {
       "id": "fr-n14",
-      "atSec": 176
+      "atSec": 193
     },
     {
       "id": "fr-n15",
-      "atSec": 194
+      "atSec": 199
     },
     {
       "id": "fr-n16",
-      "atSec": 200
+      "atSec": 205
     },
     {
       "id": "fr-n17",
-      "atSec": 212
+      "atSec": 225
     },
     {
       "id": "fr-n18",
-      "atSec": 230
+      "atSec": 228
     },
     {
       "id": "fr-n19",
-      "atSec": 254
+      "atSec": 233
     },
     {
       "id": "fr-n20",
-      "atSec": 272
+      "atSec": 265
     },
     {
       "id": "fr-n21",
-      "atSec": 284
+      "atSec": 294
     },
     {
       "id": "fr-n22",
-      "atSec": 296
+      "atSec": 301
     },
     {
       "id": "fr-n23",
-      "atSec": 308
+      "atSec": 318
     },
     {
       "id": "fr-n24",
-      "atSec": 344
+      "atSec": 341
     },
     {
       "id": "fr-n25",
-      "atSec": 380
+      "atSec": 358
     },
     {
       "id": "fr-n26",
-      "atSec": 398
+      "atSec": 367
     },
     {
       "id": "fr-n27",
-      "atSec": 428
+      "atSec": 385
     },
     {
       "id": "fr-n28",
-      "atSec": 446
+      "atSec": 409
     },
     {
       "id": "fr-n29",
-      "atSec": 452
+      "atSec": 430
     },
     {
       "id": "fr-n30",
-      "atSec": 470
+      "atSec": 445
     },
     {
       "id": "fr-n31",
-      "atSec": 476
+      "atSec": 485
     },
     {
       "id": "fr-n32",
-      "atSec": 488
+      "atSec": 506
     },
     {
       "id": "fr-n33",
-      "atSec": 494
+      "atSec": 520
+    },
+    {
+      "id": "fr-n34",
+      "atSec": 540
+    },
+    {
+      "id": "fr-n35",
+      "atSec": 550
+    },
+    {
+      "id": "fr-n36",
+      "atSec": 561
+    },
+    {
+      "id": "fr-n37",
+      "atSec": 577
+    },
+    {
+      "id": "fr-n38",
+      "atSec": 725
     }
   ],
   "lines": [],
@@ -151,58 +171,46 @@
     {
       "id": "sc-01",
       "startSec": 0,
-      "endSec": 62
+      "endSec": 45
     },
     {
       "id": "sc-02",
-      "startSec": 62,
-      "endSec": 112
+      "startSec": 45,
+      "endSec": 135
     },
     {
       "id": "sc-03",
-      "startSec": 112,
-      "endSec": 196
+      "startSec": 135,
+      "endSec": 240
     },
     {
       "id": "sc-04",
-      "startSec": 196,
-      "endSec": 234
+      "startSec": 240,
+      "endSec": 345
     },
     {
       "id": "sc-05",
-      "startSec": 234,
-      "endSec": 298
+      "startSec": 345,
+      "endSec": 440
     },
     {
       "id": "sc-06",
-      "startSec": 298,
-      "endSec": 382
+      "startSec": 440,
+      "endSec": 580
     },
     {
       "id": "sc-07",
-      "startSec": 382,
-      "endSec": 454
-    },
-    {
-      "id": "sc-08",
-      "startSec": 454,
-      "endSec": 490
-    },
-    {
-      "id": "sc-09",
-      "startSec": 490,
-      "endSec": 596
+      "startSec": 580,
+      "endSec": 734
     }
   ],
   "entities": [
     {
-      "id": "bird",
-      "name": "The purple bird",
-      "aliases": [
-        "purple bird"
-      ],
-      "firstSeenSec": 18,
-      "intro": "A small purple bird who wakes up early on a branch.",
+      "id": "thom",
+      "name": "Thom",
+      "aliases": [],
+      "firstSeenSec": 23,
+      "intro": "A young man on a canal bridge who dreams of going to space.",
       "review": {
         "status": "accepted",
         "by": "claude-code (frame check)",
@@ -211,15 +219,11 @@
       }
     },
     {
-      "id": "bunny",
-      "name": "Big Buck Bunny",
-      "aliases": [
-        "bunny",
-        "rabbit",
-        "big bunny"
-      ],
-      "firstSeenSec": 36,
-      "intro": "A huge, gentle grey rabbit who lives in a burrow under a big tree.",
+      "id": "celia",
+      "name": "Celia",
+      "aliases": [],
+      "firstSeenSec": 23,
+      "intro": "A young woman with a robotic hand, who loves robotics.",
       "review": {
         "status": "accepted",
         "by": "claude-code (frame check)",
@@ -228,13 +232,14 @@
       }
     },
     {
-      "id": "flying-squirrel",
-      "name": "The flying squirrel",
+      "id": "scientist",
+      "name": "The scientist",
       "aliases": [
-        "flying squirrel"
+        "scientist",
+        "scientist in glasses"
       ],
-      "firstSeenSec": 72,
-      "intro": "A brown flying squirrel who secretly watches the bunny from a tree.",
+      "firstSeenSec": 50,
+      "intro": "A scientist in glasses who works the glowing screens in the lab.",
       "review": {
         "status": "accepted",
         "by": "claude-code (frame check)",
@@ -243,13 +248,15 @@
       }
     },
     {
-      "id": "pink-butterfly",
-      "name": "The pink butterfly",
+      "id": "eyepiece-man",
+      "name": "The man with the robot eye",
       "aliases": [
-        "pink butterfly"
+        "man with the robot eye",
+        "big man",
+        "mechanical eyepiece"
       ],
-      "firstSeenSec": 78,
-      "intro": "A pink butterfly who flutters around the bunny.",
+      "firstSeenSec": 60,
+      "intro": "A big man with a mechanical eyepiece, who studies a robot's brain.",
       "review": {
         "status": "accepted",
         "by": "claude-code (frame check)",
@@ -258,13 +265,14 @@
       }
     },
     {
-      "id": "purple-butterfly",
-      "name": "The purple butterfly",
+      "id": "soldier",
+      "name": "The soldier",
       "aliases": [
-        "purple butterfly"
+        "soldier",
+        "sniper"
       ],
-      "firstSeenSec": 108,
-      "intro": "A purple butterfly the bunny waves at.",
+      "firstSeenSec": 82,
+      "intro": "A soldier with a sniper rifle, watching the city from a church tower.",
       "review": {
         "status": "accepted",
         "by": "claude-code (frame check)",
@@ -273,13 +281,14 @@
       }
     },
     {
-      "id": "red-squirrel",
-      "name": "The red squirrel",
+      "id": "old-man",
+      "name": "The old man",
       "aliases": [
-        "red squirrel"
+        "old man",
+        "grey-haired old man"
       ],
-      "firstSeenSec": 120,
-      "intro": "A skinny red squirrel with big front teeth, one of the troublemakers.",
+      "firstSeenSec": 103,
+      "intro": "A grey-haired old man in the church tower with the soldier.",
       "review": {
         "status": "accepted",
         "by": "claude-code (frame check)",
@@ -288,13 +297,13 @@
       }
     },
     {
-      "id": "chinchilla",
-      "name": "The chinchilla",
+      "id": "giant-robot",
+      "name": "The giant robot",
       "aliases": [
-        "chinchilla"
+        "giant robot"
       ],
-      "firstSeenSec": 120,
-      "intro": "A round grey chinchilla who always holds a nut. One of the troublemakers.",
+      "firstSeenSec": 223,
+      "intro": "A giant robot towering over a canal street.",
       "review": {
         "status": "accepted",
         "by": "claude-code (frame check)",
@@ -306,10 +315,10 @@
   "facts": [
     {
       "id": "n00",
-      "startSec": 0,
-      "revealSec": 10,
+      "startSec": 10,
+      "revealSec": 20,
       "kind": "event",
-      "text": "Morning in a green meadow with a stream, flowers and soft pink clouds.",
+      "text": "A blinding blast of light rises over a huge industrial plant with tall chimneys.",
       "entities": [],
       "evidence": [
         "fr-n00"
@@ -323,24 +332,25 @@
         "note": "checked against a frame at the note time"
       },
       "spoilerTerms": [
-        "meadow",
-        "stream",
-        "flower",
-        "green",
-        "cloud",
-        "soft",
-        "pink"
+        "industrial",
+        "blinding",
+        "chimney",
+        "blast",
+        "light",
+        "plant",
+        "rise",
+        "tall"
       ],
       "sceneId": "sc-01"
     },
     {
       "id": "n01",
-      "startSec": 18,
-      "revealSec": 28,
-      "kind": "event",
-      "text": "A small purple bird wakes up on a branch and stretches its wings.",
+      "startSec": 23,
+      "revealSec": 33,
+      "kind": "dialogue",
+      "text": "On a bridge over a canal in Amsterdam, a young woman and a young man are breaking up. She says: You're a jerk, Thom.",
       "entities": [
-        "bird"
+        "thom"
       ],
       "evidence": [
         "fr-n01"
@@ -354,23 +364,26 @@
         "note": "checked against a frame at the note time"
       },
       "spoilerTerms": [
-        "stretche",
-        "purple",
-        "branch",
-        "bird",
-        "wake",
-        "wing"
+        "amsterdam",
+        "breaking",
+        "bridge",
+        "canal",
+        "woman",
+        "youre",
+        "jerk",
+        "thom"
       ],
       "sceneId": "sc-01"
     },
     {
       "id": "n02",
-      "startSec": 30,
-      "revealSec": 40,
-      "kind": "event",
-      "text": "The title Big Buck Bunny appears over a big tree. Under the tree there is a burrow, a rabbit hole.",
+      "startSec": 25,
+      "revealSec": 35,
+      "kind": "dialogue",
+      "text": "Thom says they have to follow their passions: Celia has her robotics, and he just wants to be awesome in space.",
       "entities": [
-        "bunny"
+        "thom",
+        "celia"
       ],
       "evidence": [
         "fr-n02"
@@ -384,23 +397,24 @@
         "note": "checked against a frame at the note time"
       },
       "spoilerTerms": [
-        "appear",
-        "burrow",
-        "rabbit",
-        "title",
-        "tree",
-        "hole"
+        "passion",
+        "robotic",
+        "awesome",
+        "follow",
+        "celia",
+        "space"
       ],
       "sceneId": "sc-01"
     },
     {
       "id": "n03",
-      "startSec": 36,
-      "revealSec": 46,
-      "kind": "event",
-      "text": "Inside the burrow a huge grey rabbit is fast asleep. This is Big Buck Bunny.",
+      "startSec": 30,
+      "revealSec": 40,
+      "kind": "dialogue",
+      "text": "Celia, who has a robotic hand, asks if he is just freaked out by it. Thom admits he has nightmares about giant robotic claws.",
       "entities": [
-        "bunny"
+        "thom",
+        "celia"
       ],
       "evidence": [
         "fr-n03"
@@ -414,21 +428,24 @@
         "note": "checked against a frame at the note time"
       },
       "spoilerTerms": [
-        "inside",
-        "asleep",
-        "grey",
-        "fast"
+        "nightmare",
+        "freaked",
+        "admit",
+        "giant",
+        "hand",
+        "claw"
       ],
       "sceneId": "sc-01"
     },
     {
       "id": "n04",
-      "startSec": 48,
-      "revealSec": 58,
-      "kind": "event",
-      "text": "The big bunny wakes up, yawns and squeezes out of his burrow.",
+      "startSec": 43,
+      "revealSec": 53,
+      "kind": "dialogue",
+      "text": "Celia says: Whatever, Thom. We're done. The words Forty years later appear over a ruined, glowing city.",
       "entities": [
-        "bunny"
+        "thom",
+        "celia"
       ],
       "evidence": [
         "fr-n04"
@@ -442,18 +459,26 @@
         "note": "checked against a frame at the note time"
       },
       "spoilerTerms": [
-        "squeeze",
-        "yawn"
+        "whatever",
+        "glowing",
+        "appear",
+        "ruined",
+        "forty",
+        "later",
+        "done",
+        "word"
       ],
       "sceneId": "sc-01"
     },
     {
       "id": "n05",
-      "startSec": 60,
-      "revealSec": 70,
+      "startSec": 50,
+      "revealSec": 60,
       "kind": "event",
-      "text": "He stretches in the sunshine and smiles up at the sky. He is gentle and happy.",
-      "entities": [],
+      "text": "In a lab full of glowing screens, a scientist in glasses calls out: Robot's memory synced and locked!",
+      "entities": [
+        "scientist"
+      ],
       "evidence": [
         "fr-n05"
       ],
@@ -466,19 +491,26 @@
         "note": "checked against a frame at the note time"
       },
       "spoilerTerms": [
-        "sunshine",
-        "gentle",
-        "smile"
+        "scientist",
+        "screen",
+        "glasse",
+        "memory",
+        "synced",
+        "locked",
+        "robot",
+        "full"
       ],
-      "sceneId": "sc-01"
+      "sceneId": "sc-02"
     },
     {
       "id": "n06",
-      "startSec": 66,
-      "revealSec": 76,
-      "kind": "event",
-      "text": "He walks between giant daisies and sniffs the flowers.",
-      "entities": [],
+      "startSec": 60,
+      "revealSec": 70,
+      "kind": "dialogue",
+      "text": "A big man with a mechanical eyepiece studies a brain on his desk and says: This is pretty freaky.",
+      "entities": [
+        "eyepiece-man"
+      ],
       "evidence": [
         "fr-n06"
       ],
@@ -491,10 +523,12 @@
         "note": "checked against a frame at the note time"
       },
       "spoilerTerms": [
-        "between",
-        "giant",
-        "daisy",
-        "sniff"
+        "mechanical",
+        "eyepiece",
+        "pretty",
+        "freaky",
+        "study",
+        "desk"
       ],
       "sceneId": "sc-02"
     },
@@ -503,10 +537,8 @@
       "startSec": 72,
       "revealSec": 82,
       "kind": "event",
-      "text": "From high in a tree, a brown flying squirrel secretly watches him.",
-      "entities": [
-        "flying-squirrel"
-      ],
+      "text": "Fog hangs over the ruined rooftops of Amsterdam, with huge machines looming in the distance.",
+      "entities": [],
       "evidence": [
         "fr-n07"
       ],
@@ -519,24 +551,22 @@
         "note": "checked against a frame at the note time"
       },
       "spoilerTerms": [
-        "squirrel",
-        "secretly",
-        "flying",
-        "watche",
-        "brown",
-        "high"
+        "distance",
+        "rooftop",
+        "machine",
+        "looming",
+        "hang"
       ],
       "sceneId": "sc-02"
     },
     {
       "id": "n08",
-      "startSec": 78,
-      "revealSec": 88,
+      "startSec": 82,
+      "revealSec": 92,
       "kind": "event",
-      "text": "A pink butterfly flutters around the bunny, and he plays with it very gently.",
+      "text": "High in a church tower, a soldier aims a sniper rifle and watches a flying machine through his scope.",
       "entities": [
-        "bunny",
-        "pink-butterfly"
+        "soldier"
       ],
       "evidence": [
         "fr-n08"
@@ -550,19 +580,27 @@
         "note": "checked against a frame at the note time"
       },
       "spoilerTerms": [
-        "butterfly",
-        "flutter",
-        "gently"
+        "soldier",
+        "church",
+        "sniper",
+        "watche",
+        "flying",
+        "tower",
+        "rifle",
+        "scope"
       ],
       "sceneId": "sc-02"
     },
     {
       "id": "n09",
-      "startSec": 96,
-      "revealSec": 106,
+      "startSec": 103,
+      "revealSec": 113,
       "kind": "event",
-      "text": "He finds a red apple in the grass and picks it up, pleased.",
-      "entities": [],
+      "text": "A grey-haired old man sits in the tower near the soldier.",
+      "entities": [
+        "soldier",
+        "old-man"
+      ],
       "evidence": [
         "fr-n09"
       ],
@@ -575,20 +613,21 @@
         "note": "checked against a frame at the note time"
       },
       "spoilerTerms": [
-        "pleased",
-        "apple",
-        "grass"
+        "haired",
+        "grey",
+        "near"
       ],
       "sceneId": "sc-02"
     },
     {
       "id": "n10",
-      "startSec": 108,
-      "revealSec": 118,
-      "kind": "event",
-      "text": "A purple butterfly flies past his face. He waves at it happily.",
+      "startSec": 117,
+      "revealSec": 127,
+      "kind": "dialogue",
+      "text": "The soldier asks the old man: Shouldn't you be down there?",
       "entities": [
-        "purple-butterfly"
+        "soldier",
+        "old-man"
       ],
       "evidence": [
         "fr-n10"
@@ -602,24 +641,17 @@
         "note": "checked against a frame at the note time"
       },
       "spoilerTerms": [
-        "happily",
-        "past",
-        "face",
-        "wave"
+        "shouldnt"
       ],
       "sceneId": "sc-02"
     },
     {
       "id": "n11",
-      "startSec": 120,
-      "revealSec": 130,
-      "kind": "event",
-      "text": "Three troublemakers watch him: a brown flying squirrel, a skinny red squirrel with big front teeth, and a round grey chinchilla holding a nut.",
-      "entities": [
-        "flying-squirrel",
-        "red-squirrel",
-        "chinchilla"
-      ],
+      "startSec": 131,
+      "revealSec": 141,
+      "kind": "dialogue",
+      "text": "Someone says: I heard you guys talking last night. It's not my fault, you know.",
+      "entities": [],
       "evidence": [
         "fr-n11"
       ],
@@ -632,25 +664,20 @@
         "note": "checked against a frame at the note time"
       },
       "spoilerTerms": [
-        "troublemaker",
-        "chinchilla",
-        "holding",
-        "skinny",
-        "three",
-        "teeth",
-        "round"
+        "talking",
+        "heard",
+        "fault"
       ],
-      "sceneId": "sc-03"
+      "sceneId": "sc-02"
     },
     {
       "id": "n12",
-      "startSec": 132,
-      "revealSec": 142,
+      "startSec": 163,
+      "revealSec": 173,
       "kind": "event",
-      "text": "The flying squirrel sneaks around the tree right behind the bunny's back.",
+      "text": "The old man stands in the ruins of a church, next to a hanging rope.",
       "entities": [
-        "bunny",
-        "flying-squirrel"
+        "old-man"
       ],
       "evidence": [
         "fr-n12"
@@ -664,18 +691,21 @@
         "note": "checked against a frame at the note time"
       },
       "spoilerTerms": [
-        "sneak"
+        "hanging",
+        "ruin",
+        "next",
+        "rope"
       ],
       "sceneId": "sc-03"
     },
     {
       "id": "n13",
-      "startSec": 156,
-      "revealSec": 166,
+      "startSec": 173,
+      "revealSec": 183,
       "kind": "event",
-      "text": "Behind the tree the three troublemakers laugh at the bunny.",
+      "text": "In a hideout full of maps and lamps, a young woman in a soldier's jacket waits.",
       "entities": [
-        "bunny"
+        "soldier"
       ],
       "evidence": [
         "fr-n13"
@@ -689,18 +719,21 @@
         "note": "checked against a frame at the note time"
       },
       "spoilerTerms": [
-        "laugh"
+        "hideout",
+        "jacket",
+        "lamp"
       ],
       "sceneId": "sc-03"
     },
     {
       "id": "n14",
-      "startSec": 174,
-      "revealSec": 184,
+      "startSec": 191,
+      "revealSec": 201,
       "kind": "event",
-      "text": "Fruit and nuts hit the bunny on the head. The troublemakers are throwing things at him, and he looks confused.",
+      "text": "The big man with the mechanical eyepiece puts his arm around the old man: Are you ready? Of course you're ready, you're a rockstar.",
       "entities": [
-        "bunny"
+        "eyepiece-man",
+        "old-man"
       ],
       "evidence": [
         "fr-n14"
@@ -714,22 +747,18 @@
         "note": "checked against a frame at the note time"
       },
       "spoilerTerms": [
-        "throwing",
-        "confused",
-        "fruit",
-        "head"
+        "rockstar",
+        "course"
       ],
       "sceneId": "sc-03"
     },
     {
       "id": "n15",
-      "startSec": 192,
-      "revealSec": 202,
-      "kind": "event",
-      "text": "The bunny stands in the grass with fallen fruit all around him.",
-      "entities": [
-        "bunny"
-      ],
+      "startSec": 197,
+      "revealSec": 207,
+      "kind": "dialogue",
+      "text": "Someone asks: How's it looking, Barley? The answer: they should have about ten minutes.",
+      "entities": [],
       "evidence": [
         "fr-n15"
       ],
@@ -742,19 +771,20 @@
         "note": "checked against a frame at the note time"
       },
       "spoilerTerms": [
-        "fallen"
+        "looking",
+        "barley",
+        "minute"
       ],
       "sceneId": "sc-03"
     },
     {
       "id": "n16",
-      "startSec": 198,
-      "revealSec": 208,
+      "startSec": 203,
+      "revealSec": 213,
       "kind": "event",
-      "text": "The bunny reaches out in shock: the troublemakers have caught the purple butterfly.",
+      "text": "The team rushes into action: We're on in one! All systems go! In the lab, scientists work fast.",
       "entities": [
-        "bunny",
-        "purple-butterfly"
+        "scientist"
       ],
       "evidence": [
         "fr-n16"
@@ -768,21 +798,23 @@
         "note": "checked against a frame at the note time"
       },
       "spoilerTerms": [
-        "reache",
-        "caught",
-        "shock"
+        "action",
+        "system",
+        "rushe",
+        "team",
+        "work",
+        "fast"
       ],
-      "sceneId": "sc-04"
+      "sceneId": "sc-03"
     },
     {
       "id": "n17",
-      "startSec": 210,
-      "revealSec": 220,
+      "startSec": 223,
+      "revealSec": 233,
       "kind": "event",
-      "text": "The red squirrel waves a torn purple wing. The butterfly is hurt, and the flying squirrel grins.",
+      "text": "A giant robot towers over a canal street.",
       "entities": [
-        "flying-squirrel",
-        "red-squirrel"
+        "giant-robot"
       ],
       "evidence": [
         "fr-n17"
@@ -796,20 +828,20 @@
         "note": "checked against a frame at the note time"
       },
       "spoilerTerms": [
-        "torn",
-        "hurt",
-        "grin"
+        "street"
       ],
-      "sceneId": "sc-04"
+      "sceneId": "sc-03"
     },
     {
       "id": "n18",
-      "startSec": 228,
-      "revealSec": 238,
+      "startSec": 226,
+      "revealSec": 236,
       "kind": "event",
-      "text": "The bunny leans against a tree, very sad. Then his sad face slowly turns angry.",
+      "text": "The big man calls the old man Thom. The old man is Thom, forty years older.",
       "entities": [
-        "bunny"
+        "thom",
+        "eyepiece-man",
+        "old-man"
       ],
       "evidence": [
         "fr-n18"
@@ -823,19 +855,19 @@
         "note": "checked against a frame at the note time"
       },
       "spoilerTerms": [
-        "against",
-        "lean"
+        "older"
       ],
-      "sceneId": "sc-04"
+      "sceneId": "sc-03"
     },
     {
       "id": "n19",
-      "startSec": 252,
-      "revealSec": 262,
-      "kind": "event",
-      "text": "Deep in the forest the bunny gets busy. He carves a stick into a sharp point with a stone.",
+      "startSec": 231,
+      "revealSec": 241,
+      "kind": "dialogue",
+      "text": "The big man tells Thom: There she is. You love her. She is your passion. Be tender to her. Remind her what love is.",
       "entities": [
-        "bunny"
+        "thom",
+        "eyepiece-man"
       ],
       "evidence": [
         "fr-n19"
@@ -849,24 +881,20 @@
         "note": "checked against a frame at the note time"
       },
       "spoilerTerms": [
-        "forest",
-        "carve",
-        "stick",
-        "sharp",
-        "point",
-        "stone",
-        "deep",
-        "busy"
+        "tender",
+        "remind"
       ],
-      "sceneId": "sc-05"
+      "sceneId": "sc-03"
     },
     {
       "id": "n20",
-      "startSec": 270,
-      "revealSec": 280,
+      "startSec": 263,
+      "revealSec": 273,
       "kind": "event",
-      "text": "He twists a long vine into a rope and pushes a pointed wooden stake into the ground.",
-      "entities": [],
+      "text": "A young man who looks just like Thom forty years ago walks onto the canal bridge again.",
+      "entities": [
+        "thom"
+      ],
       "evidence": [
         "fr-n20"
       ],
@@ -878,23 +906,15 @@
         "at": "2026-10-22",
         "note": "checked against a frame at the note time"
       },
-      "spoilerTerms": [
-        "pointed",
-        "wooden",
-        "twist",
-        "pushe",
-        "stake",
-        "vine",
-        "rope"
-      ],
-      "sceneId": "sc-05"
+      "spoilerTerms": [],
+      "sceneId": "sc-04"
     },
     {
       "id": "n21",
-      "startSec": 282,
-      "revealSec": 292,
+      "startSec": 292,
+      "revealSec": 302,
       "kind": "event",
-      "text": "A close-up of his eyes: he looks determined. He has a plan.",
+      "text": "A voice calls: and, action! The lab announces: Memory overwrite in progress!",
       "entities": [],
       "evidence": [
         "fr-n21"
@@ -908,18 +928,22 @@
         "note": "checked against a frame at the note time"
       },
       "spoilerTerms": [
-        "determined",
-        "plan"
+        "overwrite",
+        "announce",
+        "progress",
+        "voice"
       ],
-      "sceneId": "sc-05"
+      "sceneId": "sc-04"
     },
     {
       "id": "n22",
-      "startSec": 294,
-      "revealSec": 304,
+      "startSec": 299,
+      "revealSec": 309,
       "kind": "event",
-      "text": "He holds a bow made from a branch and pulls back a wooden arrow.",
-      "entities": [],
+      "text": "The breakup on the bridge plays again, word for word: You're a jerk, Thom!",
+      "entities": [
+        "thom"
+      ],
       "evidence": [
         "fr-n22"
       ],
@@ -932,18 +956,18 @@
         "note": "checked against a frame at the note time"
       },
       "spoilerTerms": [
-        "arrow"
+        "breakup"
       ],
-      "sceneId": "sc-05"
+      "sceneId": "sc-04"
     },
     {
       "id": "n23",
-      "startSec": 306,
-      "revealSec": 316,
+      "startSec": 316,
+      "revealSec": 326,
       "kind": "event",
-      "text": "The three troublemakers stroll along a forest path, not knowing the bunny is hiding in the leaves and watching them.",
+      "text": "Thom repeats his old lines while glowing pink words float over the canal.",
       "entities": [
-        "bunny"
+        "thom"
       ],
       "evidence": [
         "fr-n23"
@@ -957,22 +981,21 @@
         "note": "checked against a frame at the note time"
       },
       "spoilerTerms": [
-        "knowing",
-        "stroll",
-        "hiding",
-        "along",
-        "path"
+        "repeat",
+        "float",
+        "line",
+        "pink"
       ],
-      "sceneId": "sc-06"
+      "sceneId": "sc-04"
     },
     {
       "id": "n24",
-      "startSec": 342,
-      "revealSec": 352,
+      "startSec": 339,
+      "revealSec": 349,
       "kind": "event",
-      "text": "Along the path the bunny has set traps: a big rock tied up with vines, a log and a bent young tree.",
+      "text": "The team warns: Two minutes left! Speed it up, Thom!",
       "entities": [
-        "bunny"
+        "thom"
       ],
       "evidence": [
         "fr-n24"
@@ -986,22 +1009,20 @@
         "note": "checked against a frame at the note time"
       },
       "spoilerTerms": [
-        "trap",
-        "rock",
-        "tied",
-        "bent"
+        "speed",
+        "warn"
       ],
-      "sceneId": "sc-06"
+      "sceneId": "sc-04"
     },
     {
       "id": "n25",
-      "startSec": 378,
-      "revealSec": 388,
-      "kind": "event",
-      "text": "The bunny stands behind the chinchilla and gives a thumbs up. The chinchilla does not notice.",
+      "startSec": 356,
+      "revealSec": 366,
+      "kind": "dialogue",
+      "text": "Thom tries new words: he tells Celia he was young and behaved badly, but that's no reason to destroy the world.",
       "entities": [
-        "bunny",
-        "chinchilla"
+        "thom",
+        "celia"
       ],
       "evidence": [
         "fr-n25"
@@ -1015,19 +1036,21 @@
         "note": "checked against a frame at the note time"
       },
       "spoilerTerms": [
-        "notice",
-        "thumb"
+        "behaved",
+        "destroy",
+        "reason",
+        "badly"
       ],
-      "sceneId": "sc-06"
+      "sceneId": "sc-05"
     },
     {
       "id": "n26",
-      "startSec": 396,
-      "revealSec": 406,
+      "startSec": 365,
+      "revealSec": 375,
       "kind": "event",
-      "text": "High in a tree the flying squirrel spreads his arms, ready to glide.",
+      "text": "It goes wrong: We already tried that one! Abort! Cut! A giant robotic hand grabs Thom.",
       "entities": [
-        "flying-squirrel"
+        "thom"
       ],
       "evidence": [
         "fr-n26"
@@ -1041,19 +1064,23 @@
         "note": "checked against a frame at the note time"
       },
       "spoilerTerms": [
-        "spread",
-        "glide"
+        "already",
+        "wrong",
+        "tried",
+        "abort",
+        "grab"
       ],
-      "sceneId": "sc-07"
+      "sceneId": "sc-05"
     },
     {
       "id": "n27",
-      "startSec": 426,
-      "revealSec": 436,
+      "startSec": 383,
+      "revealSec": 393,
       "kind": "event",
-      "text": "The flying squirrel glides through the air above the forest.",
+      "text": "The giant robot speaks with Celia's voice: You broke my heart. You forgot me on Earth. I should just crush you.",
       "entities": [
-        "flying-squirrel"
+        "celia",
+        "giant-robot"
       ],
       "evidence": [
         "fr-n27"
@@ -1067,17 +1094,24 @@
         "note": "checked against a frame at the note time"
       },
       "spoilerTerms": [
-        "above"
+        "forgot",
+        "speak",
+        "broke",
+        "heart",
+        "earth",
+        "crush"
       ],
-      "sceneId": "sc-07"
+      "sceneId": "sc-05"
     },
     {
       "id": "n28",
-      "startSec": 444,
-      "revealSec": 454,
-      "kind": "event",
-      "text": "Something goes wrong: he panics and tumbles through the air.",
-      "entities": [],
+      "startSec": 407,
+      "revealSec": 417,
+      "kind": "dialogue",
+      "text": "Thom says: I'm sorry. Someone in the team whispers: Good ad-lib.",
+      "entities": [
+        "thom"
+      ],
       "evidence": [
         "fr-n28"
       ],
@@ -1090,21 +1124,18 @@
         "note": "checked against a frame at the note time"
       },
       "spoilerTerms": [
-        "tumble",
-        "wrong",
-        "panic"
+        "whisper",
+        "sorry"
       ],
-      "sceneId": "sc-07"
+      "sceneId": "sc-05"
     },
     {
       "id": "n29",
-      "startSec": 450,
-      "revealSec": 460,
-      "kind": "event",
-      "text": "He falls toward a row of sharp wooden spikes, but the bunny catches him on a stick just in time.",
-      "entities": [
-        "bunny"
-      ],
+      "startSec": 428,
+      "revealSec": 438,
+      "kind": "dialogue",
+      "text": "Someone says: Not my fault! This time. Then: Quiet on set! We're out of time!",
+      "entities": [],
       "evidence": [
         "fr-n29"
       ],
@@ -1117,20 +1148,18 @@
         "note": "checked against a frame at the note time"
       },
       "spoilerTerms": [
-        "toward",
-        "catche",
-        "spike"
+        "quiet"
       ],
-      "sceneId": "sc-07"
+      "sceneId": "sc-05"
     },
     {
       "id": "n30",
-      "startSec": 468,
-      "revealSec": 478,
+      "startSec": 443,
+      "revealSec": 453,
       "kind": "event",
-      "text": "Night passes and a new day starts at the bunny's big tree.",
+      "text": "In a robot factory, scientists in white suits work among robot parts, and flames burst out.",
       "entities": [
-        "bunny"
+        "scientist"
       ],
       "evidence": [
         "fr-n30"
@@ -1144,19 +1173,23 @@
         "note": "checked against a frame at the note time"
       },
       "spoilerTerms": [
-        "passe"
+        "factory",
+        "white",
+        "among",
+        "flame",
+        "burst",
+        "suit"
       ],
-      "sceneId": "sc-08"
+      "sceneId": "sc-06"
     },
     {
       "id": "n31",
-      "startSec": 474,
-      "revealSec": 484,
+      "startSec": 483,
+      "revealSec": 493,
       "kind": "event",
-      "text": "The bunny smiles again, with the pink butterfly flying beside him.",
+      "text": "In the church tower the soldier fights the robots, swinging on a rope and roaring.",
       "entities": [
-        "bunny",
-        "pink-butterfly"
+        "soldier"
       ],
       "evidence": [
         "fr-n31"
@@ -1170,20 +1203,19 @@
         "note": "checked against a frame at the note time"
       },
       "spoilerTerms": [
-        "beside"
+        "swinging",
+        "roaring",
+        "fight"
       ],
-      "sceneId": "sc-08"
+      "sceneId": "sc-06"
     },
     {
       "id": "n32",
-      "startSec": 486,
-      "revealSec": 496,
-      "kind": "event",
-      "text": "The bunny flies the flying squirrel on a string, like a kite, over the meadow.",
-      "entities": [
-        "bunny",
-        "flying-squirrel"
-      ],
+      "startSec": 504,
+      "revealSec": 514,
+      "kind": "dialogue",
+      "text": "The lab reports: Memory overwrite, ninety percent. Someone shouts: Captain! We have to abort!",
+      "entities": [],
       "evidence": [
         "fr-n32"
       ],
@@ -1196,18 +1228,24 @@
         "note": "checked against a frame at the note time"
       },
       "spoilerTerms": [
-        "string",
-        "kite"
+        "percent",
+        "captain",
+        "report",
+        "ninety"
       ],
-      "sceneId": "sc-08"
+      "sceneId": "sc-06"
     },
     {
       "id": "n33",
-      "startSec": 492,
-      "revealSec": 502,
-      "kind": "event",
-      "text": "The story is over and the credits roll, with little drawings of the animals.",
-      "entities": [],
+      "startSec": 518,
+      "revealSec": 528,
+      "kind": "dialogue",
+      "text": "On the bridge, Thom faces the giant robot and says: The world's changed, Celia. Maybe we can too.",
+      "entities": [
+        "thom",
+        "celia",
+        "giant-robot"
+      ],
       "evidence": [
         "fr-n33"
       ],
@@ -1220,12 +1258,135 @@
         "note": "checked against a frame at the note time"
       },
       "spoilerTerms": [
-        "drawing",
-        "credit",
-        "animal",
-        "roll"
+        "changed",
+        "maybe",
+        "face"
       ],
-      "sceneId": "sc-09"
+      "sceneId": "sc-06"
+    },
+    {
+      "id": "n34",
+      "startSec": 538,
+      "revealSec": 548,
+      "kind": "event",
+      "text": "The lab calls out: Memory overwrite complete!",
+      "entities": [],
+      "evidence": [
+        "fr-n34"
+      ],
+      "confidence": 0.9,
+      "generator": "notes/1 (content notes, written from frames and subtitles)",
+      "review": {
+        "status": "accepted",
+        "by": "claude-code (frame check)",
+        "at": "2026-10-22",
+        "note": "checked against a frame at the note time"
+      },
+      "spoilerTerms": [
+        "complete"
+      ],
+      "sceneId": "sc-06"
+    },
+    {
+      "id": "n35",
+      "startSec": 548,
+      "revealSec": 558,
+      "kind": "event",
+      "text": "Old Thom stands face to face with a robot among the ruins.",
+      "entities": [
+        "thom"
+      ],
+      "evidence": [
+        "fr-n35"
+      ],
+      "confidence": 0.9,
+      "generator": "notes/1 (content notes, written from frames and subtitles)",
+      "review": {
+        "status": "accepted",
+        "by": "claude-code (frame check)",
+        "at": "2026-10-22",
+        "note": "checked against a frame at the note time"
+      },
+      "spoilerTerms": [],
+      "sceneId": "sc-06"
+    },
+    {
+      "id": "n36",
+      "startSec": 559,
+      "revealSec": 569,
+      "kind": "dialogue",
+      "text": "The big man with the eyepiece leans back and says: You know, there's a lesson to be learned from this. Could have gone worse.",
+      "entities": [
+        "eyepiece-man"
+      ],
+      "evidence": [
+        "fr-n36"
+      ],
+      "confidence": 0.9,
+      "generator": "notes/1 (content notes, written from frames and subtitles)",
+      "review": {
+        "status": "accepted",
+        "by": "claude-code (frame check)",
+        "at": "2026-10-22",
+        "note": "checked against a frame at the note time"
+      },
+      "spoilerTerms": [
+        "learned",
+        "lesson",
+        "worse",
+        "lean",
+        "gone"
+      ],
+      "sceneId": "sc-06"
+    },
+    {
+      "id": "n37",
+      "startSec": 575,
+      "revealSec": 585,
+      "kind": "event",
+      "text": "The robots lie still among the ruins. The story is over and the credits begin.",
+      "entities": [],
+      "evidence": [
+        "fr-n37"
+      ],
+      "confidence": 0.9,
+      "generator": "notes/1 (content notes, written from frames and subtitles)",
+      "review": {
+        "status": "accepted",
+        "by": "claude-code (frame check)",
+        "at": "2026-10-22",
+        "note": "checked against a frame at the note time"
+      },
+      "spoilerTerms": [
+        "credit"
+      ],
+      "sceneId": "sc-06"
+    },
+    {
+      "id": "n38",
+      "startSec": 723,
+      "revealSec": 733,
+      "kind": "event",
+      "text": "After the credits, the soldier sits on a pile of broken robots.",
+      "entities": [
+        "soldier"
+      ],
+      "evidence": [
+        "fr-n38"
+      ],
+      "confidence": 0.9,
+      "generator": "notes/1 (content notes, written from frames and subtitles)",
+      "review": {
+        "status": "accepted",
+        "by": "claude-code (frame check)",
+        "at": "2026-10-22",
+        "note": "checked against a frame at the note time"
+      },
+      "spoilerTerms": [
+        "broken",
+        "pile"
+      ],
+      "sceneId": "sc-07"
     }
   ]
 }

@@ -4,7 +4,7 @@ import { join } from 'node:path';
 import { describe, expect, it } from 'vitest';
 import { createAnswerMemory, normalizeQuestion, similarity } from './answer-memory.js';
 
-const film = 'big-buck-bunny';
+const film = 'tears-of-steel';
 const entry = (sceneSec: number, question: string, answer: string) => ({
   contentId: film,
   sceneSec,

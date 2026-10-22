@@ -2,7 +2,7 @@
 import { readdirSync, readFileSync } from 'node:fs';
 import { basename, join } from 'node:path';
 import { z } from 'zod';
-import type { ContentView } from '../shared/protocol.js';
+import type { ContentView, SceneView } from '../shared/protocol.js';
 
 const CHOICES_PER_QUESTION = 4;
 
@@ -76,6 +76,7 @@ export const contentSchema = z
     durationSec: z.number().positive(),
     poster: mediaUrl.optional(),
     premise: z.string().min(1).max(400),
+    tags: z.array(z.string().min(1).max(24)).max(6).default([]), // kind and mood, for Discover
     // A film may have no notes or quiz when Pip answers from its timeline (the lab film).
     notes: z.array(noteSchema).max(40),
     quiz: z.array(quizQuestionSchema).max(8),
@@ -191,7 +192,24 @@ export function toContentView(content: Content, publicUrl: string): ContentView 
     durationSec: content.durationSec,
     poster: content.poster ? new URL(content.poster, publicUrl).toString() : null,
     synopsis: content.premise,
+    tags: content.tags,
   };
+}
+
+/**
+ * The chapters fully watched by `untilSec`, each with where it begins, for the TV's Scenes page.
+ * Spoiler-safe by construction: nothing after `untilSec` is returned.
+ */
+export function watchedScenes(content: Content, untilSec: number, publicUrl: string): SceneView[] {
+  return content.chapters
+    .map((chapter, i) => ({
+      startSec: i === 0 ? 0 : (content.chapters[i - 1]?.atSec ?? 0),
+      atSec: chapter.atSec,
+      title: chapter.title,
+      summary: chapter.summary,
+      image: chapter.image ? new URL(chapter.image, publicUrl).toString() : null,
+    }))
+    .filter((scene) => scene.atSec <= untilSec);
 }
 
 /** The quiz questions the family has already seen enough to answer. */

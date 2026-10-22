@@ -5,12 +5,13 @@ import {
   loadFilms,
   toContentView,
   unlockedQuestions,
+  watchedScenes,
   type Content,
 } from './content.js';
 
 const CONTENT_DIR = new URL('../../content/', import.meta.url);
 const realFile: unknown = JSON.parse(
-  readFileSync(new URL('big-buck-bunny.json', CONTENT_DIR), 'utf8'),
+  readFileSync(new URL('tears-of-steel.json', CONTENT_DIR), 'utf8'),
 );
 
 function question(atSec: number, overrides: Record<string, unknown> = {}) {
@@ -48,12 +49,12 @@ function problemOf(data: unknown, id = 'test-film'): string {
 
 describe('checkContent', () => {
   it('accepts the real film file', () => {
-    expect(checkContent(realFile, 'big-buck-bunny').ok).toBe(true);
+    expect(checkContent(realFile, 'tears-of-steel').ok).toBe(true);
   });
 
   it('loads every file in content/', () => {
     const films = loadFilms(CONTENT_DIR.pathname);
-    expect(films.map((f) => f.id)).toContain('big-buck-bunny');
+    expect(films.map((f) => f.id)).toContain('tears-of-steel');
   });
 
   it('rejects a question after the end of the film', () => {
@@ -125,5 +126,17 @@ describe('toContentView', () => {
       'http://localhost:8787',
     );
     expect(view.url).toBe('https://cdn.example.com/a.mp4');
+  });
+});
+
+describe('watchedScenes', () => {
+  const tears = checkContent(realFile, 'tears-of-steel');
+  it('returns only chapters fully watched, each starting where the last one ended', () => {
+    if (!tears.ok) throw new Error(tears.problem);
+    const scenes = watchedScenes(tears.content, 240, 'https://pip.example.com');
+    expect(scenes.map((s) => s.atSec)).toEqual([45, 135, 240]);
+    expect(scenes.map((s) => s.startSec)).toEqual([0, 45, 135]);
+    expect(scenes[0]?.image).toMatch(/^https:\/\/pip\.example\.com\/media\//);
+    expect(watchedScenes(tears.content, 30, 'https://pip.example.com')).toEqual([]);
   });
 });
