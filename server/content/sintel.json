@@ -286,6 +286,10 @@
     {
       "id": "sintel",
       "name": "Sintel",
+      "aliases": [
+        "young woman",
+        "girl"
+      ],
       "image": "/media/companion/sintel/sintel.jpg",
       "facts": [
         {
@@ -313,6 +317,9 @@
     {
       "id": "shaman",
       "name": "The shaman",
+      "aliases": [
+        "old man"
+      ],
       "image": "/media/companion/sintel/shaman.jpg",
       "facts": [
         {

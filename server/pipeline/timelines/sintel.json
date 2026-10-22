@@ -1,0 +1,5803 @@
+{
+  "schemaVersion": 1,
+  "contentId": "sintel",
+  "durationSec": 888,
+  "source": {
+    "assetId": "sintel",
+    "sha256": "00b28cec4a64da348287d26fd682a4915d82b5105e11302f6d645d2b4498ea78",
+    "license": "CC BY 3.0",
+    "rights": "Sintel (c) copyright 2010 Blender Foundation, durian.blender.org; credited in Pip's film card"
+  },
+  "frames": [
+    {
+      "id": "fr-00005",
+      "atSec": 0.5,
+      "path": "frames/fr-00005.jpg"
+    },
+    {
+      "id": "fr-00055",
+      "atSec": 5.5,
+      "path": "frames/fr-00055.jpg"
+    },
+    {
+      "id": "fr-00085",
+      "atSec": 8.5,
+      "path": "frames/fr-00085.jpg"
+    },
+    {
+      "id": "fr-00125",
+      "atSec": 12.5,
+      "path": "frames/fr-00125.jpg"
+    },
+    {
+      "id": "fr-00165",
+      "atSec": 16.5,
+      "path": "frames/fr-00165.jpg"
+    },
+    {
+      "id": "fr-00205",
+      "atSec": 20.5,
+      "path": "frames/fr-00205.jpg"
+    },
+    {
+      "id": "fr-00245",
+      "atSec": 24.5,
+      "path": "frames/fr-00245.jpg"
+    },
+    {
+      "id": "fr-00285",
+      "atSec": 28.5,
+      "path": "frames/fr-00285.jpg"
+    },
+    {
+      "id": "fr-00319",
+      "atSec": 31.917,
+      "path": "frames/fr-00319.jpg"
+    },
+    {
+      "id": "fr-00358",
+      "atSec": 35.833,
+      "path": "frames/fr-00358.jpg"
+    },
+    {
+      "id": "fr-00398",
+      "atSec": 39.833,
+      "path": "frames/fr-00398.jpg"
+    },
+    {
+      "id": "fr-00673",
+      "atSec": 67.333,
+      "path": "frames/fr-00673.jpg"
+    },
+    {
+      "id": "fr-00687",
+      "atSec": 68.708,
+      "path": "frames/fr-00687.jpg"
+    },
+    {
+      "id": "fr-00704",
+      "atSec": 70.417,
+      "path": "frames/fr-00704.jpg"
+    },
+    {
+      "id": "fr-00727",
+      "atSec": 72.708,
+      "path": "frames/fr-00727.jpg"
+    },
+    {
+      "id": "fr-00746",
+      "atSec": 74.625,
+      "path": "frames/fr-00746.jpg"
+    },
+    {
+      "id": "fr-00785",
+      "atSec": 78.5,
+      "path": "frames/fr-00785.jpg"
+    },
+    {
+      "id": "fr-00820",
+      "atSec": 82,
+      "path": "frames/fr-00820.jpg"
+    },
+    {
+      "id": "fr-00885",
+      "atSec": 88.5,
+      "path": "frames/fr-00885.jpg"
+    },
+    {
+      "id": "fr-00930",
+      "atSec": 93,
+      "path": "frames/fr-00930.jpg"
+    },
+    {
+      "id": "fr-00970",
+      "atSec": 97,
+      "path": "frames/fr-00970.jpg"
+    },
+    {
+      "id": "fr-01010",
+      "atSec": 101,
+      "path": "frames/fr-01010.jpg"
+    },
+    {
+      "id": "fr-01057",
+      "atSec": 105.708,
+      "path": "frames/fr-01057.jpg"
+    },
+    {
+      "id": "fr-01099",
+      "atSec": 109.917,
+      "path": "frames/fr-01099.jpg"
+    },
+    {
+      "id": "fr-01138",
+      "atSec": 113.833,
+      "path": "frames/fr-01138.jpg"
+    },
+    {
+      "id": "fr-01164",
+      "atSec": 116.417,
+      "path": "frames/fr-01164.jpg"
+    },
+    {
+      "id": "fr-01186",
+      "atSec": 118.625,
+      "path": "frames/fr-01186.jpg"
+    },
+    {
+      "id": "fr-01206",
+      "atSec": 120.625,
+      "path": "frames/fr-01206.jpg"
+    },
+    {
+      "id": "fr-01237",
+      "atSec": 123.708,
+      "path": "frames/fr-01237.jpg"
+    },
+    {
+      "id": "fr-01268",
+      "atSec": 126.833,
+      "path": "frames/fr-01268.jpg"
+    },
+    {
+      "id": "fr-01308",
+      "atSec": 130.833,
+      "path": "frames/fr-01308.jpg"
+    },
+    {
+      "id": "fr-01345",
+      "atSec": 134.5,
+      "path": "frames/fr-01345.jpg"
+    },
+    {
+      "id": "fr-01387",
+      "atSec": 138.708,
+      "path": "frames/fr-01387.jpg"
+    },
+    {
+      "id": "fr-01415",
+      "atSec": 141.5,
+      "path": "frames/fr-01415.jpg"
+    },
+    {
+      "id": "fr-01455",
+      "atSec": 145.5,
+      "path": "frames/fr-01455.jpg"
+    },
+    {
+      "id": "fr-01495",
+      "atSec": 149.5,
+      "path": "frames/fr-01495.jpg"
+    },
+    {
+      "id": "fr-01510",
+      "atSec": 151,
+      "path": "frames/fr-01510.jpg"
+    },
+    {
+      "id": "fr-01526",
+      "atSec": 152.625,
+      "path": "frames/fr-01526.jpg"
+    },
+    {
+      "id": "fr-01571",
+      "atSec": 157.125,
+      "path": "frames/fr-01571.jpg"
+    },
+    {
+      "id": "fr-01603",
+      "atSec": 160.333,
+      "path": "frames/fr-01603.jpg"
+    },
+    {
+      "id": "fr-01635",
+      "atSec": 163.5,
+      "path": "frames/fr-01635.jpg"
+    },
+    {
+      "id": "fr-01667",
+      "atSec": 166.708,
+      "path": "frames/fr-01667.jpg"
+    },
+    {
+      "id": "fr-01706",
+      "atSec": 170.625,
+      "path": "frames/fr-01706.jpg"
+    },
+    {
+      "id": "fr-01738",
+      "atSec": 173.833,
+      "path": "frames/fr-01738.jpg"
+    },
+    {
+      "id": "fr-01781",
+      "atSec": 178.125,
+      "path": "frames/fr-01781.jpg"
+    },
+    {
+      "id": "fr-01815",
+      "atSec": 181.5,
+      "path": "frames/fr-01815.jpg"
+    },
+    {
+      "id": "fr-01832",
+      "atSec": 183.208,
+      "path": "frames/fr-01832.jpg"
+    },
+    {
+      "id": "fr-01851",
+      "atSec": 185.125,
+      "path": "frames/fr-01851.jpg"
+    },
+    {
+      "id": "fr-01883",
+      "atSec": 188.333,
+      "path": "frames/fr-01883.jpg"
+    },
+    {
+      "id": "fr-01903",
+      "atSec": 190.333,
+      "path": "frames/fr-01903.jpg"
+    },
+    {
+      "id": "fr-01924",
+      "atSec": 192.417,
+      "path": "frames/fr-01924.jpg"
+    },
+    {
+      "id": "fr-01952",
+      "atSec": 195.208,
+      "path": "frames/fr-01952.jpg"
+    },
+    {
+      "id": "fr-01969",
+      "atSec": 196.917,
+      "path": "frames/fr-01969.jpg"
+    },
+    {
+      "id": "fr-01983",
+      "atSec": 198.333,
+      "path": "frames/fr-01983.jpg"
+    },
+    {
+      "id": "fr-02009",
+      "atSec": 200.917,
+      "path": "frames/fr-02009.jpg"
+    },
+    {
+      "id": "fr-02037",
+      "atSec": 203.708,
+      "path": "frames/fr-02037.jpg"
+    },
+    {
+      "id": "fr-02065",
+      "atSec": 206.5,
+      "path": "frames/fr-02065.jpg"
+    },
+    {
+      "id": "fr-02095",
+      "atSec": 209.5,
+      "path": "frames/fr-02095.jpg"
+    },
+    {
+      "id": "fr-02130",
+      "atSec": 213,
+      "path": "frames/fr-02130.jpg"
+    },
+    {
+      "id": "fr-02158",
+      "atSec": 215.833,
+      "path": "frames/fr-02158.jpg"
+    },
+    {
+      "id": "fr-02200",
+      "atSec": 220,
+      "path": "frames/fr-02200.jpg"
+    },
+    {
+      "id": "fr-02214",
+      "atSec": 221.417,
+      "path": "frames/fr-02214.jpg"
+    },
+    {
+      "id": "fr-02234",
+      "atSec": 223.417,
+      "path": "frames/fr-02234.jpg"
+    },
+    {
+      "id": "fr-02246",
+      "atSec": 224.625,
+      "path": "frames/fr-02246.jpg"
+    },
+    {
+      "id": "fr-02286",
+      "atSec": 228.625,
+      "path": "frames/fr-02286.jpg"
+    },
+    {
+      "id": "fr-02326",
+      "atSec": 232.625,
+      "path": "frames/fr-02326.jpg"
+    },
+    {
+      "id": "fr-02366",
+      "atSec": 236.625,
+      "path": "frames/fr-02366.jpg"
+    },
+    {
+      "id": "fr-02406",
+      "atSec": 240.625,
+      "path": "frames/fr-02406.jpg"
+    },
+    {
+      "id": "fr-02446",
+      "atSec": 244.625,
+      "path": "frames/fr-02446.jpg"
+    },
+    {
+      "id": "fr-02586",
+      "atSec": 258.625,
+      "path": "frames/fr-02586.jpg"
+    },
+    {
+      "id": "fr-02598",
+      "atSec": 259.833,
+      "path": "frames/fr-02598.jpg"
+    },
+    {
+      "id": "fr-02638",
+      "atSec": 263.833,
+      "path": "frames/fr-02638.jpg"
+    },
+    {
+      "id": "fr-02650",
+      "atSec": 265,
+      "path": "frames/fr-02650.jpg"
+    },
+    {
+      "id": "fr-02687",
+      "atSec": 268.708,
+      "path": "frames/fr-02687.jpg"
+    },
+    {
+      "id": "fr-02721",
+      "atSec": 272.125,
+      "path": "frames/fr-02721.jpg"
+    },
+    {
+      "id": "fr-02750",
+      "atSec": 275,
+      "path": "frames/fr-02750.jpg"
+    },
+    {
+      "id": "fr-02762",
+      "atSec": 276.208,
+      "path": "frames/fr-02762.jpg"
+    },
+    {
+      "id": "fr-02794",
+      "atSec": 279.417,
+      "path": "frames/fr-02794.jpg"
+    },
+    {
+      "id": "fr-02833",
+      "atSec": 283.333,
+      "path": "frames/fr-02833.jpg"
+    },
+    {
+      "id": "fr-02843",
+      "atSec": 284.333,
+      "path": "frames/fr-02843.jpg"
+    },
+    {
+      "id": "fr-02897",
+      "atSec": 289.708,
+      "path": "frames/fr-02897.jpg"
+    },
+    {
+      "id": "fr-02913",
+      "atSec": 291.333,
+      "path": "frames/fr-02913.jpg"
+    },
+    {
+      "id": "fr-02966",
+      "atSec": 296.625,
+      "path": "frames/fr-02966.jpg"
+    },
+    {
+      "id": "fr-02978",
+      "atSec": 297.833,
+      "path": "frames/fr-02978.jpg"
+    },
+    {
+      "id": "fr-03017",
+      "atSec": 301.708,
+      "path": "frames/fr-03017.jpg"
+    },
+    {
+      "id": "fr-03033",
+      "atSec": 303.333,
+      "path": "frames/fr-03033.jpg"
+    },
+    {
+      "id": "fr-03061",
+      "atSec": 306.125,
+      "path": "frames/fr-03061.jpg"
+    },
+    {
+      "id": "fr-03094",
+      "atSec": 309.417,
+      "path": "frames/fr-03094.jpg"
+    },
+    {
+      "id": "fr-03137",
+      "atSec": 313.708,
+      "path": "frames/fr-03137.jpg"
+    },
+    {
+      "id": "fr-03273",
+      "atSec": 327.333,
+      "path": "frames/fr-03273.jpg"
+    },
+    {
+      "id": "fr-03287",
+      "atSec": 328.708,
+      "path": "frames/fr-03287.jpg"
+    },
+    {
+      "id": "fr-03309",
+      "atSec": 330.917,
+      "path": "frames/fr-03309.jpg"
+    },
+    {
+      "id": "fr-03389",
+      "atSec": 338.917,
+      "path": "frames/fr-03389.jpg"
+    },
+    {
+      "id": "fr-03399",
+      "atSec": 339.917,
+      "path": "frames/fr-03399.jpg"
+    },
+    {
+      "id": "fr-03428",
+      "atSec": 342.833,
+      "path": "frames/fr-03428.jpg"
+    },
+    {
+      "id": "fr-03468",
+      "atSec": 346.833,
+      "path": "frames/fr-03468.jpg"
+    },
+    {
+      "id": "fr-03539",
+      "atSec": 353.917,
+      "path": "frames/fr-03539.jpg"
+    },
+    {
+      "id": "fr-03578",
+      "atSec": 357.833,
+      "path": "frames/fr-03578.jpg"
+    },
+    {
+      "id": "fr-03618",
+      "atSec": 361.833,
+      "path": "frames/fr-03618.jpg"
+    },
+    {
+      "id": "fr-03658",
+      "atSec": 365.833,
+      "path": "frames/fr-03658.jpg"
+    },
+    {
+      "id": "fr-03676",
+      "atSec": 367.625,
+      "path": "frames/fr-03676.jpg"
+    },
+    {
+      "id": "fr-03698",
+      "atSec": 369.833,
+      "path": "frames/fr-03698.jpg"
+    },
+    {
+      "id": "fr-03738",
+      "atSec": 373.833,
+      "path": "frames/fr-03738.jpg"
+    },
+    {
+      "id": "fr-03778",
+      "atSec": 377.833,
+      "path": "frames/fr-03778.jpg"
+    },
+    {
+      "id": "fr-03811",
+      "atSec": 381.125,
+      "path": "frames/fr-03811.jpg"
+    },
+    {
+      "id": "fr-03839",
+      "atSec": 383.917,
+      "path": "frames/fr-03839.jpg"
+    },
+    {
+      "id": "fr-03868",
+      "atSec": 386.833,
+      "path": "frames/fr-03868.jpg"
+    },
+    {
+      "id": "fr-03936",
+      "atSec": 393.625,
+      "path": "frames/fr-03936.jpg"
+    },
+    {
+      "id": "fr-03954",
+      "atSec": 395.417,
+      "path": "frames/fr-03954.jpg"
+    },
+    {
+      "id": "fr-03978",
+      "atSec": 397.833,
+      "path": "frames/fr-03978.jpg"
+    },
+    {
+      "id": "fr-03999",
+      "atSec": 399.917,
+      "path": "frames/fr-03999.jpg"
+    },
+    {
+      "id": "fr-04014",
+      "atSec": 401.417,
+      "path": "frames/fr-04014.jpg"
+    },
+    {
+      "id": "fr-04074",
+      "atSec": 407.417,
+      "path": "frames/fr-04074.jpg"
+    },
+    {
+      "id": "fr-04094",
+      "atSec": 409.417,
+      "path": "frames/fr-04094.jpg"
+    },
+    {
+      "id": "fr-04134",
+      "atSec": 413.417,
+      "path": "frames/fr-04134.jpg"
+    },
+    {
+      "id": "fr-04156",
+      "atSec": 415.625,
+      "path": "frames/fr-04156.jpg"
+    },
+    {
+      "id": "fr-04189",
+      "atSec": 418.917,
+      "path": "frames/fr-04189.jpg"
+    },
+    {
+      "id": "fr-04236",
+      "atSec": 423.625,
+      "path": "frames/fr-04236.jpg"
+    },
+    {
+      "id": "fr-04263",
+      "atSec": 426.333,
+      "path": "frames/fr-04263.jpg"
+    },
+    {
+      "id": "fr-04303",
+      "atSec": 430.333,
+      "path": "frames/fr-04303.jpg"
+    },
+    {
+      "id": "fr-04321",
+      "atSec": 432.125,
+      "path": "frames/fr-04321.jpg"
+    },
+    {
+      "id": "fr-04356",
+      "atSec": 435.625,
+      "path": "frames/fr-04356.jpg"
+    },
+    {
+      "id": "fr-04388",
+      "atSec": 438.833,
+      "path": "frames/fr-04388.jpg"
+    },
+    {
+      "id": "fr-04429",
+      "atSec": 442.917,
+      "path": "frames/fr-04429.jpg"
+    },
+    {
+      "id": "fr-04448",
+      "atSec": 444.833,
+      "path": "frames/fr-04448.jpg"
+    },
+    {
+      "id": "fr-04480",
+      "atSec": 448,
+      "path": "frames/fr-04480.jpg"
+    },
+    {
+      "id": "fr-04510",
+      "atSec": 451,
+      "path": "frames/fr-04510.jpg"
+    },
+    {
+      "id": "fr-04550",
+      "atSec": 455,
+      "path": "frames/fr-04550.jpg"
+    },
+    {
+      "id": "fr-04568",
+      "atSec": 456.833,
+      "path": "frames/fr-04568.jpg"
+    },
+    {
+      "id": "fr-04585",
+      "atSec": 458.5,
+      "path": "frames/fr-04585.jpg"
+    },
+    {
+      "id": "fr-04610",
+      "atSec": 461,
+      "path": "frames/fr-04610.jpg"
+    },
+    {
+      "id": "fr-04632",
+      "atSec": 463.208,
+      "path": "frames/fr-04632.jpg"
+    },
+    {
+      "id": "fr-04672",
+      "atSec": 467.208,
+      "path": "frames/fr-04672.jpg"
+    },
+    {
+      "id": "fr-04711",
+      "atSec": 471.125,
+      "path": "frames/fr-04711.jpg"
+    },
+    {
+      "id": "fr-04755",
+      "atSec": 475.5,
+      "path": "frames/fr-04755.jpg"
+    },
+    {
+      "id": "fr-04768",
+      "atSec": 476.833,
+      "path": "frames/fr-04768.jpg"
+    },
+    {
+      "id": "fr-04791",
+      "atSec": 479.125,
+      "path": "frames/fr-04791.jpg"
+    },
+    {
+      "id": "fr-04823",
+      "atSec": 482.333,
+      "path": "frames/fr-04823.jpg"
+    },
+    {
+      "id": "fr-04842",
+      "atSec": 484.208,
+      "path": "frames/fr-04842.jpg"
+    },
+    {
+      "id": "fr-04880",
+      "atSec": 488,
+      "path": "frames/fr-04880.jpg"
+    },
+    {
+      "id": "fr-04915",
+      "atSec": 491.5,
+      "path": "frames/fr-04915.jpg"
+    },
+    {
+      "id": "fr-04955",
+      "atSec": 495.5,
+      "path": "frames/fr-04955.jpg"
+    },
+    {
+      "id": "fr-04995",
+      "atSec": 499.5,
+      "path": "frames/fr-04995.jpg"
+    },
+    {
+      "id": "fr-05056",
+      "atSec": 505.625,
+      "path": "frames/fr-05056.jpg"
+    },
+    {
+      "id": "fr-05093",
+      "atSec": 509.333,
+      "path": "frames/fr-05093.jpg"
+    },
+    {
+      "id": "fr-05132",
+      "atSec": 513.208,
+      "path": "frames/fr-05132.jpg"
+    },
+    {
+      "id": "fr-05161",
+      "atSec": 516.125,
+      "path": "frames/fr-05161.jpg"
+    },
+    {
+      "id": "fr-05210",
+      "atSec": 521,
+      "path": "frames/fr-05210.jpg"
+    },
+    {
+      "id": "fr-05240",
+      "atSec": 524,
+      "path": "frames/fr-05240.jpg"
+    },
+    {
+      "id": "fr-05271",
+      "atSec": 527.125,
+      "path": "frames/fr-05271.jpg"
+    },
+    {
+      "id": "fr-05311",
+      "atSec": 531.125,
+      "path": "frames/fr-05311.jpg"
+    },
+    {
+      "id": "fr-05342",
+      "atSec": 534.208,
+      "path": "frames/fr-05342.jpg"
+    },
+    {
+      "id": "fr-05369",
+      "atSec": 536.917,
+      "path": "frames/fr-05369.jpg"
+    },
+    {
+      "id": "fr-05399",
+      "atSec": 539.917,
+      "path": "frames/fr-05399.jpg"
+    },
+    {
+      "id": "fr-05476",
+      "atSec": 547.625,
+      "path": "frames/fr-05476.jpg"
+    },
+    {
+      "id": "fr-05496",
+      "atSec": 549.625,
+      "path": "frames/fr-05496.jpg"
+    },
+    {
+      "id": "fr-05520",
+      "atSec": 552,
+      "path": "frames/fr-05520.jpg"
+    },
+    {
+      "id": "fr-05555",
+      "atSec": 555.5,
+      "path": "frames/fr-05555.jpg"
+    },
+    {
+      "id": "fr-05618",
+      "atSec": 561.833,
+      "path": "frames/fr-05618.jpg"
+    },
+    {
+      "id": "fr-05683",
+      "atSec": 568.333,
+      "path": "frames/fr-05683.jpg"
+    },
+    {
+      "id": "fr-05722",
+      "atSec": 572.208,
+      "path": "frames/fr-05722.jpg"
+    },
+    {
+      "id": "fr-05735",
+      "atSec": 573.5,
+      "path": "frames/fr-05735.jpg"
+    },
+    {
+      "id": "fr-05768",
+      "atSec": 576.833,
+      "path": "frames/fr-05768.jpg"
+    },
+    {
+      "id": "fr-05840",
+      "atSec": 584,
+      "path": "frames/fr-05840.jpg"
+    },
+    {
+      "id": "fr-05893",
+      "atSec": 589.333,
+      "path": "frames/fr-05893.jpg"
+    },
+    {
+      "id": "fr-05913",
+      "atSec": 591.333,
+      "path": "frames/fr-05913.jpg"
+    },
+    {
+      "id": "fr-05959",
+      "atSec": 595.917,
+      "path": "frames/fr-05959.jpg"
+    },
+    {
+      "id": "fr-06046",
+      "atSec": 604.625,
+      "path": "frames/fr-06046.jpg"
+    },
+    {
+      "id": "fr-06088",
+      "atSec": 608.833,
+      "path": "frames/fr-06088.jpg"
+    },
+    {
+      "id": "fr-06098",
+      "atSec": 609.833,
+      "path": "frames/fr-06098.jpg"
+    },
+    {
+      "id": "fr-06124",
+      "atSec": 612.417,
+      "path": "frames/fr-06124.jpg"
+    },
+    {
+      "id": "fr-06143",
+      "atSec": 614.333,
+      "path": "frames/fr-06143.jpg"
+    },
+    {
+      "id": "fr-06173",
+      "atSec": 617.333,
+      "path": "frames/fr-06173.jpg"
+    },
+    {
+      "id": "fr-06204",
+      "atSec": 620.417,
+      "path": "frames/fr-06204.jpg"
+    },
+    {
+      "id": "fr-06223",
+      "atSec": 622.333,
+      "path": "frames/fr-06223.jpg"
+    },
+    {
+      "id": "fr-06263",
+      "atSec": 626.333,
+      "path": "frames/fr-06263.jpg"
+    },
+    {
+      "id": "fr-06303",
+      "atSec": 630.333,
+      "path": "frames/fr-06303.jpg"
+    },
+    {
+      "id": "fr-06346",
+      "atSec": 634.625,
+      "path": "frames/fr-06346.jpg"
+    },
+    {
+      "id": "fr-06383",
+      "atSec": 638.333,
+      "path": "frames/fr-06383.jpg"
+    },
+    {
+      "id": "fr-06415",
+      "atSec": 641.5,
+      "path": "frames/fr-06415.jpg"
+    },
+    {
+      "id": "fr-06455",
+      "atSec": 645.5,
+      "path": "frames/fr-06455.jpg"
+    },
+    {
+      "id": "fr-06480",
+      "atSec": 648,
+      "path": "frames/fr-06480.jpg"
+    },
+    {
+      "id": "fr-06520",
+      "atSec": 652,
+      "path": "frames/fr-06520.jpg"
+    },
+    {
+      "id": "fr-06555",
+      "atSec": 655.5,
+      "path": "frames/fr-06555.jpg"
+    },
+    {
+      "id": "fr-06580",
+      "atSec": 658,
+      "path": "frames/fr-06580.jpg"
+    },
+    {
+      "id": "fr-06682",
+      "atSec": 668.208,
+      "path": "frames/fr-06682.jpg"
+    },
+    {
+      "id": "fr-06707",
+      "atSec": 670.708,
+      "path": "frames/fr-06707.jpg"
+    },
+    {
+      "id": "fr-06775",
+      "atSec": 677.5,
+      "path": "frames/fr-06775.jpg"
+    },
+    {
+      "id": "fr-06800",
+      "atSec": 680,
+      "path": "frames/fr-06800.jpg"
+    },
+    {
+      "id": "fr-06840",
+      "atSec": 684,
+      "path": "frames/fr-06840.jpg"
+    },
+    {
+      "id": "fr-06885",
+      "atSec": 688.5,
+      "path": "frames/fr-06885.jpg"
+    },
+    {
+      "id": "fr-06925",
+      "atSec": 692.5,
+      "path": "frames/fr-06925.jpg"
+    },
+    {
+      "id": "fr-06965",
+      "atSec": 696.5,
+      "path": "frames/fr-06965.jpg"
+    },
+    {
+      "id": "fr-07008",
+      "atSec": 700.833,
+      "path": "frames/fr-07008.jpg"
+    },
+    {
+      "id": "fr-07048",
+      "atSec": 704.833,
+      "path": "frames/fr-07048.jpg"
+    },
+    {
+      "id": "fr-07088",
+      "atSec": 708.833,
+      "path": "frames/fr-07088.jpg"
+    },
+    {
+      "id": "fr-07118",
+      "atSec": 711.833,
+      "path": "frames/fr-07118.jpg"
+    },
+    {
+      "id": "fr-07145",
+      "atSec": 714.5,
+      "path": "frames/fr-07145.jpg"
+    },
+    {
+      "id": "fr-07185",
+      "atSec": 718.5,
+      "path": "frames/fr-07185.jpg"
+    },
+    {
+      "id": "fr-07225",
+      "atSec": 722.5,
+      "path": "frames/fr-07225.jpg"
+    },
+    {
+      "id": "fr-07265",
+      "atSec": 726.5,
+      "path": "frames/fr-07265.jpg"
+    },
+    {
+      "id": "fr-07314",
+      "atSec": 731.417,
+      "path": "frames/fr-07314.jpg"
+    },
+    {
+      "id": "fr-07345",
+      "atSec": 734.5,
+      "path": "frames/fr-07345.jpg"
+    },
+    {
+      "id": "fr-07385",
+      "atSec": 738.5,
+      "path": "frames/fr-07385.jpg"
+    },
+    {
+      "id": "fr-07425",
+      "atSec": 742.5,
+      "path": "frames/fr-07425.jpg"
+    },
+    {
+      "id": "fr-07446",
+      "atSec": 744.625,
+      "path": "frames/fr-07446.jpg"
+    },
+    {
+      "id": "fr-07479",
+      "atSec": 747.917,
+      "path": "frames/fr-07479.jpg"
+    },
+    {
+      "id": "fr-07513",
+      "atSec": 751.333,
+      "path": "frames/fr-07513.jpg"
+    },
+    {
+      "id": "fr-07526",
+      "atSec": 752.625,
+      "path": "frames/fr-07526.jpg"
+    },
+    {
+      "id": "fr-07547",
+      "atSec": 754.708,
+      "path": "frames/fr-07547.jpg"
+    },
+    {
+      "id": "fr-07566",
+      "atSec": 756.625,
+      "path": "frames/fr-07566.jpg"
+    },
+    {
+      "id": "fr-07581",
+      "atSec": 758.125,
+      "path": "frames/fr-07581.jpg"
+    },
+    {
+      "id": "fr-07615",
+      "atSec": 761.5,
+      "path": "frames/fr-07615.jpg"
+    },
+    {
+      "id": "fr-07650",
+      "atSec": 765,
+      "path": "frames/fr-07650.jpg"
+    },
+    {
+      "id": "fr-07684",
+      "atSec": 768.417,
+      "path": "frames/fr-07684.jpg"
+    },
+    {
+      "id": "fr-07718",
+      "atSec": 771.833,
+      "path": "frames/fr-07718.jpg"
+    },
+    {
+      "id": "fr-07752",
+      "atSec": 775.208,
+      "path": "frames/fr-07752.jpg"
+    },
+    {
+      "id": "fr-07766",
+      "atSec": 776.625,
+      "path": "frames/fr-07766.jpg"
+    },
+    {
+      "id": "fr-07786",
+      "atSec": 778.625,
+      "path": "frames/fr-07786.jpg"
+    },
+    {
+      "id": "fr-07806",
+      "atSec": 780.625,
+      "path": "frames/fr-07806.jpg"
+    },
+    {
+      "id": "fr-07820",
+      "atSec": 782,
+      "path": "frames/fr-07820.jpg"
+    },
+    {
+      "id": "fr-07846",
+      "atSec": 784.625,
+      "path": "frames/fr-07846.jpg"
+    },
+    {
+      "id": "fr-07886",
+      "atSec": 788.625,
+      "path": "frames/fr-07886.jpg"
+    },
+    {
+      "id": "fr-07926",
+      "atSec": 792.625,
+      "path": "frames/fr-07926.jpg"
+    },
+    {
+      "id": "fr-07966",
+      "atSec": 796.625,
+      "path": "frames/fr-07966.jpg"
+    },
+    {
+      "id": "fr-08006",
+      "atSec": 800.625,
+      "path": "frames/fr-08006.jpg"
+    },
+    {
+      "id": "fr-08046",
+      "atSec": 804.625,
+      "path": "frames/fr-08046.jpg"
+    },
+    {
+      "id": "fr-08086",
+      "atSec": 808.625,
+      "path": "frames/fr-08086.jpg"
+    },
+    {
+      "id": "fr-08126",
+      "atSec": 812.625,
+      "path": "frames/fr-08126.jpg"
+    },
+    {
+      "id": "fr-08166",
+      "atSec": 816.625,
+      "path": "frames/fr-08166.jpg"
+    },
+    {
+      "id": "fr-08206",
+      "atSec": 820.625,
+      "path": "frames/fr-08206.jpg"
+    },
+    {
+      "id": "fr-08246",
+      "atSec": 824.625,
+      "path": "frames/fr-08246.jpg"
+    },
+    {
+      "id": "fr-08286",
+      "atSec": 828.625,
+      "path": "frames/fr-08286.jpg"
+    },
+    {
+      "id": "fr-08326",
+      "atSec": 832.625,
+      "path": "frames/fr-08326.jpg"
+    },
+    {
+      "id": "fr-08366",
+      "atSec": 836.625,
+      "path": "frames/fr-08366.jpg"
+    },
+    {
+      "id": "fr-08406",
+      "atSec": 840.625,
+      "path": "frames/fr-08406.jpg"
+    },
+    {
+      "id": "fr-08446",
+      "atSec": 844.625,
+      "path": "frames/fr-08446.jpg"
+    },
+    {
+      "id": "fr-08486",
+      "atSec": 848.625,
+      "path": "frames/fr-08486.jpg"
+    },
+    {
+      "id": "fr-08526",
+      "atSec": 852.625,
+      "path": "frames/fr-08526.jpg"
+    },
+    {
+      "id": "fr-08566",
+      "atSec": 856.625,
+      "path": "frames/fr-08566.jpg"
+    },
+    {
+      "id": "fr-08606",
+      "atSec": 860.625,
+      "path": "frames/fr-08606.jpg"
+    },
+    {
+      "id": "fr-08646",
+      "atSec": 864.625,
+      "path": "frames/fr-08646.jpg"
+    },
+    {
+      "id": "fr-08686",
+      "atSec": 868.625,
+      "path": "frames/fr-08686.jpg"
+    },
+    {
+      "id": "fr-08726",
+      "atSec": 872.625,
+      "path": "frames/fr-08726.jpg"
+    },
+    {
+      "id": "fr-08766",
+      "atSec": 876.625,
+      "path": "frames/fr-08766.jpg"
+    },
+    {
+      "id": "fr-08806",
+      "atSec": 880.625,
+      "path": "frames/fr-08806.jpg"
+    },
+    {
+      "id": "fr-08846",
+      "atSec": 884.625,
+      "path": "frames/fr-08846.jpg"
+    }
+  ],
+  "lines": [
+    {
+      "id": "ln-01069",
+      "startSec": 106.94,
+      "endSec": 109.44,
+      "text": "This blade has a dark past."
+    },
+    {
+      "id": "ln-01115",
+      "startSec": 111.54,
+      "endSec": 114.14,
+      "text": "It has shed much innocent blood."
+    },
+    {
+      "id": "ln-01177",
+      "startSec": 117.72,
+      "endSec": 121.44,
+      "text": "You're a fool for traveling alone, so completely unprepared."
+    },
+    {
+      "id": "ln-01214",
+      "startSec": 121.44,
+      "endSec": 125.04,
+      "text": "You're lucky your blood's still flowing."
+    },
+    {
+      "id": "ln-01250",
+      "startSec": 125.04,
+      "endSec": 127.32,
+      "text": "Thank you."
+    },
+    {
+      "id": "ln-01273",
+      "startSec": 127.32,
+      "endSec": 132.96,
+      "text": "So what brings you to the land of the gatekeepers?"
+    },
+    {
+      "id": "ln-01330",
+      "startSec": 132.96,
+      "endSec": 137.6,
+      "text": "Um, I'm searching for someone."
+    },
+    {
+      "id": "ln-01376",
+      "startSec": 137.6,
+      "endSec": 143.7,
+      "text": "Someone very dear, a kindred spirit, a dragon."
+    },
+    {
+      "id": "ln-01477",
+      "startSec": 147.72,
+      "endSec": 150.88,
+      "text": "A dangerous quest for a lone hunter."
+    },
+    {
+      "id": "ln-01509",
+      "startSec": 150.88,
+      "endSec": 154.72,
+      "text": "I've been alone for as long as I can remember."
+    },
+    {
+      "id": "ln-01955",
+      "startSec": 195.54,
+      "endSec": 196.38,
+      "text": "Shh."
+    },
+    {
+      "id": "ln-02065",
+      "startSec": 206.54,
+      "endSec": 211.54,
+      "text": "Shh, shh, shh. We're almost done. Hey, sit still."
+    },
+    {
+      "id": "ln-02155",
+      "startSec": 215.54,
+      "endSec": 216.54,
+      "text": "Hmm."
+    },
+    {
+      "id": "ln-02275",
+      "startSec": 227.54,
+      "endSec": 229.54,
+      "text": "Goodnight, Scales."
+    },
+    {
+      "id": "ln-02500",
+      "startSec": 249.96,
+      "endSec": 250.96,
+      "text": "Get him, Scales!"
+    },
+    {
+      "id": "ln-02510",
+      "startSec": 250.96,
+      "endSec": 251.96,
+      "text": "Come on, get him!"
+    },
+    {
+      "id": "ln-02649",
+      "startSec": 264.86,
+      "endSec": 265.76,
+      "text": "Scales?"
+    },
+    {
+      "id": "ln-03063",
+      "startSec": 306.34,
+      "endSec": 307.18,
+      "text": "Mom!"
+    },
+    {
+      "id": "ln-03383",
+      "startSec": 338.3,
+      "endSec": 339.8,
+      "text": "Scout!"
+    },
+    {
+      "id": "ln-04458",
+      "startSec": 445.8,
+      "endSec": 447.22,
+      "text": "I have failed."
+    },
+    {
+      "id": "ln-04527",
+      "startSec": 452.68,
+      "endSec": 455.18,
+      "text": "You've only failed your C."
+    },
+    {
+      "id": "ln-04577",
+      "startSec": 457.68,
+      "endSec": 460.48,
+      "text": "These are dragon lands, Sintel."
+    },
+    {
+      "id": "ln-04605",
+      "startSec": 460.48,
+      "endSec": 462.9,
+      "text": "You are closer than you know."
+    },
+    {
+      "id": "ln-05574",
+      "startSec": 557.42,
+      "endSec": 558.42,
+      "text": "Scales!"
+    },
+    {
+      "id": "ln-05782",
+      "startSec": 578.24,
+      "endSec": 580.08,
+      "text": "Hey!"
+    },
+    {
+      "id": "ln-05986",
+      "startSec": 598.58,
+      "endSec": 599.58,
+      "text": "Lemon."
+    },
+    {
+      "id": "ln-06213",
+      "startSec": 621.32,
+      "endSec": 622.16,
+      "text": "Scales?"
+    },
+    {
+      "id": "ln-06258",
+      "startSec": 625.76,
+      "endSec": 626.6,
+      "text": "Scales?"
+    },
+    {
+      "id": "ln-07475",
+      "startSec": 747.46,
+      "endSec": 754.16,
+      "text": "Come take my journey in tonight"
+    },
+    {
+      "id": "ln-07542",
+      "startSec": 754.16,
+      "endSec": 760.84,
+      "text": "Come be my shadow, walk at my side"
+    },
+    {
+      "id": "ln-07608",
+      "startSec": 760.84,
+      "endSec": 767.04,
+      "text": "And when you see all that I have seen"
+    },
+    {
+      "id": "ln-07670",
+      "startSec": 767.04,
+      "endSec": 772.04,
+      "text": "Can you tell me now from time"
+    },
+    {
+      "id": "ln-07742",
+      "startSec": 774.18,
+      "endSec": 779.18,
+      "text": "I have been waiting all this time"
+    },
+    {
+      "id": "ln-07807",
+      "startSec": 780.72,
+      "endSec": 785.72,
+      "text": "For one to wake me, one to call mine"
+    },
+    {
+      "id": "ln-07874",
+      "startSec": 787.36,
+      "endSec": 792.36,
+      "text": "So when you're here, all that you hold dear"
+    },
+    {
+      "id": "ln-07936",
+      "startSec": 793.56,
+      "endSec": 799.56,
+      "text": "Do you fear what you will find?"
+    },
+    {
+      "id": "ln-07996",
+      "startSec": 799.56,
+      "endSec": 805.56,
+      "text": "'Cause the dawn breaks through the night"
+    },
+    {
+      "id": "ln-08066",
+      "startSec": 806.56,
+      "endSec": 815.56,
+      "text": "I'm alone forever longing for the home"
+    },
+    {
+      "id": "ln-08156",
+      "startSec": 815.56,
+      "endSec": 820.56,
+      "text": "I've found in your eyes"
+    },
+    {
+      "id": "ln-08236",
+      "startSec": 823.56,
+      "endSec": 852.56,
+      "text": "I will be listening for the drum to call me over far away from my tender youth and the very truth, showing me what I've begun."
+    },
+    {
+      "id": "ln-08526",
+      "startSec": 852.56,
+      "endSec": 858.56,
+      "text": "As the time breaks through the night"
+    },
+    {
+      "id": "ln-08586",
+      "startSec": 858.56,
+      "endSec": 864.56,
+      "text": "I will fall forever long"
+    },
+    {
+      "id": "ln-08646",
+      "startSec": 864.56,
+      "endSec": 867.56,
+      "text": "In for the fall"
+    },
+    {
+      "id": "ln-08676",
+      "startSec": 867.56,
+      "endSec": 871.56,
+      "text": "I found in your eyes"
+    },
+    {
+      "id": "ln-08716",
+      "startSec": 871.56,
+      "endSec": 873.56,
+      "text": "Your voice"
+    },
+    {
+      "id": "ln-08736",
+      "startSec": 873.56,
+      "endSec": 879.56,
+      "text": "Saw me through the night"
+    }
+  ],
+  "scenes": [
+    {
+      "id": "sc-001",
+      "startSec": 0,
+      "endSec": 31.333
+    },
+    {
+      "id": "sc-002",
+      "startSec": 31.333,
+      "endSec": 42.417
+    },
+    {
+      "id": "sc-003",
+      "startSec": 42.417,
+      "endSec": 44
+    },
+    {
+      "id": "sc-004",
+      "startSec": 44,
+      "endSec": 45.5
+    },
+    {
+      "id": "sc-005",
+      "startSec": 45.5,
+      "endSec": 47.333
+    },
+    {
+      "id": "sc-006",
+      "startSec": 47.333,
+      "endSec": 52.292
+    },
+    {
+      "id": "sc-007",
+      "startSec": 52.292,
+      "endSec": 53.792
+    },
+    {
+      "id": "sc-008",
+      "startSec": 53.792,
+      "endSec": 55.583
+    },
+    {
+      "id": "sc-009",
+      "startSec": 55.583,
+      "endSec": 57.083
+    },
+    {
+      "id": "sc-010",
+      "startSec": 57.083,
+      "endSec": 58.625
+    },
+    {
+      "id": "sc-011",
+      "startSec": 58.625,
+      "endSec": 60.625
+    },
+    {
+      "id": "sc-012",
+      "startSec": 60.625,
+      "endSec": 62.25
+    },
+    {
+      "id": "sc-013",
+      "startSec": 62.25,
+      "endSec": 64.667
+    },
+    {
+      "id": "sc-014",
+      "startSec": 64.667,
+      "endSec": 68.208
+    },
+    {
+      "id": "sc-015",
+      "startSec": 68.208,
+      "endSec": 74.042
+    },
+    {
+      "id": "sc-016",
+      "startSec": 74.042,
+      "endSec": 81.458
+    },
+    {
+      "id": "sc-017",
+      "startSec": 81.458,
+      "endSec": 85.833
+    },
+    {
+      "id": "sc-018",
+      "startSec": 85.833,
+      "endSec": 88.542
+    },
+    {
+      "id": "sc-019",
+      "startSec": 88.542,
+      "endSec": 101.208
+    },
+    {
+      "id": "sc-020",
+      "startSec": 101.208,
+      "endSec": 109.333
+    },
+    {
+      "id": "sc-021",
+      "startSec": 109.333,
+      "endSec": 115.833
+    },
+    {
+      "id": "sc-022",
+      "startSec": 115.833,
+      "endSec": 118.125
+    },
+    {
+      "id": "sc-023",
+      "startSec": 118.125,
+      "endSec": 120.042
+    },
+    {
+      "id": "sc-024",
+      "startSec": 120.042,
+      "endSec": 123.125
+    },
+    {
+      "id": "sc-025",
+      "startSec": 123.125,
+      "endSec": 126.333
+    },
+    {
+      "id": "sc-026",
+      "startSec": 126.333,
+      "endSec": 131
+    },
+    {
+      "id": "sc-027",
+      "startSec": 131,
+      "endSec": 134.042
+    },
+    {
+      "id": "sc-028",
+      "startSec": 134.042,
+      "endSec": 138.125
+    },
+    {
+      "id": "sc-029",
+      "startSec": 138.125,
+      "endSec": 141
+    },
+    {
+      "id": "sc-030",
+      "startSec": 141,
+      "endSec": 155.833
+    },
+    {
+      "id": "sc-031",
+      "startSec": 155.833,
+      "endSec": 162.083
+    },
+    {
+      "id": "sc-032",
+      "startSec": 162.083,
+      "endSec": 176.417
+    },
+    {
+      "id": "sc-033",
+      "startSec": 176.417,
+      "endSec": 180.083
+    },
+    {
+      "id": "sc-034",
+      "startSec": 180.083,
+      "endSec": 182
+    },
+    {
+      "id": "sc-035",
+      "startSec": 182,
+      "endSec": 184.375
+    },
+    {
+      "id": "sc-036",
+      "startSec": 184.375,
+      "endSec": 186.708
+    },
+    {
+      "id": "sc-037",
+      "startSec": 186.708,
+      "endSec": 189.792
+    },
+    {
+      "id": "sc-038",
+      "startSec": 189.792,
+      "endSec": 191.875
+    },
+    {
+      "id": "sc-039",
+      "startSec": 191.875,
+      "endSec": 194.625
+    },
+    {
+      "id": "sc-040",
+      "startSec": 194.625,
+      "endSec": 196.417
+    },
+    {
+      "id": "sc-041",
+      "startSec": 196.417,
+      "endSec": 203.125
+    },
+    {
+      "id": "sc-042",
+      "startSec": 203.125,
+      "endSec": 205
+    },
+    {
+      "id": "sc-043",
+      "startSec": 205,
+      "endSec": 211.75
+    },
+    {
+      "id": "sc-044",
+      "startSec": 211.75,
+      "endSec": 214.917
+    },
+    {
+      "id": "sc-045",
+      "startSec": 214.917,
+      "endSec": 219.458
+    },
+    {
+      "id": "sc-046",
+      "startSec": 219.458,
+      "endSec": 224.125
+    },
+    {
+      "id": "sc-047",
+      "startSec": 224.125,
+      "endSec": 248.167
+    },
+    {
+      "id": "sc-048",
+      "startSec": 248.167,
+      "endSec": 250.875
+    },
+    {
+      "id": "sc-049",
+      "startSec": 250.875,
+      "endSec": 252.958
+    },
+    {
+      "id": "sc-050",
+      "startSec": 252.958,
+      "endSec": 254.667
+    },
+    {
+      "id": "sc-051",
+      "startSec": 254.667,
+      "endSec": 259.208
+    },
+    {
+      "id": "sc-052",
+      "startSec": 259.208,
+      "endSec": 263.25
+    },
+    {
+      "id": "sc-053",
+      "startSec": 263.25,
+      "endSec": 265.583
+    },
+    {
+      "id": "sc-054",
+      "startSec": 265.583,
+      "endSec": 271.625
+    },
+    {
+      "id": "sc-055",
+      "startSec": 271.625,
+      "endSec": 273.25
+    },
+    {
+      "id": "sc-056",
+      "startSec": 273.25,
+      "endSec": 275.625
+    },
+    {
+      "id": "sc-057",
+      "startSec": 275.625,
+      "endSec": 278.792
+    },
+    {
+      "id": "sc-058",
+      "startSec": 278.792,
+      "endSec": 283.458
+    },
+    {
+      "id": "sc-059",
+      "startSec": 283.458,
+      "endSec": 287.5
+    },
+    {
+      "id": "sc-060",
+      "startSec": 287.5,
+      "endSec": 289.333
+    },
+    {
+      "id": "sc-061",
+      "startSec": 289.333,
+      "endSec": 297.25
+    },
+    {
+      "id": "sc-062",
+      "startSec": 297.25,
+      "endSec": 302.75
+    },
+    {
+      "id": "sc-063",
+      "startSec": 302.75,
+      "endSec": 306.292
+    },
+    {
+      "id": "sc-064",
+      "startSec": 306.292,
+      "endSec": 308.917
+    },
+    {
+      "id": "sc-065",
+      "startSec": 308.917,
+      "endSec": 311.125
+    },
+    {
+      "id": "sc-066",
+      "startSec": 311.125,
+      "endSec": 312.625
+    },
+    {
+      "id": "sc-067",
+      "startSec": 312.625,
+      "endSec": 314.958
+    },
+    {
+      "id": "sc-068",
+      "startSec": 314.958,
+      "endSec": 317.542
+    },
+    {
+      "id": "sc-069",
+      "startSec": 317.542,
+      "endSec": 321.333
+    },
+    {
+      "id": "sc-070",
+      "startSec": 321.333,
+      "endSec": 322.875
+    },
+    {
+      "id": "sc-071",
+      "startSec": 322.875,
+      "endSec": 325.375
+    },
+    {
+      "id": "sc-072",
+      "startSec": 325.375,
+      "endSec": 328.167
+    },
+    {
+      "id": "sc-073",
+      "startSec": 328.167,
+      "endSec": 330.375
+    },
+    {
+      "id": "sc-074",
+      "startSec": 330.375,
+      "endSec": 332.125
+    },
+    {
+      "id": "sc-075",
+      "startSec": 332.125,
+      "endSec": 335.292
+    },
+    {
+      "id": "sc-076",
+      "startSec": 335.292,
+      "endSec": 337.458
+    },
+    {
+      "id": "sc-077",
+      "startSec": 337.458,
+      "endSec": 339.333
+    },
+    {
+      "id": "sc-078",
+      "startSec": 339.333,
+      "endSec": 342.292
+    },
+    {
+      "id": "sc-079",
+      "startSec": 342.292,
+      "endSec": 349.75
+    },
+    {
+      "id": "sc-080",
+      "startSec": 349.75,
+      "endSec": 351.458
+    },
+    {
+      "id": "sc-081",
+      "startSec": 351.458,
+      "endSec": 353.333
+    },
+    {
+      "id": "sc-082",
+      "startSec": 353.333,
+      "endSec": 380.542
+    },
+    {
+      "id": "sc-083",
+      "startSec": 380.542,
+      "endSec": 382.917
+    },
+    {
+      "id": "sc-084",
+      "startSec": 382.917,
+      "endSec": 396.875
+    },
+    {
+      "id": "sc-085",
+      "startSec": 396.875,
+      "endSec": 415.083
+    },
+    {
+      "id": "sc-086",
+      "startSec": 415.083,
+      "endSec": 425.833
+    },
+    {
+      "id": "sc-087",
+      "startSec": 425.833,
+      "endSec": 431.583
+    },
+    {
+      "id": "sc-088",
+      "startSec": 431.583,
+      "endSec": 434.333
+    },
+    {
+      "id": "sc-089",
+      "startSec": 434.333,
+      "endSec": 442.375
+    },
+    {
+      "id": "sc-090",
+      "startSec": 442.375,
+      "endSec": 444.333
+    },
+    {
+      "id": "sc-091",
+      "startSec": 444.333,
+      "endSec": 447.5
+    },
+    {
+      "id": "sc-092",
+      "startSec": 447.5,
+      "endSec": 450.458
+    },
+    {
+      "id": "sc-093",
+      "startSec": 450.458,
+      "endSec": 454.458
+    },
+    {
+      "id": "sc-094",
+      "startSec": 454.458,
+      "endSec": 456.25
+    },
+    {
+      "id": "sc-095",
+      "startSec": 456.25,
+      "endSec": 458.042
+    },
+    {
+      "id": "sc-096",
+      "startSec": 458.042,
+      "endSec": 460.417
+    },
+    {
+      "id": "sc-097",
+      "startSec": 460.417,
+      "endSec": 462.208
+    },
+    {
+      "id": "sc-098",
+      "startSec": 462.208,
+      "endSec": 466.625
+    },
+    {
+      "id": "sc-099",
+      "startSec": 466.625,
+      "endSec": 475
+    },
+    {
+      "id": "sc-100",
+      "startSec": 475,
+      "endSec": 478.583
+    },
+    {
+      "id": "sc-101",
+      "startSec": 478.583,
+      "endSec": 483.708
+    },
+    {
+      "id": "sc-102",
+      "startSec": 483.708,
+      "endSec": 487.5
+    },
+    {
+      "id": "sc-103",
+      "startSec": 487.5,
+      "endSec": 490.958
+    },
+    {
+      "id": "sc-104",
+      "startSec": 490.958,
+      "endSec": 502.458
+    },
+    {
+      "id": "sc-105",
+      "startSec": 502.458,
+      "endSec": 505.792
+    },
+    {
+      "id": "sc-106",
+      "startSec": 505.792,
+      "endSec": 508.75
+    },
+    {
+      "id": "sc-107",
+      "startSec": 508.75,
+      "endSec": 512.667
+    },
+    {
+      "id": "sc-108",
+      "startSec": 512.667,
+      "endSec": 516.458
+    },
+    {
+      "id": "sc-109",
+      "startSec": 516.458,
+      "endSec": 523.417
+    },
+    {
+      "id": "sc-110",
+      "startSec": 523.417,
+      "endSec": 526.583
+    },
+    {
+      "id": "sc-111",
+      "startSec": 526.583,
+      "endSec": 533.625
+    },
+    {
+      "id": "sc-112",
+      "startSec": 533.625,
+      "endSec": 536.333
+    },
+    {
+      "id": "sc-113",
+      "startSec": 536.333,
+      "endSec": 539.333
+    },
+    {
+      "id": "sc-114",
+      "startSec": 539.333,
+      "endSec": 541.083
+    },
+    {
+      "id": "sc-115",
+      "startSec": 541.083,
+      "endSec": 543.125
+    },
+    {
+      "id": "sc-116",
+      "startSec": 543.125,
+      "endSec": 546
+    },
+    {
+      "id": "sc-117",
+      "startSec": 546,
+      "endSec": 549.125
+    },
+    {
+      "id": "sc-118",
+      "startSec": 549.125,
+      "endSec": 550.667
+    },
+    {
+      "id": "sc-119",
+      "startSec": 550.667,
+      "endSec": 554.958
+    },
+    {
+      "id": "sc-120",
+      "startSec": 554.958,
+      "endSec": 557.167
+    },
+    {
+      "id": "sc-121",
+      "startSec": 557.167,
+      "endSec": 559.292
+    },
+    {
+      "id": "sc-122",
+      "startSec": 559.292,
+      "endSec": 561.208
+    },
+    {
+      "id": "sc-123",
+      "startSec": 561.208,
+      "endSec": 567.042
+    },
+    {
+      "id": "sc-124",
+      "startSec": 567.042,
+      "endSec": 568.75
+    },
+    {
+      "id": "sc-125",
+      "startSec": 568.75,
+      "endSec": 572.958
+    },
+    {
+      "id": "sc-126",
+      "startSec": 572.958,
+      "endSec": 576.25
+    },
+    {
+      "id": "sc-127",
+      "startSec": 576.25,
+      "endSec": 578.875
+    },
+    {
+      "id": "sc-128",
+      "startSec": 578.875,
+      "endSec": 581.708
+    },
+    {
+      "id": "sc-129",
+      "startSec": 581.708,
+      "endSec": 583.417
+    },
+    {
+      "id": "sc-130",
+      "startSec": 583.417,
+      "endSec": 585.708
+    },
+    {
+      "id": "sc-131",
+      "startSec": 585.708,
+      "endSec": 587.208
+    },
+    {
+      "id": "sc-132",
+      "startSec": 587.208,
+      "endSec": 589.167
+    },
+    {
+      "id": "sc-133",
+      "startSec": 589.167,
+      "endSec": 590.708
+    },
+    {
+      "id": "sc-134",
+      "startSec": 590.708,
+      "endSec": 593.667
+    },
+    {
+      "id": "sc-135",
+      "startSec": 593.667,
+      "endSec": 595.333
+    },
+    {
+      "id": "sc-136",
+      "startSec": 595.333,
+      "endSec": 598.083
+    },
+    {
+      "id": "sc-137",
+      "startSec": 598.083,
+      "endSec": 599.583
+    },
+    {
+      "id": "sc-138",
+      "startSec": 599.583,
+      "endSec": 603.875
+    },
+    {
+      "id": "sc-139",
+      "startSec": 603.875,
+      "endSec": 606.333
+    },
+    {
+      "id": "sc-140",
+      "startSec": 606.333,
+      "endSec": 609.167
+    },
+    {
+      "id": "sc-141",
+      "startSec": 609.167,
+      "endSec": 611.875
+    },
+    {
+      "id": "sc-142",
+      "startSec": 611.875,
+      "endSec": 613.792
+    },
+    {
+      "id": "sc-143",
+      "startSec": 613.792,
+      "endSec": 616.75
+    },
+    {
+      "id": "sc-144",
+      "startSec": 616.75,
+      "endSec": 619.833
+    },
+    {
+      "id": "sc-145",
+      "startSec": 619.833,
+      "endSec": 621.75
+    },
+    {
+      "id": "sc-146",
+      "startSec": 621.75,
+      "endSec": 641
+    },
+    {
+      "id": "sc-147",
+      "startSec": 641,
+      "endSec": 647.458
+    },
+    {
+      "id": "sc-148",
+      "startSec": 647.458,
+      "endSec": 654.958
+    },
+    {
+      "id": "sc-149",
+      "startSec": 654.958,
+      "endSec": 657.375
+    },
+    {
+      "id": "sc-150",
+      "startSec": 657.375,
+      "endSec": 659.375
+    },
+    {
+      "id": "sc-151",
+      "startSec": 659.375,
+      "endSec": 661.125
+    },
+    {
+      "id": "sc-152",
+      "startSec": 661.125,
+      "endSec": 666.208
+    },
+    {
+      "id": "sc-153",
+      "startSec": 666.208,
+      "endSec": 671.208
+    },
+    {
+      "id": "sc-154",
+      "startSec": 671.208,
+      "endSec": 672.917
+    },
+    {
+      "id": "sc-155",
+      "startSec": 672.917,
+      "endSec": 675.542
+    },
+    {
+      "id": "sc-156",
+      "startSec": 675.542,
+      "endSec": 684.417
+    },
+    {
+      "id": "sc-157",
+      "startSec": 684.417,
+      "endSec": 687.958
+    },
+    {
+      "id": "sc-158",
+      "startSec": 687.958,
+      "endSec": 700.292
+    },
+    {
+      "id": "sc-159",
+      "startSec": 700.292,
+      "endSec": 710.042
+    },
+    {
+      "id": "sc-160",
+      "startSec": 710.042,
+      "endSec": 744.083
+    },
+    {
+      "id": "sc-161",
+      "startSec": 744.083,
+      "endSec": 888
+    }
+  ],
+  "entities": [
+    {
+      "id": "c1",
+      "name": "young woman with red hair",
+      "aliases": [],
+      "firstSeenSec": 28.5,
+      "intro": "A young woman with red hair, first seen in a snowy mountain pass with misty peaks at 0:28.",
+      "review": {
+        "status": "candidate",
+        "by": null,
+        "at": null
+      }
+    },
+    {
+      "id": "c2",
+      "name": "bald man in dark clothes",
+      "aliases": [],
+      "firstSeenSec": 68.708,
+      "intro": "A bald man in dark clothes, first seen in a snowy, rocky terrain with misty background at 1:08.",
+      "review": {
+        "status": "candidate",
+        "by": null,
+        "at": null
+      }
+    },
+    {
+      "id": "c3",
+      "name": "large figure in apron",
+      "aliases": [],
+      "firstSeenSec": 259.833,
+      "intro": "A large figure in apron, first seen in a sunlit alley with wooden stalls and crates at 4:19.",
+      "review": {
+        "status": "candidate",
+        "by": null,
+        "at": null
+      }
+    },
+    {
+      "id": "c4",
+      "name": "woman in long dark dress",
+      "aliases": [],
+      "firstSeenSec": 259.833,
+      "intro": "A woman in long dark dress, first seen in a sunlit alley with wooden stalls and crates at 4:19.",
+      "review": {
+        "status": "candidate",
+        "by": null,
+        "at": null
+      }
+    },
+    {
+      "id": "c5",
+      "name": "small grey reptilian with large eyes",
+      "aliases": [],
+      "firstSeenSec": 279.417,
+      "intro": "A small grey reptilian with large eyes, first seen in a high above a building under construction at 4:39.",
+      "review": {
+        "status": "candidate",
+        "by": null,
+        "at": null
+      }
+    }
+  ],
+  "facts": [
+    {
+      "id": "ev-fr-00055",
+      "startSec": 0,
+      "revealSec": 5.5,
+      "kind": "event",
+      "text": "Snow-covered landscape with text overlay. Text on screen: \"THE BLENDER FOUNDATION PRESENTS\".",
+      "entities": [],
+      "spoilerTerms": [
+        "snow"
+      ],
+      "evidence": [
+        "fr-00055"
+      ],
+      "confidence": 0.7,
+      "sceneId": "sc-001",
+      "generator": "pip-video-understanding/1 qwen3-vl:4b-instruct@ee4b975b58c1",
+      "review": {
+        "status": "candidate",
+        "by": null,
+        "at": null
+      }
+    },
+    {
+      "id": "ev-fr-00085",
+      "startSec": 0,
+      "revealSec": 8.5,
+      "kind": "event",
+      "text": "Snow-covered mountains loom in a misty valley. Text on screen: \"THE DURIAN OPEN MOVIE PROJECT\".",
+      "entities": [],
+      "spoilerTerms": [
+        "mountain"
+      ],
+      "evidence": [
+        "fr-00085"
+      ],
+      "confidence": 0.7,
+      "sceneId": "sc-001",
+      "generator": "pip-video-understanding/1 qwen3-vl:4b-instruct@ee4b975b58c1",
+      "review": {
+        "status": "candidate",
+        "by": null,
+        "at": null
+      }
+    },
+    {
+      "id": "ap-c1",
+      "startSec": 0,
+      "revealSec": 28.5,
+      "kind": "appearance",
+      "text": "A young woman with red hair appears for the first time: walking through snow with stick.",
+      "entities": [
+        "c1"
+      ],
+      "spoilerTerms": [
+        "woman",
+        "hair"
+      ],
+      "evidence": [
+        "fr-00285"
+      ],
+      "confidence": 0.5,
+      "sceneId": "sc-001",
+      "generator": "pip-video-understanding/1 qwen3-vl:4b-instruct@ee4b975b58c1",
+      "review": {
+        "status": "candidate",
+        "by": null,
+        "at": null
+      }
+    },
+    {
+      "id": "ev-fr-00285",
+      "startSec": 0,
+      "revealSec": 28.5,
+      "kind": "event",
+      "text": "A lone figure walks through deep snow. Also visible: footprints in snow, rocky outcrop, snow-covered cliffs.",
+      "entities": [
+        "c1"
+      ],
+      "spoilerTerms": [
+        "figure",
+        "footprint",
+        "outcrop",
+        "cliff"
+      ],
+      "evidence": [
+        "fr-00285"
+      ],
+      "confidence": 0.5,
+      "sceneId": "sc-001",
+      "generator": "pip-video-understanding/1 qwen3-vl:4b-instruct@ee4b975b58c1",
+      "review": {
+        "status": "candidate",
+        "by": null,
+        "at": null
+      }
+    },
+    {
+      "id": "ev-fr-00319",
+      "startSec": 31.333,
+      "revealSec": 31.917,
+      "kind": "event",
+      "text": "A lone figure stands in snow holding a sword. Also visible: sword, rocks, mountain.",
+      "entities": [
+        "c1"
+      ],
+      "spoilerTerms": [
+        "sword",
+        "rock"
+      ],
+      "evidence": [
+        "fr-00319"
+      ],
+      "confidence": 0.7,
+      "sceneId": "sc-002",
+      "generator": "pip-video-understanding/1 qwen3-vl:4b-instruct@ee4b975b58c1",
+      "review": {
+        "status": "candidate",
+        "by": null,
+        "at": null
+      }
+    },
+    {
+      "id": "ev-fr-00358",
+      "startSec": 31.333,
+      "revealSec": 35.833,
+      "kind": "event",
+      "text": "Small figure holds sword to eye. Also visible: sword, snow.",
+      "entities": [
+        "c1"
+      ],
+      "spoilerTerms": [],
+      "evidence": [
+        "fr-00358"
+      ],
+      "confidence": 0.7,
+      "sceneId": "sc-002",
+      "generator": "pip-video-understanding/1 qwen3-vl:4b-instruct@ee4b975b58c1",
+      "review": {
+        "status": "candidate",
+        "by": null,
+        "at": null
+      }
+    },
+    {
+      "id": "ev-fr-00398",
+      "startSec": 31.333,
+      "revealSec": 39.833,
+      "kind": "event",
+      "text": "A young woman stands in a snowy, misty landscape. Also visible: sword, snow-covered rocks, foggy sky.",
+      "entities": [
+        "c1"
+      ],
+      "spoilerTerms": [
+        "sky"
+      ],
+      "evidence": [
+        "fr-00398"
+      ],
+      "confidence": 0.7,
+      "sceneId": "sc-002",
+      "generator": "pip-video-understanding/1 qwen3-vl:4b-instruct@ee4b975b58c1",
+      "review": {
+        "status": "candidate",
+        "by": null,
+        "at": null
+      }
+    },
+    {
+      "id": "ap-c2",
+      "startSec": 68.208,
+      "revealSec": 68.708,
+      "kind": "appearance",
+      "text": "A bald man in dark clothes appears for the first time: stands over fallen figure.",
+      "entities": [
+        "c2"
+      ],
+      "spoilerTerms": [
+        "man"
+      ],
+      "evidence": [
+        "fr-00687"
+      ],
+      "confidence": 0.5,
+      "sceneId": "sc-015",
+      "generator": "pip-video-understanding/1 qwen3-vl:4b-instruct@ee4b975b58c1",
+      "review": {
+        "status": "candidate",
+        "by": null,
+        "at": null
+      }
+    },
+    {
+      "id": "st-fr-00687",
+      "startSec": 68.208,
+      "revealSec": 68.708,
+      "kind": "setting",
+      "text": "The scene is in a snowy, rocky terrain with misty background.",
+      "entities": [],
+      "spoilerTerms": [],
+      "evidence": [
+        "fr-00687"
+      ],
+      "confidence": 0.7,
+      "sceneId": "sc-015",
+      "generator": "pip-video-understanding/1 qwen3-vl:4b-instruct@ee4b975b58c1",
+      "review": {
+        "status": "candidate",
+        "by": null,
+        "at": null
+      }
+    },
+    {
+      "id": "ev-fr-00687",
+      "startSec": 68.208,
+      "revealSec": 68.708,
+      "kind": "event",
+      "text": "One person stands over another who lies on snow-covered ground. Also visible: sword, long staff, rocky outcrop, snowy ground.",
+      "entities": [
+        "c1",
+        "c2"
+      ],
+      "spoilerTerms": [
+        "ground",
+        "staff"
+      ],
+      "evidence": [
+        "fr-00687"
+      ],
+      "confidence": 0.5,
+      "sceneId": "sc-015",
+      "generator": "pip-video-understanding/1 qwen3-vl:4b-instruct@ee4b975b58c1",
+      "review": {
+        "status": "candidate",
+        "by": null,
+        "at": null
+      }
+    },
+    {
+      "id": "ev-fr-00704",
+      "startSec": 68.208,
+      "revealSec": 70.417,
+      "kind": "event",
+      "text": "Bald man presses hand on small figure. Also visible: sword, wall.",
+      "entities": [
+        "c1",
+        "c2"
+      ],
+      "spoilerTerms": [
+        "hand",
+        "wall"
+      ],
+      "evidence": [
+        "fr-00704"
+      ],
+      "confidence": 0.7,
+      "sceneId": "sc-015",
+      "generator": "pip-video-understanding/1 qwen3-vl:4b-instruct@ee4b975b58c1",
+      "review": {
+        "status": "candidate",
+        "by": null,
+        "at": null
+      }
+    },
+    {
+      "id": "ev-fr-00727",
+      "startSec": 68.208,
+      "revealSec": 72.708,
+      "kind": "event",
+      "text": "A woman holds a sword while a man leans over her. Also visible: sword, weapon, armor, belt.",
+      "entities": [
+        "c1",
+        "c2"
+      ],
+      "spoilerTerms": [
+        "weapon",
+        "armor",
+        "belt"
+      ],
+      "evidence": [
+        "fr-00727"
+      ],
+      "confidence": 0.7,
+      "sceneId": "sc-015",
+      "generator": "pip-video-understanding/1 qwen3-vl:4b-instruct@ee4b975b58c1",
+      "review": {
+        "status": "candidate",
+        "by": null,
+        "at": null
+      }
+    },
+    {
+      "id": "st-fr-00746",
+      "startSec": 74.042,
+      "revealSec": 74.625,
+      "kind": "setting",
+      "text": "The scene is in a snowy ground with dark blade.",
+      "entities": [],
+      "spoilerTerms": [],
+      "evidence": [
+        "fr-00746"
+      ],
+      "confidence": 0.7,
+      "sceneId": "sc-016",
+      "generator": "pip-video-understanding/1 qwen3-vl:4b-instruct@ee4b975b58c1",
+      "review": {
+        "status": "candidate",
+        "by": null,
+        "at": null
+      }
+    },
+    {
+      "id": "ev-fr-00746",
+      "startSec": 74.042,
+      "revealSec": 74.625,
+      "kind": "event",
+      "text": "Young woman lies on snow holding sword. Also visible: sword, brown coat, snow.",
+      "entities": [
+        "c1"
+      ],
+      "spoilerTerms": [
+        "coat"
+      ],
+      "evidence": [
+        "fr-00746"
+      ],
+      "confidence": 0.7,
+      "sceneId": "sc-016",
+      "generator": "pip-video-understanding/1 qwen3-vl:4b-instruct@ee4b975b58c1",
+      "review": {
+        "status": "candidate",
+        "by": null,
+        "at": null
+      }
+    },
+    {
+      "id": "st-fr-00820",
+      "startSec": 81.458,
+      "revealSec": 82,
+      "kind": "setting",
+      "text": "The scene is in a snow-covered mountain valley with fog.",
+      "entities": [],
+      "spoilerTerms": [
+        "fog"
+      ],
+      "evidence": [
+        "fr-00820"
+      ],
+      "confidence": 0.7,
+      "sceneId": "sc-017",
+      "generator": "pip-video-understanding/1 qwen3-vl:4b-instruct@ee4b975b58c1",
+      "review": {
+        "status": "candidate",
+        "by": null,
+        "at": null
+      }
+    },
+    {
+      "id": "ev-fr-00820",
+      "startSec": 81.458,
+      "revealSec": 82,
+      "kind": "event",
+      "text": "A lone cabin glows warmly in the snow. Also visible: glowing cabin, snowy mountains, fog, rocks.",
+      "entities": [],
+      "spoilerTerms": [
+        "cabin"
+      ],
+      "evidence": [
+        "fr-00820"
+      ],
+      "confidence": 0.7,
+      "sceneId": "sc-017",
+      "generator": "pip-video-understanding/1 qwen3-vl:4b-instruct@ee4b975b58c1",
+      "review": {
+        "status": "candidate",
+        "by": null,
+        "at": null
+      }
+    },
+    {
+      "id": "st-fr-00930",
+      "startSec": 88.542,
+      "revealSec": 93,
+      "kind": "setting",
+      "text": "The scene is in a snowy mountainous terrain with mist.",
+      "entities": [],
+      "spoilerTerms": [],
+      "evidence": [
+        "fr-00930"
+      ],
+      "confidence": 0.7,
+      "sceneId": "sc-019",
+      "generator": "pip-video-understanding/1 qwen3-vl:4b-instruct@ee4b975b58c1",
+      "review": {
+        "status": "candidate",
+        "by": null,
+        "at": null
+      }
+    },
+    {
+      "id": "ev-fr-00930",
+      "startSec": 88.542,
+      "revealSec": 93,
+      "kind": "event",
+      "text": "A young woman stands in a snowy landscape holding a sword. Also visible: sword, tree symbol logo, text 'SINTEL'. Text on screen: \"SINTEL\".",
+      "entities": [
+        "c1"
+      ],
+      "spoilerTerms": [
+        "logo",
+        "sintel"
+      ],
+      "evidence": [
+        "fr-00930"
+      ],
+      "confidence": 0.7,
+      "sceneId": "sc-019",
+      "generator": "pip-video-understanding/1 qwen3-vl:4b-instruct@ee4b975b58c1",
+      "review": {
+        "status": "candidate",
+        "by": null,
+        "at": null
+      }
+    },
+    {
+      "id": "ev-fr-00970",
+      "startSec": 88.542,
+      "revealSec": 97,
+      "kind": "event",
+      "text": "Young woman sits on snow holding sword. Also visible: sword, tree symbol logo, text 'SINTEL'. Text on screen: \"SINTEL\".",
+      "entities": [
+        "c1"
+      ],
+      "spoilerTerms": [],
+      "evidence": [
+        "fr-00970"
+      ],
+      "confidence": 0.7,
+      "sceneId": "sc-019",
+      "generator": "pip-video-understanding/1 qwen3-vl:4b-instruct@ee4b975b58c1",
+      "review": {
+        "status": "candidate",
+        "by": null,
+        "at": null
+      }
+    },
+    {
+      "id": "ev-fr-01010",
+      "startSec": 88.542,
+      "revealSec": 101,
+      "kind": "event",
+      "text": "A lone figure lies motionless in the snow.",
+      "entities": [],
+      "spoilerTerms": [],
+      "evidence": [
+        "fr-01010"
+      ],
+      "confidence": 0.7,
+      "sceneId": "sc-019",
+      "generator": "pip-video-understanding/1 qwen3-vl:4b-instruct@ee4b975b58c1",
+      "review": {
+        "status": "candidate",
+        "by": null,
+        "at": null
+      }
+    },
+    {
+      "id": "st-fr-01057",
+      "startSec": 101.208,
+      "revealSec": 105.708,
+      "kind": "setting",
+      "text": "The scene is in a dark, dimly lit interior space.",
+      "entities": [],
+      "spoilerTerms": [],
+      "evidence": [
+        "fr-01057"
+      ],
+      "confidence": 0.7,
+      "sceneId": "sc-020",
+      "generator": "pip-video-understanding/1 qwen3-vl:4b-instruct@ee4b975b58c1",
+      "review": {
+        "status": "candidate",
+        "by": null,
+        "at": null
+      }
+    },
+    {
+      "id": "ev-fr-01057",
+      "startSec": 101.208,
+      "revealSec": 105.708,
+      "kind": "event",
+      "text": "A small fire burns in the center of a circle. Also visible: small fire, round stone, metal objects, wooden containers.",
+      "entities": [],
+      "spoilerTerms": [
+        "fire",
+        "stone",
+        "container"
+      ],
+      "evidence": [
+        "fr-01057"
+      ],
+      "confidence": 0.7,
+      "sceneId": "sc-020",
+      "generator": "pip-video-understanding/1 qwen3-vl:4b-instruct@ee4b975b58c1",
+      "review": {
+        "status": "candidate",
+        "by": null,
+        "at": null
+      }
+    },
+    {
+      "id": "dl-ln-01069",
+      "startSec": 106.94,
+      "revealSec": 109.44,
+      "kind": "dialogue",
+      "text": "Someone says: \"This blade has a dark past.\"",
+      "entities": [],
+      "spoilerTerms": [],
+      "evidence": [
+        "ln-01069"
+      ],
+      "confidence": 0.85,
+      "sceneId": "sc-020",
+      "generator": "pip-video-understanding/1 qwen3-vl:4b-instruct@ee4b975b58c1",
+      "review": {
+        "status": "candidate",
+        "by": null,
+        "at": null
+      }
+    },
+    {
+      "id": "ev-fr-01138",
+      "startSec": 109.333,
+      "revealSec": 113.833,
+      "kind": "event",
+      "text": "A young woman lies on the ground while a bald man stands over her with a sword. Also visible: sword with ornate hilt, ornate wall panel, furniture or structure.",
+      "entities": [
+        "c1",
+        "c2"
+      ],
+      "spoilerTerms": [
+        "hilt",
+        "panel"
+      ],
+      "evidence": [
+        "fr-01138"
+      ],
+      "confidence": 0.7,
+      "sceneId": "sc-021",
+      "generator": "pip-video-understanding/1 qwen3-vl:4b-instruct@ee4b975b58c1",
+      "review": {
+        "status": "candidate",
+        "by": null,
+        "at": null
+      }
+    },
+    {
+      "id": "dl-ln-01115",
+      "startSec": 111.54,
+      "revealSec": 114.14,
+      "kind": "dialogue",
+      "text": "Someone says: \"It has shed much innocent blood.\"",
+      "entities": [
+        "c1",
+        "c2"
+      ],
+      "spoilerTerms": [
+        "blood"
+      ],
+      "evidence": [
+        "ln-01115"
+      ],
+      "confidence": 0.85,
+      "sceneId": "sc-021",
+      "generator": "pip-video-understanding/1 qwen3-vl:4b-instruct@ee4b975b58c1",
+      "review": {
+        "status": "candidate",
+        "by": null,
+        "at": null
+      }
+    },
+    {
+      "id": "ev-fr-01164",
+      "startSec": 115.833,
+      "revealSec": 116.417,
+      "kind": "event",
+      "text": "A man stirs a pot over a fire while a woman watches. Also visible: pot, fire, bowl, spoon.",
+      "entities": [
+        "c1",
+        "c2"
+      ],
+      "spoilerTerms": [
+        "pot",
+        "bowl",
+        "spoon"
+      ],
+      "evidence": [
+        "fr-01164"
+      ],
+      "confidence": 0.7,
+      "sceneId": "sc-022",
+      "generator": "pip-video-understanding/1 qwen3-vl:4b-instruct@ee4b975b58c1",
+      "review": {
+        "status": "candidate",
+        "by": null,
+        "at": null
+      }
+    },
+    {
+      "id": "dl-ln-01177",
+      "startSec": 117.72,
+      "revealSec": 121.44,
+      "kind": "dialogue",
+      "text": "Someone says: \"You're a fool for traveling alone, so completely unprepared.\"",
+      "entities": [
+        "c1",
+        "c2"
+      ],
+      "spoilerTerms": [],
+      "evidence": [
+        "ln-01177"
+      ],
+      "confidence": 0.85,
+      "sceneId": "sc-022",
+      "generator": "pip-video-understanding/1 qwen3-vl:4b-instruct@ee4b975b58c1",
+      "review": {
+        "status": "candidate",
+        "by": null,
+        "at": null
+      }
+    },
+    {
+      "id": "st-fr-01186",
+      "startSec": 118.125,
+      "revealSec": 118.625,
+      "kind": "setting",
+      "text": "The scene is in a dark room with faint glow.",
+      "entities": [],
+      "spoilerTerms": [],
+      "evidence": [
+        "fr-01186"
+      ],
+      "confidence": 0.7,
+      "sceneId": "sc-023",
+      "generator": "pip-video-understanding/1 qwen3-vl:4b-instruct@ee4b975b58c1",
+      "review": {
+        "status": "candidate",
+        "by": null,
+        "at": null
+      }
+    },
+    {
+      "id": "ev-fr-01186",
+      "startSec": 118.125,
+      "revealSec": 118.625,
+      "kind": "event",
+      "text": "Young woman closes her eyes in dim light.",
+      "entities": [
+        "c1"
+      ],
+      "spoilerTerms": [],
+      "evidence": [
+        "fr-01186"
+      ],
+      "confidence": 0.7,
+      "sceneId": "sc-023",
+      "generator": "pip-video-understanding/1 qwen3-vl:4b-instruct@ee4b975b58c1",
+      "review": {
+        "status": "candidate",
+        "by": null,
+        "at": null
+      }
+    },
+    {
+      "id": "st-fr-01206",
+      "startSec": 120.042,
+      "revealSec": 120.625,
+      "kind": "setting",
+      "text": "The scene is in a dimly lit, possibly indoor or camp setting.",
+      "entities": [],
+      "spoilerTerms": [],
+      "evidence": [
+        "fr-01206"
+      ],
+      "confidence": 0.7,
+      "sceneId": "sc-024",
+      "generator": "pip-video-understanding/1 qwen3-vl:4b-instruct@ee4b975b58c1",
+      "review": {
+        "status": "candidate",
+        "by": null,
+        "at": null
+      }
+    },
+    {
+      "id": "ev-fr-01206",
+      "startSec": 120.042,
+      "revealSec": 120.625,
+      "kind": "event",
+      "text": "A man pours liquid into a bowl while a woman watches. Also visible: ladle, bowl, small pot, fingers with tattoos.",
+      "entities": [
+        "c1",
+        "c2"
+      ],
+      "spoilerTerms": [
+        "ladle",
+        "finger"
+      ],
+      "evidence": [
+        "fr-01206"
+      ],
+      "confidence": 0.7,
+      "sceneId": "sc-024",
+      "generator": "pip-video-understanding/1 qwen3-vl:4b-instruct@ee4b975b58c1",
+      "review": {
+        "status": "candidate",
+        "by": null,
+        "at": null
+      }
+    },
+    {
+      "id": "dl-ln-01214",
+      "startSec": 121.44,
+      "revealSec": 125.04,
+      "kind": "dialogue",
+      "text": "Someone says: \"You're lucky your blood's still flowing.\"",
+      "entities": [
+        "c1",
+        "c2"
+      ],
+      "spoilerTerms": [],
+      "evidence": [
+        "ln-01214"
+      ],
+      "confidence": 0.85,
+      "sceneId": "sc-024",
+      "generator": "pip-video-understanding/1 qwen3-vl:4b-instruct@ee4b975b58c1",
+      "review": {
+        "status": "candidate",
+        "by": null,
+        "at": null
+      }
+    },
+    {
+      "id": "ev-fr-01237",
+      "startSec": 123.125,
+      "revealSec": 123.708,
+      "kind": "event",
+      "text": "Woman extends hand toward man holding sword. Also visible: sword, hand, dark clothing, red hair.",
+      "entities": [
+        "c1",
+        "c2"
+      ],
+      "spoilerTerms": [
+        "clothing"
+      ],
+      "evidence": [
+        "fr-01237"
+      ],
+      "confidence": 0.7,
+      "sceneId": "sc-025",
+      "generator": "pip-video-understanding/1 qwen3-vl:4b-instruct@ee4b975b58c1",
+      "review": {
+        "status": "candidate",
+        "by": null,
+        "at": null
+      }
+    },
+    {
+      "id": "dl-ln-01250",
+      "startSec": 125.04,
+      "revealSec": 127.32,
+      "kind": "dialogue",
+      "text": "Someone says: \"Thank you.\"",
+      "entities": [
+        "c1",
+        "c2"
+      ],
+      "spoilerTerms": [],
+      "evidence": [
+        "ln-01250"
+      ],
+      "confidence": 0.85,
+      "sceneId": "sc-025",
+      "generator": "pip-video-understanding/1 qwen3-vl:4b-instruct@ee4b975b58c1",
+      "review": {
+        "status": "candidate",
+        "by": null,
+        "at": null
+      }
+    },
+    {
+      "id": "ev-fr-01268",
+      "startSec": 126.333,
+      "revealSec": 126.833,
+      "kind": "event",
+      "text": "Two characters are inside a tent near a fire. Also visible: fire, hanging decorations, wooden structure, bowl.",
+      "entities": [
+        "c1",
+        "c2"
+      ],
+      "spoilerTerms": [
+        "decoration"
+      ],
+      "evidence": [
+        "fr-01268"
+      ],
+      "confidence": 0.7,
+      "sceneId": "sc-026",
+      "generator": "pip-video-understanding/1 qwen3-vl:4b-instruct@ee4b975b58c1",
+      "review": {
+        "status": "candidate",
+        "by": null,
+        "at": null
+      }
+    },
+    {
+      "id": "ev-fr-01308",
+      "startSec": 126.333,
+      "revealSec": 130.833,
+      "kind": "event",
+      "text": "Two figures sit opposite each other around a fire. Also visible: fire, sword, staff, hanging shells.",
+      "entities": [
+        "c1",
+        "c2"
+      ],
+      "spoilerTerms": [
+        "shell"
+      ],
+      "evidence": [
+        "fr-01308"
+      ],
+      "confidence": 0.7,
+      "sceneId": "sc-026",
+      "generator": "pip-video-understanding/1 qwen3-vl:4b-instruct@ee4b975b58c1",
+      "review": {
+        "status": "candidate",
+        "by": null,
+        "at": null
+      }
+    },
+    {
+      "id": "dl-ln-01273",
+      "startSec": 127.32,
+      "revealSec": 132.96,
+      "kind": "dialogue",
+      "text": "Someone says: \"So what brings you to the land of the gatekeepers?\"",
+      "entities": [
+        "c1",
+        "c2"
+      ],
+      "spoilerTerms": [],
+      "evidence": [
+        "ln-01273"
+      ],
+      "confidence": 0.85,
+      "sceneId": "sc-026",
+      "generator": "pip-video-understanding/1 qwen3-vl:4b-instruct@ee4b975b58c1",
+      "review": {
+        "status": "candidate",
+        "by": null,
+        "at": null
+      }
+    },
+    {
+      "id": "dl-ln-01330",
+      "startSec": 132.96,
+      "revealSec": 137.6,
+      "kind": "dialogue",
+      "text": "Someone says: \"Um, I'm searching for someone.\"",
+      "entities": [],
+      "spoilerTerms": [],
+      "evidence": [
+        "ln-01330"
+      ],
+      "confidence": 0.85,
+      "sceneId": "sc-027",
+      "generator": "pip-video-understanding/1 qwen3-vl:4b-instruct@ee4b975b58c1",
+      "review": {
+        "status": "candidate",
+        "by": null,
+        "at": null
+      }
+    },
+    {
+      "id": "dl-ln-01376",
+      "startSec": 137.6,
+      "revealSec": 143.7,
+      "kind": "dialogue",
+      "text": "Someone says: \"Someone very dear, a kindred spirit, a dragon.\"",
+      "entities": [
+        "c1"
+      ],
+      "spoilerTerms": [
+        "dragon"
+      ],
+      "evidence": [
+        "ln-01376"
+      ],
+      "confidence": 0.85,
+      "sceneId": "sc-028",
+      "generator": "pip-video-understanding/1 qwen3-vl:4b-instruct@ee4b975b58c1",
+      "review": {
+        "status": "candidate",
+        "by": null,
+        "at": null
+      }
+    },
+    {
+      "id": "st-fr-01415",
+      "startSec": 141,
+      "revealSec": 141.5,
+      "kind": "setting",
+      "text": "The scene is in a dimly lit interior space.",
+      "entities": [],
+      "spoilerTerms": [],
+      "evidence": [
+        "fr-01415"
+      ],
+      "confidence": 0.7,
+      "sceneId": "sc-030",
+      "generator": "pip-video-understanding/1 qwen3-vl:4b-instruct@ee4b975b58c1",
+      "review": {
+        "status": "candidate",
+        "by": null,
+        "at": null
+      }
+    },
+    {
+      "id": "ev-fr-01415",
+      "startSec": 141,
+      "revealSec": 141.5,
+      "kind": "event",
+      "text": "Young woman with red hair holds sword. Also visible: sword, sword hilt.",
+      "entities": [
+        "c1"
+      ],
+      "spoilerTerms": [],
+      "evidence": [
+        "fr-01415"
+      ],
+      "confidence": 0.7,
+      "sceneId": "sc-030",
+      "generator": "pip-video-understanding/1 qwen3-vl:4b-instruct@ee4b975b58c1",
+      "review": {
+        "status": "candidate",
+        "by": null,
+        "at": null
+      }
+    },
+    {
+      "id": "ev-fr-01455",
+      "startSec": 141,
+      "revealSec": 145.5,
+      "kind": "event",
+      "text": "Young woman with red hair looks down intently.",
+      "entities": [
+        "c1"
+      ],
+      "spoilerTerms": [],
+      "evidence": [
+        "fr-01455"
+      ],
+      "confidence": 0.7,
+      "sceneId": "sc-030",
+      "generator": "pip-video-understanding/1 qwen3-vl:4b-instruct@ee4b975b58c1",
+      "review": {
+        "status": "candidate",
+        "by": null,
+        "at": null
+      }
+    },
+    {
+      "id": "ev-fr-01510",
+      "startSec": 141,
+      "revealSec": 151,
+      "kind": "event",
+      "text": "A cityscape under a dark, cloudy sky. Also visible: Ruined buildings, Broken tower, Overcast sky.",
+      "entities": [],
+      "spoilerTerms": [
+        "cityscape",
+        "building",
+        "tower"
+      ],
+      "evidence": [
+        "fr-01510"
+      ],
+      "confidence": 0.7,
+      "sceneId": "sc-030",
+      "generator": "pip-video-understanding/1 qwen3-vl:4b-instruct@ee4b975b58c1",
+      "review": {
+        "status": "candidate",
+        "by": null,
+        "at": null
+      }
+    },
+    {
+      "id": "ev-fr-01526",
+      "startSec": 141,
+      "revealSec": 152.625,
+      "kind": "event",
+      "text": "A vast city sprawls under a hazy sky. Also visible: Cityscape with dense buildings, Tower in the distance, Mountain-like structure with stairs, Hazy, overcast sky.",
+      "entities": [],
+      "spoilerTerms": [],
+      "evidence": [
+        "fr-01526"
+      ],
+      "confidence": 0.7,
+      "sceneId": "sc-030",
+      "generator": "pip-video-understanding/1 qwen3-vl:4b-instruct@ee4b975b58c1",
+      "review": {
+        "status": "candidate",
+        "by": null,
+        "at": null
+      }
+    },
+    {
+      "id": "dl-ln-01477",
+      "startSec": 147.72,
+      "revealSec": 150.88,
+      "kind": "dialogue",
+      "text": "Someone says: \"A dangerous quest for a lone hunter.\"",
+      "entities": [],
+      "spoilerTerms": [],
+      "evidence": [
+        "ln-01477"
+      ],
+      "confidence": 0.85,
+      "sceneId": "sc-030",
+      "generator": "pip-video-understanding/1 qwen3-vl:4b-instruct@ee4b975b58c1",
+      "review": {
+        "status": "candidate",
+        "by": null,
+        "at": null
+      }
+    },
+    {
+      "id": "dl-ln-01509",
+      "startSec": 150.88,
+      "revealSec": 154.72,
+      "kind": "dialogue",
+      "text": "Someone says: \"I've been alone for as long as I can remember.\"",
+      "entities": [],
+      "spoilerTerms": [],
+      "evidence": [
+        "ln-01509"
+      ],
+      "confidence": 0.85,
+      "sceneId": "sc-030",
+      "generator": "pip-video-understanding/1 qwen3-vl:4b-instruct@ee4b975b58c1",
+      "review": {
+        "status": "candidate",
+        "by": null,
+        "at": null
+      }
+    },
+    {
+      "id": "st-fr-01571",
+      "startSec": 155.833,
+      "revealSec": 157.125,
+      "kind": "setting",
+      "text": "The scene is in a dilapidated alleyway between stone buildings.",
+      "entities": [],
+      "spoilerTerms": [],
+      "evidence": [
+        "fr-01571"
+      ],
+      "confidence": 0.7,
+      "sceneId": "sc-031",
+      "generator": "pip-video-understanding/1 qwen3-vl:4b-instruct@ee4b975b58c1",
+      "review": {
+        "status": "candidate",
+        "by": null,
+        "at": null
+      }
+    },
+    {
+      "id": "ev-fr-01571",
+      "startSec": 155.833,
+      "revealSec": 157.125,
+      "kind": "event",
+      "text": "A young woman with red hair stands in a narrow alleyway. Also visible: broken wooden planks, cracked stone pavement, wooden door, red-tiled roof.",
+      "entities": [
+        "c1"
+      ],
+      "spoilerTerms": [
+        "plank",
+        "pavement",
+        "door",
+        "roof"
+      ],
+      "evidence": [
+        "fr-01571"
+      ],
+      "confidence": 0.7,
+      "sceneId": "sc-031",
+      "generator": "pip-video-understanding/1 qwen3-vl:4b-instruct@ee4b975b58c1",
+      "review": {
+        "status": "candidate",
+        "by": null,
+        "at": null
+      }
+    },
+    {
+      "id": "st-fr-01635",
+      "startSec": 162.083,
+      "revealSec": 163.5,
+      "kind": "setting",
+      "text": "The scene is in a rustic village with wooden buildings.",
+      "entities": [],
+      "spoilerTerms": [],
+      "evidence": [
+        "fr-01635"
+      ],
+      "confidence": 0.7,
+      "sceneId": "sc-032",
+      "generator": "pip-video-understanding/1 qwen3-vl:4b-instruct@ee4b975b58c1",
+      "review": {
+        "status": "candidate",
+        "by": null,
+        "at": null
+      }
+    },
+    {
+      "id": "ev-fr-01635",
+      "startSec": 162.083,
+      "revealSec": 163.5,
+      "kind": "event",
+      "text": "A young woman holds a sword as a bald man grabs her arm. Also visible: sword, wooden buildings, red roof.",
+      "entities": [
+        "c1",
+        "c2"
+      ],
+      "spoilerTerms": [],
+      "evidence": [
+        "fr-01635"
+      ],
+      "confidence": 0.7,
+      "sceneId": "sc-032",
+      "generator": "pip-video-understanding/1 qwen3-vl:4b-instruct@ee4b975b58c1",
+      "review": {
+        "status": "candidate",
+        "by": null,
+        "at": null
+      }
+    },
+    {
+      "id": "ev-fr-01667",
+      "startSec": 162.083,
+      "revealSec": 166.708,
+      "kind": "event",
+      "text": "Young woman holds sword while looking down. Also visible: sword, worn gloves, wooden structure.",
+      "entities": [
+        "c1"
+      ],
+      "spoilerTerms": [
+        "glove"
+      ],
+      "evidence": [
+        "fr-01667"
+      ],
+      "confidence": 0.7,
+      "sceneId": "sc-032",
+      "generator": "pip-video-understanding/1 qwen3-vl:4b-instruct@ee4b975b58c1",
+      "review": {
+        "status": "candidate",
+        "by": null,
+        "at": null
+      }
+    },
+    {
+      "id": "ev-fr-01706",
+      "startSec": 162.083,
+      "revealSec": 170.625,
+      "kind": "event",
+      "text": "Young woman stands in front of wooden structure. Also visible: wooden building, stacked crates, stone wall.",
+      "entities": [
+        "c1"
+      ],
+      "spoilerTerms": [
+        "crate"
+      ],
+      "evidence": [
+        "fr-01706"
+      ],
+      "confidence": 0.7,
+      "sceneId": "sc-032",
+      "generator": "pip-video-understanding/1 qwen3-vl:4b-instruct@ee4b975b58c1",
+      "review": {
+        "status": "candidate",
+        "by": null,
+        "at": null
+      }
+    },
+    {
+      "id": "ev-fr-01738",
+      "startSec": 162.083,
+      "revealSec": 173.833,
+      "kind": "event",
+      "text": "A young woman holds a spiky fruit. Also visible: spiky fruit, wooden beams, stone walls.",
+      "entities": [
+        "c1"
+      ],
+      "spoilerTerms": [
+        "fruit",
+        "beam"
+      ],
+      "evidence": [
+        "fr-01738"
+      ],
+      "confidence": 0.7,
+      "sceneId": "sc-032",
+      "generator": "pip-video-understanding/1 qwen3-vl:4b-instruct@ee4b975b58c1",
+      "review": {
+        "status": "candidate",
+        "by": null,
+        "at": null
+      }
+    },
+    {
+      "id": "st-fr-01781",
+      "startSec": 176.417,
+      "revealSec": 178.125,
+      "kind": "setting",
+      "text": "The scene is in a dusty, sunlit alleyway between old buildings.",
+      "entities": [],
+      "spoilerTerms": [],
+      "evidence": [
+        "fr-01781"
+      ],
+      "confidence": 0.7,
+      "sceneId": "sc-033",
+      "generator": "pip-video-understanding/1 qwen3-vl:4b-instruct@ee4b975b58c1",
+      "review": {
+        "status": "candidate",
+        "by": null,
+        "at": null
+      }
+    },
+    {
+      "id": "ev-fr-01781",
+      "startSec": 176.417,
+      "revealSec": 178.125,
+      "kind": "event",
+      "text": "A young woman with red hair runs through a narrow alley. Also visible: broken bricks, wooden crates, stacked barrels, wooden beams.",
+      "entities": [
+        "c1"
+      ],
+      "spoilerTerms": [
+        "brick",
+        "barrel"
+      ],
+      "evidence": [
+        "fr-01781"
+      ],
+      "confidence": 0.7,
+      "sceneId": "sc-033",
+      "generator": "pip-video-understanding/1 qwen3-vl:4b-instruct@ee4b975b58c1",
+      "review": {
+        "status": "candidate",
+        "by": null,
+        "at": null
+      }
+    },
+    {
+      "id": "ev-fr-01815",
+      "startSec": 180.083,
+      "revealSec": 181.5,
+      "kind": "event",
+      "text": "Young woman with red hair stands on rooftop. Also visible: sword, brick roof, wooden structure, bucket.",
+      "entities": [
+        "c1"
+      ],
+      "spoilerTerms": [
+        "bucket"
+      ],
+      "evidence": [
+        "fr-01815"
+      ],
+      "confidence": 0.7,
+      "sceneId": "sc-034",
+      "generator": "pip-video-understanding/1 qwen3-vl:4b-instruct@ee4b975b58c1",
+      "review": {
+        "status": "candidate",
+        "by": null,
+        "at": null
+      }
+    },
+    {
+      "id": "st-fr-01832",
+      "startSec": 182,
+      "revealSec": 183.208,
+      "kind": "setting",
+      "text": "The scene is in a stone roof with blood stains.",
+      "entities": [],
+      "spoilerTerms": [],
+      "evidence": [
+        "fr-01832"
+      ],
+      "confidence": 0.7,
+      "sceneId": "sc-035",
+      "generator": "pip-video-understanding/1 qwen3-vl:4b-instruct@ee4b975b58c1",
+      "review": {
+        "status": "candidate",
+        "by": null,
+        "at": null
+      }
+    },
+    {
+      "id": "ev-fr-01832",
+      "startSec": 182,
+      "revealSec": 183.208,
+      "kind": "event",
+      "text": "A creature lies injured on a roof. Also visible: blood, stone roof, stone wall.",
+      "entities": [],
+      "spoilerTerms": [
+        "creature"
+      ],
+      "evidence": [
+        "fr-01832"
+      ],
+      "confidence": 0.7,
+      "sceneId": "sc-035",
+      "generator": "pip-video-understanding/1 qwen3-vl:4b-instruct@ee4b975b58c1",
+      "review": {
+        "status": "candidate",
+        "by": null,
+        "at": null
+      }
+    },
+    {
+      "id": "st-fr-01851",
+      "startSec": 184.375,
+      "revealSec": 185.125,
+      "kind": "setting",
+      "text": "The scene is in a rustic stone building interior.",
+      "entities": [],
+      "spoilerTerms": [],
+      "evidence": [
+        "fr-01851"
+      ],
+      "confidence": 0.7,
+      "sceneId": "sc-036",
+      "generator": "pip-video-understanding/1 qwen3-vl:4b-instruct@ee4b975b58c1",
+      "review": {
+        "status": "candidate",
+        "by": null,
+        "at": null
+      }
+    },
+    {
+      "id": "ev-fr-01851",
+      "startSec": 184.375,
+      "revealSec": 185.125,
+      "kind": "event",
+      "text": "Young woman stands near stone wall. Also visible: stone wall, wooden structure, red tiled roof.",
+      "entities": [
+        "c1"
+      ],
+      "spoilerTerms": [],
+      "evidence": [
+        "fr-01851"
+      ],
+      "confidence": 0.7,
+      "sceneId": "sc-036",
+      "generator": "pip-video-understanding/1 qwen3-vl:4b-instruct@ee4b975b58c1",
+      "review": {
+        "status": "candidate",
+        "by": null,
+        "at": null
+      }
+    },
+    {
+      "id": "ev-fr-01883",
+      "startSec": 186.708,
+      "revealSec": 188.333,
+      "kind": "event",
+      "text": "A small dragon lies on a roof with blood on its wings. Also visible: blood-stained wings, stone roof tiles, stone wall.",
+      "entities": [],
+      "spoilerTerms": [
+        "wing",
+        "tile"
+      ],
+      "evidence": [
+        "fr-01883"
+      ],
+      "confidence": 0.7,
+      "sceneId": "sc-037",
+      "generator": "pip-video-understanding/1 qwen3-vl:4b-instruct@ee4b975b58c1",
+      "review": {
+        "status": "candidate",
+        "by": null,
+        "at": null
+      }
+    },
+    {
+      "id": "ev-fr-01903",
+      "startSec": 189.792,
+      "revealSec": 190.333,
+      "kind": "event",
+      "text": "Young woman with red hair holds a sword. Also visible: sword, stone wall.",
+      "entities": [
+        "c1"
+      ],
+      "spoilerTerms": [],
+      "evidence": [
+        "fr-01903"
+      ],
+      "confidence": 0.7,
+      "sceneId": "sc-038",
+      "generator": "pip-video-understanding/1 qwen3-vl:4b-instruct@ee4b975b58c1",
+      "review": {
+        "status": "candidate",
+        "by": null,
+        "at": null
+      }
+    },
+    {
+      "id": "st-fr-01924",
+      "startSec": 191.875,
+      "revealSec": 192.417,
+      "kind": "setting",
+      "text": "The scene is in a stone alley with tiled roof.",
+      "entities": [],
+      "spoilerTerms": [],
+      "evidence": [
+        "fr-01924"
+      ],
+      "confidence": 0.7,
+      "sceneId": "sc-039",
+      "generator": "pip-video-understanding/1 qwen3-vl:4b-instruct@ee4b975b58c1",
+      "review": {
+        "status": "candidate",
+        "by": null,
+        "at": null
+      }
+    },
+    {
+      "id": "ev-fr-01924",
+      "startSec": 191.875,
+      "revealSec": 192.417,
+      "kind": "event",
+      "text": "Woman kneels beside a dead dragon. Also visible: bloodied dragon, stone wall, cobblestone ground, tiled roof.",
+      "entities": [
+        "c1"
+      ],
+      "spoilerTerms": [],
+      "evidence": [
+        "fr-01924"
+      ],
+      "confidence": 0.7,
+      "sceneId": "sc-039",
+      "generator": "pip-video-understanding/1 qwen3-vl:4b-instruct@ee4b975b58c1",
+      "review": {
+        "status": "candidate",
+        "by": null,
+        "at": null
+      }
+    },
+    {
+      "id": "st-fr-01952",
+      "startSec": 194.625,
+      "revealSec": 195.208,
+      "kind": "setting",
+      "text": "The scene is in a stone rooftop with broken tiles.",
+      "entities": [],
+      "spoilerTerms": [],
+      "evidence": [
+        "fr-01952"
+      ],
+      "confidence": 0.7,
+      "sceneId": "sc-040",
+      "generator": "pip-video-understanding/1 qwen3-vl:4b-instruct@ee4b975b58c1",
+      "review": {
+        "status": "candidate",
+        "by": null,
+        "at": null
+      }
+    },
+    {
+      "id": "ev-fr-01952",
+      "startSec": 194.625,
+      "revealSec": 195.208,
+      "kind": "event",
+      "text": "A small creature looks up at a reaching hand. Also visible: hand reaching forward, small creature with wings, stone wall, shattered roof tiles.",
+      "entities": [],
+      "spoilerTerms": [],
+      "evidence": [
+        "fr-01952"
+      ],
+      "confidence": 0.7,
+      "sceneId": "sc-040",
+      "generator": "pip-video-understanding/1 qwen3-vl:4b-instruct@ee4b975b58c1",
+      "review": {
+        "status": "candidate",
+        "by": null,
+        "at": null
+      }
+    },
+    {
+      "id": "dl-ln-01955",
+      "startSec": 195.54,
+      "revealSec": 196.38,
+      "kind": "dialogue",
+      "text": "Someone says: \"Shh.\"",
+      "entities": [],
+      "spoilerTerms": [],
+      "evidence": [
+        "ln-01955"
+      ],
+      "confidence": 0.85,
+      "sceneId": "sc-040",
+      "generator": "pip-video-understanding/1 qwen3-vl:4b-instruct@ee4b975b58c1",
+      "review": {
+        "status": "candidate",
+        "by": null,
+        "at": null
+      }
+    },
+    {
+      "id": "st-fr-01969",
+      "startSec": 196.417,
+      "revealSec": 196.917,
+      "kind": "setting",
+      "text": "The scene is in a stone wall background.",
+      "entities": [],
+      "spoilerTerms": [],
+      "evidence": [
+        "fr-01969"
+      ],
+      "confidence": 0.7,
+      "sceneId": "sc-041",
+      "generator": "pip-video-understanding/1 qwen3-vl:4b-instruct@ee4b975b58c1",
+      "review": {
+        "status": "candidate",
+        "by": null,
+        "at": null
+      }
+    },
+    {
+      "id": "ev-fr-01969",
+      "startSec": 196.417,
+      "revealSec": 196.917,
+      "kind": "event",
+      "text": "Young woman with red hair holds a sword. Also visible: sword, stone wall.",
+      "entities": [
+        "c1"
+      ],
+      "spoilerTerms": [],
+      "evidence": [
+        "fr-01969"
+      ],
+      "confidence": 0.7,
+      "sceneId": "sc-041",
+      "generator": "pip-video-understanding/1 qwen3-vl:4b-instruct@ee4b975b58c1",
+      "review": {
+        "status": "candidate",
+        "by": null,
+        "at": null
+      }
+    },
+    {
+      "id": "ev-fr-01983",
+      "startSec": 196.417,
+      "revealSec": 198.333,
+      "kind": "event",
+      "text": "A small creature with wings and red markings is held by a hand. Also visible: small creature with wings, hand reaching down, stone wall, tiled roof.",
+      "entities": [],
+      "spoilerTerms": [],
+      "evidence": [
+        "fr-01983"
+      ],
+      "confidence": 0.7,
+      "sceneId": "sc-041",
+      "generator": "pip-video-understanding/1 qwen3-vl:4b-instruct@ee4b975b58c1",
+      "review": {
+        "status": "candidate",
+        "by": null,
+        "at": null
+      }
+    },
+    {
+      "id": "ev-fr-02009",
+      "startSec": 196.417,
+      "revealSec": 200.917,
+      "kind": "event",
+      "text": "A hand reaches toward a small dragon-like creature. Also visible: Hand with gloves, Small dragon-like creature, Stone roof tiles, Stone wall.",
+      "entities": [],
+      "spoilerTerms": [],
+      "evidence": [
+        "fr-02009"
+      ],
+      "confidence": 0.7,
+      "sceneId": "sc-041",
+      "generator": "pip-video-understanding/1 qwen3-vl:4b-instruct@ee4b975b58c1",
+      "review": {
+        "status": "candidate",
+        "by": null,
+        "at": null
+      }
+    },
+    {
+      "id": "ev-fr-02037",
+      "startSec": 203.125,
+      "revealSec": 203.708,
+      "kind": "event",
+      "text": "Young woman with red hair holds a sword. Also visible: sword, stone wall.",
+      "entities": [
+        "c1"
+      ],
+      "spoilerTerms": [],
+      "evidence": [
+        "fr-02037"
+      ],
+      "confidence": 0.7,
+      "sceneId": "sc-042",
+      "generator": "pip-video-understanding/1 qwen3-vl:4b-instruct@ee4b975b58c1",
+      "review": {
+        "status": "candidate",
+        "by": null,
+        "at": null
+      }
+    },
+    {
+      "id": "st-fr-02065",
+      "startSec": 205,
+      "revealSec": 206.5,
+      "kind": "setting",
+      "text": "The scene is in a ruined stone room with scattered debris.",
+      "entities": [],
+      "spoilerTerms": [],
+      "evidence": [
+        "fr-02065"
+      ],
+      "confidence": 0.7,
+      "sceneId": "sc-043",
+      "generator": "pip-video-understanding/1 qwen3-vl:4b-instruct@ee4b975b58c1",
+      "review": {
+        "status": "candidate",
+        "by": null,
+        "at": null
+      }
+    },
+    {
+      "id": "ev-fr-02065",
+      "startSec": 205,
+      "revealSec": 206.5,
+      "kind": "event",
+      "text": "Young woman reads while bald man stands nearby. Also visible: book, sword, stone blocks, basket.",
+      "entities": [
+        "c1",
+        "c2"
+      ],
+      "spoilerTerms": [
+        "book",
+        "block",
+        "basket"
+      ],
+      "evidence": [
+        "fr-02065"
+      ],
+      "confidence": 0.7,
+      "sceneId": "sc-043",
+      "generator": "pip-video-understanding/1 qwen3-vl:4b-instruct@ee4b975b58c1",
+      "review": {
+        "status": "candidate",
+        "by": null,
+        "at": null
+      }
+    },
+    {
+      "id": "ev-fr-02095",
+      "startSec": 205,
+      "revealSec": 209.5,
+      "kind": "event",
+      "text": "Young woman sits on floor with sword, bald man lies nearby. Also visible: sword, stone blocks, basket, rolled scroll.",
+      "entities": [
+        "c1",
+        "c2"
+      ],
+      "spoilerTerms": [
+        "scroll"
+      ],
+      "evidence": [
+        "fr-02095"
+      ],
+      "confidence": 0.7,
+      "sceneId": "sc-043",
+      "generator": "pip-video-understanding/1 qwen3-vl:4b-instruct@ee4b975b58c1",
+      "review": {
+        "status": "candidate",
+        "by": null,
+        "at": null
+      }
+    },
+    {
+      "id": "dl-ln-02065",
+      "startSec": 206.54,
+      "revealSec": 211.54,
+      "kind": "dialogue",
+      "text": "Someone says: \"Shh, shh, shh. We're almost done. Hey, sit still.\"",
+      "entities": [
+        "c1",
+        "c2"
+      ],
+      "spoilerTerms": [],
+      "evidence": [
+        "ln-02065"
+      ],
+      "confidence": 0.85,
+      "sceneId": "sc-043",
+      "generator": "pip-video-understanding/1 qwen3-vl:4b-instruct@ee4b975b58c1",
+      "review": {
+        "status": "candidate",
+        "by": null,
+        "at": null
+      }
+    },
+    {
+      "id": "st-fr-02158",
+      "startSec": 214.917,
+      "revealSec": 215.833,
+      "kind": "relation",
+      "text": "Back in a dimly lit, rocky interior space, last shown at 1:45.",
+      "entities": [],
+      "spoilerTerms": [],
+      "evidence": [
+        "fr-02158"
+      ],
+      "confidence": 0.7,
+      "sceneId": "sc-045",
+      "generator": "pip-video-understanding/1 qwen3-vl:4b-instruct@ee4b975b58c1",
+      "review": {
+        "status": "candidate",
+        "by": null,
+        "at": null
+      }
+    },
+    {
+      "id": "ev-fr-02158",
+      "startSec": 214.917,
+      "revealSec": 215.833,
+      "kind": "event",
+      "text": "Young woman holds a small creature in her hands. Also visible: small creature with large eyes, sword handle in hand.",
+      "entities": [
+        "c1"
+      ],
+      "spoilerTerms": [
+        "handle"
+      ],
+      "evidence": [
+        "fr-02158"
+      ],
+      "confidence": 0.7,
+      "sceneId": "sc-045",
+      "generator": "pip-video-understanding/1 qwen3-vl:4b-instruct@ee4b975b58c1",
+      "review": {
+        "status": "candidate",
+        "by": null,
+        "at": null
+      }
+    },
+    {
+      "id": "dl-ln-02155",
+      "startSec": 215.54,
+      "revealSec": 216.54,
+      "kind": "dialogue",
+      "text": "Someone says: \"Hmm.\"",
+      "entities": [
+        "c1"
+      ],
+      "spoilerTerms": [
+        "hmm"
+      ],
+      "evidence": [
+        "ln-02155"
+      ],
+      "confidence": 0.85,
+      "sceneId": "sc-045",
+      "generator": "pip-video-understanding/1 qwen3-vl:4b-instruct@ee4b975b58c1",
+      "review": {
+        "status": "candidate",
+        "by": null,
+        "at": null
+      }
+    },
+    {
+      "id": "ev-fr-02234",
+      "startSec": 219.458,
+      "revealSec": 223.417,
+      "kind": "event",
+      "text": "A dark cloth covers a surface with patches. Also visible: dark cloth with patches, dark bowl or container.",
+      "entities": [],
+      "spoilerTerms": [
+        "cloth"
+      ],
+      "evidence": [
+        "fr-02234"
+      ],
+      "confidence": 0.7,
+      "sceneId": "sc-046",
+      "generator": "pip-video-understanding/1 qwen3-vl:4b-instruct@ee4b975b58c1",
+      "review": {
+        "status": "candidate",
+        "by": null,
+        "at": null
+      }
+    },
+    {
+      "id": "dl-ln-02275",
+      "startSec": 227.54,
+      "revealSec": 229.54,
+      "kind": "dialogue",
+      "text": "Someone says: \"Goodnight, Scales.\"",
+      "entities": [],
+      "spoilerTerms": [
+        "scale"
+      ],
+      "evidence": [
+        "ln-02275"
+      ],
+      "confidence": 0.85,
+      "sceneId": "sc-047",
+      "generator": "pip-video-understanding/1 qwen3-vl:4b-instruct@ee4b975b58c1",
+      "review": {
+        "status": "candidate",
+        "by": null,
+        "at": null
+      }
+    },
+    {
+      "id": "dl-ln-02500",
+      "startSec": 249.96,
+      "revealSec": 250.96,
+      "kind": "dialogue",
+      "text": "Someone says: \"Get him, Scales!\"",
+      "entities": [],
+      "spoilerTerms": [],
+      "evidence": [
+        "ln-02500"
+      ],
+      "confidence": 0.85,
+      "sceneId": "sc-048",
+      "generator": "pip-video-understanding/1 qwen3-vl:4b-instruct@ee4b975b58c1",
+      "review": {
+        "status": "candidate",
+        "by": null,
+        "at": null
+      }
+    },
+    {
+      "id": "dl-ln-02510",
+      "startSec": 250.96,
+      "revealSec": 251.96,
+      "kind": "dialogue",
+      "text": "Someone says: \"Come on, get him!\"",
+      "entities": [],
+      "spoilerTerms": [],
+      "evidence": [
+        "ln-02510"
+      ],
+      "confidence": 0.85,
+      "sceneId": "sc-049",
+      "generator": "pip-video-understanding/1 qwen3-vl:4b-instruct@ee4b975b58c1",
+      "review": {
+        "status": "candidate",
+        "by": null,
+        "at": null
+      }
+    },
+    {
+      "id": "st-fr-02586",
+      "startSec": 254.667,
+      "revealSec": 258.625,
+      "kind": "setting",
+      "text": "The scene is in a dilapidated wooden market stalls under bright sun.",
+      "entities": [],
+      "spoilerTerms": [
+        "stall",
+        "sun"
+      ],
+      "evidence": [
+        "fr-02586"
+      ],
+      "confidence": 0.7,
+      "sceneId": "sc-051",
+      "generator": "pip-video-understanding/1 qwen3-vl:4b-instruct@ee4b975b58c1",
+      "review": {
+        "status": "candidate",
+        "by": null,
+        "at": null
+      }
+    },
+    {
+      "id": "ev-fr-02586",
+      "startSec": 254.667,
+      "revealSec": 258.625,
+      "kind": "event",
+      "text": "A small creature flies above a collapsed wooden structure. Also visible: Broken wooden beams, Wooden stalls, Sack of green vegetables, Metal bucket.",
+      "entities": [],
+      "spoilerTerms": [
+        "sack"
+      ],
+      "evidence": [
+        "fr-02586"
+      ],
+      "confidence": 0.7,
+      "sceneId": "sc-051",
+      "generator": "pip-video-understanding/1 qwen3-vl:4b-instruct@ee4b975b58c1",
+      "review": {
+        "status": "candidate",
+        "by": null,
+        "at": null
+      }
+    },
+    {
+      "id": "ap-c3",
+      "startSec": 259.208,
+      "revealSec": 259.833,
+      "kind": "appearance",
+      "text": "A large figure in apron appears for the first time: walks past scene.",
+      "entities": [
+        "c3"
+      ],
+      "spoilerTerms": [],
+      "evidence": [
+        "fr-02598"
+      ],
+      "confidence": 0.5,
+      "sceneId": "sc-052",
+      "generator": "pip-video-understanding/1 qwen3-vl:4b-instruct@ee4b975b58c1",
+      "review": {
+        "status": "candidate",
+        "by": null,
+        "at": null
+      }
+    },
+    {
+      "id": "ap-c4",
+      "startSec": 259.208,
+      "revealSec": 259.833,
+      "kind": "appearance",
+      "text": "A woman in long dark dress appears for the first time: stands beside fruit stand.",
+      "entities": [
+        "c4"
+      ],
+      "spoilerTerms": [],
+      "evidence": [
+        "fr-02598"
+      ],
+      "confidence": 0.5,
+      "sceneId": "sc-052",
+      "generator": "pip-video-understanding/1 qwen3-vl:4b-instruct@ee4b975b58c1",
+      "review": {
+        "status": "candidate",
+        "by": null,
+        "at": null
+      }
+    },
+    {
+      "id": "ev-fr-02598",
+      "startSec": 259.208,
+      "revealSec": 259.833,
+      "kind": "event",
+      "text": "A young woman with red hair stands ready with a sword in a bustling market alley. Also visible: wooden crates, pumpkins, apples, barrels.",
+      "entities": [
+        "c1",
+        "c2",
+        "c3",
+        "c4"
+      ],
+      "spoilerTerms": [
+        "pumpkin",
+        "apple"
+      ],
+      "evidence": [
+        "fr-02598"
+      ],
+      "confidence": 0.5,
+      "sceneId": "sc-052",
+      "generator": "pip-video-understanding/1 qwen3-vl:4b-instruct@ee4b975b58c1",
+      "review": {
+        "status": "candidate",
+        "by": null,
+        "at": null
+      }
+    },
+    {
+      "id": "ev-fr-02638",
+      "startSec": 263.25,
+      "revealSec": 263.833,
+      "kind": "event",
+      "text": "Characters stand in shadowy alleyway with sunlight casting patterns on ground. Also visible: wooden pallets, crate, pink cloth, sword.",
+      "entities": [
+        "c1",
+        "c2",
+        "c3",
+        "c4"
+      ],
+      "spoilerTerms": [
+        "pallet"
+      ],
+      "evidence": [
+        "fr-02638"
+      ],
+      "confidence": 0.7,
+      "sceneId": "sc-053",
+      "generator": "pip-video-understanding/1 qwen3-vl:4b-instruct@ee4b975b58c1",
+      "review": {
+        "status": "candidate",
+        "by": null,
+        "at": null
+      }
+    },
+    {
+      "id": "dl-ln-02649",
+      "startSec": 264.86,
+      "revealSec": 265.76,
+      "kind": "dialogue",
+      "text": "Someone says: \"Scales?\"",
+      "entities": [],
+      "spoilerTerms": [],
+      "evidence": [
+        "ln-02649"
+      ],
+      "confidence": 0.85,
+      "sceneId": "sc-053",
+      "generator": "pip-video-understanding/1 qwen3-vl:4b-instruct@ee4b975b58c1",
+      "review": {
+        "status": "candidate",
+        "by": null,
+        "at": null
+      }
+    },
+    {
+      "id": "st-fr-02687",
+      "startSec": 265.583,
+      "revealSec": 268.708,
+      "kind": "setting",
+      "text": "The scene is in a sunlit alley with wooden structures.",
+      "entities": [],
+      "spoilerTerms": [],
+      "evidence": [
+        "fr-02687"
+      ],
+      "confidence": 0.7,
+      "sceneId": "sc-054",
+      "generator": "pip-video-understanding/1 qwen3-vl:4b-instruct@ee4b975b58c1",
+      "review": {
+        "status": "candidate",
+        "by": null,
+        "at": null
+      }
+    },
+    {
+      "id": "ev-fr-02687",
+      "startSec": 265.583,
+      "revealSec": 268.708,
+      "kind": "event",
+      "text": "Young woman stands alert in alleyway. Also visible: sword, tattered cloth, wooden beams, stacked wood.",
+      "entities": [
+        "c1"
+      ],
+      "spoilerTerms": [
+        "wood"
+      ],
+      "evidence": [
+        "fr-02687"
+      ],
+      "confidence": 0.7,
+      "sceneId": "sc-054",
+      "generator": "pip-video-understanding/1 qwen3-vl:4b-instruct@ee4b975b58c1",
+      "review": {
+        "status": "candidate",
+        "by": null,
+        "at": null
+      }
+    },
+    {
+      "id": "st-fr-02721",
+      "startSec": 271.625,
+      "revealSec": 272.125,
+      "kind": "setting",
+      "text": "The scene is under a makeshift shelter with beams.",
+      "entities": [],
+      "spoilerTerms": [],
+      "evidence": [
+        "fr-02721"
+      ],
+      "confidence": 0.7,
+      "sceneId": "sc-055",
+      "generator": "pip-video-understanding/1 qwen3-vl:4b-instruct@ee4b975b58c1",
+      "review": {
+        "status": "candidate",
+        "by": null,
+        "at": null
+      }
+    },
+    {
+      "id": "ev-fr-02721",
+      "startSec": 271.625,
+      "revealSec": 272.125,
+      "kind": "event",
+      "text": "Young woman with red hair stands alert. Also visible: sword, wooden beams, tattered fabric, sunlit sky.",
+      "entities": [
+        "c1"
+      ],
+      "spoilerTerms": [
+        "fabric"
+      ],
+      "evidence": [
+        "fr-02721"
+      ],
+      "confidence": 0.7,
+      "sceneId": "sc-055",
+      "generator": "pip-video-understanding/1 qwen3-vl:4b-instruct@ee4b975b58c1",
+      "review": {
+        "status": "candidate",
+        "by": null,
+        "at": null
+      }
+    },
+    {
+      "id": "st-fr-02750",
+      "startSec": 273.25,
+      "revealSec": 275,
+      "kind": "setting",
+      "text": "The scene is in an outdoor, near a building under construction.",
+      "entities": [],
+      "spoilerTerms": [],
+      "evidence": [
+        "fr-02750"
+      ],
+      "confidence": 0.7,
+      "sceneId": "sc-056",
+      "generator": "pip-video-understanding/1 qwen3-vl:4b-instruct@ee4b975b58c1",
+      "review": {
+        "status": "candidate",
+        "by": null,
+        "at": null
+      }
+    },
+    {
+      "id": "ev-fr-02750",
+      "startSec": 273.25,
+      "revealSec": 275,
+      "kind": "event",
+      "text": "A small creature perches on a wooden beam. Also visible: wooden beam, building structure, sky with clouds.",
+      "entities": [],
+      "spoilerTerms": [
+        "cloud"
+      ],
+      "evidence": [
+        "fr-02750"
+      ],
+      "confidence": 0.7,
+      "sceneId": "sc-056",
+      "generator": "pip-video-understanding/1 qwen3-vl:4b-instruct@ee4b975b58c1",
+      "review": {
+        "status": "candidate",
+        "by": null,
+        "at": null
+      }
+    },
+    {
+      "id": "st-fr-02762",
+      "startSec": 275.625,
+      "revealSec": 276.208,
+      "kind": "setting",
+      "text": "The scene is in an outdoor stone-paved area with barrels.",
+      "entities": [],
+      "spoilerTerms": [],
+      "evidence": [
+        "fr-02762"
+      ],
+      "confidence": 0.7,
+      "sceneId": "sc-057",
+      "generator": "pip-video-understanding/1 qwen3-vl:4b-instruct@ee4b975b58c1",
+      "review": {
+        "status": "candidate",
+        "by": null,
+        "at": null
+      }
+    },
+    {
+      "id": "ev-fr-02762",
+      "startSec": 275.625,
+      "revealSec": 276.208,
+      "kind": "event",
+      "text": "Young woman with red hair looks startled. Also visible: wooden barrel, worn basket, green cloth, wooden planks.",
+      "entities": [
+        "c1"
+      ],
+      "spoilerTerms": [],
+      "evidence": [
+        "fr-02762"
+      ],
+      "confidence": 0.7,
+      "sceneId": "sc-057",
+      "generator": "pip-video-understanding/1 qwen3-vl:4b-instruct@ee4b975b58c1",
+      "review": {
+        "status": "candidate",
+        "by": null,
+        "at": null
+      }
+    },
+    {
+      "id": "ap-c5",
+      "startSec": 278.792,
+      "revealSec": 279.417,
+      "kind": "appearance",
+      "text": "A small grey reptilian with large eyes appears for the first time: perched on wooden beam, looking up.",
+      "entities": [
+        "c5"
+      ],
+      "spoilerTerms": [
+        "reptilian"
+      ],
+      "evidence": [
+        "fr-02794"
+      ],
+      "confidence": 0.5,
+      "sceneId": "sc-058",
+      "generator": "pip-video-understanding/1 qwen3-vl:4b-instruct@ee4b975b58c1",
+      "review": {
+        "status": "candidate",
+        "by": null,
+        "at": null
+      }
+    },
+    {
+      "id": "st-fr-02794",
+      "startSec": 278.792,
+      "revealSec": 279.417,
+      "kind": "setting",
+      "text": "The scene is in a high above a building under construction.",
+      "entities": [],
+      "spoilerTerms": [],
+      "evidence": [
+        "fr-02794"
+      ],
+      "confidence": 0.7,
+      "sceneId": "sc-058",
+      "generator": "pip-video-understanding/1 qwen3-vl:4b-instruct@ee4b975b58c1",
+      "review": {
+        "status": "candidate",
+        "by": null,
+        "at": null
+      }
+    },
+    {
+      "id": "ev-fr-02794",
+      "startSec": 278.792,
+      "revealSec": 279.417,
+      "kind": "event",
+      "text": "Small creature watches birds flying overhead. Also visible: wooden beams, birds in flight, cloudy sky.",
+      "entities": [
+        "c5"
+      ],
+      "spoilerTerms": [
+        "bird"
+      ],
+      "evidence": [
+        "fr-02794"
+      ],
+      "confidence": 0.5,
+      "sceneId": "sc-058",
+      "generator": "pip-video-understanding/1 qwen3-vl:4b-instruct@ee4b975b58c1",
+      "review": {
+        "status": "candidate",
+        "by": null,
+        "at": null
+      }
+    },
+    {
+      "id": "ev-fr-02833",
+      "startSec": 278.792,
+      "revealSec": 283.333,
+      "kind": "event",
+      "text": "A small creature sits on a ledge, watching birds fly overhead. Also visible: birds flying in formation, building ledge, cloudy sky.",
+      "entities": [
+        "c5"
+      ],
+      "spoilerTerms": [
+        "ledge"
+      ],
+      "evidence": [
+        "fr-02833"
+      ],
+      "confidence": 0.7,
+      "sceneId": "sc-058",
+      "generator": "pip-video-understanding/1 qwen3-vl:4b-instruct@ee4b975b58c1",
+      "review": {
+        "status": "candidate",
+        "by": null,
+        "at": null
+      }
+    },
+    {
+      "id": "st-fr-02843",
+      "startSec": 283.458,
+      "revealSec": 284.333,
+      "kind": "setting",
+      "text": "The scene is in a ruined rooftop under orange sky.",
+      "entities": [],
+      "spoilerTerms": [],
+      "evidence": [
+        "fr-02843"
+      ],
+      "confidence": 0.7,
+      "sceneId": "sc-059",
+      "generator": "pip-video-understanding/1 qwen3-vl:4b-instruct@ee4b975b58c1",
+      "review": {
+        "status": "candidate",
+        "by": null,
+        "at": null
+      }
+    },
+    {
+      "id": "ev-fr-02843",
+      "startSec": 283.458,
+      "revealSec": 284.333,
+      "kind": "event",
+      "text": "A young woman runs across a ruined rooftop. Also visible: broken tiles, stone pillars, red feathered creature, stone dragon statue.",
+      "entities": [
+        "c1"
+      ],
+      "spoilerTerms": [
+        "pillar",
+        "statue"
+      ],
+      "evidence": [
+        "fr-02843"
+      ],
+      "confidence": 0.7,
+      "sceneId": "sc-059",
+      "generator": "pip-video-understanding/1 qwen3-vl:4b-instruct@ee4b975b58c1",
+      "review": {
+        "status": "candidate",
+        "by": null,
+        "at": null
+      }
+    },
+    {
+      "id": "ev-fr-02913",
+      "startSec": 289.333,
+      "revealSec": 291.333,
+      "kind": "event",
+      "text": "Birds fly above a ruined fortress. Also visible: stone towers, wooden planks, flagpole with banner, ladder.",
+      "entities": [],
+      "spoilerTerms": [
+        "flagpole",
+        "ladder"
+      ],
+      "evidence": [
+        "fr-02913"
+      ],
+      "confidence": 0.7,
+      "sceneId": "sc-061",
+      "generator": "pip-video-understanding/1 qwen3-vl:4b-instruct@ee4b975b58c1",
+      "review": {
+        "status": "candidate",
+        "by": null,
+        "at": null
+      }
+    },
+    {
+      "id": "ev-fr-02966",
+      "startSec": 289.333,
+      "revealSec": 296.625,
+      "kind": "event",
+      "text": "A young woman stands on a ruined rooftop at sunset. Also visible: broken stone structures, distant sun, ruined buildings.",
+      "entities": [
+        "c1",
+        "c5"
+      ],
+      "spoilerTerms": [],
+      "evidence": [
+        "fr-02966"
+      ],
+      "confidence": 0.7,
+      "sceneId": "sc-061",
+      "generator": "pip-video-understanding/1 qwen3-vl:4b-instruct@ee4b975b58c1",
+      "review": {
+        "status": "candidate",
+        "by": null,
+        "at": null
+      }
+    },
+    {
+      "id": "ev-fr-02978",
+      "startSec": 297.25,
+      "revealSec": 297.833,
+      "kind": "event",
+      "text": "A young woman with red hair stands on a cliff overlooking a city at sunset. Also visible: large stone structure, ruined buildings, rocky cliff edge.",
+      "entities": [
+        "c1"
+      ],
+      "spoilerTerms": [],
+      "evidence": [
+        "fr-02978"
+      ],
+      "confidence": 0.7,
+      "sceneId": "sc-062",
+      "generator": "pip-video-understanding/1 qwen3-vl:4b-instruct@ee4b975b58c1",
+      "review": {
+        "status": "candidate",
+        "by": null,
+        "at": null
+      }
+    },
+    {
+      "id": "ev-fr-03017",
+      "startSec": 297.25,
+      "revealSec": 301.708,
+      "kind": "event",
+      "text": "Woman shields eyes from bright sun.",
+      "entities": [
+        "c1"
+      ],
+      "spoilerTerms": [],
+      "evidence": [
+        "fr-03017"
+      ],
+      "confidence": 0.7,
+      "sceneId": "sc-062",
+      "generator": "pip-video-understanding/1 qwen3-vl:4b-instruct@ee4b975b58c1",
+      "review": {
+        "status": "candidate",
+        "by": null,
+        "at": null
+      }
+    },
+    {
+      "id": "st-fr-03033",
+      "startSec": 302.75,
+      "revealSec": 303.333,
+      "kind": "setting",
+      "text": "The scene is in a high platform with birds flying.",
+      "entities": [],
+      "spoilerTerms": [],
+      "evidence": [
+        "fr-03033"
+      ],
+      "confidence": 0.7,
+      "sceneId": "sc-063",
+      "generator": "pip-video-understanding/1 qwen3-vl:4b-instruct@ee4b975b58c1",
+      "review": {
+        "status": "candidate",
+        "by": null,
+        "at": null
+      }
+    },
+    {
+      "id": "ev-fr-03033",
+      "startSec": 302.75,
+      "revealSec": 303.333,
+      "kind": "event",
+      "text": "Two figures stand on a high platform at sunset. Also visible: stone tower, birds in flight, sword held by woman.",
+      "entities": [
+        "c1",
+        "c5"
+      ],
+      "spoilerTerms": [],
+      "evidence": [
+        "fr-03033"
+      ],
+      "confidence": 0.7,
+      "sceneId": "sc-063",
+      "generator": "pip-video-understanding/1 qwen3-vl:4b-instruct@ee4b975b58c1",
+      "review": {
+        "status": "candidate",
+        "by": null,
+        "at": null
+      }
+    },
+    {
+      "id": "dl-ln-03063",
+      "startSec": 306.34,
+      "revealSec": 307.18,
+      "kind": "dialogue",
+      "text": "Someone says: \"Mom!\"",
+      "entities": [],
+      "spoilerTerms": [
+        "mom"
+      ],
+      "evidence": [
+        "ln-03063"
+      ],
+      "confidence": 0.85,
+      "sceneId": "sc-064",
+      "generator": "pip-video-understanding/1 qwen3-vl:4b-instruct@ee4b975b58c1",
+      "review": {
+        "status": "candidate",
+        "by": null,
+        "at": null
+      }
+    },
+    {
+      "id": "st-fr-03094",
+      "startSec": 308.917,
+      "revealSec": 309.417,
+      "kind": "setting",
+      "text": "The scene is in a distant city under warm sky.",
+      "entities": [],
+      "spoilerTerms": [],
+      "evidence": [
+        "fr-03094"
+      ],
+      "confidence": 0.7,
+      "sceneId": "sc-065",
+      "generator": "pip-video-understanding/1 qwen3-vl:4b-instruct@ee4b975b58c1",
+      "review": {
+        "status": "candidate",
+        "by": null,
+        "at": null
+      }
+    },
+    {
+      "id": "ev-fr-03094",
+      "startSec": 308.917,
+      "revealSec": 309.417,
+      "kind": "event",
+      "text": "Two flying creatures soar above a distant city.",
+      "entities": [],
+      "spoilerTerms": [],
+      "evidence": [
+        "fr-03094"
+      ],
+      "confidence": 0.7,
+      "sceneId": "sc-065",
+      "generator": "pip-video-understanding/1 qwen3-vl:4b-instruct@ee4b975b58c1",
+      "review": {
+        "status": "candidate",
+        "by": null,
+        "at": null
+      }
+    },
+    {
+      "id": "st-fr-03273",
+      "startSec": 325.375,
+      "revealSec": 327.333,
+      "kind": "setting",
+      "text": "The scene is in a dramatic sky at sunset.",
+      "entities": [],
+      "spoilerTerms": [],
+      "evidence": [
+        "fr-03273"
+      ],
+      "confidence": 0.7,
+      "sceneId": "sc-072",
+      "generator": "pip-video-understanding/1 qwen3-vl:4b-instruct@ee4b975b58c1",
+      "review": {
+        "status": "candidate",
+        "by": null,
+        "at": null
+      }
+    },
+    {
+      "id": "ev-fr-03273",
+      "startSec": 325.375,
+      "revealSec": 327.333,
+      "kind": "event",
+      "text": "Young woman stares upward in surprise. Also visible: sword, shoulder, sky.",
+      "entities": [
+        "c1",
+        "c5"
+      ],
+      "spoilerTerms": [
+        "shoulder"
+      ],
+      "evidence": [
+        "fr-03273"
+      ],
+      "confidence": 0.7,
+      "sceneId": "sc-072",
+      "generator": "pip-video-understanding/1 qwen3-vl:4b-instruct@ee4b975b58c1",
+      "review": {
+        "status": "candidate",
+        "by": null,
+        "at": null
+      }
+    },
+    {
+      "id": "st-fr-03287",
+      "startSec": 328.167,
+      "revealSec": 328.708,
+      "kind": "setting",
+      "text": "The scene is in a sky with soft pink and orange clouds.",
+      "entities": [],
+      "spoilerTerms": [],
+      "evidence": [
+        "fr-03287"
+      ],
+      "confidence": 0.7,
+      "sceneId": "sc-073",
+      "generator": "pip-video-understanding/1 qwen3-vl:4b-instruct@ee4b975b58c1",
+      "review": {
+        "status": "candidate",
+        "by": null,
+        "at": null
+      }
+    },
+    {
+      "id": "ev-fr-03287",
+      "startSec": 328.167,
+      "revealSec": 328.708,
+      "kind": "event",
+      "text": "Small reptilian creature flies upside down toward outstretched hand. Also visible: flying creature, outstretched hand, clouds.",
+      "entities": [
+        "c5"
+      ],
+      "spoilerTerms": [],
+      "evidence": [
+        "fr-03287"
+      ],
+      "confidence": 0.6,
+      "sceneId": "sc-073",
+      "generator": "pip-video-understanding/1 qwen3-vl:4b-instruct@ee4b975b58c1",
+      "review": {
+        "status": "candidate",
+        "by": null,
+        "at": null
+      }
+    },
+    {
+      "id": "dl-ln-03383",
+      "startSec": 338.3,
+      "revealSec": 339.8,
+      "kind": "dialogue",
+      "text": "Someone says: \"Scout!\"",
+      "entities": [],
+      "spoilerTerms": [
+        "scout"
+      ],
+      "evidence": [
+        "ln-03383"
+      ],
+      "confidence": 0.85,
+      "sceneId": "sc-077",
+      "generator": "pip-video-understanding/1 qwen3-vl:4b-instruct@ee4b975b58c1",
+      "review": {
+        "status": "candidate",
+        "by": null,
+        "at": null
+      }
+    },
+    {
+      "id": "st-fr-03539",
+      "startSec": 353.333,
+      "revealSec": 353.917,
+      "kind": "setting",
+      "text": "The scene is in a desert landscape at twilight with ruins and skeletal trees.",
+      "entities": [],
+      "spoilerTerms": [],
+      "evidence": [
+        "fr-03539"
+      ],
+      "confidence": 0.7,
+      "sceneId": "sc-082",
+      "generator": "pip-video-understanding/1 qwen3-vl:4b-instruct@ee4b975b58c1",
+      "review": {
+        "status": "candidate",
+        "by": null,
+        "at": null
+      }
+    },
+    {
+      "id": "ev-fr-03539",
+      "startSec": 353.333,
+      "revealSec": 353.917,
+      "kind": "event",
+      "text": "No characters are visible in this frame.",
+      "entities": [],
+      "spoilerTerms": [],
+      "evidence": [
+        "fr-03539"
+      ],
+      "confidence": 0.7,
+      "sceneId": "sc-082",
+      "generator": "pip-video-understanding/1 qwen3-vl:4b-instruct@ee4b975b58c1",
+      "review": {
+        "status": "candidate",
+        "by": null,
+        "at": null
+      }
+    },
+    {
+      "id": "ev-fr-03578",
+      "startSec": 353.333,
+      "revealSec": 357.833,
+      "kind": "event",
+      "text": "Woman crouches in misty field.",
+      "entities": [
+        "c1"
+      ],
+      "spoilerTerms": [],
+      "evidence": [
+        "fr-03578"
+      ],
+      "confidence": 0.7,
+      "sceneId": "sc-082",
+      "generator": "pip-video-understanding/1 qwen3-vl:4b-instruct@ee4b975b58c1",
+      "review": {
+        "status": "candidate",
+        "by": null,
+        "at": null
+      }
+    },
+    {
+      "id": "ev-fr-03618",
+      "startSec": 353.333,
+      "revealSec": 361.833,
+      "kind": "event",
+      "text": "A young woman observes a small reptilian creature on a hill. Also visible: sword, hill, flagpole.",
+      "entities": [
+        "c1",
+        "c5"
+      ],
+      "spoilerTerms": [
+        "hill"
+      ],
+      "evidence": [
+        "fr-03618"
+      ],
+      "confidence": 0.7,
+      "sceneId": "sc-082",
+      "generator": "pip-video-understanding/1 qwen3-vl:4b-instruct@ee4b975b58c1",
+      "review": {
+        "status": "candidate",
+        "by": null,
+        "at": null
+      }
+    },
+    {
+      "id": "ev-fr-03658",
+      "startSec": 353.333,
+      "revealSec": 365.833,
+      "kind": "event",
+      "text": "A lone figure stands on a hill under a large moon. Also visible: large moon, hilltop, stars.",
+      "entities": [],
+      "spoilerTerms": [
+        "moon",
+        "hilltop",
+        "star"
+      ],
+      "evidence": [
+        "fr-03658"
+      ],
+      "confidence": 0.7,
+      "sceneId": "sc-082",
+      "generator": "pip-video-understanding/1 qwen3-vl:4b-instruct@ee4b975b58c1",
+      "review": {
+        "status": "candidate",
+        "by": null,
+        "at": null
+      }
+    },
+    {
+      "id": "ev-fr-03676",
+      "startSec": 353.333,
+      "revealSec": 367.625,
+      "kind": "event",
+      "text": "No characters visible in this frame.",
+      "entities": [],
+      "spoilerTerms": [],
+      "evidence": [
+        "fr-03676"
+      ],
+      "confidence": 0.7,
+      "sceneId": "sc-082",
+      "generator": "pip-video-understanding/1 qwen3-vl:4b-instruct@ee4b975b58c1",
+      "review": {
+        "status": "candidate",
+        "by": null,
+        "at": null
+      }
+    },
+    {
+      "id": "ev-fr-03698",
+      "startSec": 353.333,
+      "revealSec": 369.833,
+      "kind": "event",
+      "text": "A lone figure traverses vast golden dunes.",
+      "entities": [],
+      "spoilerTerms": [],
+      "evidence": [
+        "fr-03698"
+      ],
+      "confidence": 0.7,
+      "sceneId": "sc-082",
+      "generator": "pip-video-understanding/1 qwen3-vl:4b-instruct@ee4b975b58c1",
+      "review": {
+        "status": "candidate",
+        "by": null,
+        "at": null
+      }
+    },
+    {
+      "id": "st-fr-03811",
+      "startSec": 380.542,
+      "revealSec": 381.125,
+      "kind": "setting",
+      "text": "The scene is in a tall green bamboo forest with fallen logs.",
+      "entities": [],
+      "spoilerTerms": [
+        "log"
+      ],
+      "evidence": [
+        "fr-03811"
+      ],
+      "confidence": 0.7,
+      "sceneId": "sc-083",
+      "generator": "pip-video-understanding/1 qwen3-vl:4b-instruct@ee4b975b58c1",
+      "review": {
+        "status": "candidate",
+        "by": null,
+        "at": null
+      }
+    },
+    {
+      "id": "ev-fr-03811",
+      "startSec": 380.542,
+      "revealSec": 381.125,
+      "kind": "event",
+      "text": "Young woman navigates through dense bamboo forest. Also visible: fallen bamboo log, orange butterfly, green bamboo stalks, rocky ground.",
+      "entities": [
+        "c1"
+      ],
+      "spoilerTerms": [
+        "butterfly",
+        "stalk"
+      ],
+      "evidence": [
+        "fr-03811"
+      ],
+      "confidence": 0.7,
+      "sceneId": "sc-083",
+      "generator": "pip-video-understanding/1 qwen3-vl:4b-instruct@ee4b975b58c1",
+      "review": {
+        "status": "candidate",
+        "by": null,
+        "at": null
+      }
+    },
+    {
+      "id": "ev-fr-03839",
+      "startSec": 382.917,
+      "revealSec": 383.917,
+      "kind": "event",
+      "text": "No characters are visible in this frame.",
+      "entities": [],
+      "spoilerTerms": [],
+      "evidence": [
+        "fr-03839"
+      ],
+      "confidence": 0.7,
+      "sceneId": "sc-084",
+      "generator": "pip-video-understanding/1 qwen3-vl:4b-instruct@ee4b975b58c1",
+      "review": {
+        "status": "candidate",
+        "by": null,
+        "at": null
+      }
+    },
+    {
+      "id": "dl-ln-04458",
+      "startSec": 445.8,
+      "revealSec": 447.22,
+      "kind": "dialogue",
+      "text": "Someone says: \"I have failed.\"",
+      "entities": [],
+      "spoilerTerms": [],
+      "evidence": [
+        "ln-04458"
+      ],
+      "confidence": 0.85,
+      "sceneId": "sc-091",
+      "generator": "pip-video-understanding/1 qwen3-vl:4b-instruct@ee4b975b58c1",
+      "review": {
+        "status": "candidate",
+        "by": null,
+        "at": null
+      }
+    },
+    {
+      "id": "dl-ln-04527",
+      "startSec": 452.68,
+      "revealSec": 455.18,
+      "kind": "dialogue",
+      "text": "Someone says: \"You've only failed your C.\"",
+      "entities": [],
+      "spoilerTerms": [],
+      "evidence": [
+        "ln-04527"
+      ],
+      "confidence": 0.85,
+      "sceneId": "sc-093",
+      "generator": "pip-video-understanding/1 qwen3-vl:4b-instruct@ee4b975b58c1",
+      "review": {
+        "status": "candidate",
+        "by": null,
+        "at": null
+      }
+    },
+    {
+      "id": "dl-ln-04577",
+      "startSec": 457.68,
+      "revealSec": 460.48,
+      "kind": "dialogue",
+      "text": "Someone says: \"These are dragon lands, Sintel.\"",
+      "entities": [],
+      "spoilerTerms": [],
+      "evidence": [
+        "ln-04577"
+      ],
+      "confidence": 0.85,
+      "sceneId": "sc-095",
+      "generator": "pip-video-understanding/1 qwen3-vl:4b-instruct@ee4b975b58c1",
+      "review": {
+        "status": "candidate",
+        "by": null,
+        "at": null
+      }
+    },
+    {
+      "id": "dl-ln-04605",
+      "startSec": 460.48,
+      "revealSec": 462.9,
+      "kind": "dialogue",
+      "text": "Someone says: \"You are closer than you know.\"",
+      "entities": [],
+      "spoilerTerms": [],
+      "evidence": [
+        "ln-04605"
+      ],
+      "confidence": 0.85,
+      "sceneId": "sc-097",
+      "generator": "pip-video-understanding/1 qwen3-vl:4b-instruct@ee4b975b58c1",
+      "review": {
+        "status": "candidate",
+        "by": null,
+        "at": null
+      }
+    },
+    {
+      "id": "dl-ln-05574",
+      "startSec": 557.42,
+      "revealSec": 558.42,
+      "kind": "dialogue",
+      "text": "Someone says: \"Scales!\"",
+      "entities": [],
+      "spoilerTerms": [],
+      "evidence": [
+        "ln-05574"
+      ],
+      "confidence": 0.85,
+      "sceneId": "sc-121",
+      "generator": "pip-video-understanding/1 qwen3-vl:4b-instruct@ee4b975b58c1",
+      "review": {
+        "status": "candidate",
+        "by": null,
+        "at": null
+      }
+    },
+    {
+      "id": "dl-ln-05782",
+      "startSec": 578.24,
+      "revealSec": 580.08,
+      "kind": "dialogue",
+      "text": "Someone says: \"Hey!\"",
+      "entities": [],
+      "spoilerTerms": [],
+      "evidence": [
+        "ln-05782"
+      ],
+      "confidence": 0.85,
+      "sceneId": "sc-127",
+      "generator": "pip-video-understanding/1 qwen3-vl:4b-instruct@ee4b975b58c1",
+      "review": {
+        "status": "candidate",
+        "by": null,
+        "at": null
+      }
+    },
+    {
+      "id": "dl-ln-05986",
+      "startSec": 598.58,
+      "revealSec": 599.58,
+      "kind": "dialogue",
+      "text": "Someone says: \"Lemon.\"",
+      "entities": [],
+      "spoilerTerms": [
+        "lemon"
+      ],
+      "evidence": [
+        "ln-05986"
+      ],
+      "confidence": 0.85,
+      "sceneId": "sc-137",
+      "generator": "pip-video-understanding/1 qwen3-vl:4b-instruct@ee4b975b58c1",
+      "review": {
+        "status": "candidate",
+        "by": null,
+        "at": null
+      }
+    },
+    {
+      "id": "dl-ln-06213",
+      "startSec": 621.32,
+      "revealSec": 622.16,
+      "kind": "dialogue",
+      "text": "Someone says: \"Scales?\"",
+      "entities": [],
+      "spoilerTerms": [],
+      "evidence": [
+        "ln-06213"
+      ],
+      "confidence": 0.85,
+      "sceneId": "sc-145",
+      "generator": "pip-video-understanding/1 qwen3-vl:4b-instruct@ee4b975b58c1",
+      "review": {
+        "status": "candidate",
+        "by": null,
+        "at": null
+      }
+    },
+    {
+      "id": "dl-ln-06258",
+      "startSec": 625.76,
+      "revealSec": 626.6,
+      "kind": "dialogue",
+      "text": "Someone says: \"Scales?\"",
+      "entities": [],
+      "spoilerTerms": [],
+      "evidence": [
+        "ln-06258"
+      ],
+      "confidence": 0.85,
+      "sceneId": "sc-146",
+      "generator": "pip-video-understanding/1 qwen3-vl:4b-instruct@ee4b975b58c1",
+      "review": {
+        "status": "candidate",
+        "by": null,
+        "at": null
+      }
+    },
+    {
+      "id": "dl-ln-07475",
+      "startSec": 747.46,
+      "revealSec": 754.16,
+      "kind": "dialogue",
+      "text": "Someone says: \"Come take my journey in tonight\"",
+      "entities": [],
+      "spoilerTerms": [],
+      "evidence": [
+        "ln-07475"
+      ],
+      "confidence": 0.85,
+      "sceneId": "sc-161",
+      "generator": "pip-video-understanding/1 qwen3-vl:4b-instruct@ee4b975b58c1",
+      "review": {
+        "status": "candidate",
+        "by": null,
+        "at": null
+      }
+    },
+    {
+      "id": "dl-ln-07542",
+      "startSec": 754.16,
+      "revealSec": 760.84,
+      "kind": "dialogue",
+      "text": "Someone says: \"Come be my shadow, walk at my side\"",
+      "entities": [],
+      "spoilerTerms": [],
+      "evidence": [
+        "ln-07542"
+      ],
+      "confidence": 0.85,
+      "sceneId": "sc-161",
+      "generator": "pip-video-understanding/1 qwen3-vl:4b-instruct@ee4b975b58c1",
+      "review": {
+        "status": "candidate",
+        "by": null,
+        "at": null
+      }
+    },
+    {
+      "id": "dl-ln-07608",
+      "startSec": 760.84,
+      "revealSec": 767.04,
+      "kind": "dialogue",
+      "text": "Someone says: \"And when you see all that I have seen\"",
+      "entities": [],
+      "spoilerTerms": [],
+      "evidence": [
+        "ln-07608"
+      ],
+      "confidence": 0.85,
+      "sceneId": "sc-161",
+      "generator": "pip-video-understanding/1 qwen3-vl:4b-instruct@ee4b975b58c1",
+      "review": {
+        "status": "candidate",
+        "by": null,
+        "at": null
+      }
+    },
+    {
+      "id": "dl-ln-07670",
+      "startSec": 767.04,
+      "revealSec": 772.04,
+      "kind": "dialogue",
+      "text": "Someone says: \"Can you tell me now from time\"",
+      "entities": [],
+      "spoilerTerms": [],
+      "evidence": [
+        "ln-07670"
+      ],
+      "confidence": 0.85,
+      "sceneId": "sc-161",
+      "generator": "pip-video-understanding/1 qwen3-vl:4b-instruct@ee4b975b58c1",
+      "review": {
+        "status": "candidate",
+        "by": null,
+        "at": null
+      }
+    },
+    {
+      "id": "dl-ln-07742",
+      "startSec": 774.18,
+      "revealSec": 779.18,
+      "kind": "dialogue",
+      "text": "Someone says: \"I have been waiting all this time\"",
+      "entities": [],
+      "spoilerTerms": [],
+      "evidence": [
+        "ln-07742"
+      ],
+      "confidence": 0.85,
+      "sceneId": "sc-161",
+      "generator": "pip-video-understanding/1 qwen3-vl:4b-instruct@ee4b975b58c1",
+      "review": {
+        "status": "candidate",
+        "by": null,
+        "at": null
+      }
+    },
+    {
+      "id": "dl-ln-07807",
+      "startSec": 780.72,
+      "revealSec": 785.72,
+      "kind": "dialogue",
+      "text": "Someone says: \"For one to wake me, one to call mine\"",
+      "entities": [],
+      "spoilerTerms": [],
+      "evidence": [
+        "ln-07807"
+      ],
+      "confidence": 0.85,
+      "sceneId": "sc-161",
+      "generator": "pip-video-understanding/1 qwen3-vl:4b-instruct@ee4b975b58c1",
+      "review": {
+        "status": "candidate",
+        "by": null,
+        "at": null
+      }
+    },
+    {
+      "id": "dl-ln-07874",
+      "startSec": 787.36,
+      "revealSec": 792.36,
+      "kind": "dialogue",
+      "text": "Someone says: \"So when you're here, all that you hold dear\"",
+      "entities": [],
+      "spoilerTerms": [],
+      "evidence": [
+        "ln-07874"
+      ],
+      "confidence": 0.85,
+      "sceneId": "sc-161",
+      "generator": "pip-video-understanding/1 qwen3-vl:4b-instruct@ee4b975b58c1",
+      "review": {
+        "status": "candidate",
+        "by": null,
+        "at": null
+      }
+    },
+    {
+      "id": "dl-ln-07936",
+      "startSec": 793.56,
+      "revealSec": 799.56,
+      "kind": "dialogue",
+      "text": "Someone says: \"Do you fear what you will find?\"",
+      "entities": [],
+      "spoilerTerms": [],
+      "evidence": [
+        "ln-07936"
+      ],
+      "confidence": 0.85,
+      "sceneId": "sc-161",
+      "generator": "pip-video-understanding/1 qwen3-vl:4b-instruct@ee4b975b58c1",
+      "review": {
+        "status": "candidate",
+        "by": null,
+        "at": null
+      }
+    },
+    {
+      "id": "dl-ln-07996",
+      "startSec": 799.56,
+      "revealSec": 805.56,
+      "kind": "dialogue",
+      "text": "Someone says: \"'Cause the dawn breaks through the night\"",
+      "entities": [],
+      "spoilerTerms": [],
+      "evidence": [
+        "ln-07996"
+      ],
+      "confidence": 0.85,
+      "sceneId": "sc-161",
+      "generator": "pip-video-understanding/1 qwen3-vl:4b-instruct@ee4b975b58c1",
+      "review": {
+        "status": "candidate",
+        "by": null,
+        "at": null
+      }
+    },
+    {
+      "id": "dl-ln-08066",
+      "startSec": 806.56,
+      "revealSec": 815.56,
+      "kind": "dialogue",
+      "text": "Someone says: \"I'm alone forever longing for the home\"",
+      "entities": [],
+      "spoilerTerms": [],
+      "evidence": [
+        "ln-08066"
+      ],
+      "confidence": 0.85,
+      "sceneId": "sc-161",
+      "generator": "pip-video-understanding/1 qwen3-vl:4b-instruct@ee4b975b58c1",
+      "review": {
+        "status": "candidate",
+        "by": null,
+        "at": null
+      }
+    },
+    {
+      "id": "dl-ln-08156",
+      "startSec": 815.56,
+      "revealSec": 820.56,
+      "kind": "dialogue",
+      "text": "Someone says: \"I've found in your eyes\"",
+      "entities": [],
+      "spoilerTerms": [],
+      "evidence": [
+        "ln-08156"
+      ],
+      "confidence": 0.85,
+      "sceneId": "sc-161",
+      "generator": "pip-video-understanding/1 qwen3-vl:4b-instruct@ee4b975b58c1",
+      "review": {
+        "status": "candidate",
+        "by": null,
+        "at": null
+      }
+    },
+    {
+      "id": "dl-ln-08236",
+      "startSec": 823.56,
+      "revealSec": 852.56,
+      "kind": "dialogue",
+      "text": "Someone says: \"I will be listening for the drum to call me over far away from my tender youth and the very truth, showing me what I've begun.\"",
+      "entities": [],
+      "spoilerTerms": [],
+      "evidence": [
+        "ln-08236"
+      ],
+      "confidence": 0.85,
+      "sceneId": "sc-161",
+      "generator": "pip-video-understanding/1 qwen3-vl:4b-instruct@ee4b975b58c1",
+      "review": {
+        "status": "candidate",
+        "by": null,
+        "at": null
+      }
+    },
+    {
+      "id": "dl-ln-08526",
+      "startSec": 852.56,
+      "revealSec": 858.56,
+      "kind": "dialogue",
+      "text": "Someone says: \"As the time breaks through the night\"",
+      "entities": [],
+      "spoilerTerms": [],
+      "evidence": [
+        "ln-08526"
+      ],
+      "confidence": 0.85,
+      "sceneId": "sc-161",
+      "generator": "pip-video-understanding/1 qwen3-vl:4b-instruct@ee4b975b58c1",
+      "review": {
+        "status": "candidate",
+        "by": null,
+        "at": null
+      }
+    },
+    {
+      "id": "dl-ln-08586",
+      "startSec": 858.56,
+      "revealSec": 864.56,
+      "kind": "dialogue",
+      "text": "Someone says: \"I will fall forever long\"",
+      "entities": [],
+      "spoilerTerms": [],
+      "evidence": [
+        "ln-08586"
+      ],
+      "confidence": 0.85,
+      "sceneId": "sc-161",
+      "generator": "pip-video-understanding/1 qwen3-vl:4b-instruct@ee4b975b58c1",
+      "review": {
+        "status": "candidate",
+        "by": null,
+        "at": null
+      }
+    },
+    {
+      "id": "dl-ln-08646",
+      "startSec": 864.56,
+      "revealSec": 867.56,
+      "kind": "dialogue",
+      "text": "Someone says: \"In for the fall\"",
+      "entities": [],
+      "spoilerTerms": [],
+      "evidence": [
+        "ln-08646"
+      ],
+      "confidence": 0.85,
+      "sceneId": "sc-161",
+      "generator": "pip-video-understanding/1 qwen3-vl:4b-instruct@ee4b975b58c1",
+      "review": {
+        "status": "candidate",
+        "by": null,
+        "at": null
+      }
+    },
+    {
+      "id": "dl-ln-08676",
+      "startSec": 867.56,
+      "revealSec": 871.56,
+      "kind": "dialogue",
+      "text": "Someone says: \"I found in your eyes\"",
+      "entities": [],
+      "spoilerTerms": [],
+      "evidence": [
+        "ln-08676"
+      ],
+      "confidence": 0.85,
+      "sceneId": "sc-161",
+      "generator": "pip-video-understanding/1 qwen3-vl:4b-instruct@ee4b975b58c1",
+      "review": {
+        "status": "candidate",
+        "by": null,
+        "at": null
+      }
+    },
+    {
+      "id": "dl-ln-08716",
+      "startSec": 871.56,
+      "revealSec": 873.56,
+      "kind": "dialogue",
+      "text": "Someone says: \"Your voice\"",
+      "entities": [],
+      "spoilerTerms": [],
+      "evidence": [
+        "ln-08716"
+      ],
+      "confidence": 0.85,
+      "sceneId": "sc-161",
+      "generator": "pip-video-understanding/1 qwen3-vl:4b-instruct@ee4b975b58c1",
+      "review": {
+        "status": "candidate",
+        "by": null,
+        "at": null
+      }
+    },
+    {
+      "id": "dl-ln-08736",
+      "startSec": 873.56,
+      "revealSec": 879.56,
+      "kind": "dialogue",
+      "text": "Someone says: \"Saw me through the night\"",
+      "entities": [],
+      "spoilerTerms": [],
+      "evidence": [
+        "ln-08736"
+      ],
+      "confidence": 0.85,
+      "sceneId": "sc-161",
+      "generator": "pip-video-understanding/1 qwen3-vl:4b-instruct@ee4b975b58c1",
+      "review": {
+        "status": "candidate",
+        "by": null,
+        "at": null
+      }
+    }
+  ],
+  "coveredUntilSec": 383.917
+}

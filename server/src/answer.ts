@@ -20,6 +20,9 @@ import type { AskVia, Source } from './shared/protocol.js';
 /** answer: from the facts; clarify: "Did you mean"; unknown: Pip abstains; fallback: no model. */
 export type ReplyKind = 'answer' | 'clarify' | 'unknown' | 'fallback';
 const RETRIEVE = { limit: 10, recentCount: 4 } as const;
+// A model reply that only says the facts do not tell (it is an abstention, not an answer).
+const NOT_SAID =
+  /\b(?:not (?:been )?(?:mentioned|said|shown|specified|described|stated|given)|(?:does not|doesn'?t) (?:say|mention)|no (?:information|mention)|in the (?:facts|notes|premise))\b/i;
 const IDENTIFY_WINDOW_SEC = 30;
 // Below this, an answer resting on the fact says it is unsure (CONFIDENCE in
 // pipeline/scene-memory.ts: a character seen once, or linked only by look, is below it).
@@ -270,8 +273,10 @@ function firstSentence(text: string): string {
 
 /** What Pip says about one entity: its intro, led by its name when the intro does not say it. */
 function introduce(entity: Entity): string {
-  if (entity.label === undefined || containsTerm(entity.intro, entity.name)) return entity.intro;
-  return entity.name === entity.label ? entity.intro : `That's ${entity.name}. ${entity.intro}`;
+  if (containsTerm(entity.intro, entity.name)) return entity.intro;
+  // Until its name is heard, the name is the label ("the baby dragon"), which the intro describes.
+  if (entity.label !== undefined && entity.name === entity.label) return entity.intro;
+  return `That's ${entity.name.replace(/^The\b/, 'the')}. ${entity.intro}`;
 }
 
 /**
@@ -340,6 +345,8 @@ async function modelAnswer(
     deps.now,
   );
   if (!outcome.reply) {
+    const found = fromKeywords(req, evidence);
+    if (found) return found;
     const text = outcome.error === 'unparsed' ? LINES.unparsed : LINES.modelFailed;
     return reply(evidence, 'model', {
       kind: 'fallback',
@@ -368,6 +375,15 @@ async function modelAnswer(
       modelMs: outcome.ms ?? null,
     });
   }
+  // "Her age is not mentioned in the facts" is Pip not knowing: say so plainly, in Pip's words.
+  if (NOT_SAID.test(outcome.reply.text)) {
+    return reply(evidence, 'model', {
+      kind: 'unknown',
+      source: 'template',
+      text: LINES.cantTell,
+      modelMs: outcome.ms ?? null,
+    });
+  }
   const checked = gate(
     reply(evidence, 'model', {
       kind: 'answer',
@@ -386,8 +402,28 @@ async function modelAnswer(
       { text: checked.text, next: checked.next, sources: checked.sources },
       deps.now(),
     );
+    return checked;
   }
-  return checked;
+  // The gate withheld the model's words; a reviewed fact that clearly answers is still safe.
+  const found = fromKeywords(req, evidence);
+  return found ? { ...found, withheld: checked.withheld } : checked;
+}
+
+/** The one permitted fact that clearly matches the question, through the gate, or null. */
+function fromKeywords(req: AnswerRequest, evidence: EvidenceSet): AnswerResult | null {
+  const best = bestKeywordMatch(evidence, req.question);
+  if (!best) return null;
+  const found = gate(
+    reply(evidence, 'retrieval', {
+      kind: 'answer',
+      source: 'timeline',
+      text: cleanText(best.text),
+      sources: [best.id],
+    }),
+    req.timeline,
+    evidence,
+  );
+  return found.kind === 'answer' ? found : null;
 }
 
 /**

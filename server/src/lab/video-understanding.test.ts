@@ -1,5 +1,5 @@
 // Virtual Pip Lab: video understanding end to end. The real server answers about Sintel from the
-// timeline the pipeline generated (content/timelines/sintel.json), at the position the fake TV
+// timeline the pipeline generated (pipeline/timelines/sintel.json), at the position the fake TV
 // reports, over real sockets. The TV scrubs forward and back; the pad asks.
 import { fileURLToPath } from 'node:url';
 import { afterEach, describe, expect, it } from 'vitest';
@@ -12,7 +12,8 @@ import { startLab, waitFor, type Lab } from './harness.js';
 const CONTENT = fileURLToPath(new URL('../../content', import.meta.url));
 const sintel = loadFilms(CONTENT).find((f) => f.id === 'sintel');
 if (!sintel) throw new Error('content/sintel.json is missing');
-const timeline = loadTimeline(`${CONTENT}/timelines`, sintel);
+const GENERATED = fileURLToPath(new URL('../../pipeline/timelines', import.meta.url));
+const timeline = loadTimeline(GENERATED, sintel);
 
 let lab: Lab | null = null;
 afterEach(async () => {

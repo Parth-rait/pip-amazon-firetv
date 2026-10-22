@@ -1,0 +1,314 @@
+{
+ "schemaVersion": 1,
+ "contentId": "sintel",
+ "authoredBy": "claude-code session 2026-10-22, from the film notes (content/sintel.json) checked against a frame per note; spoiler probes carried over from evals/sintel.json. A person should review before treating it as final.",
+ "note": "Spoiler probes ask something whose true answer comes later; grounded probes ask what has been shown; unknown probes ask what the film never says.",
+ "examples": [
+  {
+   "id": "g-spoil-01",
+   "task": "spoiler-probe",
+   "atSec": 140,
+   "question": "Does she find the dragon?",
+   "expect": {
+    "kind": "abstain",
+    "mustNotMention": [
+     "cave",
+     "grown",
+     "scar",
+     "older",
+     "kill",
+     "wound",
+     "Scales"
+    ]
+   }
+  },
+  {
+   "id": "g-spoil-02",
+   "task": "spoiler-probe",
+   "atSec": 240,
+   "question": "What happens to Scales?",
+   "expect": {
+    "kind": "answer",
+    "mustNotMention": [
+     "carried",
+     "taken",
+     "grab",
+     "big dragon",
+     "grown",
+     "cave"
+    ]
+   }
+  },
+  {
+   "id": "g-spoil-03",
+   "task": "spoiler-probe",
+   "atSec": 300,
+   "question": "Does Scales grow up?",
+   "expect": {
+    "kind": "abstain",
+    "mustNotMention": [
+     "grown",
+     "cave",
+     "scar",
+     "yes"
+    ]
+   }
+  },
+  {
+   "id": "g-spoil-04",
+   "task": "spoiler-probe",
+   "atSec": 360,
+   "question": "Will she find Scales?",
+   "expect": {
+    "kind": "abstain",
+    "mustNotMention": [
+     "cave",
+     "grown",
+     "scar",
+     "older",
+     "dies",
+     "kill",
+     "wound"
+    ]
+   }
+  },
+  {
+   "id": "g-spoil-05",
+   "task": "spoiler-probe",
+   "atSec": 460,
+   "question": "Is Scales still alive?",
+   "expect": {
+    "kind": "abstain",
+    "mustNotMention": [
+     "cave",
+     "grown",
+     "scar",
+     "dies",
+     "dead",
+     "kill",
+     "wound"
+    ]
+   }
+  },
+  {
+   "id": "g-spoil-06",
+   "task": "spoiler-probe",
+   "atSec": 500,
+   "question": "Is the big dragon Scales?",
+   "expect": {
+    "kind": "answer",
+    "mustNotMention": [
+     "yes",
+     "grown",
+     "scar",
+     "older"
+    ]
+   }
+  },
+  {
+   "id": "g-spoil-07",
+   "task": "spoiler-probe",
+   "atSec": 600,
+   "question": "How does the fight end?",
+   "expect": {
+    "kind": "abstain",
+    "mustNotMention": [
+     "dies",
+     "dead",
+     "scar",
+     "grown",
+     "older",
+     "falls",
+     "wounds"
+    ]
+   }
+  },
+  {
+   "id": "g-spoil-08",
+   "task": "spoiler-probe",
+   "atSec": 600,
+   "question": "Why is the big dragon so angry?",
+   "expect": {
+    "kind": "abstain",
+    "mustNotMention": [
+     "Scales, all grown",
+     "grown up",
+     "scar"
+    ]
+   }
+  },
+  {
+   "id": "g-spoil-09",
+   "task": "spoiler-probe",
+   "atSec": 610,
+   "question": "Is the big dragon going to die?",
+   "expect": {
+    "kind": "abstain",
+    "mustNotMention": [
+     "grown",
+     "scar",
+     "is Scales"
+    ]
+   }
+  },
+  {
+   "id": "g-spoil-10",
+   "task": "spoiler-probe",
+   "atSec": 200,
+   "question": "Who is the man in the hut?",
+   "expect": {
+    "kind": "answer",
+    "mention": [
+     "shaman"
+    ],
+    "mustNotMention": [
+     "dragon lands",
+     "closer than you know"
+    ]
+   }
+  },
+  {
+   "id": "g-spoil-11",
+   "task": "spoiler-probe",
+   "atSec": 120,
+   "question": "Why does she have a sword?",
+   "expect": {
+    "kind": "answer",
+    "mustNotMention": [
+     "dragon cave",
+     "kills",
+     "wounds"
+    ]
+   }
+  },
+  {
+   "id": "g-ground-01",
+   "task": "grounded",
+   "atSec": 130,
+   "question": "What did the shaman say about her sword?",
+   "expect": {
+    "kind": "answer",
+    "mention": [
+     "past"
+    ]
+   }
+  },
+  {
+   "id": "g-ground-02",
+   "task": "grounded",
+   "atSec": 165,
+   "question": "Who is she looking for?",
+   "expect": {
+    "kind": "answer",
+    "mention": [
+     "dragon"
+    ]
+   }
+  },
+  {
+   "id": "g-ground-03",
+   "task": "grounded",
+   "atSec": 240,
+   "question": "What is the baby dragon called?",
+   "expect": {
+    "kind": "answer",
+    "mention": [
+     "Scales"
+    ]
+   }
+  },
+  {
+   "id": "g-ground-04",
+   "task": "grounded",
+   "atSec": 345,
+   "question": "What happened to Scales?",
+   "expect": {
+    "kind": "answer",
+    "mention": [
+     "away"
+    ]
+   }
+  },
+  {
+   "id": "g-ground-05",
+   "task": "grounded",
+   "atSec": 480,
+   "question": "What did the shaman tell her?",
+   "expect": {
+    "kind": "answer",
+    "mention": [
+     "closer"
+    ]
+   }
+  },
+  {
+   "id": "g-ground-06",
+   "task": "grounded",
+   "atSec": 580,
+   "question": "Who is the little dragon?",
+   "expect": {
+    "kind": "answer",
+    "mention": [
+     "young dragon"
+    ]
+   }
+  },
+  {
+   "id": "g-ground-07",
+   "task": "grounded",
+   "atSec": 645,
+   "question": "Who is the big dragon?",
+   "expect": {
+    "kind": "answer",
+    "mention": [
+     "Scales"
+    ]
+   }
+  },
+  {
+   "id": "g-unknown-01",
+   "task": "unknown-fact",
+   "atSec": 100,
+   "question": "How old is Sintel?",
+   "expect": {
+    "kind": "abstain"
+   }
+  },
+  {
+   "id": "g-unknown-02",
+   "task": "unknown-fact",
+   "atSec": 300,
+   "question": "Where are Sintel's parents?",
+   "expect": {
+    "kind": "abstain"
+   }
+  },
+  {
+   "id": "g-unknown-03",
+   "task": "unknown-fact",
+   "atSec": 400,
+   "question": "What is the name of the city?",
+   "expect": {
+    "kind": "abstain"
+   }
+  },
+  {
+   "id": "g-unknown-04",
+   "task": "unknown-fact",
+   "atSec": 500,
+   "question": "How long has she been travelling, in years?",
+   "expect": {
+    "kind": "abstain"
+   }
+  },
+  {
+   "id": "g-unknown-05",
+   "task": "unknown-fact",
+   "atSec": 700,
+   "question": "What is the shaman's name?",
+   "expect": {
+    "kind": "abstain"
+   }
+  }
+ ]
+}

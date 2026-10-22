@@ -1,0 +1,1266 @@
+{
+  "schemaVersion": 1,
+  "contentId": "big-buck-bunny",
+  "durationSec": 596,
+  "source": {
+    "assetId": "big-buck-bunny",
+    "sha256": "ec65cb00cea1b8871b5e4db99784504dbfaef824062a6e87176aad3923752a9b",
+    "license": "CC BY 3.0",
+    "rights": "Big Buck Bunny, (c) copyright 2008 Blender Foundation, www.bigbuckbunny.org, CC BY 3.0"
+  },
+  "frames": [
+    {
+      "id": "fr-n00",
+      "atSec": 2
+    },
+    {
+      "id": "fr-n01",
+      "atSec": 20
+    },
+    {
+      "id": "fr-n02",
+      "atSec": 32
+    },
+    {
+      "id": "fr-n03",
+      "atSec": 38
+    },
+    {
+      "id": "fr-n04",
+      "atSec": 50
+    },
+    {
+      "id": "fr-n05",
+      "atSec": 62
+    },
+    {
+      "id": "fr-n06",
+      "atSec": 68
+    },
+    {
+      "id": "fr-n07",
+      "atSec": 74
+    },
+    {
+      "id": "fr-n08",
+      "atSec": 80
+    },
+    {
+      "id": "fr-n09",
+      "atSec": 98
+    },
+    {
+      "id": "fr-n10",
+      "atSec": 110
+    },
+    {
+      "id": "fr-n11",
+      "atSec": 122
+    },
+    {
+      "id": "fr-n12",
+      "atSec": 134
+    },
+    {
+      "id": "fr-n13",
+      "atSec": 158
+    },
+    {
+      "id": "fr-n14",
+      "atSec": 176
+    },
+    {
+      "id": "fr-n15",
+      "atSec": 194
+    },
+    {
+      "id": "fr-n16",
+      "atSec": 200
+    },
+    {
+      "id": "fr-n17",
+      "atSec": 212
+    },
+    {
+      "id": "fr-n18",
+      "atSec": 230
+    },
+    {
+      "id": "fr-n19",
+      "atSec": 254
+    },
+    {
+      "id": "fr-n20",
+      "atSec": 272
+    },
+    {
+      "id": "fr-n21",
+      "atSec": 284
+    },
+    {
+      "id": "fr-n22",
+      "atSec": 296
+    },
+    {
+      "id": "fr-n23",
+      "atSec": 308
+    },
+    {
+      "id": "fr-n24",
+      "atSec": 344
+    },
+    {
+      "id": "fr-n25",
+      "atSec": 380
+    },
+    {
+      "id": "fr-n26",
+      "atSec": 398
+    },
+    {
+      "id": "fr-n27",
+      "atSec": 428
+    },
+    {
+      "id": "fr-n28",
+      "atSec": 446
+    },
+    {
+      "id": "fr-n29",
+      "atSec": 452
+    },
+    {
+      "id": "fr-n30",
+      "atSec": 470
+    },
+    {
+      "id": "fr-n31",
+      "atSec": 476
+    },
+    {
+      "id": "fr-n32",
+      "atSec": 488
+    },
+    {
+      "id": "fr-n33",
+      "atSec": 494
+    }
+  ],
+  "lines": [],
+  "scenes": [
+    {
+      "id": "sc-01",
+      "startSec": 0,
+      "endSec": 62
+    },
+    {
+      "id": "sc-02",
+      "startSec": 62,
+      "endSec": 112
+    },
+    {
+      "id": "sc-03",
+      "startSec": 112,
+      "endSec": 196
+    },
+    {
+      "id": "sc-04",
+      "startSec": 196,
+      "endSec": 234
+    },
+    {
+      "id": "sc-05",
+      "startSec": 234,
+      "endSec": 298
+    },
+    {
+      "id": "sc-06",
+      "startSec": 298,
+      "endSec": 382
+    },
+    {
+      "id": "sc-07",
+      "startSec": 382,
+      "endSec": 454
+    },
+    {
+      "id": "sc-08",
+      "startSec": 454,
+      "endSec": 490
+    },
+    {
+      "id": "sc-09",
+      "startSec": 490,
+      "endSec": 596
+    }
+  ],
+  "entities": [
+    {
+      "id": "bird",
+      "name": "The purple bird",
+      "aliases": [
+        "purple bird"
+      ],
+      "firstSeenSec": 18,
+      "intro": "A small purple bird who wakes up early on a branch.",
+      "review": {
+        "status": "accepted",
+        "by": "claude-code (frame check)",
+        "at": "2026-10-22",
+        "note": "checked against a frame at the note time"
+      }
+    },
+    {
+      "id": "bunny",
+      "name": "Big Buck Bunny",
+      "aliases": [
+        "bunny",
+        "rabbit",
+        "big bunny"
+      ],
+      "firstSeenSec": 36,
+      "intro": "A huge, gentle grey rabbit who lives in a burrow under a big tree.",
+      "review": {
+        "status": "accepted",
+        "by": "claude-code (frame check)",
+        "at": "2026-10-22",
+        "note": "checked against a frame at the note time"
+      }
+    },
+    {
+      "id": "flying-squirrel",
+      "name": "The flying squirrel",
+      "aliases": [
+        "flying squirrel"
+      ],
+      "firstSeenSec": 72,
+      "intro": "A brown flying squirrel who secretly watches the bunny from a tree.",
+      "review": {
+        "status": "accepted",
+        "by": "claude-code (frame check)",
+        "at": "2026-10-22",
+        "note": "checked against a frame at the note time"
+      }
+    },
+    {
+      "id": "pink-butterfly",
+      "name": "The pink butterfly",
+      "aliases": [
+        "pink butterfly"
+      ],
+      "firstSeenSec": 78,
+      "intro": "A pink butterfly who flutters around the bunny.",
+      "review": {
+        "status": "accepted",
+        "by": "claude-code (frame check)",
+        "at": "2026-10-22",
+        "note": "checked against a frame at the note time"
+      }
+    },
+    {
+      "id": "purple-butterfly",
+      "name": "The purple butterfly",
+      "aliases": [
+        "purple butterfly"
+      ],
+      "firstSeenSec": 108,
+      "intro": "A purple butterfly the bunny waves at.",
+      "review": {
+        "status": "accepted",
+        "by": "claude-code (frame check)",
+        "at": "2026-10-22",
+        "note": "checked against a frame at the note time"
+      }
+    },
+    {
+      "id": "red-squirrel",
+      "name": "The red squirrel",
+      "aliases": [
+        "red squirrel"
+      ],
+      "firstSeenSec": 120,
+      "intro": "A skinny red squirrel with big front teeth, one of the troublemakers.",
+      "review": {
+        "status": "accepted",
+        "by": "claude-code (frame check)",
+        "at": "2026-10-22",
+        "note": "checked against a frame at the note time"
+      }
+    },
+    {
+      "id": "chinchilla",
+      "name": "The chinchilla",
+      "aliases": [
+        "chinchilla"
+      ],
+      "firstSeenSec": 120,
+      "intro": "A round grey chinchilla who always holds a nut. One of the troublemakers.",
+      "review": {
+        "status": "accepted",
+        "by": "claude-code (frame check)",
+        "at": "2026-10-22",
+        "note": "checked against a frame at the note time"
+      }
+    }
+  ],
+  "facts": [
+    {
+      "id": "n00",
+      "startSec": 0,
+      "revealSec": 10,
+      "kind": "event",
+      "text": "Morning in a green meadow with a stream, flowers and soft pink clouds.",
+      "entities": [],
+      "evidence": [
+        "fr-n00"
+      ],
+      "confidence": 0.9,
+      "generator": "notes/1 (content notes, written from frames and subtitles)",
+      "review": {
+        "status": "accepted",
+        "by": "claude-code (frame check)",
+        "at": "2026-10-22",
+        "note": "checked against a frame at the note time"
+      },
+      "spoilerTerms": [
+        "morning",
+        "meadow",
+        "stream",
+        "flower",
+        "green",
+        "cloud",
+        "soft",
+        "pink"
+      ],
+      "sceneId": "sc-01"
+    },
+    {
+      "id": "n01",
+      "startSec": 18,
+      "revealSec": 28,
+      "kind": "event",
+      "text": "A small purple bird wakes up on a branch and stretches its wings.",
+      "entities": [
+        "bird"
+      ],
+      "evidence": [
+        "fr-n01"
+      ],
+      "confidence": 0.9,
+      "generator": "notes/1 (content notes, written from frames and subtitles)",
+      "review": {
+        "status": "accepted",
+        "by": "claude-code (frame check)",
+        "at": "2026-10-22",
+        "note": "checked against a frame at the note time"
+      },
+      "spoilerTerms": [
+        "stretche",
+        "purple",
+        "branch",
+        "small",
+        "bird",
+        "wake",
+        "wing"
+      ],
+      "sceneId": "sc-01"
+    },
+    {
+      "id": "n02",
+      "startSec": 30,
+      "revealSec": 40,
+      "kind": "event",
+      "text": "The title Big Buck Bunny appears over a big tree. Under the tree there is a burrow, a rabbit hole.",
+      "entities": [
+        "bunny"
+      ],
+      "evidence": [
+        "fr-n02"
+      ],
+      "confidence": 0.9,
+      "generator": "notes/1 (content notes, written from frames and subtitles)",
+      "review": {
+        "status": "accepted",
+        "by": "claude-code (frame check)",
+        "at": "2026-10-22",
+        "note": "checked against a frame at the note time"
+      },
+      "spoilerTerms": [
+        "appear",
+        "burrow",
+        "rabbit",
+        "title",
+        "under",
+        "over",
+        "tree",
+        "hole"
+      ],
+      "sceneId": "sc-01"
+    },
+    {
+      "id": "n03",
+      "startSec": 36,
+      "revealSec": 46,
+      "kind": "event",
+      "text": "Inside the burrow a huge grey rabbit is fast asleep. This is Big Buck Bunny.",
+      "entities": [
+        "bunny"
+      ],
+      "evidence": [
+        "fr-n03"
+      ],
+      "confidence": 0.9,
+      "generator": "notes/1 (content notes, written from frames and subtitles)",
+      "review": {
+        "status": "accepted",
+        "by": "claude-code (frame check)",
+        "at": "2026-10-22",
+        "note": "checked against a frame at the note time"
+      },
+      "spoilerTerms": [
+        "inside",
+        "asleep",
+        "huge",
+        "grey",
+        "fast"
+      ],
+      "sceneId": "sc-01"
+    },
+    {
+      "id": "n04",
+      "startSec": 48,
+      "revealSec": 58,
+      "kind": "event",
+      "text": "The big bunny wakes up, yawns and squeezes out of his burrow.",
+      "entities": [
+        "bunny"
+      ],
+      "evidence": [
+        "fr-n04"
+      ],
+      "confidence": 0.9,
+      "generator": "notes/1 (content notes, written from frames and subtitles)",
+      "review": {
+        "status": "accepted",
+        "by": "claude-code (frame check)",
+        "at": "2026-10-22",
+        "note": "checked against a frame at the note time"
+      },
+      "spoilerTerms": [
+        "squeeze",
+        "yawn"
+      ],
+      "sceneId": "sc-01"
+    },
+    {
+      "id": "n05",
+      "startSec": 60,
+      "revealSec": 70,
+      "kind": "event",
+      "text": "He stretches in the sunshine and smiles up at the sky. He is gentle and happy.",
+      "entities": [],
+      "evidence": [
+        "fr-n05"
+      ],
+      "confidence": 0.9,
+      "generator": "notes/1 (content notes, written from frames and subtitles)",
+      "review": {
+        "status": "accepted",
+        "by": "claude-code (frame check)",
+        "at": "2026-10-22",
+        "note": "checked against a frame at the note time"
+      },
+      "spoilerTerms": [
+        "sunshine",
+        "gentle",
+        "smile",
+        "happy"
+      ],
+      "sceneId": "sc-01"
+    },
+    {
+      "id": "n06",
+      "startSec": 66,
+      "revealSec": 76,
+      "kind": "event",
+      "text": "He walks between giant daisies and sniffs the flowers.",
+      "entities": [],
+      "evidence": [
+        "fr-n06"
+      ],
+      "confidence": 0.9,
+      "generator": "notes/1 (content notes, written from frames and subtitles)",
+      "review": {
+        "status": "accepted",
+        "by": "claude-code (frame check)",
+        "at": "2026-10-22",
+        "note": "checked against a frame at the note time"
+      },
+      "spoilerTerms": [
+        "between",
+        "giant",
+        "daisy",
+        "sniff",
+        "walk"
+      ],
+      "sceneId": "sc-02"
+    },
+    {
+      "id": "n07",
+      "startSec": 72,
+      "revealSec": 82,
+      "kind": "event",
+      "text": "From high in a tree, a brown flying squirrel secretly watches him.",
+      "entities": [
+        "flying-squirrel"
+      ],
+      "evidence": [
+        "fr-n07"
+      ],
+      "confidence": 0.9,
+      "generator": "notes/1 (content notes, written from frames and subtitles)",
+      "review": {
+        "status": "accepted",
+        "by": "claude-code (frame check)",
+        "at": "2026-10-22",
+        "note": "checked against a frame at the note time"
+      },
+      "spoilerTerms": [
+        "squirrel",
+        "secretly",
+        "flying",
+        "watche",
+        "brown",
+        "high"
+      ],
+      "sceneId": "sc-02"
+    },
+    {
+      "id": "n08",
+      "startSec": 78,
+      "revealSec": 88,
+      "kind": "event",
+      "text": "A pink butterfly flutters around the bunny, and he plays with it very gently.",
+      "entities": [
+        "bunny",
+        "pink-butterfly"
+      ],
+      "evidence": [
+        "fr-n08"
+      ],
+      "confidence": 0.9,
+      "generator": "notes/1 (content notes, written from frames and subtitles)",
+      "review": {
+        "status": "accepted",
+        "by": "claude-code (frame check)",
+        "at": "2026-10-22",
+        "note": "checked against a frame at the note time"
+      },
+      "spoilerTerms": [
+        "butterfly",
+        "flutter",
+        "around",
+        "gently"
+      ],
+      "sceneId": "sc-02"
+    },
+    {
+      "id": "n09",
+      "startSec": 96,
+      "revealSec": 106,
+      "kind": "event",
+      "text": "He finds a red apple in the grass and picks it up, pleased.",
+      "entities": [],
+      "evidence": [
+        "fr-n09"
+      ],
+      "confidence": 0.9,
+      "generator": "notes/1 (content notes, written from frames and subtitles)",
+      "review": {
+        "status": "accepted",
+        "by": "claude-code (frame check)",
+        "at": "2026-10-22",
+        "note": "checked against a frame at the note time"
+      },
+      "spoilerTerms": [
+        "pleased",
+        "apple",
+        "grass",
+        "find",
+        "pick"
+      ],
+      "sceneId": "sc-02"
+    },
+    {
+      "id": "n10",
+      "startSec": 108,
+      "revealSec": 118,
+      "kind": "event",
+      "text": "A purple butterfly flies past his face. He waves at it happily.",
+      "entities": [
+        "purple-butterfly"
+      ],
+      "evidence": [
+        "fr-n10"
+      ],
+      "confidence": 0.9,
+      "generator": "notes/1 (content notes, written from frames and subtitles)",
+      "review": {
+        "status": "accepted",
+        "by": "claude-code (frame check)",
+        "at": "2026-10-22",
+        "note": "checked against a frame at the note time"
+      },
+      "spoilerTerms": [
+        "happily",
+        "past",
+        "face",
+        "wave"
+      ],
+      "sceneId": "sc-02"
+    },
+    {
+      "id": "n11",
+      "startSec": 120,
+      "revealSec": 130,
+      "kind": "event",
+      "text": "Three troublemakers watch him: a brown flying squirrel, a skinny red squirrel with big front teeth, and a round grey chinchilla holding a nut.",
+      "entities": [
+        "flying-squirrel",
+        "red-squirrel",
+        "chinchilla"
+      ],
+      "evidence": [
+        "fr-n11"
+      ],
+      "confidence": 0.9,
+      "generator": "notes/1 (content notes, written from frames and subtitles)",
+      "review": {
+        "status": "accepted",
+        "by": "claude-code (frame check)",
+        "at": "2026-10-22",
+        "note": "checked against a frame at the note time"
+      },
+      "spoilerTerms": [
+        "troublemaker",
+        "chinchilla",
+        "holding",
+        "skinny",
+        "three",
+        "front",
+        "teeth",
+        "round"
+      ],
+      "sceneId": "sc-03"
+    },
+    {
+      "id": "n12",
+      "startSec": 132,
+      "revealSec": 142,
+      "kind": "event",
+      "text": "The flying squirrel sneaks around the tree right behind the bunny's back.",
+      "entities": [
+        "bunny",
+        "flying-squirrel"
+      ],
+      "evidence": [
+        "fr-n12"
+      ],
+      "confidence": 0.9,
+      "generator": "notes/1 (content notes, written from frames and subtitles)",
+      "review": {
+        "status": "accepted",
+        "by": "claude-code (frame check)",
+        "at": "2026-10-22",
+        "note": "checked against a frame at the note time"
+      },
+      "spoilerTerms": [
+        "behind",
+        "sneak"
+      ],
+      "sceneId": "sc-03"
+    },
+    {
+      "id": "n13",
+      "startSec": 156,
+      "revealSec": 166,
+      "kind": "event",
+      "text": "Behind the tree the three troublemakers laugh at the bunny.",
+      "entities": [
+        "bunny"
+      ],
+      "evidence": [
+        "fr-n13"
+      ],
+      "confidence": 0.9,
+      "generator": "notes/1 (content notes, written from frames and subtitles)",
+      "review": {
+        "status": "accepted",
+        "by": "claude-code (frame check)",
+        "at": "2026-10-22",
+        "note": "checked against a frame at the note time"
+      },
+      "spoilerTerms": [
+        "laugh"
+      ],
+      "sceneId": "sc-03"
+    },
+    {
+      "id": "n14",
+      "startSec": 174,
+      "revealSec": 184,
+      "kind": "event",
+      "text": "Fruit and nuts hit the bunny on the head. The troublemakers are throwing things at him, and he looks confused.",
+      "entities": [
+        "bunny"
+      ],
+      "evidence": [
+        "fr-n14"
+      ],
+      "confidence": 0.9,
+      "generator": "notes/1 (content notes, written from frames and subtitles)",
+      "review": {
+        "status": "accepted",
+        "by": "claude-code (frame check)",
+        "at": "2026-10-22",
+        "note": "checked against a frame at the note time"
+      },
+      "spoilerTerms": [
+        "throwing",
+        "confused",
+        "fruit",
+        "thing",
+        "head"
+      ],
+      "sceneId": "sc-03"
+    },
+    {
+      "id": "n15",
+      "startSec": 192,
+      "revealSec": 202,
+      "kind": "event",
+      "text": "The bunny stands in the grass with fallen fruit all around him.",
+      "entities": [
+        "bunny"
+      ],
+      "evidence": [
+        "fr-n15"
+      ],
+      "confidence": 0.9,
+      "generator": "notes/1 (content notes, written from frames and subtitles)",
+      "review": {
+        "status": "accepted",
+        "by": "claude-code (frame check)",
+        "at": "2026-10-22",
+        "note": "checked against a frame at the note time"
+      },
+      "spoilerTerms": [
+        "fallen",
+        "stand"
+      ],
+      "sceneId": "sc-03"
+    },
+    {
+      "id": "n16",
+      "startSec": 198,
+      "revealSec": 208,
+      "kind": "event",
+      "text": "The bunny reaches out in shock: the troublemakers have caught the purple butterfly.",
+      "entities": [
+        "bunny",
+        "purple-butterfly"
+      ],
+      "evidence": [
+        "fr-n16"
+      ],
+      "confidence": 0.9,
+      "generator": "notes/1 (content notes, written from frames and subtitles)",
+      "review": {
+        "status": "accepted",
+        "by": "claude-code (frame check)",
+        "at": "2026-10-22",
+        "note": "checked against a frame at the note time"
+      },
+      "spoilerTerms": [
+        "reache",
+        "caught",
+        "shock"
+      ],
+      "sceneId": "sc-04"
+    },
+    {
+      "id": "n17",
+      "startSec": 210,
+      "revealSec": 220,
+      "kind": "event",
+      "text": "The red squirrel waves a torn purple wing. The butterfly is hurt, and the flying squirrel grins.",
+      "entities": [
+        "flying-squirrel",
+        "red-squirrel"
+      ],
+      "evidence": [
+        "fr-n17"
+      ],
+      "confidence": 0.9,
+      "generator": "notes/1 (content notes, written from frames and subtitles)",
+      "review": {
+        "status": "accepted",
+        "by": "claude-code (frame check)",
+        "at": "2026-10-22",
+        "note": "checked against a frame at the note time"
+      },
+      "spoilerTerms": [
+        "torn",
+        "hurt",
+        "grin"
+      ],
+      "sceneId": "sc-04"
+    },
+    {
+      "id": "n18",
+      "startSec": 228,
+      "revealSec": 238,
+      "kind": "event",
+      "text": "The bunny leans against a tree, very sad. Then his sad face slowly turns angry.",
+      "entities": [
+        "bunny"
+      ],
+      "evidence": [
+        "fr-n18"
+      ],
+      "confidence": 0.9,
+      "generator": "notes/1 (content notes, written from frames and subtitles)",
+      "review": {
+        "status": "accepted",
+        "by": "claude-code (frame check)",
+        "at": "2026-10-22",
+        "note": "checked against a frame at the note time"
+      },
+      "spoilerTerms": [
+        "against",
+        "slowly",
+        "angry",
+        "lean",
+        "turn"
+      ],
+      "sceneId": "sc-04"
+    },
+    {
+      "id": "n19",
+      "startSec": 252,
+      "revealSec": 262,
+      "kind": "event",
+      "text": "Deep in the forest the bunny gets busy. He carves a stick into a sharp point with a stone.",
+      "entities": [
+        "bunny"
+      ],
+      "evidence": [
+        "fr-n19"
+      ],
+      "confidence": 0.9,
+      "generator": "notes/1 (content notes, written from frames and subtitles)",
+      "review": {
+        "status": "accepted",
+        "by": "claude-code (frame check)",
+        "at": "2026-10-22",
+        "note": "checked against a frame at the note time"
+      },
+      "spoilerTerms": [
+        "forest",
+        "carve",
+        "stick",
+        "sharp",
+        "point",
+        "stone",
+        "deep",
+        "busy"
+      ],
+      "sceneId": "sc-05"
+    },
+    {
+      "id": "n20",
+      "startSec": 270,
+      "revealSec": 280,
+      "kind": "event",
+      "text": "He twists a long vine into a rope and pushes a pointed wooden stake into the ground.",
+      "entities": [],
+      "evidence": [
+        "fr-n20"
+      ],
+      "confidence": 0.9,
+      "generator": "notes/1 (content notes, written from frames and subtitles)",
+      "review": {
+        "status": "accepted",
+        "by": "claude-code (frame check)",
+        "at": "2026-10-22",
+        "note": "checked against a frame at the note time"
+      },
+      "spoilerTerms": [
+        "pointed",
+        "wooden",
+        "ground",
+        "twist",
+        "pushe",
+        "stake",
+        "long",
+        "vine"
+      ],
+      "sceneId": "sc-05"
+    },
+    {
+      "id": "n21",
+      "startSec": 282,
+      "revealSec": 292,
+      "kind": "event",
+      "text": "A close-up of his eyes: he looks determined. He has a plan.",
+      "entities": [],
+      "evidence": [
+        "fr-n21"
+      ],
+      "confidence": 0.9,
+      "generator": "notes/1 (content notes, written from frames and subtitles)",
+      "review": {
+        "status": "accepted",
+        "by": "claude-code (frame check)",
+        "at": "2026-10-22",
+        "note": "checked against a frame at the note time"
+      },
+      "spoilerTerms": [
+        "determined",
+        "close",
+        "plan"
+      ],
+      "sceneId": "sc-05"
+    },
+    {
+      "id": "n22",
+      "startSec": 294,
+      "revealSec": 304,
+      "kind": "event",
+      "text": "He holds a bow made from a branch and pulls back a wooden arrow.",
+      "entities": [],
+      "evidence": [
+        "fr-n22"
+      ],
+      "confidence": 0.9,
+      "generator": "notes/1 (content notes, written from frames and subtitles)",
+      "review": {
+        "status": "accepted",
+        "by": "claude-code (frame check)",
+        "at": "2026-10-22",
+        "note": "checked against a frame at the note time"
+      },
+      "spoilerTerms": [
+        "arrow",
+        "hold",
+        "made",
+        "pull"
+      ],
+      "sceneId": "sc-05"
+    },
+    {
+      "id": "n23",
+      "startSec": 306,
+      "revealSec": 316,
+      "kind": "event",
+      "text": "The three troublemakers stroll along a forest path, not knowing the bunny is hiding in the leaves and watching them.",
+      "entities": [
+        "bunny"
+      ],
+      "evidence": [
+        "fr-n23"
+      ],
+      "confidence": 0.9,
+      "generator": "notes/1 (content notes, written from frames and subtitles)",
+      "review": {
+        "status": "accepted",
+        "by": "claude-code (frame check)",
+        "at": "2026-10-22",
+        "note": "checked against a frame at the note time"
+      },
+      "spoilerTerms": [
+        "knowing",
+        "stroll",
+        "hiding",
+        "along",
+        "leave",
+        "path"
+      ],
+      "sceneId": "sc-06"
+    },
+    {
+      "id": "n24",
+      "startSec": 342,
+      "revealSec": 352,
+      "kind": "event",
+      "text": "Along the path the bunny has set traps: a big rock tied up with vines, a log and a bent young tree.",
+      "entities": [
+        "bunny"
+      ],
+      "evidence": [
+        "fr-n24"
+      ],
+      "confidence": 0.9,
+      "generator": "notes/1 (content notes, written from frames and subtitles)",
+      "review": {
+        "status": "accepted",
+        "by": "claude-code (frame check)",
+        "at": "2026-10-22",
+        "note": "checked against a frame at the note time"
+      },
+      "spoilerTerms": [
+        "young",
+        "trap",
+        "rock",
+        "tied",
+        "bent"
+      ],
+      "sceneId": "sc-06"
+    },
+    {
+      "id": "n25",
+      "startSec": 378,
+      "revealSec": 388,
+      "kind": "event",
+      "text": "The bunny stands behind the chinchilla and gives a thumbs up. The chinchilla does not notice.",
+      "entities": [
+        "bunny",
+        "chinchilla"
+      ],
+      "evidence": [
+        "fr-n25"
+      ],
+      "confidence": 0.9,
+      "generator": "notes/1 (content notes, written from frames and subtitles)",
+      "review": {
+        "status": "accepted",
+        "by": "claude-code (frame check)",
+        "at": "2026-10-22",
+        "note": "checked against a frame at the note time"
+      },
+      "spoilerTerms": [
+        "notice",
+        "thumb",
+        "give"
+      ],
+      "sceneId": "sc-06"
+    },
+    {
+      "id": "n26",
+      "startSec": 396,
+      "revealSec": 406,
+      "kind": "event",
+      "text": "High in a tree the flying squirrel spreads his arms, ready to glide.",
+      "entities": [
+        "flying-squirrel"
+      ],
+      "evidence": [
+        "fr-n26"
+      ],
+      "confidence": 0.9,
+      "generator": "notes/1 (content notes, written from frames and subtitles)",
+      "review": {
+        "status": "accepted",
+        "by": "claude-code (frame check)",
+        "at": "2026-10-22",
+        "note": "checked against a frame at the note time"
+      },
+      "spoilerTerms": [
+        "spread",
+        "ready",
+        "glide"
+      ],
+      "sceneId": "sc-07"
+    },
+    {
+      "id": "n27",
+      "startSec": 426,
+      "revealSec": 436,
+      "kind": "event",
+      "text": "The flying squirrel glides through the air above the forest.",
+      "entities": [
+        "flying-squirrel"
+      ],
+      "evidence": [
+        "fr-n27"
+      ],
+      "confidence": 0.9,
+      "generator": "notes/1 (content notes, written from frames and subtitles)",
+      "review": {
+        "status": "accepted",
+        "by": "claude-code (frame check)",
+        "at": "2026-10-22",
+        "note": "checked against a frame at the note time"
+      },
+      "spoilerTerms": [
+        "through",
+        "above"
+      ],
+      "sceneId": "sc-07"
+    },
+    {
+      "id": "n28",
+      "startSec": 444,
+      "revealSec": 454,
+      "kind": "event",
+      "text": "Something goes wrong: he panics and tumbles through the air.",
+      "entities": [],
+      "evidence": [
+        "fr-n28"
+      ],
+      "confidence": 0.9,
+      "generator": "notes/1 (content notes, written from frames and subtitles)",
+      "review": {
+        "status": "accepted",
+        "by": "claude-code (frame check)",
+        "at": "2026-10-22",
+        "note": "checked against a frame at the note time"
+      },
+      "spoilerTerms": [
+        "something",
+        "tumble",
+        "wrong",
+        "panic"
+      ],
+      "sceneId": "sc-07"
+    },
+    {
+      "id": "n29",
+      "startSec": 450,
+      "revealSec": 460,
+      "kind": "event",
+      "text": "He falls toward a row of sharp wooden spikes, but the bunny catches him on a stick just in time.",
+      "entities": [
+        "bunny"
+      ],
+      "evidence": [
+        "fr-n29"
+      ],
+      "confidence": 0.9,
+      "generator": "notes/1 (content notes, written from frames and subtitles)",
+      "review": {
+        "status": "accepted",
+        "by": "claude-code (frame check)",
+        "at": "2026-10-22",
+        "note": "checked against a frame at the note time"
+      },
+      "spoilerTerms": [
+        "toward",
+        "catche",
+        "spike",
+        "fall",
+        "time"
+      ],
+      "sceneId": "sc-07"
+    },
+    {
+      "id": "n30",
+      "startSec": 468,
+      "revealSec": 478,
+      "kind": "event",
+      "text": "Night passes and a new day starts at the bunny's big tree.",
+      "entities": [
+        "bunny"
+      ],
+      "evidence": [
+        "fr-n30"
+      ],
+      "confidence": 0.9,
+      "generator": "notes/1 (content notes, written from frames and subtitles)",
+      "review": {
+        "status": "accepted",
+        "by": "claude-code (frame check)",
+        "at": "2026-10-22",
+        "note": "checked against a frame at the note time"
+      },
+      "spoilerTerms": [
+        "night",
+        "passe",
+        "start"
+      ],
+      "sceneId": "sc-08"
+    },
+    {
+      "id": "n31",
+      "startSec": 474,
+      "revealSec": 484,
+      "kind": "event",
+      "text": "The bunny smiles again, with the pink butterfly flying beside him.",
+      "entities": [
+        "bunny",
+        "pink-butterfly"
+      ],
+      "evidence": [
+        "fr-n31"
+      ],
+      "confidence": 0.9,
+      "generator": "notes/1 (content notes, written from frames and subtitles)",
+      "review": {
+        "status": "accepted",
+        "by": "claude-code (frame check)",
+        "at": "2026-10-22",
+        "note": "checked against a frame at the note time"
+      },
+      "spoilerTerms": [
+        "beside"
+      ],
+      "sceneId": "sc-08"
+    },
+    {
+      "id": "n32",
+      "startSec": 486,
+      "revealSec": 496,
+      "kind": "event",
+      "text": "The bunny flies the flying squirrel on a string, like a kite, over the meadow.",
+      "entities": [
+        "bunny",
+        "flying-squirrel"
+      ],
+      "evidence": [
+        "fr-n32"
+      ],
+      "confidence": 0.9,
+      "generator": "notes/1 (content notes, written from frames and subtitles)",
+      "review": {
+        "status": "accepted",
+        "by": "claude-code (frame check)",
+        "at": "2026-10-22",
+        "note": "checked against a frame at the note time"
+      },
+      "spoilerTerms": [
+        "string",
+        "like",
+        "kite"
+      ],
+      "sceneId": "sc-08"
+    },
+    {
+      "id": "n33",
+      "startSec": 492,
+      "revealSec": 502,
+      "kind": "event",
+      "text": "The story is over and the credits roll, with little drawings of the animals.",
+      "entities": [],
+      "evidence": [
+        "fr-n33"
+      ],
+      "confidence": 0.9,
+      "generator": "notes/1 (content notes, written from frames and subtitles)",
+      "review": {
+        "status": "accepted",
+        "by": "claude-code (frame check)",
+        "at": "2026-10-22",
+        "note": "checked against a frame at the note time"
+      },
+      "spoilerTerms": [
+        "drawing",
+        "credit",
+        "little",
+        "animal",
+        "story",
+        "roll"
+      ],
+      "sceneId": "sc-09"
+    }
+  ]
+}

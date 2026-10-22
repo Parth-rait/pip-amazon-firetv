@@ -42,6 +42,7 @@ const chapterSchema = z.object({
 const characterSchema = z.object({
   id: slug,
   name: z.string().min(1).max(40),
+  aliases: z.array(z.string().min(2).max(40)).max(6).optional(), // other words for them, for Ask Pip
   image: mediaUrl.optional(),
   facts: z
     .array(z.object({ atSec: z.number().min(0), text: z.string().min(1).max(160) }))

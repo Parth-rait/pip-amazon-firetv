@@ -23,6 +23,7 @@
     "gesture": "tsx scripts/gesture.ts",
     "annotate": "tsx scripts/annotate.ts",
     "pipeline": "tsx scripts/pipeline.ts",
+    "timeline:notes": "tsx scripts/timeline-from-notes.ts",
     "lab:film": "tsx scripts/make-lab-film.ts",
     "eval": "tsx scripts/eval.ts",
     "lab": "vitest run src/lab --reporter=verbose",

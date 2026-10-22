@@ -260,6 +260,11 @@
     {
       "id": "bunny",
       "name": "Big Buck Bunny",
+      "aliases": [
+        "bunny",
+        "rabbit",
+        "big bunny"
+      ],
       "image": "/media/companion/big-buck-bunny/bunny.jpg",
       "facts": [
         {

@@ -2,7 +2,7 @@
 // produced it on 17 Oct 2026 (qwen3-vl:4b-instruct on 106 frames, 0 to 384 s; whisper.cpp
 // small.en on the whole soundtrack). Everything here runs from committed files, without a model:
 // - pipeline/understanding/sintel.observations.json: every reply the vision model gave
-// - content/timelines/sintel.json: the timeline the server loads
+// - pipeline/timelines/sintel.json: the timeline the server loads
 // - pipeline/truth/sintel.characters.json: who is on screen in 54 frames, labelled by hand
 import { readFileSync } from 'node:fs';
 import { join } from 'node:path';
@@ -23,7 +23,7 @@ const SERVER = fileURLToPath(new URL('../..', import.meta.url));
 const json = (path: string): unknown => JSON.parse(readFileSync(join(SERVER, path), 'utf8'));
 
 function loadFile(): TimelineFile {
-  const checked = checkTimelineFile(json('content/timelines/sintel.json'));
+  const checked = checkTimelineFile(json('pipeline/timelines/sintel.json'));
   if (!checked.ok) throw new Error(checked.problems.join('\n'));
   return checked.file;
 }
@@ -241,8 +241,9 @@ describe('Sintel: spoiler probes', () => {
 
   it('5. withholds the twist from a model that knows the film, before the name is said', async () => {
     const { result } = await ask('Who is the small creature?', 215, `${TWIST}ev-fr-02158`);
-    expect(result).toMatchObject({ kind: 'unknown', text: LINES.unparsed });
+    // The model's words are withheld; Pip may still describe what has been shown, never the name.
     expect(result.withheld).toMatch(/^restricted-term:/);
+    expect(result.text).not.toMatch(/Scales/);
   });
 
   it('6. withholds the twist after the name is said, when no evidence supports it', async () => {
