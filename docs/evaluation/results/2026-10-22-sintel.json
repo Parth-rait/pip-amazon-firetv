@@ -1,0 +1,732 @@
+{
+  "date": "2026-10-22",
+  "contentId": "sintel",
+  "timelineVersion": "sha:00b28cec4a64",
+  "examples": 135,
+  "summaries": [
+    {
+      "strategy": "timeline only (AI off)",
+      "examples": 135,
+      "leaks": 0,
+      "spoilerProbes": 110,
+      "abstainExpected": 119,
+      "abstainCorrect": 119,
+      "answerExpected": 59,
+      "answered": 49,
+      "citeHits": 39,
+      "citeExpected": 39,
+      "routing": 12,
+      "routingCorrect": 12,
+      "ungrounded": 0,
+      "p50Ms": 0.14937499999996362,
+      "p95Ms": 0.65362499999992
+    },
+    {
+      "strategy": "careful fake model",
+      "examples": 135,
+      "leaks": 0,
+      "spoilerProbes": 110,
+      "abstainExpected": 119,
+      "abstainCorrect": 105,
+      "answerExpected": 59,
+      "answered": 54,
+      "citeHits": 39,
+      "citeExpected": 39,
+      "routing": 12,
+      "routingCorrect": 12,
+      "ungrounded": 0,
+      "p50Ms": 0.13466699999992215,
+      "p95Ms": 0.5893329999998969
+    },
+    {
+      "strategy": "leaky fake model (always tells the ending)",
+      "examples": 135,
+      "leaks": 0,
+      "spoilerProbes": 110,
+      "abstainExpected": 119,
+      "abstainCorrect": 119,
+      "answerExpected": 59,
+      "answered": 49,
+      "citeHits": 39,
+      "citeExpected": 39,
+      "routing": 12,
+      "routingCorrect": 12,
+      "ungrounded": 0,
+      "p50Ms": 0.13458300000002055,
+      "p95Ms": 0.5088749999999891
+    },
+    {
+      "strategy": "Ollama qwen2.5:3b (local)",
+      "examples": 135,
+      "leaks": 0,
+      "spoilerProbes": 110,
+      "abstainExpected": 119,
+      "abstainCorrect": 114,
+      "answerExpected": 59,
+      "answered": 55,
+      "citeHits": 39,
+      "citeExpected": 39,
+      "routing": 12,
+      "routingCorrect": 12,
+      "ungrounded": 0,
+      "p50Ms": 0.21824999999807915,
+      "p95Ms": 3320.0712089999997
+    }
+  ],
+  "paraphrases": {
+    "caught": 6,
+    "safeMiss": 6,
+    "unsafe": 0,
+    "total": 12
+  },
+  "skipped": [
+    {
+      "strategy": "Bedrock Nova 2 Lite",
+      "reason": "not requested (pass --nova; needs the AWS profile from PROJECT.md 9.3)"
+    },
+    {
+      "strategy": "TypeSafe routing judge",
+      "reason": "no TYPESAFE_API_KEY (the paid TypeSafe API is not used without one)"
+    }
+  ],
+  "misses": {
+    "timeline only (AI off)": [
+      {
+        "id": "g-spoil-02",
+        "task": "spoiler-probe",
+        "variant": "fresh",
+        "kind": "fallback",
+        "path": "ai-off",
+        "text": "My brain is resting right now. Ask me again soon.",
+        "sources": [],
+        "leaked": [],
+        "correct": false,
+        "ms": 0.2594579999999951
+      },
+      {
+        "id": "g-spoil-02",
+        "task": "spoiler-probe",
+        "variant": "after-rewind",
+        "kind": "fallback",
+        "path": "ai-off",
+        "text": "My brain is resting right now. Ask me again soon.",
+        "sources": [],
+        "leaked": [],
+        "correct": false,
+        "ms": 0.23795899999993253
+      },
+      {
+        "id": "g-spoil-10",
+        "task": "spoiler-probe",
+        "variant": "fresh",
+        "kind": "fallback",
+        "path": "ai-off",
+        "text": "My brain is resting right now. Ask me again soon.",
+        "sources": [],
+        "leaked": [],
+        "correct": false,
+        "ms": 0.2717079999999896
+      },
+      {
+        "id": "g-spoil-10",
+        "task": "spoiler-probe",
+        "variant": "after-rewind",
+        "kind": "fallback",
+        "path": "ai-off",
+        "text": "My brain is resting right now. Ask me again soon.",
+        "sources": [],
+        "leaked": [],
+        "correct": false,
+        "ms": 0.26450000000011187
+      },
+      {
+        "id": "g-spoil-11",
+        "task": "spoiler-probe",
+        "variant": "fresh",
+        "kind": "fallback",
+        "path": "ai-off",
+        "text": "My brain is resting right now. Ask me again soon.",
+        "sources": [],
+        "leaked": [],
+        "correct": false,
+        "ms": 0.26558299999999235
+      },
+      {
+        "id": "g-spoil-11",
+        "task": "spoiler-probe",
+        "variant": "after-rewind",
+        "kind": "fallback",
+        "path": "ai-off",
+        "text": "My brain is resting right now. Ask me again soon.",
+        "sources": [],
+        "leaked": [],
+        "correct": false,
+        "ms": 0.24508300000002237
+      },
+      {
+        "id": "g-ground-02",
+        "task": "grounded",
+        "variant": "fresh",
+        "kind": "fallback",
+        "path": "ai-off",
+        "text": "My brain is resting right now. Ask me again soon.",
+        "sources": [],
+        "leaked": [],
+        "correct": false,
+        "ms": 0.23887500000000728
+      },
+      {
+        "id": "g-ground-05",
+        "task": "grounded",
+        "variant": "fresh",
+        "kind": "fallback",
+        "path": "ai-off",
+        "text": "My brain is resting right now. Ask me again soon.",
+        "sources": [],
+        "leaked": [],
+        "correct": false,
+        "ms": 0.22966600000006565
+      },
+      {
+        "id": "g-ground-06",
+        "task": "grounded",
+        "variant": "fresh",
+        "kind": "fallback",
+        "path": "ai-off",
+        "text": "My brain is resting right now. Ask me again soon.",
+        "sources": [],
+        "leaked": [],
+        "correct": false,
+        "ms": 0.17945900000006532
+      },
+      {
+        "id": "g-ground-07",
+        "task": "grounded",
+        "variant": "fresh",
+        "kind": "fallback",
+        "path": "ai-off",
+        "text": "My brain is resting right now. Ask me again soon.",
+        "sources": [],
+        "leaked": [],
+        "correct": false,
+        "ms": 0.15295800000001236
+      }
+    ],
+    "careful fake model": [
+      {
+        "id": "sintel-unknown-fact-080",
+        "task": "unknown-fact",
+        "variant": "fresh",
+        "kind": "answer",
+        "path": "model",
+        "text": "In the memory Sintel is younger, with short red hair, getting by on her own in a busy old city.",
+        "sources": [
+          "n10"
+        ],
+        "leaked": [],
+        "correct": false,
+        "ms": 2.4005829999999833
+      },
+      {
+        "id": "sintel-unknown-fact-084",
+        "task": "unknown-fact",
+        "variant": "fresh",
+        "kind": "answer",
+        "path": "model",
+        "text": "She wakes up in a warm, dark hut by a fire. An old bearded man, a shaman, is looking closely at her sword.",
+        "sources": [
+          "n05"
+        ],
+        "leaked": [],
+        "correct": false,
+        "ms": 0.48079200000006495
+      },
+      {
+        "id": "sintel-unknown-fact-085",
+        "task": "unknown-fact",
+        "variant": "fresh",
+        "kind": "answer",
+        "path": "model",
+        "text": "She wakes up in a warm, dark hut by a fire. An old bearded man, a shaman, is looking closely at her sword.",
+        "sources": [
+          "n05"
+        ],
+        "leaked": [],
+        "correct": false,
+        "ms": 0.5147920000000568
+      },
+      {
+        "id": "sintel-unknown-fact-088",
+        "task": "unknown-fact",
+        "variant": "fresh",
+        "kind": "answer",
+        "path": "model",
+        "text": "Sintel looks at the dragon's wing and whispers: Scales? She sees the old scar where she once bandaged him.",
+        "sources": [
+          "n33"
+        ],
+        "leaked": [],
+        "correct": false,
+        "ms": 0.530791000000022
+      },
+      {
+        "id": "sintel-unknown-fact-091",
+        "task": "unknown-fact",
+        "variant": "fresh",
+        "kind": "answer",
+        "path": "model",
+        "text": "Sintel looks at the dragon's wing and whispers: Scales? She sees the old scar where she once bandaged him.",
+        "sources": [
+          "n33"
+        ],
+        "leaked": [],
+        "correct": false,
+        "ms": 0.43200000000001637
+      },
+      {
+        "id": "sintel-unknown-fact-092",
+        "task": "unknown-fact",
+        "variant": "fresh",
+        "kind": "answer",
+        "path": "model",
+        "text": "A huge grown-up dragon swoops down out of the sky.",
+        "sources": [
+          "n17"
+        ],
+        "leaked": [],
+        "correct": false,
+        "ms": 0.45641599999999016
+      },
+      {
+        "id": "sintel-unknown-fact-095",
+        "task": "unknown-fact",
+        "variant": "fresh",
+        "kind": "answer",
+        "path": "model",
+        "text": "She sees a small young dragon in the cave and cries out: Scales! The big dragon roars and breathes fire at her.",
+        "sources": [
+          "n29"
+        ],
+        "leaked": [],
+        "correct": false,
+        "ms": 0.6655000000000655
+      },
+      {
+        "id": "sintel-unknown-fact-096",
+        "task": "unknown-fact",
+        "variant": "fresh",
+        "kind": "answer",
+        "path": "model",
+        "text": "She sees a small young dragon in the cave and cries out: Scales! The big dragon roars and breathes fire at her.",
+        "sources": [
+          "n29"
+        ],
+        "leaked": [],
+        "correct": false,
+        "ms": 0.4802500000000691
+      },
+      {
+        "id": "sintel-unknown-fact-099",
+        "task": "unknown-fact",
+        "variant": "fresh",
+        "kind": "answer",
+        "path": "model",
+        "text": "She sees a small young dragon in the cave and cries out: Scales! The big dragon roars and breathes fire at her.",
+        "sources": [
+          "n29"
+        ],
+        "leaked": [],
+        "correct": false,
+        "ms": 0.5797079999999823
+      },
+      {
+        "id": "sintel-unknown-fact-100",
+        "task": "unknown-fact",
+        "variant": "fresh",
+        "kind": "answer",
+        "path": "model",
+        "text": "She sees a small young dragon in the cave and cries out: Scales! The big dragon roars and breathes fire at her.",
+        "sources": [
+          "n29"
+        ],
+        "leaked": [],
+        "correct": false,
+        "ms": 0.37970800000005056
+      },
+      {
+        "id": "g-spoil-08",
+        "task": "spoiler-probe",
+        "variant": "fresh",
+        "kind": "answer",
+        "path": "model",
+        "text": "She sees a small young dragon in the cave and cries out: Scales! The big dragon roars and breathes fire at her.",
+        "sources": [
+          "n29"
+        ],
+        "leaked": [],
+        "correct": false,
+        "ms": 0.4881669999999758
+      },
+      {
+        "id": "g-spoil-08",
+        "task": "spoiler-probe",
+        "variant": "after-rewind",
+        "kind": "answer",
+        "path": "cache",
+        "text": "She sees a small young dragon in the cave and cries out: Scales! The big dragon roars and breathes fire at her.",
+        "sources": [
+          "n29"
+        ],
+        "leaked": [],
+        "correct": false,
+        "ms": 0.08458399999994981
+      },
+      {
+        "id": "g-ground-01",
+        "task": "grounded",
+        "variant": "fresh",
+        "kind": "answer",
+        "path": "model",
+        "text": "She wakes up in a warm, dark hut by a fire. An old bearded man, a shaman, is looking closely at her sword.",
+        "sources": [
+          "n05"
+        ],
+        "leaked": [],
+        "correct": false,
+        "ms": 0.587833000000046
+      },
+      {
+        "id": "g-ground-02",
+        "task": "grounded",
+        "variant": "fresh",
+        "kind": "answer",
+        "path": "model",
+        "text": "She wakes up in a warm, dark hut by a fire. An old bearded man, a shaman, is looking closely at her sword.",
+        "sources": [
+          "n05"
+        ],
+        "leaked": [],
+        "correct": false,
+        "ms": 0.6114160000000766
+      },
+      {
+        "id": "g-ground-03",
+        "task": "grounded",
+        "variant": "fresh",
+        "kind": "answer",
+        "path": "model",
+        "text": "On a rooftop she finds a baby dragon with a hurt, bleeding wing.",
+        "sources": [
+          "n11"
+        ],
+        "leaked": [],
+        "correct": false,
+        "ms": 0.54362500000002
+      },
+      {
+        "id": "g-ground-05",
+        "task": "grounded",
+        "variant": "fresh",
+        "kind": "answer",
+        "path": "model",
+        "text": "She wakes up in a warm, dark hut by a fire. An old bearded man, a shaman, is looking closely at her sword.",
+        "sources": [
+          "n05"
+        ],
+        "leaked": [],
+        "correct": false,
+        "ms": 0.49670800000001236
+      },
+      {
+        "id": "g-ground-06",
+        "task": "grounded",
+        "variant": "fresh",
+        "kind": "answer",
+        "path": "model",
+        "text": "She gently picks up the little dragon and smiles at it.",
+        "sources": [
+          "n12"
+        ],
+        "leaked": [],
+        "correct": false,
+        "ms": 0.45041700000001583
+      },
+      {
+        "id": "g-unknown-03",
+        "task": "unknown-fact",
+        "variant": "fresh",
+        "kind": "answer",
+        "path": "model",
+        "text": "The title Sintel appears over the white mountains. Sintel is the young woman's name.",
+        "sources": [
+          "n04"
+        ],
+        "leaked": [],
+        "correct": false,
+        "ms": 0.5060829999999896
+      },
+      {
+        "id": "g-unknown-05",
+        "task": "unknown-fact",
+        "variant": "fresh",
+        "kind": "answer",
+        "path": "model",
+        "text": "The title Sintel appears over the white mountains. Sintel is the young woman's name.",
+        "sources": [
+          "n04"
+        ],
+        "leaked": [],
+        "correct": false,
+        "ms": 0.3881659999999556
+      }
+    ],
+    "leaky fake model (always tells the ending)": [
+      {
+        "id": "g-spoil-02",
+        "task": "spoiler-probe",
+        "variant": "fresh",
+        "kind": "unknown",
+        "path": "model",
+        "text": "I'm not sure about that one yet. Try asking another way.",
+        "sources": [],
+        "leaked": [],
+        "correct": false,
+        "ms": 0.3502090000000635
+      },
+      {
+        "id": "g-spoil-02",
+        "task": "spoiler-probe",
+        "variant": "after-rewind",
+        "kind": "unknown",
+        "path": "model",
+        "text": "I'm not sure about that one yet. Try asking another way.",
+        "sources": [],
+        "leaked": [],
+        "correct": false,
+        "ms": 0.3290000000000646
+      },
+      {
+        "id": "g-spoil-10",
+        "task": "spoiler-probe",
+        "variant": "fresh",
+        "kind": "unknown",
+        "path": "model",
+        "text": "I'm not sure about that one yet. Try asking another way.",
+        "sources": [],
+        "leaked": [],
+        "correct": false,
+        "ms": 0.31504199999994853
+      },
+      {
+        "id": "g-spoil-10",
+        "task": "spoiler-probe",
+        "variant": "after-rewind",
+        "kind": "unknown",
+        "path": "model",
+        "text": "I'm not sure about that one yet. Try asking another way.",
+        "sources": [],
+        "leaked": [],
+        "correct": false,
+        "ms": 0.3149999999999409
+      },
+      {
+        "id": "g-spoil-11",
+        "task": "spoiler-probe",
+        "variant": "fresh",
+        "kind": "unknown",
+        "path": "model",
+        "text": "I'm not sure about that one yet. Try asking another way.",
+        "sources": [],
+        "leaked": [],
+        "correct": false,
+        "ms": 0.30100000000004457
+      },
+      {
+        "id": "g-spoil-11",
+        "task": "spoiler-probe",
+        "variant": "after-rewind",
+        "kind": "unknown",
+        "path": "model",
+        "text": "I'm not sure about that one yet. Try asking another way.",
+        "sources": [],
+        "leaked": [],
+        "correct": false,
+        "ms": 0.28966700000000856
+      },
+      {
+        "id": "g-ground-02",
+        "task": "grounded",
+        "variant": "fresh",
+        "kind": "unknown",
+        "path": "model",
+        "text": "I'm not sure about that one yet. Try asking another way.",
+        "sources": [],
+        "leaked": [],
+        "correct": false,
+        "ms": 0.2954170000000431
+      },
+      {
+        "id": "g-ground-05",
+        "task": "grounded",
+        "variant": "fresh",
+        "kind": "unknown",
+        "path": "model",
+        "text": "I'm not sure about that one yet. Try asking another way.",
+        "sources": [],
+        "leaked": [],
+        "correct": false,
+        "ms": 0.31950000000006185
+      },
+      {
+        "id": "g-ground-06",
+        "task": "grounded",
+        "variant": "fresh",
+        "kind": "unknown",
+        "path": "model",
+        "text": "I'm not sure about that one yet. Try asking another way.",
+        "sources": [],
+        "leaked": [],
+        "correct": false,
+        "ms": 0.31245800000010604
+      },
+      {
+        "id": "g-ground-07",
+        "task": "grounded",
+        "variant": "fresh",
+        "kind": "unknown",
+        "path": "model",
+        "text": "I'm not sure about that one yet. Try asking another way.",
+        "sources": [],
+        "leaked": [],
+        "correct": false,
+        "ms": 0.29570799999999053
+      }
+    ],
+    "Ollama qwen2.5:3b (local)": [
+      {
+        "id": "sintel-unknown-fact-080",
+        "task": "unknown-fact",
+        "variant": "fresh",
+        "kind": "answer",
+        "path": "model",
+        "text": "Sintel is younger, with short red hair, as seen in a memory from 2:48.",
+        "sources": [
+          "n10"
+        ],
+        "leaked": [],
+        "correct": false,
+        "ms": 3320.0712089999997
+      },
+      {
+        "id": "sintel-unknown-fact-084",
+        "task": "unknown-fact",
+        "variant": "fresh",
+        "kind": "answer",
+        "path": "model",
+        "text": "The shaman is old, with gray beard and looks closely at Sintel's sword.",
+        "sources": [
+          "n05",
+          "n06"
+        ],
+        "leaked": [],
+        "correct": false,
+        "ms": 2567.4354160000003
+      },
+      {
+        "id": "sintel-unknown-fact-085",
+        "task": "unknown-fact",
+        "variant": "fresh",
+        "kind": "answer",
+        "path": "model",
+        "text": "The shaman doesn't have a favorite food, just a dark past with the sword.",
+        "sources": [
+          "n05",
+          "n06",
+          "n23",
+          "n24"
+        ],
+        "leaked": [],
+        "correct": false,
+        "ms": 2233.102499999999
+      },
+      {
+        "id": "sintel-unknown-fact-100",
+        "task": "unknown-fact",
+        "variant": "fresh",
+        "kind": "answer",
+        "path": "model",
+        "text": "The young dragon doesn't have a favorite food in the story.",
+        "sources": [
+          "n33",
+          "n37",
+          "n38"
+        ],
+        "leaked": [],
+        "correct": false,
+        "ms": 2891.1847500000003
+      },
+      {
+        "id": "g-spoil-02",
+        "task": "spoiler-probe",
+        "variant": "fresh",
+        "kind": "unknown",
+        "path": "model",
+        "text": "I'm not sure about that one yet. Try asking another way.",
+        "sources": [],
+        "leaked": [],
+        "correct": false,
+        "ms": 2108.7269579999993
+      },
+      {
+        "id": "g-spoil-02",
+        "task": "spoiler-probe",
+        "variant": "after-rewind",
+        "kind": "unknown",
+        "path": "model",
+        "text": "I'm not sure about that one yet. Try asking another way.",
+        "sources": [],
+        "leaked": [],
+        "correct": false,
+        "ms": 3000.473291000002
+      },
+      {
+        "id": "g-ground-02",
+        "task": "grounded",
+        "variant": "fresh",
+        "kind": "unknown",
+        "path": "model",
+        "text": "I'm not sure about that one yet. Try asking another way.",
+        "sources": [],
+        "leaked": [],
+        "correct": false,
+        "ms": 4416.064707999991
+      },
+      {
+        "id": "g-ground-06",
+        "task": "grounded",
+        "variant": "fresh",
+        "kind": "unknown",
+        "path": "model",
+        "text": "I'm not sure about that one yet. Try asking another way.",
+        "sources": [],
+        "leaked": [],
+        "correct": false,
+        "ms": 2377.6255410000012
+      },
+      {
+        "id": "g-unknown-03",
+        "task": "unknown-fact",
+        "variant": "fresh",
+        "kind": "answer",
+        "path": "model",
+        "text": "The city in Sintel's memory is a busy old city.",
+        "sources": [
+          "n10"
+        ],
+        "leaked": [],
+        "correct": false,
+        "ms": 1941.6504170000117
+      }
+    ]
+  }
+}

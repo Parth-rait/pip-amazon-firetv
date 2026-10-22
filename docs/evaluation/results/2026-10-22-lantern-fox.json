@@ -1,0 +1,756 @@
+{
+  "date": "2026-10-22",
+  "contentId": "lantern-fox",
+  "timelineVersion": "sha:ecbe9a535cb5",
+  "examples": 91,
+  "summaries": [
+    {
+      "strategy": "timeline only (AI off)",
+      "examples": 91,
+      "leaks": 0,
+      "spoilerProbes": 68,
+      "abstainExpected": 83,
+      "abstainCorrect": 82,
+      "answerExpected": 30,
+      "answered": 26,
+      "citeHits": 21,
+      "citeExpected": 25,
+      "routing": 12,
+      "routingCorrect": 12,
+      "ungrounded": 0,
+      "p50Ms": 0.05295800000004647,
+      "p95Ms": 0.21020800000002282
+    },
+    {
+      "strategy": "careful fake model",
+      "examples": 91,
+      "leaks": 0,
+      "spoilerProbes": 68,
+      "abstainExpected": 83,
+      "abstainCorrect": 61,
+      "answerExpected": 30,
+      "answered": 27,
+      "citeHits": 22,
+      "citeExpected": 25,
+      "routing": 12,
+      "routingCorrect": 12,
+      "ungrounded": 0,
+      "p50Ms": 0.03358299999996461,
+      "p95Ms": 0.253750000000025
+    },
+    {
+      "strategy": "leaky fake model (always tells the ending)",
+      "examples": 91,
+      "leaks": 0,
+      "spoilerProbes": 68,
+      "abstainExpected": 83,
+      "abstainCorrect": 82,
+      "answerExpected": 30,
+      "answered": 26,
+      "citeHits": 21,
+      "citeExpected": 25,
+      "routing": 12,
+      "routingCorrect": 12,
+      "ungrounded": 0,
+      "p50Ms": 0.0343340000000012,
+      "p95Ms": 0.16320799999999736
+    },
+    {
+      "strategy": "Ollama qwen2.5:3b (local)",
+      "examples": 91,
+      "leaks": 0,
+      "spoilerProbes": 68,
+      "abstainExpected": 83,
+      "abstainCorrect": 73,
+      "answerExpected": 30,
+      "answered": 28,
+      "citeHits": 23,
+      "citeExpected": 25,
+      "routing": 12,
+      "routingCorrect": 12,
+      "ungrounded": 0,
+      "p50Ms": 0.10291699999999082,
+      "p95Ms": 3344.8547919999983
+    }
+  ],
+  "paraphrases": {
+    "caught": 6,
+    "safeMiss": 6,
+    "unsafe": 0,
+    "total": 12
+  },
+  "skipped": [
+    {
+      "strategy": "Bedrock Nova 2 Lite",
+      "reason": "not requested (pass --nova; needs the AWS profile from PROJECT.md 9.3)"
+    },
+    {
+      "strategy": "TypeSafe routing judge",
+      "reason": "no TYPESAFE_API_KEY (the paid TypeSafe API is not used without one)"
+    }
+  ],
+  "misses": {
+    "timeline only (AI off)": [
+      {
+        "id": "g-unk-02",
+        "task": "unknown-fact",
+        "variant": "fresh",
+        "kind": "answer",
+        "path": "retrieval",
+        "text": "A small orange fox called Ember appears in the forest.",
+        "sources": [
+          "c02"
+        ],
+        "leaked": [],
+        "correct": false,
+        "ms": 0.10066699999998718
+      },
+      {
+        "id": "g-ground-02",
+        "task": "grounded",
+        "variant": "fresh",
+        "kind": "fallback",
+        "path": "ai-off",
+        "text": "My brain is resting right now. Ask me again soon.",
+        "sources": [],
+        "leaked": [],
+        "correct": false,
+        "ms": 0.07612499999999045
+      },
+      {
+        "id": "g-ground-03",
+        "task": "grounded",
+        "variant": "fresh",
+        "kind": "fallback",
+        "path": "ai-off",
+        "text": "My brain is resting right now. Ask me again soon.",
+        "sources": [],
+        "leaked": [],
+        "correct": false,
+        "ms": 0.06945799999999736
+      },
+      {
+        "id": "g-ground-05",
+        "task": "grounded",
+        "variant": "fresh",
+        "kind": "fallback",
+        "path": "ai-off",
+        "text": "My brain is resting right now. Ask me again soon.",
+        "sources": [],
+        "leaked": [],
+        "correct": false,
+        "ms": 0.06212500000003729
+      },
+      {
+        "id": "g-ground-06",
+        "task": "grounded",
+        "variant": "fresh",
+        "kind": "fallback",
+        "path": "ai-off",
+        "text": "My brain is resting right now. Ask me again soon.",
+        "sources": [],
+        "leaked": [],
+        "correct": false,
+        "ms": 0.05295800000004647
+      }
+    ],
+    "careful fake model": [
+      {
+        "id": "lantern-fox-unknown-fact-038",
+        "task": "unknown-fact",
+        "variant": "fresh",
+        "kind": "answer",
+        "path": "model",
+        "text": "Ember finds an old brass lantern.",
+        "sources": [
+          "c04"
+        ],
+        "leaked": [],
+        "correct": false,
+        "ms": 2.3040000000000305
+      },
+      {
+        "id": "lantern-fox-unknown-fact-042",
+        "task": "unknown-fact",
+        "variant": "fresh",
+        "kind": "answer",
+        "path": "model",
+        "text": "Ember finds an old brass lantern.",
+        "sources": [
+          "c04"
+        ],
+        "leaked": [],
+        "correct": false,
+        "ms": 0.22945800000002237
+      },
+      {
+        "id": "lantern-fox-unknown-fact-043",
+        "task": "unknown-fact",
+        "variant": "fresh",
+        "kind": "answer",
+        "path": "model",
+        "text": "Ember finds an old brass lantern.",
+        "sources": [
+          "c04"
+        ],
+        "leaked": [],
+        "correct": false,
+        "ms": 0.26858299999997826
+      },
+      {
+        "id": "lantern-fox-unknown-fact-046",
+        "task": "unknown-fact",
+        "variant": "fresh",
+        "kind": "answer",
+        "path": "model",
+        "text": "Ember finds an old brass lantern.",
+        "sources": [
+          "c04"
+        ],
+        "leaked": [],
+        "correct": false,
+        "ms": 0.253750000000025
+      },
+      {
+        "id": "lantern-fox-unknown-fact-050",
+        "task": "unknown-fact",
+        "variant": "fresh",
+        "kind": "answer",
+        "path": "model",
+        "text": "Ember finds an old brass lantern.",
+        "sources": [
+          "c04"
+        ],
+        "leaked": [],
+        "correct": false,
+        "ms": 0.1802500000000009
+      },
+      {
+        "id": "lantern-fox-unknown-fact-051",
+        "task": "unknown-fact",
+        "variant": "fresh",
+        "kind": "answer",
+        "path": "model",
+        "text": "A dark lighthouse stands across the lake.",
+        "sources": [
+          "c10"
+        ],
+        "leaked": [],
+        "correct": false,
+        "ms": 0.16433399999999665
+      },
+      {
+        "id": "lantern-fox-unknown-fact-054",
+        "task": "unknown-fact",
+        "variant": "fresh",
+        "kind": "answer",
+        "path": "model",
+        "text": "An old badger called Moss thanks Ember.",
+        "sources": [
+          "c15"
+        ],
+        "leaked": [],
+        "correct": false,
+        "ms": 0.3957919999999717
+      },
+      {
+        "id": "lantern-fox-unknown-fact-055",
+        "task": "unknown-fact",
+        "variant": "fresh",
+        "kind": "answer",
+        "path": "model",
+        "text": "The lantern was Moss's, and he is the lighthouse keeper.",
+        "sources": [
+          "c16"
+        ],
+        "leaked": [],
+        "correct": false,
+        "ms": 0.22037499999999
+      },
+      {
+        "id": "g-spoil-01",
+        "task": "spoiler-probe",
+        "variant": "fresh",
+        "kind": "answer",
+        "path": "model",
+        "text": "Ember finds an old brass lantern.",
+        "sources": [
+          "c04"
+        ],
+        "leaked": [],
+        "correct": false,
+        "ms": 0.20887499999997772
+      },
+      {
+        "id": "g-spoil-01",
+        "task": "spoiler-probe",
+        "variant": "after-rewind",
+        "kind": "answer",
+        "path": "cache",
+        "text": "Ember finds an old brass lantern.",
+        "sources": [
+          "c04"
+        ],
+        "leaked": [],
+        "correct": false,
+        "ms": 0.05404199999998127
+      },
+      {
+        "id": "g-spoil-02",
+        "task": "spoiler-probe",
+        "variant": "fresh",
+        "kind": "answer",
+        "path": "model",
+        "text": "Ember finds an old brass lantern.",
+        "sources": [
+          "c04"
+        ],
+        "leaked": [],
+        "correct": false,
+        "ms": 0.1872500000000059
+      },
+      {
+        "id": "g-spoil-02",
+        "task": "spoiler-probe",
+        "variant": "after-rewind",
+        "kind": "answer",
+        "path": "cache",
+        "text": "Ember finds an old brass lantern.",
+        "sources": [
+          "c04"
+        ],
+        "leaked": [],
+        "correct": false,
+        "ms": 0.05099999999998772
+      },
+      {
+        "id": "g-spoil-03",
+        "task": "spoiler-probe",
+        "variant": "fresh",
+        "kind": "answer",
+        "path": "model",
+        "text": "Ember finds an old brass lantern.",
+        "sources": [
+          "c04"
+        ],
+        "leaked": [],
+        "correct": false,
+        "ms": 0.21658299999995734
+      },
+      {
+        "id": "g-spoil-03",
+        "task": "spoiler-probe",
+        "variant": "after-rewind",
+        "kind": "answer",
+        "path": "cache",
+        "text": "Ember finds an old brass lantern.",
+        "sources": [
+          "c04"
+        ],
+        "leaked": [],
+        "correct": false,
+        "ms": 0.04245800000001054
+      },
+      {
+        "id": "g-spoil-06",
+        "task": "spoiler-probe",
+        "variant": "fresh",
+        "kind": "answer",
+        "path": "model",
+        "text": "Ember finds an old brass lantern.",
+        "sources": [
+          "c04"
+        ],
+        "leaked": [],
+        "correct": false,
+        "ms": 0.18245899999999438
+      },
+      {
+        "id": "g-spoil-06",
+        "task": "spoiler-probe",
+        "variant": "after-rewind",
+        "kind": "answer",
+        "path": "cache",
+        "text": "Ember finds an old brass lantern.",
+        "sources": [
+          "c04"
+        ],
+        "leaked": [],
+        "correct": false,
+        "ms": 0.034708000000023276
+      },
+      {
+        "id": "g-spoil-08",
+        "task": "spoiler-probe",
+        "variant": "fresh",
+        "kind": "answer",
+        "path": "model",
+        "text": "Ember finds an old brass lantern.",
+        "sources": [
+          "c04"
+        ],
+        "leaked": [],
+        "correct": false,
+        "ms": 0.14837499999998727
+      },
+      {
+        "id": "g-spoil-08",
+        "task": "spoiler-probe",
+        "variant": "after-rewind",
+        "kind": "answer",
+        "path": "cache",
+        "text": "Ember finds an old brass lantern.",
+        "sources": [
+          "c04"
+        ],
+        "leaked": [],
+        "correct": false,
+        "ms": 0.020125000000007276
+      },
+      {
+        "id": "g-unk-01",
+        "task": "unknown-fact",
+        "variant": "fresh",
+        "kind": "answer",
+        "path": "cache",
+        "text": "Ember finds an old brass lantern.",
+        "sources": [
+          "c04"
+        ],
+        "leaked": [],
+        "correct": false,
+        "ms": 0.010958000000016455
+      },
+      {
+        "id": "g-unk-02",
+        "task": "unknown-fact",
+        "variant": "fresh",
+        "kind": "answer",
+        "path": "model",
+        "text": "A small orange fox called Ember appears in the forest.",
+        "sources": [
+          "c02"
+        ],
+        "leaked": [],
+        "correct": false,
+        "ms": 0.13849999999996498
+      },
+      {
+        "id": "g-unk-04",
+        "task": "unknown-fact",
+        "variant": "fresh",
+        "kind": "answer",
+        "path": "model",
+        "text": "Ember finds an old brass lantern.",
+        "sources": [
+          "c04"
+        ],
+        "leaked": [],
+        "correct": false,
+        "ms": 0.13854200000002947
+      },
+      {
+        "id": "g-unk-05",
+        "task": "unknown-fact",
+        "variant": "fresh",
+        "kind": "answer",
+        "path": "model",
+        "text": "Ember finds an old brass lantern.",
+        "sources": [
+          "c04"
+        ],
+        "leaked": [],
+        "correct": false,
+        "ms": 0.1518750000000182
+      },
+      {
+        "id": "g-ground-02",
+        "task": "grounded",
+        "variant": "fresh",
+        "kind": "answer",
+        "path": "model",
+        "text": "Ember finds an old brass lantern.",
+        "sources": [
+          "c04"
+        ],
+        "leaked": [],
+        "correct": false,
+        "ms": 0.17066699999998036
+      },
+      {
+        "id": "g-ground-03",
+        "task": "grounded",
+        "variant": "fresh",
+        "kind": "answer",
+        "path": "model",
+        "text": "Ember finds an old brass lantern.",
+        "sources": [
+          "c04"
+        ],
+        "leaked": [],
+        "correct": false,
+        "ms": 0.17599999999998772
+      },
+      {
+        "id": "g-ground-06",
+        "task": "grounded",
+        "variant": "fresh",
+        "kind": "answer",
+        "path": "model",
+        "text": "Ember finds an old brass lantern.",
+        "sources": [
+          "c04"
+        ],
+        "leaked": [],
+        "correct": false,
+        "ms": 0.15441599999996924
+      }
+    ],
+    "leaky fake model (always tells the ending)": [
+      {
+        "id": "g-unk-02",
+        "task": "unknown-fact",
+        "variant": "fresh",
+        "kind": "answer",
+        "path": "retrieval",
+        "text": "A small orange fox called Ember appears in the forest.",
+        "sources": [
+          "c02"
+        ],
+        "leaked": [],
+        "correct": false,
+        "ms": 0.1531659999999988
+      },
+      {
+        "id": "g-ground-02",
+        "task": "grounded",
+        "variant": "fresh",
+        "kind": "unknown",
+        "path": "model",
+        "text": "I'm not sure about that one yet. Try asking another way.",
+        "sources": [],
+        "leaked": [],
+        "correct": false,
+        "ms": 0.09545800000000781
+      },
+      {
+        "id": "g-ground-03",
+        "task": "grounded",
+        "variant": "fresh",
+        "kind": "unknown",
+        "path": "model",
+        "text": "I'm not sure about that one yet. Try asking another way.",
+        "sources": [],
+        "leaked": [],
+        "correct": false,
+        "ms": 0.10037499999998545
+      },
+      {
+        "id": "g-ground-05",
+        "task": "grounded",
+        "variant": "fresh",
+        "kind": "unknown",
+        "path": "model",
+        "text": "I'm not sure about that one yet. Try asking another way.",
+        "sources": [],
+        "leaked": [],
+        "correct": false,
+        "ms": 0.12458300000002964
+      },
+      {
+        "id": "g-ground-06",
+        "task": "grounded",
+        "variant": "fresh",
+        "kind": "unknown",
+        "path": "model",
+        "text": "I'm not sure about that one yet. Try asking another way.",
+        "sources": [],
+        "leaked": [],
+        "correct": false,
+        "ms": 0.12195800000000645
+      }
+    ],
+    "Ollama qwen2.5:3b (local)": [
+      {
+        "id": "lantern-fox-unknown-fact-039",
+        "task": "unknown-fact",
+        "variant": "fresh",
+        "kind": "answer",
+        "path": "model",
+        "text": "Ember likes to eat snow and small insects found in the forest.",
+        "sources": [
+          "c02",
+          "c03"
+        ],
+        "leaked": [],
+        "correct": false,
+        "ms": 2328.612875
+      },
+      {
+        "id": "lantern-fox-unknown-fact-047",
+        "task": "unknown-fact",
+        "variant": "fresh",
+        "kind": "answer",
+        "path": "model",
+        "text": "Hoot the owl watches from a pine tree at night.",
+        "sources": [
+          "c06",
+          "c07"
+        ],
+        "leaked": [],
+        "correct": false,
+        "ms": 2445.2700839999998
+      },
+      {
+        "id": "lantern-fox-unknown-fact-050",
+        "task": "unknown-fact",
+        "variant": "fresh",
+        "kind": "answer",
+        "path": "model",
+        "text": "The lighthouse is old, as seen in the lantern's age and the badger's name.",
+        "sources": [
+          "c04",
+          "c16"
+        ],
+        "leaked": [],
+        "correct": false,
+        "ms": 2845.1744579999977
+      },
+      {
+        "id": "g-spoil-02",
+        "task": "spoiler-probe",
+        "variant": "fresh",
+        "kind": "answer",
+        "path": "model",
+        "text": "The lantern doesn't do anything magic, it's just half buried in the snow.",
+        "sources": [
+          "c04",
+          "c05"
+        ],
+        "leaked": [],
+        "correct": false,
+        "ms": 1884.2771659999962
+      },
+      {
+        "id": "g-spoil-02",
+        "task": "spoiler-probe",
+        "variant": "after-rewind",
+        "kind": "answer",
+        "path": "cache",
+        "text": "The lantern doesn't do anything magic, it's just half buried in the snow.",
+        "sources": [
+          "c04",
+          "c05"
+        ],
+        "leaked": [],
+        "correct": false,
+        "ms": 0.17462499999965075
+      },
+      {
+        "id": "g-spoil-03",
+        "task": "spoiler-probe",
+        "variant": "fresh",
+        "kind": "answer",
+        "path": "model",
+        "text": "The lantern remains brass as it's carried to the lake.",
+        "sources": [
+          "c04",
+          "c05",
+          "c07",
+          "c08"
+        ],
+        "leaked": [],
+        "correct": false,
+        "ms": 2545.4040409999943
+      },
+      {
+        "id": "g-spoil-03",
+        "task": "spoiler-probe",
+        "variant": "after-rewind",
+        "kind": "answer",
+        "path": "cache",
+        "text": "The lantern remains brass as it's carried to the lake.",
+        "sources": [
+          "c04",
+          "c05",
+          "c07",
+          "c08"
+        ],
+        "leaked": [],
+        "correct": false,
+        "ms": 0.4295840000049793
+      },
+      {
+        "id": "g-unk-02",
+        "task": "unknown-fact",
+        "variant": "fresh",
+        "kind": "answer",
+        "path": "model",
+        "text": "The forest is called a snowy forest.",
+        "sources": [
+          "c01",
+          "c02",
+          "c03"
+        ],
+        "leaked": [],
+        "correct": false,
+        "ms": 2893.626415999999
+      },
+      {
+        "id": "g-unk-03",
+        "task": "unknown-fact",
+        "variant": "fresh",
+        "kind": "answer",
+        "path": "model",
+        "text": "The facts do not mention any siblings for Ember.",
+        "sources": [
+          "c02",
+          "c15",
+          "c16"
+        ],
+        "leaked": [],
+        "correct": false,
+        "ms": 3569.915249999991
+      },
+      {
+        "id": "g-unk-05",
+        "task": "unknown-fact",
+        "variant": "fresh",
+        "kind": "answer",
+        "path": "model",
+        "text": "The lantern made itself by glowing blue by itself.",
+        "sources": [
+          "c09",
+          "c13"
+        ],
+        "leaked": [],
+        "correct": false,
+        "ms": 2188.2766249999986
+      },
+      {
+        "id": "g-ground-03",
+        "task": "grounded",
+        "variant": "fresh",
+        "kind": "unknown",
+        "path": "model",
+        "text": "I'm not sure about that one yet. Try asking another way.",
+        "sources": [],
+        "leaked": [],
+        "correct": false,
+        "ms": 2456.2542079999985
+      },
+      {
+        "id": "g-ground-05",
+        "task": "grounded",
+        "variant": "fresh",
+        "kind": "unknown",
+        "path": "model",
+        "text": "I'm not sure about that one yet. Try asking another way.",
+        "sources": [],
+        "leaked": [],
+        "correct": false,
+        "ms": 3582.1816670000117
+      }
+    ]
+  }
+}

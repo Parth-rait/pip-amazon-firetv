@@ -2,7 +2,7 @@
 
 ## What it is
 
-One Node.js 22 process that connects the Pip Pads, the TV app and Amazon Bedrock. It holds the sessions (a TV, its code, the players and the host) in memory, relays the host's commands to the TV, draws the join QR codes, and serves the film list and the film files from `media/`. Socket.IO events are typed with `src/shared/protocol.ts`. TypeScript runs directly with `tsx`; there is no build step.
+One Node.js 22 process that connects the Pip Pads and the TV app, and asks a local model (Ollama) when a question needs one; Amazon Bedrock is an optional adapter. It holds the sessions (a TV, its code, the players and the host) in memory, relays the host's commands to the TV, draws the join QR codes, and serves the film list and the film files from `media/`. Socket.IO events are typed with `src/shared/protocol.ts`. TypeScript runs directly with `tsx`; there is no build step.
 
 - `src/core/`: Pip Core, reusable by any Pip product. Never imports from `src/film/`.
 - `src/film/`: film night (film files, the playback estimate, the Ask Pip prompt, and later the quiz).
@@ -29,12 +29,15 @@ npm run gesture -- ABCD --preview   # webcam hand gestures into session ABCD (se
 npm run gesture -- --replay evening --dry   # a recorded trace of hand poses through the gesture pipeline; prints the inputs
 npm run lab            # Virtual Pip Lab: real-socket scenarios with injected faults (the gesture scenario needs gesture/.venv)
 npm run eval -- --ollama   # benchmark on the lab film, plus the local model (free)
+npm run eval -- sintel --ollama   # the same on a demo film's reviewed timeline (also big-buck-bunny)
+npm run timeline:notes -- big-buck-bunny   # content/timelines/<film>.json from the film's notes (each checked against a frame)
+npm run timeline:notes -- sintel --lines-from pipeline/timelines/sintel.json   # ...with whisper.cpp dialogue as evidence
 npm run pipeline -- asr sintel   # whisper.cpp dialogue with timestamps (setup: ../video/setup.sh)
 npm run pipeline -- understand sintel --known Sintel   # local vision model over the frames: characters, actions, names from dialogue (docs/extractions/video-understanding.md)
 npm run pipeline -- understand sintel --replay   # rebuild the candidates from the committed run, without the model
-npm run smoke:ai       # one real Nova call: prints the reply and latency (needs the AWS profile)
+npm run smoke:ai       # one real model call (the configured brain): prints the reply and latency
 npm run draft:quiz -- big-buck-bunny   # Nova drafts 5 quiz questions into content/drafts/ for review
-npm run eval:ask       # runs the probes in evals/<film>.json against Nova; flags LEAK? and CHECK
+npm run eval:ask       # the old notes-prompt probes (evals/<film>.json); the films now answer through their timelines
 ```
 
 Quick checks while it runs:
@@ -67,8 +70,9 @@ npm run format
 | `AWS_REGION`       | `us-east-1`                                         | Bedrock region                                                                                 |
 | `BEDROCK_MODEL_ID` | `us.amazon.nova-2-lite-v1:0`                        | Inference profile ID                                                                           |
 | `AI_ENABLED`       | `true`                                              | `false` uses the fixed lines only                                                              |
+| `AI_PROVIDER`      | `ollama`                                            | `ollama` (local, default since 22 Oct) or `bedrock` (Nova 2 Lite; not verified)                |
 | `LOG_TEXT`         | `false`                                             | `true` logs question text (development only)                                                   |
 | `JOURNAL`          | `true`                                              | Writes events to `data/events/` (gitignored), with pseudonymous ids                            |
-| `TIMELINE_REVIEW`  | `accepted`                                          | `candidate` also answers from unreviewed facts (Sintel's generated timeline is all candidates) |
+| `TIMELINE_REVIEW`  | `accepted`                                          | `candidate` also answers from unreviewed facts (the generated pipeline/timelines/sintel.json)  |
 | `WHISPER_CLI`      | `../video/.tools/whisper.cpp/build/bin/whisper-cli` | Pipeline only: the speech recognizer built by `video/setup.sh`                                 |
 | `WHISPER_MODEL`    | `../video/models/ggml-small.en.bin`                 | Pipeline only: its model                                                                       |

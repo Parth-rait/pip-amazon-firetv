@@ -128,6 +128,14 @@ for (const id of FILM_IDS) {
   } catch (error) {
     report(false, `${id} has ${QUIZ_QUESTIONS} quiz questions`, why(error));
   }
+  // Ask Pip answers through the spoiler gate only with a reviewed timeline (npm run timeline:notes).
+  try {
+    const timeline = JSON.parse(readFileSync(join(CONTENT_DIR, 'timelines', `${id}.json`), 'utf8'));
+    const accepted = timeline.facts.filter((f) => f.review?.status === 'accepted').length;
+    report(accepted > 0, `${id} has a reviewed timeline`, `${accepted} accepted facts`);
+  } catch (error) {
+    report(false, `${id} has a reviewed timeline`, why(error));
+  }
 }
 
 // 4b. The TV app talks to this tunnel. A new tunnel URL needs a TV rebuild (tv/README.md).
@@ -147,10 +155,13 @@ try {
 const hasPad = existsSync(join(root, 'pad', 'dist', 'index.html'));
 report(hasPad, 'pad/dist exists', hasPad ? '' : 'run npm run build in pad/');
 
-// 6. One real model call. The demo uses Nova; the local model is for rehearsals (PROJECT.md 2.4).
-if (env.AI_PROVIDER === 'ollama') {
-  console.log('NOTE  AI_PROVIDER=ollama: Pip uses the local model, not Nova');
-}
+// 6. One real model call. Pip's brain runs on this machine (Ollama) by default; Bedrock (Nova) is an
+// optional adapter for when an AWS account is ready (docs/vnext/PLAN.md 0).
+console.log(
+  env.AI_PROVIDER === 'bedrock'
+    ? 'NOTE  AI_PROVIDER=bedrock: Pip uses Nova on AWS'
+    : `NOTE  Pip uses the local model (${env.OLLAMA_MODEL ?? 'qwen2.5:3b'}); nothing leaves this machine`,
+);
 const smoke = await runSmokeAi();
 const latency = /latency: (\d+) ms/.exec(smoke.output)?.[1];
 const lastLine = smoke.output.trim().split('\n').at(-1) ?? '';

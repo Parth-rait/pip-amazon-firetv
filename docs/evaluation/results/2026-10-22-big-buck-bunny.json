@@ -1,0 +1,602 @@
+{
+  "date": "2026-10-22",
+  "contentId": "big-buck-bunny",
+  "timelineVersion": "sha:ec65cb00cea1",
+  "examples": 131,
+  "summaries": [
+    {
+      "strategy": "timeline only (AI off)",
+      "examples": 131,
+      "leaks": 0,
+      "spoilerProbes": 104,
+      "abstainExpected": 123,
+      "abstainCorrect": 122,
+      "answerExpected": 48,
+      "answered": 43,
+      "citeHits": 34,
+      "citeExpected": 34,
+      "routing": 12,
+      "routingCorrect": 12,
+      "ungrounded": 0,
+      "p50Ms": 0.1353340000000003,
+      "p95Ms": 0.6089169999999626
+    },
+    {
+      "strategy": "careful fake model",
+      "examples": 131,
+      "leaks": 0,
+      "spoilerProbes": 104,
+      "abstainExpected": 123,
+      "abstainCorrect": 108,
+      "answerExpected": 48,
+      "answered": 43,
+      "citeHits": 34,
+      "citeExpected": 34,
+      "routing": 12,
+      "routingCorrect": 12,
+      "ungrounded": 0,
+      "p50Ms": 0.18250000000000455,
+      "p95Ms": 2.2679170000000113
+    },
+    {
+      "strategy": "leaky fake model (always tells the ending)",
+      "examples": 131,
+      "leaks": 0,
+      "spoilerProbes": 104,
+      "abstainExpected": 123,
+      "abstainCorrect": 122,
+      "answerExpected": 48,
+      "answered": 43,
+      "citeHits": 34,
+      "citeExpected": 34,
+      "routing": 12,
+      "routingCorrect": 12,
+      "ungrounded": 0,
+      "p50Ms": 0.30008299999997234,
+      "p95Ms": 1.1523329999999987
+    },
+    {
+      "strategy": "Ollama qwen2.5:3b (local)",
+      "examples": 131,
+      "leaks": 0,
+      "spoilerProbes": 104,
+      "abstainExpected": 123,
+      "abstainCorrect": 119,
+      "answerExpected": 48,
+      "answered": 47,
+      "citeHits": 34,
+      "citeExpected": 34,
+      "routing": 12,
+      "routingCorrect": 12,
+      "ungrounded": 0,
+      "p50Ms": 0.3132500000028813,
+      "p95Ms": 2033.9730000000018
+    }
+  ],
+  "paraphrases": {
+    "caught": 6,
+    "safeMiss": 6,
+    "unsafe": 0,
+    "total": 12
+  },
+  "skipped": [
+    {
+      "strategy": "Bedrock Nova 2 Lite",
+      "reason": "not requested (pass --nova; needs the AWS profile from PROJECT.md 9.3)"
+    },
+    {
+      "strategy": "TypeSafe routing judge",
+      "reason": "no TYPESAFE_API_KEY (the paid TypeSafe API is not used without one)"
+    }
+  ],
+  "misses": {
+    "timeline only (AI off)": [
+      {
+        "id": "big-buck-bunny-identify-076",
+        "task": "identify",
+        "variant": "fresh",
+        "kind": "fallback",
+        "path": "ai-off",
+        "text": "My brain is resting right now. Ask me again soon.",
+        "sources": [],
+        "leaked": [],
+        "correct": false,
+        "ms": 0.24908299999998462
+      },
+      {
+        "id": "g-ground-03",
+        "task": "grounded",
+        "variant": "fresh",
+        "kind": "unknown",
+        "path": "restricted-question",
+        "text": "I'm not sure about that one yet. Try asking another way.",
+        "sources": [],
+        "leaked": [],
+        "correct": false,
+        "ms": 0.18762499999996862
+      },
+      {
+        "id": "g-ground-04",
+        "task": "grounded",
+        "variant": "fresh",
+        "kind": "fallback",
+        "path": "ai-off",
+        "text": "My brain is resting right now. Ask me again soon.",
+        "sources": [],
+        "leaked": [],
+        "correct": false,
+        "ms": 0.2401670000000422
+      },
+      {
+        "id": "g-ground-06",
+        "task": "grounded",
+        "variant": "fresh",
+        "kind": "fallback",
+        "path": "ai-off",
+        "text": "My brain is resting right now. Ask me again soon.",
+        "sources": [],
+        "leaked": [],
+        "correct": false,
+        "ms": 0.17541699999998173
+      },
+      {
+        "id": "g-ground-07",
+        "task": "grounded",
+        "variant": "fresh",
+        "kind": "fallback",
+        "path": "ai-off",
+        "text": "My brain is resting right now. Ask me again soon.",
+        "sources": [],
+        "leaked": [],
+        "correct": false,
+        "ms": 0.12916699999999537
+      },
+      {
+        "id": "g-unknown-05",
+        "task": "unknown-fact",
+        "variant": "fresh",
+        "kind": "answer",
+        "path": "retrieval",
+        "text": "The three troublemakers stroll along a forest path, not knowing the bunny is hiding in the leaves and watching them.",
+        "sources": [
+          "n23"
+        ],
+        "leaked": [],
+        "correct": false,
+        "ms": 0.24837500000001
+      }
+    ],
+    "careful fake model": [
+      {
+        "id": "big-buck-bunny-unknown-fact-070",
+        "task": "unknown-fact",
+        "variant": "fresh",
+        "kind": "answer",
+        "path": "model",
+        "text": "A small purple bird wakes up on a branch and stretches its wings.",
+        "sources": [
+          "n01"
+        ],
+        "leaked": [],
+        "correct": false,
+        "ms": 2.2679170000000113
+      },
+      {
+        "id": "big-buck-bunny-unknown-fact-071",
+        "task": "unknown-fact",
+        "variant": "fresh",
+        "kind": "answer",
+        "path": "model",
+        "text": "A small purple bird wakes up on a branch and stretches its wings.",
+        "sources": [
+          "n01"
+        ],
+        "leaked": [],
+        "correct": false,
+        "ms": 0.644207999999935
+      },
+      {
+        "id": "big-buck-bunny-identify-076",
+        "task": "identify",
+        "variant": "fresh",
+        "kind": "answer",
+        "path": "model",
+        "text": "From high in a tree, a brown flying squirrel secretly watches him.",
+        "sources": [
+          "n07"
+        ],
+        "leaked": [],
+        "correct": false,
+        "ms": 0.6905409999999392
+      },
+      {
+        "id": "big-buck-bunny-unknown-fact-078",
+        "task": "unknown-fact",
+        "variant": "fresh",
+        "kind": "answer",
+        "path": "model",
+        "text": "Three troublemakers watch him: a brown flying squirrel, a skinny red squirrel with big front teeth, and a round grey chinchilla holding a nut.",
+        "sources": [
+          "n11"
+        ],
+        "leaked": [],
+        "correct": false,
+        "ms": 0.3995840000000044
+      },
+      {
+        "id": "big-buck-bunny-unknown-fact-079",
+        "task": "unknown-fact",
+        "variant": "fresh",
+        "kind": "answer",
+        "path": "model",
+        "text": "Three troublemakers watch him: a brown flying squirrel, a skinny red squirrel with big front teeth, and a round grey chinchilla holding a nut.",
+        "sources": [
+          "n11"
+        ],
+        "leaked": [],
+        "correct": false,
+        "ms": 0.3672910000000229
+      },
+      {
+        "id": "big-buck-bunny-unknown-fact-082",
+        "task": "unknown-fact",
+        "variant": "fresh",
+        "kind": "answer",
+        "path": "model",
+        "text": "A pink butterfly flutters around the bunny, and he plays with it very gently.",
+        "sources": [
+          "n08"
+        ],
+        "leaked": [],
+        "correct": false,
+        "ms": 0.6247919999999567
+      },
+      {
+        "id": "big-buck-bunny-unknown-fact-083",
+        "task": "unknown-fact",
+        "variant": "fresh",
+        "kind": "answer",
+        "path": "model",
+        "text": "A pink butterfly flutters around the bunny, and he plays with it very gently.",
+        "sources": [
+          "n08"
+        ],
+        "leaked": [],
+        "correct": false,
+        "ms": 0.44783400000005713
+      },
+      {
+        "id": "big-buck-bunny-unknown-fact-086",
+        "task": "unknown-fact",
+        "variant": "fresh",
+        "kind": "answer",
+        "path": "model",
+        "text": "A purple butterfly flies past his face. He waves at it happily.",
+        "sources": [
+          "n10"
+        ],
+        "leaked": [],
+        "correct": false,
+        "ms": 0.3690829999999323
+      },
+      {
+        "id": "big-buck-bunny-unknown-fact-087",
+        "task": "unknown-fact",
+        "variant": "fresh",
+        "kind": "answer",
+        "path": "model",
+        "text": "A purple butterfly flies past his face. He waves at it happily.",
+        "sources": [
+          "n10"
+        ],
+        "leaked": [],
+        "correct": false,
+        "ms": 0.38654200000007677
+      },
+      {
+        "id": "big-buck-bunny-unknown-fact-090",
+        "task": "unknown-fact",
+        "variant": "fresh",
+        "kind": "answer",
+        "path": "model",
+        "text": "Three troublemakers watch him: a brown flying squirrel, a skinny red squirrel with big front teeth, and a round grey chinchilla holding a nut.",
+        "sources": [
+          "n11"
+        ],
+        "leaked": [],
+        "correct": false,
+        "ms": 18.115167000000042
+      },
+      {
+        "id": "big-buck-bunny-unknown-fact-091",
+        "task": "unknown-fact",
+        "variant": "fresh",
+        "kind": "answer",
+        "path": "model",
+        "text": "Three troublemakers watch him: a brown flying squirrel, a skinny red squirrel with big front teeth, and a round grey chinchilla holding a nut.",
+        "sources": [
+          "n11"
+        ],
+        "leaked": [],
+        "correct": false,
+        "ms": 10.26983400000006
+      },
+      {
+        "id": "big-buck-bunny-unknown-fact-094",
+        "task": "unknown-fact",
+        "variant": "fresh",
+        "kind": "answer",
+        "path": "model",
+        "text": "The bunny stands behind the chinchilla and gives a thumbs up. The chinchilla does not notice.",
+        "sources": [
+          "n25"
+        ],
+        "leaked": [],
+        "correct": false,
+        "ms": 0.9421660000000429
+      },
+      {
+        "id": "big-buck-bunny-unknown-fact-095",
+        "task": "unknown-fact",
+        "variant": "fresh",
+        "kind": "answer",
+        "path": "model",
+        "text": "The bunny stands behind the chinchilla and gives a thumbs up. The chinchilla does not notice.",
+        "sources": [
+          "n25"
+        ],
+        "leaked": [],
+        "correct": false,
+        "ms": 1.0080000000000382
+      },
+      {
+        "id": "g-ground-03",
+        "task": "grounded",
+        "variant": "fresh",
+        "kind": "unknown",
+        "path": "restricted-question",
+        "text": "I'm not sure about that one yet. Try asking another way.",
+        "sources": [],
+        "leaked": [],
+        "correct": false,
+        "ms": 0.6151250000000346
+      },
+      {
+        "id": "g-ground-04",
+        "task": "grounded",
+        "variant": "fresh",
+        "kind": "answer",
+        "path": "model",
+        "text": "I am not sure yet.",
+        "sources": [],
+        "leaked": [],
+        "correct": false,
+        "ms": 0.9423750000000837
+      },
+      {
+        "id": "g-ground-06",
+        "task": "grounded",
+        "variant": "fresh",
+        "kind": "answer",
+        "path": "model",
+        "text": "The flying squirrel sneaks around the tree right behind the bunny's back.",
+        "sources": [
+          "n12"
+        ],
+        "leaked": [],
+        "correct": false,
+        "ms": 0.9948339999999689
+      },
+      {
+        "id": "g-ground-07",
+        "task": "grounded",
+        "variant": "fresh",
+        "kind": "answer",
+        "path": "model",
+        "text": "Three troublemakers watch him: a brown flying squirrel, a skinny red squirrel with big front teeth, and a round grey chinchilla holding a nut.",
+        "sources": [
+          "n11"
+        ],
+        "leaked": [],
+        "correct": false,
+        "ms": 1.0952920000000859
+      },
+      {
+        "id": "g-unknown-03",
+        "task": "unknown-fact",
+        "variant": "fresh",
+        "kind": "answer",
+        "path": "model",
+        "text": "Deep in the forest the bunny gets busy. He carves a stick into a sharp point with a stone.",
+        "sources": [
+          "n19"
+        ],
+        "leaked": [],
+        "correct": false,
+        "ms": 1.1014170000000831
+      },
+      {
+        "id": "g-unknown-04",
+        "task": "unknown-fact",
+        "variant": "fresh",
+        "kind": "answer",
+        "path": "model",
+        "text": "Behind the tree the three troublemakers laugh at the bunny.",
+        "sources": [
+          "n13"
+        ],
+        "leaked": [],
+        "correct": false,
+        "ms": 1.3272499999999354
+      },
+      {
+        "id": "g-unknown-05",
+        "task": "unknown-fact",
+        "variant": "fresh",
+        "kind": "answer",
+        "path": "model",
+        "text": "Deep in the forest the bunny gets busy. He carves a stick into a sharp point with a stone.",
+        "sources": [
+          "n19"
+        ],
+        "leaked": [],
+        "correct": false,
+        "ms": 1.2617079999999987
+      }
+    ],
+    "leaky fake model (always tells the ending)": [
+      {
+        "id": "big-buck-bunny-identify-076",
+        "task": "identify",
+        "variant": "fresh",
+        "kind": "unknown",
+        "path": "model",
+        "text": "I'm not sure about that one yet. Try asking another way.",
+        "sources": [],
+        "leaked": [],
+        "correct": false,
+        "ms": 0.4696250000000646
+      },
+      {
+        "id": "g-ground-03",
+        "task": "grounded",
+        "variant": "fresh",
+        "kind": "unknown",
+        "path": "restricted-question",
+        "text": "I'm not sure about that one yet. Try asking another way.",
+        "sources": [],
+        "leaked": [],
+        "correct": false,
+        "ms": 0.21029199999998127
+      },
+      {
+        "id": "g-ground-04",
+        "task": "grounded",
+        "variant": "fresh",
+        "kind": "unknown",
+        "path": "model",
+        "text": "I'm not sure about that one yet. Try asking another way.",
+        "sources": [],
+        "leaked": [],
+        "correct": false,
+        "ms": 0.4080830000000333
+      },
+      {
+        "id": "g-ground-06",
+        "task": "grounded",
+        "variant": "fresh",
+        "kind": "unknown",
+        "path": "model",
+        "text": "I'm not sure about that one yet. Try asking another way.",
+        "sources": [],
+        "leaked": [],
+        "correct": false,
+        "ms": 0.3537499999999909
+      },
+      {
+        "id": "g-ground-07",
+        "task": "grounded",
+        "variant": "fresh",
+        "kind": "unknown",
+        "path": "model",
+        "text": "I'm not sure about that one yet. Try asking another way.",
+        "sources": [],
+        "leaked": [],
+        "correct": false,
+        "ms": 0.30008299999997234
+      },
+      {
+        "id": "g-unknown-05",
+        "task": "unknown-fact",
+        "variant": "fresh",
+        "kind": "answer",
+        "path": "retrieval",
+        "text": "The three troublemakers stroll along a forest path, not knowing the bunny is hiding in the leaves and watching them.",
+        "sources": [
+          "n23"
+        ],
+        "leaked": [],
+        "correct": false,
+        "ms": 0.5007080000000315
+      }
+    ],
+    "Ollama qwen2.5:3b (local)": [
+      {
+        "id": "big-buck-bunny-unknown-fact-070",
+        "task": "unknown-fact",
+        "variant": "fresh",
+        "kind": "answer",
+        "path": "model",
+        "text": "The purple bird is a small bird that wakes up and stretches.",
+        "sources": [
+          "n01"
+        ],
+        "leaked": [],
+        "correct": false,
+        "ms": 2553.47
+      },
+      {
+        "id": "big-buck-bunny-unknown-fact-074",
+        "task": "unknown-fact",
+        "variant": "fresh",
+        "kind": "answer",
+        "path": "model",
+        "text": "Big Buck Bunny is a grown-up rabbit, not an infant.",
+        "sources": [
+          "n02",
+          "n03"
+        ],
+        "leaked": [],
+        "correct": false,
+        "ms": 2152.9968750000007
+      },
+      {
+        "id": "big-buck-bunny-unknown-fact-087",
+        "task": "unknown-fact",
+        "variant": "fresh",
+        "kind": "answer",
+        "path": "model",
+        "text": "The facts do not mention what the purple butterfly's favorite food is.",
+        "sources": [
+          "n10",
+          "n32",
+          "n33",
+          "n31",
+          "n16",
+          "n17",
+          "n01",
+          "n08"
+        ],
+        "leaked": [],
+        "correct": false,
+        "ms": 1984.8819999999978
+      },
+      {
+        "id": "g-ground-03",
+        "task": "grounded",
+        "variant": "fresh",
+        "kind": "unknown",
+        "path": "restricted-question",
+        "text": "I'm not sure about that one yet. Try asking another way.",
+        "sources": [],
+        "leaked": [],
+        "correct": false,
+        "ms": 0.28004199999850243
+      },
+      {
+        "id": "g-unknown-05",
+        "task": "unknown-fact",
+        "variant": "fresh",
+        "kind": "answer",
+        "path": "retrieval",
+        "text": "The three troublemakers stroll along a forest path, not knowing the bunny is hiding in the leaves and watching them.",
+        "sources": [
+          "n23"
+        ],
+        "leaked": [],
+        "correct": false,
+        "ms": 2405.0319999999992
+      }
+    ]
+  }
+}

@@ -2,6 +2,17 @@
 
 Version 2.0, 16 October 2026. Written by Parth; this file is the source of truth for direction from now on. Where it differs from PROJECT.md, this file wins; PROJECT.md stays the reference for the infrastructure that is kept (pairing, playback, the socket protocol, coding standards).
 
+## 0. 22 October: no AWS, local-first (read this first)
+
+The AWS account was not verified in time, so the submission is built without AWS. This is now the plan, not a workaround:
+
+- **Pip's brain runs on the living room's own hardware.** Text: `qwen2.5:3b` through Ollama (`AI_PROVIDER=ollama`, now the default). Film understanding: whisper.cpp and `qwen3-vl:4b-instruct`, offline (`npm run pipeline`). Nothing about the family leaves the house. Bedrock (Nova 2 Lite) stays as an optional adapter behind the same interface, unverified.
+- **Every film answers through the grounded path.** Big Buck Bunny and Sintel now have reviewed timelines built from their notes (`npm run timeline:notes`), so every answer passes the spoiler boundary, retrieval and the answer gate. The old notes prompt is only a fallback for a film without a timeline.
+- **The innovation is what a small local model cannot get wrong:** knowledge cut at the playback position in code (section 7), "While you were away" catch-ups for one viewer without stopping the room, one action layer for pad, voice, webcam gestures, remote and simulated touch hardware (section 5), and the film understood offline (section 10).
+- **Cut for this submission:** Phase 5 hardware (the simulator stays), Phase 6 recommendations (two films are not a catalogue), Phase 8. Nova numbers are "not measured", never estimated.
+
+Build order to the deadline: (1) grounded timelines and the answer check, (2) "While you were away", (3) the pad on a tablet, (4) docs and devpost, (5) the VVD walk-through and the recording. Evidence: docs/vnext/REPORT-local-first.md.
+
 Parth's notes with it (16 Oct): the Pip Pad, not the remote, controls everything; voice commands for play, pause, plus or minus 10 s, volume, brightness and ambient light; Pip is a button on the pad, invisible during the film and shown only on a pause or when called; one simple, cute mascot in the spirit of Bandhu (RouteMate), not overbearing; quizzes and games are a child-learning function, not the selling point; the selling point is Pip as a helpful intern-like assistant that understands what has happened so far, learns user patterns from datasets, and recommends what to watch for the mood the user chooses; replace Big Buck Bunny with a shorter film now and add a longer one later. References: awesome-smart-tv, the Xiaomi Mi TV Stick recovery project, DeepVideoR1, LLaVA, todbot/touchpads, and an annotation tool called "JEV" (not yet identified).
 
 ## 1. The decision

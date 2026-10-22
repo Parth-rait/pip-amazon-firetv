@@ -2,7 +2,7 @@ import { describe, expect, it } from 'vitest';
 import { parseConfig } from './config.js';
 
 describe('parseConfig', () => {
-  it('applies the defaults from section 7.4 when nothing is set', () => {
+  it('applies the defaults (section 7.4; the local brain since 22 Oct) when nothing is set', () => {
     expect(parseConfig({})).toEqual({
       PORT: 8787,
       PUBLIC_URL: 'http://localhost:8787',
@@ -10,7 +10,7 @@ describe('parseConfig', () => {
       AWS_REGION: 'us-east-1',
       BEDROCK_MODEL_ID: 'us.amazon.nova-2-lite-v1:0',
       AI_ENABLED: true,
-      AI_PROVIDER: 'bedrock',
+      AI_PROVIDER: 'ollama',
       OLLAMA_URL: 'http://localhost:11434',
       OLLAMA_MODEL: 'qwen2.5:3b',
       ANSWER_MEMORY: true,
