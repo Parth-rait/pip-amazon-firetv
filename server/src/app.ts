@@ -5,6 +5,7 @@ import { join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import QRCode from 'qrcode';
 import type { Config } from './config.js';
+import { isLocalRequest, type Hub } from './hub.js';
 import { isValidCode } from './core/codes.js';
 import { toContentView, watchedScenes, type Content } from './film/content.js';
 import { errorFields, log } from './log.js';
@@ -17,6 +18,7 @@ const NOT_PAD_PATHS = /^\/(api|qr|media|socket\.io)(\/|$)/;
 
 export interface AppOptions {
   hasSession?: (code: string) => boolean; // a QR code is drawn only for a live session
+  hub?: Hub; // the Command Center's data (/api/hub), this machine only
   mediaDir?: string; // swapped in tests
   padDir?: string; // the built pad; served only when the folder exists
 }
@@ -38,6 +40,24 @@ export function createApp(config: Config, films: Content[], options: AppOptions 
 
   app.get('/api/films', (_req, res) => {
     res.json(films.map((film) => toContentView(film, config.PUBLIC_URL)));
+  });
+
+  // The Command Center's data: this machine only (hub.ts).
+  app.get('/api/hub', async (req, res) => {
+    if (!options.hub || !isLocalRequest(req)) {
+      res.status(403).json({ ok: false, error: 'local-only' });
+      return;
+    }
+    res.json(await options.hub.snapshot());
+  });
+
+  app.get('/api/hub/films/:id/facts', (req, res) => {
+    const facts = options.hub && isLocalRequest(req) ? options.hub.facts(req.params.id) : null;
+    if (!facts) {
+      res.status(options.hub && isLocalRequest(req) ? 404 : 403).json({ ok: false });
+      return;
+    }
+    res.json(facts);
   });
 
   // Scenes the family has watched: the TV asks with its resume position, never for more.
@@ -79,12 +99,16 @@ export function createApp(config: Config, films: Content[], options: AppOptions 
 
 /**
  * The built pad, with index.html for any other GET, so links like /?code=K7QD open the app; and
- * the browser TV (tv.html, a second TV client on the same protocol) at /tv.
+ * the browser TV (tv.html, a second TV client on the same protocol) at /tv, and the Command
+ * Center (hub.html) at /hub.
  */
 function servePad(app: Express, padDir: string): void {
   if (!existsSync(join(padDir, 'index.html'))) return;
   if (existsSync(join(padDir, 'tv.html'))) {
     app.get('/tv', (_req, res) => res.sendFile(join(padDir, 'tv.html')));
+  }
+  if (existsSync(join(padDir, 'hub.html'))) {
+    app.get('/hub', (_req, res) => res.sendFile(join(padDir, 'hub.html')));
   }
   app.use(express.static(padDir));
   // Express 5 no longer accepts '*' as a path, so the fallback is the last middleware.

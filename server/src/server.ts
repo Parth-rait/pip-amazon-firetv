@@ -3,6 +3,7 @@
 import { createServer, type Server as HttpServer } from 'node:http';
 import { Server } from 'socket.io';
 import { createApp } from './app.js';
+import { createHub } from './hub.js';
 import type { Config } from './config.js';
 import type { AnswerMemory } from './core/ai/answer-memory.js';
 import type { TextModel } from './core/ai/model.js';
@@ -32,6 +33,8 @@ export interface PipServerParts {
   judge?: IntentJudge;
   padDir?: string;
   mediaDir?: string;
+  journalDir?: string; // for the Command Center's view of today's journal
+  resultsDir?: string; // docs/evaluation/results, for its benchmark figures
 }
 
 export interface PipServer {
@@ -45,6 +48,15 @@ export function createPipServer(parts: PipServerParts): PipServer {
   const store = parts.store ?? new InMemorySessionStore();
   const app = createApp(parts.config, parts.films, {
     hasSession: (code) => store.get(code) !== undefined,
+    hub: createHub({
+      config: parts.config,
+      films: parts.films,
+      timelines: parts.timelines,
+      store,
+      journalDir: parts.journalDir,
+      resultsDir: parts.resultsDir,
+      now: parts.now,
+    }),
     padDir: parts.padDir,
     mediaDir: parts.mediaDir,
   });

@@ -86,6 +86,61 @@ export interface SceneView {
   image: string | null; // full URL
 }
 
+/**
+ * The Command Center (/hub): what Pip is, knows and does right now, for the household's own screen.
+ * GET /api/hub answers only on this machine, never through the tunnel.
+ */
+export interface HubSnapshot {
+  brain: {
+    provider: 'ollama' | 'bedrock';
+    model: string;
+    aiEnabled: boolean;
+    reachable: boolean | null; // null when not checked (Bedrock)
+    latencyMs: number | null;
+    timelineReview: 'accepted' | 'candidate';
+  };
+  sessions: {
+    code: string;
+    stage: Stage;
+    film: string | null;
+    positionSec: number | null;
+    paused: boolean | null;
+    tvOnline: boolean;
+    kidsMode: boolean;
+    assistantOpen: boolean;
+    players: { name: string; online: boolean; isHost: boolean }[];
+    device: { volume: number; brightness: number; ambient: AmbientScene };
+  }[];
+  library: {
+    id: string;
+    title: string;
+    durationSec: number;
+    poster: string | null;
+    credit: string;
+    tags: string[];
+    facts: number; // accepted facts Pip answers from
+    candidates: number; // facts waiting for review
+    characters: number;
+    scenes: number;
+    benchmark: { leaks: number; probes: number; answered: number; answerable: number } | null;
+  }[];
+  memory: {
+    journalOn: boolean;
+    eventsToday: number;
+    byType: Record<string, number>;
+    recent: { at: string; type: string; source: string; film: string | null }[];
+  };
+  settings: Record<string, string>;
+}
+
+/** One reviewed fact, for the Command Center's Library (it holds the whole film: spoilers). */
+export interface HubFact {
+  atSec: number;
+  revealSec: number;
+  text: string;
+  review: string;
+}
+
 /** What the TV's video player is doing. The TV app is the only writer. */
 export interface Playback {
   contentId: string;

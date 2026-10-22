@@ -48,6 +48,7 @@ export interface SessionStore {
   create(code: string, tvKey: string, tvSocketId: string, now: number): Session;
   get(code: string): Session | undefined;
   remove(code: string): void;
+  all(): Session[]; // every live session, for the Command Center
   sweep(now: number): string[]; // removes idle sessions (isIdle); returns their codes
 }
 
@@ -107,6 +108,10 @@ export class InMemorySessionStore implements SessionStore {
 
   remove(code: string): void {
     this.sessions.delete(code);
+  }
+
+  all(): Session[] {
+    return [...this.sessions.values()];
   }
 
   sweep(now: number): string[] {

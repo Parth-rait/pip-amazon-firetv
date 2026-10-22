@@ -83,6 +83,8 @@ if (config.INTENT_JUDGE === 'typesafe' && !judge) {
 }
 
 const { httpServer } = createPipServer({
+  journalDir: config.JOURNAL ? JOURNAL_DIR : undefined,
+  resultsDir: fileURLToPath(new URL('../../docs/evaluation/results', import.meta.url)),
   config,
   films,
   timelines,
