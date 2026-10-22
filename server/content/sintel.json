@@ -391,7 +391,19 @@
           "atSec": 622,
           "text": "It is Scales, all grown up."
         }
-      ]
+      ],
+      "sameAs": {
+        "id": "scales",
+        "atSec": 622,
+        "terms": [
+          "big dragon",
+          "dragon in the cave",
+          "cave dragon",
+          "huge dragon",
+          "grown-up dragon",
+          "adult dragon"
+        ]
+      }
     },
     {
       "id": "young-dragon",

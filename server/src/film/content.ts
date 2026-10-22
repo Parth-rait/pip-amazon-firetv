@@ -43,6 +43,16 @@ const characterSchema = z.object({
   id: slug,
   name: z.string().min(1).max(40),
   aliases: z.array(z.string().min(2).max(40)).max(6).optional(), // other words for them, for Ask Pip
+  // A twist of identity: this character turns out to be another one, revealed at atSec. Until then
+  // a made-up story may not put the two together in one sentence (Parallel Stories' guard). terms:
+  // how a story might refer to this character.
+  sameAs: z
+    .object({
+      id: slug,
+      atSec: z.number().min(0),
+      terms: z.array(z.string().min(2).max(40)).min(1).max(8),
+    })
+    .optional(),
   image: mediaUrl.optional(),
   facts: z
     .array(z.object({ atSec: z.number().min(0), text: z.string().min(1).max(160) }))

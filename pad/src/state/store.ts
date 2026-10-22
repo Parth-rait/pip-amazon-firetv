@@ -1,5 +1,12 @@
 // The pad's state: a reducer with no side effects, so it is easy to test (PROJECT.md section 3.3).
-import type { JoinResult, PipMissed, PipSay, Playback, SessionView } from '../shared/protocol';
+import type {
+  BranchView,
+  JoinResult,
+  PipMissed,
+  PipSay,
+  Playback,
+  SessionView,
+} from '../shared/protocol';
 
 export type Connection = 'connecting' | 'online' | 'offline';
 export type JoinFailure = Extract<JoinResult, { ok: false }>['reason'];
@@ -20,6 +27,7 @@ export interface PadState {
   playbackAt: number; // when the TV's latest playback report arrived (ms), for the progress line
   say: PipSay | null; // Pip's latest answer to me
   missed: PipMissed | null; // "While you were away": what I missed, until I close it
+  branch: BranchView | null; // Parallel Stories: the branch I am exploring, if any
   chips: { kind: ChipKind; items: string[] };
   joinError: JoinFailure | null;
   lookingForTv: boolean; // a saved-code rejoin is retrying
@@ -36,6 +44,7 @@ export type PadAction =
   | { type: 'chips-expired' }
   | { type: 'missed'; missed: PipMissed }
   | { type: 'missed-done' }
+  | { type: 'branch'; ownerId: string; branch: BranchView | null }
   | { type: 'leave' };
 
 export function initialState(myId: string): PadState {
@@ -47,6 +56,7 @@ export function initialState(myId: string): PadState {
     playbackAt: 0,
     say: null,
     missed: null,
+    branch: null,
     chips: { kind: 'starter', items: STARTER_CHIPS },
     joinError: null,
     lookingForTv: false,
@@ -103,6 +113,9 @@ export function reducer(state: PadState, action: PadAction): PadState {
       return { ...state, missed: action.missed };
     case 'missed-done':
       return { ...state, missed: null };
+    case 'branch':
+      // Everyone's pad hears a branch change; only its owner draws the map.
+      return action.ownerId === state.myId ? { ...state, branch: action.branch } : state;
     case 'leave':
       return { ...initialState(state.myId), connection: state.connection };
   }

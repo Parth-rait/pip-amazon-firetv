@@ -193,7 +193,8 @@ function Overview({ hub }: { hub: HubSnapshot }) {
             keeps playing.
           </li>
           <li>
-            <strong>What if…?</strong> A made-up version of the story, labelled as Pip&apos;s.
+            <strong>Parallel Stories.</strong> “What if…?” splits the film where you asked; Pip
+            writes its own version, labelled, and never sees the film past the split.
           </li>
           <li>
             <strong>Control without the remote.</strong> Pip Pad, voice, the TV remote, and webcam

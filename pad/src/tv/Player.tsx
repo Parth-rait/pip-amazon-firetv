@@ -7,6 +7,7 @@
 import { useCallback, useEffect, useLayoutEffect, useRef, useState } from 'react';
 import { Pip } from '../components/Pip';
 import type {
+  BranchView,
   ContentView,
   Playback,
   ReactionKind,
@@ -23,6 +24,7 @@ const REPORT_EVERY_MS = 5000;
 const CREDIT_MS = 4000;
 const CHROME_MS = 3500;
 const ANSWER_MS = 8000;
+const TV_PIP_EVENTS = 5; // Pip's version on the TV: the latest few; the pad has them all
 const STORY_MS = 25000; // a made-up "what if" story takes longer to read
 const TOAST_MS = 1600;
 const SEEK_SEC = 10;
@@ -42,6 +44,7 @@ export function Player({
   view,
   content,
   say,
+  branch,
   reactions,
   fromStart,
   startAt,
@@ -52,6 +55,7 @@ export function Player({
   view: SessionView;
   content: ContentView;
   say: SayEntry | null;
+  branch: BranchView | null; // Parallel Stories: compared in full on pause and at the end
   reactions: ReactionEntry[];
   fromStart: boolean; // the family chose Start over
   startAt: number | null; // the family picked a scene: start there
@@ -310,20 +314,6 @@ export function Player({
     poke();
   };
 
-  useRemote((key) => {
-    if (!activeRef.current) return;
-    unmute(); // any key counts as the click a browser wants before it plays sound
-    if (report.ended || failed) {
-      if (key === 'select' || key === 'back') onHome();
-      return;
-    }
-    if (key === 'select' || key === 'playPause') toggle();
-    else if (key === 'left' || key === 'rewind') jump(-SEEK_SEC);
-    else if (key === 'right' || key === 'forward') jump(SEEK_SEC);
-    else if (key === 'up' || key === 'down') poke();
-    else if (key === 'back') onHome();
-  });
-
   // An answer shows for 8 s; Pip shows with it.
   const [answeredId, setAnsweredId] = useState<number | null>(null);
   useEffect(() => {
@@ -335,6 +325,37 @@ export function Player({
     return () => clearTimeout(t);
   }, [say]);
   const answer = say && say.id !== answeredId ? say : null;
+
+  // Parallel Stories: in full only on pause or at the end, and only for this film. The server sends
+  // the film after the split only as far as it was watched; Down hides the comparison.
+  const branchKey = branch ? `${branch.id}:${branch.pip.length}:${branch.after.length}` : null;
+  const [hiddenBranch, setHiddenBranch] = useState<string | null>(null);
+  const isStopped = (report.paused || report.ended) && loaded;
+  const comparison =
+    branch && branch.contentId === content.id && isStopped && hiddenBranch !== branchKey
+      ? branch
+      : null;
+  const dismiss = () => {
+    if (comparison) setHiddenBranch(branchKey);
+    else if (say) setAnsweredId(say.id);
+  };
+
+  useRemote((key) => {
+    if (!activeRef.current) return;
+    unmute(); // any key counts as the click a browser wants before it plays sound
+    if (report.ended || failed) {
+      if (key === 'down' && comparison) return dismiss();
+      if (key === 'select' || key === 'back') onHome();
+      return;
+    }
+    if (key === 'select' || key === 'playPause') toggle();
+    else if (key === 'left' || key === 'rewind') jump(-SEEK_SEC);
+    else if (key === 'right' || key === 'forward') jump(SEEK_SEC);
+    else if (key === 'down' && (answer || comparison))
+      dismiss(); // Down hides Pip's story
+    else if (key === 'up' || key === 'down') poke();
+    else if (key === 'back') onHome();
+  });
 
   const { paused, ended } = report;
   const isAsked = view.assistant.open;
@@ -427,7 +448,9 @@ export function Player({
             </div>
           </div>
 
-          {(ended || failed) && (
+          {comparison && <Comparison branch={comparison} />}
+
+          {(ended || failed) && !comparison && (
             <div className="end-card">
               <p className="end-title">
                 {failed
@@ -490,19 +513,20 @@ export function Player({
             </div>
           )}
 
-          {isPipShown && (
+          {isPipShown && !comparison && (
             <div className={`corner${isChromeShown ? ' is-raised' : ''}`}>
               {answer ? (
                 <Bubble
                   key={`say-${answer.id}`}
                   above={
                     answer.say.source === 'imagined'
-                      ? `${answer.say.askedByName}'s what if, made up by Pip`
-                      : `${answer.say.askedByName} asked: ${answer.say.question}`
+                      ? `Pip's version · made up for ${answer.say.askedByName} · Down to hide`
+                      : answer.say.source === 'template'
+                        ? `${answer.say.askedByName} asked: ${answer.say.question}`
+                        : `The film · ${answer.say.askedByName} asked: ${answer.say.question}`
                   }
                   text={answer.say.text}
                   tone="accent"
-                  isStory={answer.say.source === 'imagined'}
                 />
               ) : hint && view.pip !== 'thinking' ? (
                 <Bubble key={hint} text={hint} />
@@ -513,6 +537,52 @@ export function Player({
         </div>
       )}
     </div>
+  );
+}
+
+/** The two stories side by side: the film to the split, then Pip's version and the film after it. */
+function Comparison({ branch }: { branch: BranchView }) {
+  return (
+    <section className="comparison" aria-label="Parallel story">
+      <p className="eyebrow eyebrow--accent">
+        {branch.ownerName}&apos;s parallel story · split at {clock(branch.splitSec)}
+      </p>
+      <h2 className="comparison-title">{branch.premise}</h2>
+      <div className="comparison-lanes">
+        <ol className="tv-lane">
+          <li className="tv-lane__label">The film</li>
+          {branch.film.map((line) => (
+            <li key={`f-${line.atSec}`}>
+              <span className="tv-lane__time">{clock(line.atSec)}</span> {line.text}
+            </li>
+          ))}
+          {branch.after.map((line) => (
+            <li key={`a-${line.atSec}`} className="tv-lane__after">
+              <span className="tv-lane__time">{clock(line.atSec)}</span> {line.text}
+            </li>
+          ))}
+          {branch.unseenAfter > 0 && (
+            <li className="tv-lane__hidden">
+              After {clock(branch.splitSec)}: you haven&apos;t seen this yet.
+            </li>
+          )}
+        </ol>
+        <ol className="tv-lane tv-lane--pip">
+          <li className="tv-lane__label">Pip&apos;s version · made up</li>
+          {branch.pip.length > TV_PIP_EVENTS && (
+            <li className="tv-lane__hidden">
+              {branch.pip.length - TV_PIP_EVENTS} earlier on {branch.ownerName}&apos;s Pip Pad
+            </li>
+          )}
+          {branch.pip.slice(-TV_PIP_EVENTS).map((event) => (
+            <li key={event.id}>{event.text}</li>
+          ))}
+        </ol>
+      </div>
+      <p className="caption">
+        <kbd>OK</kbd> play <span className="dot">·</span> <kbd>Down</kbd> hide
+      </p>
+    </section>
   );
 }
 

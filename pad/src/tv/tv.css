@@ -627,6 +627,76 @@ ul {
   gap: 10px;
 }
 
+/* Parallel Stories on pause or at the end: the film's lane solid, Pip's dashed Electric. */
+.comparison {
+  position: absolute;
+  left: var(--tv-safe-x);
+  right: var(--tv-safe-x);
+  top: 130px;
+  max-height: calc(100% - 130px - var(--tv-safe-y));
+  overflow: hidden;
+  z-index: 15;
+  display: grid;
+  gap: 20px;
+  padding: 40px 48px;
+  border-radius: var(--radius);
+  border: 1px solid var(--border);
+  background: rgb(5 9 20 / 0.94);
+  animation: tv-fade var(--motion-fast);
+}
+
+.comparison-title {
+  font-size: 44px;
+  font-weight: 700;
+  color: var(--ice);
+}
+
+.comparison-lanes {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 56px;
+}
+
+.tv-lane {
+  display: grid;
+  align-content: start;
+  gap: 12px;
+  padding-left: 28px;
+  border-left: 5px solid var(--text-muted);
+  font-size: 26px;
+  line-height: 1.35;
+}
+
+.tv-lane--pip {
+  border-left: 5px dashed var(--accent);
+}
+
+.tv-lane__label {
+  font-size: var(--tv-caption);
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+
+.tv-lane--pip .tv-lane__label {
+  color: var(--accent);
+}
+
+.tv-lane__time {
+  color: var(--text-muted);
+  font-variant-numeric: tabular-nums;
+}
+
+.tv-lane__after {
+  opacity: 0.75;
+}
+
+.tv-lane__hidden {
+  color: var(--text-muted);
+  font-style: italic;
+}
+
 /* Pip's corner, the speech bubble and greetings */
 
 .corner {

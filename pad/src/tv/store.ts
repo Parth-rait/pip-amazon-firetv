@@ -1,6 +1,13 @@
 // The browser TV's state: the Vega TV's reducer (tv/src/state/tv-store.ts) with the films list
 // and the floating reactions added. No side effects, so it is easy to test.
-import type { ContentView, PipHello, PipSay, ReactionKind, SessionView } from '../shared/protocol';
+import type {
+  BranchView,
+  ContentView,
+  PipHello,
+  PipSay,
+  ReactionKind,
+  SessionView,
+} from '../shared/protocol';
 
 /** A pip:say with a sequence number, so the same answer twice still shows twice. */
 export interface SayEntry {
@@ -29,6 +36,7 @@ export interface TvState {
   say: SayEntry | null;
   greet: GreetEntry | null;
   reactions: ReactionEntry[];
+  branch: BranchView | null; // Parallel Stories: the room's latest open branch
 }
 
 export type TvAction =
@@ -41,7 +49,8 @@ export type TvAction =
   | { type: 'say'; say: PipSay }
   | { type: 'greet'; hello: PipHello }
   | { type: 'react'; kind: ReactionKind }
-  | { type: 'reaction-done'; id: number };
+  | { type: 'reaction-done'; id: number }
+  | { type: 'branch'; ownerId: string; branch: BranchView | null };
 
 const MAX_REACTIONS = 12;
 
@@ -54,6 +63,7 @@ export const initialTvState: TvState = {
   say: null,
   greet: null,
   reactions: [],
+  branch: null,
 };
 
 export function tvReducer(state: TvState, action: TvAction): TvState {
@@ -78,6 +88,10 @@ export function tvReducer(state: TvState, action: TvAction): TvState {
       return { ...state, films: action.films, filmsFailed: false };
     case 'films-failed':
       return { ...state, filmsFailed: true };
+    case 'branch':
+      // A closed branch disappears only if it is the one showing.
+      if (action.branch) return { ...state, branch: action.branch };
+      return state.branch?.ownerId === action.ownerId ? { ...state, branch: null } : state;
     case 'say':
       return { ...state, say: { id: (state.say?.id ?? 0) + 1, say: action.say } };
     case 'greet':

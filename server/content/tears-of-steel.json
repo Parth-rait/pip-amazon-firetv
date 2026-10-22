@@ -357,7 +357,17 @@
           "atSec": 226,
           "text": "The others call him Thom: he is Thom, forty years older."
         }
-      ]
+      ],
+      "sameAs": {
+        "id": "thom",
+        "atSec": 226,
+        "terms": [
+          "old man",
+          "grey-haired man",
+          "grey-haired old man",
+          "older man"
+        ]
+      }
     },
     {
       "id": "giant-robot",
@@ -371,7 +381,18 @@
           "atSec": 383,
           "text": "It speaks with Celia's voice and memories."
         }
-      ]
+      ],
+      "sameAs": {
+        "id": "celia",
+        "atSec": 383,
+        "terms": [
+          "giant robot",
+          "big robot",
+          "robot's voice",
+          "giant robotic hand",
+          "huge robot"
+        ]
+      }
     }
   ],
   "predictions": []

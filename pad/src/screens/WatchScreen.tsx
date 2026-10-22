@@ -4,6 +4,7 @@
 import { useEffect, useRef, useState } from 'react';
 import { AskPip } from '../components/AskPip';
 import { MissedCard } from '../components/MissedCard';
+import { StoryMap } from '../components/StoryMap';
 import { NowPlaying } from '../components/NowPlaying';
 import { PipButton, PipSheet } from '../components/PipSheet';
 import { PredictionCard } from '../components/PredictionCard';
@@ -18,6 +19,7 @@ import type {
   InputResult,
   InputSource,
   PipInputEvent,
+  BranchView,
   PipMissed,
   PipSay,
   ReactionKind,
@@ -46,6 +48,8 @@ interface Props {
   chips: { kind: ChipKind; items: string[] };
   say: PipSay | null;
   missed: PipMissed | null;
+  branch: BranchView | null;
+  onBackToFilm: () => void;
   onMissedDone: () => void;
   onCommand: (command: HostCommand) => void;
   onInput: (event: PipInputEvent, source: InputSource) => Promise<InputResult | null>;
@@ -116,6 +120,15 @@ export function WatchScreen(props: Props) {
       />
 
       {props.missed && <MissedCard missed={props.missed} onDone={props.onMissedDone} />}
+
+      {props.branch && props.branch.contentId === view.content?.id && (
+        <StoryMap
+          branch={props.branch}
+          isBusy={view.pip === 'thinking'}
+          onAsk={(question) => void props.onAsk(question, 'next')}
+          onBackToFilm={props.onBackToFilm}
+        />
+      )}
 
       <div className="watch-grid">
         <div className="watch-grid__main">

@@ -8,6 +8,8 @@ import {
   closeBranch,
   continueBranch,
   createBranch,
+  identityGuards,
+  identityVerdict,
   parseEvents,
   splitReply,
   toBranchView,
@@ -150,17 +152,39 @@ describe('Parallel Stories: the branch engine', () => {
     });
   });
 
-  it('withholds a branch that names something the film has not reached', async () => {
+  it('withholds a branch that names a character the film has not shown yet', async () => {
     const s = state();
-    const term = permittedEvidence(timeline, 230, 'accepted').restrictedTerms[0] ?? 'heartbroken';
+    // At 1:40 the old man and the giant robot have not appeared.
     const leak = JSON.stringify({
-      events: [`Suddenly ${term} appears.`, 'Then more.', 'The end comes.'],
+      events: ['Suddenly the giant robot appears.', 'Everyone runs.', 'The end comes.'],
     });
     const m = model(leak);
-    const out = await createBranch(req(s, 230, 'What if Thom never left?'), deps(m));
+    const out = await createBranch(req(s, 100, 'What if Thom never left?'), deps(m));
     expect(out).toMatchObject({ text: LINES.imagineWithheld, branch: null });
+    expect(out.log.withheld).toMatch(
+      /restricted-term:the giant robot|restricted-term:giant robot/i,
+    );
     expect(m.complete).toHaveBeenCalledTimes(2);
     expect(s.branches).toEqual([]);
+  });
+
+  it('lets a story use everyday words the film says later; only names are held back', async () => {
+    const s = state();
+    const out = await createBranch(
+      req(s, 230, 'What if Thom never left?'),
+      deps(
+        model(
+          JSON.stringify({
+            events: [
+              'It is quiet on the bridge.',
+              'They are scared but stay.',
+              'Time passes slowly.',
+            ],
+          }),
+        ),
+      ),
+    );
+    expect(out.branch?.events).toHaveLength(3);
   });
 
   it('survives malformed output and a failing model without making a branch', async () => {
@@ -230,5 +254,37 @@ describe('Parallel Stories: the branch engine', () => {
     expect(branchIntent('What happens next?', 'future', false)).toBeNull();
     clearBranches(s);
     expect(s).toMatchObject({ branches: [], activeBranch: {} });
+  });
+
+  describe('Parallel Stories: identity twists', () => {
+    const sintel = loadFilms(CONTENT).find((f) => f.id === 'sintel');
+    if (!sintel) throw new Error('content/sintel.json is missing');
+
+    it('holds back a line that puts both sides of an unrevealed twist together', () => {
+      // The line the local model wrote 7 s before Sintel's reveal, in the benchmark of 22 Oct.
+      const leak =
+        "Fighting back tears, Sintel whispers: 'I know you, big dragon. You're my friend Scales, from the time I was a little girl.";
+      const before = identityGuards(sintel.characters, 625);
+      expect(identityVerdict(leak, before)).toBe('identity:cave-dragon=scales');
+      // Each side alone is fine: the big dragon in one event, Scales in another.
+      expect(identityVerdict('The big dragon roars and the cave shakes.', before)).toBeNull();
+      expect(identityVerdict('Sintel thinks of Scales as a baby.', before)).toBeNull();
+      expect(identityGuards(sintel.characters, 640)).toEqual([]); // seen: no longer a twist
+    });
+
+    it('withholds a branch that tells who the old man is before the film does', async () => {
+      const s = state();
+      const m = model(
+        JSON.stringify({
+          events: ['The old man smiles: I am Thom, forty years on.', 'They talk.', 'Night falls.'],
+        }),
+      );
+      const out = await createBranch(
+        req(s, 200, 'What if we found out who the old man really is?'),
+        deps(m),
+      );
+      expect(out).toMatchObject({ text: LINES.imagineWithheld, branch: null });
+      expect(out.log.withheld).toBe('identity:old-man=thom');
+    });
   });
 });

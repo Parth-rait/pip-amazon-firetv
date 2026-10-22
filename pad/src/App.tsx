@@ -96,6 +96,8 @@ export function App() {
           chips={state.chips}
           say={state.say}
           missed={state.missed}
+          branch={state.branch}
+          onBackToFilm={() => socket.connected && socket.emit('pad:branch', { action: 'close' })}
           onMissedDone={() => dispatch({ type: 'missed-done' })}
           onCommand={sendHost}
           onInput={input}

@@ -42,6 +42,7 @@ export function TvApp() {
     socket.on('pip:say', (say) => dispatch({ type: 'say', say }));
     socket.on('pip:hello', (hello) => dispatch({ type: 'greet', hello }));
     socket.on('pip:react', (r) => dispatch({ type: 'react', kind: r.kind }));
+    socket.on('pip:branch', ({ ownerId, branch }) => dispatch({ type: 'branch', ownerId, branch }));
     if (socket.connected) onConnect();
     else socket.connect();
     return () => {
@@ -51,6 +52,7 @@ export function TvApp() {
       socket.off('pip:say');
       socket.off('pip:hello');
       socket.off('pip:react');
+      socket.off('pip:branch');
       socket.disconnect();
     };
   }, [socket]);
@@ -121,6 +123,7 @@ export function TvApp() {
           view={view}
           content={view.content}
           say={state.say}
+          branch={state.branch}
           reactions={state.reactions}
           fromStart={fromStartId === view.content.id}
           startAt={startAt?.id === view.content.id ? startAt.sec : null}

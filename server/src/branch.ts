@@ -8,6 +8,7 @@ import { cleanText, stripMarkdown } from './core/ai/clean-text.js';
 import type { TextModel } from './core/ai/model.js';
 import { permittedEvidence, type EvidenceSet } from './core/context/boundary.js';
 import { checkAnswer } from './core/context/check-answer.js';
+import { containsTerm } from './core/context/text.js';
 import {
   isUsable,
   type ReviewPolicy,
@@ -27,6 +28,7 @@ const VIEW_AFTER_EVENTS = 4; // watched canon events shown after the split
 const ATTEMPTS = 2; // a withheld or malformed reply is tried once more
 const TIMEOUT_MS = 30_000;
 const EVENT_MAX_CHARS = 240;
+const REVEAL_LAG_SEC = 10; // as in pipeline/from-notes.ts: a beat counts once it is over
 
 export interface BranchEvent {
   id: string; // assigned by code: <branch id>-e<n>
@@ -160,6 +162,7 @@ export async function writeEvents(
   timeline: Timeline,
   range: { min: number; max: number },
   deps: StoryDeps,
+  guards: IdentityGuard[] = [],
 ): Promise<StoryOutcome> {
   const startedAt = deps.now();
   let last: StoryOutcome = { ok: false, reason: 'unparsed', detail: null };
@@ -186,7 +189,7 @@ export async function writeEvents(
       continue;
     }
     const blocked = events
-      .map((text) => storyVerdict(text, evidence, timeline))
+      .map((text) => storyVerdict(text, evidence, timeline) ?? identityVerdict(text, guards))
       .find((v) => v !== null);
     if (blocked) {
       last = { ok: false, reason: 'withheld', detail: blocked };
@@ -197,33 +200,93 @@ export async function writeEvents(
   return last;
 }
 
-/** Null when a made-up line passes the spoiler rules at this evidence; otherwise why not. */
+/**
+ * Null when a made-up line passes the spoiler rules at this evidence; otherwise why not. A story
+ * may invent, and it uses everyday words a factual answer would not ("quiet", "scared"), so for
+ * stories the word check keeps only names: characters not seen yet and names not heard yet. The
+ * main protection is upstream: nothing after the split is in the prompt.
+ */
 export function storyVerdict(
   text: string,
   evidence: EvidenceSet,
   timeline: Timeline,
 ): string | null {
+  const names = storyLexicon(timeline);
+  const lexicon = new Set(names.map((n) => n.toLowerCase()));
   const verdict = checkAnswer(
     text,
     evidence.facts.map((f) => f.id),
-    evidence,
-    storyLexicon(timeline),
+    {
+      ...evidence,
+      restrictedTerms: evidence.restrictedTerms.filter((t) => lexicon.has(t.toLowerCase())),
+    },
+    names,
   );
   return verdict.ok ? null : `${verdict.reason}:${verdict.detail}`;
 }
 
+/** Every name and alias a character has, and the labels they go by before they are named. */
 function storyLexicon(timeline: Timeline): string[] {
   return [
-    ...new Set([
-      ...timeline.entities.flatMap((e) => [e.name, ...e.aliases, ...(e.label ? [e.label] : [])]),
-      ...timeline.facts.flatMap((f) => f.spoilerTerms),
-    ]),
+    ...new Set(
+      timeline.entities.flatMap((e) => [e.name, ...e.aliases, ...(e.label ? [e.label] : [])]),
+    ),
   ];
+}
+
+/**
+ * A twist of identity not revealed by the split ("the big dragon is Scales"): a story sentence that
+ * names both sides is withheld. Words alone cannot catch this, so each film declares its identity
+ * reveals (content characters' `sameAs`), and the guard holds until the reveal has been seen.
+ */
+export interface IdentityGuard {
+  label: string; // "cave-dragon=scales", for the log
+  these: string[]; // how a story may refer to the one character
+  those: string[]; // the other one's name and aliases
+}
+
+type Character = {
+  id: string;
+  name: string;
+  aliases?: string[];
+  sameAs?: { id: string; atSec: number; terms: string[] };
+};
+
+/** The identity reveals still ahead at `splitSec` (each counts once its beat is over). */
+export function identityGuards(characters: Character[], splitSec: number): IdentityGuard[] {
+  return characters.flatMap((c) => {
+    const twist = c.sameAs;
+    if (!twist || twist.atSec + REVEAL_LAG_SEC <= splitSec) return [];
+    const other = characters.find((o) => o.id === twist.id);
+    if (!other) return [];
+    return [
+      {
+        label: `${c.id}=${other.id}`,
+        these: [...twist.terms, c.name.replace(/^the\s+/i, ''), ...(c.aliases ?? [])],
+        those: [other.name, ...(other.aliases ?? [])],
+      },
+    ];
+  });
+}
+
+/**
+ * Null when no line names both sides of an unrevealed identity; otherwise which one. A line is
+ * one event or one answer (one or two sentences): the twist the benchmark caught spanned two
+ * ("...big dragon. You're my friend Scales"), so a sentence is too small a window.
+ */
+export function identityVerdict(text: string, guards: IdentityGuard[]): string | null {
+  for (const guard of guards) {
+    const both =
+      guard.these.some((t) => containsTerm(text, t)) &&
+      guard.those.some((t) => containsTerm(text, t));
+    if (both) return `identity:${guard.label}`;
+  }
+  return null;
 }
 
 export interface BranchRequest {
   state: BranchState;
-  film: { id: string; title: string; premise: string };
+  film: { id: string; title: string; premise: string; characters?: Character[] };
   timeline: Timeline;
   ownerId: string;
   ownerName: string;
@@ -280,6 +343,7 @@ export async function createBranch(req: BranchRequest, deps: StoryDeps): Promise
     req.timeline,
     { min: 3, max: 5 },
     deps,
+    identityGuards(req.film.characters ?? [], req.positionSec),
   );
   if (!outcome.ok) return failed(outcome);
   req.state.branchSeq += 1;
@@ -334,6 +398,7 @@ export async function continueBranch(
     req.timeline,
     { min: 1, max: 3 },
     deps,
+    identityGuards(req.film.characters ?? [], branch.splitSec),
   );
   if (!outcome.ok) return failed(outcome);
   const added = events(branch, outcome.events);
@@ -364,6 +429,7 @@ export async function changeBranch(
     req.timeline,
     { min: 3, max: 5 },
     deps,
+    identityGuards(req.film.characters ?? [], branch.splitSec),
   );
   if (!outcome.ok) return failed(outcome);
   branch.premise = req.question;
@@ -397,7 +463,10 @@ export async function whyInBranch(
       timeoutMs: TIMEOUT_MS,
     });
     const text = cleanText(raw);
-    const blocked = text ? storyVerdict(text, evidence, req.timeline) : 'empty';
+    const blocked = text
+      ? (storyVerdict(text, evidence, req.timeline) ??
+        identityVerdict(text, identityGuards(req.film.characters ?? [], branch.splitSec)))
+      : 'empty';
     if (blocked) return failed({ ok: false, reason: 'withheld', detail: blocked });
     return {
       text,

@@ -106,3 +106,28 @@ describe('reducer', () => {
     expect(left.connection).toBe('online');
   });
 });
+
+describe('Parallel Stories on the pad', () => {
+  const branch = {
+    id: 'b1',
+    ownerId: ME,
+    ownerName: 'Sam',
+    contentId: 'film',
+    splitSec: 230,
+    premise: 'What if?',
+    changes: ['What if?'],
+    film: [],
+    pip: [{ id: 'b1-e1', order: 1, text: 'Pip event.' }],
+    after: [],
+    unseenAfter: 3,
+    open: true,
+  };
+
+  it('keeps only my own branch, and clears it when it closes', () => {
+    const mine = reducer(joined(), { type: 'branch', ownerId: ME, branch });
+    expect(mine.branch?.id).toBe('b1');
+    const theirs = reducer(joined(), { type: 'branch', ownerId: 'someone-else', branch });
+    expect(theirs.branch).toBeNull();
+    expect(reducer(mine, { type: 'branch', ownerId: ME, branch: null }).branch).toBeNull();
+  });
+});

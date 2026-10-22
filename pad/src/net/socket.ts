@@ -89,6 +89,7 @@ export function connectPad(socket: PadSocket, playerId: string, dispatch: (a: Pa
   socket.on('session:view', (view) => dispatch({ type: 'view', view, at: Date.now() }));
   socket.on('pip:say', (say) => dispatch({ type: 'say', say }));
   socket.on('pip:missed', (missed) => dispatch({ type: 'missed', missed }));
+  socket.on('pip:branch', ({ ownerId, branch }) => dispatch({ type: 'branch', ownerId, branch }));
   socket.connect();
 
   return {

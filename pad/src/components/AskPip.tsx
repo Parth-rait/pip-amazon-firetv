@@ -68,8 +68,12 @@ export function AskPip(props: Props) {
           <p
             className={`bubble bubble--pip${say?.source === 'imagined' && !isWaiting ? ' bubble--story' : ''}`}
           >
-            {say?.source === 'imagined' && !isWaiting && (
-              <span className="bubble__tag">What if, made up by Pip</span>
+            {say && !isWaiting && sourceLabel(say.source) && (
+              <span
+                className={`bubble__tag${say.source === 'imagined' ? '' : ' bubble__tag--film'}`}
+              >
+                {sourceLabel(say.source)}
+              </span>
             )}
             {isWaiting ? (
               <span className="typing" aria-label="Pip is thinking">
@@ -104,4 +108,11 @@ export function AskPip(props: Props) {
       />
     </section>
   );
+}
+
+/** Every answer says whose it is: the film's, or Pip's made-up version. */
+function sourceLabel(source: PipSay['source']): string | null {
+  if (source === 'imagined') return "Pip's version · made up";
+  if (source === 'timeline' || source === 'ai') return 'The film';
+  return null;
 }
