@@ -15,7 +15,7 @@ When someone asks "wait, who is that?" or comes back from the kitchen asking "wh
 - **Ask without spoilers.** Anyone can ask Pip from their Pip Pad (a phone or a tablet) by tapping, typing or speaking: "Who is that?", "What just happened?", "Why did she do that?". Pip answers in one or two sentences, on the TV and the asker's pad, from what the film has shown so far. Questions about what happens later ("Does she find the dragon?", "How does it end?") get "No spoilers from me".
 - **While you were away.** If someone's pad goes to sleep or drops off during the film, or someone joins halfway, Pip catches up only that person when they're back. Their pad gets up to four moments they missed, with times, and nothing after the current second. The TV never pauses and nobody else is interrupted.
 - **Quiet by default.** During the film, Pip is hidden on the TV. It appears only when someone asks, on pause, or when called with the Pip button. Quizzes, guesses and reactions for children are an opt-in "Kids games" switch, never the default.
-- **One remote for everything, without the remote.** Play, pause, ±10 s, volume, brightness and (simulated) lights come from the host's pad, from voice ("pause", "back 10", "louder"), from **hand gestures in front of a webcam** (palm, fist, palm plays or pauses; pointing seeks; a pinch changes the volume; a held fist calls Pip) or from the TV remote. They all go through one action router, and the TV confirms each command before the pad says it happened. None of them calls a model.
+- **One remote for everything, without the remote.** Play, pause, ±10 s, volume, brightness and (simulated) lights come from the host's pad, from voice ("pause", "back 10", "louder") or from the TV remote. They all go through one action router, and the TV confirms each command before the pad says it happened. None of them calls a model. As an experiment, we also plugged in **hand gestures from a webcam** through the same router (palm, fist, palm plays or pauses; pointing seeks); it works, but it's a playground for the input layer, not the product.
 - **A Fire TV style TV.** The Vega OS app, and a browser version of the same TV client at `/tv` for laptops: a home screen with the featured film and rows, the Pip Pad QR code and code, and a player with a transport bar.
 
 ## How we built it
@@ -26,7 +26,7 @@ When someone asks "wait, who is that?" or comes back from the kitchen asking "wh
 - **TV:** Vega OS app in React Native for Vega (RN 0.83, SDK 0.24): W3C Media API in MP4 URL mode, Vega Media Controls for the remote, `FocusManager` for the film cards.
 - **Pip Pad:** a React and Vite web app with no install. On a tablet, Pip sits beside the remote; on a phone, it's one button.
 - **Server:** one Node.js 22 process (Express 5, Socket.IO 4.8). It owns the session and sends every screen a full snapshot after each change, so a screen that reconnects simply catches up. One contract file (`shared/protocol.ts`, version 7) describes every event, with zod validation on each.
-- **Gestures:** a vendored MIT webcam gesture pipeline plus a small Python bridge. Gestures join the session like a player and send the same semantic inputs as the pad.
+- **Gestures (experiment):** a vendored MIT webcam gesture pipeline plus a small Python bridge. Gestures join the session like a player and send the same semantic inputs as the pad, which showed that a new input device needs no new logic.
 
 ## Challenges we ran into
 
@@ -47,9 +47,15 @@ When someone asks "wait, who is that?" or comes back from the kitchen asking "wh
 
 **(Parth)**
 
-## What's next for Pip
+## What we were reaching for, and what's next
 
-A reviewed timeline for any film the pipeline watches, with a person approving facts in a review tool; recommendations from the mood the family picks (PLAN.md section 9); the capacitive touch-wheel Pip Pad (the input contract and simulator exist); and Nova as an optional brain once an AWS account is verified, measured on the same benchmark before it is used.
+The router that takes the pad, voice, the remote and gestures alike was built so that Pip isn't tied to one screen. What we were aiming at, and didn't get to by the deadline:
+
+- **The room as an input.** The camera already sees hands. Next it would notice people: when everyone gets up, the film pauses itself. When someone comes back, it carries on and Pip offers "While you were away". This would run on the device, be off by default, and count people without recognizing who they are.
+- **Alexa.** On a Fire TV device, Vega Media Controls already let Alexa play, pause and seek the film in our app. Next: "Alexa, ask Pip who that is", answered by the same spoiler-safe path.
+- **Glasses.** Smart glasses as one more Pip Pad: look at the screen and ask quietly, and the answer comes to you alone, like "While you were away". The same contract, a new input and output, no new logic.
+- **Any title, not just two films.** The offline pipeline drafts a timeline from the video and dialogue, and a person approves the facts. A service that already keeps per-title metadata could do this for its catalogue, so story questions get the same spoiler boundary that cast information doesn't need.
+- **Also on the list:** recommendations from the mood the family picks (PLAN.md section 9), the capacitive touch-wheel Pip Pad (the input contract and simulator exist), and Nova as an optional brain once an AWS account is verified, measured on the same benchmark first.
 
 ## Measurements and the usability test
 
