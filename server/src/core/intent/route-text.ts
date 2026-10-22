@@ -62,11 +62,19 @@ export function routeText(text: string): TextRoute {
 const FUTURE =
   /\b(next|later|going to|gonna|ending|in the end|at the end|end up)\b|\bhow does (it|this|the \w+) end\b|\bwill\b|\bever\b/;
 
+// "Does she find the dragon?", "Is Scales still alive?": yes or no about how things turn out. Either
+// answer would tell the story ahead, so these are questions about the future too. "Did" asks the past.
+const OUTCOME =
+  /^(does|do|is|are|can) .*\b(get (hurt|caught|away|killed|eaten|saved)|grows? up|die|dies|survive|escape|win|lose|finds?|come back|make it|revenge|fight back|still alive|alive)\b/;
+
 function questionTopic(t: string): QuestionTopic {
   if (FUTURE.test(t) && !/\b(what (just )?happened|before)\b/.test(t)) return 'future';
+  if (OUTCOME.test(t)) return 'future';
   if (/\b(what (just )?happened|what did (i|we) miss|recap|so far|catch me up)\b/.test(t))
     return 'recap';
   // "Who is that?" or "Who is Hoot?" identify someone; "Who owns the lantern?" asks a relation.
+  // "Who is she looking for?" asks about what someone does, not who they are.
+  if (/^(who is|who are|whos) \w+ \w+ing\b/.test(t)) return 'other';
   if (/^(who is|who are|whos|which (one|character|animal))\b/.test(t)) return 'identify';
   if (/^why\b/.test(t)) return 'why';
   return 'other';

@@ -63,4 +63,25 @@ describe('routeText', () => {
       topic: 'future',
     });
   });
+
+  it('tags yes-or-no questions about how things turn out as future, but not the past', () => {
+    for (const q of [
+      'Does she find the dragon?',
+      'Is Scales still alive?',
+      'Does the flying squirrel get hurt?',
+      'Does Scales grow up?',
+    ])
+      expect(routeText(q)).toEqual({ kind: 'question', topic: 'future' });
+    for (const q of [
+      'Did the bunny save the flying squirrel?',
+      'Does the bunny have a family?',
+      'Is the big dragon Scales?',
+    ])
+      expect(routeText(q)).not.toEqual({ kind: 'question', topic: 'future' });
+  });
+
+  it('reads "Who is she looking for?" as a question about her, not "who is that?"', () => {
+    expect(routeText('Who is she looking for?')).toEqual({ kind: 'question', topic: 'other' });
+    expect(routeText('Who is that?')).toEqual({ kind: 'question', topic: 'identify' });
+  });
 });

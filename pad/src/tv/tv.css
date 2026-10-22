@@ -785,7 +785,7 @@ kbd {
   position: absolute;
   inset: 0;
   padding: var(--tv-safe-y) var(--tv-safe-x);
-  background: rgb(11 11 15 / 0.96);
+  background: rgb(11 11 15); /* opaque: the film behind (often its credits) must not show through text */
   display: grid;
   grid-template-rows: auto auto 1fr auto;
   gap: 40px;
