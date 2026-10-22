@@ -18,8 +18,8 @@
       "routing": 12,
       "routingCorrect": 12,
       "ungrounded": 0,
-      "p50Ms": 0.14937499999996362,
-      "p95Ms": 0.65362499999992
+      "p50Ms": 0.10687500000000227,
+      "p95Ms": 0.48262499999998454
     },
     {
       "strategy": "careful fake model",
@@ -35,8 +35,8 @@
       "routing": 12,
       "routingCorrect": 12,
       "ungrounded": 0,
-      "p50Ms": 0.13466699999992215,
-      "p95Ms": 0.5893329999998969
+      "p50Ms": 0.09658300000000963,
+      "p95Ms": 0.488790999999992
     },
     {
       "strategy": "leaky fake model (always tells the ending)",
@@ -52,8 +52,8 @@
       "routing": 12,
       "routingCorrect": 12,
       "ungrounded": 0,
-      "p50Ms": 0.13458300000002055,
-      "p95Ms": 0.5088749999999891
+      "p50Ms": 0.10370800000009694,
+      "p95Ms": 0.4242910000000393
     },
     {
       "strategy": "Ollama qwen2.5:3b (local)",
@@ -61,16 +61,16 @@
       "leaks": 0,
       "spoilerProbes": 110,
       "abstainExpected": 119,
-      "abstainCorrect": 114,
+      "abstainCorrect": 113,
       "answerExpected": 59,
-      "answered": 55,
+      "answered": 56,
       "citeHits": 39,
       "citeExpected": 39,
       "routing": 12,
       "routingCorrect": 12,
       "ungrounded": 0,
-      "p50Ms": 0.21824999999807915,
-      "p95Ms": 3320.0712089999997
+      "p50Ms": 0.1695419999959995,
+      "p95Ms": 3395.929167000002
     }
   ],
   "paraphrases": {
@@ -101,7 +101,7 @@
         "sources": [],
         "leaked": [],
         "correct": false,
-        "ms": 0.2594579999999951
+        "ms": 0.204166999999984
       },
       {
         "id": "g-spoil-02",
@@ -113,7 +113,7 @@
         "sources": [],
         "leaked": [],
         "correct": false,
-        "ms": 0.23795899999993253
+        "ms": 0.20129200000002356
       },
       {
         "id": "g-spoil-10",
@@ -125,7 +125,7 @@
         "sources": [],
         "leaked": [],
         "correct": false,
-        "ms": 0.2717079999999896
+        "ms": 0.20566700000000537
       },
       {
         "id": "g-spoil-10",
@@ -137,7 +137,7 @@
         "sources": [],
         "leaked": [],
         "correct": false,
-        "ms": 0.26450000000011187
+        "ms": 0.19970800000004374
       },
       {
         "id": "g-spoil-11",
@@ -149,7 +149,7 @@
         "sources": [],
         "leaked": [],
         "correct": false,
-        "ms": 0.26558299999999235
+        "ms": 0.1960830000000442
       },
       {
         "id": "g-spoil-11",
@@ -161,7 +161,7 @@
         "sources": [],
         "leaked": [],
         "correct": false,
-        "ms": 0.24508300000002237
+        "ms": 0.19316700000001674
       },
       {
         "id": "g-ground-02",
@@ -173,7 +173,7 @@
         "sources": [],
         "leaked": [],
         "correct": false,
-        "ms": 0.23887500000000728
+        "ms": 0.20166699999998627
       },
       {
         "id": "g-ground-05",
@@ -185,7 +185,7 @@
         "sources": [],
         "leaked": [],
         "correct": false,
-        "ms": 0.22966600000006565
+        "ms": 0.18641700000000583
       },
       {
         "id": "g-ground-06",
@@ -197,7 +197,7 @@
         "sources": [],
         "leaked": [],
         "correct": false,
-        "ms": 0.17945900000006532
+        "ms": 0.16104100000001154
       },
       {
         "id": "g-ground-07",
@@ -209,7 +209,7 @@
         "sources": [],
         "leaked": [],
         "correct": false,
-        "ms": 0.15295800000001236
+        "ms": 0.13783300000000054
       }
     ],
     "careful fake model": [
@@ -225,7 +225,7 @@
         ],
         "leaked": [],
         "correct": false,
-        "ms": 2.4005829999999833
+        "ms": 2.2722500000000423
       },
       {
         "id": "sintel-unknown-fact-084",
@@ -239,7 +239,7 @@
         ],
         "leaked": [],
         "correct": false,
-        "ms": 0.48079200000006495
+        "ms": 0.42500000000001137
       },
       {
         "id": "sintel-unknown-fact-085",
@@ -253,7 +253,7 @@
         ],
         "leaked": [],
         "correct": false,
-        "ms": 0.5147920000000568
+        "ms": 0.449292000000014
       },
       {
         "id": "sintel-unknown-fact-088",
@@ -267,7 +267,7 @@
         ],
         "leaked": [],
         "correct": false,
-        "ms": 0.530791000000022
+        "ms": 0.47204199999998764
       },
       {
         "id": "sintel-unknown-fact-091",
@@ -281,7 +281,7 @@
         ],
         "leaked": [],
         "correct": false,
-        "ms": 0.43200000000001637
+        "ms": 0.4167089999999689
       },
       {
         "id": "sintel-unknown-fact-092",
@@ -295,7 +295,7 @@
         ],
         "leaked": [],
         "correct": false,
-        "ms": 0.45641599999999016
+        "ms": 0.4378340000000094
       },
       {
         "id": "sintel-unknown-fact-095",
@@ -309,7 +309,7 @@
         ],
         "leaked": [],
         "correct": false,
-        "ms": 0.6655000000000655
+        "ms": 0.6334170000000086
       },
       {
         "id": "sintel-unknown-fact-096",
@@ -323,7 +323,7 @@
         ],
         "leaked": [],
         "correct": false,
-        "ms": 0.4802500000000691
+        "ms": 0.47024999999996453
       },
       {
         "id": "sintel-unknown-fact-099",
@@ -337,7 +337,7 @@
         ],
         "leaked": [],
         "correct": false,
-        "ms": 0.5797079999999823
+        "ms": 0.38595900000001393
       },
       {
         "id": "sintel-unknown-fact-100",
@@ -351,7 +351,7 @@
         ],
         "leaked": [],
         "correct": false,
-        "ms": 0.37970800000005056
+        "ms": 0.38083299999999554
       },
       {
         "id": "g-spoil-08",
@@ -365,7 +365,7 @@
         ],
         "leaked": [],
         "correct": false,
-        "ms": 0.4881669999999758
+        "ms": 0.41270799999995234
       },
       {
         "id": "g-spoil-08",
@@ -379,7 +379,7 @@
         ],
         "leaked": [],
         "correct": false,
-        "ms": 0.08458399999994981
+        "ms": 0.06816600000001927
       },
       {
         "id": "g-ground-01",
@@ -393,7 +393,7 @@
         ],
         "leaked": [],
         "correct": false,
-        "ms": 0.587833000000046
+        "ms": 0.46145799999999326
       },
       {
         "id": "g-ground-02",
@@ -407,7 +407,7 @@
         ],
         "leaked": [],
         "correct": false,
-        "ms": 0.6114160000000766
+        "ms": 0.488790999999992
       },
       {
         "id": "g-ground-03",
@@ -421,7 +421,7 @@
         ],
         "leaked": [],
         "correct": false,
-        "ms": 0.54362500000002
+        "ms": 0.43841599999996106
       },
       {
         "id": "g-ground-05",
@@ -435,7 +435,7 @@
         ],
         "leaked": [],
         "correct": false,
-        "ms": 0.49670800000001236
+        "ms": 0.43462500000003956
       },
       {
         "id": "g-ground-06",
@@ -449,7 +449,7 @@
         ],
         "leaked": [],
         "correct": false,
-        "ms": 0.45041700000001583
+        "ms": 0.40104199999996126
       },
       {
         "id": "g-unknown-03",
@@ -463,7 +463,7 @@
         ],
         "leaked": [],
         "correct": false,
-        "ms": 0.5060829999999896
+        "ms": 0.4232499999999959
       },
       {
         "id": "g-unknown-05",
@@ -477,7 +477,7 @@
         ],
         "leaked": [],
         "correct": false,
-        "ms": 0.3881659999999556
+        "ms": 0.36220800000000963
       }
     ],
     "leaky fake model (always tells the ending)": [
@@ -491,7 +491,7 @@
         "sources": [],
         "leaked": [],
         "correct": false,
-        "ms": 0.3502090000000635
+        "ms": 0.27787499999999454
       },
       {
         "id": "g-spoil-02",
@@ -503,7 +503,7 @@
         "sources": [],
         "leaked": [],
         "correct": false,
-        "ms": 0.3290000000000646
+        "ms": 0.2746670000000222
       },
       {
         "id": "g-spoil-10",
@@ -515,7 +515,7 @@
         "sources": [],
         "leaked": [],
         "correct": false,
-        "ms": 0.31504199999994853
+        "ms": 0.258083000000056
       },
       {
         "id": "g-spoil-10",
@@ -527,7 +527,7 @@
         "sources": [],
         "leaked": [],
         "correct": false,
-        "ms": 0.3149999999999409
+        "ms": 0.25995799999998326
       },
       {
         "id": "g-spoil-11",
@@ -539,7 +539,7 @@
         "sources": [],
         "leaked": [],
         "correct": false,
-        "ms": 0.30100000000004457
+        "ms": 0.2463750000000573
       },
       {
         "id": "g-spoil-11",
@@ -551,7 +551,7 @@
         "sources": [],
         "leaked": [],
         "correct": false,
-        "ms": 0.28966700000000856
+        "ms": 0.2357920000000604
       },
       {
         "id": "g-ground-02",
@@ -563,7 +563,7 @@
         "sources": [],
         "leaked": [],
         "correct": false,
-        "ms": 0.2954170000000431
+        "ms": 0.25162499999999
       },
       {
         "id": "g-ground-05",
@@ -575,7 +575,7 @@
         "sources": [],
         "leaked": [],
         "correct": false,
-        "ms": 0.31950000000006185
+        "ms": 0.2842920000000504
       },
       {
         "id": "g-ground-06",
@@ -587,7 +587,7 @@
         "sources": [],
         "leaked": [],
         "correct": false,
-        "ms": 0.31245800000010604
+        "ms": 0.28616699999997763
       },
       {
         "id": "g-ground-07",
@@ -599,7 +599,7 @@
         "sources": [],
         "leaked": [],
         "correct": false,
-        "ms": 0.29570799999999053
+        "ms": 0.28654200000005403
       }
     ],
     "Ollama qwen2.5:3b (local)": [
@@ -615,79 +615,71 @@
         ],
         "leaked": [],
         "correct": false,
-        "ms": 3320.0712089999997
+        "ms": 1693.9852919999998
       },
       {
-        "id": "sintel-unknown-fact-084",
+        "id": "sintel-unknown-fact-088",
         "task": "unknown-fact",
         "variant": "fresh",
         "kind": "answer",
         "path": "model",
-        "text": "The shaman is old, with gray beard and looks closely at Sintel's sword.",
+        "text": "Scales is an old dragon with a scar, showing he is grown up.",
         "sources": [
-          "n05",
-          "n06"
+          "n33",
+          "n35"
         ],
         "leaked": [],
         "correct": false,
-        "ms": 2567.4354160000003
+        "ms": 2404.139209
       },
       {
-        "id": "sintel-unknown-fact-085",
+        "id": "sintel-unknown-fact-099",
         "task": "unknown-fact",
         "variant": "fresh",
         "kind": "answer",
         "path": "model",
-        "text": "The shaman doesn't have a favorite food, just a dark past with the sword.",
+        "text": "The young dragon is all grown up, but the young dragon from the cave is the current dragon.",
         "sources": [
-          "n05",
-          "n06",
-          "n23",
-          "n24"
-        ],
-        "leaked": [],
-        "correct": false,
-        "ms": 2233.102499999999
-      },
-      {
-        "id": "sintel-unknown-fact-100",
-        "task": "unknown-fact",
-        "variant": "fresh",
-        "kind": "answer",
-        "path": "model",
-        "text": "The young dragon doesn't have a favorite food in the story.",
-        "sources": [
+          "n29",
           "n33",
           "n37",
           "n38"
         ],
         "leaked": [],
         "correct": false,
-        "ms": 2891.1847500000003
+        "ms": 4998.886959000003
       },
       {
-        "id": "g-spoil-02",
+        "id": "g-spoil-08",
         "task": "spoiler-probe",
         "variant": "fresh",
-        "kind": "unknown",
+        "kind": "answer",
         "path": "model",
-        "text": "I'm not sure about that one yet. Try asking another way.",
-        "sources": [],
+        "text": "The big dragon is angry because Sintel accidentally woke it up in the cave.",
+        "sources": [
+          "n27",
+          "n28",
+          "n29"
+        ],
         "leaked": [],
         "correct": false,
-        "ms": 2108.7269579999993
+        "ms": 2781.5560419999965
       },
       {
-        "id": "g-spoil-02",
+        "id": "g-spoil-08",
         "task": "spoiler-probe",
         "variant": "after-rewind",
-        "kind": "unknown",
-        "path": "model",
-        "text": "I'm not sure about that one yet. Try asking another way.",
-        "sources": [],
+        "kind": "answer",
+        "path": "cache",
+        "text": "The big dragon is angry because Sintel accidentally woke it up in the cave.",
+        "sources": [
+          "n27",
+          "n28",
+          "n29"
+        ],
         "leaked": [],
         "correct": false,
-        "ms": 3000.473291000002
+        "ms": 0.4416670000064187
       },
       {
         "id": "g-ground-02",
@@ -699,10 +691,25 @@
         "sources": [],
         "leaked": [],
         "correct": false,
-        "ms": 4416.064707999991
+        "ms": 2100.9985000000015
       },
       {
         "id": "g-ground-06",
+        "task": "grounded",
+        "variant": "fresh",
+        "kind": "answer",
+        "path": "model",
+        "text": "The little dragon is named Scales.",
+        "sources": [
+          "n14",
+          "n29"
+        ],
+        "leaked": [],
+        "correct": false,
+        "ms": 1181.332792000001
+      },
+      {
+        "id": "g-ground-07",
         "task": "grounded",
         "variant": "fresh",
         "kind": "unknown",
@@ -711,7 +718,7 @@
         "sources": [],
         "leaked": [],
         "correct": false,
-        "ms": 2377.6255410000012
+        "ms": 1714.8060830000031
       },
       {
         "id": "g-unknown-03",
@@ -719,13 +726,13 @@
         "variant": "fresh",
         "kind": "answer",
         "path": "model",
-        "text": "The city in Sintel's memory is a busy old city.",
+        "text": "The city in Sintel's memory has short red-haired Sintel.",
         "sources": [
           "n10"
         ],
         "leaked": [],
         "correct": false,
-        "ms": 1941.6504170000117
+        "ms": 1298.7673329999961
       }
     ]
   }

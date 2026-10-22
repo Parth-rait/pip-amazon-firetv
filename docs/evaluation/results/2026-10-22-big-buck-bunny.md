@@ -4,10 +4,10 @@ Timeline sha:ec65cb00cea1: 34 facts. Examples: 131 (derived dataset v1 plus hand
 
 | Strategy | Spoiler leaks | Abstains when it should | Answers when it should | Cites the expected fact | Routing | Ungrounded sources | Latency p50 / p95 (ms) |
 |---|---|---|---|---|---|---|---|
-| timeline only (AI off) | 0 of 104 | 122/123 (99%) | 43/48 (90%) | 34/34 (100%) | 12/12 (100%) | 0 | 0.14 / 0.61 |
-| careful fake model | 0 of 104 | 108/123 (88%) | 43/48 (90%) | 34/34 (100%) | 12/12 (100%) | 0 | 0.18 / 2.27 |
-| leaky fake model (always tells the ending) | 0 of 104 | 122/123 (99%) | 43/48 (90%) | 34/34 (100%) | 12/12 (100%) | 0 | 0.30 / 1.15 |
-| Ollama qwen2.5:3b (local) | 0 of 104 | 119/123 (97%) | 47/48 (98%) | 34/34 (100%) | 12/12 (100%) | 0 | 0.31 / 2033.97 |
+| timeline only (AI off) | 0 of 104 | 122/123 (99%) | 43/48 (90%) | 34/34 (100%) | 12/12 (100%) | 0 | 0.11 / 0.49 |
+| careful fake model | 0 of 104 | 108/123 (88%) | 43/48 (90%) | 34/34 (100%) | 12/12 (100%) | 0 | 0.11 / 0.50 |
+| leaky fake model (always tells the ending) | 0 of 104 | 122/123 (99%) | 43/48 (90%) | 34/34 (100%) | 12/12 (100%) | 0 | 0.11 / 0.43 |
+| Ollama qwen2.5:3b (local) | 0 of 104 | 115/123 (93%) | 47/48 (98%) | 34/34 (100%) | 12/12 (100%) | 0 | 0.20 / 2098.78 |
 
 Latency is measured in-process on this machine. For the fake models (no network) it is Pip's own pipeline only; a real model's row (Ollama, Nova) includes the model, and questions answered from the timeline or a fixed line never reach it, so p50 can stay near 0. The fake models measure the plumbing (prompt, citations, gate, cache), not answer quality: the careful one answers with any fact sharing a word.
 

@@ -28,20 +28,26 @@ Why: the AWS account was not verified in time, so the submission is built withou
 | Film, strategy | Spoiler leaks | Abstains when it should | Answers when it should | Cites the expected fact | p50 / p95 |
 |---|---|---|---|---|---|
 | Big Buck Bunny, timeline only (AI off) | 0 of 104 | 99% | 90% | 100% | 0.1 / 0.6 ms |
-| Big Buck Bunny, qwen2.5:3b | 0 of 104 | 97% (119/123) | 98% (47/48) | 100% | 0.3 ms / 2.0 s |
+| Big Buck Bunny, qwen2.5:3b | 0 of 104 | 93% (115/123) | 98% (47/48) | 100% | 0.2 ms / 2.1 s |
 | Sintel, timeline only (AI off) | 0 of 110 | 100% | 83% | 100% | 0.1 / 0.6 ms |
-| Sintel, qwen2.5:3b | 0 of 110 | 96% (114/119) | 93% (55/59) | 100% | 0.2 ms / 3.3 s |
+| Sintel, qwen2.5:3b | 0 of 110 | 95% (113/119) | 95% (56/59) | 100% | 0.2 ms / 3.4 s |
 | Either film, a fake model that always tells the ending | 0 | 99 to 100% | 83 to 90% | 100% | - |
 
 p50 stays under a millisecond because "who is that?", "what just happened?", future questions and controls never reach the model. Full tables: `docs/evaluation/results/2026-10-22-*.md`.
 
-**Still wrong** (from reading every miss): the model infers small things from what was shown ("the chinchilla is holding a nut, which is its favourite food"; "Sintel is younger, as seen in a memory" for "How old is Sintel?"). These aren't spoilers, but they aren't true either. Abstention is 96 to 97%, not 100%.
+**Still wrong** (from reading every miss): the model infers small things from what was shown ("the chinchilla is holding a nut, which is its favourite food"; "Sintel is younger, as seen in a memory" for "How old is Sintel?"). These aren't spoilers, but they aren't true either. Abstention is 93 to 95%, not 100% (final run, after everyday words stopped being spoiler terms).
 
 ## 2. While you were away
 
 Contract v7: `pad:away` (the pad was hidden or shown again) and `pip:missed` (to one pad). When a viewer's pad is hidden or loses its connection during the film, the server notes where the film was (`server/src/away.ts`). When they come back, or when someone joins after 60 s, it sends that pad alone up to four accepted facts revealed between then and now (`server/src/core/context/missed.ts`). The facts are spread over the gap and end with the latest. Nothing goes out for gaps under 20 s. No model call is made, and the event is journaled as `pip.missed`.
 
 Checks: `server/src/core/context/missed.test.ts` (4 tests) and `server/src/lab/away.test.ts`. The lab test runs 3 scenarios over real sockets on Sintel's timeline: only the absent viewer gets the recap, nothing after now and never the twist, the film keeps playing, a late joiner gets the story so far, and a pad that drops and rejoins is caught up. In headless Chrome, a phone hidden from 2:31 to 5:47 got four moments ending with "The big dragon grabs Scales and carries him away into the sunset", while the tablet and TV carried on (`docs/screenshots/local-pad-missed.jpg`).
+
+## 2b. What if...?
+
+Contract v8: source `imagined`. Questions starting "What if", "Imagine" or "Suppose", or asking for "a better / happier / different ending", go to `imagineAnswer` in `server/src/answer.ts`. The local model writes 4 to 6 sentences from the facts revealed by now (the whole film once it is within 30 s of the end), at temperature 0.9. A story may invent, so its gate keeps only the spoiler rules: no restricted term and no character not yet seen. A withheld story is told again once, then Pip says "That story got too close to what's coming." Stories are never cached and never enter the history Pip answers from. The screens label them "made up by Pip" and keep them up for 25 s.
+
+Tried with qwen2.5:3b (2 to 6 s each): "What if Sintel had kept Scales inside that night?" at 5:45, "What if the shaman came with her?" at 8:20, "Give it a happier ending" at the end of Sintel, and "What if it went differently?" in Big Buck Bunny. All were written and passed the gate; end to end in Chrome, the TV showed the ending with its label. The first try at 5:45 was withheld over "first", an everyday word that the film first uses later. That showed everyday words make poor spoiler terms, so the converter now skips them; "scar", "older" and "bandaged" stay restricted. Tests: 4 in `server/src/answer.test.ts`.
 
 ## 3. The pad and the TV
 

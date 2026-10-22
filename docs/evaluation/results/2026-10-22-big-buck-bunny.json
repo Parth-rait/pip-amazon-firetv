@@ -18,8 +18,8 @@
       "routing": 12,
       "routingCorrect": 12,
       "ungrounded": 0,
-      "p50Ms": 0.1353340000000003,
-      "p95Ms": 0.6089169999999626
+      "p50Ms": 0.10812500000002956,
+      "p95Ms": 0.48995900000005577
     },
     {
       "strategy": "careful fake model",
@@ -35,8 +35,8 @@
       "routing": 12,
       "routingCorrect": 12,
       "ungrounded": 0,
-      "p50Ms": 0.18250000000000455,
-      "p95Ms": 2.2679170000000113
+      "p50Ms": 0.10987499999998818,
+      "p95Ms": 0.4992499999999609
     },
     {
       "strategy": "leaky fake model (always tells the ending)",
@@ -52,8 +52,8 @@
       "routing": 12,
       "routingCorrect": 12,
       "ungrounded": 0,
-      "p50Ms": 0.30008299999997234,
-      "p95Ms": 1.1523329999999987
+      "p50Ms": 0.11024999999995089,
+      "p95Ms": 0.43383299999993596
     },
     {
       "strategy": "Ollama qwen2.5:3b (local)",
@@ -61,7 +61,7 @@
       "leaks": 0,
       "spoilerProbes": 104,
       "abstainExpected": 123,
-      "abstainCorrect": 119,
+      "abstainCorrect": 115,
       "answerExpected": 48,
       "answered": 47,
       "citeHits": 34,
@@ -69,8 +69,8 @@
       "routing": 12,
       "routingCorrect": 12,
       "ungrounded": 0,
-      "p50Ms": 0.3132500000028813,
-      "p95Ms": 2033.9730000000018
+      "p50Ms": 0.19570899999996527,
+      "p95Ms": 2098.777624999995
     }
   ],
   "paraphrases": {
@@ -101,7 +101,7 @@
         "sources": [],
         "leaked": [],
         "correct": false,
-        "ms": 0.24908299999998462
+        "ms": 0.20266700000001947
       },
       {
         "id": "g-ground-03",
@@ -113,7 +113,7 @@
         "sources": [],
         "leaked": [],
         "correct": false,
-        "ms": 0.18762499999996862
+        "ms": 0.14150000000000773
       },
       {
         "id": "g-ground-04",
@@ -125,7 +125,7 @@
         "sources": [],
         "leaked": [],
         "correct": false,
-        "ms": 0.2401670000000422
+        "ms": 0.20291699999995672
       },
       {
         "id": "g-ground-06",
@@ -137,7 +137,7 @@
         "sources": [],
         "leaked": [],
         "correct": false,
-        "ms": 0.17541699999998173
+        "ms": 0.15208300000000463
       },
       {
         "id": "g-ground-07",
@@ -149,7 +149,7 @@
         "sources": [],
         "leaked": [],
         "correct": false,
-        "ms": 0.12916699999999537
+        "ms": 0.12370800000002191
       },
       {
         "id": "g-unknown-05",
@@ -163,7 +163,7 @@
         ],
         "leaked": [],
         "correct": false,
-        "ms": 0.24837500000001
+        "ms": 0.30066599999997834
       }
     ],
     "careful fake model": [
@@ -179,7 +179,7 @@
         ],
         "leaked": [],
         "correct": false,
-        "ms": 2.2679170000000113
+        "ms": 2.451582999999971
       },
       {
         "id": "big-buck-bunny-unknown-fact-071",
@@ -193,7 +193,7 @@
         ],
         "leaked": [],
         "correct": false,
-        "ms": 0.644207999999935
+        "ms": 0.7402910000000134
       },
       {
         "id": "big-buck-bunny-identify-076",
@@ -207,7 +207,7 @@
         ],
         "leaked": [],
         "correct": false,
-        "ms": 0.6905409999999392
+        "ms": 0.5614170000000058
       },
       {
         "id": "big-buck-bunny-unknown-fact-078",
@@ -221,7 +221,7 @@
         ],
         "leaked": [],
         "correct": false,
-        "ms": 0.3995840000000044
+        "ms": 0.3721249999999827
       },
       {
         "id": "big-buck-bunny-unknown-fact-079",
@@ -235,7 +235,7 @@
         ],
         "leaked": [],
         "correct": false,
-        "ms": 0.3672910000000229
+        "ms": 0.3527080000000069
       },
       {
         "id": "big-buck-bunny-unknown-fact-082",
@@ -249,7 +249,7 @@
         ],
         "leaked": [],
         "correct": false,
-        "ms": 0.6247919999999567
+        "ms": 0.6025000000000205
       },
       {
         "id": "big-buck-bunny-unknown-fact-083",
@@ -263,7 +263,7 @@
         ],
         "leaked": [],
         "correct": false,
-        "ms": 0.44783400000005713
+        "ms": 0.4066249999999627
       },
       {
         "id": "big-buck-bunny-unknown-fact-086",
@@ -277,7 +277,7 @@
         ],
         "leaked": [],
         "correct": false,
-        "ms": 0.3690829999999323
+        "ms": 0.33925000000004957
       },
       {
         "id": "big-buck-bunny-unknown-fact-087",
@@ -291,7 +291,7 @@
         ],
         "leaked": [],
         "correct": false,
-        "ms": 0.38654200000007677
+        "ms": 0.3457080000000019
       },
       {
         "id": "big-buck-bunny-unknown-fact-090",
@@ -305,7 +305,7 @@
         ],
         "leaked": [],
         "correct": false,
-        "ms": 18.115167000000042
+        "ms": 0.350166999999999
       },
       {
         "id": "big-buck-bunny-unknown-fact-091",
@@ -319,7 +319,7 @@
         ],
         "leaked": [],
         "correct": false,
-        "ms": 10.26983400000006
+        "ms": 0.363083999999958
       },
       {
         "id": "big-buck-bunny-unknown-fact-094",
@@ -333,7 +333,7 @@
         ],
         "leaked": [],
         "correct": false,
-        "ms": 0.9421660000000429
+        "ms": 0.3784999999999741
       },
       {
         "id": "big-buck-bunny-unknown-fact-095",
@@ -347,7 +347,7 @@
         ],
         "leaked": [],
         "correct": false,
-        "ms": 1.0080000000000382
+        "ms": 0.3102079999999887
       },
       {
         "id": "g-ground-03",
@@ -359,7 +359,7 @@
         "sources": [],
         "leaked": [],
         "correct": false,
-        "ms": 0.6151250000000346
+        "ms": 0.1725420000000213
       },
       {
         "id": "g-ground-04",
@@ -371,7 +371,7 @@
         "sources": [],
         "leaked": [],
         "correct": false,
-        "ms": 0.9423750000000837
+        "ms": 0.3569170000000099
       },
       {
         "id": "g-ground-06",
@@ -385,7 +385,7 @@
         ],
         "leaked": [],
         "correct": false,
-        "ms": 0.9948339999999689
+        "ms": 0.4010830000000283
       },
       {
         "id": "g-ground-07",
@@ -399,7 +399,7 @@
         ],
         "leaked": [],
         "correct": false,
-        "ms": 1.0952920000000859
+        "ms": 0.5904160000000047
       },
       {
         "id": "g-unknown-03",
@@ -413,7 +413,7 @@
         ],
         "leaked": [],
         "correct": false,
-        "ms": 1.1014170000000831
+        "ms": 0.4379170000000272
       },
       {
         "id": "g-unknown-04",
@@ -427,7 +427,7 @@
         ],
         "leaked": [],
         "correct": false,
-        "ms": 1.3272499999999354
+        "ms": 0.35462499999999864
       },
       {
         "id": "g-unknown-05",
@@ -441,7 +441,7 @@
         ],
         "leaked": [],
         "correct": false,
-        "ms": 1.2617079999999987
+        "ms": 0.33683399999995345
       }
     ],
     "leaky fake model (always tells the ending)": [
@@ -455,7 +455,7 @@
         "sources": [],
         "leaked": [],
         "correct": false,
-        "ms": 0.4696250000000646
+        "ms": 0.29941699999994853
       },
       {
         "id": "g-ground-03",
@@ -467,7 +467,7 @@
         "sources": [],
         "leaked": [],
         "correct": false,
-        "ms": 0.21029199999998127
+        "ms": 0.12791699999991124
       },
       {
         "id": "g-ground-04",
@@ -479,7 +479,7 @@
         "sources": [],
         "leaked": [],
         "correct": false,
-        "ms": 0.4080830000000333
+        "ms": 0.3078329999999596
       },
       {
         "id": "g-ground-06",
@@ -491,7 +491,7 @@
         "sources": [],
         "leaked": [],
         "correct": false,
-        "ms": 0.3537499999999909
+        "ms": 0.28370799999993324
       },
       {
         "id": "g-ground-07",
@@ -503,7 +503,7 @@
         "sources": [],
         "leaked": [],
         "correct": false,
-        "ms": 0.30008299999997234
+        "ms": 0.2731659999999465
       },
       {
         "id": "g-unknown-05",
@@ -517,23 +517,27 @@
         ],
         "leaked": [],
         "correct": false,
-        "ms": 0.5007080000000315
+        "ms": 0.4252079999999978
       }
     ],
     "Ollama qwen2.5:3b (local)": [
       {
-        "id": "big-buck-bunny-unknown-fact-070",
+        "id": "big-buck-bunny-unknown-fact-071",
         "task": "unknown-fact",
         "variant": "fresh",
         "kind": "answer",
         "path": "model",
-        "text": "The purple bird is a small bird that wakes up and stretches.",
+        "text": "The purple bird is seen stretching, but no food preference is mentioned.",
         "sources": [
-          "n01"
+          "n01",
+          "n10",
+          "n17",
+          "n32",
+          "n33"
         ],
         "leaked": [],
         "correct": false,
-        "ms": 2553.47
+        "ms": 1703.7928749999996
       },
       {
         "id": "big-buck-bunny-unknown-fact-074",
@@ -543,33 +547,73 @@
         "path": "model",
         "text": "Big Buck Bunny is a grown-up rabbit, not an infant.",
         "sources": [
-          "n02",
           "n03"
         ],
         "leaked": [],
         "correct": false,
-        "ms": 2152.9968750000007
+        "ms": 1937.90625
       },
       {
-        "id": "big-buck-bunny-unknown-fact-087",
+        "id": "big-buck-bunny-unknown-fact-086",
         "task": "unknown-fact",
         "variant": "fresh",
         "kind": "answer",
         "path": "model",
-        "text": "The facts do not mention what the purple butterfly's favorite food is.",
+        "text": "The butterfly is young and playful, seen fluttering around the bunny.",
         "sources": [
+          "n08",
           "n10",
-          "n32",
-          "n33",
-          "n31",
           "n16",
-          "n17",
-          "n01",
+          "n17"
+        ],
+        "leaked": [],
+        "correct": false,
+        "ms": 2128.972582999999
+      },
+      {
+        "id": "big-buck-bunny-unknown-fact-095",
+        "task": "unknown-fact",
+        "variant": "fresh",
+        "kind": "answer",
+        "path": "model",
+        "text": "The chinchilla is holding a nut, which is the chinchilla's favourite food.",
+        "sources": [
+          "n11",
+          "n32"
+        ],
+        "leaked": [],
+        "correct": false,
+        "ms": 1520.4321249999994
+      },
+      {
+        "id": "g-spoil-07",
+        "task": "spoiler-probe",
+        "variant": "fresh",
+        "kind": "answer",
+        "path": "model",
+        "text": "A brown flying squirrel watches and doesn't throw things, but a pink butterfly flutters near the bunny.",
+        "sources": [
+          "n07",
           "n08"
         ],
         "leaked": [],
         "correct": false,
-        "ms": 1984.8819999999978
+        "ms": 2197.435458
+      },
+      {
+        "id": "g-spoil-07",
+        "task": "spoiler-probe",
+        "variant": "after-rewind",
+        "kind": "answer",
+        "path": "cache",
+        "text": "A brown flying squirrel watches and doesn't throw things, but a pink butterfly flutters near the bunny.",
+        "sources": [
+          "n07",
+          "n08"
+        ],
+        "leaked": [],
+        "correct": false,
+        "ms": 1.6635830000013812
       },
       {
         "id": "g-ground-03",
@@ -581,7 +625,22 @@
         "sources": [],
         "leaked": [],
         "correct": false,
-        "ms": 0.28004199999850243
+        "ms": 0.4832079999978305
+      },
+      {
+        "id": "g-unknown-01",
+        "task": "unknown-fact",
+        "variant": "fresh",
+        "kind": "answer",
+        "path": "model",
+        "text": "The bunny is very young and still sleeps in his burrow at the start.",
+        "sources": [
+          "n02",
+          "n03"
+        ],
+        "leaked": [],
+        "correct": false,
+        "ms": 1983.4365830000024
       },
       {
         "id": "g-unknown-05",
@@ -595,7 +654,7 @@
         ],
         "leaked": [],
         "correct": false,
-        "ms": 2405.0319999999992
+        "ms": 2098.777624999995
       }
     ]
   }

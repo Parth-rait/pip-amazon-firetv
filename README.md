@@ -11,7 +11,8 @@ Built for the Amazon Developer Hackathon, Fire TV track. Direction: [docs/vnext/
 3. **Control it any way you like.** Play, pause, ±10 s, volume, brightness and simulated lights come from the host's pad, voice ("pause", "back 10", "louder"), webcam hand gestures (`npm run gesture`) or the TV remote. They all go through one action router, and the TV confirms each command. None of them calls a model.
 4. **Ask Pip.** Tap, type or speak. Pip answers briefly on the TV and the asker's pad, using only facts the film has already shown. Questions about later get "No spoilers from me".
 5. **While you were away.** A pad that sleeps or drops off during the film, or someone who joins late, gets a private recap of what they missed, up to now and never further. The film keeps playing for everyone else.
-6. **Kids games (opt-in).** A switch in the lobby turns on guesses, reactions and a quiz after the film. They're off by default.
+6. **What if...?** "What if Sintel had kept Scales inside that night?" or, after the film, "Give it a happier ending." Pip makes up a short version of the story from what has been shown so far, labelled "made up by Pip" on every screen. Mid-film it doesn't know the real story ahead, and the spoiler gate keeps later words and unseen characters out, so a made-up ending can't give the real one away by accident. Both films are CC BY 3.0, which allows adaptations.
+7. **Kids games (opt-in).** A switch in the lobby turns on guesses, reactions and a quiz after the film. They're off by default.
 
 ![The TV home](docs/screenshots/local-tv-home.jpg)
 ![Ask Pip on a tablet, beside the remote](docs/screenshots/local-pad-tablet-ask.jpg)
@@ -26,8 +27,8 @@ The TV screenshots are from the browser TV at `/tv`. The Vega app's earlier scre
 | Claim | Evidence |
 |---|---|
 | Pip does not spoil the film | 0 leaks in 104 probes on Big Buck Bunny and 110 on Sintel with the local model (`npm run eval -- <film> --ollama`; [docs/evaluation/results/](docs/evaluation/results/)) |
-| Pip answers when the film has shown the answer | 98% (Big Buck Bunny) and 93% (Sintel) of grounded questions answered; every expected fact cited |
-| Pip says when it doesn't know | Abstains correctly on 96 to 97% of unknown-fact and future questions |
+| Pip answers when the film has shown the answer | 98% (Big Buck Bunny) and 95% (Sintel) of grounded questions answered; every expected fact cited |
+| Pip says when it doesn't know | Abstains correctly on 93 to 95% of unknown-fact and future questions |
 | Controls never wait for a model | 0 model calls for playback; TV confirmation in 6 to 12 ms (browser TV), 177 to 239 ms (VVD over the tunnel) |
 | The catch-up is private and safe | Lab scenarios over real sockets (`server/src/lab/away.test.ts`) |
 
@@ -40,7 +41,7 @@ Not claimed: that the Pip Pad hardware exists (it's a web app; the touch-wheel i
           |   pad:input, pad:ask,             |  pad:input     |  tv:playback, tv:applied
           |   pad:away                        |                |
           +---------------+-------------------+----------------+
-                          | Socket.IO, one room per session, protocol v7 (shared/protocol.ts)
+                          | Socket.IO, one room per session, protocol v8 (shared/protocol.ts)
                           v
    +--------------------------------------------------------------------------+
    | Pip server (Node.js 22)                                                  |
@@ -100,7 +101,7 @@ The Vega app: [tv/README.md](tv/README.md). Rebuild it after a new tunnel URL. T
 
 - The local 3B model still guesses small things it was not told (for example, "the nut is the chinchilla's favourite food"). The answer gate stops it from naming anything the film hasn't shown yet, but not from inferring from what has been shown.
 - A few grounded questions right after a new moment ("Who is the little dragon?" at 9:40) still get "I'm not sure" when the model's wording is withheld and no single fact matches the question's words.
-- The vNext build has been walked through on the browser TV. The Vega app was checked on the VVD on 16 Oct, but not yet with the merged server and protocol v7.
+- The vNext build has been walked through on the browser TV. The Vega app was checked on the VVD on 16 Oct, but not yet with the merged server and protocol v8.
 - After a server restart, a pad can show "Looking for your TV" for up to 10 s.
 - iPhone Safari has no full screen for web pages; added to the home screen, the pad opens without browser bars.
 - A skip takes 1.1 to 1.6 s to land on the Vega app while the player re-buffers over the tunnel.
