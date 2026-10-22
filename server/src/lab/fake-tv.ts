@@ -5,6 +5,7 @@ import { io, type Socket } from 'socket.io-client';
 import type {
   ClientToServerEvents,
   HelloResult,
+  BranchView,
   PipSay,
   Playback,
   ServerToClientEvents,
@@ -27,6 +28,7 @@ export class FakeTv {
   commands: TvCommand[] = [];
   views: SessionView[] = [];
   says: PipSay[] = [];
+  branches: { ownerId: string; branch: BranchView | null }[] = [];
   volume = 1;
   brightness = 1;
   ignoreCommands = false; // fault: the player never answers
@@ -49,6 +51,7 @@ export class FakeTv {
     socket.on('session:view', (view) => this.onView(view));
     socket.on('tv:command', (command) => this.apply(command));
     socket.on('pip:say', (say) => this.says.push(say));
+    socket.on('pip:branch', (update) => this.branches.push(update));
     return socket;
   }
 
@@ -117,6 +120,14 @@ export class FakeTv {
     if (command.type === 'volume') this.volume = command.level;
     if (command.type === 'brightness') this.brightness = command.level;
     this.socket.emit('tv:applied', { id: command.id, ok: true });
+    this.report();
+  }
+
+  /** Someone paused on the TV itself (the remote's play/pause). */
+  pauseHere(): void {
+    if (!this.playback) return;
+    this.advance();
+    this.playback.paused = true;
     this.report();
   }
 

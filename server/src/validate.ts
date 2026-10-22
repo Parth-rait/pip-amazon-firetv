@@ -112,6 +112,10 @@ export const reactSchema: z.ZodType<PayloadOf<'pad:react'>> = z.object({
   kind: z.enum(['laugh', 'wow', 'love', 'scared']),
 });
 
+export const branchSchema: z.ZodType<PayloadOf<'pad:branch'>> = z.object({
+  action: z.literal('close'),
+});
+
 export const awaySchema: z.ZodType<PayloadOf<'pad:away'>> = z.object({ away: z.boolean() });
 
 export const predictSchema: z.ZodType<PayloadOf<'pad:predict'>> = z.object({

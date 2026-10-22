@@ -3,7 +3,7 @@
 // the answer gate. Never throws; every path ends in a reply people can see. Films without a
 // timeline still use the notes path in flow.ts.
 import { runAsk } from './core/ai/ask.js';
-import { cleanText, stripMarkdown } from './core/ai/clean-text.js';
+import { cleanText } from './core/ai/clean-text.js';
 import type { TextModel } from './core/ai/model.js';
 import type { AnswerCache, CacheKeyParts } from './core/context/answer-cache.js';
 import { permittedEvidence, type EvidenceSet } from './core/context/boundary.js';
@@ -12,7 +12,8 @@ import { entitiesNear, mentionedEntities, retrieve } from './core/context/retrie
 import { containsTerm, contentWords } from './core/context/text.js';
 import type { Entity, ReviewPolicy, Timeline, TimedFact } from './core/context/timeline.js';
 import type { QuestionTopic } from './core/intent/route-text.js';
-import { buildGroundedPrompt, buildImaginePrompt, type HistoryItem } from './film/ask-prompt.js';
+import { BRANCH_FACTS, writeEvents } from './branch.js';
+import { buildBranchPrompt, buildGroundedPrompt, type HistoryItem } from './film/ask-prompt.js';
 import { ASK_SETTINGS, GROUNDED_PROMPT_VERSION } from './film/prompts.js';
 import { LINES } from './lines.js';
 import type { AskVia, Source } from './shared/protocol.js';
@@ -23,6 +24,7 @@ import type { AskVia, Source } from './shared/protocol.js';
  */
 export type ReplyKind = 'answer' | 'clarify' | 'unknown' | 'fallback' | 'imagined';
 const RETRIEVE = { limit: 10, recentCount: 4 } as const;
+const END_MARGIN_SEC = 30; // this close to the end, a story rewrites the whole film
 const UPDATE_AFTER_SEC = 60;
 // A model reply that only says the facts do not tell (it is an abstention, not an answer).
 const NOT_SAID =
@@ -470,82 +472,59 @@ export function recheckAtPosition(
   );
 }
 
-const IMAGINE_MAX_FACTS = 40;
-const IMAGINE_MAX_SENTENCES = 6;
-const IMAGINE_MAX_CHARS = 650;
-const IMAGINE_TIMEOUT_MS = 30_000;
-const IMAGINE_ATTEMPTS = 2;
-// The last facts this close to the end mean the story is over: "a better ending" rewrites it all.
-const END_MARGIN_SEC = 30;
-
 /**
- * "What if...?": Pip makes up another version from the facts revealed by now. Mid-film it cannot
- * know the real story ahead, and the gate still keeps every later word and unseen character out,
- * so an imagined ending can never give the true one away by accident.
+ * "What if...?" asked outside a session (the benchmark, a test): Parallel Stories' engine
+ * (branch.ts) writes the events from the facts revealed by now only, and they are read as one
+ * story. In a session the same question opens a branch the viewer can explore (flow.ts).
  */
 async function imagineAnswer(
   req: AnswerRequest,
   evidence: EvidenceSet,
   deps: AnswerDeps,
 ): Promise<AnswerResult> {
-  const isEnd = req.positionSec >= req.timeline.durationSec - END_MARGIN_SEC;
-  const facts = evidence.facts.slice(-IMAGINE_MAX_FACTS);
-  const prompt = buildImaginePrompt({
-    title: req.film.title,
-    premise: req.film.premise,
-    positionSec: req.positionSec,
-    isEnd,
-    facts,
-    question: req.question,
-  });
-  const startedAt = deps.now();
-  let result: AnswerResult | null = null;
-  // A story the gate withholds over one later word is usually fine told again: one more try.
-  for (let attempt = 0; attempt < IMAGINE_ATTEMPTS; attempt += 1) {
-    let raw: string;
-    try {
-      raw = await deps.model.complete({
-        ...prompt,
-        maxTokens: 260,
-        temperature: 0.9,
-        timeoutMs: IMAGINE_TIMEOUT_MS,
-      });
-    } catch (error) {
-      return reply(evidence, 'imagine', {
-        kind: 'fallback',
-        source: 'template',
-        text: LINES.modelFailed,
-        error: error instanceof Error ? error.name : 'error',
-        modelMs: deps.now() - startedAt,
-      });
-    }
-    const text = cleanStory(raw);
-    if (!text) continue;
-    result = gate(
-      reply(evidence, 'imagine', {
-        kind: 'imagined',
-        source: 'imagined',
-        text,
-        sources: facts.map((f) => f.id),
-        next: isEnd
-          ? ['Give it a happier ending', 'What if it went differently?']
-          : ['What if it went differently?', 'What just happened?'],
-        modelMs: deps.now() - startedAt,
-      }),
-      req.timeline,
-      evidence,
-    );
-    if (result.kind === 'imagined') return result;
-  }
-  return (
-    result ??
-    reply(evidence, 'imagine', {
-      kind: 'fallback',
-      source: 'template',
-      text: LINES.unparsed,
-      error: 'unparsed',
-    })
+  const facts = evidence.facts.slice(-BRANCH_FACTS);
+  const outcome = await writeEvents(
+    buildBranchPrompt({
+      title: req.film.title,
+      premise: req.film.premise,
+      splitSec: req.positionSec,
+      isEnd: req.positionSec >= req.timeline.durationSec - END_MARGIN_SEC,
+      facts,
+      change: req.question,
+      sofar: [],
+      want: '3 to 5',
+    }),
+    evidence,
+    req.timeline,
+    { min: 3, max: 5 },
+    { model: deps.model, policy: deps.policy, now: deps.now },
   );
+  if (!outcome.ok) {
+    return reply(evidence, 'imagine', {
+      kind: outcome.reason === 'withheld' ? 'unknown' : 'fallback',
+      source: 'template',
+      text:
+        outcome.reason === 'withheld'
+          ? LINES.imagineWithheld
+          : outcome.reason === 'model-failed'
+            ? LINES.modelFailed
+            : LINES.unparsed,
+      next: ['What if it went differently?'],
+      withheld: outcome.reason === 'withheld' ? outcome.detail : null,
+      error: outcome.reason === 'withheld' ? null : (outcome.detail ?? outcome.reason),
+    });
+  }
+  const isEnd = req.positionSec >= req.timeline.durationSec - END_MARGIN_SEC;
+  return reply(evidence, 'imagine', {
+    kind: 'imagined',
+    source: 'imagined',
+    text: outcome.events.join(' '),
+    sources: facts.map((f) => f.id),
+    next: isEnd
+      ? ['Give it a happier ending', 'What if it went differently?']
+      : ['What happens next?', 'What if it went differently?'],
+    modelMs: outcome.modelMs,
+  });
 }
 
 /**
@@ -568,23 +547,4 @@ function gateImagined(
     sources: [],
     withheld: `${verdict.reason}:${verdict.detail}`,
   };
-}
-
-/** Plain text of at most 6 whole sentences within 650 characters, for a story bubble. */
-export function cleanStory(raw: string): string {
-  const text = stripMarkdown(raw)
-    .replace(/^\s*(title|story)\s*:.*$/gim, '')
-    .replace(/\s+/g, ' ')
-    .trim()
-    .replace(/^["'“”‘’]+|["'“”‘’]+$/g, '')
-    .trim();
-  const sentences = text.match(/[^.!?…]+(?:[.!?…]+["”’]?|$)/g)?.map((s) => s.trim()) ?? [];
-  let kept = '';
-  for (const sentence of sentences.slice(0, IMAGINE_MAX_SENTENCES)) {
-    const next = kept ? `${kept} ${sentence}` : sentence;
-    if (next.length > IMAGINE_MAX_CHARS) break;
-    kept = next;
-  }
-  // A last sentence cut off by the token limit has no end mark: drop it.
-  return kept.replace(/\s+[^.!?…"”’]*$/, '').trim() || kept;
 }

@@ -11,6 +11,7 @@ import type {
   InputSource,
   JoinResult,
   PipInputEvent,
+  BranchView,
   PipMissed,
   PipSay,
   ServerToClientEvents,
@@ -35,6 +36,7 @@ export class FakePad {
   views: SessionView[] = [];
   says: PipSay[] = [];
   missed: PipMissed[] = [];
+  branches: { ownerId: string; branch: BranchView | null }[] = [];
   private code: string | null = null;
 
   constructor(
@@ -54,6 +56,7 @@ export class FakePad {
     socket.on('session:view', (view) => this.views.push(view));
     socket.on('pip:say', (say) => this.says.push(say));
     socket.on('pip:missed', (missed) => this.missed.push(missed));
+    socket.on('pip:branch', (update) => this.branches.push(update));
     socket.on('connect', () => {
       if (this.code) void this.rejoin(this.code);
     });
@@ -105,6 +108,11 @@ export class FakePad {
     id = labId('in'),
   ): Promise<InputResult> {
     return this.socket.emitWithAck('pad:input', { id, source, at: this.now(), event });
+  }
+
+  /** Back to the film: close this player's branch. */
+  backToFilm(): void {
+    this.socket.emit('pad:branch', { action: 'close' });
   }
 
   /** The pad was hidden (phone locked) or shown again. */

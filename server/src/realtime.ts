@@ -8,6 +8,7 @@ import type { Timeline } from './core/context/timeline.js';
 import type { IntentJudge } from './core/intent/judge.js';
 import { askCommand } from './ask-commands.js';
 import { catchUp, markAway } from './away.js';
+import { closeBranch } from './branch.js';
 import type { Journal } from './core/journal.js';
 import type { TextModel } from './core/ai/model.js';
 import { newCode } from './core/codes.js';
@@ -26,6 +27,7 @@ import {
   broadcast,
   goToLobby,
   checkPredictionReveal,
+  emitBranch,
   positionNow,
   roomOf,
   watchFilm,
@@ -257,6 +259,20 @@ export function registerRealtime(deps: RealtimeDeps): () => void {
       if (missed) socket.emit('pip:missed', missed);
     });
 
+    on('pad:branch', (payload) => {
+      const parsed = schema.branchSchema.safeParse(payload);
+      if (!parsed.success) return invalid('pad:branch');
+      const d = data();
+      const session = sessionOf();
+      if (!session || d?.role !== 'pad' || !session.players.has(d.playerId)) {
+        return ignored('pad:branch', 'not-a-player');
+      }
+      // Back to the film: the branch closes; questions go to the film again.
+      const branch = closeBranch(session, d.playerId);
+      if (!branch) return ignored('pad:branch', 'no-branch');
+      deps.io.to(roomOf(session.code)).emit('pip:branch', { ownerId: d.playerId, branch: null });
+    });
+
     on('pad:away', (payload) => {
       const parsed = schema.awaySchema.safeParse(payload);
       if (!parsed.success) return invalid('pad:away');
@@ -341,10 +357,18 @@ export function registerRealtime(deps: RealtimeDeps): () => void {
       const session = sessionOf();
       if (!session || session.tvSocketId !== socket.id) return ignored('tv:playback', 'not-tv');
       if (parsed.data.contentId !== session.contentId) return ignored('tv:playback', 'other-film');
+      const was = session.playback;
       session.playback = parsed.data;
       session.playbackAt = deps.now();
       checkPredictionReveal(session, flow);
       broadcast(session, flow);
+      // On pause and at the end the TV shows the full comparison, grown to what was watched.
+      const stopped = (parsed.data.paused && !was?.paused) || (parsed.data.ended && !was?.ended);
+      const timeline = deps.timelines?.get(parsed.data.contentId);
+      if (stopped && timeline) {
+        for (const branch of session.branches.filter((b) => b.open))
+          emitBranch(session, branch, timeline, flow);
+      }
     });
 
     on('pad:react', (payload) => {

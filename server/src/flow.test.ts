@@ -7,7 +7,7 @@ import { createFakeTimers } from './core/fake-timers.js';
 import { pipTimerKey } from './core/pip.js';
 import { joinPlayer, type Player } from './core/players.js';
 import type { Content } from './film/content.js';
-import { askPip, goToLobby, type FlowDeps, type PipServer } from './flow.js';
+import { askPip, goToLobby, watchFilm, type FlowDeps, type PipServer } from './flow.js';
 import { LINES } from './lines.js';
 import { createSession, type Session } from './sessions.js';
 import { LIMITS, type PipSay } from './shared/protocol.js';
@@ -321,5 +321,36 @@ describe('askPip with a typed judge (INTENT_JUDGE=typesafe)', () => {
     t.deps.judge = { name: 'test-judge', judge: vi.fn(async () => null) };
     await askPip(t.session, t.sam, 'hold it a sec', 'typed', t.deps).done;
     expect(t.said[0]).toMatchObject({ text: 'A bunny.', source: 'ai' });
+  });
+});
+
+describe('Parallel Stories in the session', () => {
+  it('forgets every branch when the family starts another film, never between films', () => {
+    const other: Content = { ...film, id: 'other-film' };
+    const { deps, session, sam } = setup(
+      createFakeModel(() => ''),
+      { films: [film, other] },
+    );
+    session.branches = [
+      {
+        id: 'b1',
+        ownerId: sam.id,
+        ownerName: sam.name,
+        contentId: film.id,
+        splitSec: 20,
+        inherited: [],
+        premise: 'What if?',
+        changes: ['What if?'],
+        events: [],
+        open: true,
+        createdAt: 0,
+      },
+    ];
+    session.activeBranch = { [sam.id]: 'b1' };
+    goToLobby(session, deps);
+    expect(session.branches).toHaveLength(1); // back in the lobby, the same film may resume
+    watchFilm(session, other.id, deps);
+    expect(session.branches).toEqual([]);
+    expect(session.activeBranch).toEqual({});
   });
 });

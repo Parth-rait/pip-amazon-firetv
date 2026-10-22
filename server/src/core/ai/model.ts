@@ -7,6 +7,7 @@ export interface CompleteInput {
   maxTokens: number;
   temperature: number;
   timeoutMs: number;
+  format?: 'json'; // ask for a JSON reply where the model supports it (Ollama); the caller still validates
 }
 
 export interface TextModel {
@@ -82,6 +83,7 @@ export function createOllamaModel(options: {
             stream: false,
             keep_alive: '30m',
             options: { temperature: input.temperature, num_predict: input.maxTokens },
+            ...(input.format ? { format: input.format } : {}),
             messages: [
               { role: 'system', content: input.system },
               { role: 'user', content: input.user },

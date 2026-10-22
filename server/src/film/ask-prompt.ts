@@ -105,37 +105,75 @@ export function buildGroundedPrompt(input: GroundedPromptInput): { system: strin
   return { system: groundedSystemPrompt(input.simpleFormat), user: lines.join('\n') };
 }
 
-const IMAGINE_SYSTEM = [
-  'You are Pip, a warm storyteller for a family watching a film together.',
-  'Someone asked you to imagine a different version of the story. Write it: 4 to 6 short',
-  'sentences, under 110 words, gentle enough for children, plain text with no title or list.',
-  'Begin with "In Pip\'s version,". Use only the characters, places and things in <facts>; do',
-  'not bring in anything else from the film, even if you know it. It is make-believe: never',
-  'say it is what really happens.',
+const BRANCH_SYSTEM = [
+  'You are Pip, a storyteller for a family watching a film. You write an alternate branch of the',
+  'story, starting at a split point, after one thing changes. Reply with JSON only:',
+  '{"events": ["...", "..."]}. Each event is one or two short sentences in the present tense,',
+  'gentle enough for children. Use only the characters, places and things in <facts> and',
+  '<pip-so-far>; do not bring in anything else from the film, even if you know it. Never describe',
+  "what happens in the real film after the split: everything you write is Pip's version.",
 ].join(' ');
 
 /**
- * "What if...?": an imagined version of the story, from the facts revealed by now only. During
- * the film that is the story so far; at the end it is the whole film.
+ * Parallel Stories: the events of a branch, from the canon revealed by its split only. With
+ * <pip-so-far>, the next events of the same branch.
  */
-export function buildImaginePrompt(input: {
+export function buildBranchPrompt(input: {
   title: string;
   premise: string;
-  positionSec: number;
+  splitSec: number;
   isEnd: boolean;
   facts: { startSec: number; text: string }[];
-  question: string;
+  change: string;
+  sofar: string[];
+  want: string;
 }): { system: string; user: string } {
   const lines = [
     `<title>${inert(input.title)}</title>`,
     input.isEnd
-      ? '<now>the film has ended</now>'
-      : `<now>${formatTime(input.positionSec)}; nothing after this is known</now>`,
+      ? '<split>the end of the film</split>'
+      : `<split>${formatTime(input.splitSec)}; nothing after this is known</split>`,
     `<premise>${inert(input.premise)}</premise>`,
     '<facts>',
     ...input.facts.map((f) => `[${formatTime(f.startSec)}] ${inert(f.text)}`),
     '</facts>',
-    `Imagine: ${inert(input.question)}`,
+    `<change>${inert(input.change)}</change>`,
+    ...(input.sofar.length
+      ? ['<pip-so-far>', ...input.sofar.map((e) => inert(e)), '</pip-so-far>']
+      : []),
+    input.sofar.length
+      ? `Write the next ${input.want} events of Pip's version.`
+      : `Write ${input.want} events: what happens from the split if this changes.`,
   ];
-  return { system: IMAGINE_SYSTEM, user: lines.join('\n') };
+  return { system: BRANCH_SYSTEM, user: lines.join('\n') };
+}
+
+const BRANCH_WHY_SYSTEM = [
+  "You are Pip. Answer in one or two short sentences about Pip's version of the story below,",
+  'which is make-believe. Use only <facts> and <pip-so-far>; say you are not sure if they do not',
+  'tell. Never describe what happens in the real film after the split.',
+].join(' ');
+
+/** "Why?" inside a branch: answered from the branch and the canon before its split. */
+export function buildBranchWhyPrompt(input: {
+  title: string;
+  splitSec: number;
+  facts: { startSec: number; text: string }[];
+  change: string;
+  sofar: string[];
+  question: string;
+}): { system: string; user: string } {
+  const lines = [
+    `<title>${inert(input.title)}</title>`,
+    `<split>${formatTime(input.splitSec)}</split>`,
+    '<facts>',
+    ...input.facts.map((f) => `[${formatTime(f.startSec)}] ${inert(f.text)}`),
+    '</facts>',
+    `<change>${inert(input.change)}</change>`,
+    '<pip-so-far>',
+    ...input.sofar.map((e) => inert(e)),
+    '</pip-so-far>',
+    `Question: ${inert(input.question)}`,
+  ];
+  return { system: BRANCH_WHY_SYSTEM, user: lines.join('\n') };
 }

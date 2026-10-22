@@ -1,6 +1,7 @@
 // The Session type and the in-memory store (PROJECT.md section 4.6).
 import { randomBytes } from 'node:crypto';
 import { isOnline, type Roster } from './core/players.js';
+import type { BranchState } from './branch.js';
 import type { PredictionVotes } from './film/companion.js';
 import type { QuizRun } from './film/quiz.js';
 import {
@@ -11,7 +12,7 @@ import {
   type Stage,
 } from './shared/protocol.js';
 
-export interface Session extends Roster {
+export interface Session extends Roster, BranchState {
   code: string;
   tvKey: string; // 32 hex characters; a TV needs it to take this code back
   tvSocketId: string | null;
@@ -89,6 +90,9 @@ export function createSession(
     revealedPredictions: [],
     reactions: {},
     away: {},
+    branches: [],
+    activeBranch: {},
+    branchSeq: 0,
     updatedAt: now,
   };
 }

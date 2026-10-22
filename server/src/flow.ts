@@ -1,6 +1,22 @@
 // Stage changes and Ask Pip for film night (PROJECT.md section 4.5).
 import type { Server } from 'socket.io';
 import { answerQuestion, recheckAtPosition } from './answer.js';
+import {
+  activeBranch,
+  branchIntent,
+  changeBranch,
+  clearBranches,
+  continueBranch,
+  createBranch,
+  splitReply,
+  toBranchView,
+  whyInBranch,
+  type Branch,
+  type BranchIntent,
+  type BranchReply,
+  type BranchRequest,
+} from './branch.js';
+
 import { runAsk, type AskOutcome } from './core/ai/ask.js';
 import type { AnswerMemory } from './core/ai/answer-memory.js';
 import type { AnswerCache } from './core/context/answer-cache.js';
@@ -99,6 +115,7 @@ export function watchFilm(session: Session, contentId: string, deps: FlowDeps): 
     session.predictionVotes = {};
     session.revealedPredictions = [];
     session.reactions = {};
+    clearBranches(session); // a branch belongs to one film
   } else if (session.playback?.ended) {
     session.playback = null;
   }
@@ -205,14 +222,41 @@ async function answer(
     ...(deps.logText ? { question: text } : {}),
   });
   const timeline = deps.timelines?.get(contentId);
+  const grounded =
+    timeline && hasUsableFacts(timeline, deps.timelinePolicy ?? 'accepted') ? timeline : null;
+  // Parallel Stories: a "what if" opens a branch; with one open, "what happens next" and "why"
+  // stay in it. Questions about the film go to the film as usual.
+  const branch = grounded ? activeBranch(session, player.id, contentId) : null;
+  const intent = grounded ? branchIntent(text, topic, branch !== null) : null;
+  let changed: Branch | null = null;
   let reply: Reply;
   try {
     // Only text the rules could not place waits for the judge; everything else goes straight on.
     const judge = deps.judge && topic === 'other' && via !== 'clarify' ? deps.judge : null;
+    const story =
+      grounded && intent
+        ? await branchStep(
+            intent,
+            branch,
+            {
+              state: session,
+              film,
+              timeline: grounded,
+              ownerId: player.id,
+              ownerName: player.name,
+              positionSec,
+              question: text,
+              aiEnabled: deps.aiEnabled,
+            },
+            deps,
+          )
+        : null;
+    changed = story?.branch ?? null;
     reply =
+      (story ? storyReply(story) : null) ??
       (judge ? await commandChoices(text, judge) : null) ??
-      (timeline && hasUsableFacts(timeline, deps.timelinePolicy ?? 'accepted')
-        ? await groundedReply(session, film, timeline, positionSec, text, via, topic, deps)
+      (grounded
+        ? await groundedReply(session, film, grounded, positionSec, text, via, topic, deps)
         : await notesReply(session, film, positionSec, text, via, topic, deps));
   } finally {
     session.asking = false;
@@ -245,7 +289,54 @@ async function answer(
     ...reply.log,
   });
   deps.io.to(roomOf(session.code)).emit('pip:say', say);
+  if (changed && grounded) emitBranch(session, changed, grounded, deps);
   setPip(session, 'talking', coreDeps(session, deps), TALKING_MS);
+}
+
+async function branchStep(
+  intent: BranchIntent,
+  branch: Branch | null,
+  req: BranchRequest,
+  deps: FlowDeps,
+): Promise<BranchReply> {
+  const story = { model: deps.model, policy: deps.timelinePolicy ?? 'accepted', now: deps.now };
+  if (intent === 'create' || !branch) return createBranch(req, story);
+  if (intent === 'continue') return continueBranch(branch, req, story);
+  if (intent === 'change') return changeBranch(branch, req, story);
+  if (intent === 'why') return whyInBranch(branch, req, story);
+  return splitReply(branch, req.timeline, req.positionSec, story.policy);
+}
+
+function storyReply(story: BranchReply): Reply {
+  return {
+    text: story.text,
+    next:
+      story.source === 'imagined'
+        ? ['What happens next?', 'Where did it split?', 'Why did that happen?']
+        : ['What if it went differently?'],
+    clarify: [],
+    source: story.source,
+    isAnswer: false, // a made-up story never enters the history Pip answers the film from
+    log: story.log,
+  };
+}
+
+/** Sends a branch to the room as screens draw it, cut at what the room has watched now. */
+export function emitBranch(
+  session: Session,
+  branch: Branch,
+  timeline: Timeline,
+  deps: FlowDeps,
+): void {
+  const now = positionNow(session, deps);
+  const watched =
+    session.playback?.ended && now ? now.film.durationSec : (now?.positionSec ?? branch.splitSec);
+  deps.io.to(roomOf(session.code)).emit('pip:branch', {
+    ownerId: branch.ownerId,
+    branch: branch.open
+      ? toBranchView(branch, timeline, watched, deps.timelinePolicy ?? 'accepted')
+      : null,
+  });
 }
 
 /**

@@ -61,7 +61,7 @@ export function routeText(text: string): TextRoute {
 }
 
 const FUTURE =
-  /\b(next|later|going to|gonna|ending|in the end|at the end|end up)\b|\bhow does (it|this|the \w+) end\b|\bwill\b|\bever\b/;
+  /\b(next|later|going to|gonna|ending|in the end|at the end|end up)\b|\bhow does (it|this|the( \w+){1,2}) end\b|\bwill\b|\bever\b/;
 
 // "Does she find the dragon?", "Is Scales still alive?": yes or no about how things turn out. Either
 // answer would tell the story ahead, so these are questions about the future too. "Did" asks the past.

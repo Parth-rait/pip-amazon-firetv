@@ -84,4 +84,8 @@ describe('routeText', () => {
     expect(routeText('Who is she looking for?')).toEqual({ kind: 'question', topic: 'other' });
     expect(routeText('Who is that?')).toEqual({ kind: 'question', topic: 'identify' });
   });
+
+  it('reads "How does the real film end?" as a question about the ending', () => {
+    expect(routeText('How does the real film end?')).toEqual({ kind: 'question', topic: 'future' });
+  });
 });

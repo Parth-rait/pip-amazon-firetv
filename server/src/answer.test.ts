@@ -352,33 +352,53 @@ describe('answerQuestion on a generated timeline', () => {
 });
 
 describe('answerQuestion: what if', () => {
-  const STORY =
-    "In Pip's version, the fox curls up by the lantern. The snow stops falling. The forest is quiet and warm.";
+  const EVENTS = [
+    "In Pip's version, the fox curls up by the lantern.",
+    'The snow stops falling.',
+    'The forest is quiet and warm.',
+  ];
+  const STORY = JSON.stringify({ events: EVENTS });
 
   it('makes up a story from the facts revealed so far only, labelled as imagined', async () => {
     const { deps: d, complete } = deps(STORY);
     const result = await answerQuestion(request('What if the fox stayed home?', 40), d);
     expect(result).toMatchObject({ kind: 'imagined', source: 'imagined', path: 'imagine' });
-    expect(result.text).toBe(STORY);
+    expect(result.text).toBe(EVENTS.join(' '));
     const prompt = complete.mock.calls[0]?.[0] as CompleteInput;
+    expect(prompt.format).toBe('json');
     const later = timeline.facts.filter((f) => f.revealSec > 40);
     for (const fact of later) expect(prompt.user).not.toContain(fact.text);
   });
 
   it('keeps a story that uses a word from later, so a made-up ending cannot give the real one away', async () => {
-    const { deps: d, complete } = deps("In Pip's version, Moss the badger lights the lighthouse.");
+    const { deps: d, complete } = deps(
+      JSON.stringify({
+        events: [
+          "In Pip's version, Moss the badger lights the lighthouse.",
+          'Everyone cheers.',
+          'The end.',
+        ],
+      }),
+    );
     const result = await answerQuestion(request('Give it a better ending', 40), d);
     expect(result).toMatchObject({ kind: 'unknown', text: LINES.imagineWithheld });
-    expect(complete).toHaveBeenCalledTimes(2); // told again once before giving up
     expect(result.withheld).toMatch(/^restricted-term:/);
+    expect(complete).toHaveBeenCalledTimes(2); // told again once before giving up
   });
 
   it('rewrites the ending from the whole film once it is over', async () => {
     const { deps: d, complete } = deps(STORY);
     await answerQuestion(request('Give it a happier ending', timeline.durationSec), d);
     const prompt = complete.mock.calls[0]?.[0] as CompleteInput;
-    expect(prompt.user).toContain('the film has ended');
+    expect(prompt.user).toContain('the end of the film');
     expect(prompt.user).toContain(timeline.facts.at(-1)?.text ?? '');
+  });
+
+  it('refuses prose where the schema asks for events, and says so after one more try', async () => {
+    const { deps: d, complete } = deps('Once upon a time the fox went home.');
+    const result = await answerQuestion(request('What if the fox stayed home?', 40), d);
+    expect(result).toMatchObject({ kind: 'fallback', text: LINES.unparsed });
+    expect(complete).toHaveBeenCalledTimes(2);
   });
 
   it('routes "what if" and "a better ending" to a story, and "how does it end" still to no spoilers', () => {

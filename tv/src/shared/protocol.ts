@@ -4,7 +4,7 @@
 // Edit only this file, then run `npm run sync:shared` to copy it into each package.
 // Types and constants only: no imports, so it compiles in Node, browsers and React Native for Vega.
 
-export const PROTOCOL_VERSION = 9;
+export const PROTOCOL_VERSION = 10;
 
 /** Where the session is in the journey. The server owns it; the TV and pads follow it. */
 export type Stage = 'lobby' | 'watch' | 'quiz' | 'results';
@@ -296,6 +296,26 @@ export interface PipMissed {
   items: { atSec: number; text: string }[]; // at most 4, in story order
 }
 
+/**
+ * Parallel Stories: one viewer's "What if...?" as a branch of the film, split where it was asked.
+ * `film` is the canon up to the split; `after` is the canon after it only as far as the room has
+ * watched (the rest is a count, never text); `pip` is Pip's version. Screens label every line.
+ */
+export interface BranchView {
+  id: string;
+  ownerId: string; // the player exploring it; only their pad shows the map
+  ownerName: string;
+  contentId: string;
+  splitSec: number;
+  premise: string; // the change being explored now
+  changes: string[]; // every premise it has had, oldest first
+  film: { atSec: number; text: string }[]; // The film, up to the split (the last few events)
+  pip: { id: string; order: number; text: string }[]; // Pip's version, in order
+  after: { atSec: number; text: string }[]; // The film after the split, watched part only
+  unseenAfter: number; // film events after the split not watched yet
+  open: boolean;
+}
+
 /** Pip says hello on the TV (lobby only) when a new player joins. */
 export interface PipHello {
   playerId: string;
@@ -339,6 +359,7 @@ export interface ClientToServerEvents {
   'pad:react': (payload: { kind: ReactionKind }) => void; // kids mode, watch stage only
   'pad:predict': (payload: { id: string; choice: number }) => void; // kids mode, while that prediction is open
   'pad:away': (payload: { away: boolean }) => void; // the pad was hidden (phone locked) or shown again
+  'pad:branch': (payload: { action: 'close' }) => void; // Back to the film: close my branch
 }
 
 /** Events the server sends to the TV and pads of one session. */
@@ -349,6 +370,9 @@ export interface ServerToClientEvents {
   'pip:hello': (hello: PipHello) => void; // to the TV and every pad, when a new player joins
   'pip:react': (reaction: { playerId: string; kind: ReactionKind }) => void; // to the room
   'pip:missed': (missed: PipMissed) => void; // to one returning pad only
+  // A branch changed, or the TV paused or finished (the comparison grows with what was watched).
+  // To the room: the owner's pad draws the map, the TV the comparison; branch null when closed.
+  'pip:branch': (update: { ownerId: string; branch: BranchView | null }) => void;
 }
 
 export const LIMITS = {
