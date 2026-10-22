@@ -1,0 +1,2367 @@
+{
+  "schemaVersion": 1,
+  "assetId": "sintel",
+  "generator": "pip-video-understanding/1 qwen3-vl:4b-instruct@ee4b975b58c1",
+  "createdAt": "2026-10-17T15:27:31.212Z",
+  "method": "106 frames (scenes.json ffmpeg-scdet threshold=3 min-scene=1.5s) described by qwen3-vl:4b-instruct with the running character roster; 46 whisper.cpp lines; 11 name checks",
+  "entities": [
+    {
+      "id": "c1",
+      "name": "young woman with red hair",
+      "aliases": [],
+      "firstSeenSec": 28.5,
+      "intro": "A young woman with red hair, first seen in a snowy mountain pass with misty peaks at 0:28."
+    },
+    {
+      "id": "c2",
+      "name": "bald man in dark clothes",
+      "aliases": [],
+      "firstSeenSec": 68.708,
+      "intro": "A bald man in dark clothes, first seen in a snowy, rocky terrain with misty background at 1:08."
+    },
+    {
+      "id": "c3",
+      "name": "large figure in apron",
+      "aliases": [],
+      "firstSeenSec": 259.833,
+      "intro": "A large figure in apron, first seen in a sunlit alley with wooden stalls and crates at 4:19."
+    },
+    {
+      "id": "c4",
+      "name": "woman in long dark dress",
+      "aliases": [],
+      "firstSeenSec": 259.833,
+      "intro": "A woman in long dark dress, first seen in a sunlit alley with wooden stalls and crates at 4:19."
+    },
+    {
+      "id": "c5",
+      "name": "small grey reptilian with large eyes",
+      "aliases": [],
+      "firstSeenSec": 279.417,
+      "intro": "A small grey reptilian with large eyes, first seen in a high above a building under construction at 4:39."
+    }
+  ],
+  "facts": [
+    {
+      "id": "ev-fr-00055",
+      "startSec": 0,
+      "revealSec": 5.5,
+      "kind": "event",
+      "text": "Snow-covered landscape with text overlay. Text on screen: \"THE BLENDER FOUNDATION PRESENTS\".",
+      "entities": [],
+      "spoilerTerms": [
+        "snow"
+      ],
+      "evidence": [
+        "fr-00055"
+      ],
+      "confidence": 0.7
+    },
+    {
+      "id": "ev-fr-00085",
+      "startSec": 0,
+      "revealSec": 8.5,
+      "kind": "event",
+      "text": "Snow-covered mountains loom in a misty valley. Text on screen: \"THE DURIAN OPEN MOVIE PROJECT\".",
+      "entities": [],
+      "spoilerTerms": [
+        "mountain"
+      ],
+      "evidence": [
+        "fr-00085"
+      ],
+      "confidence": 0.7
+    },
+    {
+      "id": "ap-c1",
+      "startSec": 0,
+      "revealSec": 28.5,
+      "kind": "appearance",
+      "text": "A young woman with red hair appears for the first time: walking through snow with stick.",
+      "entities": [
+        "c1"
+      ],
+      "spoilerTerms": [
+        "woman",
+        "hair"
+      ],
+      "evidence": [
+        "fr-00285"
+      ],
+      "confidence": 0.5
+    },
+    {
+      "id": "ev-fr-00285",
+      "startSec": 0,
+      "revealSec": 28.5,
+      "kind": "event",
+      "text": "A lone figure walks through deep snow. Also visible: footprints in snow, rocky outcrop, snow-covered cliffs.",
+      "entities": [
+        "c1"
+      ],
+      "spoilerTerms": [
+        "figure",
+        "footprint",
+        "outcrop",
+        "cliff"
+      ],
+      "evidence": [
+        "fr-00285"
+      ],
+      "confidence": 0.5
+    },
+    {
+      "id": "ev-fr-00319",
+      "startSec": 31.333,
+      "revealSec": 31.917,
+      "kind": "event",
+      "text": "A lone figure stands in snow holding a sword. Also visible: sword, rocks, mountain.",
+      "entities": [
+        "c1"
+      ],
+      "spoilerTerms": [
+        "sword",
+        "rock"
+      ],
+      "evidence": [
+        "fr-00319"
+      ],
+      "confidence": 0.7
+    },
+    {
+      "id": "ev-fr-00358",
+      "startSec": 31.333,
+      "revealSec": 35.833,
+      "kind": "event",
+      "text": "Small figure holds sword to eye. Also visible: sword, snow.",
+      "entities": [
+        "c1"
+      ],
+      "spoilerTerms": [],
+      "evidence": [
+        "fr-00358"
+      ],
+      "confidence": 0.7
+    },
+    {
+      "id": "ev-fr-00398",
+      "startSec": 31.333,
+      "revealSec": 39.833,
+      "kind": "event",
+      "text": "A young woman stands in a snowy, misty landscape. Also visible: sword, snow-covered rocks, foggy sky.",
+      "entities": [
+        "c1"
+      ],
+      "spoilerTerms": [
+        "sky"
+      ],
+      "evidence": [
+        "fr-00398"
+      ],
+      "confidence": 0.7
+    },
+    {
+      "id": "ap-c2",
+      "startSec": 68.208,
+      "revealSec": 68.708,
+      "kind": "appearance",
+      "text": "A bald man in dark clothes appears for the first time: stands over fallen figure.",
+      "entities": [
+        "c2"
+      ],
+      "spoilerTerms": [
+        "man"
+      ],
+      "evidence": [
+        "fr-00687"
+      ],
+      "confidence": 0.5
+    },
+    {
+      "id": "st-fr-00687",
+      "startSec": 68.208,
+      "revealSec": 68.708,
+      "kind": "setting",
+      "text": "The scene is in a snowy, rocky terrain with misty background.",
+      "entities": [],
+      "spoilerTerms": [],
+      "evidence": [
+        "fr-00687"
+      ],
+      "confidence": 0.7
+    },
+    {
+      "id": "ev-fr-00687",
+      "startSec": 68.208,
+      "revealSec": 68.708,
+      "kind": "event",
+      "text": "One person stands over another who lies on snow-covered ground. Also visible: sword, long staff, rocky outcrop, snowy ground.",
+      "entities": [
+        "c1",
+        "c2"
+      ],
+      "spoilerTerms": [
+        "ground",
+        "staff"
+      ],
+      "evidence": [
+        "fr-00687"
+      ],
+      "confidence": 0.5
+    },
+    {
+      "id": "ev-fr-00704",
+      "startSec": 68.208,
+      "revealSec": 70.417,
+      "kind": "event",
+      "text": "Bald man presses hand on small figure. Also visible: sword, wall.",
+      "entities": [
+        "c1",
+        "c2"
+      ],
+      "spoilerTerms": [
+        "hand",
+        "wall"
+      ],
+      "evidence": [
+        "fr-00704"
+      ],
+      "confidence": 0.7
+    },
+    {
+      "id": "ev-fr-00727",
+      "startSec": 68.208,
+      "revealSec": 72.708,
+      "kind": "event",
+      "text": "A woman holds a sword while a man leans over her. Also visible: sword, weapon, armor, belt.",
+      "entities": [
+        "c1",
+        "c2"
+      ],
+      "spoilerTerms": [
+        "weapon",
+        "armor",
+        "belt"
+      ],
+      "evidence": [
+        "fr-00727"
+      ],
+      "confidence": 0.7
+    },
+    {
+      "id": "st-fr-00746",
+      "startSec": 74.042,
+      "revealSec": 74.625,
+      "kind": "setting",
+      "text": "The scene is in a snowy ground with dark blade.",
+      "entities": [],
+      "spoilerTerms": [],
+      "evidence": [
+        "fr-00746"
+      ],
+      "confidence": 0.7
+    },
+    {
+      "id": "ev-fr-00746",
+      "startSec": 74.042,
+      "revealSec": 74.625,
+      "kind": "event",
+      "text": "Young woman lies on snow holding sword. Also visible: sword, brown coat, snow.",
+      "entities": [
+        "c1"
+      ],
+      "spoilerTerms": [
+        "coat"
+      ],
+      "evidence": [
+        "fr-00746"
+      ],
+      "confidence": 0.7
+    },
+    {
+      "id": "st-fr-00820",
+      "startSec": 81.458,
+      "revealSec": 82,
+      "kind": "setting",
+      "text": "The scene is in a snow-covered mountain valley with fog.",
+      "entities": [],
+      "spoilerTerms": [
+        "fog"
+      ],
+      "evidence": [
+        "fr-00820"
+      ],
+      "confidence": 0.7
+    },
+    {
+      "id": "ev-fr-00820",
+      "startSec": 81.458,
+      "revealSec": 82,
+      "kind": "event",
+      "text": "A lone cabin glows warmly in the snow. Also visible: glowing cabin, snowy mountains, fog, rocks.",
+      "entities": [],
+      "spoilerTerms": [
+        "cabin"
+      ],
+      "evidence": [
+        "fr-00820"
+      ],
+      "confidence": 0.7
+    },
+    {
+      "id": "st-fr-00930",
+      "startSec": 88.542,
+      "revealSec": 93,
+      "kind": "setting",
+      "text": "The scene is in a snowy mountainous terrain with mist.",
+      "entities": [],
+      "spoilerTerms": [],
+      "evidence": [
+        "fr-00930"
+      ],
+      "confidence": 0.7
+    },
+    {
+      "id": "ev-fr-00930",
+      "startSec": 88.542,
+      "revealSec": 93,
+      "kind": "event",
+      "text": "A young woman stands in a snowy landscape holding a sword. Also visible: sword, tree symbol logo, text 'SINTEL'. Text on screen: \"SINTEL\".",
+      "entities": [
+        "c1"
+      ],
+      "spoilerTerms": [
+        "logo",
+        "sintel"
+      ],
+      "evidence": [
+        "fr-00930"
+      ],
+      "confidence": 0.7
+    },
+    {
+      "id": "ev-fr-00970",
+      "startSec": 88.542,
+      "revealSec": 97,
+      "kind": "event",
+      "text": "Young woman sits on snow holding sword. Also visible: sword, tree symbol logo, text 'SINTEL'. Text on screen: \"SINTEL\".",
+      "entities": [
+        "c1"
+      ],
+      "spoilerTerms": [],
+      "evidence": [
+        "fr-00970"
+      ],
+      "confidence": 0.7
+    },
+    {
+      "id": "ev-fr-01010",
+      "startSec": 88.542,
+      "revealSec": 101,
+      "kind": "event",
+      "text": "A lone figure lies motionless in the snow.",
+      "entities": [],
+      "spoilerTerms": [],
+      "evidence": [
+        "fr-01010"
+      ],
+      "confidence": 0.7
+    },
+    {
+      "id": "st-fr-01057",
+      "startSec": 101.208,
+      "revealSec": 105.708,
+      "kind": "setting",
+      "text": "The scene is in a dark, dimly lit interior space.",
+      "entities": [],
+      "spoilerTerms": [],
+      "evidence": [
+        "fr-01057"
+      ],
+      "confidence": 0.7
+    },
+    {
+      "id": "ev-fr-01057",
+      "startSec": 101.208,
+      "revealSec": 105.708,
+      "kind": "event",
+      "text": "A small fire burns in the center of a circle. Also visible: small fire, round stone, metal objects, wooden containers.",
+      "entities": [],
+      "spoilerTerms": [
+        "fire",
+        "stone",
+        "container"
+      ],
+      "evidence": [
+        "fr-01057"
+      ],
+      "confidence": 0.7
+    },
+    {
+      "id": "dl-ln-01069",
+      "startSec": 106.94,
+      "revealSec": 109.44,
+      "kind": "dialogue",
+      "text": "Someone says: \"This blade has a dark past.\"",
+      "entities": [],
+      "spoilerTerms": [],
+      "evidence": [
+        "ln-01069"
+      ],
+      "confidence": 0.85
+    },
+    {
+      "id": "ev-fr-01138",
+      "startSec": 109.333,
+      "revealSec": 113.833,
+      "kind": "event",
+      "text": "A young woman lies on the ground while a bald man stands over her with a sword. Also visible: sword with ornate hilt, ornate wall panel, furniture or structure.",
+      "entities": [
+        "c1",
+        "c2"
+      ],
+      "spoilerTerms": [
+        "hilt",
+        "panel"
+      ],
+      "evidence": [
+        "fr-01138"
+      ],
+      "confidence": 0.7
+    },
+    {
+      "id": "dl-ln-01115",
+      "startSec": 111.54,
+      "revealSec": 114.14,
+      "kind": "dialogue",
+      "text": "Someone says: \"It has shed much innocent blood.\"",
+      "entities": [
+        "c1",
+        "c2"
+      ],
+      "spoilerTerms": [
+        "blood"
+      ],
+      "evidence": [
+        "ln-01115"
+      ],
+      "confidence": 0.85
+    },
+    {
+      "id": "ev-fr-01164",
+      "startSec": 115.833,
+      "revealSec": 116.417,
+      "kind": "event",
+      "text": "A man stirs a pot over a fire while a woman watches. Also visible: pot, fire, bowl, spoon.",
+      "entities": [
+        "c1",
+        "c2"
+      ],
+      "spoilerTerms": [
+        "pot",
+        "bowl",
+        "spoon"
+      ],
+      "evidence": [
+        "fr-01164"
+      ],
+      "confidence": 0.7
+    },
+    {
+      "id": "dl-ln-01177",
+      "startSec": 117.72,
+      "revealSec": 121.44,
+      "kind": "dialogue",
+      "text": "Someone says: \"You're a fool for traveling alone, so completely unprepared.\"",
+      "entities": [
+        "c1",
+        "c2"
+      ],
+      "spoilerTerms": [],
+      "evidence": [
+        "ln-01177"
+      ],
+      "confidence": 0.85
+    },
+    {
+      "id": "st-fr-01186",
+      "startSec": 118.125,
+      "revealSec": 118.625,
+      "kind": "setting",
+      "text": "The scene is in a dark room with faint glow.",
+      "entities": [],
+      "spoilerTerms": [],
+      "evidence": [
+        "fr-01186"
+      ],
+      "confidence": 0.7
+    },
+    {
+      "id": "ev-fr-01186",
+      "startSec": 118.125,
+      "revealSec": 118.625,
+      "kind": "event",
+      "text": "Young woman closes her eyes in dim light.",
+      "entities": [
+        "c1"
+      ],
+      "spoilerTerms": [],
+      "evidence": [
+        "fr-01186"
+      ],
+      "confidence": 0.7
+    },
+    {
+      "id": "st-fr-01206",
+      "startSec": 120.042,
+      "revealSec": 120.625,
+      "kind": "setting",
+      "text": "The scene is in a dimly lit, possibly indoor or camp setting.",
+      "entities": [],
+      "spoilerTerms": [],
+      "evidence": [
+        "fr-01206"
+      ],
+      "confidence": 0.7
+    },
+    {
+      "id": "ev-fr-01206",
+      "startSec": 120.042,
+      "revealSec": 120.625,
+      "kind": "event",
+      "text": "A man pours liquid into a bowl while a woman watches. Also visible: ladle, bowl, small pot, fingers with tattoos.",
+      "entities": [
+        "c1",
+        "c2"
+      ],
+      "spoilerTerms": [
+        "ladle",
+        "finger"
+      ],
+      "evidence": [
+        "fr-01206"
+      ],
+      "confidence": 0.7
+    },
+    {
+      "id": "dl-ln-01214",
+      "startSec": 121.44,
+      "revealSec": 125.04,
+      "kind": "dialogue",
+      "text": "Someone says: \"You're lucky your blood's still flowing.\"",
+      "entities": [
+        "c1",
+        "c2"
+      ],
+      "spoilerTerms": [],
+      "evidence": [
+        "ln-01214"
+      ],
+      "confidence": 0.85
+    },
+    {
+      "id": "ev-fr-01237",
+      "startSec": 123.125,
+      "revealSec": 123.708,
+      "kind": "event",
+      "text": "Woman extends hand toward man holding sword. Also visible: sword, hand, dark clothing, red hair.",
+      "entities": [
+        "c1",
+        "c2"
+      ],
+      "spoilerTerms": [
+        "clothing"
+      ],
+      "evidence": [
+        "fr-01237"
+      ],
+      "confidence": 0.7
+    },
+    {
+      "id": "dl-ln-01250",
+      "startSec": 125.04,
+      "revealSec": 127.32,
+      "kind": "dialogue",
+      "text": "Someone says: \"Thank you.\"",
+      "entities": [
+        "c1",
+        "c2"
+      ],
+      "spoilerTerms": [],
+      "evidence": [
+        "ln-01250"
+      ],
+      "confidence": 0.85
+    },
+    {
+      "id": "ev-fr-01268",
+      "startSec": 126.333,
+      "revealSec": 126.833,
+      "kind": "event",
+      "text": "Two characters are inside a tent near a fire. Also visible: fire, hanging decorations, wooden structure, bowl.",
+      "entities": [
+        "c1",
+        "c2"
+      ],
+      "spoilerTerms": [
+        "decoration"
+      ],
+      "evidence": [
+        "fr-01268"
+      ],
+      "confidence": 0.7
+    },
+    {
+      "id": "ev-fr-01308",
+      "startSec": 126.333,
+      "revealSec": 130.833,
+      "kind": "event",
+      "text": "Two figures sit opposite each other around a fire. Also visible: fire, sword, staff, hanging shells.",
+      "entities": [
+        "c1",
+        "c2"
+      ],
+      "spoilerTerms": [
+        "shell"
+      ],
+      "evidence": [
+        "fr-01308"
+      ],
+      "confidence": 0.7
+    },
+    {
+      "id": "dl-ln-01273",
+      "startSec": 127.32,
+      "revealSec": 132.96,
+      "kind": "dialogue",
+      "text": "Someone says: \"So what brings you to the land of the gatekeepers?\"",
+      "entities": [
+        "c1",
+        "c2"
+      ],
+      "spoilerTerms": [],
+      "evidence": [
+        "ln-01273"
+      ],
+      "confidence": 0.85
+    },
+    {
+      "id": "dl-ln-01330",
+      "startSec": 132.96,
+      "revealSec": 137.6,
+      "kind": "dialogue",
+      "text": "Someone says: \"Um, I'm searching for someone.\"",
+      "entities": [],
+      "spoilerTerms": [],
+      "evidence": [
+        "ln-01330"
+      ],
+      "confidence": 0.85
+    },
+    {
+      "id": "dl-ln-01376",
+      "startSec": 137.6,
+      "revealSec": 143.7,
+      "kind": "dialogue",
+      "text": "Someone says: \"Someone very dear, a kindred spirit, a dragon.\"",
+      "entities": [
+        "c1"
+      ],
+      "spoilerTerms": [
+        "dragon"
+      ],
+      "evidence": [
+        "ln-01376"
+      ],
+      "confidence": 0.85
+    },
+    {
+      "id": "st-fr-01415",
+      "startSec": 141,
+      "revealSec": 141.5,
+      "kind": "setting",
+      "text": "The scene is in a dimly lit interior space.",
+      "entities": [],
+      "spoilerTerms": [],
+      "evidence": [
+        "fr-01415"
+      ],
+      "confidence": 0.7
+    },
+    {
+      "id": "ev-fr-01415",
+      "startSec": 141,
+      "revealSec": 141.5,
+      "kind": "event",
+      "text": "Young woman with red hair holds sword. Also visible: sword, sword hilt.",
+      "entities": [
+        "c1"
+      ],
+      "spoilerTerms": [],
+      "evidence": [
+        "fr-01415"
+      ],
+      "confidence": 0.7
+    },
+    {
+      "id": "ev-fr-01455",
+      "startSec": 141,
+      "revealSec": 145.5,
+      "kind": "event",
+      "text": "Young woman with red hair looks down intently.",
+      "entities": [
+        "c1"
+      ],
+      "spoilerTerms": [],
+      "evidence": [
+        "fr-01455"
+      ],
+      "confidence": 0.7
+    },
+    {
+      "id": "ev-fr-01510",
+      "startSec": 141,
+      "revealSec": 151,
+      "kind": "event",
+      "text": "A cityscape under a dark, cloudy sky. Also visible: Ruined buildings, Broken tower, Overcast sky.",
+      "entities": [],
+      "spoilerTerms": [
+        "cityscape",
+        "building",
+        "tower"
+      ],
+      "evidence": [
+        "fr-01510"
+      ],
+      "confidence": 0.7
+    },
+    {
+      "id": "ev-fr-01526",
+      "startSec": 141,
+      "revealSec": 152.625,
+      "kind": "event",
+      "text": "A vast city sprawls under a hazy sky. Also visible: Cityscape with dense buildings, Tower in the distance, Mountain-like structure with stairs, Hazy, overcast sky.",
+      "entities": [],
+      "spoilerTerms": [],
+      "evidence": [
+        "fr-01526"
+      ],
+      "confidence": 0.7
+    },
+    {
+      "id": "dl-ln-01477",
+      "startSec": 147.72,
+      "revealSec": 150.88,
+      "kind": "dialogue",
+      "text": "Someone says: \"A dangerous quest for a lone hunter.\"",
+      "entities": [],
+      "spoilerTerms": [],
+      "evidence": [
+        "ln-01477"
+      ],
+      "confidence": 0.85
+    },
+    {
+      "id": "dl-ln-01509",
+      "startSec": 150.88,
+      "revealSec": 154.72,
+      "kind": "dialogue",
+      "text": "Someone says: \"I've been alone for as long as I can remember.\"",
+      "entities": [],
+      "spoilerTerms": [],
+      "evidence": [
+        "ln-01509"
+      ],
+      "confidence": 0.85
+    },
+    {
+      "id": "st-fr-01571",
+      "startSec": 155.833,
+      "revealSec": 157.125,
+      "kind": "setting",
+      "text": "The scene is in a dilapidated alleyway between stone buildings.",
+      "entities": [],
+      "spoilerTerms": [],
+      "evidence": [
+        "fr-01571"
+      ],
+      "confidence": 0.7
+    },
+    {
+      "id": "ev-fr-01571",
+      "startSec": 155.833,
+      "revealSec": 157.125,
+      "kind": "event",
+      "text": "A young woman with red hair stands in a narrow alleyway. Also visible: broken wooden planks, cracked stone pavement, wooden door, red-tiled roof.",
+      "entities": [
+        "c1"
+      ],
+      "spoilerTerms": [
+        "plank",
+        "pavement",
+        "door",
+        "roof"
+      ],
+      "evidence": [
+        "fr-01571"
+      ],
+      "confidence": 0.7
+    },
+    {
+      "id": "st-fr-01635",
+      "startSec": 162.083,
+      "revealSec": 163.5,
+      "kind": "setting",
+      "text": "The scene is in a rustic village with wooden buildings.",
+      "entities": [],
+      "spoilerTerms": [],
+      "evidence": [
+        "fr-01635"
+      ],
+      "confidence": 0.7
+    },
+    {
+      "id": "ev-fr-01635",
+      "startSec": 162.083,
+      "revealSec": 163.5,
+      "kind": "event",
+      "text": "A young woman holds a sword as a bald man grabs her arm. Also visible: sword, wooden buildings, red roof.",
+      "entities": [
+        "c1",
+        "c2"
+      ],
+      "spoilerTerms": [],
+      "evidence": [
+        "fr-01635"
+      ],
+      "confidence": 0.7
+    },
+    {
+      "id": "ev-fr-01667",
+      "startSec": 162.083,
+      "revealSec": 166.708,
+      "kind": "event",
+      "text": "Young woman holds sword while looking down. Also visible: sword, worn gloves, wooden structure.",
+      "entities": [
+        "c1"
+      ],
+      "spoilerTerms": [
+        "glove"
+      ],
+      "evidence": [
+        "fr-01667"
+      ],
+      "confidence": 0.7
+    },
+    {
+      "id": "ev-fr-01706",
+      "startSec": 162.083,
+      "revealSec": 170.625,
+      "kind": "event",
+      "text": "Young woman stands in front of wooden structure. Also visible: wooden building, stacked crates, stone wall.",
+      "entities": [
+        "c1"
+      ],
+      "spoilerTerms": [
+        "crate"
+      ],
+      "evidence": [
+        "fr-01706"
+      ],
+      "confidence": 0.7
+    },
+    {
+      "id": "ev-fr-01738",
+      "startSec": 162.083,
+      "revealSec": 173.833,
+      "kind": "event",
+      "text": "A young woman holds a spiky fruit. Also visible: spiky fruit, wooden beams, stone walls.",
+      "entities": [
+        "c1"
+      ],
+      "spoilerTerms": [
+        "fruit",
+        "beam"
+      ],
+      "evidence": [
+        "fr-01738"
+      ],
+      "confidence": 0.7
+    },
+    {
+      "id": "st-fr-01781",
+      "startSec": 176.417,
+      "revealSec": 178.125,
+      "kind": "setting",
+      "text": "The scene is in a dusty, sunlit alleyway between old buildings.",
+      "entities": [],
+      "spoilerTerms": [],
+      "evidence": [
+        "fr-01781"
+      ],
+      "confidence": 0.7
+    },
+    {
+      "id": "ev-fr-01781",
+      "startSec": 176.417,
+      "revealSec": 178.125,
+      "kind": "event",
+      "text": "A young woman with red hair runs through a narrow alley. Also visible: broken bricks, wooden crates, stacked barrels, wooden beams.",
+      "entities": [
+        "c1"
+      ],
+      "spoilerTerms": [
+        "brick",
+        "barrel"
+      ],
+      "evidence": [
+        "fr-01781"
+      ],
+      "confidence": 0.7
+    },
+    {
+      "id": "ev-fr-01815",
+      "startSec": 180.083,
+      "revealSec": 181.5,
+      "kind": "event",
+      "text": "Young woman with red hair stands on rooftop. Also visible: sword, brick roof, wooden structure, bucket.",
+      "entities": [
+        "c1"
+      ],
+      "spoilerTerms": [
+        "bucket"
+      ],
+      "evidence": [
+        "fr-01815"
+      ],
+      "confidence": 0.7
+    },
+    {
+      "id": "st-fr-01832",
+      "startSec": 182,
+      "revealSec": 183.208,
+      "kind": "setting",
+      "text": "The scene is in a stone roof with blood stains.",
+      "entities": [],
+      "spoilerTerms": [],
+      "evidence": [
+        "fr-01832"
+      ],
+      "confidence": 0.7
+    },
+    {
+      "id": "ev-fr-01832",
+      "startSec": 182,
+      "revealSec": 183.208,
+      "kind": "event",
+      "text": "A creature lies injured on a roof. Also visible: blood, stone roof, stone wall.",
+      "entities": [],
+      "spoilerTerms": [
+        "creature"
+      ],
+      "evidence": [
+        "fr-01832"
+      ],
+      "confidence": 0.7
+    },
+    {
+      "id": "st-fr-01851",
+      "startSec": 184.375,
+      "revealSec": 185.125,
+      "kind": "setting",
+      "text": "The scene is in a rustic stone building interior.",
+      "entities": [],
+      "spoilerTerms": [],
+      "evidence": [
+        "fr-01851"
+      ],
+      "confidence": 0.7
+    },
+    {
+      "id": "ev-fr-01851",
+      "startSec": 184.375,
+      "revealSec": 185.125,
+      "kind": "event",
+      "text": "Young woman stands near stone wall. Also visible: stone wall, wooden structure, red tiled roof.",
+      "entities": [
+        "c1"
+      ],
+      "spoilerTerms": [],
+      "evidence": [
+        "fr-01851"
+      ],
+      "confidence": 0.7
+    },
+    {
+      "id": "ev-fr-01883",
+      "startSec": 186.708,
+      "revealSec": 188.333,
+      "kind": "event",
+      "text": "A small dragon lies on a roof with blood on its wings. Also visible: blood-stained wings, stone roof tiles, stone wall.",
+      "entities": [],
+      "spoilerTerms": [
+        "wing",
+        "tile"
+      ],
+      "evidence": [
+        "fr-01883"
+      ],
+      "confidence": 0.7
+    },
+    {
+      "id": "ev-fr-01903",
+      "startSec": 189.792,
+      "revealSec": 190.333,
+      "kind": "event",
+      "text": "Young woman with red hair holds a sword. Also visible: sword, stone wall.",
+      "entities": [
+        "c1"
+      ],
+      "spoilerTerms": [],
+      "evidence": [
+        "fr-01903"
+      ],
+      "confidence": 0.7
+    },
+    {
+      "id": "st-fr-01924",
+      "startSec": 191.875,
+      "revealSec": 192.417,
+      "kind": "setting",
+      "text": "The scene is in a stone alley with tiled roof.",
+      "entities": [],
+      "spoilerTerms": [],
+      "evidence": [
+        "fr-01924"
+      ],
+      "confidence": 0.7
+    },
+    {
+      "id": "ev-fr-01924",
+      "startSec": 191.875,
+      "revealSec": 192.417,
+      "kind": "event",
+      "text": "Woman kneels beside a dead dragon. Also visible: bloodied dragon, stone wall, cobblestone ground, tiled roof.",
+      "entities": [
+        "c1"
+      ],
+      "spoilerTerms": [],
+      "evidence": [
+        "fr-01924"
+      ],
+      "confidence": 0.7
+    },
+    {
+      "id": "st-fr-01952",
+      "startSec": 194.625,
+      "revealSec": 195.208,
+      "kind": "setting",
+      "text": "The scene is in a stone rooftop with broken tiles.",
+      "entities": [],
+      "spoilerTerms": [],
+      "evidence": [
+        "fr-01952"
+      ],
+      "confidence": 0.7
+    },
+    {
+      "id": "ev-fr-01952",
+      "startSec": 194.625,
+      "revealSec": 195.208,
+      "kind": "event",
+      "text": "A small creature looks up at a reaching hand. Also visible: hand reaching forward, small creature with wings, stone wall, shattered roof tiles.",
+      "entities": [],
+      "spoilerTerms": [],
+      "evidence": [
+        "fr-01952"
+      ],
+      "confidence": 0.7
+    },
+    {
+      "id": "dl-ln-01955",
+      "startSec": 195.54,
+      "revealSec": 196.38,
+      "kind": "dialogue",
+      "text": "Someone says: \"Shh.\"",
+      "entities": [],
+      "spoilerTerms": [],
+      "evidence": [
+        "ln-01955"
+      ],
+      "confidence": 0.85
+    },
+    {
+      "id": "st-fr-01969",
+      "startSec": 196.417,
+      "revealSec": 196.917,
+      "kind": "setting",
+      "text": "The scene is in a stone wall background.",
+      "entities": [],
+      "spoilerTerms": [],
+      "evidence": [
+        "fr-01969"
+      ],
+      "confidence": 0.7
+    },
+    {
+      "id": "ev-fr-01969",
+      "startSec": 196.417,
+      "revealSec": 196.917,
+      "kind": "event",
+      "text": "Young woman with red hair holds a sword. Also visible: sword, stone wall.",
+      "entities": [
+        "c1"
+      ],
+      "spoilerTerms": [],
+      "evidence": [
+        "fr-01969"
+      ],
+      "confidence": 0.7
+    },
+    {
+      "id": "ev-fr-01983",
+      "startSec": 196.417,
+      "revealSec": 198.333,
+      "kind": "event",
+      "text": "A small creature with wings and red markings is held by a hand. Also visible: small creature with wings, hand reaching down, stone wall, tiled roof.",
+      "entities": [],
+      "spoilerTerms": [],
+      "evidence": [
+        "fr-01983"
+      ],
+      "confidence": 0.7
+    },
+    {
+      "id": "ev-fr-02009",
+      "startSec": 196.417,
+      "revealSec": 200.917,
+      "kind": "event",
+      "text": "A hand reaches toward a small dragon-like creature. Also visible: Hand with gloves, Small dragon-like creature, Stone roof tiles, Stone wall.",
+      "entities": [],
+      "spoilerTerms": [],
+      "evidence": [
+        "fr-02009"
+      ],
+      "confidence": 0.7
+    },
+    {
+      "id": "ev-fr-02037",
+      "startSec": 203.125,
+      "revealSec": 203.708,
+      "kind": "event",
+      "text": "Young woman with red hair holds a sword. Also visible: sword, stone wall.",
+      "entities": [
+        "c1"
+      ],
+      "spoilerTerms": [],
+      "evidence": [
+        "fr-02037"
+      ],
+      "confidence": 0.7
+    },
+    {
+      "id": "st-fr-02065",
+      "startSec": 205,
+      "revealSec": 206.5,
+      "kind": "setting",
+      "text": "The scene is in a ruined stone room with scattered debris.",
+      "entities": [],
+      "spoilerTerms": [],
+      "evidence": [
+        "fr-02065"
+      ],
+      "confidence": 0.7
+    },
+    {
+      "id": "ev-fr-02065",
+      "startSec": 205,
+      "revealSec": 206.5,
+      "kind": "event",
+      "text": "Young woman reads while bald man stands nearby. Also visible: book, sword, stone blocks, basket.",
+      "entities": [
+        "c1",
+        "c2"
+      ],
+      "spoilerTerms": [
+        "book",
+        "block",
+        "basket"
+      ],
+      "evidence": [
+        "fr-02065"
+      ],
+      "confidence": 0.7
+    },
+    {
+      "id": "ev-fr-02095",
+      "startSec": 205,
+      "revealSec": 209.5,
+      "kind": "event",
+      "text": "Young woman sits on floor with sword, bald man lies nearby. Also visible: sword, stone blocks, basket, rolled scroll.",
+      "entities": [
+        "c1",
+        "c2"
+      ],
+      "spoilerTerms": [
+        "scroll"
+      ],
+      "evidence": [
+        "fr-02095"
+      ],
+      "confidence": 0.7
+    },
+    {
+      "id": "dl-ln-02065",
+      "startSec": 206.54,
+      "revealSec": 211.54,
+      "kind": "dialogue",
+      "text": "Someone says: \"Shh, shh, shh. We're almost done. Hey, sit still.\"",
+      "entities": [
+        "c1",
+        "c2"
+      ],
+      "spoilerTerms": [],
+      "evidence": [
+        "ln-02065"
+      ],
+      "confidence": 0.85
+    },
+    {
+      "id": "st-fr-02158",
+      "startSec": 214.917,
+      "revealSec": 215.833,
+      "kind": "relation",
+      "text": "Back in a dimly lit, rocky interior space, last shown at 1:45.",
+      "entities": [],
+      "spoilerTerms": [],
+      "evidence": [
+        "fr-02158"
+      ],
+      "confidence": 0.7
+    },
+    {
+      "id": "ev-fr-02158",
+      "startSec": 214.917,
+      "revealSec": 215.833,
+      "kind": "event",
+      "text": "Young woman holds a small creature in her hands. Also visible: small creature with large eyes, sword handle in hand.",
+      "entities": [
+        "c1"
+      ],
+      "spoilerTerms": [
+        "handle"
+      ],
+      "evidence": [
+        "fr-02158"
+      ],
+      "confidence": 0.7
+    },
+    {
+      "id": "dl-ln-02155",
+      "startSec": 215.54,
+      "revealSec": 216.54,
+      "kind": "dialogue",
+      "text": "Someone says: \"Hmm.\"",
+      "entities": [
+        "c1"
+      ],
+      "spoilerTerms": [
+        "hmm"
+      ],
+      "evidence": [
+        "ln-02155"
+      ],
+      "confidence": 0.85
+    },
+    {
+      "id": "ev-fr-02234",
+      "startSec": 219.458,
+      "revealSec": 223.417,
+      "kind": "event",
+      "text": "A dark cloth covers a surface with patches. Also visible: dark cloth with patches, dark bowl or container.",
+      "entities": [],
+      "spoilerTerms": [
+        "cloth"
+      ],
+      "evidence": [
+        "fr-02234"
+      ],
+      "confidence": 0.7
+    },
+    {
+      "id": "dl-ln-02275",
+      "startSec": 227.54,
+      "revealSec": 229.54,
+      "kind": "dialogue",
+      "text": "Someone says: \"Goodnight, Scales.\"",
+      "entities": [],
+      "spoilerTerms": [
+        "scale"
+      ],
+      "evidence": [
+        "ln-02275"
+      ],
+      "confidence": 0.85
+    },
+    {
+      "id": "dl-ln-02500",
+      "startSec": 249.96,
+      "revealSec": 250.96,
+      "kind": "dialogue",
+      "text": "Someone says: \"Get him, Scales!\"",
+      "entities": [],
+      "spoilerTerms": [],
+      "evidence": [
+        "ln-02500"
+      ],
+      "confidence": 0.85
+    },
+    {
+      "id": "dl-ln-02510",
+      "startSec": 250.96,
+      "revealSec": 251.96,
+      "kind": "dialogue",
+      "text": "Someone says: \"Come on, get him!\"",
+      "entities": [],
+      "spoilerTerms": [],
+      "evidence": [
+        "ln-02510"
+      ],
+      "confidence": 0.85
+    },
+    {
+      "id": "st-fr-02586",
+      "startSec": 254.667,
+      "revealSec": 258.625,
+      "kind": "setting",
+      "text": "The scene is in a dilapidated wooden market stalls under bright sun.",
+      "entities": [],
+      "spoilerTerms": [
+        "stall",
+        "sun"
+      ],
+      "evidence": [
+        "fr-02586"
+      ],
+      "confidence": 0.7
+    },
+    {
+      "id": "ev-fr-02586",
+      "startSec": 254.667,
+      "revealSec": 258.625,
+      "kind": "event",
+      "text": "A small creature flies above a collapsed wooden structure. Also visible: Broken wooden beams, Wooden stalls, Sack of green vegetables, Metal bucket.",
+      "entities": [],
+      "spoilerTerms": [
+        "sack"
+      ],
+      "evidence": [
+        "fr-02586"
+      ],
+      "confidence": 0.7
+    },
+    {
+      "id": "ap-c3",
+      "startSec": 259.208,
+      "revealSec": 259.833,
+      "kind": "appearance",
+      "text": "A large figure in apron appears for the first time: walks past scene.",
+      "entities": [
+        "c3"
+      ],
+      "spoilerTerms": [],
+      "evidence": [
+        "fr-02598"
+      ],
+      "confidence": 0.5
+    },
+    {
+      "id": "ap-c4",
+      "startSec": 259.208,
+      "revealSec": 259.833,
+      "kind": "appearance",
+      "text": "A woman in long dark dress appears for the first time: stands beside fruit stand.",
+      "entities": [
+        "c4"
+      ],
+      "spoilerTerms": [],
+      "evidence": [
+        "fr-02598"
+      ],
+      "confidence": 0.5
+    },
+    {
+      "id": "ev-fr-02598",
+      "startSec": 259.208,
+      "revealSec": 259.833,
+      "kind": "event",
+      "text": "A young woman with red hair stands ready with a sword in a bustling market alley. Also visible: wooden crates, pumpkins, apples, barrels.",
+      "entities": [
+        "c1",
+        "c2",
+        "c3",
+        "c4"
+      ],
+      "spoilerTerms": [
+        "pumpkin",
+        "apple"
+      ],
+      "evidence": [
+        "fr-02598"
+      ],
+      "confidence": 0.5
+    },
+    {
+      "id": "ev-fr-02638",
+      "startSec": 263.25,
+      "revealSec": 263.833,
+      "kind": "event",
+      "text": "Characters stand in shadowy alleyway with sunlight casting patterns on ground. Also visible: wooden pallets, crate, pink cloth, sword.",
+      "entities": [
+        "c1",
+        "c2",
+        "c3",
+        "c4"
+      ],
+      "spoilerTerms": [
+        "pallet"
+      ],
+      "evidence": [
+        "fr-02638"
+      ],
+      "confidence": 0.7
+    },
+    {
+      "id": "dl-ln-02649",
+      "startSec": 264.86,
+      "revealSec": 265.76,
+      "kind": "dialogue",
+      "text": "Someone says: \"Scales?\"",
+      "entities": [],
+      "spoilerTerms": [],
+      "evidence": [
+        "ln-02649"
+      ],
+      "confidence": 0.85
+    },
+    {
+      "id": "st-fr-02687",
+      "startSec": 265.583,
+      "revealSec": 268.708,
+      "kind": "setting",
+      "text": "The scene is in a sunlit alley with wooden structures.",
+      "entities": [],
+      "spoilerTerms": [],
+      "evidence": [
+        "fr-02687"
+      ],
+      "confidence": 0.7
+    },
+    {
+      "id": "ev-fr-02687",
+      "startSec": 265.583,
+      "revealSec": 268.708,
+      "kind": "event",
+      "text": "Young woman stands alert in alleyway. Also visible: sword, tattered cloth, wooden beams, stacked wood.",
+      "entities": [
+        "c1"
+      ],
+      "spoilerTerms": [
+        "wood"
+      ],
+      "evidence": [
+        "fr-02687"
+      ],
+      "confidence": 0.7
+    },
+    {
+      "id": "st-fr-02721",
+      "startSec": 271.625,
+      "revealSec": 272.125,
+      "kind": "setting",
+      "text": "The scene is under a makeshift shelter with beams.",
+      "entities": [],
+      "spoilerTerms": [],
+      "evidence": [
+        "fr-02721"
+      ],
+      "confidence": 0.7
+    },
+    {
+      "id": "ev-fr-02721",
+      "startSec": 271.625,
+      "revealSec": 272.125,
+      "kind": "event",
+      "text": "Young woman with red hair stands alert. Also visible: sword, wooden beams, tattered fabric, sunlit sky.",
+      "entities": [
+        "c1"
+      ],
+      "spoilerTerms": [
+        "fabric"
+      ],
+      "evidence": [
+        "fr-02721"
+      ],
+      "confidence": 0.7
+    },
+    {
+      "id": "st-fr-02750",
+      "startSec": 273.25,
+      "revealSec": 275,
+      "kind": "setting",
+      "text": "The scene is in an outdoor, near a building under construction.",
+      "entities": [],
+      "spoilerTerms": [],
+      "evidence": [
+        "fr-02750"
+      ],
+      "confidence": 0.7
+    },
+    {
+      "id": "ev-fr-02750",
+      "startSec": 273.25,
+      "revealSec": 275,
+      "kind": "event",
+      "text": "A small creature perches on a wooden beam. Also visible: wooden beam, building structure, sky with clouds.",
+      "entities": [],
+      "spoilerTerms": [
+        "cloud"
+      ],
+      "evidence": [
+        "fr-02750"
+      ],
+      "confidence": 0.7
+    },
+    {
+      "id": "st-fr-02762",
+      "startSec": 275.625,
+      "revealSec": 276.208,
+      "kind": "setting",
+      "text": "The scene is in an outdoor stone-paved area with barrels.",
+      "entities": [],
+      "spoilerTerms": [],
+      "evidence": [
+        "fr-02762"
+      ],
+      "confidence": 0.7
+    },
+    {
+      "id": "ev-fr-02762",
+      "startSec": 275.625,
+      "revealSec": 276.208,
+      "kind": "event",
+      "text": "Young woman with red hair looks startled. Also visible: wooden barrel, worn basket, green cloth, wooden planks.",
+      "entities": [
+        "c1"
+      ],
+      "spoilerTerms": [],
+      "evidence": [
+        "fr-02762"
+      ],
+      "confidence": 0.7
+    },
+    {
+      "id": "ap-c5",
+      "startSec": 278.792,
+      "revealSec": 279.417,
+      "kind": "appearance",
+      "text": "A small grey reptilian with large eyes appears for the first time: perched on wooden beam, looking up.",
+      "entities": [
+        "c5"
+      ],
+      "spoilerTerms": [
+        "reptilian"
+      ],
+      "evidence": [
+        "fr-02794"
+      ],
+      "confidence": 0.5
+    },
+    {
+      "id": "st-fr-02794",
+      "startSec": 278.792,
+      "revealSec": 279.417,
+      "kind": "setting",
+      "text": "The scene is in a high above a building under construction.",
+      "entities": [],
+      "spoilerTerms": [],
+      "evidence": [
+        "fr-02794"
+      ],
+      "confidence": 0.7
+    },
+    {
+      "id": "ev-fr-02794",
+      "startSec": 278.792,
+      "revealSec": 279.417,
+      "kind": "event",
+      "text": "Small creature watches birds flying overhead. Also visible: wooden beams, birds in flight, cloudy sky.",
+      "entities": [
+        "c5"
+      ],
+      "spoilerTerms": [
+        "bird"
+      ],
+      "evidence": [
+        "fr-02794"
+      ],
+      "confidence": 0.5
+    },
+    {
+      "id": "ev-fr-02833",
+      "startSec": 278.792,
+      "revealSec": 283.333,
+      "kind": "event",
+      "text": "A small creature sits on a ledge, watching birds fly overhead. Also visible: birds flying in formation, building ledge, cloudy sky.",
+      "entities": [
+        "c5"
+      ],
+      "spoilerTerms": [
+        "ledge"
+      ],
+      "evidence": [
+        "fr-02833"
+      ],
+      "confidence": 0.7
+    },
+    {
+      "id": "st-fr-02843",
+      "startSec": 283.458,
+      "revealSec": 284.333,
+      "kind": "setting",
+      "text": "The scene is in a ruined rooftop under orange sky.",
+      "entities": [],
+      "spoilerTerms": [],
+      "evidence": [
+        "fr-02843"
+      ],
+      "confidence": 0.7
+    },
+    {
+      "id": "ev-fr-02843",
+      "startSec": 283.458,
+      "revealSec": 284.333,
+      "kind": "event",
+      "text": "A young woman runs across a ruined rooftop. Also visible: broken tiles, stone pillars, red feathered creature, stone dragon statue.",
+      "entities": [
+        "c1"
+      ],
+      "spoilerTerms": [
+        "pillar",
+        "statue"
+      ],
+      "evidence": [
+        "fr-02843"
+      ],
+      "confidence": 0.7
+    },
+    {
+      "id": "ev-fr-02913",
+      "startSec": 289.333,
+      "revealSec": 291.333,
+      "kind": "event",
+      "text": "Birds fly above a ruined fortress. Also visible: stone towers, wooden planks, flagpole with banner, ladder.",
+      "entities": [],
+      "spoilerTerms": [
+        "flagpole",
+        "ladder"
+      ],
+      "evidence": [
+        "fr-02913"
+      ],
+      "confidence": 0.7
+    },
+    {
+      "id": "ev-fr-02966",
+      "startSec": 289.333,
+      "revealSec": 296.625,
+      "kind": "event",
+      "text": "A young woman stands on a ruined rooftop at sunset. Also visible: broken stone structures, distant sun, ruined buildings.",
+      "entities": [
+        "c1",
+        "c5"
+      ],
+      "spoilerTerms": [],
+      "evidence": [
+        "fr-02966"
+      ],
+      "confidence": 0.7
+    },
+    {
+      "id": "ev-fr-02978",
+      "startSec": 297.25,
+      "revealSec": 297.833,
+      "kind": "event",
+      "text": "A young woman with red hair stands on a cliff overlooking a city at sunset. Also visible: large stone structure, ruined buildings, rocky cliff edge.",
+      "entities": [
+        "c1"
+      ],
+      "spoilerTerms": [],
+      "evidence": [
+        "fr-02978"
+      ],
+      "confidence": 0.7
+    },
+    {
+      "id": "ev-fr-03017",
+      "startSec": 297.25,
+      "revealSec": 301.708,
+      "kind": "event",
+      "text": "Woman shields eyes from bright sun.",
+      "entities": [
+        "c1"
+      ],
+      "spoilerTerms": [],
+      "evidence": [
+        "fr-03017"
+      ],
+      "confidence": 0.7
+    },
+    {
+      "id": "st-fr-03033",
+      "startSec": 302.75,
+      "revealSec": 303.333,
+      "kind": "setting",
+      "text": "The scene is in a high platform with birds flying.",
+      "entities": [],
+      "spoilerTerms": [],
+      "evidence": [
+        "fr-03033"
+      ],
+      "confidence": 0.7
+    },
+    {
+      "id": "ev-fr-03033",
+      "startSec": 302.75,
+      "revealSec": 303.333,
+      "kind": "event",
+      "text": "Two figures stand on a high platform at sunset. Also visible: stone tower, birds in flight, sword held by woman.",
+      "entities": [
+        "c1",
+        "c5"
+      ],
+      "spoilerTerms": [],
+      "evidence": [
+        "fr-03033"
+      ],
+      "confidence": 0.7
+    },
+    {
+      "id": "dl-ln-03063",
+      "startSec": 306.34,
+      "revealSec": 307.18,
+      "kind": "dialogue",
+      "text": "Someone says: \"Mom!\"",
+      "entities": [],
+      "spoilerTerms": [
+        "mom"
+      ],
+      "evidence": [
+        "ln-03063"
+      ],
+      "confidence": 0.85
+    },
+    {
+      "id": "st-fr-03094",
+      "startSec": 308.917,
+      "revealSec": 309.417,
+      "kind": "setting",
+      "text": "The scene is in a distant city under warm sky.",
+      "entities": [],
+      "spoilerTerms": [],
+      "evidence": [
+        "fr-03094"
+      ],
+      "confidence": 0.7
+    },
+    {
+      "id": "ev-fr-03094",
+      "startSec": 308.917,
+      "revealSec": 309.417,
+      "kind": "event",
+      "text": "Two flying creatures soar above a distant city.",
+      "entities": [],
+      "spoilerTerms": [],
+      "evidence": [
+        "fr-03094"
+      ],
+      "confidence": 0.7
+    },
+    {
+      "id": "st-fr-03273",
+      "startSec": 325.375,
+      "revealSec": 327.333,
+      "kind": "setting",
+      "text": "The scene is in a dramatic sky at sunset.",
+      "entities": [],
+      "spoilerTerms": [],
+      "evidence": [
+        "fr-03273"
+      ],
+      "confidence": 0.7
+    },
+    {
+      "id": "ev-fr-03273",
+      "startSec": 325.375,
+      "revealSec": 327.333,
+      "kind": "event",
+      "text": "Young woman stares upward in surprise. Also visible: sword, shoulder, sky.",
+      "entities": [
+        "c1",
+        "c5"
+      ],
+      "spoilerTerms": [
+        "shoulder"
+      ],
+      "evidence": [
+        "fr-03273"
+      ],
+      "confidence": 0.7
+    },
+    {
+      "id": "st-fr-03287",
+      "startSec": 328.167,
+      "revealSec": 328.708,
+      "kind": "setting",
+      "text": "The scene is in a sky with soft pink and orange clouds.",
+      "entities": [],
+      "spoilerTerms": [],
+      "evidence": [
+        "fr-03287"
+      ],
+      "confidence": 0.7
+    },
+    {
+      "id": "ev-fr-03287",
+      "startSec": 328.167,
+      "revealSec": 328.708,
+      "kind": "event",
+      "text": "Small reptilian creature flies upside down toward outstretched hand. Also visible: flying creature, outstretched hand, clouds.",
+      "entities": [
+        "c5"
+      ],
+      "spoilerTerms": [],
+      "evidence": [
+        "fr-03287"
+      ],
+      "confidence": 0.6
+    },
+    {
+      "id": "dl-ln-03383",
+      "startSec": 338.3,
+      "revealSec": 339.8,
+      "kind": "dialogue",
+      "text": "Someone says: \"Scout!\"",
+      "entities": [],
+      "spoilerTerms": [
+        "scout"
+      ],
+      "evidence": [
+        "ln-03383"
+      ],
+      "confidence": 0.85
+    },
+    {
+      "id": "st-fr-03539",
+      "startSec": 353.333,
+      "revealSec": 353.917,
+      "kind": "setting",
+      "text": "The scene is in a desert landscape at twilight with ruins and skeletal trees.",
+      "entities": [],
+      "spoilerTerms": [],
+      "evidence": [
+        "fr-03539"
+      ],
+      "confidence": 0.7
+    },
+    {
+      "id": "ev-fr-03539",
+      "startSec": 353.333,
+      "revealSec": 353.917,
+      "kind": "event",
+      "text": "No characters are visible in this frame.",
+      "entities": [],
+      "spoilerTerms": [],
+      "evidence": [
+        "fr-03539"
+      ],
+      "confidence": 0.7
+    },
+    {
+      "id": "ev-fr-03578",
+      "startSec": 353.333,
+      "revealSec": 357.833,
+      "kind": "event",
+      "text": "Woman crouches in misty field.",
+      "entities": [
+        "c1"
+      ],
+      "spoilerTerms": [],
+      "evidence": [
+        "fr-03578"
+      ],
+      "confidence": 0.7
+    },
+    {
+      "id": "ev-fr-03618",
+      "startSec": 353.333,
+      "revealSec": 361.833,
+      "kind": "event",
+      "text": "A young woman observes a small reptilian creature on a hill. Also visible: sword, hill, flagpole.",
+      "entities": [
+        "c1",
+        "c5"
+      ],
+      "spoilerTerms": [
+        "hill"
+      ],
+      "evidence": [
+        "fr-03618"
+      ],
+      "confidence": 0.7
+    },
+    {
+      "id": "ev-fr-03658",
+      "startSec": 353.333,
+      "revealSec": 365.833,
+      "kind": "event",
+      "text": "A lone figure stands on a hill under a large moon. Also visible: large moon, hilltop, stars.",
+      "entities": [],
+      "spoilerTerms": [
+        "moon",
+        "hilltop",
+        "star"
+      ],
+      "evidence": [
+        "fr-03658"
+      ],
+      "confidence": 0.7
+    },
+    {
+      "id": "ev-fr-03676",
+      "startSec": 353.333,
+      "revealSec": 367.625,
+      "kind": "event",
+      "text": "No characters visible in this frame.",
+      "entities": [],
+      "spoilerTerms": [],
+      "evidence": [
+        "fr-03676"
+      ],
+      "confidence": 0.7
+    },
+    {
+      "id": "ev-fr-03698",
+      "startSec": 353.333,
+      "revealSec": 369.833,
+      "kind": "event",
+      "text": "A lone figure traverses vast golden dunes.",
+      "entities": [],
+      "spoilerTerms": [],
+      "evidence": [
+        "fr-03698"
+      ],
+      "confidence": 0.7
+    },
+    {
+      "id": "st-fr-03811",
+      "startSec": 380.542,
+      "revealSec": 381.125,
+      "kind": "setting",
+      "text": "The scene is in a tall green bamboo forest with fallen logs.",
+      "entities": [],
+      "spoilerTerms": [
+        "log"
+      ],
+      "evidence": [
+        "fr-03811"
+      ],
+      "confidence": 0.7
+    },
+    {
+      "id": "ev-fr-03811",
+      "startSec": 380.542,
+      "revealSec": 381.125,
+      "kind": "event",
+      "text": "Young woman navigates through dense bamboo forest. Also visible: fallen bamboo log, orange butterfly, green bamboo stalks, rocky ground.",
+      "entities": [
+        "c1"
+      ],
+      "spoilerTerms": [
+        "butterfly",
+        "stalk"
+      ],
+      "evidence": [
+        "fr-03811"
+      ],
+      "confidence": 0.7
+    },
+    {
+      "id": "ev-fr-03839",
+      "startSec": 382.917,
+      "revealSec": 383.917,
+      "kind": "event",
+      "text": "No characters are visible in this frame.",
+      "entities": [],
+      "spoilerTerms": [],
+      "evidence": [
+        "fr-03839"
+      ],
+      "confidence": 0.7
+    },
+    {
+      "id": "dl-ln-04458",
+      "startSec": 445.8,
+      "revealSec": 447.22,
+      "kind": "dialogue",
+      "text": "Someone says: \"I have failed.\"",
+      "entities": [],
+      "spoilerTerms": [],
+      "evidence": [
+        "ln-04458"
+      ],
+      "confidence": 0.85
+    },
+    {
+      "id": "dl-ln-04527",
+      "startSec": 452.68,
+      "revealSec": 455.18,
+      "kind": "dialogue",
+      "text": "Someone says: \"You've only failed your C.\"",
+      "entities": [],
+      "spoilerTerms": [],
+      "evidence": [
+        "ln-04527"
+      ],
+      "confidence": 0.85
+    },
+    {
+      "id": "dl-ln-04577",
+      "startSec": 457.68,
+      "revealSec": 460.48,
+      "kind": "dialogue",
+      "text": "Someone says: \"These are dragon lands, Sintel.\"",
+      "entities": [],
+      "spoilerTerms": [],
+      "evidence": [
+        "ln-04577"
+      ],
+      "confidence": 0.85
+    },
+    {
+      "id": "dl-ln-04605",
+      "startSec": 460.48,
+      "revealSec": 462.9,
+      "kind": "dialogue",
+      "text": "Someone says: \"You are closer than you know.\"",
+      "entities": [],
+      "spoilerTerms": [],
+      "evidence": [
+        "ln-04605"
+      ],
+      "confidence": 0.85
+    },
+    {
+      "id": "dl-ln-05574",
+      "startSec": 557.42,
+      "revealSec": 558.42,
+      "kind": "dialogue",
+      "text": "Someone says: \"Scales!\"",
+      "entities": [],
+      "spoilerTerms": [],
+      "evidence": [
+        "ln-05574"
+      ],
+      "confidence": 0.85
+    },
+    {
+      "id": "dl-ln-05782",
+      "startSec": 578.24,
+      "revealSec": 580.08,
+      "kind": "dialogue",
+      "text": "Someone says: \"Hey!\"",
+      "entities": [],
+      "spoilerTerms": [],
+      "evidence": [
+        "ln-05782"
+      ],
+      "confidence": 0.85
+    },
+    {
+      "id": "dl-ln-05986",
+      "startSec": 598.58,
+      "revealSec": 599.58,
+      "kind": "dialogue",
+      "text": "Someone says: \"Lemon.\"",
+      "entities": [],
+      "spoilerTerms": [
+        "lemon"
+      ],
+      "evidence": [
+        "ln-05986"
+      ],
+      "confidence": 0.85
+    },
+    {
+      "id": "dl-ln-06213",
+      "startSec": 621.32,
+      "revealSec": 622.16,
+      "kind": "dialogue",
+      "text": "Someone says: \"Scales?\"",
+      "entities": [],
+      "spoilerTerms": [],
+      "evidence": [
+        "ln-06213"
+      ],
+      "confidence": 0.85
+    },
+    {
+      "id": "dl-ln-06258",
+      "startSec": 625.76,
+      "revealSec": 626.6,
+      "kind": "dialogue",
+      "text": "Someone says: \"Scales?\"",
+      "entities": [],
+      "spoilerTerms": [],
+      "evidence": [
+        "ln-06258"
+      ],
+      "confidence": 0.85
+    },
+    {
+      "id": "dl-ln-07475",
+      "startSec": 747.46,
+      "revealSec": 754.16,
+      "kind": "dialogue",
+      "text": "Someone says: \"Come take my journey in tonight\"",
+      "entities": [],
+      "spoilerTerms": [],
+      "evidence": [
+        "ln-07475"
+      ],
+      "confidence": 0.85
+    },
+    {
+      "id": "dl-ln-07542",
+      "startSec": 754.16,
+      "revealSec": 760.84,
+      "kind": "dialogue",
+      "text": "Someone says: \"Come be my shadow, walk at my side\"",
+      "entities": [],
+      "spoilerTerms": [],
+      "evidence": [
+        "ln-07542"
+      ],
+      "confidence": 0.85
+    },
+    {
+      "id": "dl-ln-07608",
+      "startSec": 760.84,
+      "revealSec": 767.04,
+      "kind": "dialogue",
+      "text": "Someone says: \"And when you see all that I have seen\"",
+      "entities": [],
+      "spoilerTerms": [],
+      "evidence": [
+        "ln-07608"
+      ],
+      "confidence": 0.85
+    },
+    {
+      "id": "dl-ln-07670",
+      "startSec": 767.04,
+      "revealSec": 772.04,
+      "kind": "dialogue",
+      "text": "Someone says: \"Can you tell me now from time\"",
+      "entities": [],
+      "spoilerTerms": [],
+      "evidence": [
+        "ln-07670"
+      ],
+      "confidence": 0.85
+    },
+    {
+      "id": "dl-ln-07742",
+      "startSec": 774.18,
+      "revealSec": 779.18,
+      "kind": "dialogue",
+      "text": "Someone says: \"I have been waiting all this time\"",
+      "entities": [],
+      "spoilerTerms": [],
+      "evidence": [
+        "ln-07742"
+      ],
+      "confidence": 0.85
+    },
+    {
+      "id": "dl-ln-07807",
+      "startSec": 780.72,
+      "revealSec": 785.72,
+      "kind": "dialogue",
+      "text": "Someone says: \"For one to wake me, one to call mine\"",
+      "entities": [],
+      "spoilerTerms": [],
+      "evidence": [
+        "ln-07807"
+      ],
+      "confidence": 0.85
+    },
+    {
+      "id": "dl-ln-07874",
+      "startSec": 787.36,
+      "revealSec": 792.36,
+      "kind": "dialogue",
+      "text": "Someone says: \"So when you're here, all that you hold dear\"",
+      "entities": [],
+      "spoilerTerms": [],
+      "evidence": [
+        "ln-07874"
+      ],
+      "confidence": 0.85
+    },
+    {
+      "id": "dl-ln-07936",
+      "startSec": 793.56,
+      "revealSec": 799.56,
+      "kind": "dialogue",
+      "text": "Someone says: \"Do you fear what you will find?\"",
+      "entities": [],
+      "spoilerTerms": [],
+      "evidence": [
+        "ln-07936"
+      ],
+      "confidence": 0.85
+    },
+    {
+      "id": "dl-ln-07996",
+      "startSec": 799.56,
+      "revealSec": 805.56,
+      "kind": "dialogue",
+      "text": "Someone says: \"'Cause the dawn breaks through the night\"",
+      "entities": [],
+      "spoilerTerms": [],
+      "evidence": [
+        "ln-07996"
+      ],
+      "confidence": 0.85
+    },
+    {
+      "id": "dl-ln-08066",
+      "startSec": 806.56,
+      "revealSec": 815.56,
+      "kind": "dialogue",
+      "text": "Someone says: \"I'm alone forever longing for the home\"",
+      "entities": [],
+      "spoilerTerms": [],
+      "evidence": [
+        "ln-08066"
+      ],
+      "confidence": 0.85
+    },
+    {
+      "id": "dl-ln-08156",
+      "startSec": 815.56,
+      "revealSec": 820.56,
+      "kind": "dialogue",
+      "text": "Someone says: \"I've found in your eyes\"",
+      "entities": [],
+      "spoilerTerms": [],
+      "evidence": [
+        "ln-08156"
+      ],
+      "confidence": 0.85
+    },
+    {
+      "id": "dl-ln-08236",
+      "startSec": 823.56,
+      "revealSec": 852.56,
+      "kind": "dialogue",
+      "text": "Someone says: \"I will be listening for the drum to call me over far away from my tender youth and the very truth, showing me what I've begun.\"",
+      "entities": [],
+      "spoilerTerms": [],
+      "evidence": [
+        "ln-08236"
+      ],
+      "confidence": 0.85
+    },
+    {
+      "id": "dl-ln-08526",
+      "startSec": 852.56,
+      "revealSec": 858.56,
+      "kind": "dialogue",
+      "text": "Someone says: \"As the time breaks through the night\"",
+      "entities": [],
+      "spoilerTerms": [],
+      "evidence": [
+        "ln-08526"
+      ],
+      "confidence": 0.85
+    },
+    {
+      "id": "dl-ln-08586",
+      "startSec": 858.56,
+      "revealSec": 864.56,
+      "kind": "dialogue",
+      "text": "Someone says: \"I will fall forever long\"",
+      "entities": [],
+      "spoilerTerms": [],
+      "evidence": [
+        "ln-08586"
+      ],
+      "confidence": 0.85
+    },
+    {
+      "id": "dl-ln-08646",
+      "startSec": 864.56,
+      "revealSec": 867.56,
+      "kind": "dialogue",
+      "text": "Someone says: \"In for the fall\"",
+      "entities": [],
+      "spoilerTerms": [],
+      "evidence": [
+        "ln-08646"
+      ],
+      "confidence": 0.85
+    },
+    {
+      "id": "dl-ln-08676",
+      "startSec": 867.56,
+      "revealSec": 871.56,
+      "kind": "dialogue",
+      "text": "Someone says: \"I found in your eyes\"",
+      "entities": [],
+      "spoilerTerms": [],
+      "evidence": [
+        "ln-08676"
+      ],
+      "confidence": 0.85
+    },
+    {
+      "id": "dl-ln-08716",
+      "startSec": 871.56,
+      "revealSec": 873.56,
+      "kind": "dialogue",
+      "text": "Someone says: \"Your voice\"",
+      "entities": [],
+      "spoilerTerms": [],
+      "evidence": [
+        "ln-08716"
+      ],
+      "confidence": 0.85
+    },
+    {
+      "id": "dl-ln-08736",
+      "startSec": 873.56,
+      "revealSec": 879.56,
+      "kind": "dialogue",
+      "text": "Someone says: \"Saw me through the night\"",
+      "entities": [],
+      "spoilerTerms": [],
+      "evidence": [
+        "ln-08736"
+      ],
+      "confidence": 0.85
+    }
+  ],
+  "coveredUntilSec": 383.917
+}

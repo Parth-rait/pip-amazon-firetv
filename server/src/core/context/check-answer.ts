@@ -5,7 +5,11 @@ import { containsTerm } from './text.js';
 
 export type AnswerVerdict =
   | { ok: true }
-  | { ok: false; reason: 'restricted-term' | 'unknown-source' | 'uncited-claim'; detail: string };
+  | {
+      ok: false;
+      reason: 'restricted-term' | 'unknown-source' | 'uncited-claim' | 'unsupported-term';
+      detail: string;
+    };
 
 const ABSTAIN =
   /\b(not sure|don'?t know|do not know|haven'?t seen|can'?t tell|cannot tell|no idea)\b/i;
@@ -34,6 +38,21 @@ export function checkAnswer(
   if (cited.length === 0 && !isAbstention(text)) {
     const named = lexicon.find((t) => containsTerm(text, t));
     if (named !== undefined) return { ok: false, reason: 'uncited-claim', detail: named };
+  }
+  // Everything the answer names from the film must be in what it cites: "The big dragon is
+  // Scales" citing a fact about a roof is the model's own knowledge of the film, not evidence.
+  if (cited.length > 0) {
+    const citedFacts = evidence.facts.filter((f) => cited.includes(f.id));
+    const ids = new Set(citedFacts.flatMap((f) => f.entities));
+    const support = [
+      ...citedFacts.map((f) => f.text),
+      ...evidence.entities
+        .filter((e) => ids.has(e.id))
+        .flatMap((e) => [e.name, ...e.aliases, e.intro]),
+    ].join('\n');
+    const unsupported = lexicon.find((t) => containsTerm(text, t) && !containsTerm(support, t));
+    if (unsupported !== undefined)
+      return { ok: false, reason: 'unsupported-term', detail: unsupported };
   }
   return { ok: true };
 }

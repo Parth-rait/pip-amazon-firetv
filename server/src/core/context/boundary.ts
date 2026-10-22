@@ -33,11 +33,17 @@ export function permittedEvidence(
   const facts = timeline.facts.filter(
     (f) => f.revealSec <= boundarySec && isUsable(f.review, policy),
   );
-  const entities = timeline.entities.filter(
+  const seen = timeline.entities.filter(
     (e) => e.firstSeenSec <= boundarySec && isUsable(e.review, policy),
   );
-  const restrictedTerms = laterTerms(timeline, facts, entities);
-  const ids = [...facts.map((f) => f.id), ...entities.map((e) => `e:${e.id}`)].sort();
+  const entities = seen.map((e) => entityAt(e, boundarySec));
+  const unnamed = seen.filter((e) => !isNamed(e, boundarySec)).map((e) => e.name);
+  const restrictedTerms = laterTerms(timeline, facts, entities, unnamed);
+  // A naming changes what Pip may say without adding a fact id, so it is part of the key too.
+  const ids = [
+    ...facts.map((f) => f.id),
+    ...seen.map((e) => `e:${e.id}${isNamed(e, boundarySec) ? '' : ':unnamed'}`),
+  ].sort();
   const key = createHash('sha256')
     .update(`${timeline.contentId}\n${timeline.version}\n${ids.join(',')}`)
     .digest('hex')
@@ -53,11 +59,30 @@ export function permittedEvidence(
   };
 }
 
+function isNamed(entity: Entity, boundarySec: number): boolean {
+  return entity.namedSec === undefined || entity.namedSec <= boundarySec;
+}
+
 /**
- * Names of entities not seen yet and spoiler words of facts not revealed yet. Rejected facts count
- * too: a wrong fact is still about the film. A term already present in revealed text is allowed.
+ * The entity as a viewer knows it at `boundarySec`: before its name is heard it is its label
+ * ("the baby dragon"), with no aliases, so nothing Pip builds from it carries the name.
  */
-function laterTerms(timeline: Timeline, facts: TimedFact[], entities: Entity[]): string[] {
+export function entityAt(entity: Entity, boundarySec: number): Entity {
+  if (isNamed(entity, boundarySec)) return entity;
+  return { ...entity, name: entity.label ?? 'someone', aliases: [] };
+}
+
+/**
+ * Names of entities not seen yet, names not heard yet, and spoiler words of facts not revealed
+ * yet. Rejected facts count too: a wrong fact is still about the film. A term already present in
+ * revealed text is allowed.
+ */
+function laterTerms(
+  timeline: Timeline,
+  facts: TimedFact[],
+  entities: Entity[],
+  unheardNames: string[],
+): string[] {
   const shownFacts = new Set(facts.map((f) => f.id));
   const shownEntities = new Set(entities.map((e) => e.id));
   const revealedText = [
@@ -69,6 +94,7 @@ function laterTerms(timeline: Timeline, facts: TimedFact[], entities: Entity[]):
       .filter((e) => !shownEntities.has(e.id))
       .flatMap((e) => [e.name, ...e.aliases]),
     ...timeline.facts.filter((f) => !shownFacts.has(f.id)).flatMap((f) => f.spoilerTerms),
+    ...unheardNames,
   ];
   const unique = [...new Set(candidates.map((t) => t.trim()).filter((t) => t.length > 1))];
   return unique.filter((term) => !containsTerm(revealedText, term));

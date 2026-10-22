@@ -89,7 +89,9 @@ export const candidateEntitySchema = z.object({
   name: z.string().min(1).max(60),
   aliases: z.array(z.string().min(1).max(60)).max(8),
   firstSeenSec: seconds,
-  intro: z.string().min(1).max(200),
+  intro: z.string().min(1).max(200), // safe at firstSeenSec: never the name when namedSec is later
+  label: z.string().min(1).max(60).optional(), // what to call it until its name is heard
+  namedSec: seconds.optional(), // when its name is revealed, if after firstSeenSec
 });
 
 /** pipeline/annotations/<asset>.candidates.json: what a person or a model proposed. */
@@ -101,6 +103,7 @@ export const candidatesFileSchema = z.object({
   method: z.string().max(400), // how: which frames or sheets were looked at
   entities: z.array(candidateEntitySchema),
   facts: z.array(candidateFactSchema),
+  coveredUntilSec: seconds.optional(), // frames were described up to here (a partial run)
 });
 export type CandidatesFile = z.infer<typeof candidatesFileSchema>;
 
@@ -128,6 +131,33 @@ export const reviewFileSchema = z.object({
     .default({}),
 });
 export type ReviewFile = z.infer<typeof reviewFileSchema>;
+
+export const transcriptLineSchema = z.object({
+  id,
+  startSec: seconds,
+  endSec: seconds,
+  text: z.string().min(1).max(400),
+});
+
+/** asr.json: timestamped dialogue, or why there is none. Written by `asr`. */
+export const asrFileSchema = z.discriminatedUnion('status', [
+  z.object({
+    schemaVersion: z.literal(1),
+    status: z.literal('skipped'),
+    reason: z.string(),
+    audioStreams: z.number().int(),
+  }),
+  z.object({
+    schemaVersion: z.literal(1),
+    status: z.literal('done'),
+    engine: z.string(), // whisper.cpp and its commit
+    model: z.string(), // model file name and sha256
+    ms: z.number().int(),
+    lines: z.array(transcriptLineSchema),
+  }),
+]);
+export type AsrFile = z.infer<typeof asrFileSchema>;
+export type TranscriptLine = z.infer<typeof transcriptLineSchema>;
 
 /** The stable id of a frame from its planned time, so annotations survive a re-run. */
 export function frameId(requestedSec: number): string {

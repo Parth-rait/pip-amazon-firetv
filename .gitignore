@@ -16,3 +16,8 @@ gesture/.venv/
 gesture/models/
 gesture/logs/
 __pycache__/
+
+# video/: whisper.cpp built by video/setup.sh, and downloaded models
+video/.tools/
+video/.venv/
+video/models/

@@ -17,8 +17,18 @@ npm run pipeline -- scenes big-buck-bunny --threshold 3   # add --truth <file> t
 npm run pipeline -- frames big-buck-bunny --every 2
 npm run pipeline -- sheets big-buck-bunny
 
-# 6. Candidates: write pipeline/annotations/<asset>.candidates.json by looking at data/<asset>/sheets/,
-#    or draft them with Nova (unverified, needs the AWS profile) and copy what is right.
+# 5b. Dialogue: whisper.cpp on the soundtrack (video/setup.sh builds it once).
+npm run pipeline -- asr sintel
+
+# 6. Candidates, automatically: a local vision model (Ollama, qwen3-vl:4b-instruct) describes every
+#    sampled frame with the characters seen so far; heard names are matched to characters.
+#    Writes pipeline/annotations/<asset>.candidates.json and the recorded run in
+#    pipeline/understanding/<asset>.observations.json (--replay rebuilds from it, no model).
+#    docs/extractions/video-understanding.md has the details and the measurements.
+npm run pipeline -- understand sintel --known Sintel
+
+# 6 (by hand). Or write pipeline/annotations/<asset>.candidates.json by looking at
+#    data/<asset>/sheets/, or draft them with Nova (unverified, needs the AWS profile).
 npm run pipeline -- annotate big-buck-bunny                    # checks every cited frame exists
 npm run pipeline -- annotate big-buck-bunny --generator nova   # writes data/<asset>/candidates.nova.json
 
@@ -45,11 +55,12 @@ The lab film runs the same way: `npm run lab:film` renders it, then `npm run pip
 | scenes | `scenes.json`, `scenes.score.json` | One ffmpeg `scdet` pass at a low floor keeps every change with its score; cuts are chosen in code at `--threshold`; scenes shorter than `--min-scene` merge. A fixed-interval baseline (`--baseline 6`) is stored beside it. With `--truth`, precision, recall and F1 are reported for thresholds 1 to 10. |
 | frames | `frames/*.jpg`, `thumbs/*.jpg`, `frames.json` | Shortly after each scene start, then every `--every` seconds, plus one frame after every smaller change (a caption, an object appearing). `-copyts` and `showinfo` record the decoded frame's own time; ids come from the planned time (`fr-00525` is 52.5 s), so annotations survive a re-run. |
 | sheets | `sheets/sheet-NN.png`, `sheets/index.json` | Labelled thumbnails tiled 4x3 for people (or a model) to look at. |
-| asr | `asr.json` | Adapter slot. Skipped with a reason: no speech recognition is installed, and both films have no dialogue. Subtitles or a separate ASR adapter go here when a film needs them. |
+| asr | `asr.json`, `audio.16k.wav` | whisper.cpp (`small.en`, `-mc 0`) on 16 kHz mono audio: timestamped lines with ids (`ln-01069` starts at 106.9 s), sound captions and repetition loops dropped. Skipped with a reason when the file has no audio or whisper.cpp is not set up. |
+| understand | `pipeline/annotations/<asset>.candidates.json`, `pipeline/understanding/<asset>.observations.json`, `data/<asset>/understand/` (cache) | Video understanding: per-frame vision-model replies in story order with the running character roster; characters tracked across shots; names only from dialogue; appearances, events, settings, dialogue, namings and returns to earlier scenes as candidate facts. Prints a tracking score when `pipeline/truth/<asset>.characters.json` exists. |
 | annotate | `pipeline/annotations/<asset>.candidates.json` | Untrusted candidates: each fact has start and reveal times, entities, spoiler terms, evidence frame ids, confidence and the generator. `--generator nova` writes `data/<asset>/candidates.nova.json` for a person to copy from. |
 | review | `pipeline/reviews/<asset>.review.json` | A person's decision per fact and entity (accepted, rejected, needs-change) with notes and corrections; reviewer and date are recorded. |
 | export | `content/timelines/<film>.json` (or `lab/content/timelines/`) | Canonical timeline with frames, scenes, entities and facts, each with generator, evidence and review state. |
-| validate | exit code | Schema plus cross-checks: unique ids, times inside the film, scenes in order without overlap, evidence that resolves and is not after the reveal, entities named only once seen, accepted facts with evidence and a reviewer. The server runs the same checks at start-up and refuses an invalid file. |
+| validate | exit code | Schema plus cross-checks: unique ids, times inside the film, scenes in order without overlap, evidence (a frame, or a dialogue line at its end) that resolves and is not after the reveal, entities named only once seen, a label and a name-free intro for a character whose name is heard later, accepted facts with evidence and a reviewer. The server runs the same checks at start-up and refuses an invalid file. |
 | dataset | `evals/datasets/<asset>/v1/examples.jsonl` | Recap, identify, spoiler-probe, unseen-entity, unknown-fact and routing examples, each with allowed evidence, expectations and provenance. One film: everything is held out (`split: test`); nothing is for training. |
 
 Work files under `server/data/` and media under `server/media/` are gitignored. Annotations, reviews, truth files, timelines and datasets are small text files and are committed.

@@ -29,6 +29,10 @@ export interface Entity {
   aliases: string[];
   firstSeenSec: number;
   intro: string; // a short description that is safe at firstSeenSec
+  // Set when the name is learned later than the character is seen (from dialogue): until
+  // namedSec the character is called `label`, and its name is a restricted term.
+  label?: string;
+  namedSec?: number;
   review: ReviewStatus;
 }
 
@@ -38,6 +42,7 @@ export interface Timeline {
   durationSec: number;
   facts: TimedFact[]; // sorted by startSec
   entities: Entity[];
+  coveredUntilSec?: number; // what is on screen is described only up to here (partial annotation)
 }
 
 /** Which review states the runtime may use. Production uses `accepted` only. */

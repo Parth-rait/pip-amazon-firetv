@@ -7,6 +7,7 @@ import type { Entity, TimedFact } from './timeline.js';
 export interface RetrieveOptions {
   limit: number; // most facts returned
   recentCount: number; // the latest facts always included, for "what just happened?"
+  focusEntities?: string[]; // entities the question is about without naming them ("why did she...")
 }
 
 const ENTITY_MATCH_SCORE = 3;
@@ -22,7 +23,10 @@ export function retrieve(
   const facts = evidence.facts;
   if (facts.length === 0 || options.limit <= 0) return [];
   const queryWords = new Set(contentWords(query));
-  const mentioned = mentionedEntities(evidence.entities, query);
+  const mentioned = new Set([
+    ...mentionedEntities(evidence.entities, query),
+    ...(options.focusEntities ?? []),
+  ]);
   const df = documentFrequency(facts);
   const scored = facts.map((fact) => ({
     fact,

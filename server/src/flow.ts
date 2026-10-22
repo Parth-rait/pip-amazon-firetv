@@ -4,7 +4,7 @@ import { answerQuestion, recheckAtPosition } from './answer.js';
 import { runAsk, type AskOutcome } from './core/ai/ask.js';
 import type { AnswerMemory } from './core/ai/answer-memory.js';
 import type { AnswerCache } from './core/context/answer-cache.js';
-import type { ReviewPolicy, Timeline } from './core/context/timeline.js';
+import { isUsable, type ReviewPolicy, type Timeline } from './core/context/timeline.js';
 import { shouldOfferCommandChoices, type IntentJudge } from './core/intent/judge.js';
 import { routeText, type QuestionTopic } from './core/intent/route-text.js';
 import type { Journal } from './core/journal.js';
@@ -211,7 +211,7 @@ async function answer(
     const judge = deps.judge && topic === 'other' && via !== 'clarify' ? deps.judge : null;
     reply =
       (judge ? await commandChoices(text, judge) : null) ??
-      (timeline && timeline.facts.length > 0
+      (timeline && hasUsableFacts(timeline, deps.timelinePolicy ?? 'accepted')
         ? await groundedReply(session, film, timeline, positionSec, text, via, topic, deps)
         : await notesReply(session, film, positionSec, text, via, topic, deps));
   } finally {
@@ -246,6 +246,14 @@ async function answer(
   });
   deps.io.to(roomOf(session.code)).emit('pip:say', say);
   setPip(session, 'talking', coreDeps(session, deps), TALKING_MS);
+}
+
+/**
+ * A timeline answers only once it has facts the review policy allows. A machine-made timeline
+ * that nobody has reviewed yet leaves the film on its notes instead of making Pip go quiet.
+ */
+function hasUsableFacts(timeline: Timeline, policy: ReviewPolicy): boolean {
+  return timeline.facts.some((f) => isUsable(f.review, policy));
 }
 
 /** What Pip says, plus what the log may record about how it was found (never the text). */

@@ -1,6 +1,6 @@
 // npm run pipeline -- <stage> <asset id> [options]: the offline video data pipeline.
-// Stages: ingest, probe, scenes, frames, sheets, asr, annotate, review, export, validate, dataset,
-// all (ingest to sheets). Work files go to data/<asset>/ (gitignored); reviewed outputs are
+// Stages: ingest, probe, scenes, frames, sheets, asr, understand, annotate, review, export,
+// validate, dataset, all (ingest to asr). Work files go to data/<asset>/ (gitignored); reviewed outputs are
 // committed. See docs/architecture/video-data-pipeline.md.
 import 'dotenv/config';
 import { existsSync, mkdirSync, readFileSync, readdirSync, statSync, writeFileSync } from 'node:fs';
@@ -11,6 +11,7 @@ import type { ZodType } from 'zod';
 import { loadConfig } from '../src/config.js';
 import { checkTimelineFile, toTimeline } from '../src/film/timeline-file.js';
 import {
+  asrFileSchema,
   assetSchema,
   candidatesFileSchema,
   framesFileSchema,
@@ -32,6 +33,7 @@ import {
 import {
   detectChanges,
   extractFrame,
+  hasFilter,
   hasMediaTools,
   probeFile,
   sha256File,
@@ -39,8 +41,20 @@ import {
 } from '../src/pipeline/media-tools.js';
 import { annotateWithNova } from '../src/pipeline/nova-annotate.js';
 import { buildTimelineFile, pendingReview } from '../src/pipeline/review.js';
+import { SceneMemory } from '../src/pipeline/scene-memory.js';
+import { extractAudio, transcribe, whisperCommit, whisperSetup } from '../src/pipeline/speech.js';
+import { characterTruthSchema, scoreTracking } from '../src/pipeline/tracking-score.js';
+import { nameMentions } from '../src/pipeline/transcript.js';
+import {
+  candidatesFromRecording,
+  nameCharacters,
+  understandFrames,
+  type UnderstandingRecording,
+} from '../src/pipeline/understand.js';
+import { ollamaVision, type VisionModel } from '../src/pipeline/vlm.js';
 
 const SERVER = join(dirname(fileURLToPath(import.meta.url)), '..');
+const REPO = join(SERVER, '..');
 const FONTS = [
   '/usr/share/fonts/truetype/dejavu/DejaVuSans.ttf',
   '/System/Library/Fonts/Supplemental/Arial.ttf',
@@ -67,6 +81,11 @@ const { positionals, values } = parseArgs({
     timeline: { type: 'string' },
     out: { type: 'string' },
     list: { type: 'boolean', default: false },
+    model: { type: 'string', default: 'qwen3-vl:4b-instruct' },
+    limit: { type: 'string' },
+    known: { type: 'string', multiple: true }, // names the viewer has before the film
+    replay: { type: 'boolean', default: false }, // understand: rebuild from the recorded run
+    'cached-only': { type: 'boolean', default: false }, // understand: no model calls, cached frames only
   },
 });
 const [stage, assetId] = positionals;
@@ -190,7 +209,8 @@ async function frames(id: string): Promise<void> {
     minGapSec: 1,
     eventsSec,
   });
-  const font = FONTS.find((f) => existsSync(f)) ?? null;
+  // Labels need drawtext; without it the thumbnails are unlabelled and the sheets index names them.
+  const font = hasFilter('drawtext') ? (FONTS.find((f) => existsSync(f)) ?? null) : null;
   const out: FramesFile = {
     schemaVersion: 1,
     plan: {
@@ -256,25 +276,166 @@ function sheets(id: string): void {
   write(join(dataDir(id), 'sheets', 'index.json'), index);
 }
 
-function asr(id: string): void {
+async function asr(id: string): Promise<void> {
+  const asset = await loadAsset(id);
   const info = read(join(dataDir(id), 'probe.json'), probeSchema);
-  const status = {
+  if (info.audio.length === 0) {
+    write(join(dataDir(id), 'asr.json'), {
+      schemaVersion: 1,
+      status: 'skipped',
+      reason: 'the file has no audio stream',
+      audioStreams: 0,
+    });
+    return;
+  }
+  const setup = whisperSetup(REPO);
+  if (!existsSync(setup.cli) || !existsSync(setup.model)) {
+    write(join(dataDir(id), 'asr.json'), {
+      schemaVersion: 1,
+      status: 'skipped',
+      reason:
+        'whisper.cpp is not set up: run video/setup.sh (or set WHISPER_CLI and WHISPER_MODEL)',
+      audioStreams: info.audio.length,
+    });
+    return;
+  }
+  const wav = join(dataDir(id), 'audio.16k.wav');
+  const started = Date.now();
+  extractAudio(resolve(SERVER, asset.file), wav);
+  const lines = transcribe(setup, wav, join(dataDir(id), 'whisper'));
+  const ms = Date.now() - started;
+  const file = asrFileSchema.parse({
     schemaVersion: 1,
-    status: 'skipped',
-    reason:
-      'No speech recognition adapter is installed. Add subtitles or a separate ASR adapter (for example Whisper) when a film has dialogue.',
-    audioStreams: info.audio.length,
+    status: 'done',
+    engine: `whisper.cpp ${whisperCommit(setup)}`,
+    model: `${setup.model.split('/').pop()} sha256:${(await sha256File(setup.model)).slice(0, 12)}`,
+    ms,
+    lines,
+  });
+  write(join(dataDir(id), 'asr.json'), file);
+  console.log(`${lines.length} spoken lines in ${(ms / 1000).toFixed(1)} s`);
+}
+
+/** The asset's spoken lines, or none when ASR was skipped or not run. */
+function spokenLines(id: string) {
+  const path = join(dataDir(id), 'asr.json');
+  if (!existsSync(path)) return [];
+  const file = read(path, asrFileSchema);
+  return file.status === 'done' ? file.lines : [];
+}
+
+/**
+ * Video understanding: the vision model looks at every sampled frame in story order (cached per
+ * frame, so a re-run only asks for new frames), heard names are matched to characters, and the
+ * scene memory writes candidate facts to pipeline/annotations/<asset>.candidates.json.
+ */
+async function understand(id: string): Promise<void> {
+  const frameFile = read(join(dataDir(id), 'frames.json'), framesFileSchema);
+  const scenesFile = read(join(dataDir(id), 'scenes.json'), scenesFileSchema);
+  const lines = spokenLines(id);
+  const recordingPath = join(SERVER, 'pipeline', 'understanding', `${id}.observations.json`);
+  let recording: UnderstandingRecording;
+  if (values.replay) {
+    // Rebuild the candidates from the committed run, without the model.
+    if (!existsSync(recordingPath)) fail(`no recorded run at ${relative(SERVER, recordingPath)}`);
+    recording = JSON.parse(readFileSync(recordingPath, 'utf8')) as UnderstandingRecording;
+  } else {
+    const offline = values['cached-only'];
+    const cacheDir = join(dataDir(id), 'understand', values.model.replace(/[^a-z0-9.]+/gi, '-'));
+    const vision = offline
+      ? cachedVision(values.model, cacheDir)
+      : await ollamaVision(loadConfig().OLLAMA_URL, values.model);
+    const frames = frameFile.frames.slice(0, values.limit ? num(values.limit) : undefined);
+    const memory = new SceneMemory();
+    const records = await understandFrames({
+      vision,
+      memory,
+      frames: frames.map((f) => ({
+        id: f.id,
+        atSec: f.atSec,
+        sceneId: f.sceneId,
+        image: join(dataDir(id), f.path),
+      })),
+      cacheDir,
+      log: (line) => console.log(line),
+      offline,
+    });
+    const namings = await nameCharacters({
+      vision,
+      memory,
+      lines,
+      mentions: nameMentions(lines),
+      imageOf: (frameId) => join(dataDir(id), 'frames', `${frameId}.jpg`),
+      cacheDir,
+      log: (line) => console.log(line),
+      offline,
+    });
+    recording = {
+      schemaVersion: 1,
+      assetId: id,
+      model: vision.model,
+      digest: vision.digest,
+      coveredUntilSec: records[records.length - 1]?.atSec ?? 0,
+      frames: records,
+      namings,
+      known: values.known ?? [],
+    };
+    write(recordingPath, recording);
+  }
+  const { candidates, memory } = candidatesFromRecording(recording, {
+    lines,
+    scenes: scenesFile.scenes,
+    createdAt: new Date().toISOString(),
+    method:
+      `${recording.frames.length} frames (scenes.json ${scenesFile.method}) described by ` +
+      `${recording.model} with the running character roster; ${lines.length} whisper.cpp lines; ` +
+      `${recording.namings.length} name checks`,
+  });
+  const parsed = candidatesFileSchema.parse(candidates);
+  write(join(SERVER, 'pipeline', 'annotations', `${id}.candidates.json`), parsed);
+  const named = parsed.entities
+    .filter((e) => e.name !== (e.label ?? e.name) || e.aliases.length > 0)
+    .map((e) => `${e.id}=${e.name}`);
+  console.log(
+    `${parsed.entities.length} characters (named: ${named.join(', ') || 'none'}), ` +
+      `${parsed.facts.length} candidate facts`,
+  );
+  const truthPath = join(SERVER, 'pipeline', 'truth', `${id}.characters.json`);
+  if (existsSync(truthPath)) {
+    const names = new Map(
+      parsed.entities.filter((e) => e.aliases.length > 0).map((e) => [e.name, e.id]),
+    );
+    const score = scoreTracking(memory, read(truthPath, characterTruthSchema), names);
+    write(join(dataDir(id), 'understand.score.json'), score);
+    console.log(
+      `vs ${relative(SERVER, truthPath)}: ${score.labelledFrames} frames, link precision ` +
+        `${score.links.precision}, recall ${score.recall}, presence ${JSON.stringify(score.presence)}`,
+    );
+  }
+}
+
+/** The model as the cache knows it: its digest, and no way to ask anything new. */
+function cachedVision(model: string, cacheDir: string): VisionModel {
+  const first = existsSync(cacheDir)
+    ? readdirSync(cacheDir).find((f) => f.startsWith('fr-') && f.endsWith('.json'))
+    : undefined;
+  if (!first) fail(`no cached replies in ${relative(SERVER, cacheDir)}`);
+  const { digest } = JSON.parse(readFileSync(join(cacheDir, first), 'utf8')) as { digest: string };
+  return {
+    model,
+    digest,
+    ask: () => Promise.reject(new Error('--cached-only: the model is not asked')),
   };
-  write(join(dataDir(id), 'asr.json'), status);
 }
 
 async function annotate(id: string): Promise<void> {
   if (values.generator === 'manual') {
     const path = join(SERVER, 'pipeline', 'annotations', `${id}.candidates.json`);
     const candidates = read(path, candidatesFileSchema);
-    const frameIds = new Set(
-      read(join(dataDir(id), 'frames.json'), framesFileSchema).frames.map((f) => f.id),
-    );
+    const frameIds = new Set([
+      ...read(join(dataDir(id), 'frames.json'), framesFileSchema).frames.map((f) => f.id),
+      ...spokenLines(id).map((l) => l.id),
+    ]);
     const missing = candidates.facts.flatMap((f) =>
       f.evidence.filter((ref) => !frameIds.has(ref)).map((ref) => `${f.id}->${ref}`),
     );
@@ -334,6 +495,7 @@ async function exportTimeline(id: string): Promise<void> {
       endSec: Math.min(s.endSec, Math.floor(info.durationSec)),
     })),
     frames: read(join(dataDir(id), 'frames.json'), framesFileSchema).frames,
+    lines: spokenLines(id),
     candidates: read(
       join(SERVER, 'pipeline', 'annotations', `${id}.candidates.json`),
       candidatesFileSchema,
@@ -386,6 +548,7 @@ async function main(): Promise<void> {
     frames: () => frames(assetId),
     sheets: () => sheets(assetId),
     asr: () => asr(assetId),
+    understand: () => understand(assetId),
     annotate: () => annotate(assetId),
     review: () =>
       values.list
@@ -399,7 +562,7 @@ async function main(): Promise<void> {
       await scenes(assetId);
       await frames(assetId);
       sheets(assetId);
-      asr(assetId);
+      await asr(assetId);
     },
   };
   const run = stages[stage];

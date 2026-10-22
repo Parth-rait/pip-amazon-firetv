@@ -37,6 +37,7 @@ export interface LabOptions {
   model?: TextModel;
   env?: Record<string, string>; // server config overrides, as in server/.env
   timeline?: Timeline;
+  film?: Content; // another film than the lab film, with `timeline` as its timeline
   judge?: IntentJudge;
 }
 
@@ -84,12 +85,13 @@ export async function startLab(options: LabOptions = {}): Promise<Lab> {
   const logs: Record<string, unknown>[] = [];
   const journal = createMemoryJournal(clock.now);
   const config = parseConfig({ AI_ENABLED: 'true', ...options.env });
-  const timelines = new Map([[LAB_FILM.id, options.timeline ?? lanternFoxTimeline()]]);
+  const film = options.film ?? LAB_FILM;
+  const timelines = new Map([[film.id, options.timeline ?? lanternFoxTimeline()]]);
   const clients: { close(): void }[] = [];
   const build = () =>
     createPipServer({
       config,
-      films: [LAB_FILM],
+      films: [film],
       timelines,
       model: options.model ?? groundedModel(),
       judge: options.judge,

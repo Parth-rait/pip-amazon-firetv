@@ -20,6 +20,12 @@ export function hasMediaTools(): boolean {
   );
 }
 
+/** True when this ffmpeg build has the filter (Homebrew's default build has no `drawtext`). */
+export function hasFilter(name: string): boolean {
+  const result = spawnSync('ffmpeg', ['-hide_banner', '-filters'], { encoding: 'utf8' });
+  return result.status === 0 && new RegExp(`^\\s*\\S+\\s+${name}\\s`, 'm').test(result.stdout);
+}
+
 export async function sha256File(path: string): Promise<string> {
   const hash = createHash('sha256');
   for await (const chunk of createReadStream(path)) hash.update(chunk as Buffer);

@@ -8,6 +8,17 @@ const lexicon = timeline.entities.flatMap((e) => [e.name, ...e.aliases]);
 const at30 = permittedEvidence(timeline, 30, 'accepted');
 
 describe('checkAnswer', () => {
+  it('rejects a revealed name the cited facts do not support', () => {
+    // At 50 s Hoot is revealed, but f3 (Ember finds the lantern) says nothing about Hoot.
+    const at50 = permittedEvidence(timeline, 50, 'accepted');
+    expect(checkAnswer('Hoot hid the lantern for Ember.', ['f3'], at50, lexicon)).toMatchObject({
+      ok: false,
+      reason: 'unsupported-term',
+      detail: 'Hoot',
+    });
+    expect(checkAnswer('Ember found an old lantern.', ['f3'], at50, lexicon)).toEqual({ ok: true });
+  });
+
   it('passes a cited answer that stays within what was seen', () => {
     expect(checkAnswer('Ember found an old lantern in the snow.', ['f3'], at30, lexicon)).toEqual({
       ok: true,

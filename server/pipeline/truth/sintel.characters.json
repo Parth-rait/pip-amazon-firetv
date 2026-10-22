@@ -1,0 +1,395 @@
+{
+  "schemaVersion": 1,
+  "assetId": "sintel",
+  "labelledBy": "Claude (agent), by looking at each frame; not a person's review",
+  "labelledAt": "2026-10-17",
+  "characters": {
+    "sintel": "the red-haired young woman (child and adult)",
+    "shaman": "the old bearded man in the hut",
+    "scales": "the baby dragon (small, before it is taken)",
+    "adult-dragon": "the big dragon in the lair",
+    "other": "anyone else (market people)"
+  },
+  "note": "present: clearly visible characters. maybe: partly visible or unsure; neither credited nor penalised.",
+  "frames": [
+    {
+      "id": "fr-00205",
+      "atSec": 20.5,
+      "present": []
+    },
+    {
+      "id": "fr-00746",
+      "atSec": 74.625,
+      "present": [
+        "sintel"
+      ]
+    },
+    {
+      "id": "fr-01010",
+      "atSec": 101,
+      "present": []
+    },
+    {
+      "id": "fr-01138",
+      "atSec": 113.833,
+      "present": [
+        "sintel"
+      ],
+      "maybe": [
+        "shaman"
+      ]
+    },
+    {
+      "id": "fr-01164",
+      "atSec": 116.417,
+      "present": [
+        "sintel",
+        "shaman"
+      ]
+    },
+    {
+      "id": "fr-01237",
+      "atSec": 123.708,
+      "present": [
+        "sintel"
+      ],
+      "maybe": [
+        "shaman"
+      ]
+    },
+    {
+      "id": "fr-01345",
+      "atSec": 134.5,
+      "present": [],
+      "maybe": [
+        "shaman"
+      ]
+    },
+    {
+      "id": "fr-01455",
+      "atSec": 145.5,
+      "present": [
+        "sintel"
+      ]
+    },
+    {
+      "id": "fr-01495",
+      "atSec": 149.5,
+      "present": []
+    },
+    {
+      "id": "fr-01571",
+      "atSec": 157.125,
+      "present": [
+        "sintel"
+      ]
+    },
+    {
+      "id": "fr-01815",
+      "atSec": 181.5,
+      "present": [
+        "sintel"
+      ]
+    },
+    {
+      "id": "fr-01903",
+      "atSec": 190.333,
+      "present": [
+        "sintel"
+      ]
+    },
+    {
+      "id": "fr-01969",
+      "atSec": 196.917,
+      "present": [
+        "sintel"
+      ]
+    },
+    {
+      "id": "fr-02037",
+      "atSec": 203.708,
+      "present": [
+        "sintel"
+      ]
+    },
+    {
+      "id": "fr-02065",
+      "atSec": 206.5,
+      "present": [
+        "sintel"
+      ]
+    },
+    {
+      "id": "fr-02158",
+      "atSec": 215.833,
+      "present": [
+        "sintel",
+        "scales"
+      ]
+    },
+    {
+      "id": "fr-02234",
+      "atSec": 223.417,
+      "present": []
+    },
+    {
+      "id": "fr-02326",
+      "atSec": 232.625,
+      "present": []
+    },
+    {
+      "id": "fr-02366",
+      "atSec": 236.625,
+      "present": []
+    },
+    {
+      "id": "fr-02586",
+      "atSec": 258.625,
+      "present": [
+        "other"
+      ],
+      "maybe": [
+        "other"
+      ]
+    },
+    {
+      "id": "fr-02650",
+      "atSec": 265,
+      "present": [
+        "other"
+      ]
+    },
+    {
+      "id": "fr-02750",
+      "atSec": 275,
+      "present": [
+        "scales"
+      ]
+    },
+    {
+      "id": "fr-02762",
+      "atSec": 276.208,
+      "present": [
+        "sintel"
+      ]
+    },
+    {
+      "id": "fr-02843",
+      "atSec": 284.333,
+      "present": [
+        "sintel"
+      ],
+      "maybe": [
+        "scales"
+      ]
+    },
+    {
+      "id": "fr-02966",
+      "atSec": 296.625,
+      "present": [
+        "sintel"
+      ]
+    },
+    {
+      "id": "fr-03033",
+      "atSec": 303.333,
+      "present": [
+        "sintel"
+      ],
+      "maybe": [
+        "scales",
+        "other"
+      ]
+    },
+    {
+      "id": "fr-03061",
+      "atSec": 306.125,
+      "present": [
+        "sintel"
+      ],
+      "maybe": [
+        "scales"
+      ]
+    },
+    {
+      "id": "fr-03273",
+      "atSec": 327.333,
+      "present": [
+        "sintel"
+      ]
+    },
+    {
+      "id": "fr-03389",
+      "atSec": 338.917,
+      "present": [
+        "sintel"
+      ]
+    },
+    {
+      "id": "fr-03468",
+      "atSec": 346.833,
+      "present": [
+        "sintel"
+      ]
+    },
+    {
+      "id": "fr-03839",
+      "atSec": 383.917,
+      "present": []
+    },
+    {
+      "id": "fr-04156",
+      "atSec": 415.625,
+      "present": []
+    },
+    {
+      "id": "fr-04480",
+      "atSec": 448,
+      "present": [
+        "shaman"
+      ]
+    },
+    {
+      "id": "fr-04768",
+      "atSec": 476.833,
+      "present": [
+        "sintel"
+      ]
+    },
+    {
+      "id": "fr-05132",
+      "atSec": 513.208,
+      "present": [
+        "sintel"
+      ]
+    },
+    {
+      "id": "fr-05210",
+      "atSec": 521,
+      "present": [
+        "adult-dragon"
+      ]
+    },
+    {
+      "id": "fr-05342",
+      "atSec": 534.208,
+      "present": [
+        "sintel"
+      ]
+    },
+    {
+      "id": "fr-05496",
+      "atSec": 549.625,
+      "present": [
+        "sintel"
+      ]
+    },
+    {
+      "id": "fr-05520",
+      "atSec": 552,
+      "present": [
+        "sintel",
+        "adult-dragon"
+      ]
+    },
+    {
+      "id": "fr-05722",
+      "atSec": 572.208,
+      "present": [
+        "sintel",
+        "adult-dragon"
+      ]
+    },
+    {
+      "id": "fr-05893",
+      "atSec": 589.333,
+      "present": [
+        "adult-dragon"
+      ]
+    },
+    {
+      "id": "fr-05913",
+      "atSec": 591.333,
+      "present": [
+        "adult-dragon"
+      ]
+    },
+    {
+      "id": "fr-06098",
+      "atSec": 609.833,
+      "present": [
+        "adult-dragon"
+      ]
+    },
+    {
+      "id": "fr-06204",
+      "atSec": 620.417,
+      "present": [
+        "sintel"
+      ]
+    },
+    {
+      "id": "fr-06263",
+      "atSec": 626.333,
+      "present": [
+        "adult-dragon"
+      ]
+    },
+    {
+      "id": "fr-06383",
+      "atSec": 638.333,
+      "present": [
+        "sintel"
+      ]
+    },
+    {
+      "id": "fr-06520",
+      "atSec": 652,
+      "present": [
+        "sintel"
+      ],
+      "maybe": [
+        "adult-dragon"
+      ]
+    },
+    {
+      "id": "fr-06682",
+      "atSec": 668.208,
+      "present": [
+        "sintel"
+      ]
+    },
+    {
+      "id": "fr-07088",
+      "atSec": 708.833,
+      "present": [
+        "sintel"
+      ]
+    },
+    {
+      "id": "fr-07446",
+      "atSec": 744.625,
+      "present": []
+    },
+    {
+      "id": "fr-07718",
+      "atSec": 771.833,
+      "present": []
+    },
+    {
+      "id": "fr-08006",
+      "atSec": 800.625,
+      "present": []
+    },
+    {
+      "id": "fr-08406",
+      "atSec": 840.625,
+      "present": []
+    },
+    {
+      "id": "fr-08806",
+      "atSec": 880.625,
+      "present": []
+    }
+  ]
+}

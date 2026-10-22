@@ -4,6 +4,7 @@ import { createHash } from 'node:crypto';
 import { existsSync, readFileSync } from 'node:fs';
 import { join } from 'node:path';
 import { z } from 'zod';
+import { containsTerm } from '../core/context/text.js';
 import { emptyTimeline, type Timeline, type TimedFact } from '../core/context/timeline.js';
 import type { Content } from './content.js';
 
@@ -32,7 +33,13 @@ export const timelineFileSchema = z.object({
     rights: z.string().min(1).max(400),
   }),
   frames: z.array(z.object({ id, atSec: seconds, path: z.string().max(200).optional() })),
+  // Timestamped dialogue (speech recognition); a fact may cite a line as evidence.
+  lines: z
+    .array(z.object({ id, startSec: seconds, endSec: seconds, text: z.string().min(1).max(400) }))
+    .default([]),
   scenes: z.array(z.object({ id, startSec: seconds, endSec: seconds })),
+  // Set when only part of the film was looked at: after this, nothing on screen is described.
+  coveredUntilSec: seconds.optional(),
   entities: z.array(
     z.object({
       id,
@@ -40,6 +47,8 @@ export const timelineFileSchema = z.object({
       aliases: z.array(z.string().min(1).max(60)).max(8),
       firstSeenSec: seconds,
       intro: z.string().min(1).max(200),
+      label: z.string().min(1).max(60).optional(), // what it is called until its name is heard
+      namedSec: seconds.optional(), // when its name is revealed, if later than firstSeenSec
       review: reviewSchema,
     }),
   ),
@@ -53,7 +62,7 @@ export const timelineFileSchema = z.object({
       text: z.string().min(1).max(300),
       entities: z.array(id).max(8),
       spoilerTerms: z.array(z.string().min(2).max(40)).max(8),
-      evidence: z.array(id).max(8), // frame ids
+      evidence: z.array(id).max(8), // frame or line ids
       confidence: z.number().min(0).max(1),
       generator: z.string().min(1).max(80), // what proposed it, with a version
       review: reviewSchema,
@@ -71,11 +80,15 @@ function duplicates(ids: string[]): string[] {
 export function timelineProblems(file: TimelineFile): string[] {
   const problems: string[] = [];
   const end = file.durationSec;
-  const frames = new Map(file.frames.map((f) => [f.id, f.atSec]));
+  // Evidence time: a frame's own time, or the end of a line (when it has been heard).
+  const frames = new Map([
+    ...file.frames.map((f) => [f.id, f.atSec] as const),
+    ...file.lines.map((l) => [l.id, l.endSec] as const),
+  ]);
   const entities = new Map(file.entities.map((e) => [e.id, e]));
   const scenes = new Set(file.scenes.map((s) => s.id));
   for (const [kind, ids] of [
-    ['frame', file.frames.map((f) => f.id)],
+    ['evidence', [...file.frames.map((f) => f.id), ...file.lines.map((l) => l.id)]],
     ['scene', file.scenes.map((s) => s.id)],
     ['entity', file.entities.map((e) => e.id)],
     ['fact', file.facts.map((f) => f.id)],
@@ -88,9 +101,18 @@ export function timelineProblems(file: TimelineFile): string[] {
     const prev = file.scenes[i - 1];
     if (prev && s.startSec < prev.endSec) problems.push(`scene ${s.id} overlaps ${prev.id}`);
   });
-  file.entities.forEach(
-    (e) => e.firstSeenSec > end && problems.push(`entity ${e.id} is after the end`),
-  );
+  file.lines.forEach((l) => {
+    if (l.endSec < l.startSec || l.endSec > end + 1) problems.push(`line ${l.id} has a bad range`);
+  });
+  file.entities.forEach((e) => {
+    if (e.firstSeenSec > end) problems.push(`entity ${e.id} is after the end`);
+    if (e.namedSec === undefined) return;
+    if (e.namedSec < e.firstSeenSec) problems.push(`entity ${e.id} is named before it is seen`);
+    if (e.namedSec > e.firstSeenSec) {
+      if (!e.label) problems.push(`entity ${e.id} needs a label until it is named`);
+      if (containsTerm(e.intro, e.name)) problems.push(`entity ${e.id}: intro gives away the name`);
+    }
+  });
   file.facts.forEach((fact, i) =>
     problems.push(...factProblems(fact, i, file, frames, entities, scenes)),
   );
@@ -151,7 +173,10 @@ export function checkTimelineFile(
 
 /** The runtime view of a timeline file; `version` is a hash of its contents. */
 export function toTimeline(file: TimelineFile, version: string): Timeline {
-  const frames = new Map(file.frames.map((f) => [f.id, f.atSec]));
+  const frames = new Map([
+    ...file.frames.map((f) => [f.id, f.atSec] as const),
+    ...file.lines.map((l) => [l.id, l.endSec] as const),
+  ]);
   const facts: TimedFact[] = file.facts.map((f) => ({
     id: f.id,
     startSec: f.startSec,
@@ -170,9 +195,17 @@ export function toTimeline(file: TimelineFile, version: string): Timeline {
     aliases: e.aliases,
     firstSeenSec: e.firstSeenSec,
     intro: e.intro,
+    ...(e.namedSec !== undefined && e.label ? { label: e.label, namedSec: e.namedSec } : {}),
     review: e.review.status,
   }));
-  return { contentId: file.contentId, version, durationSec: file.durationSec, facts, entities };
+  return {
+    contentId: file.contentId,
+    version,
+    durationSec: file.durationSec,
+    facts,
+    entities,
+    ...(file.coveredUntilSec !== undefined ? { coveredUntilSec: file.coveredUntilSec } : {}),
+  };
 }
 
 /**

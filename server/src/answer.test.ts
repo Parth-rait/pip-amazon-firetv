@@ -8,7 +8,7 @@ import {
 import { createFakeModel, type CompleteInput } from './core/ai/model.js';
 import { createAnswerCache } from './core/context/answer-cache.js';
 import { lanternFoxTimeline } from './core/context/fixture.js';
-import { emptyTimeline } from './core/context/timeline.js';
+import { emptyTimeline, type Timeline, type TimedFact } from './core/context/timeline.js';
 import { routeText } from './core/intent/route-text.js';
 import { LINES } from './lines.js';
 
@@ -220,5 +220,133 @@ describe('recheckAtPosition', () => {
     });
     const rewound = recheckAtPosition(result, timeline, 30, 'accepted');
     expect(rewound).toMatchObject({ kind: 'unknown', text: LINES.unparsed });
+  });
+});
+
+/**
+ * A machine-made timeline, the shape the video-understanding pipeline writes: a character known by
+ * its look until its name is heard, captions with honest confidence, and dialogue.
+ */
+function generated(): Timeline {
+  const fact = (
+    id: string,
+    revealSec: number,
+    text: string,
+    entities: string[],
+    confidence: number,
+    kind: TimedFact['kind'] = 'event',
+  ): TimedFact => ({
+    id,
+    startSec: revealSec,
+    revealSec,
+    kind,
+    text,
+    entities,
+    spoilerTerms: [],
+    evidence: [{ ref: `fr-${id}`, atSec: revealSec }],
+    confidence,
+    review: 'candidate',
+  });
+  return {
+    contentId: 'gen',
+    version: 'g1',
+    durationSec: 600,
+    entities: [
+      {
+        id: 'c1',
+        name: 'young woman with red hair',
+        aliases: [],
+        firstSeenSec: 10,
+        intro: 'A young woman with red hair, first seen in a snowy mountain at 0:10.',
+        review: 'candidate',
+      },
+      {
+        id: 'c2',
+        name: 'Scales',
+        aliases: ['baby dragon'],
+        label: 'baby dragon',
+        namedSec: 230,
+        firstSeenSec: 200,
+        intro: 'A baby dragon, first seen in a city rooftop at 3:20.',
+        review: 'candidate',
+      },
+    ],
+    facts: [
+      fact(
+        'a1',
+        10,
+        'A young woman with red hair appears for the first time.',
+        ['c1'],
+        0.5,
+        'appearance',
+      ),
+      fact('e1', 20, 'The woman searches the mountain for her lost friend.', ['c1'], 0.7),
+      fact(
+        'a2',
+        200,
+        'A baby dragon appears for the first time: lies hurt.',
+        ['c2'],
+        0.5,
+        'appearance',
+      ),
+      fact('e2', 215, 'The woman bandages the baby dragon.', ['c1', 'c2'], 0.85),
+      fact(
+        'n2',
+        230,
+        'The baby dragon is called Scales: someone says "Goodnight, Scales."',
+        ['c2'],
+        0.7,
+        'relation',
+      ),
+      fact('e3', 400, 'Snow falls on an empty valley.', [], 0.7),
+    ],
+  };
+}
+
+describe('answerQuestion on a generated timeline', () => {
+  const ask = (question: string, positionSec: number) =>
+    request(question, positionSec, { timeline: generated() });
+  const candidateDeps = (reply = LEAKY) => deps(reply, { policy: 'candidate' });
+
+  it('hedges "who is that" when the only sighting is unconfirmed', async () => {
+    const { deps: d } = candidateDeps();
+    const result = await answerQuestion(ask('Who is that?', 205), d);
+    expect(result.text).toBe(`${LINES.hedge} A baby dragon, first seen in a city rooftop at 3:20.`);
+  });
+
+  it('answers plainly once the sighting is confirmed, and by name only after it is heard', async () => {
+    const { deps: d } = candidateDeps();
+    const before = await answerQuestion(ask('Who is that?', 220), d);
+    expect(before.text).toBe('A baby dragon, first seen in a city rooftop at 3:20.');
+    expect(before.text).not.toContain('Scales');
+    const after = await answerQuestion(ask('Who is that?', 235), d);
+    expect(after.text).toBe("That's Scales. A baby dragon, first seen in a city rooftop at 3:20.");
+  });
+
+  it('keeps a name back until it is heard, even when asked directly', async () => {
+    const { deps: d, complete } = candidateDeps();
+    expect(await answerQuestion(ask('Is the dragon called Scales?', 220), d)).toMatchObject({
+      kind: 'unknown',
+      path: 'restricted-question',
+    });
+    expect(complete).not.toHaveBeenCalled();
+  });
+
+  it('says it cannot tell who is on screen when nobody has been seen lately', async () => {
+    const { deps: d, complete } = candidateDeps();
+    const result = await answerQuestion(ask('Who is that?', 420), d);
+    expect(result).toMatchObject({ kind: 'unknown', text: LINES.cantTellWho });
+    expect(complete).not.toHaveBeenCalled();
+  });
+
+  it('gives "why did she do that" the earlier scenes of whoever is on screen', async () => {
+    const { deps: d, complete } = candidateDeps(
+      'ANSWER: She is looking after the dragon she found.\nSOURCES: e2',
+    );
+    await answerQuestion(ask('Why did she do that?', 216), d);
+    const prompt = complete.mock.calls[0]?.[0].user ?? '';
+    // e1 shares no word with the question; it is there because it is about the woman on screen.
+    expect(prompt).toContain('[e1 ');
+    expect(prompt).not.toContain('Scales');
   });
 });

@@ -1,7 +1,14 @@
 // Turns candidates plus a person's review into the canonical timeline file. Every fact keeps its
 // generator, evidence and review state; only accepted facts reach people at runtime.
 import { TIMELINE_SCHEMA_VERSION, type TimelineFile } from '../film/timeline-file.js';
-import type { Asset, CandidatesFile, FramesFile, ReviewFile, ScenesFile } from './artifacts.js';
+import type {
+  Asset,
+  CandidatesFile,
+  FramesFile,
+  ReviewFile,
+  ScenesFile,
+  TranscriptLine,
+} from './artifacts.js';
 
 export interface ExportInput {
   asset: Pick<Asset, 'assetId' | 'sha256' | 'license' | 'rights'>;
@@ -9,6 +16,7 @@ export interface ExportInput {
   durationSec: number;
   scenes: ScenesFile['scenes'];
   frames: FramesFile['frames'];
+  lines?: TranscriptLine[];
   candidates: CandidatesFile;
   review: ReviewFile | null;
 }
@@ -54,9 +62,13 @@ export function buildTimelineFile(input: ExportInput): TimelineFile {
       rights: input.asset.rights,
     },
     frames: input.frames.map((f) => ({ id: f.id, atSec: f.atSec, path: f.path })),
+    lines: input.lines ?? [],
     scenes: input.scenes,
     entities: candidates.entities.map((e) => ({ ...e, review: decide(`entity:${e.id}`) })),
     facts,
+    ...(candidates.coveredUntilSec !== undefined
+      ? { coveredUntilSec: candidates.coveredUntilSec }
+      : {}),
   };
 }
 

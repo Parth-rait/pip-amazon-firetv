@@ -29,6 +29,9 @@ npm run gesture -- ABCD --preview   # webcam hand gestures into session ABCD (se
 npm run gesture -- --replay evening --dry   # a recorded trace of hand poses through the gesture pipeline; prints the inputs
 npm run lab            # Virtual Pip Lab: real-socket scenarios with injected faults (the gesture scenario needs gesture/.venv)
 npm run eval -- --ollama   # benchmark on the lab film, plus the local model (free)
+npm run pipeline -- asr sintel   # whisper.cpp dialogue with timestamps (setup: ../video/setup.sh)
+npm run pipeline -- understand sintel --known Sintel   # local vision model over the frames: characters, actions, names from dialogue (docs/extractions/video-understanding.md)
+npm run pipeline -- understand sintel --replay   # rebuild the candidates from the committed run, without the model
 npm run smoke:ai       # one real Nova call: prints the reply and latency (needs the AWS profile)
 npm run draft:quiz -- big-buck-bunny   # Nova drafts 5 quiz questions into content/drafts/ for review
 npm run eval:ask       # runs the probes in evals/<film>.json against Nova; flags LEAK? and CHECK
@@ -56,13 +59,16 @@ npm run format
 
 `.env` (gitignored), copied from `.env.example`. Parsed by `src/config.ts`; the server exits with one message if a value is invalid.
 
-| Variable           | Default                      | Meaning                                                             |
-| ------------------ | ---------------------------- | ------------------------------------------------------------------- |
-| `PORT`             | `8787`                       | HTTP port                                                           |
-| `PUBLIC_URL`       | `http://localhost:8787`      | Public base URL; written by `npm run tunnel`                        |
-| `AWS_PROFILE`      | `pip`                        | AWS credentials profile                                             |
-| `AWS_REGION`       | `us-east-1`                  | Bedrock region                                                      |
-| `BEDROCK_MODEL_ID` | `us.amazon.nova-2-lite-v1:0` | Inference profile ID                                                |
-| `AI_ENABLED`       | `true`                       | `false` uses the fixed lines only                                   |
-| `LOG_TEXT`         | `false`                      | `true` logs question text (development only)                        |
-| `JOURNAL`          | `true`                       | Writes events to `data/events/` (gitignored), with pseudonymous ids |
+| Variable           | Default                                             | Meaning                                                                                        |
+| ------------------ | --------------------------------------------------- | ---------------------------------------------------------------------------------------------- |
+| `PORT`             | `8787`                                              | HTTP port                                                                                      |
+| `PUBLIC_URL`       | `http://localhost:8787`                             | Public base URL; written by `npm run tunnel`                                                   |
+| `AWS_PROFILE`      | `pip`                                               | AWS credentials profile                                                                        |
+| `AWS_REGION`       | `us-east-1`                                         | Bedrock region                                                                                 |
+| `BEDROCK_MODEL_ID` | `us.amazon.nova-2-lite-v1:0`                        | Inference profile ID                                                                           |
+| `AI_ENABLED`       | `true`                                              | `false` uses the fixed lines only                                                              |
+| `LOG_TEXT`         | `false`                                             | `true` logs question text (development only)                                                   |
+| `JOURNAL`          | `true`                                              | Writes events to `data/events/` (gitignored), with pseudonymous ids                            |
+| `TIMELINE_REVIEW`  | `accepted`                                          | `candidate` also answers from unreviewed facts (Sintel's generated timeline is all candidates) |
+| `WHISPER_CLI`      | `../video/.tools/whisper.cpp/build/bin/whisper-cli` | Pipeline only: the speech recognizer built by `video/setup.sh`                                 |
+| `WHISPER_MODEL`    | `../video/models/ggml-small.en.bin`                 | Pipeline only: its model                                                                       |

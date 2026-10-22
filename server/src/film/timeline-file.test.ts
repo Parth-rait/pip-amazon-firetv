@@ -18,6 +18,7 @@ function fixtureFile(): TimelineFile {
       rights: 'Original test story.',
     },
     frames: t.facts.flatMap((f) => f.evidence.map((e) => ({ id: e.ref, atSec: e.atSec }))),
+    lines: [],
     scenes: [
       { id: 's1', startSec: 0, endSec: 48 },
       { id: 's2', startSec: 48, endSec: 96 },
@@ -92,6 +93,43 @@ describe('checkTimelineFile', () => {
     expect(problems((f) => void (f.scenes[1]!.startSec = 40))).toContain('scene s2 overlaps s1');
     expect(problems((f) => f.facts.reverse())).toEqual(
       expect.arrayContaining([expect.stringContaining('order of startSec')]),
+    );
+  });
+
+  it('resolves a dialogue line as evidence at the time it has been heard', () => {
+    const file = fixtureFile();
+    // f4 is revealed at 40 s: a line heard by then can support it, one still going on cannot.
+    file.lines = [{ id: 'ln-00370', startSec: 37, endSec: 39.5, text: 'It belongs to someone.' }];
+    file.facts[4]!.evidence = ['ln-00370'];
+    const checked = checkTimelineFile(file);
+    expect(checked.ok).toBe(true);
+    if (checked.ok) {
+      expect(toTimeline(checked.file, 'v').facts[4]?.evidence).toEqual([
+        { ref: 'ln-00370', atSec: 39.5 },
+      ]);
+    }
+    file.lines[0]!.endSec = 45;
+    expect(checkTimelineFile(file)).toMatchObject({ ok: false });
+  });
+
+  it('needs a label, and an intro without the name, for a character named after it is seen', () => {
+    const named = (change: (e: TimelineFile['entities'][number]) => void) =>
+      problems((f) => {
+        const ember = f.entities.find((e) => e.id === 'ember')!;
+        ember.intro = 'A small orange fox in the snow.';
+        ember.label = 'small orange fox';
+        ember.namedSec = ember.firstSeenSec + 5;
+        change(ember);
+      });
+    expect(named(() => {})).toEqual([]);
+    expect(named((e) => void (e.label = undefined))).toContain(
+      'entity ember needs a label until it is named',
+    );
+    expect(named((e) => void (e.intro = 'Ember, a small fox.'))).toContain(
+      'entity ember: intro gives away the name',
+    );
+    expect(named((e) => void (e.namedSec = e.firstSeenSec - 1))).toContain(
+      'entity ember is named before it is seen',
     );
   });
 

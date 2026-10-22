@@ -1,0 +1,1531 @@
+{
+  "schemaVersion": 1,
+  "assetId": "sintel",
+  "model": "qwen3-vl:4b-instruct",
+  "digest": "ee4b975b58c17ce268cd19d40db35d5edc64603035d2ffc1fee1968eb0947f7b",
+  "coveredUntilSec": 383.917,
+  "frames": [
+    {
+      "frameId": "fr-00005",
+      "atSec": 0.5,
+      "sceneId": "sc-001",
+      "rosterIds": [],
+      "promptVersion": "vu1",
+      "promptHash": "6bae60fd4299c68f",
+      "raw": "{\"characters\":[],\"action\":\"\",\"setting\":\"\",\"objects\":[],\"text_on_screen\":\"\"}",
+      "ms": 20628
+    },
+    {
+      "frameId": "fr-00055",
+      "atSec": 5.5,
+      "sceneId": "sc-001",
+      "rosterIds": [],
+      "promptVersion": "vu1",
+      "promptHash": "6bae60fd4299c68f",
+      "raw": "{\n  \"characters\": [],\n  \"action\": \"Snow-covered landscape with text overlay\",\n  \"setting\": \"Snowy, mountainous terrain\",\n  \"objects\": [],\n  \"text_on_screen\": \"THE BLENDER FOUNDATION PRESENTS\"\n}",
+      "ms": 12603
+    },
+    {
+      "frameId": "fr-00085",
+      "atSec": 8.5,
+      "sceneId": "sc-001",
+      "rosterIds": [],
+      "promptVersion": "vu1",
+      "promptHash": "6bae60fd4299c68f",
+      "raw": "{\n  \"characters\": [],\n  \"action\": \"Snow-covered mountains loom in a misty valley.\",\n  \"setting\": \"Snowy mountain pass with fog\",\n  \"objects\": [],\n  \"text_on_screen\": \"THE DURIAN OPEN MOVIE PROJECT\"\n}",
+      "ms": 12953
+    },
+    {
+      "frameId": "fr-00125",
+      "atSec": 12.5,
+      "sceneId": "sc-001",
+      "rosterIds": [],
+      "promptVersion": "vu1",
+      "promptHash": "6bae60fd4299c68f",
+      "raw": "{\n  \"characters\": [],\n  \"action\": \"Snow-covered mountains loom in the distance.\",\n  \"setting\": \"Snowy, misty mountain valley\",\n  \"objects\": [],\n  \"text_on_screen\": \"THE DURIAN OPEN MOVIE PROJECT\"\n}",
+      "ms": 29466
+    },
+    {
+      "frameId": "fr-00165",
+      "atSec": 16.5,
+      "sceneId": "sc-001",
+      "rosterIds": [],
+      "promptVersion": "vu1",
+      "promptHash": "6bae60fd4299c68f",
+      "raw": "{\n  \"characters\": [],\n  \"action\": \"Snow-covered mountains loom in a misty landscape.\",\n  \"setting\": \"Snowy, misty mountain range\",\n  \"objects\": [],\n  \"text_on_screen\": \"A BLENDER INSTITUTE PRODUCTION\"\n}",
+      "ms": 30145
+    },
+    {
+      "frameId": "fr-00205",
+      "atSec": 20.5,
+      "sceneId": "sc-001",
+      "rosterIds": [],
+      "promptVersion": "vu1",
+      "promptHash": "6bae60fd4299c68f",
+      "raw": "{\n  \"characters\": [],\n  \"action\": \"Snow-covered mountains loom in a misty landscape.\",\n  \"setting\": \"Frozen, misty mountain range\",\n  \"objects\": [],\n  \"text_on_screen\": \"THIS FILM WAS SUPPORTED BY THE NETHERLANDS FILM FUND\"\n}",
+      "ms": 29586
+    },
+    {
+      "frameId": "fr-00245",
+      "atSec": 24.5,
+      "sceneId": "sc-001",
+      "rosterIds": [],
+      "promptVersion": "vu1",
+      "promptHash": "6bae60fd4299c68f",
+      "raw": "{\n  \"characters\": [],\n  \"action\": \"Snow-covered mountains loom in a misty landscape.\",\n  \"setting\": \"Frozen, misty mountain range\",\n  \"objects\": [],\n  \"text_on_screen\": \"\"\n}",
+      "ms": 19095
+    },
+    {
+      "frameId": "fr-00285",
+      "atSec": 28.5,
+      "sceneId": "sc-001",
+      "rosterIds": [],
+      "promptVersion": "vu1",
+      "promptHash": "6bae60fd4299c68f",
+      "raw": "{\n  \"characters\": [\n    {\n      \"match\": \"new\",\n      \"kind\": \"person\",\n      \"looks\": \"small figure in snow\",\n      \"doing\": \"walking through snow with stick\"\n    }\n  ],\n  \"action\": \"A lone figure walks through deep snow.\",\n  \"setting\": \"Snowy mountain pass with misty peaks.\",\n  \"objects\": [\n    \"footprints in snow\",\n    \"rocky outcrop\",\n    \"snow-covered cliffs\"\n  ],\n  \"text_on_screen\": \"\"\n}",
+      "ms": 21424
+    },
+    {
+      "frameId": "fr-00319",
+      "atSec": 31.917,
+      "sceneId": "sc-002",
+      "rosterIds": [
+        "c1"
+      ],
+      "promptVersion": "vu1",
+      "promptHash": "9d3f6d3e831a428d",
+      "raw": "{\n  \"characters\": [\n    {\n      \"match\": \"c1\",\n      \"kind\": \"person\",\n      \"looks\": \"young woman with red hair\",\n      \"doing\": \"holds a sword\"\n    }\n  ],\n  \"action\": \"A lone figure stands in snow holding a sword.\",\n  \"setting\": \"Snowy mountain peak with fog\",\n  \"objects\": [\n    \"sword\",\n    \"rocks\",\n    \"mountain\"\n  ],\n  \"text_on_screen\": \"\"\n}",
+      "ms": 52222
+    },
+    {
+      "frameId": "fr-00358",
+      "atSec": 35.833,
+      "sceneId": "sc-002",
+      "rosterIds": [
+        "c1"
+      ],
+      "promptVersion": "vu1",
+      "promptHash": "9d3f6d3e831a428d",
+      "raw": "{\n  \"characters\": [\n    {\n      \"match\": \"c1\",\n      \"kind\": \"person\",\n      \"looks\": \"small figure in snow\",\n      \"doing\": \"holds sword to eye\"\n    }\n  ],\n  \"action\": \"small figure holds sword to eye\",\n  \"setting\": \"snowy, foggy landscape\",\n  \"objects\": [\n    \"sword\",\n    \"snow\"\n  ],\n  \"text_on_screen\": \"\"\n}",
+      "ms": 77464
+    },
+    {
+      "frameId": "fr-00398",
+      "atSec": 39.833,
+      "sceneId": "sc-002",
+      "rosterIds": [
+        "c1"
+      ],
+      "promptVersion": "vu1",
+      "promptHash": "9d3f6d3e831a428d",
+      "raw": "{\n  \"characters\": [\n    {\n      \"match\": \"c1\",\n      \"kind\": \"person\",\n      \"looks\": \"young woman with red hair\",\n      \"doing\": \"stands in snowy landscape\"\n    }\n  ],\n  \"action\": \"A young woman stands in a snowy, misty landscape.\",\n  \"setting\": \"Snowy, misty, rocky terrain\",\n  \"objects\": [\n    \"sword\",\n    \"snow-covered rocks\",\n    \"foggy sky\"\n  ],\n  \"text_on_screen\": \"\"\n}",
+      "ms": 18711
+    },
+    {
+      "frameId": "fr-00673",
+      "atSec": 67.333,
+      "sceneId": "sc-014",
+      "rosterIds": [
+        "c1"
+      ],
+      "promptVersion": "vu1",
+      "promptHash": "9d3f6d3e831a428d",
+      "raw": "{\n  \"characters\": [],\n  \"action\": \"\",\n  \"setting\": \"\",\n  \"objects\": [],\n  \"text_on_screen\": \"\"\n}",
+      "ms": 17625
+    },
+    {
+      "frameId": "fr-00687",
+      "atSec": 68.708,
+      "sceneId": "sc-015",
+      "rosterIds": [
+        "c1"
+      ],
+      "promptVersion": "vu1",
+      "promptHash": "9d3f6d3e831a428d",
+      "raw": "{\n  \"characters\": [\n    {\n      \"match\": \"c1\",\n      \"kind\": \"person\",\n      \"looks\": \"small figure in snow\",\n      \"doing\": \"lies on ground holding sword\"\n    },\n    {\n      \"match\": \"new\",\n      \"kind\": \"person\",\n      \"looks\": \"bald man in dark clothes\",\n      \"doing\": \"stands over fallen figure\"\n    }\n  ],\n  \"action\": \"One person stands over another who lies on snow-covered ground.\",\n  \"setting\": \"Snowy, rocky terrain with misty background\",\n  \"objects\": [\n    \"sword\",\n    \"long staff\",\n    \"rocky outcrop\",\n    \"snowy ground\"\n  ],\n  \"text_on_screen\": \"\"\n}",
+      "ms": 20907
+    },
+    {
+      "frameId": "fr-00704",
+      "atSec": 70.417,
+      "sceneId": "sc-015",
+      "rosterIds": [
+        "c1",
+        "c2"
+      ],
+      "promptVersion": "vu1",
+      "promptHash": "6392629fe0f88674",
+      "raw": "{\n  \"characters\": [\n    {\n      \"match\": \"c1\",\n      \"kind\": \"person\",\n      \"looks\": \"small figure with red hair\",\n      \"doing\": \"holds sword against wall\"\n    },\n    {\n      \"match\": \"c2\",\n      \"kind\": \"person\",\n      \"looks\": \"bald man in dark clothes\",\n      \"doing\": \"presses hand on small figure\"\n    }\n  ],\n  \"action\": \"Bald man presses hand on small figure\",\n  \"setting\": \"Snowy wall with sword\",\n  \"objects\": [\n    \"sword\",\n    \"wall\"\n  ],\n  \"text_on_screen\": \"\"\n}",
+      "ms": 38666
+    },
+    {
+      "frameId": "fr-00727",
+      "atSec": 72.708,
+      "sceneId": "sc-015",
+      "rosterIds": [
+        "c1",
+        "c2"
+      ],
+      "promptVersion": "vu1",
+      "promptHash": "6392629fe0f88674",
+      "raw": "{\n  \"characters\": [\n    {\n      \"match\": \"c1\",\n      \"kind\": \"person\",\n      \"looks\": \"young woman with red hair\",\n      \"doing\": \"holds a sword\"\n    },\n    {\n      \"match\": \"c2\",\n      \"kind\": \"person\",\n      \"looks\": \"bald man in dark clothes\",\n      \"doing\": \"leans over the woman\"\n    }\n  ],\n  \"action\": \"A woman holds a sword while a man leans over her.\",\n  \"setting\": \"White, foggy, enclosed space\",\n  \"objects\": [\n    \"sword\",\n    \"weapon\",\n    \"armor\",\n    \"belt\"\n  ],\n  \"text_on_screen\": \"\"\n}",
+      "ms": 40178
+    },
+    {
+      "frameId": "fr-00746",
+      "atSec": 74.625,
+      "sceneId": "sc-016",
+      "rosterIds": [
+        "c1",
+        "c2"
+      ],
+      "promptVersion": "vu1",
+      "promptHash": "6392629fe0f88674",
+      "raw": "{\n  \"characters\": [\n    {\n      \"match\": \"c1\",\n      \"kind\": \"person\",\n      \"looks\": \"young woman with red hair\",\n      \"doing\": \"lies on snow holding sword\"\n    }\n  ],\n  \"action\": \"Young woman lies on snow holding sword\",\n  \"setting\": \"Snowy ground with dark blade\",\n  \"objects\": [\n    \"sword\",\n    \"brown coat\",\n    \"snow\"\n  ],\n  \"text_on_screen\": \"\"\n}",
+      "ms": 33781
+    },
+    {
+      "frameId": "fr-00785",
+      "atSec": 78.5,
+      "sceneId": "sc-016",
+      "rosterIds": [
+        "c1",
+        "c2"
+      ],
+      "promptVersion": "vu1",
+      "promptHash": "8abf9da7c51fcc0d",
+      "raw": "{\n  \"characters\": [\n    {\n      \"match\": \"c1\",\n      \"kind\": \"person\",\n      \"looks\": \"young woman with red hair\",\n      \"doing\": \"lying on ground with sword nearby\"\n    }\n  ],\n  \"action\": \"Young woman lies on ground with sword nearby\",\n  \"setting\": \"Snowy, dimly lit outdoor area\",\n  \"objects\": [\n    \"sword\",\n    \"brown coat\",\n    \"hands\",\n    \"snow\"\n  ],\n  \"text_on_screen\": \"\"\n}",
+      "ms": 18233
+    },
+    {
+      "frameId": "fr-00820",
+      "atSec": 82,
+      "sceneId": "sc-017",
+      "rosterIds": [
+        "c1",
+        "c2"
+      ],
+      "promptVersion": "vu1",
+      "promptHash": "8abf9da7c51fcc0d",
+      "raw": "{\n  \"characters\": [],\n  \"action\": \"A lone cabin glows warmly in the snow.\",\n  \"setting\": \"Snow-covered mountain valley with fog.\",\n  \"objects\": [\n    \"glowing cabin\",\n    \"snowy mountains\",\n    \"fog\",\n    \"rocks\"\n  ],\n  \"text_on_screen\": \"\"\n}",
+      "ms": 15579
+    },
+    {
+      "frameId": "fr-00885",
+      "atSec": 88.5,
+      "sceneId": "sc-018",
+      "rosterIds": [
+        "c1",
+        "c2"
+      ],
+      "promptVersion": "vu1",
+      "promptHash": "8abf9da7c51fcc0d",
+      "raw": "{\n  \"characters\": [],\n  \"action\": \"\",\n  \"setting\": \"\",\n  \"objects\": [],\n  \"text_on_screen\": \"\"\n}",
+      "ms": 19374
+    },
+    {
+      "frameId": "fr-00930",
+      "atSec": 93,
+      "sceneId": "sc-019",
+      "rosterIds": [
+        "c1",
+        "c2"
+      ],
+      "promptVersion": "vu1",
+      "promptHash": "8abf9da7c51fcc0d",
+      "raw": "{\n  \"characters\": [\n    {\n      \"match\": \"c1\",\n      \"kind\": \"person\",\n      \"looks\": \"young woman with red hair\",\n      \"doing\": \"holds a sword\"\n    }\n  ],\n  \"action\": \"A young woman stands in a snowy landscape holding a sword.\",\n  \"setting\": \"Snowy mountainous terrain with mist\",\n  \"objects\": [\n    \"sword\",\n    \"tree symbol logo\",\n    \"text 'SINTEL'\"\n  ],\n  \"text_on_screen\": \"SINTEL\"\n}",
+      "ms": 25805
+    },
+    {
+      "frameId": "fr-00970",
+      "atSec": 97,
+      "sceneId": "sc-019",
+      "rosterIds": [
+        "c1",
+        "c2"
+      ],
+      "promptVersion": "vu1",
+      "promptHash": "8abf9da7c51fcc0d",
+      "raw": "{\n  \"characters\": [\n    {\n      \"match\": \"c1\",\n      \"kind\": \"person\",\n      \"looks\": \"young woman with red hair\",\n      \"doing\": \"sits on snow holding sword\"\n    }\n  ],\n  \"action\": \"Young woman sits on snow holding sword\",\n  \"setting\": \"Snowy mountain landscape with mist\",\n  \"objects\": [\n    \"sword\",\n    \"tree symbol logo\",\n    \"text 'SINTEL'\"\n  ],\n  \"text_on_screen\": \"SINTEL\"\n}",
+      "ms": 27862
+    },
+    {
+      "frameId": "fr-01010",
+      "atSec": 101,
+      "sceneId": "sc-019",
+      "rosterIds": [
+        "c1",
+        "c2"
+      ],
+      "promptVersion": "vu1",
+      "promptHash": "8abf9da7c51fcc0d",
+      "raw": "{\n  \"characters\": [],\n  \"action\": \"A lone figure lies motionless in the snow.\",\n  \"setting\": \"Snow-covered mountain range with mist.\",\n  \"objects\": [],\n  \"text_on_screen\": \"\"\n}",
+      "ms": 21226
+    },
+    {
+      "frameId": "fr-01057",
+      "atSec": 105.708,
+      "sceneId": "sc-020",
+      "rosterIds": [
+        "c1",
+        "c2"
+      ],
+      "promptVersion": "vu1",
+      "promptHash": "8abf9da7c51fcc0d",
+      "raw": "{\n  \"characters\": [],\n  \"action\": \"A small fire burns in the center of a circle.\",\n  \"setting\": \"Dark, dimly lit interior space\",\n  \"objects\": [\n    \"small fire\",\n    \"round stone\",\n    \"metal objects\",\n    \"wooden containers\"\n  ],\n  \"text_on_screen\": \"\"\n}",
+      "ms": 24857
+    },
+    {
+      "frameId": "fr-01099",
+      "atSec": 109.917,
+      "sceneId": "sc-021",
+      "rosterIds": [
+        "c1",
+        "c2"
+      ],
+      "promptVersion": "vu1",
+      "promptHash": "8abf9da7c51fcc0d",
+      "raw": "{\n  \"characters\": [],\n  \"action\": \"\",\n  \"setting\": \"\",\n  \"objects\": [],\n  \"text_on_screen\": \"\"\n}",
+      "ms": 22732
+    },
+    {
+      "frameId": "fr-01138",
+      "atSec": 113.833,
+      "sceneId": "sc-021",
+      "rosterIds": [
+        "c1",
+        "c2"
+      ],
+      "promptVersion": "vu1",
+      "promptHash": "8abf9da7c51fcc0d",
+      "raw": "{\n  \"characters\": [\n    {\n      \"match\": \"c1\",\n      \"kind\": \"person\",\n      \"looks\": \"young woman with red hair\",\n      \"doing\": \"lies on ground, looking up\"\n    },\n    {\n      \"match\": \"c2\",\n      \"kind\": \"person\",\n      \"looks\": \"bald man in dark clothes\",\n      \"doing\": \"stands over her, holding sword\"\n    }\n  ],\n  \"action\": \"A young woman lies on the ground while a bald man stands over her with a sword.\",\n  \"setting\": \"Dark, dimly lit room with ornate walls\",\n  \"objects\": [\n    \"sword with ornate hilt\",\n    \"ornate wall panel\",\n    \"furniture or structure\"\n  ],\n  \"text_on_screen\": \"\"\n}",
+      "ms": 28625
+    },
+    {
+      "frameId": "fr-01164",
+      "atSec": 116.417,
+      "sceneId": "sc-022",
+      "rosterIds": [
+        "c1",
+        "c2"
+      ],
+      "promptVersion": "vu1",
+      "promptHash": "8abf9da7c51fcc0d",
+      "raw": "{\n  \"characters\": [\n    {\n      \"match\": \"c1\",\n      \"kind\": \"person\",\n      \"looks\": \"young woman with red hair\",\n      \"doing\": \"stands watching\"\n    },\n    {\n      \"match\": \"c2\",\n      \"kind\": \"person\",\n      \"looks\": \"bald man in dark clothes\",\n      \"doing\": \"stirs pot over fire\"\n    }\n  ],\n  \"action\": \"A man stirs a pot over a fire while a woman watches.\",\n  \"setting\": \"Dark, rustic interior with wooden walls\",\n  \"objects\": [\n    \"pot\",\n    \"fire\",\n    \"bowl\",\n    \"spoon\"\n  ],\n  \"text_on_screen\": \"\"\n}",
+      "ms": 50386
+    },
+    {
+      "frameId": "fr-01186",
+      "atSec": 118.625,
+      "sceneId": "sc-023",
+      "rosterIds": [
+        "c1",
+        "c2"
+      ],
+      "promptVersion": "vu1",
+      "promptHash": "8abf9da7c51fcc0d",
+      "raw": "{\n  \"characters\": [\n    {\n      \"match\": \"c1\",\n      \"kind\": \"person\",\n      \"looks\": \"young woman with red hair\",\n      \"doing\": \"looks down with closed eyes\"\n    }\n  ],\n  \"action\": \"Young woman closes her eyes in dim light\",\n  \"setting\": \"Dark room with faint glow\",\n  \"objects\": [],\n  \"text_on_screen\": \"\"\n}",
+      "ms": 28244
+    },
+    {
+      "frameId": "fr-01206",
+      "atSec": 120.625,
+      "sceneId": "sc-024",
+      "rosterIds": [
+        "c1",
+        "c2"
+      ],
+      "promptVersion": "vu1",
+      "promptHash": "8abf9da7c51fcc0d",
+      "raw": "{\n  \"characters\": [\n    {\n      \"match\": \"c1\",\n      \"kind\": \"person\",\n      \"looks\": \"young woman with red hair\",\n      \"doing\": \"sitting and watching\"\n    },\n    {\n      \"match\": \"c2\",\n      \"kind\": \"person\",\n      \"looks\": \"bald man in dark clothes\",\n      \"doing\": \"pouring liquid from ladle\"\n    }\n  ],\n  \"action\": \"A man pours liquid into a bowl while a woman watches.\",\n  \"setting\": \"Dimly lit, possibly indoor or camp setting\",\n  \"objects\": [\n    \"ladle\",\n    \"bowl\",\n    \"small pot\",\n    \"fingers with tattoos\"\n  ],\n  \"text_on_screen\": \"\"\n}",
+      "ms": 23512
+    },
+    {
+      "frameId": "fr-01237",
+      "atSec": 123.708,
+      "sceneId": "sc-025",
+      "rosterIds": [
+        "c1",
+        "c2"
+      ],
+      "promptVersion": "vu1",
+      "promptHash": "8abf9da7c51fcc0d",
+      "raw": "{\n  \"characters\": [\n    {\n      \"match\": \"c1\",\n      \"kind\": \"person\",\n      \"looks\": \"young woman with red hair\",\n      \"doing\": \"reaching out with sword\"\n    },\n    {\n      \"match\": \"c2\",\n      \"kind\": \"person\",\n      \"looks\": \"bald man in dark clothes\",\n      \"doing\": \"holding sword near her\"\n    }\n  ],\n  \"action\": \"Woman extends hand toward man holding sword\",\n  \"setting\": \"Dark, dimly lit room\",\n  \"objects\": [\n    \"sword\",\n    \"hand\",\n    \"dark clothing\",\n    \"red hair\"\n  ],\n  \"text_on_screen\": \"\"\n}",
+      "ms": 60336
+    },
+    {
+      "frameId": "fr-01268",
+      "atSec": 126.833,
+      "sceneId": "sc-026",
+      "rosterIds": [
+        "c1",
+        "c2"
+      ],
+      "promptVersion": "vu1",
+      "promptHash": "8abf9da7c51fcc0d",
+      "raw": "{\n  \"characters\": [\n    {\n      \"match\": \"c1\",\n      \"kind\": \"person\",\n      \"looks\": \"young woman with red hair\",\n      \"doing\": \"sitting and holding a bowl\"\n    },\n    {\n      \"match\": \"c2\",\n      \"kind\": \"person\",\n      \"looks\": \"bald man in dark clothes\",\n      \"doing\": \"bending over a fire\"\n    }\n  ],\n  \"action\": \"Two characters are inside a tent near a fire.\",\n  \"setting\": \"Inside a dimly lit, circular tent\",\n  \"objects\": [\n    \"fire\",\n    \"hanging decorations\",\n    \"wooden structure\",\n    \"bowl\"\n  ],\n  \"text_on_screen\": \"\"\n}",
+      "ms": 40043
+    },
+    {
+      "frameId": "fr-01308",
+      "atSec": 130.833,
+      "sceneId": "sc-026",
+      "rosterIds": [
+        "c1",
+        "c2"
+      ],
+      "promptVersion": "vu1",
+      "promptHash": "8abf9da7c51fcc0d",
+      "raw": "{\n  \"characters\": [\n    {\n      \"match\": \"c1\",\n      \"kind\": \"person\",\n      \"looks\": \"young woman with red hair\",\n      \"doing\": \"sits cross-legged holding sword\"\n    },\n    {\n      \"match\": \"c2\",\n      \"kind\": \"person\",\n      \"looks\": \"bald man in dark clothes\",\n      \"doing\": \"sits facing fire holding staff\"\n    }\n  ],\n  \"action\": \"Two figures sit opposite each other around a fire\",\n  \"setting\": \"Inside a circular tent with hanging shells\",\n  \"objects\": [\n    \"fire\",\n    \"sword\",\n    \"staff\",\n    \"hanging shells\"\n  ],\n  \"text_on_screen\": \"\"\n}",
+      "ms": 25590
+    },
+    {
+      "frameId": "fr-01345",
+      "atSec": 134.5,
+      "sceneId": "sc-028",
+      "rosterIds": [
+        "c1",
+        "c2"
+      ],
+      "promptVersion": "vu1",
+      "promptHash": "8abf9da7c51fcc0d",
+      "raw": "{\n  \"characters\": [],\n  \"action\": \"\",\n  \"setting\": \"\",\n  \"objects\": [],\n  \"text_on_screen\": \"\"\n}",
+      "ms": 16314
+    },
+    {
+      "frameId": "fr-01387",
+      "atSec": 138.708,
+      "sceneId": "sc-029",
+      "rosterIds": [
+        "c1",
+        "c2"
+      ],
+      "promptVersion": "vu1",
+      "promptHash": "8abf9da7c51fcc0d",
+      "raw": "{\n  \"characters\": [],\n  \"action\": \"\",\n  \"setting\": \"\",\n  \"objects\": [],\n  \"text_on_screen\": \"\"\n}",
+      "ms": 15861
+    },
+    {
+      "frameId": "fr-01415",
+      "atSec": 141.5,
+      "sceneId": "sc-030",
+      "rosterIds": [
+        "c1",
+        "c2"
+      ],
+      "promptVersion": "vu1",
+      "promptHash": "8abf9da7c51fcc0d",
+      "raw": "{\n  \"characters\": [\n    {\n      \"match\": \"c1\",\n      \"kind\": \"person\",\n      \"looks\": \"young woman with red hair\",\n      \"doing\": \"holds a sword\"\n    }\n  ],\n  \"action\": \"Young woman with red hair holds sword\",\n  \"setting\": \"Dimly lit interior space\",\n  \"objects\": [\n    \"sword\",\n    \"sword hilt\"\n  ],\n  \"text_on_screen\": \"\"\n}",
+      "ms": 19938
+    },
+    {
+      "frameId": "fr-01455",
+      "atSec": 145.5,
+      "sceneId": "sc-030",
+      "rosterIds": [
+        "c1",
+        "c2"
+      ],
+      "promptVersion": "vu1",
+      "promptHash": "8abf9da7c51fcc0d",
+      "raw": "{\n  \"characters\": [\n    {\n      \"match\": \"c1\",\n      \"kind\": \"person\",\n      \"looks\": \"young woman with red hair\",\n      \"doing\": \"looking downward with focused expression\"\n    }\n  ],\n  \"action\": \"Young woman with red hair looks down intently\",\n  \"setting\": \"Dark, dimly lit interior space\",\n  \"objects\": [],\n  \"text_on_screen\": \"\"\n}",
+      "ms": 18356
+    },
+    {
+      "frameId": "fr-01495",
+      "atSec": 149.5,
+      "sceneId": "sc-030",
+      "rosterIds": [
+        "c1",
+        "c2"
+      ],
+      "promptVersion": "vu1",
+      "promptHash": "8abf9da7c51fcc0d",
+      "raw": "{\n  \"characters\": [],\n  \"action\": \"\",\n  \"setting\": \"\",\n  \"objects\": [],\n  \"text_on_screen\": \"\"\n}",
+      "ms": 14363
+    },
+    {
+      "frameId": "fr-01510",
+      "atSec": 151,
+      "sceneId": "sc-030",
+      "rosterIds": [
+        "c1",
+        "c2"
+      ],
+      "promptVersion": "vu1",
+      "promptHash": "8abf9da7c51fcc0d",
+      "raw": "{\n  \"characters\": [],\n  \"action\": \"A cityscape under a dark, cloudy sky.\",\n  \"setting\": \"Dense urban area with ruined structures.\",\n  \"objects\": [\n    \"Ruined buildings\",\n    \"Broken tower\",\n    \"Overcast sky\"\n  ],\n  \"text_on_screen\": \"\"\n}",
+      "ms": 23794
+    },
+    {
+      "frameId": "fr-01526",
+      "atSec": 152.625,
+      "sceneId": "sc-030",
+      "rosterIds": [
+        "c1",
+        "c2"
+      ],
+      "promptVersion": "vu1",
+      "promptHash": "8abf9da7c51fcc0d",
+      "raw": "{\n  \"characters\": [],\n  \"action\": \"A vast city sprawls under a hazy sky.\",\n  \"setting\": \"Ancient city with wooden rooftops and a towering structure.\",\n  \"objects\": [\n    \"Cityscape with dense buildings\",\n    \"Tower in the distance\",\n    \"Mountain-like structure with stairs\",\n    \"Hazy, overcast sky\"\n  ],\n  \"text_on_screen\": \"\"\n}",
+      "ms": 33793
+    },
+    {
+      "frameId": "fr-01571",
+      "atSec": 157.125,
+      "sceneId": "sc-031",
+      "rosterIds": [
+        "c1",
+        "c2"
+      ],
+      "promptVersion": "vu1",
+      "promptHash": "8abf9da7c51fcc0d",
+      "raw": "{\n  \"characters\": [\n    {\n      \"match\": \"c1\",\n      \"kind\": \"person\",\n      \"looks\": \"young woman with red hair\",\n      \"doing\": \"stands in a narrow alleyway\"\n    }\n  ],\n  \"action\": \"A young woman with red hair stands in a narrow alleyway.\",\n  \"setting\": \"Dilapidated alleyway between stone buildings\",\n  \"objects\": [\n    \"broken wooden planks\",\n    \"cracked stone pavement\",\n    \"wooden door\",\n    \"red-tiled roof\"\n  ],\n  \"text_on_screen\": \"\"\n}",
+      "ms": 28434
+    },
+    {
+      "frameId": "fr-01603",
+      "atSec": 160.333,
+      "sceneId": "sc-031",
+      "rosterIds": [
+        "c1",
+        "c2"
+      ],
+      "promptVersion": "vu1",
+      "promptHash": "8abf9da7c51fcc0d",
+      "raw": "{\n  \"characters\": [\n    {\n      \"match\": \"c1\",\n      \"kind\": \"person\",\n      \"looks\": \"young woman with red hair\",\n      \"doing\": \"stands in a narrow alleyway\"\n    }\n  ],\n  \"action\": \"A young woman with red hair stands in a narrow alleyway.\",\n  \"setting\": \"Dilapidated alleyway between stone buildings\",\n  \"objects\": [\n    \"broken wooden planks\",\n    \"cracked stone pavement\",\n    \"wooden door\",\n    \"tattered fabric hanging overhead\"\n  ],\n  \"text_on_screen\": \"\"\n}",
+      "ms": 28230
+    },
+    {
+      "frameId": "fr-01635",
+      "atSec": 163.5,
+      "sceneId": "sc-032",
+      "rosterIds": [
+        "c1",
+        "c2"
+      ],
+      "promptVersion": "vu1",
+      "promptHash": "8abf9da7c51fcc0d",
+      "raw": "{\n  \"characters\": [\n    {\n      \"match\": \"c1\",\n      \"kind\": \"person\",\n      \"looks\": \"young woman with red hair\",\n      \"doing\": \"holds a sword\"\n    },\n    {\n      \"match\": \"c2\",\n      \"kind\": \"person\",\n      \"looks\": \"bald man in dark clothes\",\n      \"doing\": \"grabs her arm\"\n    }\n  ],\n  \"action\": \"A young woman holds a sword as a bald man grabs her arm.\",\n  \"setting\": \"Rustic village with wooden buildings\",\n  \"objects\": [\n    \"sword\",\n    \"wooden buildings\",\n    \"red roof\"\n  ],\n  \"text_on_screen\": \"\"\n}",
+      "ms": 44944
+    },
+    {
+      "frameId": "fr-01667",
+      "atSec": 166.708,
+      "sceneId": "sc-032",
+      "rosterIds": [
+        "c1",
+        "c2"
+      ],
+      "promptVersion": "vu1",
+      "promptHash": "8abf9da7c51fcc0d",
+      "raw": "{\n  \"characters\": [\n    {\n      \"match\": \"c1\",\n      \"kind\": \"person\",\n      \"looks\": \"young woman with red hair\",\n      \"doing\": \"holds a sword\"\n    }\n  ],\n  \"action\": \"Young woman holds sword while looking down\",\n  \"setting\": \"Dusty, sunlit outdoor area\",\n  \"objects\": [\n    \"sword\",\n    \"worn gloves\",\n    \"wooden structure\"\n  ],\n  \"text_on_screen\": \"\"\n}",
+      "ms": 22434
+    },
+    {
+      "frameId": "fr-01706",
+      "atSec": 170.625,
+      "sceneId": "sc-032",
+      "rosterIds": [
+        "c1",
+        "c2"
+      ],
+      "promptVersion": "vu1",
+      "promptHash": "8abf9da7c51fcc0d",
+      "raw": "{\n  \"characters\": [\n    {\n      \"match\": \"c1\",\n      \"kind\": \"person\",\n      \"looks\": \"young woman with red hair\",\n      \"doing\": \"stands in front of wooden structure\"\n    }\n  ],\n  \"action\": \"Young woman stands in front of wooden structure\",\n  \"setting\": \"Outdoor scene with rustic buildings\",\n  \"objects\": [\n    \"wooden building\",\n    \"stacked crates\",\n    \"stone wall\"\n  ],\n  \"text_on_screen\": \"\"\n}",
+      "ms": 19883
+    },
+    {
+      "frameId": "fr-01738",
+      "atSec": 173.833,
+      "sceneId": "sc-032",
+      "rosterIds": [
+        "c1",
+        "c2"
+      ],
+      "promptVersion": "vu1",
+      "promptHash": "8abf9da7c51fcc0d",
+      "raw": "{\n  \"characters\": [\n    {\n      \"match\": \"c1\",\n      \"kind\": \"person\",\n      \"looks\": \"young woman with red hair\",\n      \"doing\": \"holds a spiky fruit\"\n    }\n  ],\n  \"action\": \"A young woman holds a spiky fruit.\",\n  \"setting\": \"Rustic stone and timber buildings\",\n  \"objects\": [\n    \"spiky fruit\",\n    \"wooden beams\",\n    \"stone walls\"\n  ],\n  \"text_on_screen\": \"\"\n}",
+      "ms": 20731
+    },
+    {
+      "frameId": "fr-01781",
+      "atSec": 178.125,
+      "sceneId": "sc-033",
+      "rosterIds": [
+        "c1",
+        "c2"
+      ],
+      "promptVersion": "vu1",
+      "promptHash": "8abf9da7c51fcc0d",
+      "raw": "{\n  \"characters\": [\n    {\n      \"match\": \"c1\",\n      \"kind\": \"person\",\n      \"looks\": \"young woman with red hair\",\n      \"doing\": \"running through a narrow alley\"\n    }\n  ],\n  \"action\": \"A young woman with red hair runs through a narrow alley.\",\n  \"setting\": \"Dusty, sunlit alleyway between old buildings\",\n  \"objects\": [\n    \"broken bricks\",\n    \"wooden crates\",\n    \"stacked barrels\",\n    \"wooden beams\"\n  ],\n  \"text_on_screen\": \"\"\n}",
+      "ms": 33323
+    },
+    {
+      "frameId": "fr-01815",
+      "atSec": 181.5,
+      "sceneId": "sc-034",
+      "rosterIds": [
+        "c1",
+        "c2"
+      ],
+      "promptVersion": "vu1",
+      "promptHash": "8abf9da7c51fcc0d",
+      "raw": "{\n  \"characters\": [\n    {\n      \"match\": \"c1\",\n      \"kind\": \"person\",\n      \"looks\": \"young woman with red hair\",\n      \"doing\": \"holds a sword\"\n    }\n  ],\n  \"action\": \"Young woman with red hair stands on rooftop\",\n  \"setting\": \"Rooftop of old brick building\",\n  \"objects\": [\n    \"sword\",\n    \"brick roof\",\n    \"wooden structure\",\n    \"bucket\"\n  ],\n  \"text_on_screen\": \"\"\n}",
+      "ms": 60173
+    },
+    {
+      "frameId": "fr-01832",
+      "atSec": 183.208,
+      "sceneId": "sc-035",
+      "rosterIds": [
+        "c1",
+        "c2"
+      ],
+      "promptVersion": "vu1",
+      "promptHash": "8abf9da7c51fcc0d",
+      "raw": "{\n  \"characters\": [],\n  \"action\": \"A creature lies injured on a roof.\",\n  \"setting\": \"Stone roof with blood stains\",\n  \"objects\": [\n    \"blood\",\n    \"stone roof\",\n    \"stone wall\"\n  ],\n  \"text_on_screen\": \"\"\n}",
+      "ms": 28026
+    },
+    {
+      "frameId": "fr-01851",
+      "atSec": 185.125,
+      "sceneId": "sc-036",
+      "rosterIds": [
+        "c1",
+        "c2"
+      ],
+      "promptVersion": "vu1",
+      "promptHash": "8abf9da7c51fcc0d",
+      "raw": "{\n  \"characters\": [\n    {\n      \"match\": \"c1\",\n      \"kind\": \"person\",\n      \"looks\": \"young woman with red hair\",\n      \"doing\": \"stands near stone wall\"\n    }\n  ],\n  \"action\": \"Young woman stands near stone wall\",\n  \"setting\": \"Rustic stone building interior\",\n  \"objects\": [\n    \"stone wall\",\n    \"wooden structure\",\n    \"red tiled roof\"\n  ],\n  \"text_on_screen\": \"\"\n}",
+      "ms": 32086
+    },
+    {
+      "frameId": "fr-01883",
+      "atSec": 188.333,
+      "sceneId": "sc-037",
+      "rosterIds": [
+        "c1",
+        "c2"
+      ],
+      "promptVersion": "vu1",
+      "promptHash": "8abf9da7c51fcc0d",
+      "raw": "{\n  \"characters\": [],\n  \"action\": \"A small dragon lies on a roof with blood on its wings.\",\n  \"setting\": \"Roof of a stone building\",\n  \"objects\": [\n    \"blood-stained wings\",\n    \"stone roof tiles\",\n    \"stone wall\"\n  ],\n  \"text_on_screen\": \"\"\n}",
+      "ms": 22843
+    },
+    {
+      "frameId": "fr-01903",
+      "atSec": 190.333,
+      "sceneId": "sc-038",
+      "rosterIds": [
+        "c1",
+        "c2"
+      ],
+      "promptVersion": "vu1",
+      "promptHash": "8abf9da7c51fcc0d",
+      "raw": "{\n  \"characters\": [\n    {\n      \"match\": \"c1\",\n      \"kind\": \"person\",\n      \"looks\": \"young woman with red hair\",\n      \"doing\": \"holds a sword\"\n    }\n  ],\n  \"action\": \"Young woman with red hair holds a sword\",\n  \"setting\": \"Stone wall background\",\n  \"objects\": [\n    \"sword\",\n    \"stone wall\"\n  ],\n  \"text_on_screen\": \"\"\n}",
+      "ms": 32205
+    },
+    {
+      "frameId": "fr-01924",
+      "atSec": 192.417,
+      "sceneId": "sc-039",
+      "rosterIds": [
+        "c1",
+        "c2"
+      ],
+      "promptVersion": "vu1",
+      "promptHash": "8abf9da7c51fcc0d",
+      "raw": "{\n  \"characters\": [\n    {\n      \"match\": \"c1\",\n      \"kind\": \"person\",\n      \"looks\": \"young woman with red hair\",\n      \"doing\": \"kneeling beside fallen creature\"\n    }\n  ],\n  \"action\": \"Woman kneels beside a dead dragon\",\n  \"setting\": \"Stone alley with tiled roof\",\n  \"objects\": [\n    \"bloodied dragon\",\n    \"stone wall\",\n    \"cobblestone ground\",\n    \"tiled roof\"\n  ],\n  \"text_on_screen\": \"\"\n}",
+      "ms": 27354
+    },
+    {
+      "frameId": "fr-01952",
+      "atSec": 195.208,
+      "sceneId": "sc-040",
+      "rosterIds": [
+        "c1",
+        "c2"
+      ],
+      "promptVersion": "vu1",
+      "promptHash": "8abf9da7c51fcc0d",
+      "raw": "{\n  \"characters\": [],\n  \"action\": \"A small creature looks up at a reaching hand.\",\n  \"setting\": \"Stone rooftop with broken tiles.\",\n  \"objects\": [\n    \"hand reaching forward\",\n    \"small creature with wings\",\n    \"stone wall\",\n    \"shattered roof tiles\"\n  ],\n  \"text_on_screen\": \"\"\n}",
+      "ms": 22104
+    },
+    {
+      "frameId": "fr-01969",
+      "atSec": 196.917,
+      "sceneId": "sc-041",
+      "rosterIds": [
+        "c1",
+        "c2"
+      ],
+      "promptVersion": "vu1",
+      "promptHash": "8abf9da7c51fcc0d",
+      "raw": "{\n  \"characters\": [\n    {\n      \"match\": \"c1\",\n      \"kind\": \"person\",\n      \"looks\": \"young woman with red hair\",\n      \"doing\": \"holds a sword\"\n    }\n  ],\n  \"action\": \"Young woman with red hair holds a sword\",\n  \"setting\": \"Stone wall background\",\n  \"objects\": [\n    \"sword\",\n    \"stone wall\"\n  ],\n  \"text_on_screen\": \"\"\n}",
+      "ms": 33689
+    },
+    {
+      "frameId": "fr-01983",
+      "atSec": 198.333,
+      "sceneId": "sc-041",
+      "rosterIds": [
+        "c1",
+        "c2"
+      ],
+      "promptVersion": "vu1",
+      "promptHash": "8abf9da7c51fcc0d",
+      "raw": "{\n  \"characters\": [],\n  \"action\": \"A small creature with wings and red markings is held by a hand.\",\n  \"setting\": \"Stone wall and tiled roof\",\n  \"objects\": [\n    \"small creature with wings\",\n    \"hand reaching down\",\n    \"stone wall\",\n    \"tiled roof\"\n  ],\n  \"text_on_screen\": \"\"\n}",
+      "ms": 27612
+    },
+    {
+      "frameId": "fr-02009",
+      "atSec": 200.917,
+      "sceneId": "sc-041",
+      "rosterIds": [
+        "c1",
+        "c2"
+      ],
+      "promptVersion": "vu1",
+      "promptHash": "8abf9da7c51fcc0d",
+      "raw": "{\n  \"characters\": [],\n  \"action\": \"A hand reaches toward a small dragon-like creature.\",\n  \"setting\": \"Roof of a stone building.\",\n  \"objects\": [\n    \"Hand with gloves\",\n    \"Small dragon-like creature\",\n    \"Stone roof tiles\",\n    \"Stone wall\"\n  ],\n  \"text_on_screen\": \"\"\n}",
+      "ms": 24437
+    },
+    {
+      "frameId": "fr-02037",
+      "atSec": 203.708,
+      "sceneId": "sc-042",
+      "rosterIds": [
+        "c1",
+        "c2"
+      ],
+      "promptVersion": "vu1",
+      "promptHash": "8abf9da7c51fcc0d",
+      "raw": "{\n  \"characters\": [\n    {\n      \"match\": \"c1\",\n      \"kind\": \"person\",\n      \"looks\": \"young woman with red hair\",\n      \"doing\": \"holds a sword\"\n    }\n  ],\n  \"action\": \"Young woman with red hair holds a sword\",\n  \"setting\": \"Stone wall background\",\n  \"objects\": [\n    \"sword\",\n    \"stone wall\"\n  ],\n  \"text_on_screen\": \"\"\n}",
+      "ms": 22281
+    },
+    {
+      "frameId": "fr-02065",
+      "atSec": 206.5,
+      "sceneId": "sc-043",
+      "rosterIds": [
+        "c1",
+        "c2"
+      ],
+      "promptVersion": "vu1",
+      "promptHash": "8abf9da7c51fcc0d",
+      "raw": "{\n  \"characters\": [\n    {\n      \"match\": \"c1\",\n      \"kind\": \"person\",\n      \"looks\": \"young woman with red hair\",\n      \"doing\": \"sitting on floor reading book\"\n    },\n    {\n      \"match\": \"c2\",\n      \"kind\": \"person\",\n      \"looks\": \"bald man in dark clothes\",\n      \"doing\": \"standing nearby, partially obscured\"\n    }\n  ],\n  \"action\": \"Young woman reads while bald man stands nearby\",\n  \"setting\": \"Ruined stone room with scattered debris\",\n  \"objects\": [\n    \"book\",\n    \"sword\",\n    \"stone blocks\",\n    \"basket\"\n  ],\n  \"text_on_screen\": \"\"\n}",
+      "ms": 24210
+    },
+    {
+      "frameId": "fr-02095",
+      "atSec": 209.5,
+      "sceneId": "sc-043",
+      "rosterIds": [
+        "c1",
+        "c2"
+      ],
+      "promptVersion": "vu1",
+      "promptHash": "8abf9da7c51fcc0d",
+      "raw": "{\n  \"characters\": [\n    {\n      \"match\": \"c1\",\n      \"kind\": \"person\",\n      \"looks\": \"young woman with red hair\",\n      \"doing\": \"sitting on floor holding sword\"\n    },\n    {\n      \"match\": \"c2\",\n      \"kind\": \"person\",\n      \"looks\": \"bald man in dark clothes\",\n      \"doing\": \"lying on ground\"\n    }\n  ],\n  \"action\": \"Young woman sits on floor with sword, bald man lies nearby\",\n  \"setting\": \"Ruined stone room with scattered debris\",\n  \"objects\": [\n    \"sword\",\n    \"stone blocks\",\n    \"basket\",\n    \"rolled scroll\"\n  ],\n  \"text_on_screen\": \"\"\n}",
+      "ms": 20954
+    },
+    {
+      "frameId": "fr-02130",
+      "atSec": 213,
+      "sceneId": "sc-044",
+      "rosterIds": [
+        "c1",
+        "c2"
+      ],
+      "promptVersion": "vu1",
+      "promptHash": "8abf9da7c51fcc0d",
+      "raw": "{\n  \"characters\": [],\n  \"action\": \"\",\n  \"setting\": \"\",\n  \"objects\": [],\n  \"text_on_screen\": \"\"\n}",
+      "ms": 13924
+    },
+    {
+      "frameId": "fr-02158",
+      "atSec": 215.833,
+      "sceneId": "sc-045",
+      "rosterIds": [
+        "c1",
+        "c2"
+      ],
+      "promptVersion": "vu1",
+      "promptHash": "8abf9da7c51fcc0d",
+      "raw": "{\n  \"characters\": [\n    {\n      \"match\": \"c1\",\n      \"kind\": \"person\",\n      \"looks\": \"young woman with red hair\",\n      \"doing\": \"holds a small creature\"\n    }\n  ],\n  \"action\": \"Young woman holds a small creature in her hands\",\n  \"setting\": \"Dimly lit, rocky interior space\",\n  \"objects\": [\n    \"small creature with large eyes\",\n    \"sword handle in hand\"\n  ],\n  \"text_on_screen\": \"\"\n}",
+      "ms": 19013
+    },
+    {
+      "frameId": "fr-02200",
+      "atSec": 220,
+      "sceneId": "sc-046",
+      "rosterIds": [
+        "c1",
+        "c2"
+      ],
+      "promptVersion": "vu1",
+      "promptHash": "8abf9da7c51fcc0d",
+      "raw": "{\n  \"characters\": [],\n  \"action\": \"\",\n  \"setting\": \"\",\n  \"objects\": [],\n  \"text_on_screen\": \"\"\n}",
+      "ms": 19925
+    },
+    {
+      "frameId": "fr-02214",
+      "atSec": 221.417,
+      "sceneId": "sc-046",
+      "rosterIds": [
+        "c1",
+        "c2"
+      ],
+      "promptVersion": "vu1",
+      "promptHash": "8abf9da7c51fcc0d",
+      "raw": "{\n  \"characters\": [],\n  \"action\": \"\",\n  \"setting\": \"\",\n  \"objects\": [],\n  \"text_on_screen\": \"\"\n}",
+      "ms": 15155
+    },
+    {
+      "frameId": "fr-02234",
+      "atSec": 223.417,
+      "sceneId": "sc-046",
+      "rosterIds": [
+        "c1",
+        "c2"
+      ],
+      "promptVersion": "vu1",
+      "promptHash": "8abf9da7c51fcc0d",
+      "raw": "{\n  \"characters\": [],\n  \"action\": \"A dark cloth covers a surface with patches.\",\n  \"setting\": \"Dimly lit, possibly a room or chamber.\",\n  \"objects\": [\n    \"dark cloth with patches\",\n    \"dark bowl or container\"\n  ],\n  \"text_on_screen\": \"\"\n}",
+      "ms": 19551
+    },
+    {
+      "frameId": "fr-02246",
+      "atSec": 224.625,
+      "sceneId": "sc-047",
+      "rosterIds": [
+        "c1",
+        "c2"
+      ],
+      "promptVersion": "vu1",
+      "promptHash": "8abf9da7c51fcc0d",
+      "raw": "{\n  \"characters\": [],\n  \"action\": \"\",\n  \"setting\": \"\",\n  \"objects\": [],\n  \"text_on_screen\": \"\"\n}",
+      "ms": 15400
+    },
+    {
+      "frameId": "fr-02286",
+      "atSec": 228.625,
+      "sceneId": "sc-047",
+      "rosterIds": [
+        "c1",
+        "c2"
+      ],
+      "promptVersion": "vu1",
+      "promptHash": "8abf9da7c51fcc0d",
+      "raw": "{\n  \"characters\": [],\n  \"action\": \"\",\n  \"setting\": \"\",\n  \"objects\": [],\n  \"text_on_screen\": \"\"\n}",
+      "ms": 15379
+    },
+    {
+      "frameId": "fr-02326",
+      "atSec": 232.625,
+      "sceneId": "sc-047",
+      "rosterIds": [
+        "c1",
+        "c2"
+      ],
+      "promptVersion": "vu1",
+      "promptHash": "8abf9da7c51fcc0d",
+      "raw": "{\n  \"characters\": [],\n  \"action\": \"\",\n  \"setting\": \"\",\n  \"objects\": [],\n  \"text_on_screen\": \"\"\n}",
+      "ms": 15878
+    },
+    {
+      "frameId": "fr-02366",
+      "atSec": 236.625,
+      "sceneId": "sc-047",
+      "rosterIds": [
+        "c1",
+        "c2"
+      ],
+      "promptVersion": "vu1",
+      "promptHash": "8abf9da7c51fcc0d",
+      "raw": "{\n  \"characters\": [],\n  \"action\": \"\",\n  \"setting\": \"\",\n  \"objects\": [],\n  \"text_on_screen\": \"\"\n}",
+      "ms": 15240
+    },
+    {
+      "frameId": "fr-02406",
+      "atSec": 240.625,
+      "sceneId": "sc-047",
+      "rosterIds": [
+        "c1",
+        "c2"
+      ],
+      "promptVersion": "vu1",
+      "promptHash": "8abf9da7c51fcc0d",
+      "raw": "{\n  \"characters\": [],\n  \"action\": \"\",\n  \"setting\": \"\",\n  \"objects\": [],\n  \"text_on_screen\": \"\"\n}",
+      "ms": 15810
+    },
+    {
+      "frameId": "fr-02446",
+      "atSec": 244.625,
+      "sceneId": "sc-047",
+      "rosterIds": [
+        "c1",
+        "c2"
+      ],
+      "promptVersion": "vu1",
+      "promptHash": "8abf9da7c51fcc0d",
+      "raw": "{\n  \"characters\": [],\n  \"action\": \"\",\n  \"setting\": \"\",\n  \"objects\": [],\n  \"text_on_screen\": \"\"\n}",
+      "ms": 16044
+    },
+    {
+      "frameId": "fr-02586",
+      "atSec": 258.625,
+      "sceneId": "sc-051",
+      "rosterIds": [
+        "c1",
+        "c2"
+      ],
+      "promptVersion": "vu1",
+      "promptHash": "8abf9da7c51fcc0d",
+      "raw": "{\n  \"characters\": [],\n  \"action\": \"A small creature flies above a collapsed wooden structure.\",\n  \"setting\": \"Dilapidated wooden market stalls under bright sun.\",\n  \"objects\": [\n    \"Broken wooden beams\",\n    \"Wooden stalls\",\n    \"Sack of green vegetables\",\n    \"Metal bucket\"\n  ],\n  \"text_on_screen\": \"\"\n}",
+      "ms": 16637
+    },
+    {
+      "frameId": "fr-02598",
+      "atSec": 259.833,
+      "sceneId": "sc-052",
+      "rosterIds": [
+        "c1",
+        "c2"
+      ],
+      "promptVersion": "vu1",
+      "promptHash": "8abf9da7c51fcc0d",
+      "raw": "{\n  \"characters\": [\n    {\n      \"match\": \"c1\",\n      \"kind\": \"person\",\n      \"looks\": \"young woman with red hair\",\n      \"doing\": \"stands with sword drawn\"\n    },\n    {\n      \"match\": \"c2\",\n      \"kind\": \"person\",\n      \"looks\": \"bald man in dark clothes\",\n      \"doing\": \"stands near pumpkins\"\n    },\n    {\n      \"match\": \"new\",\n      \"kind\": \"person\",\n      \"looks\": \"large figure in apron\",\n      \"doing\": \"walks past scene\"\n    },\n    {\n      \"match\": \"new\",\n      \"kind\": \"person\",\n      \"looks\": \"woman in long dark dress\",\n      \"doing\": \"stands beside fruit stand\"\n    }\n  ],\n  \"action\": \"A young woman with red hair stands ready with a sword in a bustling market alley.\",\n  \"setting\": \"Sunlit alley with wooden stalls and crates\",\n  \"objects\": [\n    \"wooden crates\",\n    \"pumpkins\",\n    \"apples\",\n    \"barrels\"\n  ],\n  \"text_on_screen\": \"\"\n}",
+      "ms": 30637
+    },
+    {
+      "frameId": "fr-02638",
+      "atSec": 263.833,
+      "sceneId": "sc-053",
+      "rosterIds": [
+        "c1",
+        "c2",
+        "c3",
+        "c4"
+      ],
+      "promptVersion": "vu1",
+      "promptHash": "0e8607584ccd66b9",
+      "raw": "{\n  \"characters\": [\n    {\n      \"match\": \"c1\",\n      \"kind\": \"person\",\n      \"looks\": \"young woman with red hair\",\n      \"doing\": \"stands in dimly lit alleyway\"\n    },\n    {\n      \"match\": \"c2\",\n      \"kind\": \"person\",\n      \"looks\": \"bald man in dark clothes\",\n      \"doing\": \"sits on crate in background\"\n    },\n    {\n      \"match\": \"c3\",\n      \"kind\": \"person\",\n      \"looks\": \"large figure in apron\",\n      \"doing\": \"stands near wooden pallets\"\n    },\n    {\n      \"match\": \"c4\",\n      \"kind\": \"person\",\n      \"looks\": \"woman in long dark dress\",\n      \"doing\": \"stands beside c1\"\n    }\n  ],\n  \"action\": \"Characters stand in shadowy alleyway with sunlight casting patterns on ground\",\n  \"setting\": \"Dusty alleyway with wooden pallets and crates\",\n  \"objects\": [\n    \"wooden pallets\",\n    \"crate\",\n    \"pink cloth\",\n    \"sword\"\n  ],\n  \"text_on_screen\": \"\"\n}",
+      "ms": 27009
+    },
+    {
+      "frameId": "fr-02650",
+      "atSec": 265,
+      "sceneId": "sc-053",
+      "rosterIds": [
+        "c1",
+        "c2",
+        "c3",
+        "c4"
+      ],
+      "promptVersion": "vu1",
+      "promptHash": "0e8607584ccd66b9",
+      "raw": "{\n  \"characters\": [],\n  \"action\": \"\",\n  \"setting\": \"\",\n  \"objects\": [],\n  \"text_on_screen\": \"\"\n}",
+      "ms": 14038
+    },
+    {
+      "frameId": "fr-02687",
+      "atSec": 268.708,
+      "sceneId": "sc-054",
+      "rosterIds": [
+        "c1",
+        "c2",
+        "c3",
+        "c4"
+      ],
+      "promptVersion": "vu1",
+      "promptHash": "0e8607584ccd66b9",
+      "raw": "{\n  \"characters\": [\n    {\n      \"match\": \"c1\",\n      \"kind\": \"person\",\n      \"looks\": \"young woman with red hair\",\n      \"doing\": \"stands in alleyway holding sword\"\n    }\n  ],\n  \"action\": \"Young woman stands alert in alleyway\",\n  \"setting\": \"Sunlit alley with wooden structures\",\n  \"objects\": [\n    \"sword\",\n    \"tattered cloth\",\n    \"wooden beams\",\n    \"stacked wood\"\n  ],\n  \"text_on_screen\": \"\"\n}",
+      "ms": 21175
+    },
+    {
+      "frameId": "fr-02721",
+      "atSec": 272.125,
+      "sceneId": "sc-055",
+      "rosterIds": [
+        "c1",
+        "c2",
+        "c3",
+        "c4"
+      ],
+      "promptVersion": "vu1",
+      "promptHash": "0e8607584ccd66b9",
+      "raw": "{\n  \"characters\": [\n    {\n      \"match\": \"c1\",\n      \"kind\": \"person\",\n      \"looks\": \"young woman with red hair\",\n      \"doing\": \"stands with sword drawn\"\n    }\n  ],\n  \"action\": \"Young woman with red hair stands alert\",\n  \"setting\": \"Under a makeshift shelter with beams\",\n  \"objects\": [\n    \"sword\",\n    \"wooden beams\",\n    \"tattered fabric\",\n    \"sunlit sky\"\n  ],\n  \"text_on_screen\": \"\"\n}",
+      "ms": 20974
+    },
+    {
+      "frameId": "fr-02750",
+      "atSec": 275,
+      "sceneId": "sc-056",
+      "rosterIds": [
+        "c1",
+        "c2",
+        "c3",
+        "c4"
+      ],
+      "promptVersion": "vu1",
+      "promptHash": "0e8607584ccd66b9",
+      "raw": "{\n  \"characters\": [],\n  \"action\": \"A small creature perches on a wooden beam.\",\n  \"setting\": \"Outdoor, near a building under construction.\",\n  \"objects\": [\n    \"wooden beam\",\n    \"building structure\",\n    \"sky with clouds\"\n  ],\n  \"text_on_screen\": \"\"\n}",
+      "ms": 17730
+    },
+    {
+      "frameId": "fr-02762",
+      "atSec": 276.208,
+      "sceneId": "sc-057",
+      "rosterIds": [
+        "c1",
+        "c2",
+        "c3",
+        "c4"
+      ],
+      "promptVersion": "vu1",
+      "promptHash": "0e8607584ccd66b9",
+      "raw": "{\n  \"characters\": [\n    {\n      \"match\": \"c1\",\n      \"kind\": \"person\",\n      \"looks\": \"young woman with red hair\",\n      \"doing\": \"looks surprised, holding a sword\"\n    }\n  ],\n  \"action\": \"Young woman with red hair looks startled\",\n  \"setting\": \"Outdoor stone-paved area with barrels\",\n  \"objects\": [\n    \"wooden barrel\",\n    \"worn basket\",\n    \"green cloth\",\n    \"wooden planks\"\n  ],\n  \"text_on_screen\": \"\"\n}",
+      "ms": 24316
+    },
+    {
+      "frameId": "fr-02794",
+      "atSec": 279.417,
+      "sceneId": "sc-058",
+      "rosterIds": [
+        "c1",
+        "c2",
+        "c3",
+        "c4"
+      ],
+      "promptVersion": "vu1",
+      "promptHash": "0e8607584ccd66b9",
+      "raw": "{\n  \"characters\": [\n    {\n      \"match\": \"new\",\n      \"kind\": \"creature\",\n      \"looks\": \"small, grey, reptilian, with large eyes\",\n      \"doing\": \"perched on wooden beam, looking up\"\n    }\n  ],\n  \"action\": \"Small creature watches birds flying overhead\",\n  \"setting\": \"High above a building under construction\",\n  \"objects\": [\n    \"wooden beams\",\n    \"birds in flight\",\n    \"cloudy sky\"\n  ],\n  \"text_on_screen\": \"\"\n}",
+      "ms": 19403
+    },
+    {
+      "frameId": "fr-02833",
+      "atSec": 283.333,
+      "sceneId": "sc-058",
+      "rosterIds": [
+        "c5",
+        "c1",
+        "c2",
+        "c3",
+        "c4"
+      ],
+      "promptVersion": "vu1",
+      "promptHash": "3b57a09ba51d257a",
+      "raw": "{\n  \"characters\": [\n    {\n      \"match\": \"c5\",\n      \"kind\": \"creature\",\n      \"looks\": \"small grey reptilian with large eyes\",\n      \"doing\": \"sitting on a ledge\"\n    }\n  ],\n  \"action\": \"A small creature sits on a ledge, watching birds fly overhead.\",\n  \"setting\": \"High above a building with cloudy sky\",\n  \"objects\": [\n    \"birds flying in formation\",\n    \"building ledge\",\n    \"cloudy sky\"\n  ],\n  \"text_on_screen\": \"\"\n}",
+      "ms": 18405
+    },
+    {
+      "frameId": "fr-02843",
+      "atSec": 284.333,
+      "sceneId": "sc-059",
+      "rosterIds": [
+        "c5",
+        "c1",
+        "c2",
+        "c3",
+        "c4"
+      ],
+      "promptVersion": "vu1",
+      "promptHash": "3b57a09ba51d257a",
+      "raw": "{\n  \"characters\": [\n    {\n      \"match\": \"c1\",\n      \"kind\": \"person\",\n      \"looks\": \"young woman with red hair\",\n      \"doing\": \"runs across broken rooftop\"\n    }\n  ],\n  \"action\": \"A young woman runs across a ruined rooftop.\",\n  \"setting\": \"Ruined rooftop under orange sky\",\n  \"objects\": [\n    \"broken tiles\",\n    \"stone pillars\",\n    \"red feathered creature\",\n    \"stone dragon statue\"\n  ],\n  \"text_on_screen\": \"\"\n}",
+      "ms": 18278
+    },
+    {
+      "frameId": "fr-02897",
+      "atSec": 289.708,
+      "sceneId": "sc-061",
+      "rosterIds": [
+        "c1",
+        "c5",
+        "c2",
+        "c3",
+        "c4"
+      ],
+      "promptVersion": "vu1",
+      "promptHash": "1652c4c4d2f37b83",
+      "raw": "{\n  \"characters\": [],\n  \"action\": \"\",\n  \"setting\": \"\",\n  \"objects\": [],\n  \"text_on_screen\": \"\"\n}",
+      "ms": 13844
+    },
+    {
+      "frameId": "fr-02913",
+      "atSec": 291.333,
+      "sceneId": "sc-061",
+      "rosterIds": [
+        "c1",
+        "c5",
+        "c2",
+        "c3",
+        "c4"
+      ],
+      "promptVersion": "vu1",
+      "promptHash": "1652c4c4d2f37b83",
+      "raw": "{\n  \"characters\": [],\n  \"action\": \"birds fly above a ruined fortress\",\n  \"setting\": \"ruined fortress at sunset\",\n  \"objects\": [\n    \"stone towers\",\n    \"wooden planks\",\n    \"flagpole with banner\",\n    \"ladder\"\n  ],\n  \"text_on_screen\": \"\"\n}",
+      "ms": 21998
+    },
+    {
+      "frameId": "fr-02966",
+      "atSec": 296.625,
+      "sceneId": "sc-061",
+      "rosterIds": [
+        "c1",
+        "c5",
+        "c2",
+        "c3",
+        "c4"
+      ],
+      "promptVersion": "vu1",
+      "promptHash": "1652c4c4d2f37b83",
+      "raw": "{\n  \"characters\": [\n    {\n      \"match\": \"c1\",\n      \"kind\": \"person\",\n      \"looks\": \"young woman with red hair\",\n      \"doing\": \"stands on broken rooftop\"\n    },\n    {\n      \"match\": \"c5\",\n      \"kind\": \"creature\",\n      \"looks\": \"small grey reptilian with large eyes\",\n      \"doing\": \"stands nearby on rubble\"\n    }\n  ],\n  \"action\": \"A young woman stands on a ruined rooftop at sunset.\",\n  \"setting\": \"Ruined cityscape at sunset\",\n  \"objects\": [\n    \"broken stone structures\",\n    \"distant sun\",\n    \"ruined buildings\"\n  ],\n  \"text_on_screen\": \"\"\n}",
+      "ms": 22342
+    },
+    {
+      "frameId": "fr-02978",
+      "atSec": 297.833,
+      "sceneId": "sc-062",
+      "rosterIds": [
+        "c1",
+        "c5",
+        "c2",
+        "c3",
+        "c4"
+      ],
+      "promptVersion": "vu1",
+      "promptHash": "3c6755009490500b",
+      "raw": "{\n  \"characters\": [\n    {\n      \"match\": \"c1\",\n      \"kind\": \"person\",\n      \"looks\": \"young woman with red hair\",\n      \"doing\": \"stands on a cliff overlooking a city\"\n    }\n  ],\n  \"action\": \"A young woman with red hair stands on a cliff overlooking a city at sunset.\",\n  \"setting\": \"Deserted cityscape at sunset\",\n  \"objects\": [\n    \"large stone structure\",\n    \"ruined buildings\",\n    \"rocky cliff edge\"\n  ],\n  \"text_on_screen\": \"\"\n}",
+      "ms": 18412
+    },
+    {
+      "frameId": "fr-03017",
+      "atSec": 301.708,
+      "sceneId": "sc-062",
+      "rosterIds": [
+        "c1",
+        "c5",
+        "c2",
+        "c3",
+        "c4"
+      ],
+      "promptVersion": "vu1",
+      "promptHash": "3c6755009490500b",
+      "raw": "{\n  \"characters\": [\n    {\n      \"match\": \"c1\",\n      \"kind\": \"person\",\n      \"looks\": \"young woman with red hair\",\n      \"doing\": \"holds hands to face\"\n    }\n  ],\n  \"action\": \"woman shields eyes from bright sun\",\n  \"setting\": \"desert landscape at sunset\",\n  \"objects\": [],\n  \"text_on_screen\": \"\"\n}",
+      "ms": 16925
+    },
+    {
+      "frameId": "fr-03033",
+      "atSec": 303.333,
+      "sceneId": "sc-063",
+      "rosterIds": [
+        "c1",
+        "c5",
+        "c2",
+        "c3",
+        "c4"
+      ],
+      "promptVersion": "vu1",
+      "promptHash": "3c6755009490500b",
+      "raw": "{\n  \"characters\": [\n    {\n      \"match\": \"c1\",\n      \"kind\": \"person\",\n      \"looks\": \"young woman with red hair\",\n      \"doing\": \"stands with sword held\"\n    },\n    {\n      \"match\": \"c5\",\n      \"kind\": \"creature\",\n      \"looks\": \"small grey reptilian with large eyes\",\n      \"doing\": \"stands beside woman\"\n    }\n  ],\n  \"action\": \"Two figures stand on a high platform at sunset\",\n  \"setting\": \"High platform with birds flying\",\n  \"objects\": [\n    \"stone tower\",\n    \"birds in flight\",\n    \"sword held by woman\"\n  ],\n  \"text_on_screen\": \"\"\n}",
+      "ms": 45006
+    },
+    {
+      "frameId": "fr-03061",
+      "atSec": 306.125,
+      "sceneId": "sc-063",
+      "rosterIds": [
+        "c1",
+        "c5",
+        "c2",
+        "c3",
+        "c4"
+      ],
+      "promptVersion": "vu1",
+      "promptHash": "3c6755009490500b",
+      "raw": "",
+      "ms": 0
+    },
+    {
+      "frameId": "fr-03094",
+      "atSec": 309.417,
+      "sceneId": "sc-065",
+      "rosterIds": [
+        "c1",
+        "c5",
+        "c2",
+        "c3",
+        "c4"
+      ],
+      "promptVersion": "vu1",
+      "promptHash": "3c6755009490500b",
+      "raw": "{\n  \"characters\": [],\n  \"action\": \"two flying creatures soar above a distant city\",\n  \"setting\": \"distant city under warm sky\",\n  \"objects\": [],\n  \"text_on_screen\": \"\"\n}",
+      "ms": 16762
+    },
+    {
+      "frameId": "fr-03137",
+      "atSec": 313.708,
+      "sceneId": "sc-067",
+      "rosterIds": [
+        "c1",
+        "c5",
+        "c2",
+        "c3",
+        "c4"
+      ],
+      "promptVersion": "vu1",
+      "promptHash": "3c6755009490500b",
+      "raw": "",
+      "ms": 0
+    },
+    {
+      "frameId": "fr-03273",
+      "atSec": 327.333,
+      "sceneId": "sc-072",
+      "rosterIds": [
+        "c1",
+        "c5",
+        "c2",
+        "c3",
+        "c4"
+      ],
+      "promptVersion": "vu1",
+      "promptHash": "3c6755009490500b",
+      "raw": "{\n  \"characters\": [\n    {\n      \"match\": \"c1\",\n      \"kind\": \"person\",\n      \"looks\": \"young woman with red hair\",\n      \"doing\": \"looks upward with wide eyes\"\n    },\n    {\n      \"match\": \"c5\",\n      \"kind\": \"creature\",\n      \"looks\": \"small grey reptilian with large eyes\",\n      \"doing\": \"perched on shoulder\"\n    }\n  ],\n  \"action\": \"Young woman stares upward in surprise\",\n  \"setting\": \"Dramatic sky at sunset\",\n  \"objects\": [\n    \"sword\",\n    \"shoulder\",\n    \"sky\"\n  ],\n  \"text_on_screen\": \"\"\n}",
+      "ms": 73556
+    },
+    {
+      "frameId": "fr-03287",
+      "atSec": 328.708,
+      "sceneId": "sc-073",
+      "rosterIds": [
+        "c1",
+        "c5",
+        "c2",
+        "c3",
+        "c4"
+      ],
+      "promptVersion": "vu1",
+      "promptHash": "3c6755009490500b",
+      "raw": "{\n  \"characters\": [\n    {\n      \"match\": \"new\",\n      \"kind\": \"creature\",\n      \"looks\": \"small grey reptilian with large eyes\",\n      \"doing\": \"flying upside down in air\"\n    },\n    {\n      \"match\": \"new\",\n      \"kind\": \"person\",\n      \"looks\": \"hand with fingers raised\",\n      \"doing\": \"reaching toward flying creature\"\n    }\n  ],\n  \"action\": \"Small reptilian creature flies upside down toward outstretched hand\",\n  \"setting\": \"Sky with soft pink and orange clouds\",\n  \"objects\": [\n    \"flying creature\",\n    \"outstretched hand\",\n    \"clouds\"\n  ],\n  \"text_on_screen\": \"\"\n}",
+      "ms": 120226
+    },
+    {
+      "frameId": "fr-03309",
+      "atSec": 330.917,
+      "sceneId": "sc-074",
+      "rosterIds": [
+        "c5",
+        "c6",
+        "c1",
+        "c2",
+        "c3",
+        "c4"
+      ],
+      "promptVersion": "vu1",
+      "promptHash": "228a8df253258786",
+      "raw": "",
+      "ms": 0
+    },
+    {
+      "frameId": "fr-03389",
+      "atSec": 338.917,
+      "sceneId": "sc-077",
+      "rosterIds": [
+        "c5",
+        "c6",
+        "c1",
+        "c2",
+        "c3",
+        "c4"
+      ],
+      "promptVersion": "vu1",
+      "promptHash": "228a8df253258786",
+      "raw": "",
+      "ms": 0
+    },
+    {
+      "frameId": "fr-03399",
+      "atSec": 339.917,
+      "sceneId": "sc-078",
+      "rosterIds": [
+        "c5",
+        "c6",
+        "c1",
+        "c2",
+        "c3",
+        "c4"
+      ],
+      "promptVersion": "vu1",
+      "promptHash": "228a8df253258786",
+      "raw": "",
+      "ms": 0
+    },
+    {
+      "frameId": "fr-03428",
+      "atSec": 342.833,
+      "sceneId": "sc-079",
+      "rosterIds": [
+        "c5",
+        "c6",
+        "c1",
+        "c2",
+        "c3",
+        "c4"
+      ],
+      "promptVersion": "vu1",
+      "promptHash": "228a8df253258786",
+      "raw": "",
+      "ms": 0
+    },
+    {
+      "frameId": "fr-03468",
+      "atSec": 346.833,
+      "sceneId": "sc-079",
+      "rosterIds": [
+        "c5",
+        "c6",
+        "c1",
+        "c2",
+        "c3",
+        "c4"
+      ],
+      "promptVersion": "vu1",
+      "promptHash": "228a8df253258786",
+      "raw": "",
+      "ms": 0
+    },
+    {
+      "frameId": "fr-03539",
+      "atSec": 353.917,
+      "sceneId": "sc-082",
+      "rosterIds": [
+        "c5",
+        "c6",
+        "c1",
+        "c2",
+        "c3",
+        "c4"
+      ],
+      "promptVersion": "vu1",
+      "promptHash": "228a8df253258786",
+      "raw": "{\n  \"characters\": [],\n  \"action\": \"No characters are visible in this frame.\",\n  \"setting\": \"Desert landscape at twilight with ruins and skeletal trees.\",\n  \"objects\": [],\n  \"text_on_screen\": \"\"\n}",
+      "ms": 32206
+    },
+    {
+      "frameId": "fr-03578",
+      "atSec": 357.833,
+      "sceneId": "sc-082",
+      "rosterIds": [
+        "c5",
+        "c6",
+        "c1",
+        "c2",
+        "c3",
+        "c4"
+      ],
+      "promptVersion": "vu1",
+      "promptHash": "228a8df253258786",
+      "raw": "{\n  \"characters\": [\n    {\n      \"match\": \"c1\",\n      \"kind\": \"person\",\n      \"looks\": \"young woman with red hair\",\n      \"doing\": \"crouched in misty field\"\n    }\n  ],\n  \"action\": \"woman crouches in misty field\",\n  \"setting\": \"misty field with distant figures\",\n  \"objects\": [],\n  \"text_on_screen\": \"\"\n}",
+      "ms": 56284
+    },
+    {
+      "frameId": "fr-03618",
+      "atSec": 361.833,
+      "sceneId": "sc-082",
+      "rosterIds": [
+        "c1",
+        "c5",
+        "c6",
+        "c2",
+        "c3",
+        "c4"
+      ],
+      "promptVersion": "vu1",
+      "promptHash": "9aafec273edd7819",
+      "raw": "{\n  \"characters\": [\n    {\n      \"match\": \"c1\",\n      \"kind\": \"person\",\n      \"looks\": \"young woman with red hair\",\n      \"doing\": \"looks down at a distant figure\"\n    },\n    {\n      \"match\": \"c5\",\n      \"kind\": \"creature\",\n      \"looks\": \"small grey reptilian with large eyes\",\n      \"doing\": \"stands on a hilltop\"\n    }\n  ],\n  \"action\": \"A young woman observes a small reptilian creature on a hill.\",\n  \"setting\": \"Dusty hillside under a cloudy sky\",\n  \"objects\": [\n    \"sword\",\n    \"hill\",\n    \"flagpole\"\n  ],\n  \"text_on_screen\": \"\"\n}",
+      "ms": 153038
+    },
+    {
+      "frameId": "fr-03658",
+      "atSec": 365.833,
+      "sceneId": "sc-082",
+      "rosterIds": [
+        "c1",
+        "c5",
+        "c6",
+        "c2",
+        "c3",
+        "c4"
+      ],
+      "promptVersion": "vu1",
+      "promptHash": "9aafec273edd7819",
+      "raw": "{\n  \"characters\": [],\n  \"action\": \"A lone figure stands on a hill under a large moon.\",\n  \"setting\": \"Dark sky with a large moon and distant stars\",\n  \"objects\": [\n    \"large moon\",\n    \"hilltop\",\n    \"stars\"\n  ],\n  \"text_on_screen\": \"\"\n}",
+      "ms": 56539
+    },
+    {
+      "frameId": "fr-03676",
+      "atSec": 367.625,
+      "sceneId": "sc-082",
+      "rosterIds": [
+        "c1",
+        "c5",
+        "c6",
+        "c2",
+        "c3",
+        "c4"
+      ],
+      "promptVersion": "vu1",
+      "promptHash": "9aafec273edd7819",
+      "raw": "{\n  \"characters\": [],\n  \"action\": \"No characters visible in this frame.\",\n  \"setting\": \"Bright sky with sun and clouds\",\n  \"objects\": [],\n  \"text_on_screen\": \"\"\n}",
+      "ms": 22678
+    },
+    {
+      "frameId": "fr-03698",
+      "atSec": 369.833,
+      "sceneId": "sc-082",
+      "rosterIds": [
+        "c1",
+        "c5",
+        "c6",
+        "c2",
+        "c3",
+        "c4"
+      ],
+      "promptVersion": "vu1",
+      "promptHash": "9aafec273edd7819",
+      "raw": "{\n  \"characters\": [],\n  \"action\": \"A lone figure traverses vast golden dunes.\",\n  \"setting\": \"Endless desert with soft rolling dunes.\",\n  \"objects\": [],\n  \"text_on_screen\": \"\"\n}",
+      "ms": 23458
+    },
+    {
+      "frameId": "fr-03738",
+      "atSec": 373.833,
+      "sceneId": "sc-082",
+      "rosterIds": [
+        "c1",
+        "c5",
+        "c6",
+        "c2",
+        "c3",
+        "c4"
+      ],
+      "promptVersion": "vu1",
+      "promptHash": "9aafec273edd7819",
+      "raw": "{\n  \"characters\": [],\n  \"action\": \"\",\n  \"setting\": \"\",\n  \"objects\": [],\n  \"text_on_screen\": \"\"\n}",
+      "ms": 20448
+    },
+    {
+      "frameId": "fr-03778",
+      "atSec": 377.833,
+      "sceneId": "sc-082",
+      "rosterIds": [
+        "c1",
+        "c5",
+        "c6",
+        "c2",
+        "c3",
+        "c4"
+      ],
+      "promptVersion": "vu1",
+      "promptHash": "9aafec273edd7819",
+      "raw": "{\n  \"characters\": [],\n  \"action\": \"\",\n  \"setting\": \"\",\n  \"objects\": [],\n  \"text_on_screen\": \"\"\n}",
+      "ms": 14805
+    },
+    {
+      "frameId": "fr-03811",
+      "atSec": 381.125,
+      "sceneId": "sc-083",
+      "rosterIds": [
+        "c1",
+        "c5",
+        "c6",
+        "c2",
+        "c3",
+        "c4"
+      ],
+      "promptVersion": "vu1",
+      "promptHash": "9aafec273edd7819",
+      "raw": "{\n  \"characters\": [\n    {\n      \"match\": \"c1\",\n      \"kind\": \"person\",\n      \"looks\": \"young woman with red hair\",\n      \"doing\": \"climbs over fallen bamboo\"\n    }\n  ],\n  \"action\": \"Young woman navigates through dense bamboo forest\",\n  \"setting\": \"Tall green bamboo forest with fallen logs\",\n  \"objects\": [\n    \"fallen bamboo log\",\n    \"orange butterfly\",\n    \"green bamboo stalks\",\n    \"rocky ground\"\n  ],\n  \"text_on_screen\": \"\"\n}",
+      "ms": 25010
+    },
+    {
+      "frameId": "fr-03839",
+      "atSec": 383.917,
+      "sceneId": "sc-084",
+      "rosterIds": [
+        "c1",
+        "c5",
+        "c6",
+        "c2",
+        "c3",
+        "c4"
+      ],
+      "promptVersion": "vu1",
+      "promptHash": "9aafec273edd7819",
+      "raw": "{\n  \"characters\": [],\n  \"action\": \"No characters are visible in this frame.\",\n  \"setting\": \"Dense bamboo forest with green stalks and leaves.\",\n  \"objects\": [],\n  \"text_on_screen\": \"\"\n}",
+      "ms": 20723
+    }
+  ],
+  "namings": [
+    {
+      "name": "Hmm",
+      "lineId": "ln-02155",
+      "trackId": null
+    },
+    {
+      "name": "Scales",
+      "lineId": "ln-02275",
+      "trackId": null
+    },
+    {
+      "name": "Scales",
+      "lineId": "ln-02500",
+      "trackId": null
+    },
+    {
+      "name": "Scales",
+      "lineId": "ln-02649",
+      "trackId": null
+    },
+    {
+      "name": "Mom",
+      "lineId": "ln-03063",
+      "trackId": null
+    },
+    {
+      "name": "Scout",
+      "lineId": "ln-03383",
+      "trackId": null
+    },
+    {
+      "name": "Sintel",
+      "lineId": "ln-04577",
+      "trackId": null
+    },
+    {
+      "name": "Scales",
+      "lineId": "ln-05574",
+      "trackId": null
+    },
+    {
+      "name": "Lemon",
+      "lineId": "ln-05986",
+      "trackId": null
+    },
+    {
+      "name": "Scales",
+      "lineId": "ln-06213",
+      "trackId": null
+    },
+    {
+      "name": "Scales",
+      "lineId": "ln-06258",
+      "trackId": null
+    }
+  ],
+  "known": [
+    "Sintel"
+  ]
+}

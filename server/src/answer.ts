@@ -10,7 +10,7 @@ import { permittedEvidence, type EvidenceSet } from './core/context/boundary.js'
 import { checkAnswer } from './core/context/check-answer.js';
 import { entitiesNear, mentionedEntities, retrieve } from './core/context/retrieve.js';
 import { containsTerm, contentWords } from './core/context/text.js';
-import type { ReviewPolicy, Timeline, TimedFact } from './core/context/timeline.js';
+import type { Entity, ReviewPolicy, Timeline, TimedFact } from './core/context/timeline.js';
 import type { QuestionTopic } from './core/intent/route-text.js';
 import { buildGroundedPrompt, type HistoryItem } from './film/ask-prompt.js';
 import { ASK_SETTINGS, GROUNDED_PROMPT_VERSION } from './film/prompts.js';
@@ -21,6 +21,12 @@ import type { AskVia, Source } from './shared/protocol.js';
 export type ReplyKind = 'answer' | 'clarify' | 'unknown' | 'fallback';
 const RETRIEVE = { limit: 10, recentCount: 4 } as const;
 const IDENTIFY_WINDOW_SEC = 30;
+// Below this, an answer resting on the fact says it is unsure (CONFIDENCE in
+// pipeline/scene-memory.ts: a character seen once, or linked only by look, is below it).
+const HEDGE_BELOW = 0.6;
+const COVERAGE_MARGIN_SEC = 10;
+const FOCUS_ENTITIES = 2; // "why did she do that?": the latest figures on screen are "she"
+const PRONOUN = /\b(he|she|they|him|her|them|his|hers|their|it|that|this)\b/i;
 const MIN_KEYWORD_SCORE = 2; // matched content words (an entity name counts double)
 
 export interface AnswerDeps {
@@ -48,6 +54,7 @@ export type AnswerPath =
   | 'no-evidence'
   | 'restricted-question'
   | 'future-question'
+  | 'not-covered'
   | 'retrieval'
   | 'cache'
   | 'model'
@@ -87,9 +94,17 @@ function reply(
   };
 }
 
-/** Every entity name and alias in the timeline, revealed or not. */
+/**
+ * The film's own words, revealed or not: every entity name and alias, and every fact's spoiler
+ * terms (names heard, things shown). An answer may use one only with evidence that has it.
+ */
 export function lexiconOf(timeline: Timeline): string[] {
-  return timeline.entities.flatMap((e) => [e.name, ...e.aliases]);
+  return [
+    ...new Set([
+      ...timeline.entities.flatMap((e) => [e.name, ...e.aliases, ...(e.label ? [e.label] : [])]),
+      ...timeline.facts.flatMap((f) => f.spoilerTerms),
+    ]),
+  ];
 }
 
 function safeChips(chips: string[], evidence: EvidenceSet): string[] {
@@ -130,6 +145,20 @@ export async function answerQuestion(req: AnswerRequest, deps: AnswerDeps): Prom
       text: LINES.unparsed,
     });
   }
+  // Past the part of the film that was described, "who is that?" and "what just happened?" would
+  // be answered from older scenes as if they were now: say so instead.
+  const covered = req.timeline.coveredUntilSec;
+  if (
+    covered !== undefined &&
+    req.positionSec > covered + COVERAGE_MARGIN_SEC &&
+    (req.topic === 'recap' || req.topic === 'identify')
+  ) {
+    return reply(evidence, 'not-covered', {
+      kind: 'unknown',
+      source: 'template',
+      text: LINES.notLookedYet,
+    });
+  }
   const direct = retrievalAnswer(req, evidence, deps.aiEnabled);
   if (direct) return gate(direct, req.timeline, evidence);
   if (!deps.aiEnabled) {
@@ -168,26 +197,46 @@ function retrievalAnswer(
     return reply(evidence, 'retrieval', {
       kind: 'answer',
       source: 'timeline',
-      text: cleanText(latest.map((f) => f.text).join(' ')),
+      // The gist of each: a fact's first sentence ("Also visible: ..." would crowd out the next).
+      text: cleanText(
+        latest.map((f) => (f.kind === 'dialogue' ? f.text : firstSentence(f.text))).join(' '),
+      ),
       sources: latest.map((f) => f.id),
       next: ['Who is that?', 'Why did they do that?'],
     });
   }
   if (req.topic === 'identify') {
     const asked = mentionedEntities(evidence.entities, req.question);
-    const near = entitiesNear(evidence, IDENTIFY_WINDOW_SEC);
-    // Pip speaks briefly: who was named, or else the one figure seen most recently.
+    // Pip speaks briefly: who was named, or else one figure from the latest scene. With several
+    // on screen, "who is that?" is usually about the newcomer, so the latest introduced wins.
+    // "Who is that?" points at the screen; "Who is Scales?" names someone, and if Pip cannot match
+    // the name, the figure on screen is not the answer.
+    const pointing = PRONOUN.test(req.question);
     const people =
-      asked.size > 0 ? evidence.entities.filter((e) => asked.has(e.id)) : near.slice(0, 1);
+      asked.size > 0
+        ? evidence.entities.filter((e) => asked.has(e.id))
+        : pointing
+          ? onScreenNow(evidence)
+          : [];
     if (people.length > 0) {
       const ids = new Set(people.map((p) => p.id));
       const sources = evidence.facts.filter((f) => f.entities.some((id) => ids.has(id))).slice(-2);
+      const latest = sources[sources.length - 1];
+      const text = cleanText(people.map(introduce).join(' '));
       return reply(evidence, 'retrieval', {
         kind: 'answer',
         source: 'timeline',
-        text: cleanText(people.map((p) => p.intro).join(' ')),
+        text: latest && latest.confidence < HEDGE_BELOW ? `${LINES.hedge} ${text}` : text,
         sources: sources.map((f) => f.id),
         next: [`What is ${people[0]?.name ?? 'it'} doing?`, 'What just happened?'],
+      });
+    }
+    // "Who is that?" with nobody on screen lately: say so rather than guess from older scenes.
+    if (asked.size === 0 && pointing) {
+      return reply(evidence, 'retrieval', {
+        kind: 'unknown',
+        source: 'template',
+        text: LINES.cantTellWho,
       });
     }
   }
@@ -203,6 +252,26 @@ function retrievalAnswer(
     }
   }
   return null;
+}
+
+/** The newest-introduced figure of the latest fact that shows anyone, within the window. */
+function onScreenNow(evidence: EvidenceSet): Entity[] {
+  const near = entitiesNear(evidence, IDENTIFY_WINDOW_SEC);
+  const latest = [...evidence.facts]
+    .reverse()
+    .find((f) => f.startSec >= evidence.boundarySec - IDENTIFY_WINDOW_SEC && f.entities.length > 0);
+  const shown = near.filter((e) => latest?.entities.includes(e.id));
+  return shown.sort((a, b) => b.firstSeenSec - a.firstSeenSec).slice(0, 1);
+}
+
+function firstSentence(text: string): string {
+  return /^.*?[.!?…]["”]?(?=\s|$)/.exec(text.trim())?.[0] ?? text;
+}
+
+/** What Pip says about one entity: its intro, led by its name when the intro does not say it. */
+function introduce(entity: Entity): string {
+  if (entity.label === undefined || containsTerm(entity.intro, entity.name)) return entity.intro;
+  return entity.name === entity.label ? entity.intro : `That's ${entity.name}. ${entity.intro}`;
 }
 
 /**
@@ -243,7 +312,16 @@ async function modelAnswer(
   if (cached) {
     return reply(evidence, 'cache', { kind: 'answer', source: 'ai', ...cached });
   }
-  const facts = retrieve(evidence, req.question, RETRIEVE);
+  // "Why did she do that?" names nobody: the figures on screen now are who it is about, so their
+  // earlier scenes are retrieved too.
+  const named = mentionedEntities(evidence.entities, req.question);
+  const focus =
+    named.size === 0 && (req.topic === 'why' || PRONOUN.test(req.question))
+      ? entitiesNear(evidence, IDENTIFY_WINDOW_SEC)
+          .slice(0, FOCUS_ENTITIES)
+          .map((e) => e.id)
+      : [];
+  const facts = retrieve(evidence, req.question, { ...RETRIEVE, focusEntities: focus });
   const prompt = buildGroundedPrompt({
     title: req.film.title,
     positionSec: req.positionSec,
