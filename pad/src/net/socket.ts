@@ -88,6 +88,7 @@ export function connectPad(socket: PadSocket, playerId: string, dispatch: (a: Pa
   socket.on('disconnect', () => dispatch({ type: 'disconnected' }));
   socket.on('session:view', (view) => dispatch({ type: 'view', view, at: Date.now() }));
   socket.on('pip:say', (say) => dispatch({ type: 'say', say }));
+  socket.on('pip:missed', (missed) => dispatch({ type: 'missed', missed }));
   socket.connect();
 
   return {
@@ -133,4 +134,16 @@ export async function sendInput(socket: PadSocket, input: PipInput): Promise<Inp
   } catch {
     return null;
   }
+}
+
+/**
+ * Tells the server when this pad is hidden (phone locked, app switched) and shown again, so Pip
+ * can catch this viewer up on what they missed. Returns a function that stops listening.
+ */
+export function reportAway(socket: PadSocket, doc: Document = document): () => void {
+  const onChange = () => {
+    if (socket.connected) socket.emit('pad:away', { away: doc.visibilityState === 'hidden' });
+  };
+  doc.addEventListener('visibilitychange', onChange);
+  return () => doc.removeEventListener('visibilitychange', onChange);
 }

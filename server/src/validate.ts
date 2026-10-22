@@ -112,6 +112,8 @@ export const reactSchema: z.ZodType<PayloadOf<'pad:react'>> = z.object({
   kind: z.enum(['laugh', 'wow', 'love', 'scared']),
 });
 
+export const awaySchema: z.ZodType<PayloadOf<'pad:away'>> = z.object({ away: z.boolean() });
+
 export const predictSchema: z.ZodType<PayloadOf<'pad:predict'>> = z.object({
   id: z.string().min(1).max(CONTENT_ID_MAX_CHARS),
   choice: z.number().int().min(0).max(2),

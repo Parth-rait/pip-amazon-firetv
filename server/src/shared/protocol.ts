@@ -4,7 +4,7 @@
 // Edit only this file, then run `npm run sync:shared` to copy it into each package.
 // Types and constants only: no imports, so it compiles in Node, browsers and React Native for Vega.
 
-export const PROTOCOL_VERSION = 6;
+export const PROTOCOL_VERSION = 7;
 
 /** Where the session is in the journey. The server owns it; the TV and pads follow it. */
 export type Stage = 'lobby' | 'watch' | 'quiz' | 'results';
@@ -217,6 +217,19 @@ export interface PipSay {
   source: Source;
 }
 
+/**
+ * "While you were away": what one viewer missed of the film, sent only to their pad when they come
+ * back (pad hidden or offline, then back) or join late. Facts revealed after fromSec and by toSec,
+ * never later; the TV and everyone else are not interrupted.
+ */
+export interface PipMissed {
+  contentId: string;
+  fromSec: number; // where the film was when they left (0 for a late join)
+  toSec: number; // where it is now
+  lateJoin: boolean;
+  items: { atSec: number; text: string }[]; // at most 4, in story order
+}
+
 /** Pip says hello on the TV (lobby only) when a new player joins. */
 export interface PipHello {
   playerId: string;
@@ -259,6 +272,7 @@ export interface ClientToServerEvents {
   'pad:answer': (payload: { index: number; choice: number }) => void;
   'pad:react': (payload: { kind: ReactionKind }) => void; // kids mode, watch stage only
   'pad:predict': (payload: { id: string; choice: number }) => void; // kids mode, while that prediction is open
+  'pad:away': (payload: { away: boolean }) => void; // the pad was hidden (phone locked) or shown again
 }
 
 /** Events the server sends to the TV and pads of one session. */
@@ -268,6 +282,7 @@ export interface ServerToClientEvents {
   'pip:say': (say: PipSay) => void; // to the TV and every pad; a pad shows it only to the asker
   'pip:hello': (hello: PipHello) => void; // to the TV and every pad, when a new player joins
   'pip:react': (reaction: { playerId: string; kind: ReactionKind }) => void; // to the room
+  'pip:missed': (missed: PipMissed) => void; // to one returning pad only
 }
 
 export const LIMITS = {

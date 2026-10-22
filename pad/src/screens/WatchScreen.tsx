@@ -2,7 +2,9 @@
 // out of the way until someone opens it. The quiz, guesses and reactions show only when the host
 // has turned on kids games (docs/vnext/PLAN.md 3.1).
 import { useEffect, useRef, useState } from 'react';
-import { FilmProgress } from '../components/FilmProgress';
+import { AskPip } from '../components/AskPip';
+import { MissedCard } from '../components/MissedCard';
+import { NowPlaying } from '../components/NowPlaying';
 import { PipButton, PipSheet } from '../components/PipSheet';
 import { PredictionCard } from '../components/PredictionCard';
 import { ReactionBar } from '../components/ReactionBar';
@@ -15,11 +17,13 @@ import type {
   InputResult,
   InputSource,
   PipInputEvent,
+  PipMissed,
   PipSay,
   ReactionKind,
   SessionView,
 } from '../shared/protocol';
 import { describeCommand, parseTypedCommand } from '../lib/commands';
+import { useWide } from '../lib/use-wide';
 import { hostName, type ChipKind } from '../state/store';
 
 type Refusal = Extract<InputResult, { ok: false }>['reason'];
@@ -40,6 +44,8 @@ interface Props {
   isHost: boolean;
   chips: { kind: ChipKind; items: string[] };
   say: PipSay | null;
+  missed: PipMissed | null;
+  onMissedDone: () => void;
   onCommand: (command: HostCommand) => void;
   onInput: (event: PipInputEvent, source: InputSource) => Promise<InputResult | null>;
   onAsk: (text: string, via: AskVia) => Promise<AskResult | null>;
@@ -51,6 +57,7 @@ interface Props {
 export function WatchScreen(props: Props) {
   const { view, isHost, onCommand, onInput } = props;
   const [isPipOpen, setIsPipOpen] = useState(false);
+  const isWide = useWide();
   const [notice, setNotice] = useState<string | null>(null);
   const companion = view.companion;
   const onlineCount = view.players.filter((p) => p.online).length;
@@ -86,80 +93,100 @@ export function WatchScreen(props: Props) {
     void send({ type: 'pip.dismiss' }, 'pad_touch');
   };
 
+  const pipPanel = (
+    <AskPip
+      pip={view.pip}
+      chips={props.chips}
+      say={props.say}
+      isThinking={view.pip === 'thinking'}
+      onAsk={props.onAsk}
+      onCommandText={runTypedCommand}
+      onSomethingElse={props.onSomethingElse}
+    />
+  );
+
   return (
     <main className="screen screen--watch">
-      <header className="watch-header">
-        <div className="watch-header__text">
-          <h1 className="large-title">{view.content?.title ?? 'Film'}</h1>
-          <FilmProgress
-            playback={view.playback}
-            playbackAt={props.playbackAt}
-            durationSec={view.content?.durationSec ?? 0}
-          />
-        </div>
-        {isHost && (
-          <button className="button button--small" onClick={() => onCommand({ type: 'lobby' })}>
-            Films
-          </button>
-        )}
-      </header>
-
-      {isHost ? (
-        <Remote
-          playback={view.playback}
-          device={view.device}
-          onInput={(event) => void send(event, 'pad_touch')}
-        />
-      ) : (
-        <p className="caption">{hostName(view) ?? 'The host'} has the remote</p>
-      )}
-
-      <VoiceButton
-        isHost={isHost}
-        onCommand={(event) =>
-          event.type === 'pip.invoke' ? openPip('pad_voice') : void send(event, 'pad_voice')
-        }
-        onQuestion={(text) => {
-          openPip('pad_voice');
-          void props.onAsk(text, 'voice');
-        }}
+      <NowPlaying
+        content={view.content}
+        playback={view.playback}
+        playbackAt={props.playbackAt}
+        {...(isHost ? { onFilms: () => onCommand({ type: 'lobby' }) } : {})}
       />
-      {notice && (
-        <p className="error" role="status">
-          {notice}
-        </p>
-      )}
 
-      {view.kidsMode && (
-        <section className="stack" aria-label="Kids games">
-          {companion?.prediction && (
-            <PredictionCard
-              key={companion.prediction.id}
-              prediction={companion.prediction}
-              myId={props.myId}
-              playerCount={onlineCount}
-              onVote={props.onVote}
+      {props.missed && <MissedCard missed={props.missed} onDone={props.onMissedDone} />}
+
+      <div className="watch-grid">
+        <div className="watch-grid__main">
+          {isHost ? (
+            <Remote
+              playback={view.playback}
+              device={view.device}
+              onInput={(event) => void send(event, 'pad_touch')}
             />
+          ) : (
+            <p className="caption">{hostName(view) ?? 'The host'} has the remote</p>
           )}
-          {isHost && (
-            <button
-              className={
-                view.playback?.ended ? 'button button--wide button--accent' : 'button button--wide'
-              }
-              disabled={view.quizUnlocked === 0}
-              onClick={() => onCommand({ type: 'start-quiz' })}
-            >
-              {view.quizUnlocked === 0
-                ? 'The quiz unlocks as you watch'
-                : `Start the quiz (${view.quizUnlocked} ready)`}
-            </button>
+
+          <VoiceButton
+            isHost={isHost}
+            onCommand={(event) =>
+              event.type === 'pip.invoke' ? openPip('pad_voice') : void send(event, 'pad_voice')
+            }
+            onQuestion={(text) => {
+              openPip('pad_voice');
+              void props.onAsk(text, 'voice');
+            }}
+          />
+          {notice && (
+            <p className="error" role="status">
+              {notice}
+            </p>
           )}
-        </section>
-      )}
+
+          {view.kidsMode && (
+            <section className="stack" aria-label="Kids games">
+              {companion?.prediction && (
+                <PredictionCard
+                  key={companion.prediction.id}
+                  prediction={companion.prediction}
+                  myId={props.myId}
+                  playerCount={onlineCount}
+                  onVote={props.onVote}
+                />
+              )}
+              {isHost && (
+                <button
+                  className={
+                    view.playback?.ended
+                      ? 'button button--wide button--accent'
+                      : 'button button--wide'
+                  }
+                  disabled={view.quizUnlocked === 0}
+                  onClick={() => onCommand({ type: 'start-quiz' })}
+                >
+                  {view.quizUnlocked === 0
+                    ? 'The quiz unlocks as you watch'
+                    : `Start the quiz (${view.quizUnlocked} ready)`}
+                </button>
+              )}
+            </section>
+          )}
+        </div>
+
+        {/* On a tablet Pip sits beside the remote; asking there is the invocation. */}
+        {isWide && (
+          <aside className="pip-panel" aria-label="Pip">
+            <h2 className="title">Ask Pip</h2>
+            <p className="caption">About the film so far. Pip never tells what comes next.</p>
+            {pipPanel}
+          </aside>
+        )}
+      </div>
 
       {view.kidsMode && <ReactionBar isRaised={false} onReact={props.onReact} />}
-      {!isPipOpen && <PipButton pip={view.pip} onOpen={() => openPip('pad_touch')} />}
-      {isPipOpen && (
+      {!isWide && !isPipOpen && <PipButton pip={view.pip} onOpen={() => openPip('pad_touch')} />}
+      {!isWide && isPipOpen && (
         <PipSheet
           pip={view.pip}
           chips={props.chips}

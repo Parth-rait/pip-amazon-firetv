@@ -11,6 +11,7 @@ import type {
   InputSource,
   JoinResult,
   PipInputEvent,
+  PipMissed,
   PipSay,
   ServerToClientEvents,
   SessionView,
@@ -33,6 +34,7 @@ export class FakePad {
   socket: PadSocket;
   views: SessionView[] = [];
   says: PipSay[] = [];
+  missed: PipMissed[] = [];
   private code: string | null = null;
 
   constructor(
@@ -51,6 +53,7 @@ export class FakePad {
     });
     socket.on('session:view', (view) => this.views.push(view));
     socket.on('pip:say', (say) => this.says.push(say));
+    socket.on('pip:missed', (missed) => this.missed.push(missed));
     socket.on('connect', () => {
       if (this.code) void this.rejoin(this.code);
     });
@@ -102,6 +105,11 @@ export class FakePad {
     id = labId('in'),
   ): Promise<InputResult> {
     return this.socket.emitWithAck('pad:input', { id, source, at: this.now(), event });
+  }
+
+  /** The pad was hidden (phone locked) or shown again. */
+  away(away: boolean): void {
+    this.socket.emit('pad:away', { away });
   }
 
   close(): void {

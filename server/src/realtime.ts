@@ -7,6 +7,7 @@ import { createAnswerCache, type AnswerCache } from './core/context/answer-cache
 import type { Timeline } from './core/context/timeline.js';
 import type { IntentJudge } from './core/intent/judge.js';
 import { askCommand } from './ask-commands.js';
+import { catchUp, markAway } from './away.js';
 import type { Journal } from './core/journal.js';
 import type { TextModel } from './core/ai/model.js';
 import { newCode } from './core/codes.js';
@@ -34,7 +35,12 @@ import {
 import { errorFields, type log as Log } from './log.js';
 import type { Session, SessionStore } from './sessions.js';
 import { answerQuestion, checkEveryoneAnswered, nextStep, startQuizFlow } from './quiz-flow.js';
-import { LIMITS, type ClientToServerEvents, type HelloResult } from './shared/protocol.js';
+import {
+  LIMITS,
+  type ClientToServerEvents,
+  type HelloResult,
+  type ServerToClientEvents,
+} from './shared/protocol.js';
 import * as schema from './validate.js';
 import { buildView } from './view.js';
 
@@ -54,7 +60,7 @@ export interface RealtimeDeps {
   now: () => number;
 }
 
-type PipSocket = Socket<ClientToServerEvents>;
+type PipSocket = Socket<ClientToServerEvents, ServerToClientEvents>;
 type SocketData = { role: 'tv'; code: string } | { role: 'pad'; code: string; playerId: string };
 
 const SWEEP_EVERY_MS = 10 * 60 * 1000;
@@ -132,6 +138,7 @@ export function registerRealtime(deps: RealtimeDeps): () => void {
         return;
       }
       const wasLast = leaveSocket(session, d.playerId, socket.id, deps.now());
+      if (wasLast) markAway(session, d.playerId, flow);
       if (wasLast && session.hostId === d.playerId) startHostGrace(session, core(session));
       if (wasLast) checkEveryoneAnswered(session, flow);
       if (restingPip(session) === 'sleep' && session.pip !== 'sleep')
@@ -245,6 +252,22 @@ export function registerRealtime(deps: RealtimeDeps): () => void {
       }
       if (session.pip === 'sleep') setPip(session, 'idle', core(session));
       else broadcast(session, flow);
+      // Back after being away, or joining a film already going: what they missed, to them only.
+      const missed = catchUp(session, playerId, flow, outcome.isNew);
+      if (missed) socket.emit('pip:missed', missed);
+    });
+
+    on('pad:away', (payload) => {
+      const parsed = schema.awaySchema.safeParse(payload);
+      if (!parsed.success) return invalid('pad:away');
+      const d = data();
+      const session = sessionOf();
+      if (!session || d?.role !== 'pad' || !session.players.has(d.playerId)) {
+        return ignored('pad:away', 'not-a-player');
+      }
+      if (parsed.data.away) return markAway(session, d.playerId, flow);
+      const missed = catchUp(session, d.playerId, flow);
+      if (missed) socket.emit('pip:missed', missed);
     });
 
     on('pad:host', (payload) => {

@@ -7,6 +7,12 @@ export function formatTimeLeft(positionSec: number, durationSec: number): string
   return minutes < 1 ? 'Less than a minute left' : `About ${minutes} min left`;
 }
 
+/** "4:05": minutes and seconds of the film. */
+export function formatClock(sec: number): string {
+  const whole = Math.max(0, Math.floor(sec));
+  return `${Math.floor(whole / 60)}:${String(whole % 60).padStart(2, '0')}`;
+}
+
 export function formatMinutes(durationSec: number): string {
   return `${Math.max(1, Math.round(durationSec / 60))} min`;
 }

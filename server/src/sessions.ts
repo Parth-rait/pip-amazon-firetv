@@ -39,6 +39,8 @@ export interface Session extends Roster {
   predictionVotes: PredictionVotes;
   revealedPredictions: string[]; // reveals Pip has already reacted to
   reactions: Record<string, number>; // scene atSec -> reactions there
+  // Where each viewer stopped watching (pad hidden or offline), for "While you were away".
+  away: Record<string, { contentId: string; atSec: number }>;
   updatedAt: number;
 }
 
@@ -85,6 +87,7 @@ export function createSession(
     predictionVotes: {},
     revealedPredictions: [],
     reactions: {},
+    away: {},
     updatedAt: now,
   };
 }

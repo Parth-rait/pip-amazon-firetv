@@ -6,7 +6,14 @@ import { fullscreenOnFirstTap } from './lib/fullscreen';
 import { makeInput } from './lib/input';
 import { getPlayerId, getSavedCode, getSavedName } from './lib/player-id';
 import { browserWakeLockEnv, keepAwake } from './lib/wake-lock';
-import { connectPad, createSocket, sendAsk, sendInput, type PadConnection } from './net/socket';
+import {
+  connectPad,
+  createSocket,
+  reportAway,
+  sendAsk,
+  sendInput,
+  type PadConnection,
+} from './net/socket';
 import { JoinScreen } from './screens/JoinScreen';
 import { LobbyScreen } from './screens/LobbyScreen';
 import { QuizScreen } from './screens/QuizScreen';
@@ -38,6 +45,8 @@ export function App() {
 
   const isJoined = state.view !== null;
   useEffect(() => (isJoined ? keepAwake(browserWakeLockEnv()) : undefined), [isJoined]);
+  // A locked phone or a switched app is a viewer away: Pip catches them up when they are back.
+  useEffect(() => (isJoined ? reportAway(socket) : undefined), [isJoined, socket]);
 
   useEffect(() => {
     if (state.chips.kind === 'starter') return;
@@ -86,6 +95,8 @@ export function App() {
           isHost={isHost(state)}
           chips={state.chips}
           say={state.say}
+          missed={state.missed}
+          onMissedDone={() => dispatch({ type: 'missed-done' })}
           onCommand={sendHost}
           onInput={input}
           onAsk={ask}

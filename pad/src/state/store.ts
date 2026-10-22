@@ -1,5 +1,5 @@
 // The pad's state: a reducer with no side effects, so it is easy to test (PROJECT.md section 3.3).
-import type { JoinResult, PipSay, Playback, SessionView } from '../shared/protocol';
+import type { JoinResult, PipMissed, PipSay, Playback, SessionView } from '../shared/protocol';
 
 export type Connection = 'connecting' | 'online' | 'offline';
 export type JoinFailure = Extract<JoinResult, { ok: false }>['reason'];
@@ -14,6 +14,7 @@ export interface PadState {
   viewAt: number; // when the latest view arrived (ms), for the quiz countdown
   playbackAt: number; // when the TV's latest playback report arrived (ms), for the progress line
   say: PipSay | null; // Pip's latest answer to me
+  missed: PipMissed | null; // "While you were away": what I missed, until I close it
   chips: { kind: ChipKind; items: string[] };
   joinError: JoinFailure | null;
   lookingForTv: boolean; // a saved-code rejoin is retrying
@@ -28,6 +29,8 @@ export type PadAction =
   | { type: 'looking-for-tv'; isLooking: boolean }
   | { type: 'say'; say: PipSay }
   | { type: 'chips-expired' }
+  | { type: 'missed'; missed: PipMissed }
+  | { type: 'missed-done' }
   | { type: 'leave' };
 
 export function initialState(myId: string): PadState {
@@ -38,6 +41,7 @@ export function initialState(myId: string): PadState {
     viewAt: 0,
     playbackAt: 0,
     say: null,
+    missed: null,
     chips: { kind: 'starter', items: STARTER_CHIPS },
     joinError: null,
     lookingForTv: false,
@@ -90,6 +94,10 @@ export function reducer(state: PadState, action: PadAction): PadState {
     }
     case 'chips-expired':
       return { ...state, chips: starter() };
+    case 'missed':
+      return { ...state, missed: action.missed };
+    case 'missed-done':
+      return { ...state, missed: null };
     case 'leave':
       return { ...initialState(state.myId), connection: state.connection };
   }
