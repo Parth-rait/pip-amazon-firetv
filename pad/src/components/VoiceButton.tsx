@@ -6,8 +6,8 @@ import { isSpeechAvailable, listenOnce } from '../lib/speech';
 import type { PipInputEvent } from '../shared/protocol';
 import { MicIcon } from './Icons';
 
-const HOST_HINT = 'Tap and say "pause", "back 10" or "louder"';
-const GUEST_HINT = 'Tap and ask Pip about the film';
+const HOST_HINT = 'Push to talk: "pause", "back 10", or a question';
+const GUEST_HINT = 'Push to talk: ask Pip about the film';
 
 interface Props {
   onCommand: (event: PipInputEvent) => void;

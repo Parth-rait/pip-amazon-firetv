@@ -562,6 +562,132 @@ body {
   background: var(--surface2);
 }
 
+/* The directional control: one ring with OK in the middle, like a TV remote. */
+.dpad-wrap {
+  display: grid;
+  justify-items: center;
+  gap: var(--space-4);
+}
+
+.dpad {
+  position: relative;
+  width: 248px;
+  height: 248px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 50% 40%, var(--surface2), var(--bg) 140%);
+  border: 1px solid var(--border);
+  box-shadow: inset 0 2px 0 rgb(255 255 255 / 0.04);
+}
+
+.dpad__key,
+.dpad__center {
+  position: absolute;
+  display: grid;
+  place-items: center;
+  border: none;
+  color: var(--text);
+  background: transparent;
+  font: inherit;
+  font-size: 30px;
+  cursor: pointer;
+  transition:
+    background var(--motion-fast),
+    color var(--motion-fast);
+}
+
+.dpad__key {
+  width: 72px;
+  height: 72px;
+  border-radius: 50%;
+}
+
+.dpad__key:active {
+  background: var(--surface2);
+  color: var(--ice);
+}
+
+.dpad__key svg,
+.dpad__center svg {
+  width: 30px;
+  height: 30px;
+}
+
+.dpad__key--up {
+  top: 6px;
+  left: 88px;
+}
+
+.dpad__key--down {
+  bottom: 6px;
+  left: 88px;
+}
+
+.dpad__key--left {
+  left: 6px;
+  top: 88px;
+}
+
+.dpad__key--right {
+  right: 6px;
+  top: 88px;
+}
+
+.dpad__center {
+  top: 74px;
+  left: 74px;
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  background: var(--accent);
+  color: var(--bg);
+  box-shadow: var(--glow);
+}
+
+.dpad__center:active {
+  transform: scale(0.96);
+}
+
+.dpad__volume {
+  display: grid;
+  grid-template-columns: auto 160px;
+  align-items: center;
+  gap: var(--space-3);
+}
+
+/* Quick actions: the questions people ask most, one tap each. */
+.quick {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--space-3);
+}
+
+.quick__button {
+  min-height: var(--touch-min);
+  padding: var(--space-3) var(--space-4);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  background: var(--surface);
+  color: var(--text);
+  font: inherit;
+  font-weight: 600;
+  text-align: left;
+  cursor: pointer;
+  transition: background var(--motion-fast);
+}
+
+.quick__button:first-child {
+  border-color: color-mix(in srgb, var(--accent) 60%, transparent);
+  color: var(--ice);
+}
+
+.quick__button:active {
+  background: var(--surface2);
+}
+
+.quick__button:disabled {
+  opacity: 0.5;
+}
+
 /* A tablet: the page widens; joining and the lobby stay a comfortable reading width. */
 @media (min-width: 900px) {
   .app {

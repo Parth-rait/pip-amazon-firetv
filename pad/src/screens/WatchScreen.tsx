@@ -7,6 +7,7 @@ import { MissedCard } from '../components/MissedCard';
 import { NowPlaying } from '../components/NowPlaying';
 import { PipButton, PipSheet } from '../components/PipSheet';
 import { PredictionCard } from '../components/PredictionCard';
+import { QuickActions } from '../components/QuickActions';
 import { ReactionBar } from '../components/ReactionBar';
 import { Remote } from '../components/Remote';
 import { VoiceButton } from '../components/VoiceButton';
@@ -127,6 +128,14 @@ export function WatchScreen(props: Props) {
           ) : (
             <p className="caption">{hostName(view) ?? 'The host'} has the remote</p>
           )}
+
+          <QuickActions
+            isDisabled={view.pip === 'thinking'}
+            onAsk={(question) => {
+              if (!isWide) openPip('pad_touch');
+              void props.onAsk(question, 'starter');
+            }}
+          />
 
           <VoiceButton
             isHost={isHost}
