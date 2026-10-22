@@ -1,5 +1,5 @@
 /* The browser TV (tv.html). A 1920 x 1080 canvas scaled to the window; the pad's tokens at the TV
-   type scale of DESIGN.md (72 / 48 / 36 / 24, nothing under 24). Focus is a mint ring and a small
+   type scale of DESIGN.md (72 / 48 / 36 / 24, nothing under 24). Focus is an Electric ring, a soft glow and a small
    lift, as on Fire TV. The only gradients are scrims that keep text readable over film stills. */
 :root {
   --tv-safe-x: 96px;
@@ -8,7 +8,7 @@
   --tv-title: 48px;
   --tv-body: 32px;
   --tv-caption: 24px;
-  --tv-ring: 0 0 0 6px var(--accent);
+  --tv-ring: 0 0 0 6px var(--accent), 0 0 40px rgb(22 139 255 / 0.45);
 }
 
 *,
@@ -155,8 +155,8 @@ ul {
   position: absolute;
   inset: 0 0 -2px 0; /* past the image's edge, so no seam shows when the canvas is scaled */
   background:
-    linear-gradient(90deg, var(--bg) 30%, rgb(11 11 15 / 0.75) 48%, rgb(11 11 15 / 0) 72%),
-    linear-gradient(0deg, var(--bg) 3%, rgb(11 11 15 / 0) 38%);
+    linear-gradient(90deg, var(--bg) 30%, rgb(5 9 20 / 0.75) 48%, rgb(5 9 20 / 0) 72%),
+    linear-gradient(0deg, var(--bg) 3%, rgb(5 9 20 / 0) 38%);
 }
 
 .topbar {
@@ -289,7 +289,7 @@ ul {
   align-items: center;
   padding: 24px;
   border-radius: var(--radius);
-  background: rgb(21 21 28 / 0.92);
+  background: rgb(11 20 36 / 0.92);
   max-width: 720px;
 }
 
@@ -444,6 +444,189 @@ ul {
   color: var(--text);
 }
 
+/* The top bar's tabs: Home, Discover, My Space, Scenes, Search. Electric marks the current one;
+   the ring shows only while the remote is in the bar. */
+.topbar {
+  z-index: 10;
+}
+
+.tabs {
+  display: flex;
+  gap: 8px;
+  padding: 8px;
+  border-radius: 999px;
+  background: rgb(11 20 36 / 0.72);
+  border: 1px solid var(--border);
+  backdrop-filter: blur(12px);
+}
+
+.tab {
+  padding: 14px 30px;
+  border-radius: 999px;
+  font-size: 28px;
+  font-weight: 600;
+  color: var(--text-muted);
+  transition:
+    background var(--motion-fast),
+    color var(--motion-fast),
+    box-shadow var(--motion-fast);
+}
+
+.tab.is-current {
+  color: var(--text);
+  background: var(--surface2);
+}
+
+.tab.is-focused {
+  background: var(--accent);
+  color: var(--bg);
+  box-shadow: var(--glow);
+}
+
+/* The other pages: a title, a line of help, then rows. */
+.page {
+  position: absolute;
+  inset: 170px var(--tv-safe-x) var(--tv-safe-y);
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  animation: tv-fade var(--motion-fast);
+}
+
+.page-title {
+  font-size: var(--tv-title);
+  font-weight: 700;
+}
+
+.chips-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+
+.tv-chip {
+  padding: 16px 30px;
+  border-radius: 999px;
+  border: 1px solid var(--border);
+  background: var(--surface);
+  font-size: 26px;
+  color: var(--text-muted);
+  transition:
+    background var(--motion-fast),
+    box-shadow var(--motion-fast),
+    color var(--motion-fast);
+}
+
+.tv-chip.is-on {
+  color: var(--ice);
+  border-color: color-mix(in srgb, var(--ice) 45%, transparent);
+}
+
+.tv-chip.is-focused {
+  box-shadow: var(--tv-ring);
+  color: var(--text);
+}
+
+.grid-row {
+  display: flex;
+  gap: 40px;
+  padding: 12px 6px;
+}
+
+.card--wide,
+.card--wide .card-art {
+  width: 560px;
+}
+
+.card--wide .card-art {
+  height: 315px;
+}
+
+.card-meta {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: var(--tv-caption);
+  color: var(--text-muted);
+}
+
+.tag {
+  padding: 4px 14px;
+  border-radius: 999px;
+  border: 1px solid var(--border);
+  font-size: 20px;
+  color: var(--ice);
+}
+
+.card-synopsis {
+  font-size: 22px;
+  line-height: 1.4;
+  color: var(--text-muted);
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.card--scene,
+.card--scene .card-art {
+  width: 420px;
+}
+
+.card--scene .card-art {
+  height: 236px;
+}
+
+.space-grid {
+  display: grid;
+  grid-template-columns: 1fr 640px;
+  gap: 48px;
+  align-items: start;
+}
+
+.panel {
+  display: grid;
+  gap: 20px;
+  padding: 32px;
+  border-radius: var(--radius);
+  border: 1px solid var(--border);
+  background: var(--surface);
+}
+
+.space-pair {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+}
+
+.pair-qr--small {
+  width: 150px;
+  height: 150px;
+}
+
+.search-box {
+  width: 1100px;
+  height: 96px;
+  padding: 0 36px;
+  border-radius: 999px;
+  border: 1px solid var(--border);
+  background: var(--surface);
+  color: var(--text);
+  font: inherit;
+  font-size: 34px;
+  outline: none;
+}
+
+.search-box.is-focused {
+  box-shadow: var(--tv-ring);
+}
+
+.hint-line {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
 /* Pip's corner, the speech bubble and greetings */
 
 .corner {
@@ -471,7 +654,7 @@ ul {
   max-width: 880px;
   padding: 24px 32px;
   border-radius: var(--radius);
-  background: rgb(21 21 28 / 0.95);
+  background: rgb(11 20 36 / 0.95);
   animation: tv-rise 220ms ease-out;
 }
 
@@ -544,7 +727,7 @@ ul {
   max-width: 1100px;
   padding: 16px 24px;
   border-radius: var(--radius);
-  background: rgb(11 11 15 / 0.7);
+  background: rgb(5 9 20 / 0.7);
   font-size: var(--tv-caption);
   color: var(--text-muted);
   opacity: 0;
@@ -562,7 +745,7 @@ ul {
   transform: translateX(-50%);
   padding: 14px 32px;
   border-radius: 999px;
-  background: rgb(21 21 28 / 0.92);
+  background: rgb(11 20 36 / 0.92);
   font-size: var(--tv-body);
   font-weight: 600;
   font-variant-numeric: tabular-nums;
@@ -709,7 +892,7 @@ kbd {
   place-content: center;
   justify-items: center;
   gap: 36px;
-  background: rgb(11 11 15 / 0.7);
+  background: rgb(5 9 20 / 0.7);
 }
 
 .end-title {
@@ -726,7 +909,7 @@ kbd {
   width: 640px;
   padding: 28px 32px;
   border-radius: var(--radius);
-  background: rgb(21 21 28 / 0.94);
+  background: rgb(11 20 36 / 0.94);
   display: grid;
   gap: 14px;
   animation: tv-rise 220ms ease-out;

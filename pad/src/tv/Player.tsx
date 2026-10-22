@@ -44,6 +44,7 @@ export function Player({
   say,
   reactions,
   fromStart,
+  startAt,
   onHome,
   onReactionDone,
 }: {
@@ -53,6 +54,7 @@ export function Player({
   say: SayEntry | null;
   reactions: ReactionEntry[];
   fromStart: boolean; // the family chose Start over
+  startAt: number | null; // the family picked a scene: start there
   onHome: () => void;
   onReactionDone: (id: number) => void;
 }) {
@@ -67,6 +69,7 @@ export function Player({
   });
   const loadedRef = useRef(false);
   const fromStartRef = useRef(fromStart); // read once, when the film loads
+  const startAtRef = useRef(startAt);
 
   const [report, setReport] = useState<Report>({
     positionSec: 0,
@@ -182,9 +185,11 @@ export function Player({
     if (!v) return;
     const last = viewRef.current.playback;
     const resume =
-      !fromStartRef.current && last && last.contentId === content.id && !last.ended
-        ? last.positionSec
-        : 0;
+      startAtRef.current !== null
+        ? startAtRef.current
+        : !fromStartRef.current && last && last.contentId === content.id && !last.ended
+          ? last.positionSec
+          : 0;
     v.volume = viewRef.current.device.volume;
     const onMeta = () => {
       if (resume > 0) v.currentTime = Math.min(resume, Math.max(0, v.duration - 1));

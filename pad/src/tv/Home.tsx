@@ -1,16 +1,14 @@
-// HOME (the lobby stage): a Fire TV style launcher. The featured film fills the top with Play or
-// Resume; rows of films below; the Pip Pad's QR and code stay in view. The D-pad moves the focus,
-// the featured film follows it, and OK starts the film for the whole room (tv:watch).
-import { useEffect, useMemo, useState } from 'react';
-import { Pip } from '../components/Pip';
+// HOME (the lobby stage's first page, in TvShell): a Fire TV style launcher. The featured film
+// fills the top with Play or Resume; rows of films below; the Pip Pad's QR and code stay in view.
+// The D-pad moves the focus, the featured film follows it, and OK starts the film for the whole
+// room (tv:watch). Up from the first row reaches the top bar.
+import { useMemo, useState } from 'react';
 import type { ContentView, SessionView } from '../shared/protocol';
 import { local } from './net';
 import { PlayerChips } from './PlayerChips';
 import { useRemote } from './remote';
-import { clock, resumeAt, type GreetEntry } from './store';
-import { Bubble } from './Bubble';
+import { clock, resumeAt } from './store';
 
-const GREETING_MS = 4000;
 const ROW_STEP = 372; // a row's height and the gap, in tv.css
 
 type Row =
@@ -27,14 +25,16 @@ export function Home({
   films,
   filmsFailed,
   qrUrl,
-  greet,
+  isActive,
+  onExitUp,
   onWatch,
 }: {
   view: SessionView;
   films: ContentView[] | null;
   filmsFailed: boolean;
   qrUrl: string | null;
-  greet: GreetEntry | null;
+  isActive: boolean;
+  onExitUp: () => void;
   onWatch: (film: ContentView, fromStart: boolean) => void;
 }) {
   const [featuredId, setFeaturedId] = useState<string | null>(null);
@@ -89,37 +89,24 @@ export function Home({
   };
 
   useRemote((key) => {
-    if (key === 'up') moveTo(safeRow - 1, safeRow - 1 === 0 ? 0 : safeCol);
+    if (!isActive) return;
+    if (key === 'up' && safeRow === 0) onExitUp();
+    else if (key === 'up') moveTo(safeRow - 1, safeRow - 1 === 0 ? 0 : safeCol);
     else if (key === 'down') moveTo(safeRow + 1, safeRow === 0 ? 0 : safeCol);
     else if (key === 'left') moveTo(safeRow, safeCol - 1);
     else if (key === 'right') moveTo(safeRow, safeCol + 1);
     else if (key === 'select' || key === 'playPause') activate(safeRow, safeCol);
   });
 
-  const [greetedId, setGreetedId] = useState<number | null>(null);
-  useEffect(() => {
-    if (!greet) return;
-    const t = setTimeout(() => setGreetedId(greet.id), GREETING_MS);
-    return () => clearTimeout(t);
-  }, [greet]);
-  const greeting = greet && greet.id !== greetedId ? greet : null;
-
-  const isFocused = (row: number, col: number) => row === safeRow && col === safeCol;
+  const isFocused = (row: number, col: number) => isActive && row === safeRow && col === safeCol;
 
   return (
-    <div className="home">
+    <>
       <div className="hero">
         {featured?.poster && (
           <img key={featured.id} className="hero-art" src={local(featured.poster)} alt="" />
         )}
         <div className="hero-scrim" />
-        <header className="topbar">
-          <div className="brand">
-            <Pip state={view.pip === 'sleep' ? 'idle' : view.pip} size={56} />
-            <span>Pip</span>
-          </div>
-          <Clock />
-        </header>
 
         <div className="hero-copy">
           {featured ? (
@@ -231,27 +218,7 @@ export function Home({
           )}
         </div>
       </div>
-
-      {greeting && (
-        <div className="corner">
-          <Bubble key={greeting.id} text={greeting.hello.text} tone="accent" />
-          <Pip state="talking" size={96} />
-        </div>
-      )}
-    </div>
-  );
-}
-
-function Clock() {
-  const [now, setNow] = useState(() => new Date());
-  useEffect(() => {
-    const t = setInterval(() => setNow(new Date()), 15_000);
-    return () => clearInterval(t);
-  }, []);
-  return (
-    <span className="topbar-clock">
-      {now.toLocaleTimeString([], { hour: 'numeric', minute: '2-digit' })}
-    </span>
+    </>
   );
 }
 

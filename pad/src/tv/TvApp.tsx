@@ -5,19 +5,21 @@
 import { useEffect, useMemo, useReducer, useState } from 'react';
 import { Pip } from '../components/Pip';
 import type { ContentView } from '../shared/protocol';
-import { Home } from './Home';
 import { Quiz, Results } from './KidsScreens';
 import { createTvSocket, sendHello } from './net';
 import { Player } from './Player';
 import { initialTvState, tvReducer } from './store';
+import { TvShell } from './TvShell';
 
 const CANVAS = { width: 1920, height: 1080 };
 
 export function TvApp() {
   const socket = useMemo(() => createTvSocket(), []);
   const [state, dispatch] = useReducer(tvReducer, initialTvState);
-  // "Start over" is the TV's own choice: the server resumes a film where it was.
+  // "Start over" and "play from this scene" are the TV's own choices: the server resumes a film
+  // where it was.
   const [fromStartId, setFromStartId] = useState<string | null>(null);
+  const [startAt, setStartAt] = useState<{ id: string; sec: number } | null>(null);
   const stage = useStageScale();
 
   useEffect(() => {
@@ -32,7 +34,10 @@ export function TvApp() {
     socket.on('disconnect', onDisconnect);
     socket.on('session:view', (view) => {
       dispatch({ type: 'view', view });
-      if (view.stage === 'lobby') setFromStartId(null); // Start over applies to one viewing
+      if (view.stage === 'lobby') {
+        setFromStartId(null); // Start over and a scene apply to one viewing
+        setStartAt(null);
+      }
     });
     socket.on('pip:say', (say) => dispatch({ type: 'say', say }));
     socket.on('pip:hello', (hello) => dispatch({ type: 'greet', hello }));
@@ -81,9 +86,10 @@ export function TvApp() {
 
   const { view } = state;
 
-  const watch = (film: ContentView, fromStart: boolean) => {
+  const watch = (film: ContentView, fromStart: boolean, sec?: number) => {
     if (!socket.connected) return;
     setFromStartId(fromStart ? film.id : null);
+    setStartAt(sec !== undefined ? { id: film.id, sec } : null);
     socket.emit('tv:watch', { contentId: film.id });
   };
 
@@ -97,7 +103,7 @@ export function TvApp() {
     );
   } else if (view.stage === 'lobby' || !view.content) {
     screen = (
-      <Home
+      <TvShell
         view={view}
         films={state.films}
         filmsFailed={state.filmsFailed}
@@ -117,6 +123,7 @@ export function TvApp() {
           say={state.say}
           reactions={state.reactions}
           fromStart={fromStartId === view.content.id}
+          startAt={startAt?.id === view.content.id ? startAt.sec : null}
           onHome={() => socket.emit('tv:home')}
           onReactionDone={(id) => dispatch({ type: 'reaction-done', id })}
         />

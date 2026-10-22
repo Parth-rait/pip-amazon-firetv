@@ -413,8 +413,8 @@ body {
   inset: 0;
   background: linear-gradient(
     180deg,
-    rgb(11 11 15 / 0.25) 0%,
-    rgb(11 11 15 / 0.7) 55%,
+    rgb(5 9 20 / 0.25) 0%,
+    rgb(5 9 20 / 0.7) 55%,
     var(--surface) 100%
   );
 }

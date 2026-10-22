@@ -1,11 +1,16 @@
-/* Design tokens from PROJECT.md section 3.2. Use these names; no other colors or spacing. */
+/* Design tokens, shared by the Pip Pad, the browser TV and the Command Center. Pip's palette since
+   22 Oct: Void, Surface, Electric (focus, active controls, meaningful actions) and Ice (highlights).
+   Use these names; no other colors or spacing. */
 :root {
-  --bg: #0b0b0f;
-  --surface: #15151c;
-  --surface2: #1e1e27;
-  --text: #f4f4f6;
-  --text-muted: #9b9ba8;
-  --accent: #7ce7c4;
+  --bg: #050914; /* Void */
+  --surface: #0b1424; /* Surface */
+  --surface2: #13213a;
+  --border: rgb(142 216 255 / 0.12);
+  --text: #eef4ff;
+  --text-muted: #8a9bb8;
+  --accent: #168bff; /* Electric */
+  --ice: #8ed8ff; /* Ice */
+  --glow: 0 0 24px rgb(22 139 255 / 0.35);
   --danger: #ff6b6b;
   --radius: 20px;
   --space-1: 4px;
