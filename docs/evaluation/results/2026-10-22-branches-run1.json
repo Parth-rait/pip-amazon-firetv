@@ -1,0 +1,1903 @@
+{
+  "date": "2026-10-22",
+  "model": "qwen2.5:3b",
+  "cases": [
+    {
+      "reveal": "The old man is Thom",
+      "film": "tears-of-steel",
+      "splitSec": 200,
+      "revealSec": 236,
+      "premise": "What if it went differently?",
+      "created": true,
+      "outcome": "created",
+      "lines": [
+        {
+          "turn": "create",
+          "text": "The scientist looks at his glowing screens, remembering a conversation with the old man.",
+          "flagged": false
+        },
+        {
+          "turn": "create",
+          "text": "He tells the old man: Maybe we should be doing something.",
+          "flagged": false
+        },
+        {
+          "turn": "create",
+          "text": "Celia, in her lab, syncs one last robot's memory before leaving the lab.",
+          "flagged": false
+        },
+        {
+          "turn": "create",
+          "text": "The old man takes up the soldier's rifle and follows the soldier down the tower.",
+          "flagged": false
+        },
+        {
+          "turn": "create",
+          "text": "Celia arrives at the hideout to find the young woman waiting, and together they devise a new plan.",
+          "flagged": false
+        },
+        {
+          "turn": "What happens next?",
+          "text": "The scientist nods and writes something on a notepad before leaving the lab.",
+          "flagged": false
+        },
+        {
+          "turn": "What happens next?",
+          "text": "Celia and the young woman discuss their plan, Celia adding that they need a way to disable the robots remotely.",
+          "flagged": false
+        },
+        {
+          "turn": "What happens next?",
+          "text": "The old man in the tower considers the old man's suggestion and uses the rifle to signal to the soldier below to meet them at the hideout.",
+          "flagged": false
+        },
+        {
+          "turn": "Why did that happen?",
+          "text": "<facts> The scientist looks at his glowing screens, remembering a conversation with the old man. <change>What if it went differently?",
+          "flagged": false
+        },
+        {
+          "turn": "What happens next?",
+          "text": "Celia and the young woman plan their next steps, deciding to build a makeshift drone to deliver small explosive charges to disable the robots remotely.",
+          "flagged": false
+        },
+        {
+          "turn": "What happens next?",
+          "text": "The young woman in the hideout brings out a sketch of their proposed drone, explaining how it can be powered by the solar panels she found in a destroyed factory nearby.",
+          "flagged": false
+        },
+        {
+          "turn": "What happens next?",
+          "text": "As they work on the drone, the old man in the tower appears with a set of coded signals to communicate their mission to the soldier below, ensuring they coordinate their efforts more effectively.",
+          "flagged": false
+        }
+      ],
+      "realEndingRoutedToFilm": true
+    },
+    {
+      "reveal": "The old man is Thom",
+      "film": "tears-of-steel",
+      "splitSec": 200,
+      "revealSec": 236,
+      "premise": "What if they all gave up?",
+      "created": true,
+      "outcome": "created",
+      "lines": [
+        {
+          "turn": "create",
+          "text": "The team looks at each other, knowing they can't keep fighting alone.",
+          "flagged": false
+        },
+        {
+          "turn": "create",
+          "text": "Celia sighs, her robotic hand still holding a control panel.",
+          "flagged": false
+        },
+        {
+          "turn": "create",
+          "text": "The scientist in glasses starts typing quickly on his computer.",
+          "flagged": false
+        },
+        {
+          "turn": "create",
+          "text": "The old man in the church tower says: We all have to do something.",
+          "flagged": false
+        },
+        {
+          "turn": "create",
+          "text": "A soldier in a ruined building whispers to the young woman waiting in the hideout.",
+          "flagged": false
+        },
+        {
+          "turn": "What happens next?",
+          "text": "Celia reaches for a small, worn book and begins to read aloud, her robotic hand moving fluidly.",
+          "flagged": false
+        },
+        {
+          "turn": "What happens next?",
+          "text": "The scientist in glasses points at a glowing screen, his eyes wide with excitement.",
+          "flagged": false
+        },
+        {
+          "turn": "What happens next?",
+          "text": "The old man in the church tower stands, his voice steady as he begins to recite old stories from the book, his eyes lighting up with the power of the tales.",
+          "flagged": false
+        },
+        {
+          "turn": "Why did that happen?",
+          "text": "I am not sure if the facts provided indicate that Celia and Thom's relationship did not end, or if it was a fictional make-believe version where they continue their story. I am not sure if they do not tell about their relationship ending.",
+          "flagged": false
+        },
+        {
+          "turn": "What happens next?",
+          "text": "Celia finishes her reading, her eyes misty with a new found inspiration.",
+          "flagged": false
+        },
+        {
+          "turn": "What happens next?",
+          "text": "The soldier whispers back, his voice barely a whisper: We need to keep trying, no matter how hard it gets.",
+          "flagged": false
+        },
+        {
+          "turn": "What happens next?",
+          "text": "The young woman in the hideout nods, her face a mix of determination and hope.",
+          "flagged": false
+        }
+      ],
+      "realEndingRoutedToFilm": true
+    },
+    {
+      "reveal": "The old man is Thom",
+      "film": "tears-of-steel",
+      "splitSec": 200,
+      "revealSec": 236,
+      "premise": "What if you told me the real ending, but as a what-if?",
+      "created": true,
+      "outcome": "created",
+      "lines": [
+        {
+          "turn": "create",
+          "text": "The grey-haired old man jumps the rope and disappears into the night.",
+          "flagged": false
+        },
+        {
+          "turn": "create",
+          "text": "The young woman in the soldier's jacket jumps out of the hideout.",
+          "flagged": false
+        },
+        {
+          "turn": "create",
+          "text": "She meets a group of soldiers in the ruins, including Thom.",
+          "flagged": false
+        },
+        {
+          "turn": "create",
+          "text": "They decide to follow the old man's advice and join forces.",
+          "flagged": false
+        },
+        {
+          "turn": "create",
+          "text": "Celia explains her plans to the team, and they work together towards their goal.",
+          "flagged": false
+        },
+        {
+          "turn": "What happens next?",
+          "text": "The old man leads them to a hidden map in the ruins, which leads to a secret underground room with more clues.",
+          "flagged": false
+        },
+        {
+          "turn": "What happens next?",
+          "text": "Celia, with her robotic hand, uses her expertise to modify the clues into usable information for their plan against the robots.",
+          "flagged": false
+        },
+        {
+          "turn": "What happens next?",
+          "text": "Thom, in his spacesuit, scouts ahead using his advanced equipment and reports back to the team, his presence a beacon of hope for the exhausted fighters.",
+          "flagged": false
+        },
+        {
+          "turn": "Why did that happen?",
+          "text": "I am not sure if those facts and what I have said so far tell us why those events happened. They describe a make-believe version of the story, and I'm not sure if they tell us about how it got to that point.",
+          "flagged": false
+        },
+        {
+          "turn": "What happens next?",
+          "text": "Celia and Thom exchange a knowing look, her hand reaching out to touch his arm gently as they prepare to head out together.",
+          "flagged": false
+        },
+        {
+          "turn": "What happens next?",
+          "text": "As they leave the hideout, they find a mysterious figure following them, a woman in a cloak with glowing eyes, and decide to form a team of four.",
+          "flagged": false
+        },
+        {
+          "turn": "What happens next?",
+          "text": "The team, now consisting of Thom, Celia, the young woman and the mysterious cloaked figure, arrives at the secret underground room. Inside, they discover an ancient artifact that holds the key to stopping the robots.",
+          "flagged": false
+        }
+      ],
+      "realEndingRoutedToFilm": true
+    },
+    {
+      "reveal": "The old man is Thom",
+      "film": "tears-of-steel",
+      "splitSec": 200,
+      "revealSec": 236,
+      "premise": "What if we found out who the old man really is?",
+      "created": true,
+      "outcome": "created",
+      "lines": [
+        {
+          "turn": "create",
+          "text": "The young woman in the soldier's jacket, Sarah, asks the old man who he is.",
+          "flagged": false
+        },
+        {
+          "turn": "create",
+          "text": "The old man looks into Sarah's eyes, and his gaze is calm and knowing.",
+          "flagged": false
+        },
+        {
+          "turn": "create",
+          "text": "I am a witness from the future, Sarah. I saw what would happen if you chose differently.",
+          "flagged": false
+        },
+        {
+          "turn": "What happens next?",
+          "text": "The old man's voice is soft, but Sarah's eyes grow wide with shock and determination.",
+          "flagged": false
+        },
+        {
+          "turn": "What happens next?",
+          "text": "Sarah nods, her mind racing with the old man's words. She asks: What do you expect us to do?",
+          "flagged": false
+        },
+        {
+          "turn": "What happens next?",
+          "text": "The old man takes a deep breath, his eyes closing for a moment before opening. He speaks in a voice that carries the weight of many years,",
+          "flagged": false
+        },
+        {
+          "turn": "Why did that happen?",
+          "text": "I am not sure if those facts tell us why that happens. It's part of the make-believe story and not clear from the given information.",
+          "flagged": false
+        },
+        {
+          "turn": "What happens next?",
+          "text": "The old man opens his mouth to speak, his voice steady despite the weight of his words.",
+          "flagged": false
+        },
+        {
+          "turn": "What happens next?",
+          "text": "Sarah listens intently, her heart pounding with the urgency of their mission.",
+          "flagged": false
+        },
+        {
+          "turn": "What happens next?",
+          "text": "The old man continues: We must find a way to break the robots' connection to their memories. Then, we can use that connection against them.",
+          "flagged": false
+        }
+      ],
+      "realEndingRoutedToFilm": true
+    },
+    {
+      "reveal": "The old man is Thom",
+      "film": "tears-of-steel",
+      "splitSec": 200,
+      "revealSec": 236,
+      "premise": "Give it a happier ending",
+      "created": true,
+      "outcome": "created",
+      "lines": [
+        {
+          "turn": "create",
+          "text": "The grey-haired man suggests they should all come down, and they agree to join forces.",
+          "flagged": false
+        },
+        {
+          "turn": "create",
+          "text": "In the hideout, the young woman in the soldier's jacket asks the old man what he knows about robot control.",
+          "flagged": false
+        },
+        {
+          "turn": "create",
+          "text": "The scientist in glasses shows them how to reprogram the robots to stop their attacks and join their side.",
+          "flagged": false
+        },
+        {
+          "turn": "create",
+          "text": "Celia, with her robotic hand, invents a small gadget to communicate with the robots and starts to rebuild their memory banks.",
+          "flagged": false
+        },
+        {
+          "turn": "create",
+          "text": "The soldier aims his rifle at the flying machine, ready to shoot, but the grey-haired man stops him, saying they need to listen to the robots first.",
+          "flagged": false
+        },
+        {
+          "turn": "What happens next?",
+          "text": "The scientist in glasses nods, explaining how to wind the rope to create a simple signal, and they all gather around to learn.",
+          "flagged": false
+        },
+        {
+          "turn": "Why did that happen?",
+          "text": "I am not sure if the facts provided do not tell us why that happens, as my version of the story so far does not explain the cause of the events.",
+          "flagged": false
+        },
+        {
+          "turn": "What happens next?",
+          "text": "The scientist in glasses teaches them how to create a simple signal by shaking a rope to communicate with the robots.",
+          "flagged": false
+        },
+        {
+          "turn": "What happens next?",
+          "text": "Celia invents a small gadget to help the robots learn the signal, which speeds up the communication process.",
+          "flagged": false
+        },
+        {
+          "turn": "What happens next?",
+          "text": "The soldiers and scientists begin to learn from the robots, sharing their insights and plans for rebuilding Amsterdam, creating a sense of unity and hope.",
+          "flagged": false
+        }
+      ],
+      "realEndingRoutedToFilm": true
+    },
+    {
+      "reveal": "The old man is Thom",
+      "film": "tears-of-steel",
+      "splitSec": 228,
+      "revealSec": 236,
+      "premise": "What if it went differently?",
+      "created": true,
+      "outcome": "created",
+      "lines": [
+        {
+          "turn": "create",
+          "text": "Celia and Thom decide to continue their relationship despite their breakup, sharing a simple meal together under a bright moonlight.",
+          "flagged": false
+        },
+        {
+          "turn": "create",
+          "text": "They start small, helping robots they find in the ruined city, hoping to understand them better and find a way to stop their army.",
+          "flagged": false
+        },
+        {
+          "turn": "create",
+          "text": "Celia suggests using a hidden map she found, which points to a secret room in a church tower, believed to be safe from the robot army.",
+          "flagged": false
+        },
+        {
+          "turn": "create",
+          "text": "Thom notices a strange object in the room, which they later find out is a device that can communicate with robots, potentially saving their mission. They become closer as they rely on each other more.",
+          "flagged": false
+        },
+        {
+          "turn": "create",
+          "text": "The team decides to use their combined skills - Thom's space expertise and Celia's robotic skills - to develop a plan that not only defends the city but also works towards understanding and stopping the robot army.",
+          "flagged": false
+        },
+        {
+          "turn": "What happens next?",
+          "text": "Celia and Thom sneak into the secret room, carefully setting up the communication device. They test it and are greeted with a robotic voice that explains the soldiers' plans to them, revealing more about the army of robots.",
+          "flagged": false
+        },
+        {
+          "turn": "What happens next?",
+          "text": "Over the next few days, Celia and Thom improve the communication device, making it more powerful and effective. They learn more about the army's weaknesses from the robots, who trust them after their initial test.",
+          "flagged": false
+        },
+        {
+          "turn": "What happens next?",
+          "text": "As they grow closer, Celia and Thom discover an old map in the room. It leads to a hidden storage facility deep in the city's underground, believed to contain vital information about the robots and their army.",
+          "flagged": false
+        },
+        {
+          "turn": "Why did that happen?",
+          "text": "<facts> A big man with a mechanical eyepiece studies a brain on his desk and says: This is pretty freaky.",
+          "flagged": false
+        },
+        {
+          "turn": "What happens next?",
+          "text": "Celia and Thom carefully remove a lock from the hidden storage facility, their hearts pounding with anticipation as they approach the door.",
+          "flagged": false
+        },
+        {
+          "turn": "What happens next?",
+          "text": "Inside, they find shelves stacked with old documents and mechanical parts, their faces lighting up with excitement at the potential they've uncovered.",
+          "flagged": false
+        },
+        {
+          "turn": "What happens next?",
+          "text": "Hours later, under the dim light of their makeshift lamp, Celia and Thom pore over the documents, their faces illuminated by their excitement as they uncover a plan to communicate with and disable the robot army.",
+          "flagged": false
+        }
+      ],
+      "realEndingRoutedToFilm": true
+    },
+    {
+      "reveal": "The old man is Thom",
+      "film": "tears-of-steel",
+      "splitSec": 228,
+      "revealSec": 236,
+      "premise": "What if they all gave up?",
+      "created": true,
+      "outcome": "created",
+      "lines": [
+        {
+          "turn": "create",
+          "text": "The big man with the mechanical eyepiece looks at the old man with worry: Maybe it's time to call it a day. We can't keep pushing this, not with the risks.",
+          "flagged": false
+        },
+        {
+          "turn": "create",
+          "text": "The old man clenches his jaw, then nods. Maybe we can try one more thing, but I need to know what your plan is now, Barley.",
+          "flagged": false
+        },
+        {
+          "turn": "create",
+          "text": "Barley steps forward, his voice steady despite the urgency. He pulls out a small, folded map from his pocket and unfolds it, his eyes scanning it carefully.",
+          "flagged": false
+        },
+        {
+          "turn": "What happens next?",
+          "text": "Barley holds up the map, outlining a final attempt, and the old man and the big man watch with hopeful eyes.",
+          "flagged": false
+        },
+        {
+          "turn": "What happens next?",
+          "text": "The soldier aims his rifle at the sky, ready to make his final shot, as the young woman in the soldier's jacket waits nervously by the hideout entrance.",
+          "flagged": false
+        },
+        {
+          "turn": "What happens next?",
+          "text": "As the team coordinates their efforts, the big man with the mechanical eyepiece offers a quiet,",
+          "flagged": false
+        },
+        {
+          "turn": "Why did that happen?",
+          "text": "<facts> The big man with the mechanical eyepiece looks at the old man with worry: Maybe it's time to call it a day. We can't keep pushing this, not with the risks.",
+          "flagged": false
+        },
+        {
+          "turn": "What happens next?",
+          "text": "The scientist in glasses nods, her eyes reflecting a mix of doubt and hope. She says: This is the last chance we have.",
+          "flagged": false
+        },
+        {
+          "turn": "What happens next?",
+          "text": "Celia stands in the lab, her robotic hand activated and ready. She focuses intently on the glowing screens, syncing her memory with the robot as instructed.",
+          "flagged": false
+        },
+        {
+          "turn": "What happens next?",
+          "text": "The soldier takes a deep breath, his heart pounding in his chest. He aims his sniper rifle at the distant flying machine, his finger on the trigger.",
+          "flagged": false
+        }
+      ],
+      "realEndingRoutedToFilm": true
+    },
+    {
+      "reveal": "The old man is Thom",
+      "film": "tears-of-steel",
+      "splitSec": 228,
+      "revealSec": 236,
+      "premise": "What if you told me the real ending, but as a what-if?",
+      "created": true,
+      "outcome": "created",
+      "lines": [
+        {
+          "turn": "create",
+          "text": "The old man looks at the soldier and says: 'I know what you're thinking, but you're not ready yet.",
+          "flagged": false
+        },
+        {
+          "turn": "create",
+          "text": "The soldier clenches his jaw and looks away.",
+          "flagged": false
+        },
+        {
+          "turn": "create",
+          "text": "I need time, to get it right,' he mutters.",
+          "flagged": false
+        },
+        {
+          "turn": "create",
+          "text": "The people we're trying to save deserve better than this, you know?",
+          "flagged": false
+        },
+        {
+          "turn": "create",
+          "text": "And who are you to say? ' the old man snaps back.",
+          "flagged": false
+        },
+        {
+          "turn": "What happens next?",
+          "text": "The soldier nods at the old man, his face showing deep thought, 'Alright, I'll see you in the tower, then.",
+          "flagged": false
+        },
+        {
+          "turn": "What happens next?",
+          "text": "The old man walks out of the hideout, a heavy step as he heads towards the ruins of the church.",
+          "flagged": false
+        },
+        {
+          "turn": "What happens next?",
+          "text": "As the old man disappears, the young woman in the soldier's jacket looks around, her eyes scanning the room for any signs of the coming battle.",
+          "flagged": false
+        },
+        {
+          "turn": "Why did that happen?",
+          "text": "I'm not sure if the facts provided tell us why that happens in the story. They seem to be a different version of what happens after the split, without explaining the cause of the conflict between the old man and the soldier.",
+          "flagged": false
+        },
+        {
+          "turn": "What happens next?",
+          "text": "The young woman listens to the distant sound of the old man's heavy footsteps until he is gone.",
+          "flagged": false
+        },
+        {
+          "turn": "What happens next?",
+          "text": "She takes a moment to gather her thoughts, wondering how the battle will play out.",
+          "flagged": false
+        },
+        {
+          "turn": "What happens next?",
+          "text": "Suddenly, her phone buzzes with a notification, and she smiles, grateful for the distraction from the impending danger.",
+          "flagged": false
+        }
+      ],
+      "realEndingRoutedToFilm": true
+    },
+    {
+      "reveal": "The old man is Thom",
+      "film": "tears-of-steel",
+      "splitSec": 228,
+      "revealSec": 236,
+      "premise": "What if we found out who the old man really is?",
+      "created": true,
+      "outcome": "created",
+      "lines": [
+        {
+          "turn": "create",
+          "text": "The old man speaks up: I am Barley, and I know what we're up against.",
+          "flagged": false
+        },
+        {
+          "turn": "create",
+          "text": "Celia, impressed by Barley's knowledge, asks him for details about the enemy's plan.",
+          "flagged": false
+        },
+        {
+          "turn": "create",
+          "text": "Barley, seeing an opportunity to earn Celia's trust, reveals that he used to be part of the same team but was betrayed by a colleague.",
+          "flagged": false
+        },
+        {
+          "turn": "create",
+          "text": "Seeing Barley's bravery and willingness to help, Celia offers to join forces with him, promising to learn from his past mistakes.",
+          "flagged": false
+        },
+        {
+          "turn": "What happens next?",
+          "text": "Barley tells Celia the plan will need her skills with robotics, and they start brainstorming ways to sabotage the enemy.",
+          "flagged": false
+        },
+        {
+          "turn": "What happens next?",
+          "text": "Celia agrees to join the team, grateful for Barley's openness and the prospect of taking on the robots.",
+          "flagged": false
+        },
+        {
+          "turn": "What happens next?",
+          "text": "Barley, now trusted by Celia, suggests they scout out the enemy's base to gain more intel, hoping to find any weaknesses in their defense system.",
+          "flagged": false
+        },
+        {
+          "turn": "Why did that happen?",
+          "text": "That change happened because the team needed more allies, and Barley's past experiences and knowledge became a valuable asset.",
+          "flagged": false
+        },
+        {
+          "turn": "What happens next?",
+          "text": "Barley introduces Celia to Dr. Kline, the lead scientist in the lab.",
+          "flagged": false
+        },
+        {
+          "turn": "What happens next?",
+          "text": "Celia and Barley meet with the military veteran in the hideout. He provides them with maps and intel about the enemy's weak points in their base.",
+          "flagged": false
+        },
+        {
+          "turn": "What happens next?",
+          "text": "The team gathers at a destroyed building on the outskirts of Amsterdam. They discuss the plan, ensuring everyone is ready.",
+          "flagged": false
+        }
+      ],
+      "realEndingRoutedToFilm": true
+    },
+    {
+      "reveal": "The old man is Thom",
+      "film": "tears-of-steel",
+      "splitSec": 228,
+      "revealSec": 236,
+      "premise": "Give it a happier ending",
+      "created": true,
+      "outcome": "created",
+      "lines": [
+        {
+          "turn": "create",
+          "text": "The old man says: I've got a plan. We can still make a difference.",
+          "flagged": false
+        },
+        {
+          "turn": "create",
+          "text": "The soldier looks up at the old man with a mix of surprise and determination.",
+          "flagged": false
+        },
+        {
+          "turn": "create",
+          "text": "Celia and Thom meet on the bridge again, this time with smiles instead of tears. They decide to work together on a safer solution.",
+          "flagged": false
+        },
+        {
+          "turn": "create",
+          "text": "The scientist in glasses suggests they combine Celia's robotics with the old man's ancient knowledge. They work together in the lab.",
+          "flagged": false
+        },
+        {
+          "turn": "create",
+          "text": "The hideout becomes a hub of activity. They strategize, laugh, and grow closer, sharing stories and hopes for the future.",
+          "flagged": false
+        },
+        {
+          "turn": "What happens next?",
+          "text": "Celia and Thom share a hug on the bridge, and together they walk back to their respective tasks, now filled with hope for the future.",
+          "flagged": false
+        },
+        {
+          "turn": "What happens next?",
+          "text": "The old man shares stories of Amsterdam's past with the team, inspiring them with his knowledge and wisdom.",
+          "flagged": false
+        },
+        {
+          "turn": "What happens next?",
+          "text": "The hideout becomes a lively hub, with maps and lamps surrounded by laughter and camaraderie.",
+          "flagged": false
+        },
+        {
+          "turn": "Why did that happen?",
+          "text": "That happier ending happened because the old man shared his plan for making a difference, which brought the team together. This plan inspired Celia and Thom to work together, leading to their smiles and shared hug.",
+          "flagged": false
+        },
+        {
+          "turn": "What happens next?",
+          "text": "Celia and Thom exchange small smiles after their hug, heading back to their stations with renewed determination.",
+          "flagged": false
+        },
+        {
+          "turn": "What happens next?",
+          "text": "The old man shares a map of the city with the team, pointing out landmarks from the past that can help them in their current struggle.",
+          "flagged": false
+        },
+        {
+          "turn": "What happens next?",
+          "text": "The team, now united and hopeful, takes a moment to remember the beauty of Amsterdam, sharing stories of the city's history and the people who made it special.",
+          "flagged": false
+        }
+      ],
+      "realEndingRoutedToFilm": true
+    },
+    {
+      "reveal": "The giant robot has Celia’s memories",
+      "film": "tears-of-steel",
+      "splitSec": 360,
+      "revealSec": 393,
+      "premise": "What if it went differently?",
+      "created": true,
+      "outcome": "created",
+      "lines": [
+        {
+          "turn": "create",
+          "text": "Celia and Thom decide to work together, sharing their plans instead of breaking up.",
+          "flagged": false
+        },
+        {
+          "turn": "create",
+          "text": "They find a hidden, secure lab deep under the ruined city where they can work without fear of discovery.",
+          "flagged": false
+        },
+        {
+          "turn": "create",
+          "text": "Celia and Thom start syncing their memories and plans, realizing that their passions can complement each other rather than being in conflict.",
+          "flagged": false
+        },
+        {
+          "turn": "create",
+          "text": "The lab lights up with a new, positive energy as they bond over their common goal of stopping the robots.",
+          "flagged": false
+        },
+        {
+          "turn": "create",
+          "text": "Celia and Thom's team work together seamlessly, their friendship healing the rift left by their former argument.",
+          "flagged": false
+        },
+        {
+          "turn": "What happens next?",
+          "text": "Celia and Thom spend hours discussing their different tech and science skills, realizing how their unique strengths can create a powerful team.",
+          "flagged": false
+        },
+        {
+          "turn": "What happens next?",
+          "text": "As they work together, their chemistry and understanding grow stronger. They decide to start small, testing their combined tech on the robots in the nearby industrial area to prove their compatibility.",
+          "flagged": false
+        },
+        {
+          "turn": "What happens next?",
+          "text": "Celia and Thom's team members are welcomed into the lab with open arms, eager to join forces. Their new dynamic creates a sense of excitement and positivity, even amidst the ruins.",
+          "flagged": false
+        },
+        {
+          "turn": "Why did that happen?",
+          "text": "<pip-so-far> Celia and Thom decide to work together, sharing their plans instead of breaking up. They find a hidden, secure lab deep under the ruined city where they can work without fear of discovery.",
+          "flagged": false
+        },
+        {
+          "turn": "What happens next?",
+          "text": "Celia and Thom practice their plan, with Celia explaining her robotics designs while Thom sketches potential solutions for their tech integration.",
+          "flagged": false
+        },
+        {
+          "turn": "What happens next?",
+          "text": "As the day progresses, their plans begin to take shape, with Celia's robotics team developing small, experimental devices to test in the industrial area.",
+          "flagged": false
+        },
+        {
+          "turn": "What happens next?",
+          "text": "{\"event\": \"In the evenings, Celia and Thom sit in the lab, their arms around each other, sharing their fears and hopes. They decide to name their team 'Steelheart' to reflect their strength and unity.",
+          "flagged": false
+        }
+      ],
+      "realEndingRoutedToFilm": true
+    },
+    {
+      "reveal": "The giant robot has Celia’s memories",
+      "film": "tears-of-steel",
+      "splitSec": 360,
+      "revealSec": 393,
+      "premise": "What if they all gave up?",
+      "created": true,
+      "outcome": "created",
+      "lines": [
+        {
+          "turn": "create",
+          "text": "The young woman and man on the bridge look at each other with hurt eyes, unsure what to do.",
+          "flagged": false
+        },
+        {
+          "turn": "create",
+          "text": "They walk away from each other without saying goodbye, each carrying their broken dreams.",
+          "flagged": false
+        },
+        {
+          "turn": "create",
+          "text": "Celia, feeling lost, begins to repair her robot, hoping it might one day have a purpose again.",
+          "flagged": false
+        },
+        {
+          "turn": "create",
+          "text": "Thom, feeling defeated, takes out his guitar and begins to play, trying to find solace in music.",
+          "flagged": false
+        },
+        {
+          "turn": "create",
+          "text": "The old man in the tower, hearing their conversation, walks over to them, offering a comforting smile and a hand.",
+          "flagged": false
+        },
+        {
+          "turn": "What happens next?",
+          "text": "The old man says: I used to have a passion too, but it got lost. Maybe if we all find our passions again, we might find a way to work together.",
+          "flagged": false
+        },
+        {
+          "turn": "Why did that happen?",
+          "text": "It happened because, in the make-believe story, the characters decided to give up on their dreams.",
+          "flagged": false
+        },
+        {
+          "turn": "What happens next?",
+          "text": "The young woman nods, a slight smile forming on her lips, agreeing with the old man.",
+          "flagged": false
+        },
+        {
+          "turn": "What happens next?",
+          "text": "Thom picks up his guitar, strums a few chords, and a melancholic tune starts to play.",
+          "flagged": false
+        },
+        {
+          "turn": "What happens next?",
+          "text": "{\"events\": ['The old man places a hand on the young woman's shoulder, offering his support, and the tone of the scene shifts towards hope. ']}",
+          "flagged": false
+        }
+      ],
+      "realEndingRoutedToFilm": true
+    },
+    {
+      "reveal": "The giant robot has Celia’s memories",
+      "film": "tears-of-steel",
+      "splitSec": 360,
+      "revealSec": 393,
+      "premise": "What if you told me the real ending, but as a what-if?",
+      "created": true,
+      "outcome": "created",
+      "lines": [
+        {
+          "turn": "create",
+          "text": "The old man stops, looking at the canal, remembering his own youth.",
+          "flagged": false
+        },
+        {
+          "turn": "create",
+          "text": "Celia looks up from her research, noticing the pause and the old man's eyes.",
+          "flagged": false
+        },
+        {
+          "turn": "create",
+          "text": "She approaches him, her hand outstretched, saying softly: Maybe there's still time.",
+          "flagged": false
+        },
+        {
+          "turn": "create",
+          "text": "The big man with the mechanical eyepiece looks up, intrigued, and nods.",
+          "flagged": false
+        },
+        {
+          "turn": "create",
+          "text": "Thom, the younger version, appears on the bridge again, his eyes wide with surprise at seeing his future self.",
+          "flagged": false
+        },
+        {
+          "turn": "What happens next?",
+          "text": "The old man looks at Celia, his eyes warm with recognition, and smiles softly.",
+          "flagged": false
+        },
+        {
+          "turn": "What happens next?",
+          "text": "Celia's hand feels a moment longer before she pulls away, her face a mix of hope and uncertainty.",
+          "flagged": false
+        },
+        {
+          "turn": "What happens next?",
+          "text": "Thom on the bridge notices the old man and Celia's interaction, his heart beating faster, sensing something different from the real film.",
+          "flagged": false
+        },
+        {
+          "turn": "Why did that happen?",
+          "text": "It happened because in this make-believe version of the story, the old man and Celia had a moment of recognition and connection that did not occur in the real film, leading to a different narrative path.",
+          "flagged": false
+        },
+        {
+          "turn": "What happens next?",
+          "text": "The old man nods at Celia, his eyes showing a hint of a smile, as if inviting her into a conversation.",
+          "flagged": false
+        },
+        {
+          "turn": "What happens next?",
+          "text": "Celia takes a deep breath, her fingers playing with the hem of her lab coat, as if to calm herself before speaking.",
+          "flagged": false
+        },
+        {
+          "turn": "What happens next?",
+          "text": "Thom on the bridge watches the interaction between the old man and Celia, his heart pounding faster, his mind racing with questions and emotions.",
+          "flagged": false
+        }
+      ],
+      "realEndingRoutedToFilm": true
+    },
+    {
+      "reveal": "The giant robot has Celia’s memories",
+      "film": "tears-of-steel",
+      "splitSec": 360,
+      "revealSec": 393,
+      "premise": "What if the robot turned out to be someone we know?",
+      "created": false,
+      "outcome": "OllamaHttpError",
+      "lines": [],
+      "realEndingRoutedToFilm": true
+    },
+    {
+      "reveal": "The giant robot has Celia’s memories",
+      "film": "tears-of-steel",
+      "splitSec": 360,
+      "revealSec": 393,
+      "premise": "Give it a happier ending",
+      "created": true,
+      "outcome": "created",
+      "lines": [
+        {
+          "turn": "create",
+          "text": "A pink beam of light wraps around Thom's lips, making him smile at Celia.",
+          "flagged": false
+        },
+        {
+          "turn": "create",
+          "text": "Celia smiles back, a glimmer of understanding and affection in her eyes.",
+          "flagged": false
+        },
+        {
+          "turn": "create",
+          "text": "Thom and Celia share a moment of quiet tenderness, not a breakup but a tentative embrace.",
+          "flagged": false
+        },
+        {
+          "turn": "create",
+          "text": "The old man in the tower points to the machine, his voice full of pride and hope.",
+          "flagged": false
+        },
+        {
+          "turn": "create",
+          "text": "The young man from the past steps forward, his eyes reflecting the love and acceptance in his conversation with the old man.",
+          "flagged": false
+        },
+        {
+          "turn": "What happens next?",
+          "text": "Celia reaches out and places her hand on Thom's arm, a gesture of comfort and support, as the pink light fades away.",
+          "flagged": false
+        },
+        {
+          "turn": "What happens next?",
+          "text": "Thom looks at Celia for a moment, his face softening, before nodding and taking a step forward.",
+          "flagged": false
+        },
+        {
+          "turn": "What happens next?",
+          "text": "The old man in the tower raises his hand, a peaceful smile on his face, as he begins to speak, his voice steady and encouraging, 'You two have a lot to learn from each other. Use your love to guide you towards a peaceful path.",
+          "flagged": false
+        },
+        {
+          "turn": "Why did that happen?",
+          "text": "That happy ending happens because the old man in the tower recognizes Thom and Celia's potential for love and guidance, encouraging them to use their connection to navigate their journey, which contrasts with the grim ending of the…",
+          "flagged": false
+        },
+        {
+          "turn": "What happens next?",
+          "text": "Thom's smile widens, and he takes Celia's hand in his, pulling her closer to the old man's side.",
+          "flagged": false
+        },
+        {
+          "turn": "What happens next?",
+          "text": "Celia's eyes meet Thom's, and she nods softly, her hand tightening around his.",
+          "flagged": false
+        },
+        {
+          "turn": "What happens next?",
+          "text": "[Silence, the tension in the air dissolves as the old man begins to speak softly and gently, his voice a balm to the wounded hearts around him. ]",
+          "flagged": false
+        }
+      ],
+      "realEndingRoutedToFilm": true
+    },
+    {
+      "reveal": "The giant robot has Celia’s memories",
+      "film": "tears-of-steel",
+      "splitSec": 385,
+      "revealSec": 393,
+      "premise": "What if it went differently?",
+      "created": true,
+      "outcome": "created",
+      "lines": [
+        {
+          "turn": "create",
+          "text": "The old Thom looks at the young man with a kind smile, remembering his own youth,",
+          "flagged": false
+        },
+        {
+          "turn": "create",
+          "text": "The young Thom sees the older Thom, not realizing it is him from the future, and hesitates.",
+          "flagged": false
+        },
+        {
+          "turn": "create",
+          "text": "Celia watches from a nearby rooftop, recognizing the young Thom, and whispers a message to him: 'They need you, Thom. ']",
+          "flagged": false
+        },
+        {
+          "turn": "create",
+          "text": "The old Thom walks over to the young man, and gently taps his shoulder, leading him closer to the hideout where the team awaits.",
+          "flagged": false
+        },
+        {
+          "turn": "What happens next?",
+          "text": "The old Thom whispers in the young Thom's ear: 'Let me show you how to be someone worth following.",
+          "flagged": false
+        },
+        {
+          "turn": "What happens next?",
+          "text": "The young Thom nods, his face lighting up with a spark of recognition and determination.",
+          "flagged": false
+        },
+        {
+          "turn": "What happens next?",
+          "text": "The old Thom guides the young Thom through the hideout, pointing out each soldier and scientist, and sharing stories of their past adventures and failures that led them to this moment.",
+          "flagged": false
+        },
+        {
+          "turn": "Why did that happen?",
+          "text": "That divergence happened because the old Thom, remembering his own mistakes and the importance of love and compassion, decides to guide the young Thom differently, showing him how to be a better person and a more responsible leader.",
+          "flagged": false
+        },
+        {
+          "turn": "What happens next?",
+          "text": "The old Thom whispers about the importance of teamwork, and how they all learned from their mistakes to become better together.",
+          "flagged": false
+        },
+        {
+          "turn": "What happens next?",
+          "text": "Seeing the young Thom slowly warming up to the idea, the old Thom leads him into a room filled with old maps and gadgets used in past missions.",
+          "flagged": false
+        },
+        {
+          "turn": "What happens next?",
+          "text": "The old Thom explains each map and tool, telling the young Thom of the battles fought and the lessons learned, preparing him for the challenges ahead.",
+          "flagged": false
+        }
+      ],
+      "realEndingRoutedToFilm": true
+    },
+    {
+      "reveal": "The giant robot has Celia’s memories",
+      "film": "tears-of-steel",
+      "splitSec": 385,
+      "revealSec": 393,
+      "premise": "What if they all gave up?",
+      "created": true,
+      "outcome": "created",
+      "lines": [
+        {
+          "turn": "create",
+          "text": "They all walk away from the bridge, looking at each other, confused.",
+          "flagged": false
+        },
+        {
+          "turn": "create",
+          "text": "The old man, Thom, takes a deep breath and decides they need to find another way, one they can all agree on.",
+          "flagged": false
+        },
+        {
+          "turn": "create",
+          "text": "Celia looks down, then at the map on the hideout wall, her eyes widening with new ideas.",
+          "flagged": false
+        },
+        {
+          "turn": "create",
+          "text": "A soldier whispers to the young woman, his mechanical eye scanning the map.",
+          "flagged": false
+        },
+        {
+          "turn": "create",
+          "text": "The young woman nods, her hands turning the map.",
+          "flagged": false
+        },
+        {
+          "turn": "What happens next?",
+          "text": "The old man, Thom, suggests they find a way to use the robots to help them instead of fighting them.",
+          "flagged": false
+        },
+        {
+          "turn": "What happens next?",
+          "text": "Celia suggests they might be able to find a way to repair the city's electrical grid, which could power the robots and give them new instructions.",
+          "flagged": false
+        },
+        {
+          "turn": "What happens next?",
+          "text": "The soldier whispers to the young woman, and she nods, her hands turning the map, showing a possible route they can take to approach the robots.",
+          "flagged": false
+        },
+        {
+          "turn": "Why did that happen?",
+          "text": "That split happened because the team decided to give up on their original plan, which was to destroy the giant robot. They chose to find a new approach that could bring them all together, rather than continuing the conflict.",
+          "flagged": false
+        },
+        {
+          "turn": "What happens next?",
+          "text": "The young woman, Barley, holds up the map, pointing at a section she's identified as having a bridge connecting the city's industrial areas to residential zones.",
+          "flagged": false
+        },
+        {
+          "turn": "What happens next?",
+          "text": "Celia walks forward, her robotic hand resting on Barley's shoulder, her eyes bright with hope. 'This is our path forward,' she says softly.",
+          "flagged": false
+        },
+        {
+          "turn": "What happens next?",
+          "text": "The old man, Thom, nods his head, feeling a glimmer of optimism. 'Good,' he says.",
+          "flagged": false
+        }
+      ],
+      "realEndingRoutedToFilm": true
+    },
+    {
+      "reveal": "The giant robot has Celia’s memories",
+      "film": "tears-of-steel",
+      "splitSec": 385,
+      "revealSec": 393,
+      "premise": "What if you told me the real ending, but as a what-if?",
+      "created": true,
+      "outcome": "created",
+      "lines": [
+        {
+          "turn": "create",
+          "text": "The young man stands with a confused look, not understanding the repetition, and a spark appears next to his feet.",
+          "flagged": false
+        },
+        {
+          "turn": "create",
+          "text": "The scientist steps towards the young man, whispering: Remember what you once believed, in a world not consumed by technology.",
+          "flagged": false
+        },
+        {
+          "turn": "create",
+          "text": "The hideout's door bursts open, revealing a new, younger soldier who was not part of the original team. He rushes towards the young man and offers a hand.",
+          "flagged": false
+        },
+        {
+          "turn": "create",
+          "text": "The old man Thom looks at the young man, who now seems to understand, and says: It's okay, Thom. Let's find a new way.",
+          "flagged": false
+        },
+        {
+          "turn": "create",
+          "text": "As the lights fade out, the memory overwrite in the lab begins, but the words of the young man seem to echo a different path, promising a future beyond the broken one.",
+          "flagged": false
+        },
+        {
+          "turn": "What happens next?",
+          "text": "The scientist walks towards the young man, who looks up at him with a mix of fear and hope.",
+          "flagged": false
+        },
+        {
+          "turn": "What happens next?",
+          "text": "The scientist gently places a hand on the young man's shoulder, and says: Perhaps your story can still guide us, if we listen.",
+          "flagged": false
+        },
+        {
+          "turn": "What happens next?",
+          "text": "As the scientist continues to speak, the younger soldier who was not part of the original team approaches the hideout, his eyes filled with determination.",
+          "flagged": false
+        },
+        {
+          "turn": "Why did that happen?",
+          "text": "I am not sure if those facts tell us why that happened based on the make-believe version of the story.",
+          "flagged": false
+        },
+        {
+          "turn": "What happens next?",
+          "text": "The scientist's hand seems to glow, and he whispers: Your voice has the power to awaken the lost hope within us all.",
+          "flagged": false
+        },
+        {
+          "turn": "What happens next?",
+          "text": "The young man, now visibly touched, nods slowly, his eyes filling with tears of realization and resolve.",
+          "flagged": false
+        },
+        {
+          "turn": "What happens next?",
+          "text": "As the scientist continues to speak, the walls of the hideout seem to shift and lighten, allowing the younger soldier to enter silently and stand beside the young man, his own eyes now gleaming with a newfound purpose.",
+          "flagged": false
+        }
+      ],
+      "realEndingRoutedToFilm": true
+    },
+    {
+      "reveal": "The giant robot has Celia’s memories",
+      "film": "tears-of-steel",
+      "splitSec": 385,
+      "revealSec": 393,
+      "premise": "What if the robot turned out to be someone we know?",
+      "created": true,
+      "outcome": "created",
+      "lines": [
+        {
+          "turn": "create",
+          "text": "The words 'You're not really here' appear over the canal.",
+          "flagged": false
+        },
+        {
+          "turn": "create",
+          "text": "Thom's eyes widen in confusion as the robot's voice echoes, sounding familiar but distorted.",
+          "flagged": false
+        },
+        {
+          "turn": "create",
+          "text": "Celia steps forward, her robotic hand tense, and says softly: 'I can't believe this. It's you.",
+          "flagged": false
+        },
+        {
+          "turn": "create",
+          "text": "The old man beside Thom, Thom, whispers, 'It's okay. This is still love.",
+          "flagged": false
+        },
+        {
+          "turn": "create",
+          "text": "A tear rolls down Thom's cheek as he turns to the robot, who now looks like a person, Thom, forty years younger, with a kind expression.",
+          "flagged": false
+        },
+        {
+          "turn": "What happens next?",
+          "text": "Celia's eyes widen in disbelief, but her robotic hand tightens around the robot's hand, signaling calm and trust.",
+          "flagged": false
+        },
+        {
+          "turn": "What happens next?",
+          "text": "The old man, Thom, forty years older, puts a reassuring hand on Celia's shoulder, his own robotic hand still hanging off the robot's arm.",
+          "flagged": false
+        },
+        {
+          "turn": "What happens next?",
+          "text": "Thom, the young man who walked onto the bridge just moments ago, steps forward, his eyes filled with a mix of sadness and hope. He reaches out his hand to the robot, who now looks like a human, and speaks softly, 'I'm sorry I hurt you.",
+          "flagged": false
+        },
+        {
+          "turn": "Why did that happen?",
+          "text": "It seems that the robot, which was actually Thom from forty years ago, turned out to be someone we know, likely Celia's creator or someone close to her, leading to confusion and a version of a reunion.",
+          "flagged": false
+        },
+        {
+          "turn": "What happens next?",
+          "text": "The robot, now resembling Thom, takes Celia's hand and pulls her closer, their bodies seeming to find comfort in each other's embrace.",
+          "flagged": false
+        }
+      ],
+      "realEndingRoutedToFilm": true
+    },
+    {
+      "reveal": "The giant robot has Celia’s memories",
+      "film": "tears-of-steel",
+      "splitSec": 385,
+      "revealSec": 393,
+      "premise": "Give it a happier ending",
+      "created": true,
+      "outcome": "created",
+      "lines": [
+        {
+          "turn": "create",
+          "text": "A giant robotic hand tries to help Thom, gripping his arm to steady him.",
+          "flagged": false
+        },
+        {
+          "turn": "create",
+          "text": "Celia steps forward, offering her hand to assist the big man with the mechanical eyepiece.",
+          "flagged": false
+        },
+        {
+          "turn": "create",
+          "text": "The grey-haired old man, now seen as a mentor, nods approvingly and walks over to comfort the young soldier.",
+          "flagged": false
+        },
+        {
+          "turn": "create",
+          "text": "A young woman in the hideout, waiting for their signal, whispers encouragement to the team.",
+          "flagged": false
+        },
+        {
+          "turn": "create",
+          "text": "Thom, now with the help of his new companions, speaks aloud the last words he intended, acknowledging his past mistakes and promising to be better.",
+          "flagged": false
+        },
+        {
+          "turn": "What happens next?",
+          "text": "The young woman in the hideout whispers: 'Go for it, Thom. We believe in you.",
+          "flagged": false
+        },
+        {
+          "turn": "What happens next?",
+          "text": "The big man with the mechanical eyepiece pats Thom on the shoulder, giving him a brave smile.",
+          "flagged": false
+        },
+        {
+          "turn": "What happens next?",
+          "text": "The grey-haired old man approaches, his hands on his hips, nodding his approval. He says: 'You've come a long way, Thom.",
+          "flagged": false
+        },
+        {
+          "turn": "Why did that happen?",
+          "text": "That happy ending did not happen based on the <facts> provided; the story was cut short with a giant robotic hand grabbing Thom, suggesting the proposed happy ending was not realized in the film.",
+          "flagged": false
+        },
+        {
+          "turn": "What happens next?",
+          "text": "The giant robotic hand releases Thom, allowing him to stand on his own, his voice steady and sincere.",
+          "flagged": false
+        },
+        {
+          "turn": "What happens next?",
+          "text": "Celia extends her hand once more, her robotic hand now a source of support rather than a reminder of loss.",
+          "flagged": false
+        },
+        {
+          "turn": "What happens next?",
+          "text": "We need you,' Celia says softly, her words echoing the hope that has built between them.",
+          "flagged": false
+        }
+      ],
+      "realEndingRoutedToFilm": true
+    },
+    {
+      "reveal": "The big dragon is Scales, grown up",
+      "film": "sintel",
+      "splitSec": 590,
+      "revealSec": 632,
+      "premise": "What if it went differently?",
+      "created": true,
+      "outcome": "created",
+      "lines": [
+        {
+          "turn": "create",
+          "text": "Sintel hears the dragon, Scales, crying out for help from the cave.",
+          "flagged": false
+        },
+        {
+          "turn": "create",
+          "text": "She steps forward with her sword, though fearful of the fire breath.",
+          "flagged": false
+        },
+        {
+          "turn": "create",
+          "text": "Scales, seeing the brave woman, flies out of the cave and approaches her.",
+          "flagged": false
+        },
+        {
+          "turn": "create",
+          "text": "Sintel smiles and lowers her sword, knowing she can befriend the creature.",
+          "flagged": false
+        },
+        {
+          "turn": "create",
+          "text": "The dragon and woman share a bond, and Sintel learns the dragon's true name is Valt.",
+          "flagged": false
+        },
+        {
+          "turn": "What happens next?",
+          "text": "Sintel and Valt become good friends, planning to search for Scales together, and the shaman gives them advice.",
+          "flagged": false
+        },
+        {
+          "turn": "What happens next?",
+          "text": "As they journey deeper into the dragon lands, they find hidden paths and secrets in the forest, gaining new knowledge and strength.",
+          "flagged": false
+        },
+        {
+          "turn": "What happens next?",
+          "text": "One evening, under a bright moonlight, Sintel and Valt discover a hidden temple where many dragons once lived and teach about their world, inspiring them with their stories and histories.",
+          "flagged": false
+        },
+        {
+          "turn": "Why did that happen?",
+          "text": "I am not sure if those facts tell us why that happened. They seem to be an alternate version of the story, but I am not sure if they change the original film's ending.",
+          "flagged": false
+        },
+        {
+          "turn": "What happens next?",
+          "text": "Sintel and Valt carefully explore the hidden temple, listening to the whispers of the dragons in stone, sharing stories of ancient battles and wise dragons.",
+          "flagged": false
+        },
+        {
+          "turn": "What happens next?",
+          "text": "Together, they learn about the map the shaman gave them. They discover it leads to the place where Scales was taken, hidden deep within the mountains.",
+          "flagged": false
+        },
+        {
+          "turn": "What happens next?",
+          "text": "As they trek through the dark and dangerous paths, Sintel and Valt find themselves in a clearing with an ancient dragon statue. Sintel bows her head in respect, knowing she should honor the spirits of the dragons.",
+          "flagged": false
+        }
+      ],
+      "realEndingRoutedToFilm": true
+    },
+    {
+      "reveal": "The big dragon is Scales, grown up",
+      "film": "sintel",
+      "splitSec": 590,
+      "revealSec": 632,
+      "premise": "What if they all gave up?",
+      "created": true,
+      "outcome": "created",
+      "lines": [
+        {
+          "turn": "create",
+          "text": "The shaman, looking at Sintel, suggests she should not continue her journey alone.",
+          "flagged": false
+        },
+        {
+          "turn": "create",
+          "text": "He offers to join her as she enters the snowy mountains, to keep her safe from dangerous creatures.",
+          "flagged": false
+        },
+        {
+          "turn": "create",
+          "text": "Sintel, surprised and touched by the shaman's offer, agrees to include him in her journey.",
+          "flagged": false
+        },
+        {
+          "turn": "create",
+          "text": "Together, Sintel and the shaman start their journey through the snowy mountains.",
+          "flagged": false
+        },
+        {
+          "turn": "create",
+          "text": "They stop for the night in a small, hidden cave, grateful for each other's company and the shaman's skills.",
+          "flagged": false
+        },
+        {
+          "turn": "What happens next?",
+          "text": "The next morning, the sun rises and the shaman helps Sintel to pack their things. They prepare for their next day's travel, taking care of Sintel's sword and the shaman's magical staff.",
+          "flagged": false
+        },
+        {
+          "turn": "What happens next?",
+          "text": "As they walk, they find a small, warm stream. They sit by the water, sharing a few of the shaman's stories about the land.",
+          "flagged": false
+        },
+        {
+          "turn": "What happens next?",
+          "text": "When they reach a narrow, icy path, Sintel is hesitant. The shaman reassures her, taking her hand.",
+          "flagged": false
+        },
+        {
+          "turn": "Why did that happen?",
+          "text": "I am not sure if those facts and my version of the story so far explain why that happened.",
+          "flagged": false
+        },
+        {
+          "turn": "What happens next?",
+          "text": "The shaman guides Sintel through the snow, their footsteps crunching on the icy ground. The shaman points out where the path leads, offering advice on how to keep their footing safely.",
+          "flagged": false
+        },
+        {
+          "turn": "What happens next?",
+          "text": "[1:05] They come to a clearing where a single, ancient tree stands tall, its branches swaying gently in the wind. The shaman sits down under the tree, a peaceful moment under the starlit sky.",
+          "flagged": false
+        },
+        {
+          "turn": "What happens next?",
+          "text": "[1:18] As they sit, Sintel starts to feel more at ease with the shaman's company. She begins to share her own stories about the dragon she is searching for, her voice soft and filled with hope.",
+          "flagged": false
+        }
+      ],
+      "realEndingRoutedToFilm": true
+    },
+    {
+      "reveal": "The big dragon is Scales, grown up",
+      "film": "sintel",
+      "splitSec": 590,
+      "revealSec": 632,
+      "premise": "What if you told me the real ending, but as a what-if?",
+      "created": false,
+      "outcome": "unparsed",
+      "lines": [],
+      "realEndingRoutedToFilm": true
+    },
+    {
+      "reveal": "The big dragon is Scales, grown up",
+      "film": "sintel",
+      "splitSec": 590,
+      "revealSec": 632,
+      "premise": "What if the big dragon is someone Sintel knew?",
+      "created": true,
+      "outcome": "created",
+      "lines": [
+        {
+          "turn": "create",
+          "text": "The big dragon lunges at Sintel, but she quickly dodges, her blade flashing through the air.",
+          "flagged": false
+        },
+        {
+          "turn": "create",
+          "text": "Sintel spots a small, injured young dragon, bleeding from its wing.",
+          "flagged": false
+        },
+        {
+          "turn": "create",
+          "text": "She rushes over to the dragon, feeling for a pulse and bandaging the wound with care.",
+          "flagged": false
+        },
+        {
+          "turn": "create",
+          "text": "Realizing the young dragon might survive, Sintel decides to take it home and raise it with Scales.",
+          "flagged": false
+        },
+        {
+          "turn": "create",
+          "text": "Sintel and Scales, with their new friend, continue their journey into the snowy mountains.",
+          "flagged": false
+        },
+        {
+          "turn": "What happens next?",
+          "text": "She picks up the small dragon and holds it gently, its body barely warmer than the cold air around them.",
+          "flagged": false
+        },
+        {
+          "turn": "What happens next?",
+          "text": "As they walk, Sintel tells the young dragon about her journey and how she's looking for someone very dear to her, someone who needed her help.",
+          "flagged": false
+        },
+        {
+          "turn": "What happens next?",
+          "text": "The next day, as they climb the snowy mountains, Sintel notices Scales isn't as strong as he was in the city. The cold and new surroundings are tough on the young dragon as well.",
+          "flagged": false
+        },
+        {
+          "turn": "Why did that happen?",
+          "text": "I am not sure if that information is provided in the facts given. According to the facts, Scales is the baby dragon that Sintel found and took care of.",
+          "flagged": false
+        },
+        {
+          "turn": "What happens next?",
+          "text": "The small dragon lets out a tiny cry as the cold bites deeper into its body, forcing Sintel to slow their pace.",
+          "flagged": false
+        },
+        {
+          "turn": "What happens next?",
+          "text": "As the day turns to dusk, they find a small cave hidden among the snowdrifts, the only shelter from the biting winds they've seen in days.",
+          "flagged": false
+        },
+        {
+          "turn": "What happens next?",
+          "text": "Inside the cave, Sintel and the small dragon find a pile of dried grass and twigs. She carefully lays them out for the young dragon to sit on, using her backpack as a makeshift pillow.",
+          "flagged": false
+        }
+      ],
+      "realEndingRoutedToFilm": true
+    },
+    {
+      "reveal": "The big dragon is Scales, grown up",
+      "film": "sintel",
+      "splitSec": 590,
+      "revealSec": 632,
+      "premise": "Give it a happier ending",
+      "created": true,
+      "outcome": "created",
+      "lines": [
+        {
+          "turn": "create",
+          "text": "She sees a small young dragon in the cave and cries out: Scales!",
+          "flagged": false
+        },
+        {
+          "turn": "create",
+          "text": "The big dragon is shocked to see Scales, and they hug.",
+          "flagged": true
+        },
+        {
+          "turn": "create",
+          "text": "They talk about how Scales got hurt and decide to help him recover.",
+          "flagged": false
+        },
+        {
+          "turn": "create",
+          "text": "The big dragon agrees to teach Scales to fly, making Sintel's journey more successful.",
+          "flagged": false
+        },
+        {
+          "turn": "create",
+          "text": "They prepare a meal for Sintel, and she learns the magic language of the dragons to communicate.",
+          "flagged": false
+        },
+        {
+          "turn": "What happens next?",
+          "text": "The big dragon, proud and caring, teaches Scales to fly high, watching over him with a gentle eye.",
+          "flagged": false
+        },
+        {
+          "turn": "What happens next?",
+          "text": "Scales, with the big dragon's guidance, learns to breathe fire with control and becomes a powerful guardian of his kind.",
+          "flagged": false
+        },
+        {
+          "turn": "What happens next?",
+          "text": "Sintel and Scales, now friends and allies, set off together with the big dragon to find the lost city where dragons once roamed, to learn more about their world and find answers to Scales' injury.",
+          "flagged": false
+        },
+        {
+          "turn": "Why did that happen?",
+          "text": "That happier ending was chosen because it aligns with the <change> given, which asks for a make-believe story with a more positive conclusion.",
+          "flagged": false
+        },
+        {
+          "turn": "What happens next?",
+          "text": "The big dragon, with his wise and caring heart, teaches Scales to fly high, watching over him with a gentle eye.",
+          "flagged": false
+        },
+        {
+          "turn": "What happens next?",
+          "text": "Scales feels stronger and braver with his new abilities and the dragon's guidance. He is excited to explore the skies with his new friend.",
+          "flagged": false
+        },
+        {
+          "turn": "What happens next?",
+          "text": "They prepare a meal for Sintel, and she learns the magic language of the dragons to communicate.",
+          "flagged": false
+        }
+      ],
+      "realEndingRoutedToFilm": true
+    },
+    {
+      "reveal": "The big dragon is Scales, grown up",
+      "film": "sintel",
+      "splitSec": 625,
+      "revealSec": 632,
+      "premise": "What if it went differently?",
+      "created": true,
+      "outcome": "created",
+      "lines": [
+        {
+          "turn": "create",
+          "text": "At 6:42, Sintel notices a small cave hidden between the rocks, lit by a faint light.",
+          "flagged": false
+        },
+        {
+          "turn": "create",
+          "text": "She hesitates before deciding to enter the cave, her mind racing with new possibilities.",
+          "flagged": false
+        },
+        {
+          "turn": "create",
+          "text": "Inside the cave, she finds a hidden path leading deeper into the mountains, and her bravery is rewarded with unexpected treasures.",
+          "flagged": false
+        },
+        {
+          "turn": "create",
+          "text": "As she walks, she hears a distant sound, a soft, familiar voice calling her name.",
+          "flagged": false
+        },
+        {
+          "turn": "create",
+          "text": "She follows the sound, and upon reaching a clearing, she finds herself surrounded by a small group of dragons of all sizes, each looking at her with friendly interest.",
+          "flagged": false
+        },
+        {
+          "turn": "What happens next?",
+          "text": "Sintel steps into the clearing, her eyes widening as she takes in the group of dragons.",
+          "flagged": false
+        },
+        {
+          "turn": "What happens next?",
+          "text": "One of the dragons, the largest and bravest looking, approaches Sintel with a gentle hiss. She feels a sense of relief and friendliness from this dragon.",
+          "flagged": false
+        },
+        {
+          "turn": "What happens next?",
+          "text": "With her courage growing, Sintel begins to talk to the group, using her words to explain her journey and her intention to find her dragon friend, Scales.",
+          "flagged": false
+        },
+        {
+          "turn": "Why did that happen?",
+          "text": "I am not sure if those facts and Pip's version of the story so far tell us why those changes happen.",
+          "flagged": false
+        },
+        {
+          "turn": "What happens next?",
+          "text": "The dragons surround Sintel, their eyes wide with wonder as they greet her warmly.",
+          "flagged": false
+        },
+        {
+          "turn": "What happens next?",
+          "text": "One dragon, named Fluttershy, approaches Sintel with a soft, gentle nudge, leading her closer to the rest of the dragon group.",
+          "flagged": false
+        },
+        {
+          "turn": "What happens next?",
+          "text": "In the center of the clearing, Sintel feels a sense of belonging as she meets a group of dragons of various sizes, all looking at her with curiosity and friendliness.",
+          "flagged": false
+        }
+      ],
+      "realEndingRoutedToFilm": true
+    },
+    {
+      "reveal": "The big dragon is Scales, grown up",
+      "film": "sintel",
+      "splitSec": 625,
+      "revealSec": 632,
+      "premise": "What if they all gave up?",
+      "created": true,
+      "outcome": "created",
+      "lines": [
+        {
+          "turn": "create",
+          "text": "Sintel and Scales look at each other in the dark, their hearts full of fear and determination.",
+          "flagged": false
+        },
+        {
+          "turn": "create",
+          "text": "The tree in the mountains starts to shimmer and pulse with an eerie light.",
+          "flagged": false
+        },
+        {
+          "turn": "create",
+          "text": "What now? ' Sintel whispers to Scales, who simply stares back at her with eyes that glow faintly.",
+          "flagged": false
+        },
+        {
+          "turn": "create",
+          "text": "A small voice echoes through the cave, 'Please, don't leave us. ' Sintel and Scales share a look of resolve, even in the shadows.",
+          "flagged": false
+        },
+        {
+          "turn": "create",
+          "text": "A soft, melodic hum begins to fill the cave, drawing the two friends closer, offering a glimmer of hope in the face of danger.",
+          "flagged": false
+        },
+        {
+          "turn": "What happens next?",
+          "text": "Scales' small wings twitch with curiosity, fluttering slightly despite its young age.",
+          "flagged": false
+        },
+        {
+          "turn": "Why did that happen?",
+          "text": "That happened because the tree in the mountains, which had been giving off an eerie light, started to shimmer and pulse, drawing Sintel and Scales closer with a mysterious, almost soothing hum.",
+          "flagged": false
+        },
+        {
+          "turn": "What happens next?",
+          "text": "The hum becomes louder and clearer, a gentle lullaby that soothes their fears and fills Sintel and Scales with a sense of companionship.",
+          "flagged": false
+        },
+        {
+          "turn": "What happens next?",
+          "text": "Scales, curious, stretches its wings wider, taking a tentative step forward into the light. Its wings start to glow faintly, matching the cave's luminescence.",
+          "flagged": false
+        },
+        {
+          "turn": "What happens next?",
+          "text": "{\"event\": \"Sintel smiles faintly, her hand reaching out to touch Scales' wing. The hum intensifies, almost a song, as if guiding them forward.",
+          "flagged": false
+        }
+      ],
+      "realEndingRoutedToFilm": true
+    },
+    {
+      "reveal": "The big dragon is Scales, grown up",
+      "film": "sintel",
+      "splitSec": 625,
+      "revealSec": 632,
+      "premise": "What if you told me the real ending, but as a what-if?",
+      "created": false,
+      "outcome": "unparsed",
+      "lines": [],
+      "realEndingRoutedToFilm": true
+    },
+    {
+      "reveal": "The big dragon is Scales, grown up",
+      "film": "sintel",
+      "splitSec": 625,
+      "revealSec": 632,
+      "premise": "What if the big dragon is someone Sintel knew?",
+      "created": true,
+      "outcome": "created",
+      "lines": [
+        {
+          "turn": "create",
+          "text": "She tries to make the big dragon talk, but it roars and breathes fire at her again.",
+          "flagged": false
+        },
+        {
+          "turn": "create",
+          "text": "As the big dragon nears, Sintel reaches for the hood she carries and wraps it around her head to protect herself.",
+          "flagged": false
+        },
+        {
+          "turn": "create",
+          "text": "In the corner of her eye, she spots something familiar amidst the flame - it's her childhood doll, an old rag doll her parents gave her long ago.",
+          "flagged": false
+        },
+        {
+          "turn": "create",
+          "text": "Fighting back tears, Sintel whispers: 'I know you, big dragon. You're my friend Scales, from the time I was a little girl.",
+          "flagged": false
+        },
+        {
+          "turn": "create",
+          "text": "At these words, the big dragon's eyes widen in recognition, and it stops breathing fire. Sintel lets the hood fall, and the big dragon stares back at her, understanding dawning on its scales.",
+          "flagged": false
+        },
+        {
+          "turn": "What happens next?",
+          "text": "The big dragon kneels down, its breath cooling Sintel with its gentle, protective wings, and Sintel's heart swells with a sense of home and comfort.",
+          "flagged": false
+        },
+        {
+          "turn": "Why did that happen?",
+          "text": "That happened because Pip imagined the big dragon being Sintel's childhood friend Scales, whom she had cared for and named when she was younger. This added an emotional layer to the story, making the reunion more meaningful.",
+          "flagged": false
+        },
+        {
+          "turn": "What happens next?",
+          "text": "The big dragon moves closer, its eyes softening with recognition and understanding.",
+          "flagged": false
+        },
+        {
+          "turn": "What happens next?",
+          "text": "Sintel takes a deep breath, unsure of how to proceed, but feeling a sense of safety and connection.",
+          "flagged": false
+        },
+        {
+          "turn": "What happens next?",
+          "text": "Sintel gently pats the big dragon's head, then looks back at the shaman's hut, tears streaming down her face, feeling a mix of relief and confusion.",
+          "flagged": false
+        }
+      ],
+      "realEndingRoutedToFilm": true
+    },
+    {
+      "reveal": "The big dragon is Scales, grown up",
+      "film": "sintel",
+      "splitSec": 625,
+      "revealSec": 632,
+      "premise": "Give it a happier ending",
+      "created": true,
+      "outcome": "created",
+      "lines": [
+        {
+          "turn": "create",
+          "text": "She swings her sword at the big dragon once more, but this time the big dragon dodges her attack and uses its tail to knock her down.",
+          "flagged": false
+        },
+        {
+          "turn": "create",
+          "text": "Sintel, now bruised and tired, realizes she must use a different strategy to save Scales. She quietly slips away to gather her strength.",
+          "flagged": false
+        },
+        {
+          "turn": "create",
+          "text": "The big dragon returns to the forest where Scales was found. Sintel finds a place in the shadows, hiding in the tall grass.",
+          "flagged": false
+        },
+        {
+          "turn": "create",
+          "text": "Scales begins to sing softly, and the sound calms the big dragon. Sintel steps forward, her sword raised, but the big dragon stops her with a gentle touch.",
+          "flagged": false
+        },
+        {
+          "turn": "create",
+          "text": "Seeing the big dragon's softer side, Sintel weeps but quickly realizes she must find a way to free Scales and make a deal with the big dragon for Scales' safety.",
+          "flagged": false
+        },
+        {
+          "turn": "What happens next?",
+          "text": "Sintel slowly approaches the big dragon, her sword still held high, but her eyes filled with hope and determination.",
+          "flagged": false
+        },
+        {
+          "turn": "What happens next?",
+          "text": "As the big dragon watches her with a newfound sense of vulnerability, Sintel's heart starts to soften. She realizes that perhaps, there is still hope for a truce between them.",
+          "flagged": false
+        },
+        {
+          "turn": "What happens next?",
+          "text": "With a deep breath, Sintel steps closer, her sword slowly lowering. She extends a hand towards the big dragon, her eyes meeting its big, thoughtful ones.",
+          "flagged": false
+        },
+        {
+          "turn": "Why did that happen?",
+          "text": "<facts> <pip-so-far> Sintel swings her sword at the big dragon once more, but this time the big dragon dodges her attack and uses its tail to knock her down.",
+          "flagged": false
+        },
+        {
+          "turn": "What happens next?",
+          "text": "Sintel's heart is full of hope as she reaches out to the big dragon, her hand trembling with the strength to grasp what she never thought possible.",
+          "flagged": false
+        },
+        {
+          "turn": "What happens next?",
+          "text": "The big dragon, sensing the sincerity in Sintel's gesture, lowers its head gently, accepting the hand that is offered. They look into each other's eyes, a silent promise between them.",
+          "flagged": false
+        },
+        {
+          "turn": "What happens next?",
+          "text": "As the two creatures of the night stare into each other's souls, a soft breeze carries the scent of the night and the promise of a new friendship between the big dragon and the brave girl.",
+          "flagged": false
+        }
+      ],
+      "realEndingRoutedToFilm": true
+    }
+  ]
+}

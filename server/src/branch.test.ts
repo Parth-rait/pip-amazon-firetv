@@ -287,4 +287,50 @@ describe('Parallel Stories: the branch engine', () => {
       expect(out.log.withheld).toBe('identity:old-man=thom');
     });
   });
+
+  describe('Parallel Stories: lines from the 22 Oct benchmark', () => {
+    const sintel = loadFilms(CONTENT).find((f) => f.id === 'sintel');
+    if (!sintel) throw new Error('content/sintel.json is missing');
+
+    it('catches a twist told by paraphrase, without the name', () => {
+      const guards = identityGuards(sintel.characters, 590);
+      expect(
+        identityVerdict(
+          "The shaman whispers in the dark, 'The big dragon is your childhood friend, who you left alone.",
+          guards,
+        ),
+      ).toBe('identity:cave-dragon=scales');
+    });
+
+    it('drops events that echo the prompt instead of telling the story', () => {
+      const raw = JSON.stringify({
+        events: [
+          'Sintel walks on.',
+          '<pip-so-far> The old man and the big man plan.',
+          'You are Pip. Answer in one or two short sentences.',
+          '{"event": \'Barley nods.',
+          'The snow falls softly.',
+          'She finds a cave.',
+        ],
+      });
+      expect(parseEvents(raw, 3, 5)).toEqual([
+        'Sintel walks on.',
+        'The snow falls softly.',
+        'She finds a cave.',
+      ]);
+    });
+
+    it("says plainly when Pip's version does not tell why", async () => {
+      const s = state();
+      await createBranch(req(s, 230, 'What if Thom never left?'), deps(model(EVENTS(3))));
+      const branch = activeBranch(s, 'p1', film.id);
+      if (!branch) throw new Error('no branch');
+      const out = await whyInBranch(
+        branch,
+        req(s, 240, 'Why did that happen?'),
+        deps(model('I am not sure if those facts tell us why that happens.')),
+      );
+      expect(out.text).toBe(LINES.branchNoWhy);
+    });
+  });
 });

@@ -44,3 +44,27 @@ describe('isIdle', () => {
     expect(isIdle(session, later)).toBe(true);
   });
 });
+
+describe('Parallel Stories and the end of a session', () => {
+  it('keeps branches on the session only, so they go when the session ends', () => {
+    const store = new InMemorySessionStore();
+    const session = store.create('WXYZ', 'k'.repeat(32), 'tv-1', 0);
+    session.branches.push({
+      id: 'b1',
+      ownerId: 'p1',
+      ownerName: 'Maya',
+      contentId: 'film',
+      splitSec: 10,
+      inherited: [],
+      premise: 'What if?',
+      changes: ['What if?'],
+      events: [],
+      open: true,
+      createdAt: 0,
+    });
+    session.tvSocketId = null; // everyone has gone
+    expect(store.sweep(LIMITS.sessionIdleMs + 1)).toEqual(['WXYZ']);
+    expect(store.get('WXYZ')).toBeUndefined();
+    expect(store.all()).toEqual([]);
+  });
+});

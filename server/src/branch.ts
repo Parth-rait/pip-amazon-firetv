@@ -7,7 +7,7 @@ import { z } from 'zod';
 import { cleanText, stripMarkdown } from './core/ai/clean-text.js';
 import type { TextModel } from './core/ai/model.js';
 import { permittedEvidence, type EvidenceSet } from './core/context/boundary.js';
-import { checkAnswer } from './core/context/check-answer.js';
+import { checkAnswer, isAbstention } from './core/context/check-answer.js';
 import { containsTerm } from './core/context/text.js';
 import {
   isUsable,
@@ -109,6 +109,10 @@ export function clearBranches(state: BranchState): void {
   state.activeBranch = {};
 }
 
+// A small model sometimes echoes its prompt into an event ("<pip-so-far> ...", "You are Pip.",
+// '{"event": ...', "[3 events]:"): such an event is dropped, never shown.
+const PROMPT_ECHO = /<\/?[a-z-]+>|^\s*[[{]|\byou are pip\b|"events?"\s*:/i;
+
 const eventsSchema = z.object({
   events: z.array(z.string().trim().min(8).max(600)).min(1).max(8),
 });
@@ -127,6 +131,7 @@ export function parseEvents(raw: string, min: number, max: number): string[] | n
   const parsed = eventsSchema.safeParse(data);
   if (!parsed.success) return null;
   const events = parsed.data.events
+    .filter((e) => !PROMPT_ECHO.test(e))
     .map((e) => cleanText(stripMarkdown(e)).slice(0, EVENT_MAX_CHARS))
     .filter((e) => e.length >= 8);
   return events.length >= min ? events.slice(0, max) : null;
@@ -249,7 +254,7 @@ type Character = {
   id: string;
   name: string;
   aliases?: string[];
-  sameAs?: { id: string; atSec: number; terms: string[] };
+  sameAs?: { id: string; atSec: number; terms: string[]; clues?: string[] };
 };
 
 /** The identity reveals still ahead at `splitSec` (each counts once its beat is over). */
@@ -263,7 +268,7 @@ export function identityGuards(characters: Character[], splitSec: number): Ident
       {
         label: `${c.id}=${other.id}`,
         these: [...twist.terms, c.name.replace(/^the\s+/i, ''), ...(c.aliases ?? [])],
-        those: [other.name, ...(other.aliases ?? [])],
+        those: [other.name, ...(other.aliases ?? []), ...(twist.clues ?? [])],
       },
     ];
   });
@@ -462,7 +467,9 @@ export async function whyInBranch(
       temperature: 0.6,
       timeoutMs: TIMEOUT_MS,
     });
-    const text = cleanText(raw);
+    const said = cleanText(raw);
+    // "I am not sure if those facts tell..." is Pip not knowing: say so in Pip's words.
+    const text = !said || isAbstention(said) || PROMPT_ECHO.test(said) ? LINES.branchNoWhy : said;
     const blocked = text
       ? (storyVerdict(text, evidence, req.timeline) ??
         identityVerdict(text, identityGuards(req.film.characters ?? [], branch.splitSec)))

@@ -51,6 +51,8 @@ const characterSchema = z.object({
       id: slug,
       atSec: z.number().min(0),
       terms: z.array(z.string().min(2).max(40)).min(1).max(8),
+      // how a story might point at the other side without its name ("childhood friend")
+      clues: z.array(z.string().min(2).max(40)).max(8).default([]),
     })
     .optional(),
   image: mediaUrl.optional(),

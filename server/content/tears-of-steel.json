@@ -366,6 +366,14 @@
           "grey-haired man",
           "grey-haired old man",
           "older man"
+        ],
+        "clues": [
+          "younger self",
+          "future self",
+          "forty years older",
+          "older Thom",
+          "Thom grown old",
+          "aged Thom"
         ]
       }
     },
@@ -391,6 +399,14 @@
           "robot's voice",
           "giant robotic hand",
           "huge robot"
+        ],
+        "clues": [
+          "Celia's memories",
+          "Celia's voice",
+          "her memories",
+          "her voice",
+          "Celia inside",
+          "the woman he left"
         ]
       }
     }
