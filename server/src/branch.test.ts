@@ -333,4 +333,14 @@ describe('Parallel Stories: the branch engine', () => {
       expect(out.text).toBe(LINES.branchNoWhy);
     });
   });
+
+  it('catches the twist the third run found in a "why" answer', () => {
+    const guards = identityGuards(film.characters, 385);
+    expect(
+      identityVerdict(
+        "That happened because the team's plan to save the world through the robot Celia had failed.",
+        guards,
+      ),
+    ).toBe('identity:giant-robot=celia');
+  });
 });

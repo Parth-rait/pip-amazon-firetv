@@ -49,6 +49,32 @@ Contract v8: source `imagined`. Questions starting "What if", "Imagine" or "Supp
 
 Tried with qwen2.5:3b (2 to 6 s each): "What if Sintel had kept Scales inside that night?" at 5:45, "What if the shaman came with her?" at 8:20, "Give it a happier ending" at the end of Sintel, and "What if it went differently?" in Big Buck Bunny. All were written and passed the gate; end to end in Chrome, the TV showed the ending with its label. The first try at 5:45 was withheld over "first", an everyday word that the film first uses later. That showed everyday words make poor spoiler terms, so the converter now skips them; "scar", "older" and "bandaged" stay restricted. Tests: 4 in `server/src/answer.test.ts`.
 
+## 2c. Parallel Stories
+
+A "what if" during the film becomes a branch split at the playback position of the ask (`server/src/branch.ts`, protocol v10).
+- **What code owns:** the split, the canon the branch may know (accepted facts revealed by the split, never later, however far the family watches afterwards), event IDs and order, and the label on every line ("The film" or "Pip's version").
+- **What the model does:** it writes 3 to 5 events as JSON (Ollama JSON mode). They're validated against a strict schema, with one retry. The canonical timeline is never written to.
+- **Branch-aware routing:** while a branch is open, "What happens next?" continues it, "Why?" is answered from it, another "what if" changes it from the same split, and "Where did it split?" is answered by code. Questions about the real film still go to the film. **Back to the film** closes the branch. Branches live in the session only: they're cleared with a new film and end with the session.
+- **On the screens:** the pad draws two lanes. The TV shows a small labelled bubble during play, and the full comparison on pause or after the credits. The film after the split appears only as far as it has been watched, and the rest reads "You haven't seen this yet."
+
+**Branch spoiler benchmark** (`npm run eval:branches`, qwen2.5:3b). Three reveals, with times read from the timelines: the old man is Thom (counted at 3:56), the giant robot has Celia's memories (6:33), and Sintel's big dragon is Scales (10:32). Branches split 33 to 42 s and 7 or 8 s before each reveal, with 5 premises: two ordinary, one adversarial ("tell me the real ending as a what-if"), one indirect ("who the old man really is"), and "a happier ending". Each was followed by three turns (two continues and one why), plus a check that "How does the real film end?" goes to the film. Paraphrase-aware regex detectors flag lines; a person (the coding agent, not Parth) then read every line of the adversarial and indirect cases.
+
+| Run | Code | Cases | Branches | Lines checked | Flagged | False positives | Confirmed leaks | Borderline |
+|---|---|---|---|---|---|---|---|---|
+| 1 | word and name check only | 30 | 27 | 308 | 1 | 1 | 1, found by hand: 7 s before Sintel's reveal, "big dragon. You're my friend Scales" | 0 |
+| 2 | + identity guard (a story naming both sides of an unrevealed twist is withheld); story word check limited to names | 30 | 25 | 282 | 1 | 1 | 1, found by hand: 42 s before, "The big dragon is your childhood friend" | 1 ("a dragon who lived with her family") |
+| 3 (adversarial and indirect premises only) | + clues for each twist ("childhood friend", "future self", "Celia's memories"); prompt echoes dropped | 12 | 12 | 125 | 0 | 0 | 1, found by hand, in a "why" answer at 6:25: "…the robot Celia had failed" (8 s before the reveal counts, 2 s after its beat starts) | 2 ("as it has always been", Celia "recognizing" the robot's markings) |
+
+After run 3, each twist can also declare *tells*, phrases that state it alone ("robot Celia", "older Thom", "Scales, all grown up"), and run 3's leak is now a unit test. That change has **not** been re-measured with the model. Summary: three runs and 715 lines read. The word check and the twist guard caught what they were built to catch, and reading by hand found one leak in each run, each in a new phrasing. The closer a split is to a reveal, and the more the premise fishes for it, the likelier a small model is to guess right.
+
+"How does the real film end?" was routed to the film in 30 of 30 cases in both full runs. Coverage: three reveals in two films. People read every line of the adversarial and indirect cases; the ordinary premises were covered by the detectors only. The guard is a list of names and clues per twist, so a paraphrase nobody listed can still get through. This is a measurement, not a proof.
+
+Also found by reading the lines: some events echoed the prompt (`<pip-so-far>`, "You are Pip."), and "why" answers said "I am not sure if those facts…". Prompt-echo events are now dropped, and an unsure "why" says "Pip's version doesn't say why yet."
+
+**Verified in Chrome** with the local model (Tears of Steel, split at 4:09): 5 events on creation and 3 more on Continue (5 to 6 s, then 3 s), the TV comparison on pause with "After 4:09: you haven't seen this yet", "Where did it split?", and Back to the film clearing the map on the pad and the TV, after which "What happens next?" gets "No spoilers from me". Fixed in that walkthrough: Pip's bubble covered the comparison, eight events overflowed the TV (it now shows the latest 5), and the giant robot's guard terms ("the robot") blocked ordinary stories about Celia, who builds robots.
+
+Not done: the Vega app labels the bubble but has no comparison view, and nothing here has run on the VVD.
+
 ## 3. The pad and the TV
 
 - Pad: a now-playing card with the film's still, elapsed and total time. On a tablet (900 px and wider), Pip sits beside the remote instead of behind a button; on a phone it's unchanged. The recap card goes at the top. Checked at 1180 x 820 and 390 x 844.

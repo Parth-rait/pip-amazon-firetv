@@ -248,13 +248,14 @@ export interface IdentityGuard {
   label: string; // "cave-dragon=scales", for the log
   these: string[]; // how a story may refer to the one character
   those: string[]; // the other one's name and aliases
+  tells: string[]; // phrases that state the twist alone
 }
 
 type Character = {
   id: string;
   name: string;
   aliases?: string[];
-  sameAs?: { id: string; atSec: number; terms: string[]; clues?: string[] };
+  sameAs?: { id: string; atSec: number; terms: string[]; clues?: string[]; tells?: string[] };
 };
 
 /** The identity reveals still ahead at `splitSec` (each counts once its beat is over). */
@@ -269,6 +270,7 @@ export function identityGuards(characters: Character[], splitSec: number): Ident
         label: `${c.id}=${other.id}`,
         these: [...twist.terms, c.name.replace(/^the\s+/i, ''), ...(c.aliases ?? [])],
         those: [other.name, ...(other.aliases ?? []), ...(twist.clues ?? [])],
+        tells: twist.tells ?? [],
       },
     ];
   });
@@ -282,8 +284,9 @@ export function identityGuards(characters: Character[], splitSec: number): Ident
 export function identityVerdict(text: string, guards: IdentityGuard[]): string | null {
   for (const guard of guards) {
     const both =
-      guard.these.some((t) => containsTerm(text, t)) &&
-      guard.those.some((t) => containsTerm(text, t));
+      guard.tells.some((t) => containsTerm(text, t)) ||
+      (guard.these.some((t) => containsTerm(text, t)) &&
+        guard.those.some((t) => containsTerm(text, t)));
     if (both) return `identity:${guard.label}`;
   }
   return null;

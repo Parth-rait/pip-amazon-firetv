@@ -374,6 +374,13 @@
           "older Thom",
           "Thom grown old",
           "aged Thom"
+        ],
+        "tells": [
+          "older Thom",
+          "old Thom",
+          "Thom, forty years older",
+          "Thom forty years later",
+          "aged Thom"
         ]
       }
     },
@@ -404,9 +411,15 @@
           "Celia's memories",
           "Celia's voice",
           "her memories",
-          "her voice",
           "Celia inside",
           "the woman he left"
+        ],
+        "tells": [
+          "robot Celia",
+          "Celia robot",
+          "robot named Celia",
+          "robot has Celia's",
+          "robot with Celia's"
         ]
       }
     }

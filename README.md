@@ -11,7 +11,7 @@ Built for the Amazon Developer Hackathon, Fire TV track. Direction: [docs/vnext/
 3. **Control it any way you like.** Play, pause, ±10 s, volume, brightness and simulated lights come from the host's pad, voice ("pause", "back 10", "louder"), webcam hand gestures (`npm run gesture`) or the TV remote. They all go through one action router, and the TV confirms each command. None of them calls a model.
 4. **Ask Pip.** Tap, type or speak. Pip answers briefly on the TV and the asker's pad, using only facts the film has already shown. Questions about later get "No spoilers from me".
 5. **While you were away.** A pad that sleeps or drops off during the film, or someone who joins late, gets a private recap of what they missed, up to now and never further. The film keeps playing for everyone else.
-6. **What if...?** "What if Sintel had kept Scales inside that night?" or, after the film, "Give it a happier ending." Pip makes up a short version of the story from what has been shown so far, labelled "made up by Pip" on every screen. Mid-film it doesn't know the real story ahead, and the spoiler gate keeps later words and unseen characters out, so a made-up ending can't give the real one away by accident. Both films are CC BY 3.0, which allows adaptations.
+6. **Parallel Stories.** Pause and ask "What if Thom had never left Celia?". Pip splits the film at that second and writes its own version from there. On the pad you can continue it, change one thing, ask where it split, or go back to the film. The pad draws two lanes: the film to the split, and Pip's version after it. The TV shows the same comparison on pause or after the credits. Every line is labelled "The film" or "Pip's version". A branch never sees the film past its split, and identity twists are guarded. That's measured, not promised: see the branch benchmark in [docs/vnext/REPORT-local-first.md](docs/vnext/REPORT-local-first.md). Both films are CC BY 3.0, which allows adaptations.
 7. **The Command Center** at `http://localhost:8787/hub`, on the Mac only: the brain and whether it's answering, what's playing, each film's reviewed facts and benchmark, today's journal, the devices, automations marked Active, Opt-in or Planned, and the settings. Through the tunnel it refuses to answer.
 8. **Kids games (opt-in).** A switch in the lobby turns on guesses, reactions and a quiz after the film. They're off by default.
 
@@ -45,7 +45,7 @@ Not claimed: that the Pip Pad hardware exists (it's a web app; the touch-wheel i
           |   pad:input, pad:ask,             |  pad:input     |  tv:playback, tv:applied
           |   pad:away                        |                |
           +---------------+-------------------+----------------+
-                          | Socket.IO, one room per session, protocol v8 (shared/protocol.ts)
+                          | Socket.IO, one room per session, protocol v10 (shared/protocol.ts)
                           v
    +--------------------------------------------------------------------------+
    | Pip server (Node.js 22)                                                  |
@@ -105,7 +105,7 @@ The Vega app: [tv/README.md](tv/README.md). Rebuild it after a new tunnel URL. T
 
 - The local 3B model still guesses small things it was not told (for example, "the nut is the chinchilla's favourite food"). The answer gate stops it from naming anything the film hasn't shown yet, but not from inferring from what has been shown.
 - A few grounded questions right after a new moment ("Who is the little dragon?" at 9:40) still get "I'm not sure" when the model's wording is withheld and no single fact matches the question's words.
-- The vNext build has been walked through on the browser TV. The Vega app was checked on the VVD on 16 Oct, but not yet with the merged server and protocol v8.
+- The vNext build has been walked through on the browser TV. The Vega app was checked on the VVD on 16 Oct, but not yet with the merged server and protocol v10.
 - After a server restart, a pad can show "Looking for your TV" for up to 10 s.
 - iPhone Safari has no full screen for web pages; added to the home screen, the pad opens without browser bars.
 - A skip takes 1.1 to 1.6 s to land on the Vega app while the player re-buffers over the tunnel.
