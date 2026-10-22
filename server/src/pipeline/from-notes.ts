@@ -14,6 +14,22 @@ const PIP_TEXT = Object.values(LINES)
   .map((line) => (typeof line === 'string' ? line : line(10 as never)))
   .join('\n');
 
+// Everyday words say nothing about the story by themselves: "first" or "slowly" later in the film
+// must not stop Pip using them now. Distinctive words ("scar", "grown", "cave") stay restricted.
+const EVERYDAY = new Set(
+  (
+    'first last again back away down little small big long old young new good great more most ' +
+    'still only then other another around through into onto over under after before while where ' +
+    'when there here look see find take get goes come walk run stand sit fall hold turn give make ' +
+    'tell shout scared angry happy sad shocked tired alone together slowly quickly suddenly night ' +
+    'morning ground side behind front right left ready just even also something someone everyone ' +
+    'nothing time much many huge tiny close closer begin begins start starts end ends way thing ' +
+    'made took gave went came said saw found kept keep leave let put want need help know think ' +
+    'feel play like love try call stay stop pull push pick open live move bring carry wait watch ' +
+    'friend friends people place part home world everything again almost always never'
+  ).split(' '),
+);
+
 /** A note describes a beat that may run a few seconds past its time: it counts once it is over. */
 export const REVEAL_LAG_SEC = 10;
 const MAX_SPOILER_TERMS = 8;
@@ -144,7 +160,7 @@ function withFirstMentions<T extends { revealSec: number; text: string }>(
   const terms = new Map<T, string[]>();
   for (const fact of ordered) {
     const words = contentWords(fact.text).filter(
-      (w) => w.length >= 4 && !containsTerm(PIP_TEXT, w),
+      (w) => w.length >= 4 && !EVERYDAY.has(w) && !containsTerm(PIP_TEXT, w),
     );
     const first = [...new Set(words.filter((w) => !said.has(w)))]
       .sort((a, b) => b.length - a.length)

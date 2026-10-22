@@ -350,3 +350,44 @@ describe('answerQuestion on a generated timeline', () => {
     expect(prompt).not.toContain('Scales');
   });
 });
+
+describe('answerQuestion: what if', () => {
+  const STORY =
+    "In Pip's version, the fox curls up by the lantern. The snow stops falling. The forest is quiet and warm.";
+
+  it('makes up a story from the facts revealed so far only, labelled as imagined', async () => {
+    const { deps: d, complete } = deps(STORY);
+    const result = await answerQuestion(request('What if the fox stayed home?', 40), d);
+    expect(result).toMatchObject({ kind: 'imagined', source: 'imagined', path: 'imagine' });
+    expect(result.text).toBe(STORY);
+    const prompt = complete.mock.calls[0]?.[0] as CompleteInput;
+    const later = timeline.facts.filter((f) => f.revealSec > 40);
+    for (const fact of later) expect(prompt.user).not.toContain(fact.text);
+  });
+
+  it('keeps a story that uses a word from later, so a made-up ending cannot give the real one away', async () => {
+    const { deps: d, complete } = deps("In Pip's version, Moss the badger lights the lighthouse.");
+    const result = await answerQuestion(request('Give it a better ending', 40), d);
+    expect(result).toMatchObject({ kind: 'unknown', text: LINES.imagineWithheld });
+    expect(complete).toHaveBeenCalledTimes(2); // told again once before giving up
+    expect(result.withheld).toMatch(/^restricted-term:/);
+  });
+
+  it('rewrites the ending from the whole film once it is over', async () => {
+    const { deps: d, complete } = deps(STORY);
+    await answerQuestion(request('Give it a happier ending', timeline.durationSec), d);
+    const prompt = complete.mock.calls[0]?.[0] as CompleteInput;
+    expect(prompt.user).toContain('the film has ended');
+    expect(prompt.user).toContain(timeline.facts.at(-1)?.text ?? '');
+  });
+
+  it('routes "what if" and "a better ending" to a story, and "how does it end" still to no spoilers', () => {
+    for (const q of [
+      'What if Sintel stayed home?',
+      'Give it a better ending',
+      'Imagine the bunny was mean',
+    ])
+      expect(routeText(q)).toEqual({ kind: 'question', topic: 'imagine' });
+    expect(routeText('How does it end?')).toEqual({ kind: 'question', topic: 'future' });
+  });
+});

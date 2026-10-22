@@ -4,13 +4,14 @@
 // Edit only this file, then run `npm run sync:shared` to copy it into each package.
 // Types and constants only: no imports, so it compiles in Node, browsers and React Native for Vega.
 
-export const PROTOCOL_VERSION = 7;
+export const PROTOCOL_VERSION = 8;
 
 /** Where the session is in the journey. The server owns it; the TV and pads follow it. */
 export type Stage = 'lobby' | 'watch' | 'quiz' | 'results';
 export type PipState = 'sleep' | 'idle' | 'thinking' | 'talking' | 'cheer';
 // Where a reply's text came from: the model, a fixed line, or straight from reviewed timeline facts.
-export type Source = 'ai' | 'template' | 'timeline';
+// 'imagined': a made-up "what if" story, which screens label as Pip's, not the film's.
+export type Source = 'ai' | 'template' | 'timeline' | 'imagined';
 /** A player's color, given when joining, so names are easy to tell apart. */
 export const AVATAR_COLORS = [
   '#7CE7C4',

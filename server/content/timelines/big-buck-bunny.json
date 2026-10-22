@@ -323,7 +323,6 @@
         "note": "checked against a frame at the note time"
       },
       "spoilerTerms": [
-        "morning",
         "meadow",
         "stream",
         "flower",
@@ -358,7 +357,6 @@
         "stretche",
         "purple",
         "branch",
-        "small",
         "bird",
         "wake",
         "wing"
@@ -390,8 +388,6 @@
         "burrow",
         "rabbit",
         "title",
-        "under",
-        "over",
         "tree",
         "hole"
       ],
@@ -420,7 +416,6 @@
       "spoilerTerms": [
         "inside",
         "asleep",
-        "huge",
         "grey",
         "fast"
       ],
@@ -473,8 +468,7 @@
       "spoilerTerms": [
         "sunshine",
         "gentle",
-        "smile",
-        "happy"
+        "smile"
       ],
       "sceneId": "sc-01"
     },
@@ -500,8 +494,7 @@
         "between",
         "giant",
         "daisy",
-        "sniff",
-        "walk"
+        "sniff"
       ],
       "sceneId": "sc-02"
     },
@@ -559,7 +552,6 @@
       "spoilerTerms": [
         "butterfly",
         "flutter",
-        "around",
         "gently"
       ],
       "sceneId": "sc-02"
@@ -585,9 +577,7 @@
       "spoilerTerms": [
         "pleased",
         "apple",
-        "grass",
-        "find",
-        "pick"
+        "grass"
       ],
       "sceneId": "sc-02"
     },
@@ -647,7 +637,6 @@
         "holding",
         "skinny",
         "three",
-        "front",
         "teeth",
         "round"
       ],
@@ -675,7 +664,6 @@
         "note": "checked against a frame at the note time"
       },
       "spoilerTerms": [
-        "behind",
         "sneak"
       ],
       "sceneId": "sc-03"
@@ -729,7 +717,6 @@
         "throwing",
         "confused",
         "fruit",
-        "thing",
         "head"
       ],
       "sceneId": "sc-03"
@@ -755,8 +742,7 @@
         "note": "checked against a frame at the note time"
       },
       "spoilerTerms": [
-        "fallen",
-        "stand"
+        "fallen"
       ],
       "sceneId": "sc-03"
     },
@@ -838,10 +824,7 @@
       },
       "spoilerTerms": [
         "against",
-        "slowly",
-        "angry",
-        "lean",
-        "turn"
+        "lean"
       ],
       "sceneId": "sc-04"
     },
@@ -898,12 +881,11 @@
       "spoilerTerms": [
         "pointed",
         "wooden",
-        "ground",
         "twist",
         "pushe",
         "stake",
-        "long",
-        "vine"
+        "vine",
+        "rope"
       ],
       "sceneId": "sc-05"
     },
@@ -927,7 +909,6 @@
       },
       "spoilerTerms": [
         "determined",
-        "close",
         "plan"
       ],
       "sceneId": "sc-05"
@@ -951,10 +932,7 @@
         "note": "checked against a frame at the note time"
       },
       "spoilerTerms": [
-        "arrow",
-        "hold",
-        "made",
-        "pull"
+        "arrow"
       ],
       "sceneId": "sc-05"
     },
@@ -983,7 +961,6 @@
         "stroll",
         "hiding",
         "along",
-        "leave",
         "path"
       ],
       "sceneId": "sc-06"
@@ -1009,7 +986,6 @@
         "note": "checked against a frame at the note time"
       },
       "spoilerTerms": [
-        "young",
         "trap",
         "rock",
         "tied",
@@ -1040,8 +1016,7 @@
       },
       "spoilerTerms": [
         "notice",
-        "thumb",
-        "give"
+        "thumb"
       ],
       "sceneId": "sc-06"
     },
@@ -1067,7 +1042,6 @@
       },
       "spoilerTerms": [
         "spread",
-        "ready",
         "glide"
       ],
       "sceneId": "sc-07"
@@ -1093,7 +1067,6 @@
         "note": "checked against a frame at the note time"
       },
       "spoilerTerms": [
-        "through",
         "above"
       ],
       "sceneId": "sc-07"
@@ -1117,7 +1090,6 @@
         "note": "checked against a frame at the note time"
       },
       "spoilerTerms": [
-        "something",
         "tumble",
         "wrong",
         "panic"
@@ -1147,9 +1119,7 @@
       "spoilerTerms": [
         "toward",
         "catche",
-        "spike",
-        "fall",
-        "time"
+        "spike"
       ],
       "sceneId": "sc-07"
     },
@@ -1174,9 +1144,7 @@
         "note": "checked against a frame at the note time"
       },
       "spoilerTerms": [
-        "night",
-        "passe",
-        "start"
+        "passe"
       ],
       "sceneId": "sc-08"
     },
@@ -1229,7 +1197,6 @@
       },
       "spoilerTerms": [
         "string",
-        "like",
         "kite"
       ],
       "sceneId": "sc-08"
@@ -1255,9 +1222,7 @@
       "spoilerTerms": [
         "drawing",
         "credit",
-        "little",
         "animal",
-        "story",
         "roll"
       ],
       "sceneId": "sc-09"

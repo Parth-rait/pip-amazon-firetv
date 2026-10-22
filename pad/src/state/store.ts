@@ -5,7 +5,12 @@ export type Connection = 'connecting' | 'online' | 'offline';
 export type JoinFailure = Extract<JoinResult, { ok: false }>['reason'];
 export type ChipKind = 'starter' | 'next' | 'clarify';
 
-export const STARTER_CHIPS = ['What just happened?', 'Who is that?', 'Why did they do that?'];
+export const STARTER_CHIPS = [
+  'What just happened?',
+  'Who is that?',
+  'Why did they do that?',
+  'What if it went differently?',
+];
 
 export interface PadState {
   connection: Connection;

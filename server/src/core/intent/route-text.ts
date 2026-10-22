@@ -6,7 +6,8 @@ export type PlaybackIntent =
   { type: 'play' } | { type: 'pause' } | { type: 'seek'; deltaSec: number };
 
 // 'future' asks what happens later: Pip never predicts, so it answers with a fixed line.
-export type QuestionTopic = 'recap' | 'identify' | 'why' | 'future' | 'other';
+// 'imagine' asks Pip to make up another version ("What if she stayed home?", "a better ending").
+export type QuestionTopic = 'recap' | 'identify' | 'why' | 'future' | 'imagine' | 'other';
 
 export type TextRoute =
   | { kind: 'action'; intent: PlaybackIntent }
@@ -67,7 +68,11 @@ const FUTURE =
 const OUTCOME =
   /^(does|do|is|are|can) .*\b(get (hurt|caught|away|killed|eaten|saved)|grows? up|die|dies|survive|escape|win|lose|finds?|come back|make it|revenge|fight back|still alive|alive)\b/;
 
+const IMAGINE =
+  /^(what if|imagine|suppose|pretend)\b|\b(better|different|happier|happy|new|alternate|alternative|another|funnier) ending\b|\bwent differently\b|\b(rewrite|retell|change) (the|this|it|that)\b/;
+
 function questionTopic(t: string): QuestionTopic {
+  if (IMAGINE.test(t)) return 'imagine';
   if (FUTURE.test(t) && !/\b(what (just )?happened|before)\b/.test(t)) return 'future';
   if (OUTCOME.test(t)) return 'future';
   if (/\b(what (just )?happened|what did (i|we) miss|recap|so far|catch me up)\b/.test(t))

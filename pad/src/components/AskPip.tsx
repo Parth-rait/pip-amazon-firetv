@@ -65,7 +65,12 @@ export function AskPip(props: Props) {
         {question && <p className="bubble bubble--me">{question}</p>}
         <div className="pip-line">
           <Pip state={isWaiting ? 'thinking' : pip === 'sleep' ? 'idle' : pip} size={36} />
-          <p className="bubble bubble--pip">
+          <p
+            className={`bubble bubble--pip${say?.source === 'imagined' && !isWaiting ? ' bubble--story' : ''}`}
+          >
+            {say?.source === 'imagined' && !isWaiting && (
+              <span className="bubble__tag">What if, made up by Pip</span>
+            )}
             {isWaiting ? (
               <span className="typing" aria-label="Pip is thinking">
                 <span />

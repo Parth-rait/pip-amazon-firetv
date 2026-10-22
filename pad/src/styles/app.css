@@ -503,6 +503,15 @@ body {
   background: var(--surface2);
 }
 
+/* A "what if" story is Pip's own make-believe: labelled so nobody takes it for the film. */
+.bubble__tag {
+  display: block;
+  margin-bottom: var(--space-1);
+  color: var(--accent);
+  font-size: var(--type-caption);
+  font-weight: 600;
+}
+
 /* "While you were away": only on the pad of the viewer who missed it. */
 .missed {
   display: flex;

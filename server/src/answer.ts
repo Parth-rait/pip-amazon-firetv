@@ -3,7 +3,7 @@
 // the answer gate. Never throws; every path ends in a reply people can see. Films without a
 // timeline still use the notes path in flow.ts.
 import { runAsk } from './core/ai/ask.js';
-import { cleanText } from './core/ai/clean-text.js';
+import { cleanText, stripMarkdown } from './core/ai/clean-text.js';
 import type { TextModel } from './core/ai/model.js';
 import type { AnswerCache, CacheKeyParts } from './core/context/answer-cache.js';
 import { permittedEvidence, type EvidenceSet } from './core/context/boundary.js';
@@ -12,13 +12,16 @@ import { entitiesNear, mentionedEntities, retrieve } from './core/context/retrie
 import { containsTerm, contentWords } from './core/context/text.js';
 import type { Entity, ReviewPolicy, Timeline, TimedFact } from './core/context/timeline.js';
 import type { QuestionTopic } from './core/intent/route-text.js';
-import { buildGroundedPrompt, type HistoryItem } from './film/ask-prompt.js';
+import { buildGroundedPrompt, buildImaginePrompt, type HistoryItem } from './film/ask-prompt.js';
 import { ASK_SETTINGS, GROUNDED_PROMPT_VERSION } from './film/prompts.js';
 import { LINES } from './lines.js';
 import type { AskVia, Source } from './shared/protocol.js';
 
-/** answer: from the facts; clarify: "Did you mean"; unknown: Pip abstains; fallback: no model. */
-export type ReplyKind = 'answer' | 'clarify' | 'unknown' | 'fallback';
+/**
+ * answer: from the facts; clarify: "Did you mean"; unknown: Pip abstains; fallback: no model;
+ * imagined: a made-up "what if" story (never history, never cached).
+ */
+export type ReplyKind = 'answer' | 'clarify' | 'unknown' | 'fallback' | 'imagined';
 const RETRIEVE = { limit: 10, recentCount: 4 } as const;
 // A model reply that only says the facts do not tell (it is an abstention, not an answer).
 const NOT_SAID =
@@ -61,6 +64,7 @@ export type AnswerPath =
   | 'retrieval'
   | 'cache'
   | 'model'
+  | 'imagine'
   | 'ai-off';
 
 export interface AnswerResult {
@@ -148,6 +152,16 @@ export async function answerQuestion(req: AnswerRequest, deps: AnswerDeps): Prom
       text: LINES.unparsed,
     });
   }
+  if (req.topic === 'imagine') {
+    if (!deps.aiEnabled) {
+      return reply(evidence, 'ai-off', {
+        kind: 'fallback',
+        source: 'template',
+        text: LINES.offline,
+      });
+    }
+    return imagineAnswer(req, evidence, deps);
+  }
   // Past the part of the film that was described, "who is that?" and "what just happened?" would
   // be answered from older scenes as if they were now: say so instead.
   const covered = req.timeline.coveredUntilSec;
@@ -172,6 +186,7 @@ export async function answerQuestion(req: AnswerRequest, deps: AnswerDeps): Prom
 
 /** Applies the answer gate to a reply that has text and sources. */
 function gate(result: AnswerResult, timeline: Timeline, evidence: EvidenceSet): AnswerResult {
+  if (result.kind === 'imagined') return gateImagined(result, timeline, evidence);
   if (result.kind !== 'answer') return result;
   const verdict = checkAnswer(result.text, result.sources, evidence, lexiconOf(timeline));
   if (verdict.ok) return { ...result, next: safeChips(result.next, evidence) };
@@ -436,11 +451,131 @@ export function recheckAtPosition(
   positionSec: number,
   policy: ReviewPolicy,
 ): AnswerResult {
-  if (result.kind !== 'answer' || positionSec >= result.boundarySec) return result;
+  if ((result.kind !== 'answer' && result.kind !== 'imagined') || positionSec >= result.boundarySec)
+    return result;
   const evidence = permittedEvidence(timeline, positionSec, policy);
   return gate(
     { ...result, evidenceKey: evidence.key, boundarySec: positionSec },
     timeline,
     evidence,
   );
+}
+
+const IMAGINE_MAX_FACTS = 40;
+const IMAGINE_MAX_SENTENCES = 6;
+const IMAGINE_MAX_CHARS = 650;
+const IMAGINE_TIMEOUT_MS = 30_000;
+const IMAGINE_ATTEMPTS = 2;
+// The last facts this close to the end mean the story is over: "a better ending" rewrites it all.
+const END_MARGIN_SEC = 30;
+
+/**
+ * "What if...?": Pip makes up another version from the facts revealed by now. Mid-film it cannot
+ * know the real story ahead, and the gate still keeps every later word and unseen character out,
+ * so an imagined ending can never give the true one away by accident.
+ */
+async function imagineAnswer(
+  req: AnswerRequest,
+  evidence: EvidenceSet,
+  deps: AnswerDeps,
+): Promise<AnswerResult> {
+  const isEnd = req.positionSec >= req.timeline.durationSec - END_MARGIN_SEC;
+  const facts = evidence.facts.slice(-IMAGINE_MAX_FACTS);
+  const prompt = buildImaginePrompt({
+    title: req.film.title,
+    premise: req.film.premise,
+    positionSec: req.positionSec,
+    isEnd,
+    facts,
+    question: req.question,
+  });
+  const startedAt = deps.now();
+  let result: AnswerResult | null = null;
+  // A story the gate withholds over one later word is usually fine told again: one more try.
+  for (let attempt = 0; attempt < IMAGINE_ATTEMPTS; attempt += 1) {
+    let raw: string;
+    try {
+      raw = await deps.model.complete({
+        ...prompt,
+        maxTokens: 260,
+        temperature: 0.9,
+        timeoutMs: IMAGINE_TIMEOUT_MS,
+      });
+    } catch (error) {
+      return reply(evidence, 'imagine', {
+        kind: 'fallback',
+        source: 'template',
+        text: LINES.modelFailed,
+        error: error instanceof Error ? error.name : 'error',
+        modelMs: deps.now() - startedAt,
+      });
+    }
+    const text = cleanStory(raw);
+    if (!text) continue;
+    result = gate(
+      reply(evidence, 'imagine', {
+        kind: 'imagined',
+        source: 'imagined',
+        text,
+        sources: facts.map((f) => f.id),
+        next: isEnd
+          ? ['Give it a happier ending', 'What if it went differently?']
+          : ['What if it went differently?', 'What just happened?'],
+        modelMs: deps.now() - startedAt,
+      }),
+      req.timeline,
+      evidence,
+    );
+    if (result.kind === 'imagined') return result;
+  }
+  return (
+    result ??
+    reply(evidence, 'imagine', {
+      kind: 'fallback',
+      source: 'template',
+      text: LINES.unparsed,
+      error: 'unparsed',
+    })
+  );
+}
+
+/**
+ * A made-up story may invent, so only the spoiler rules apply: no word the film has not reached
+ * and no character not seen yet. Withheld, Pip says why in its own words.
+ */
+function gateImagined(
+  result: AnswerResult,
+  timeline: Timeline,
+  evidence: EvidenceSet,
+): AnswerResult {
+  const verdict = checkAnswer(result.text, result.sources, evidence, lexiconOf(timeline));
+  if (verdict.ok) return { ...result, next: safeChips(result.next, evidence) };
+  return {
+    ...result,
+    kind: 'unknown',
+    source: 'template',
+    text: LINES.imagineWithheld,
+    next: ['What if it went differently?'],
+    sources: [],
+    withheld: `${verdict.reason}:${verdict.detail}`,
+  };
+}
+
+/** Plain text of at most 6 whole sentences within 650 characters, for a story bubble. */
+export function cleanStory(raw: string): string {
+  const text = stripMarkdown(raw)
+    .replace(/^\s*(title|story)\s*:.*$/gim, '')
+    .replace(/\s+/g, ' ')
+    .trim()
+    .replace(/^["'“”‘’]+|["'“”‘’]+$/g, '')
+    .trim();
+  const sentences = text.match(/[^.!?…]+(?:[.!?…]+["”’]?|$)/g)?.map((s) => s.trim()) ?? [];
+  let kept = '';
+  for (const sentence of sentences.slice(0, IMAGINE_MAX_SENTENCES)) {
+    const next = kept ? `${kept} ${sentence}` : sentence;
+    if (next.length > IMAGINE_MAX_CHARS) break;
+    kept = next;
+  }
+  // A last sentence cut off by the token limit has no end mark: drop it.
+  return kept.replace(/\s+[^.!?…"”’]*$/, '').trim() || kept;
 }

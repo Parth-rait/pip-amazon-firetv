@@ -14,6 +14,7 @@ export const LINES = {
   noTimeline: "I don't have notes for this film yet, so I can't answer that.",
   noEvidenceYet: "I haven't seen enough of this film yet to answer that.",
   noFuture: 'No spoilers from me. Keep watching and see!',
+  imagineWithheld: "That story got too close to what's coming. Ask me for another one?",
   play: 'Playing the film.',
   pause: 'Pausing the film.',
   seekBack: (sec: number) => `Going back ${sec} seconds.`,

@@ -20,6 +20,7 @@ import {color, dp, radius, safe, space, type} from '../theme';
 const CREDIT_MS = 4000;
 const PAUSE_BAR_MS = 3000;
 const ANSWER_MS = 8000;
+const STORY_MS = 25000; // a made-up "what if" story takes longer to read
 const PAUSE_HINT_MS = 6000;
 const MIN_BRIGHTNESS = 0.3;
 
@@ -175,7 +176,10 @@ export function WatchScreen({
   useEffect(() => {
     if (!say) return;
     setAnswerId(say.id);
-    const t = setTimeout(() => setAnswerId(null), ANSWER_MS);
+    const t = setTimeout(
+      () => setAnswerId(null),
+      say.say.source === 'imagined' ? STORY_MS : ANSWER_MS,
+    );
     return () => clearTimeout(t);
   }, [say]);
   const answer = say && say.id === answerId ? say : null;
@@ -243,9 +247,16 @@ export function WatchScreen({
               {answer ? (
                 <SpeechBubble
                   key={`say-${answer.id}`}
-                  above={`${answer.say.askedByName} asked: ${answer.say.question}`}
+                  above={
+                    answer.say.source === 'imagined'
+                      ? `${answer.say.askedByName}'s what if, made up by Pip`
+                      : `${answer.say.askedByName} asked: ${answer.say.question}`
+                  }
                   text={answer.say.text}
-                  showMs={ANSWER_MS}
+                  showMs={
+                    answer.say.source === 'imagined' ? STORY_MS : ANSWER_MS
+                  }
+                  lines={answer.say.source === 'imagined' ? 9 : 4}
                   tint={accent}
                 />
               ) : hint && view.pip !== 'thinking' ? (

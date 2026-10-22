@@ -104,3 +104,38 @@ export function buildGroundedPrompt(input: GroundedPromptInput): { system: strin
   ];
   return { system: groundedSystemPrompt(input.simpleFormat), user: lines.join('\n') };
 }
+
+const IMAGINE_SYSTEM = [
+  'You are Pip, a warm storyteller for a family watching a film together.',
+  'Someone asked you to imagine a different version of the story. Write it: 4 to 6 short',
+  'sentences, under 110 words, gentle enough for children, plain text with no title or list.',
+  'Begin with "In Pip\'s version,". Use only the characters, places and things in <facts>; do',
+  'not bring in anything else from the film, even if you know it. It is make-believe: never',
+  'say it is what really happens.',
+].join(' ');
+
+/**
+ * "What if...?": an imagined version of the story, from the facts revealed by now only. During
+ * the film that is the story so far; at the end it is the whole film.
+ */
+export function buildImaginePrompt(input: {
+  title: string;
+  premise: string;
+  positionSec: number;
+  isEnd: boolean;
+  facts: { startSec: number; text: string }[];
+  question: string;
+}): { system: string; user: string } {
+  const lines = [
+    `<title>${inert(input.title)}</title>`,
+    input.isEnd
+      ? '<now>the film has ended</now>'
+      : `<now>${formatTime(input.positionSec)}; nothing after this is known</now>`,
+    `<premise>${inert(input.premise)}</premise>`,
+    '<facts>',
+    ...input.facts.map((f) => `[${formatTime(f.startSec)}] ${inert(f.text)}`),
+    '</facts>',
+    `Imagine: ${inert(input.question)}`,
+  ];
+  return { system: IMAGINE_SYSTEM, user: lines.join('\n') };
+}

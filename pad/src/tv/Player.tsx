@@ -23,6 +23,7 @@ const REPORT_EVERY_MS = 5000;
 const CREDIT_MS = 4000;
 const CHROME_MS = 3500;
 const ANSWER_MS = 8000;
+const STORY_MS = 25000; // a made-up "what if" story takes longer to read
 const TOAST_MS = 1600;
 const SEEK_SEC = 10;
 const MIN_BRIGHTNESS = 0.3;
@@ -322,7 +323,10 @@ export function Player({
   const [answeredId, setAnsweredId] = useState<number | null>(null);
   useEffect(() => {
     if (!say) return;
-    const t = setTimeout(() => setAnsweredId(say.id), ANSWER_MS);
+    const t = setTimeout(
+      () => setAnsweredId(say.id),
+      say.say.source === 'imagined' ? STORY_MS : ANSWER_MS,
+    );
     return () => clearTimeout(t);
   }, [say]);
   const answer = say && say.id !== answeredId ? say : null;
@@ -486,9 +490,14 @@ export function Player({
               {answer ? (
                 <Bubble
                   key={`say-${answer.id}`}
-                  above={`${answer.say.askedByName} asked: ${answer.say.question}`}
+                  above={
+                    answer.say.source === 'imagined'
+                      ? `${answer.say.askedByName}'s what if, made up by Pip`
+                      : `${answer.say.askedByName} asked: ${answer.say.question}`
+                  }
                   text={answer.say.text}
                   tone="accent"
+                  isStory={answer.say.source === 'imagined'}
                 />
               ) : hint && view.pip !== 'thinking' ? (
                 <Bubble key={hint} text={hint} />

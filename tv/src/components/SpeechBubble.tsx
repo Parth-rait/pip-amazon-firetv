@@ -12,11 +12,13 @@ export function SpeechBubble({
   text,
   showMs,
   tint,
+  lines = 4,
 }: {
   above?: string;
   text: string;
   showMs: number;
   tint: string;
+  lines?: number; // a "what if" story gets more room than an answer
 }) {
   const [visible, setVisible] = useState(true);
   useEffect(() => {
@@ -31,7 +33,7 @@ export function SpeechBubble({
         </Text>
       ) : null}
       <View style={[styles.bubble, {borderColor: tint}]}>
-        <Text style={styles.text} numberOfLines={4}>
+        <Text style={styles.text} numberOfLines={lines}>
           {text}
         </Text>
       </View>
