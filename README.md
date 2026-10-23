@@ -109,6 +109,8 @@ cd server && npm run gesture -- CODE --preview   # optional: webcam gestures (ge
 npm run preflight                   # PASS or FAIL for every part, before a rehearsal or recording
 ```
 
+Or all of it in one command: `npm run demo` (add `-- --vega` to rebuild and install the Vega app for the new tunnel too). Ctrl+C stops everything.
+
 The Vega app: [tv/README.md](tv/README.md). Rebuild it after a new tunnel URL. The other package READMEs are [server/README.md](server/README.md) and [pad/README.md](pad/README.md).
 
 ## Tests

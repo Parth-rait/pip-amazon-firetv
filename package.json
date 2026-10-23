@@ -6,6 +6,7 @@
     "check:shared": "node scripts/sync-shared.mjs --check",
     "tunnel": "node scripts/tunnel.mjs",
     "preflight": "node scripts/preflight.mjs",
+    "demo": "bash scripts/demo.sh",
     "typecheck": "node scripts/run-all.mjs typecheck",
     "lint": "node scripts/run-all.mjs lint",
     "test": "node scripts/run-all.mjs test"
