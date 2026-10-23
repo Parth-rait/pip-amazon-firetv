@@ -1,5 +1,7 @@
 # Demo script
 
+**The submitted video:** https://www.youtube.com/watch?v=d0nhTE3CxiQ (3:00, 23 Oct). It is one screen recording of the Mac with Parth talking over it: the Vega app on the Vega Virtual Device on the left, two Pip Pads in Chrome on the right (Maya, and Leo in an Incognito window), Sintel instead of Tears of Steel, then the Command Center. It was cut to length with ffmpeg, with captions and an end card carrying the film credits. The plan below is what we wrote before recording.
+
 Under 3 minutes, public on YouTube or Vimeo, in English. Two people: Maya on a tablet (the host) and Leo on a phone.
 
 **A rule from the hackathon that shapes the video:** for the Fire TV track, the video must show the project running on a Fire TV device or the Fire TV or Vega simulator. So every TV shot comes from the **Vega app on the Vega Virtual Device** (or a Vega Fire TV). The browser TV client appears once, labelled as such, for the paused two-lane comparison it adds.

@@ -4,6 +4,10 @@ Pip is a quiet film companion for Fire TV. It knows the film only up to the seco
 
 The phone or tablet everyone joins with is the **Hail Mary** pad (Pip Pad in the code and on screen). It's named for the long pass you throw when time is nearly out.
 
+**Demo video (3 min):** https://www.youtube.com/watch?v=d0nhTE3CxiQ
+
+[![Pip demo video](https://i.ytimg.com/vi/d0nhTE3CxiQ/hqdefault.jpg)](https://www.youtube.com/watch?v=d0nhTE3CxiQ)
+
 Built for the Amazon Developer Hackathon, Fire TV track. The submission text, product feedback and friction log are in [docs/devpost.md](docs/devpost.md), and the video plan is in [docs/demo-script.md](docs/demo-script.md). Direction: [docs/vnext/PLAN.md](docs/vnext/PLAN.md) (section 0: local-first since 22 Oct). Infrastructure reference: [PROJECT.md](PROJECT.md). What exists now: [docs/architecture/current-state.md](docs/architecture/current-state.md).
 
 ## What it does

@@ -20,7 +20,7 @@ A film companion for Fire TV that knows what's real, never tells you what's next
 
 ## Links
 
-- Demo video (YouTube or Vimeo, public, English, under 3 minutes): **add the link after uploading**
+- Demo video (YouTube, English, 3:00): https://www.youtube.com/watch?v=d0nhTE3CxiQ
 - Code: https://github.com/Parth-rait/pip-amazon-firetv (MIT; see "Repository and reviewers" at the end)
 
 ---
