@@ -2,7 +2,9 @@
 
 Pip is a quiet film companion for Fire TV. It knows the film only up to the second the family has reached, so it can answer "who is that?" or "what did I miss?" without spoiling what comes next. It stays hidden until someone asks, and everything runs on your own machine.
 
-Built for the Amazon Developer Hackathon, Fire TV track. Direction: [docs/vnext/PLAN.md](docs/vnext/PLAN.md) (section 0: local-first since 22 Oct). Infrastructure reference: [PROJECT.md](PROJECT.md). What exists now: [docs/architecture/current-state.md](docs/architecture/current-state.md).
+The phone or tablet everyone joins with is the **Hail Mary** pad (Pip Pad in the code and on screen). It's named for the long pass you throw when time is nearly out.
+
+Built for the Amazon Developer Hackathon, Fire TV track. The submission text, product feedback and friction log are in [docs/devpost.md](docs/devpost.md), and the video plan is in [docs/demo-script.md](docs/demo-script.md). Direction: [docs/vnext/PLAN.md](docs/vnext/PLAN.md) (section 0: local-first since 22 Oct). Infrastructure reference: [PROJECT.md](PROJECT.md). What exists now: [docs/architecture/current-state.md](docs/architecture/current-state.md).
 
 ## What it does
 
@@ -82,7 +84,22 @@ Not claimed: that the Pip Pad hardware exists (it's a web app; the touch-wheel i
 
 ## How to run it
 
-Node 22 is required (`.nvmrc`). One-time setup: `ollama pull qwen2.5:3b`, and the films in `server/media/` (PROJECT.md 5.6).
+Node 22 is required (`.nvmrc`). One-time setup: `npm install` in `server/` and `pad/`, then `ollama pull qwen2.5:3b`.
+
+**The films** are not in the repository (CC BY 3.0, Blender Foundation). Download and convert them into `server/media/`:
+
+```bash
+# Tears of Steel (372 MB)
+curl -L -o /tmp/tos.mov https://download.blender.org/demo/movies/ToS/tears_of_steel_720p.mov
+ffmpeg -i /tmp/tos.mov -c:v libx264 -preset medium -crf 22 -pix_fmt yuv420p \
+  -c:a aac -b:a 128k -ac 2 -movflags +faststart server/media/tears-of-steel.mp4
+ffmpeg -ss 28 -i server/media/tears-of-steel.mp4 -frames:v 1 -vf "crop=ih*16/9:ih,scale=640:-2" -q:v 3 server/media/tears-of-steel.jpg
+# Sintel: Sintel.2010.720p.mkv.zip from download.blender.org/durian/movies/, converted as in PROJECT.md 5.6
+# Chapter pictures for both films:
+cd server && sh scripts/companion-images.sh
+```
+
+The timelines Pip answers from are committed (`server/content/timelines/`), so nothing else needs to be generated.
 
 ```bash
 npm run tunnel                      # HTTPS URL into server/.env and tv/src/config.ts; keep it running
